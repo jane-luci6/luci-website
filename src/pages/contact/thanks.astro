@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionBlock from '../../components/SectionBlock.astro';
+---
+
+<BaseLayout title="Message sent" description="Thanks for contacting LUCI Systems.">
+  <PageHero title="Message received" lead="We'll be in touch soon." deep />
+
+  <SectionBlock>
+    <p class="measure">Thank you for reaching out. Someone from LUCI will respond shortly.</p>
+    <p style="margin-top: 1.5rem"><a href="/">Back to home →</a></p>
+  </SectionBlock>
+</BaseLayout>

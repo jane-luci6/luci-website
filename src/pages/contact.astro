@@ -8,10 +8,17 @@ import SectionBlock from '../components/SectionBlock.astro';
   <PageHero title="Start a conversation" deep />
 
   <SectionBlock>
-    <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+    <form
+      class="contact-form"
+      name="contact"
+      method="POST"
+      action="/contact/thanks/"
+      netlify
+      netlify-honeypot="bot-field"
+    >
       <input type="hidden" name="form-name" value="contact" />
       <p class="hidden">
-        <label>Don’t fill this out: <input name="bot-field" /></label>
+        <label>Don’t fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
       </p>
       <label>
         <span>Name</span>
@@ -31,7 +38,6 @@ import SectionBlock from '../components/SectionBlock.astro';
       </label>
       <button class="btn btn--primary" type="submit">Send message</button>
     </form>
-    <p class="scaffold-note" style="margin-top: 1rem">Netlify Forms — enable in Netlify dashboard after first deploy</p>
   </SectionBlock>
 
   <SectionBlock title="What happens next" tone="sand">
