@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Legacy case study URL (Webflow) → new path when cutover happens
+[[redirects]]
+  from = "/case-studies/ameristar-council-bluffs"
+  to = "/resources/case-studies/ameristar-council-bluffs"
+  status = 301

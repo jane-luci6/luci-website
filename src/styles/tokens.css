@@ -1,0 +1,32 @@
+/* LUCI brand tokens — see luci-design/_project-context.md */
+
+:root {
+  --navy-deep: #0a161c;
+  --navy: #10232d;
+  --navy-mid: #314955;
+  --navy-muted: #49616e;
+  --mint: #68e3be;
+  --mint-rgb: 104, 227, 190;
+  --accent-light: #176b54;
+  --sand: #e5e3df;
+  --off-white: #f5f8fa;
+  --rule-light: #dbe1e4;
+  --ink: #354f5c;
+  --ink-strong: #1c2b33;
+
+  --font-display: 'Syncopate', sans-serif;
+  --font-body: 'Space Grotesk', system-ui, sans-serif;
+
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-8: 64px;
+  --space-12: 96px;
+
+  --measure: 60ch;
+  --page-pad: clamp(28px, 6vw, 60px);
+  --content-max: 820px;
+}

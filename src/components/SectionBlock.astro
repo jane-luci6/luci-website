@@ -1,0 +1,35 @@
+---
+interface Props {
+  id?: string;
+  kicker?: string;
+  title?: string;
+  tone?: 'white' | 'light' | 'sand' | 'deep';
+}
+
+const { id, kicker, title, tone = 'white' } = Astro.props;
+const toneClass = `section--${tone}`;
+---
+
+<section id={id} class:list={['section', toneClass]}>
+  <div class="container">
+    {kicker && <p class="display-label section-block__kicker">{kicker}</p>}
+    {title && <h2 class="h2 section-block__title">{title}</h2>}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .section-block__kicker {
+    color: var(--accent-light);
+    margin-bottom: var(--space-2);
+  }
+
+  .section--deep .section-block__kicker {
+    color: var(--mint);
+  }
+
+  .section-block__title {
+    margin-bottom: var(--space-3);
+    max-width: 48ch;
+  }
+</style>

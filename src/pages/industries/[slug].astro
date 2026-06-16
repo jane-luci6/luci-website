@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionBlock from '../../components/SectionBlock.astro';
+import { industries } from '../../data/industries';
+import { pillars } from '../../data/pillars';
+import { ameristarCaseStudy, site } from '../../data/site';
+
+export function getStaticPaths() {
+  return industries.map((industry) => ({
+    params: { slug: industry.slug },
+    props: { industry },
+  }));
+}
+
+const { industry } = Astro.props;
+if (!industry) return Astro.redirect('/404');
+---
+
+<BaseLayout title={industry.name} description={industry.teaser}>
+  <PageHero title={industry.name} lead={industry.teaser} deep />
+
+  <SectionBlock title="Vertical challenges">
+    <p class="measure scaffold-note">Vertical-specific pain points — TBD per industry</p>
+  </SectionBlock>
+
+  <SectionBlock title="How LUCI fits" tone="sand">
+    <p class="rows__title">{pillars[2].title}</p>
+    <p class="measure" style="margin-top: 0.5rem">{pillars[2].body}</p>
+  </SectionBlock>
+
+  <SectionBlock title="Proof">
+    <div class="callout">
+      <p class="rows__title">{ameristarCaseStudy.title}</p>
+      <p>{ameristarCaseStudy.dek}</p>
+    </div>
+    <div class="visual-placeholder" style="margin-top: 1.5rem">Vertical logo subset</div>
+  </SectionBlock>
+
+  <SectionBlock tone="deep">
+    <a class="btn btn--primary" href="/contact">{site.ctaPrimary}</a>
+  </SectionBlock>
+</BaseLayout>

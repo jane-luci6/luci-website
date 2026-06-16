@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionBlock from '../components/SectionBlock.astro';
+import { personas } from '../data/personas';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="Who We Serve" description="Multimedia orchestration — one platform, every function connected.">
+  <PageHero
+    title="Who we serve"
+    lead="Multimedia orchestration — one platform, every function connected."
+    deep
+  />
+
+  <SectionBlock title="By function">
+    <p class="scaffold-note">LUCI capabilities by role — workshop pending</p>
+    <ul class="rows" style="margin-top: 1rem">
+      {personas.map((p) => (
+        <li id={p.id}>
+          <p class="rows__title">{p.label}</p>
+          <p class="scaffold-note">{p.role}</p>
+          <p style="margin-top: 0.5rem">{p.line}</p>
+          <p class="callout" style="margin-top: 0.75rem"><em>{p.belief}</em></p>
+        </li>
+      ))}
+    </ul>
+  </SectionBlock>
+
+  <SectionBlock tone="sand">
+    <div class="btn-row">
+      <a class="btn btn--primary" href="/platform">Explore the platform</a>
+      <a class="btn btn--outline" href="/contact">{site.ctaPrimary}</a>
+    </div>
+  </SectionBlock>
+</BaseLayout>

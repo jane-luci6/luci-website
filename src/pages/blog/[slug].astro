@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionBlock from '../../components/SectionBlock.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <SectionBlock tone="sand">
+    <p class="display-label">Blog</p>
+    <h1 class="h1">{post.data.title}</h1>
+    <p class="lead" style="margin-top: 1rem">{post.data.description}</p>
+    <p class="scaffold-note" style="margin-top: 0.5rem">
+      {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+    </p>
+  </SectionBlock>
+
+  <SectionBlock>
+    <div class="prose measure">
+      <Content />
+    </div>
+  </SectionBlock>
+</BaseLayout>
+
+<style>
+  .prose :global(p + p) {
+    margin-top: 1rem;
+  }
+</style>

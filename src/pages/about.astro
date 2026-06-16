@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionBlock from '../components/SectionBlock.astro';
+import { oneOffering, variableReduction } from '../data/site';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="About" description={oneOffering.offering}>
+  <PageHero title="About LUCI" lead={oneOffering.offering} deep />
+
+  <SectionBlock title="Our worldview">
+    <p class="measure">{variableReduction.accumulation}</p>
+    <p class="measure" style="margin-top: 1rem">{variableReduction.subtraction}</p>
+  </SectionBlock>
+
+  <SectionBlock title="One offering" tone="sand">
+    <p class="measure">{oneOffering.summary}</p>
+    <div class="visual-placeholder" style="margin-top: 1.5rem">Diagram · luci-two-pillars.png</div>
+  </SectionBlock>
+
+  <SectionBlock tone="deep">
+    <a class="btn btn--primary" href="/contact">{site.ctaPrimary}</a>
+  </SectionBlock>
+</BaseLayout>

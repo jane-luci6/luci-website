@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHero from '../../../components/PageHero.astro';
+import SectionBlock from '../../../components/SectionBlock.astro';
+import { ameristarCaseStudy, portfolioLine } from '../../../data/site';
+---
+
+<BaseLayout title="Case Studies" description={portfolioLine}>
+  <PageHero title="Case studies" lead={portfolioLine} deep />
+
+  <SectionBlock title="Featured">
+    <div class="callout">
+      <p class="rows__title">{ameristarCaseStudy.title}</p>
+      <p>{ameristarCaseStudy.dek}</p>
+      <p style="margin-top: 0.75rem">
+        <a href={`/resources/case-studies/${ameristarCaseStudy.slug}`}>Read the full story →</a>
+      </p>
+    </div>
+    <p class="scaffold-note" style="margin-top: 1rem">Additional case studies as approved</p>
+  </SectionBlock>
+</BaseLayout>

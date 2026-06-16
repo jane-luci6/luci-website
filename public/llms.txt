@@ -1,0 +1,29 @@
+# LUCI Systems
+
+> The Orchestration Engine for Enterprise Multimedia
+
+LUCI Systems orchestrates every layer of technology running enterprise properties — AV, signage, building, and operational infrastructure — from a single interface.
+
+## What LUCI is
+
+- Multimedia orchestration platform + embedded operational partnership
+- One interface across every endpoint, zone, and system on the property
+- Software, hardware, operating model, and engineering team — one system
+
+## Primary pages
+
+- Home: https://lucisystems.com/
+- Platform: https://lucisystems.com/platform
+- Who we serve: https://lucisystems.com/who-we-serve
+- Industries: https://lucisystems.com/industries/casinos-gaming
+- Resources: https://lucisystems.com/resources
+- Case studies: https://lucisystems.com/resources/case-studies
+- Contact: https://lucisystems.com/contact
+
+## Audiences
+
+LUCI serves leadership, operations, technology, finance, marketing/guest experience, and facilities/AV teams at casinos, hotels, sports venues, airports, convention centers, and corporate campuses.
+
+## Contact
+
+https://lucisystems.com/contact

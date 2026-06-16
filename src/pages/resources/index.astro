@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionBlock from '../../components/SectionBlock.astro';
+import { ameristarCaseStudy, portfolioLine } from '../../data/site';
+---
+
+<BaseLayout title="Resources" description="Case studies, articles, and support for enterprise property teams.">
+  <PageHero title="Resources" lead="Case studies, articles, and support for enterprise property teams." deep />
+
+  <SectionBlock title="Featured">
+    <div class="callout">
+      <p class="rows__title">{ameristarCaseStudy.title}</p>
+      <p>{ameristarCaseStudy.dek}</p>
+      <p style="margin-top: 0.75rem">
+        <a href={`/resources/case-studies/${ameristarCaseStudy.slug}`}>Read the case study →</a>
+      </p>
+    </div>
+  </SectionBlock>
+
+  <SectionBlock title="Browse" tone="sand">
+    <ul class="rows">
+      <li><a href="/resources/case-studies">Case studies</a> — {portfolioLine.slice(0, 80)}…</li>
+      <li><a href="/blog">Blog</a> — Variable reduction, engagement cycle, deep dives</li>
+      <li><a href="https://support.lucisystems.com" target="_blank" rel="noopener noreferrer">Support portal</a></li>
+    </ul>
+  </SectionBlock>
+</BaseLayout>

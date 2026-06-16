@@ -1,0 +1,252 @@
+@import './tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--off-white);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--accent-light);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-light);
+  outline-offset: 3px;
+}
+
+/* Typography */
+.display-label {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+h1,
+.h1 {
+  font-size: clamp(26px, 4.5vw, 38px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--ink-strong);
+}
+
+h2,
+.h2 {
+  font-size: clamp(20px, 3vw, 24px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--ink-strong);
+}
+
+.lead {
+  font-size: clamp(18px, 2.5vw, 22px);
+  line-height: 1.45;
+  max-width: var(--measure);
+}
+
+.measure {
+  max-width: var(--measure);
+}
+
+/* Layout */
+.container {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: var(--page-pad);
+}
+
+.container--wide {
+  max-width: 960px;
+}
+
+/* Sections */
+.section {
+  padding-block: clamp(48px, 8vw, 96px);
+  border-bottom: 1px solid var(--rule-light);
+}
+
+.section--white {
+  background: #fff;
+}
+
+.section--light {
+  background: var(--off-white);
+}
+
+.section--sand {
+  background: var(--sand);
+}
+
+.section--deep {
+  background: var(--navy);
+  color: rgba(245, 248, 250, 0.9);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.section--deep h2,
+.section--deep .h2 {
+  color: var(--off-white);
+}
+
+.section--deep a {
+  color: var(--mint);
+}
+
+.section--deep .display-label {
+  color: var(--mint);
+}
+
+/* De-boxed list rows */
+.rows {
+  list-style: none;
+  max-width: var(--content-max);
+}
+
+.rows li {
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--rule-light);
+}
+
+.section--deep .rows li {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.rows li:last-child {
+  border-bottom: none;
+}
+
+.rows__title {
+  font-weight: 700;
+  color: var(--ink-strong);
+  margin-bottom: 4px;
+}
+
+.section--deep .rows__title {
+  color: var(--off-white);
+}
+
+/* Callout — mint bar on light */
+.callout {
+  margin-top: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  background: var(--off-white);
+  border-left: 4px solid var(--accent-light);
+  max-width: var(--measure);
+}
+
+.section--sand .callout,
+.section--white .callout {
+  background: #fff;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 12px 24px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.btn--primary {
+  background: var(--navy);
+  color: var(--off-white);
+}
+
+.btn--primary:hover {
+  background: var(--navy-deep);
+  color: var(--off-white);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--ink-strong);
+  box-shadow: inset 0 0 0 1px var(--navy-mid);
+}
+
+.btn--outline:hover {
+  box-shadow: inset 0 0 0 1px var(--navy);
+}
+
+.section--deep .btn--outline {
+  color: var(--off-white);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+/* Visual placeholder */
+.visual-placeholder {
+  margin-top: var(--space-3);
+  min-height: 200px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: var(--space-3);
+  font-size: 14px;
+  color: var(--navy-mid);
+  border: 1px dashed var(--navy-mid);
+  background: rgba(16, 35, 45, 0.03);
+}
+
+.section--deep .visual-placeholder {
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 0.2);
+  color: rgba(245, 248, 250, 0.65);
+}
+
+/* Scaffold badge */
+.scaffold-note {
+  font-size: 12px;
+  color: var(--navy-muted);
+  margin-top: var(--space-2);
+  font-style: italic;
+}
+
+.section--deep .scaffold-note {
+  color: rgba(245, 248, 250, 0.55);
+}

@@ -1,0 +1,168 @@
+---
+import { site } from '../data/site';
+import { industries } from '../data/industries';
+
+const nav = [
+  { href: '/platform', label: 'Platform' },
+  {
+    href: '/industries/casinos-gaming',
+    label: 'Industries',
+    children: industries.map((i) => ({ href: `/industries/${i.slug}`, label: i.name })),
+  },
+  { href: '/who-we-serve', label: 'Who We Serve' },
+  {
+    href: '/resources',
+    label: 'Resources',
+    children: [
+      { href: '/resources', label: 'Hub' },
+      { href: '/blog', label: 'Blog' },
+      { href: '/resources/case-studies', label: 'Case studies' },
+      { href: 'https://support.lucisystems.com', label: 'Support portal', external: true },
+    ],
+  },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const path = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="site-header__inner container container--wide">
+    <a class="site-header__logo" href="/">{site.name}</a>
+    <nav class="site-header__nav" aria-label="Primary">
+      {
+        nav.map((item) =>
+          item.children ? (
+            <div class="site-header__item site-header__item--menu">
+              <span class="site-header__link">{item.label}</span>
+              <div class="site-header__dropdown" role="menu">
+                {item.children.map((child) => (
+                  <a
+                    href={child.href}
+                    role="menuitem"
+                    {...(child.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a
+              class:list={['site-header__link', path.startsWith(item.href) && item.href !== '/' && 'is-active']}
+              href={item.href}
+            >
+              {item.label}
+            </a>
+          ),
+        )
+      }
+    </nav>
+    <a class="site-header__cta btn btn--primary" href="/contact">{site.ctaPrimary}</a>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--sand);
+    border-bottom: 3px solid var(--mint);
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: 72px;
+  }
+
+  .site-header__logo {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--navy);
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .site-header__nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 20px;
+    flex: 1;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .site-header__link {
+    color: var(--navy);
+    text-decoration: none;
+    padding: 8px 0;
+  }
+
+  .site-header__link:hover,
+  .site-header__link.is-active {
+    color: var(--accent-light);
+  }
+
+  .site-header__item--menu {
+    position: relative;
+  }
+
+  .site-header__item--menu > .site-header__link::after {
+    content: ' ▾';
+    font-size: 0.75em;
+    opacity: 0.6;
+  }
+
+  .site-header__dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 240px;
+    background: #fff;
+    border: 1px solid var(--rule-light);
+    box-shadow: 0 8px 24px rgba(10, 22, 28, 0.08);
+    padding: 8px 0;
+  }
+
+  .site-header__item--menu:hover .site-header__dropdown,
+  .site-header__item--menu:focus-within .site-header__dropdown {
+    display: block;
+  }
+
+  .site-header__dropdown a {
+    display: block;
+    padding: 10px 16px;
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  .site-header__dropdown a:hover {
+    background: var(--off-white);
+    color: var(--accent-light);
+  }
+
+  .site-header__cta {
+    flex-shrink: 0;
+    font-family: var(--font-display);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 12px 16px;
+  }
+
+  @media (max-width: 900px) {
+    .site-header__nav {
+      display: none;
+    }
+  }
+</style>

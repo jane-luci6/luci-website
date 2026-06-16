@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionBlock from '../components/SectionBlock.astro';
+import { site, oneOffering, variableReduction } from '../data/site';
+import { features } from '../data/features';
+import { services, servicesIntro } from '../data/services';
+
+const luciIs = [
+  'An operating system that connects infrastructure',
+  'Software, hardware, operating model, and embedded engineering — delivered as one system',
+  'A platform that appreciates over time',
+  'A team of seasoned engineers accountable from design through ongoing refinement',
+];
+
+const luciIsNot = [
+  'A control panel (runs one system at a time)',
+  "A dashboard (reports on a property, doesn't operate one)",
+  'A point solution that creates an integration problem',
+  'A vendor that hands off after deployment',
+];
+---
+
+<BaseLayout title="Platform" description={oneOffering.platform}>
+  <PageHero title={site.tagline} lead={site.subTagline} deep />
+
+  <SectionBlock title="The problem">
+    <p class="measure">{variableReduction.accumulation}</p>
+  </SectionBlock>
+
+  <SectionBlock title="How it works" tone="sand">
+    <div class="visual-placeholder">Product screenshot · map-based control UI</div>
+  </SectionBlock>
+
+  <SectionBlock id="capabilities" kicker="Capabilities" title="Key features">
+    <ul class="rows">
+      {features.map((f) => (
+        <li>
+          <p class="rows__title">{f.title}</p>
+          <p>{f.body}</p>
+        </li>
+      ))}
+    </ul>
+  </SectionBlock>
+
+  <SectionBlock title={variableReduction.headline} tone="sand">
+    <p class="measure">{variableReduction.subtraction}</p>
+    <div style="display: grid; gap: 2rem; margin-top: 2rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr))">
+      <div>
+        <p class="display-label" style="margin-bottom: 0.75rem">LUCI is</p>
+        <ul class="rows">
+          {luciIs.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+      <div>
+        <p class="display-label" style="margin-bottom: 0.75rem">LUCI is not</p>
+        <ul class="rows">
+          {luciIsNot.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </div>
+  </SectionBlock>
+
+  <SectionBlock id="partnership" kicker="How we work with you" title={servicesIntro}>
+    <p class="measure">{oneOffering.offering}</p>
+    <ul class="rows" style="margin-top: 1.5rem">
+      {services.map((s) => (
+        <li>
+          <p class="rows__title">{s.num} · {s.title}</p>
+          <p>{s.body}</p>
+        </li>
+      ))}
+    </ul>
+  </SectionBlock>
+
+  <SectionBlock tone="deep">
+    <h2 class="h2">{site.ctaPrimary}</h2>
+    <div class="btn-row">
+      <a class="btn btn--primary" href="/contact">{site.ctaPrimary}</a>
+    </div>
+  </SectionBlock>
+</BaseLayout>

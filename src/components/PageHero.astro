@@ -1,0 +1,46 @@
+---
+interface Props {
+  kicker?: string;
+  title: string;
+  lead?: string;
+  deep?: boolean;
+}
+
+const { kicker, title, lead, deep = false } = Astro.props;
+---
+
+<section class:list={['section', deep ? 'section--deep' : 'section--light', 'page-hero']}>
+  <div class="container">
+    {kicker && <p class="display-label page-hero__kicker">{kicker}</p>}
+    <h1 class="page-hero__title">{title}</h1>
+    {lead && <p class="lead page-hero__lead">{lead}</p>}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .page-hero__kicker {
+    color: var(--accent-light);
+    margin-bottom: var(--space-2);
+  }
+
+  .section--deep .page-hero__kicker {
+    color: var(--mint);
+  }
+
+  .page-hero__title {
+    max-width: 22ch;
+  }
+
+  .section--deep .page-hero__title {
+    color: var(--off-white);
+  }
+
+  .page-hero__lead {
+    margin-top: var(--space-2);
+  }
+
+  .section--deep .page-hero__lead {
+    color: rgba(245, 248, 250, 0.88);
+  }
+</style>

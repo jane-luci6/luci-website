@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionBlock from '../../components/SectionBlock.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<BaseLayout title="Blog" description="Insights on enterprise multimedia orchestration.">
+  <PageHero title="Blog" lead="Variable reduction, platform depth, and field learnings." deep />
+
+  <SectionBlock>
+    <ul class="rows">
+      {
+        posts.map((post) => (
+          <li>
+            <p class="rows__title">
+              <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+            </p>
+            <p>{post.data.description}</p>
+          </li>
+        ))
+      }
+    </ul>
+    {posts.length === 0 && <p class="scaffold-note">No posts yet.</p>}
+  </SectionBlock>
+</BaseLayout>
