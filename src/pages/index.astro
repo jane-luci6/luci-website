@@ -1,127 +1,37 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHero from '../components/PageHero.astro';
+import HomeHero from '../components/HomeHero.astro';
+import HomeDifferentiator from '../components/HomeDifferentiator.astro';
+import HomeLedger from '../components/HomeLedger.astro';
+import HomeIndustries from '../components/HomeIndustries.astro';
+import HomeIntro from '../components/HomeIntro.astro';
+import HomeTrustBar from '../components/HomeTrustBar.astro';
+import HomeProof from '../components/HomeProof.astro';
+import HomePersonas from '../components/HomePersonas.astro';
+import HomeResources from '../components/HomeResources.astro';
 import SectionBlock from '../components/SectionBlock.astro';
-import { site, valueProp, oneOffering, variableReduction, portfolioLine, ameristarCaseStudy } from '../data/site';
-import { pillars } from '../data/pillars';
-import { features } from '../data/features';
-import { services, servicesIntro } from '../data/services';
-import { personas } from '../data/personas';
-import { industries } from '../data/industries';
+import { site } from '../data/site';
 ---
 
-<BaseLayout title="Home" description={site.subTagline}>
-  <PageHero title={site.tagline} lead={site.subTagline} deep>
-    <div class="btn-row">
-      <a class="btn btn--primary" href="/contact">{site.ctaPrimary}</a>
-      <a class="btn btn--outline" href="/platform">{site.ctaSecondary}</a>
-    </div>
-    <div class="visual-placeholder" aria-hidden="true">
-      Hero visual — platform in action (map-based UI / zone control)<br />
-      <span class="scaffold-note">Replace with product screenshot or demo video</span>
-    </div>
-  </PageHero>
-
-  <SectionBlock kicker="What LUCI is" title="Orchestration for the whole property">
-    <p class="measure">{valueProp}</p>
-  </SectionBlock>
-
-  <SectionBlock kicker="One offering" title={oneOffering.summary} tone="sand">
-    <p class="measure"><strong>{oneOffering.platform}</strong></p>
-    <p class="measure" style="margin-top: 1rem">{oneOffering.partnership}</p>
-    <div class="visual-placeholder">Diagram · luci-two-pillars.png</div>
-    <p style="margin-top: 1.5rem"><a href="/platform">Explore the platform →</a></p>
-  </SectionBlock>
-
-  <SectionBlock title={variableReduction.headline}>
-    <p class="measure">{variableReduction.subtraction}</p>
-  </SectionBlock>
-
-  <SectionBlock kicker="Outcomes" title="Four message pillars" tone="sand">
-    <ul class="rows">
-      {pillars.map((p) => (
-        <li>
-          <p class="rows__title">{p.num} — {p.title}</p>
-          <p>{p.body}</p>
-        </li>
-      ))}
-    </ul>
-  </SectionBlock>
-
-  <SectionBlock kicker="Platform" title="Key capabilities">
-    <ul class="rows">
-      {features.slice(0, 3).map((f) => (
-        <li>
-          <p class="rows__title">{f.title}</p>
-          <p>{f.body}</p>
-        </li>
-      ))}
-    </ul>
-    <p style="margin-top: 1.5rem"><a href="/platform#capabilities">See all capabilities →</a></p>
-  </SectionBlock>
-
-  <SectionBlock kicker="Partnership" title="How we work with you" tone="sand">
-    <p class="measure">{servicesIntro}</p>
-    <ul class="rows" style="margin-top: 1.5rem">
-      {services.map((s) => (
-        <li>
-          <p class="rows__title">{s.num} · {s.title}</p>
-          <p>{s.body}</p>
-        </li>
-      ))}
-    </ul>
-    <p style="margin-top: 1.5rem"><a href="/platform#partnership">How we work with you →</a></p>
-  </SectionBlock>
-
-  <SectionBlock kicker="Industries" title="Where LUCI makes a difference">
-    <ul class="rows">
-      {industries.map((i) => (
-        <li>
-          <p class="rows__title"><a href={`/industries/${i.slug}`}>{i.name}</a></p>
-          <p>{i.teaser}</p>
-        </li>
-      ))}
-    </ul>
-  </SectionBlock>
-
-  <SectionBlock id="who-we-serve" kicker="Who we serve" title="One platform, every function connected" tone="sand">
-    <p class="scaffold-note">Persona picker + highlight by role — Phase 2 personalization</p>
-    <ul class="rows" style="margin-top: 1rem">
-      {personas.map((p) => (
-        <li data-persona={p.id}>
-          <p class="rows__title">{p.label} · {p.role}</p>
-          <p>{p.line}</p>
-        </li>
-      ))}
-    </ul>
-    <p style="margin-top: 1.5rem"><a href="/who-we-serve">Who we serve →</a></p>
-  </SectionBlock>
-
-  <SectionBlock kicker="Proof" title="Trusted at operationally complex properties">
-    <p class="measure">{portfolioLine}</p>
-    <div class="visual-placeholder" style="margin-top: 1.5rem">Client logo wall</div>
-    <div class="callout" style="margin-top: 1.5rem">
-      <p class="rows__title">{ameristarCaseStudy.title}</p>
-      <p>{ameristarCaseStudy.dek}</p>
-      <p style="margin-top: 0.75rem">
-        <a href={`/resources/case-studies/${ameristarCaseStudy.slug}`}>Read the case study →</a>
-      </p>
-    </div>
-  </SectionBlock>
-
-  <SectionBlock kicker="Resources" title="Proof, articles, and support" tone="sand">
-    <ul class="rows">
-      <li><a href="/resources/case-studies">Case studies</a></li>
-      <li><a href="/blog">Blog</a></li>
-      <li><a href="https://support.lucisystems.com" target="_blank" rel="noopener noreferrer">Support portal</a></li>
-    </ul>
-  </SectionBlock>
+<BaseLayout title="Home" description={site.subTagline} darkHeader>
+  <HomeHero />
+  <HomeDifferentiator />
+  <HomeLedger />
+  <HomeIndustries />
+  <HomeIntro />
+  <HomeTrustBar />
+  <HomePersonas />
+  <HomeProof />
+  <HomeResources />
 
   <SectionBlock tone="deep">
     <h2 class="h2">Ready to see LUCI on your property?</h2>
+    <p class="measure" style="margin-top: 1rem; color: rgba(245, 248, 250, 0.82)">
+      {site.tagline} — {site.subTagline}
+    </p>
     <div class="btn-row">
-      <a class="btn btn--primary" href="/contact">{site.ctaPrimary}</a>
-      <a class="btn btn--outline" href="/platform">{site.ctaSecondary}</a>
+      <a class="btn btn--mint" href="/contact">{site.ctaPrimary}</a>
+      <a class="btn btn--ghost" href="/platform">{site.ctaSecondary}</a>
     </div>
   </SectionBlock>
 </BaseLayout>

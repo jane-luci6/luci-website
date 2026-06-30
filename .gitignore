@@ -22,3 +22,27 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Scratch / debug artifacts (animation screenshot probes, crops, logs)
+/analyze-anim2.py
+/compare-iters.py
+/crop-sections.py
+/find-sections.py
+/locate-blobs.py
+/sample-colors.py
+/verify-animV.py
+/shot-anim1.mjs
+/shot-anim2.mjs
+/shot-animV.mjs
+/shot-full.mjs
+/anim1/
+/anim2/
+/animV/
+/anim1.log
+/anim2.log
+/animV.log
+/fullpage.log
+/crop-intro.png
+/crop-ledger.png
+/crop-nav.png
+/fullpage-small.png

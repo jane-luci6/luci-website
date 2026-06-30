@@ -1,0 +1,270 @@
+---
+import { homeDifferentiator } from '../data/homeDifferentiator';
+import { floorTicker } from '../data/floorControl';
+
+const { setupLead, line2Lead, line2Accent, line2Tail, foot } = homeDifferentiator;
+const destinationLead = line2Lead.replace('With LUCI, ', '');
+const [footBefore, footAfter = ''] = foot.split('open APIs');
+
+// Ticker icons (the systems a property runs today) — duotone: mint primary strokes
+// with one gold accent element each, mirroring the Capabilities doc soft-icon treatment.
+// Gold elements carry .ic-gold (stroke) or .ic-gold-fill (fill, no outline); the rest
+// inherit mint from .home-diff__item-ic svg.
+const icons: Record<string, string> = {
+  monitor: `<svg viewBox="0 0 16 16"><rect x="1.5" y="2.5" width="13" height="9"/><path d="M5.5 14h5M8 11.5V14"/><circle class="ic-gold-fill" cx="12.7" cy="4.5" r="0.8"/></svg>`,
+  grid: `<svg viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12"/><path d="M2 6h12M2 10h12M6 2v12M10 2v12"/><rect class="ic-gold-fill" x="6" y="6" width="4" height="4"/></svg>`,
+  bulb: `<svg viewBox="0 0 16 16"><path d="M8 1.7a3.8 3.8 0 0 0-2.3 6.8c.5.4.8 1 .8 1.6h3a2 2 0 0 1 .8-1.6A3.8 3.8 0 0 0 8 1.7Z"/><path class="ic-gold" d="M6.3 12.6h3.4M6.8 14.2h2.4"/></svg>`,
+  wave: `<svg viewBox="0 0 16 16"><path d="M1.5 8c1.8-3 3.6 3 5.2 0s3.6-3 5.2 0"/><circle class="ic-gold-fill" cx="13.3" cy="8" r="1"/></svg>`,
+  sign: `<svg viewBox="0 0 16 16"><rect x="2" y="2.5" width="12" height="7.5"/><path d="M8 10v3M5.5 13.5h5"/><path class="ic-gold" d="M5 6h6"/></svg>`,
+  speaker: `<svg viewBox="0 0 16 16"><path d="M3 6v4h2.3L9 12.6V3.4L5.3 6H3Z"/><path class="ic-gold" d="M11 5.6c1.1 1.4 1.1 4.4 0 5.8"/></svg>`,
+  play: `<svg viewBox="0 0 16 16"><rect x="1.5" y="3" width="13" height="10"/><path class="ic-gold-fill" d="M6.6 6l3.4 2-3.4 2V6Z"/></svg>`,
+  gear: `<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.2"/><path d="M8 1.7v2M8 12.3v2M1.7 8h2M12.3 8h2M3.6 3.6l1.4 1.4M11 11l1.4 1.4M12.4 3.6l-1.4 1.4M5 11l-1.4 1.4"/><circle class="ic-gold-fill" cx="8" cy="8" r="1"/></svg>`,
+  slider: `<svg viewBox="0 0 16 16"><path d="M3 2v12M8 2v12M13 2v12"/><rect x="1.6" y="4.5" width="2.8" height="2.4"/><rect class="ic-gold-fill" x="6.6" y="8" width="2.8" height="2.4"/><rect x="11.6" y="6" width="2.8" height="2.4"/></svg>`,
+  star: `<svg viewBox="0 0 16 16"><path d="M8 1.6l1.6 4.2 4.4.3-3.4 2.8 1.1 4.3L8 10.8 4.3 13.2l1.1-4.3L2 6.1l4.4-.3L8 1.6Z"/><circle class="ic-gold-fill" cx="13.1" cy="3" r="1.1"/></svg>`,
+};
+
+// Seamless -50% loop.
+const ticker = [...floorTicker, ...floorTicker];
+// Dotted "silo" lines into the ticker, then a funnel + arrow down to the statement.
+const silos = Array.from({ length: 7 }, (_, i) => +(((i + 0.5) / 7) * 100).toFixed(2));
+const funnel = Array.from({ length: 9 }, (_, i) => +(((i + 0.5) / 9) * 100).toFixed(2));
+---
+
+<section class="home-diff" aria-label="What makes LUCI different">
+  <div class="home-diff__inner">
+    <p class="home-diff__setup-lead">{setupLead}</p>
+
+    <svg class="home-diff__silos" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      {silos.map((x) => (
+        <line x1={x} y1="0" x2={x} y2="100" />
+      ))}
+    </svg>
+
+    <!-- The full list of systems a property runs today -->
+    <div class="home-diff__ticker" aria-hidden="true">
+      <div class="home-diff__ticker-track">
+        {ticker.map((t) => (
+          <span class="home-diff__item">
+            <span class="home-diff__item-ic" set:html={icons[t.icon]} />
+            {t.label}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <!-- many systems → one: lines converge from the ticker, then a bold arrow
+         drives the consolidation down into the "With LUCI" statement. The funnel
+         fades gold (the diverse systems above) into mint (the single outcome below). -->
+    <svg class="home-diff__converge" viewBox="0 0 100 120" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="diff-funnel" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#c9a24e" stop-opacity="0.5" />
+          <stop offset="1" stop-color="#68e3be" stop-opacity="0.45" />
+        </linearGradient>
+      </defs>
+      {funnel.map((x) => (
+        <line x1={x} y1="0" x2="50" y2="116" stroke="url(#diff-funnel)" />
+      ))}
+    </svg>
+
+    <div class="home-diff__big-arrow" aria-hidden="true"></div>
+
+    <p class="home-diff__message">
+      <span class="home-diff__line2">
+        <span class="home-diff__destination">With LUCI</span>, {destinationLead}<em>{line2Accent}</em>{line2Tail}
+      </span>
+    </p>
+
+    <p class="home-diff__foot">{footBefore}<em>open APIs</em>{footAfter}</p>
+  </div>
+</section>
+
+<style>
+  .home-diff {
+    background: var(--navy);
+    color: var(--off-white);
+    border-top: 1px solid rgba(var(--mint-rgb), 0.18);
+  }
+
+  .home-diff__inner {
+    padding-block: clamp(64px, 10vw, 120px);
+    padding-inline: var(--page-pad);
+    text-align: center;
+  }
+
+  .home-diff__setup-lead {
+    margin: 0 0 clamp(10px, 1.4vw, 14px);
+    font-family: var(--font-body);
+    font-size: clamp(18px, 2.2vw, 26px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: rgba(245, 248, 250, 0.82);
+  }
+
+  .home-diff__silos {
+    display: block;
+    width: min(700px, 80%);
+    height: clamp(22px, 3.6vw, 40px);
+    margin: 0 auto 4px;
+  }
+
+  .home-diff__silos line {
+    stroke: rgba(245, 248, 250, 0.28);
+    stroke-width: 1;
+    stroke-dasharray: 2 5;
+    vector-effect: non-scaling-stroke;
+  }
+
+  /* ---- Scrolling ticker of property systems ---- */
+  .home-diff__ticker {
+    overflow: hidden;
+    border-top: 1px solid rgba(var(--mint-rgb), 0.2);
+    border-bottom: 1px solid rgba(var(--mint-rgb), 0.2);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .home-diff__ticker-track {
+    display: flex;
+    align-items: center;
+    gap: clamp(28px, 4vw, 52px);
+    width: max-content;
+    padding: clamp(14px, 1.8vw, 20px) 0;
+    animation: home-diff-tick 34s linear infinite;
+  }
+
+  @keyframes home-diff-tick {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .home-diff__ticker:hover .home-diff__ticker-track {
+    animation-play-state: paused;
+  }
+
+  .home-diff__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-body);
+    font-size: clamp(15px, 1.7vw, 19px);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: rgba(245, 248, 250, 0.82);
+  }
+
+  .home-diff__item-ic {
+    display: inline-flex;
+    width: clamp(18px, 2vw, 22px);
+    height: clamp(18px, 2vw, 22px);
+  }
+  .home-diff__item-ic :global(svg) {
+    width: 100%;
+    height: 100%;
+    stroke: var(--mint);
+    stroke-width: 1.4;
+    fill: none;
+    display: block;
+  }
+  /* Duotone accents — one gold element per icon (matches Capabilities doc). */
+  .home-diff__item-ic :global(.ic-gold) { stroke: var(--gold); }
+  .home-diff__item-ic :global(.ic-gold-fill) { fill: var(--gold); stroke: none; }
+
+  /* Converging funnel from the ticker down toward the statement */
+  .home-diff__converge {
+    display: block;
+    width: min(760px, 100%);
+    height: clamp(64px, 8vw, 92px);
+    margin: 6px auto -2px;
+    overflow: visible;
+  }
+  .home-diff__converge line {
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+
+  /* Bold consolidation arrow: thick shaft + large head, mint with a glow —
+     the unambiguous "everything above funnels into LUCI" signal. */
+  .home-diff__big-arrow {
+    position: relative;
+    width: clamp(30px, 3.2vw, 42px);
+    margin: 2px auto 0;
+  }
+  .home-diff__big-arrow::before {
+    content: '';
+    display: block;
+    width: clamp(7px, 0.85vw, 10px);
+    height: clamp(34px, 5vw, 56px);
+    margin: 0 auto;
+    background: var(--mint);
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(var(--mint-rgb), 0.55);
+  }
+  .home-diff__big-arrow::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    margin: 0 auto;
+    border-left: clamp(15px, 1.6vw, 21px) solid transparent;
+    border-right: clamp(15px, 1.6vw, 21px) solid transparent;
+    border-top: clamp(20px, 2.2vw, 28px) solid var(--mint);
+    filter: drop-shadow(0 6px 12px rgba(var(--mint-rgb), 0.5));
+  }
+
+  .home-diff__message {
+    margin: 0 auto;
+    max-width: 1040px;
+    font-family: var(--font-body);
+    letter-spacing: -0.02em;
+  }
+
+  .home-diff__line2 {
+    display: block;
+    max-width: 24ch;
+    margin: 0 auto;
+    font-size: clamp(32px, 5.6vw, 60px);
+    font-weight: 700;
+    line-height: 1.08;
+    color: var(--off-white);
+  }
+  .home-diff__line2 em {
+    font-style: normal;
+    color: var(--mint);
+  }
+
+  .home-diff__destination {
+    position: relative;
+    display: inline-block;
+    color: var(--off-white);
+    text-shadow: 0 0 20px rgba(var(--mint-rgb), 0.26);
+  }
+
+  .home-diff__destination::after {
+    content: '';
+    position: absolute;
+    left: 0.05em;
+    right: 0.05em;
+    bottom: -0.08em;
+    height: 0.08em;
+    background: var(--mint);
+    box-shadow: 0 0 14px rgba(var(--mint-rgb), 0.5);
+  }
+
+  .home-diff__foot {
+    margin: clamp(20px, 2.5vw, 28px) auto 0;
+    font-size: 12.5px;
+    font-style: italic;
+    color: rgba(245, 248, 250, 0.5);
+  }
+  .home-diff__foot em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-diff__ticker-track { animation: none; transform: translateX(0); }
+    .home-diff__ticker { -webkit-mask-image: none; mask-image: none; }
+  }
+</style>

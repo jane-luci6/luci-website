@@ -1,0 +1,27 @@
+---
+import { zones, type ZoneId } from '../data/zones';
+
+interface Props {
+  zone: ZoneId;
+  kicker?: string;
+  title?: string;
+  id?: string;
+}
+
+const { zone, kicker, title, id } = Astro.props;
+const z = zones[zone];
+---
+
+<section
+  id={id}
+  class="zone"
+  data-zone={zone}
+  style={`--zone-base: ${z.base}; --zone-glow: ${z.glow}; --zone-glow-rgb: ${z.glowRgb}`}
+>
+  <div class="zone__glow" aria-hidden="true"></div>
+  <div class="container container--wide zone__inner">
+    {kicker && <p class="zone__kicker display-label">{kicker}</p>}
+    {title && <h2 class="zone__title h2">{title}</h2>}
+    <slot />
+  </div>
+</section>

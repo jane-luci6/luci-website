@@ -22,8 +22,8 @@ export const pillars = [
   },
   {
     num: '04',
-    title: 'Invest in the only A/V that gets more valuable over time',
-    body: "Traditional A/V depreciates and expires. LUCI doesn't. Year Five is more capable than Year One on the same line item.",
+    title: 'Invest in the only A/V that scales and improves',
+    body: "Traditional A/V depreciates and expires. LUCI doesn't. When you expand into sister properties, each one benefits from what came before — and Year Five is more capable than Year One on the same line item.",
     personas: ['finance', 'leadership'] as const,
     topics: ['tco', 'subscription'],
   },

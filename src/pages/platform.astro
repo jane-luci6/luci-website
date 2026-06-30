@@ -28,6 +28,29 @@ const luciIsNot = [
     <p class="measure">{variableReduction.accumulation}</p>
   </SectionBlock>
 
+  <SectionBlock kicker="What you get" title={oneOffering.summary} tone="deep">
+    <figure class="offering-figure">
+      <img
+        src="/images/diagrams/luci-what-luci-is.dark.svg?v=3"
+        alt="LUCI + Systems — LUCI, the orchestration platform (A/V rack plus control software on any device), plus Systems, the embedded operation (team, processes, and standards)"
+        width="560"
+        height="300"
+        loading="lazy"
+        decoding="async"
+      />
+    </figure>
+    <div class="offering-pillars">
+      <div>
+        <p class="display-label offering-pillars__label">Platform</p>
+        <p class="offering-pillars__body">{oneOffering.platform}</p>
+      </div>
+      <div>
+        <p class="display-label offering-pillars__label">Partnership</p>
+        <p class="offering-pillars__body">{oneOffering.partnership}</p>
+      </div>
+    </div>
+  </SectionBlock>
+
   <SectionBlock title="How it works" tone="sand">
     <div class="visual-placeholder">Product screenshot · map-based control UI</div>
   </SectionBlock>
@@ -80,3 +103,44 @@ const luciIsNot = [
     </div>
   </SectionBlock>
 </BaseLayout>
+
+<style>
+  .offering-figure {
+    margin: var(--space-3) 0 0;
+    max-width: 760px;
+  }
+
+  .offering-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 560 / 300;
+  }
+
+  .offering-pillars {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    margin-top: clamp(28px, 4vw, 40px);
+  }
+
+  .offering-pillars__label {
+    margin-bottom: var(--space-1);
+    color: var(--mint);
+  }
+
+  .offering-pillars__body {
+    margin: 0;
+    font-size: clamp(16px, 1.8vw, 19px);
+    line-height: 1.5;
+    color: rgba(245, 248, 250, 0.82);
+    max-width: 40ch;
+  }
+
+  @media (min-width: 760px) {
+    .offering-pillars {
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(24px, 3vw, 48px);
+    }
+  }
+</style>

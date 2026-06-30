@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 920 420" font-family="'Space Grotesk', sans-serif" role="img" aria-label="LUCI orchestration platform on one screen, controlling LED walls, lighting, signage, audio, video, IPTV, building systems and more across the property">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;display=swap');
+      .kick { font-weight:700; font-size:10px; letter-spacing:.18em; fill:#176B54; }
+      .sys { font-weight:600; font-size:12px; fill:#F5F8FA; }
+      .lap-cap { font-weight:600; font-size:12px; fill:#10232D; text-anchor:middle; }
+      .lap-sub { font-weight:500; font-size:10px; fill:#56707C; text-anchor:middle; }
+      .scan { animation: scan 6.5s linear infinite; }
+      @keyframes scan {
+        0%   { transform: translateY(-72px); }
+        100% { transform: translateY(356px); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .scan { animation: none; opacity: 0; }
+      }
+    </style>
+    <marker id="arw" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#2b9e80"/>
+    </marker>
+    <linearGradient id="scanGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#68E3BE" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#68E3BE" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#68E3BE" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="ribbonClip"><rect x="0" y="0" width="232" height="356"/></clipPath>
+  </defs>
+
+  <rect width="920" height="420" fill="#F5F8FA"/>
+
+  <!-- lift behind laptop -->
+  <rect x="32" y="56" width="452" height="300" fill="#E8EDF1" opacity=".45"/>
+
+  <!-- laptop + live map -->
+  <g transform="translate(48, 64)">
+    <rect x="0" y="0" width="420" height="280" fill="#15323B"/>
+    <image href="hero-platform.png" x="8" y="8" width="404" height="264" preserveAspectRatio="xMidYMid slice"/>
+  </g>
+  <path d="M214,344 L334,344 L350,368 L198,368 Z" fill="#15323B"/>
+  <path d="M186,368 L362,368 L374,384 L174,384 Z" fill="#20404F"/>
+  <text class="lap-cap" x="274" y="364">Orchestration platform</text>
+  <text class="lap-sub" x="274" y="380">One interface &#183; any screen</text>
+
+  <!-- control arrows: from screen edge fanning to the ribbon -->
+  <g stroke="#2b9e80" stroke-width="1.6" fill="none" marker-end="url(#arw)">
+    <path d="M472,150 C540,150 556,128 626,128"/>
+    <path d="M472,204 C552,204 552,236 626,236"/>
+    <path d="M472,258 C540,258 556,344 626,344"/>
+  </g>
+  <circle cx="472" cy="204" r="3" fill="#68E3BE"/>
+
+  <!-- vertical property-systems ribbon -->
+  <g transform="translate(632, 48)">
+    <text class="kick" x="0" y="0">LUCI CONTROLS</text>
+
+    <g transform="translate(0, 16)">
+      <rect x="0" y="0" width="232" height="356" fill="#10232D"/>
+      <rect x="0" y="0" width="4" height="356" fill="#68E3BE"/>
+
+      <!-- scanning glow - LUCI touching each system -->
+      <g clip-path="url(#ribbonClip)">
+        <rect class="scan" x="4" y="0" width="228" height="72" fill="url(#scanGrad)"/>
+      </g>
+
+      <g class="sys">
+        <text x="20" y="32">LED Walls</text>
+        <line x1="20" y1="44" x2="212" y2="44" stroke="#2A4754" stroke-width="1"/>
+        <text x="20" y="60">Lighting</text>
+        <line x1="20" y1="72" x2="212" y2="72" stroke="#2A4754" stroke-width="1"/>
+        <text x="20" y="88">LED Ribbon</text>
+        <line x1="20" y1="100" x2="212" y2="100" stroke="#2A4754" stroke-width="1"/>
+        <text x="20" y="116">Digital Signage</text>
+        <line x1="20" y1="128" x2="212" y2="128" stroke="#2A4754" stroke-width="1"/>
+        <text x="20" y="144">Sound</text>
+        <line x1="20" y1="156" x2="212" y2="156" stroke="#2A4754" stroke-width="1"/>
+        <text x="20" y="172">Video</text>
+        <line x1="20" y1="184" x2="212" y2="184" stroke="#2A4754" stroke-width="1"/>
+        <text x="20" y="200">IPTV</text>
+        <line x1="20" y1="212" x2="212" y2="212" stroke="#2A4754" stroke-width="1"/>
+        <text x="20" y="228">BMS</text>
+        <line x1="20" y1="240" x2="212" y2="240" stroke="#2A4754" stroke-width="1"/>
+        <text x="20" y="256">Audio DSP</text>
+        <line x1="20" y1="268" x2="212" y2="268" stroke="#2A4754" stroke-width="1"/>
+        <text x="20" y="284">Scoreboards</text>
+        <line x1="20" y1="296" x2="212" y2="296" stroke="#2A4754" stroke-width="1"/>
+        <text x="20" y="312">Casino Floor</text>
+        <line x1="20" y1="324" x2="212" y2="324" stroke="#2A4754" stroke-width="1"/>
+        <text x="20" y="340">Event AV</text>
+      </g>
+    </g>
+  </g>
+
+</svg>

@@ -1,0 +1,146 @@
+---
+import { ameristarCaseStudy } from '../data/site';
+
+const {
+  homeHeadline,
+  homeDek,
+  homeQuote,
+  homeQuoteAttribution,
+  homeCta,
+  slug,
+} = ameristarCaseStudy;
+
+const headlineRest = homeHeadline.replace(/^Three days\s*/, '');
+---
+
+<section class="home-proof" aria-labelledby="home-proof-title">
+  <div class="home-proof__inner container container--wide">
+    <div class="home-proof__body">
+      <header class="home-proof__head">
+        <h2 id="home-proof-title" class="home-proof__headline">
+          <span>Three days</span> {headlineRest}.
+        </h2>
+        <p class="home-proof__dek">{homeDek}</p>
+      </header>
+
+      <div class="home-proof__proof">
+        <aside class="home-proof__quote">
+          <blockquote>&ldquo;{homeQuote}&rdquo;</blockquote>
+          <p>{homeQuoteAttribution}</p>
+        </aside>
+        <a class="btn btn--mint home-proof__cta" href={`/resources/case-studies/${slug}`}>{homeCta}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Proof zone shares the trust bar's light canvas so the page clearly shifts
+     from product story (dark) to social proof (light). */
+  .home-proof {
+    background: var(--off-white);
+    color: var(--ink);
+    border-top: 1px solid rgba(10, 22, 28, 0.08);
+  }
+
+  .home-proof__inner {
+    padding-block: clamp(56px, 9vw, 96px);
+  }
+
+  .home-proof__headline {
+    margin: 0;
+    max-width: 22ch;
+    font-family: var(--font-body);
+    font-size: clamp(34px, 5vw, 58px);
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    color: var(--ink-strong);
+  }
+
+  .home-proof__headline span {
+    color: var(--ink-strong);
+    text-decoration: underline;
+    text-decoration-color: var(--gold);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 6px;
+  }
+
+  .home-proof__dek {
+    margin: clamp(18px, 2.4vw, 24px) 0 0;
+    max-width: 68ch;
+    font-size: clamp(16px, 1.8vw, 19px);
+    line-height: 1.6;
+    color: rgba(53, 79, 92, 0.82);
+  }
+
+  /* Quote as a contained callout: mint bar, tinted panel, oversized quote mark */
+  .home-proof__proof {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(24px, 3.5vw, 40px);
+    margin-top: clamp(36px, 5vw, 56px);
+  }
+
+  .home-proof__quote {
+    position: relative;
+    margin: 0;
+    padding: clamp(30px, 4vw, 46px) clamp(28px, 4vw, 44px) clamp(26px, 3.4vw, 38px);
+    background: rgba(104, 227, 190, 0.1);
+    border-left: 5px solid var(--mint);
+    max-width: 44ch;
+  }
+
+  .home-proof__quote::before {
+    content: '\201C';
+    position: absolute;
+    top: clamp(-6px, -1vw, -10px);
+    left: clamp(14px, 1.8vw, 22px);
+    font-family: var(--font-display, var(--font-body));
+    font-size: clamp(72px, 9vw, 120px);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--mint);
+    opacity: 0.32;
+    pointer-events: none;
+  }
+
+  .home-proof__quote blockquote {
+    position: relative;
+    margin: 0;
+    font-size: clamp(24px, 3.2vw, 36px);
+    font-weight: 700;
+    line-height: 1.22;
+    letter-spacing: -0.03em;
+    color: var(--ink-strong);
+  }
+
+  .home-proof__quote p {
+    position: relative;
+    margin: clamp(18px, 2.4vw, 26px) 0 0;
+    padding-top: clamp(14px, 1.8vw, 20px);
+    border-top: 1px solid rgba(10, 22, 28, 0.12);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(53, 79, 92, 0.72);
+  }
+
+  .home-proof__cta {
+    flex: none;
+    min-height: 56px;
+    padding: 16px 34px;
+    font-size: clamp(15px, 1.6vw, 17px);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  @media (max-width: 720px) {
+    .home-proof__proof {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+</style>

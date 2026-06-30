@@ -1,0 +1,20 @@
+---
+import type { ZoneId } from '../data/zones';
+
+interface Props {
+  zone: ZoneId;
+  kicker?: string;
+  title?: string;
+  id?: string;
+}
+
+const { zone, kicker, title, id } = Astro.props;
+---
+
+<article id={id} class="zone-card" data-zone={zone}>
+  <div class="zone-card__content">
+    {kicker && <p class="zone-card__kicker display-label">{kicker}</p>}
+    {title && <h2 class="zone-card__title h2">{title}</h2>}
+    <slot />
+  </div>
+</article>

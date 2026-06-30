@@ -1,0 +1,87 @@
+---
+import { industries } from '../data/industries';
+
+const kicker = 'Running on floors like yours';
+---
+
+<section class="home-industries" aria-label="Industries LUCI serves">
+  <div class="home-industries__inner container container--wide">
+    <p class="home-industries__kicker">{kicker}</p>
+    <nav class="home-industries__row" aria-label="Industries">
+      {industries.map((i, idx) => (
+        <Fragment>
+          <a class="home-industries__link" href={`/industries/${i.slug}`}>{i.name}</a>
+          {idx < industries.length - 1 && <span class="home-industries__sep" aria-hidden="true">·</span>}
+        </Fragment>
+      ))}
+    </nav>
+  </div>
+</section>
+
+<style>
+  .home-industries {
+    position: relative;
+    background: var(--navy-mid);
+    color: var(--off-white);
+    overflow: hidden;
+  }
+
+  .home-industries::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/patterns/pattern-5.svg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .home-industries__inner {
+    position: relative;
+    z-index: 1;
+    padding-block: clamp(28px, 3.6vw, 44px);
+    text-align: center;
+  }
+
+  .home-industries__kicker {
+    margin: 0 0 clamp(10px, 1.4vw, 14px);
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mint);
+  }
+
+  .home-industries__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(8px, 1.4vw, 18px);
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .home-industries__link {
+    font-family: var(--font-body);
+    font-size: clamp(15px, 1.6vw, 19px);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: rgba(245, 248, 250, 0.86);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.15s ease-out;
+  }
+
+  .home-industries__link:hover {
+    color: var(--mint);
+  }
+
+  .home-industries__sep {
+    color: rgba(245, 248, 250, 0.3);
+    font-weight: 400;
+  }
+</style>

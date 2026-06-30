@@ -7,16 +7,31 @@ import { site } from '../data/site';
 interface Props {
   title?: string;
   description?: string;
+  darkHeader?: boolean;
 }
 
-const { title, description = site.subTagline } = Astro.props;
+const { title, description = site.subTagline, darkHeader = false } = Astro.props;
 const pageTitle = title ? `${title} · ${site.name}` : `${site.tagline} · ${site.name}`;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
+    <script is:inline>
+      (function () {
+        var KEY = 'luci-theme';
+        try {
+          var saved = localStorage.getItem(KEY);
+          document.documentElement.setAttribute(
+            'data-theme',
+            saved === 'light' || saved === 'dark' ? saved : 'dark',
+          );
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -29,7 +44,7 @@ const pageTitle = title ? `${title} · ${site.name}` : `${site.tagline} · ${sit
     <title>{pageTitle}</title>
   </head>
   <body>
-    <Header />
+    <Header dark={darkHeader} />
     <main id="main">
       <slot />
     </main>

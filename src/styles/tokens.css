@@ -1,6 +1,7 @@
 /* LUCI brand tokens — see luci-design/_project-context.md */
 
 :root {
+  /* Brand (fixed) */
   --navy-deep: #0a161c;
   --navy: #10232d;
   --navy-mid: #314955;
@@ -8,6 +9,12 @@
   --mint: #68e3be;
   --mint-rgb: 104, 227, 190;
   --accent-light: #176b54;
+
+  /* Secondary accent — gold only */
+  --gold: #c9a24e;
+  --gold-rgb: 201, 162, 78;
+  --gold-deep: #9a7548;
+
   --sand: #e5e3df;
   --off-white: #f5f8fa;
   --rule-light: #dbe1e4;
@@ -29,4 +36,37 @@
   --measure: 60ch;
   --page-pad: clamp(28px, 6vw, 60px);
   --content-max: 820px;
+  --content-wide: 1120px;
+}
+
+/* Dark (default) — unified navy canvas; zone hues at low opacity only */
+:root,
+[data-theme='dark'] {
+  --surface-page: var(--navy-deep);
+  --surface-raised: var(--navy);
+  --text-primary: rgba(245, 248, 250, 0.92);
+  --text-secondary: rgba(245, 248, 250, 0.68);
+  --link: var(--mint);
+  --link-on-light: var(--accent-light);
+  --header-bg: var(--navy-deep);
+  --header-text: rgba(245, 248, 250, 0.92);
+  --header-border: rgba(var(--mint-rgb), 0.25);
+  --footer-bg: var(--navy-deep);
+  --footer-text: rgba(245, 248, 250, 0.78);
+  --footer-border: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='light'] {
+  --surface-page: var(--off-white);
+  --surface-raised: #fff;
+  --text-primary: var(--ink);
+  --text-secondary: var(--navy-muted);
+  --link: var(--accent-light);
+  --link-on-light: var(--accent-light);
+  --header-bg: var(--sand);
+  --header-text: var(--navy);
+  --header-border: var(--rule-light);
+  --footer-bg: var(--navy-deep);
+  --footer-text: rgba(245, 248, 250, 0.78);
+  --footer-border: rgba(255, 255, 255, 0.1);
 }

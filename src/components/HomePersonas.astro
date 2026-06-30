@@ -1,0 +1,249 @@
+---
+import { personas } from '../data/personas';
+
+const heading = 'The right tools for every person in the building.';
+const lede = 'Six functions, one platform. Pick your role to see exactly how LUCI fits your day-to-day.';
+const ctaLabel = 'See every role';
+const ctaHref = '/who-we-serve';
+---
+
+<section class="home-personas" aria-labelledby="home-personas-title">
+  <div class="home-personas__inner container container--wide">
+    <div class="home-personas__layout">
+      <header class="home-personas__rail">
+        <span class="home-personas__bar" aria-hidden="true"></span>
+        <h2 id="home-personas-title" class="home-personas__heading">{heading}</h2>
+        <p class="home-personas__lede">{lede}</p>
+        <a class="home-personas__cta" href={ctaHref}>
+          <span>{ctaLabel}</span>
+          <span class="home-personas__cta-arrow" aria-hidden="true">→</span>
+        </a>
+      </header>
+
+      <div class="home-personas__card">
+        <ul class="home-personas__grid" role="list">
+          {personas.map((p) => (
+            <li class="home-personas__cell">
+              <a class="home-personas__link" href={`/who-we-serve#${p.id}`}>
+                <p class="home-personas__role">{p.role}</p>
+                <h3 class="home-personas__label">{p.label}</h3>
+                <p class="home-personas__line">{p.line}</p>
+                <span class="home-personas__arrow" aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-personas {
+    position: relative;
+    background: var(--navy-deep);
+    color: var(--off-white);
+    overflow: hidden;
+  }
+
+  /* Brand texture — mint line pattern (pattern-05) as an ambient overlay behind
+     the rail. The elevated card sits on top, so the texture frames the section. */
+  .home-personas::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/patterns/pattern-5.svg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .home-personas__inner {
+    position: relative;
+    z-index: 1;
+    padding-block: clamp(64px, 9vw, 104px);
+  }
+
+  .home-personas__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.3fr);
+    gap: clamp(32px, 5vw, 72px);
+    align-items: center;
+  }
+
+  /* Rail: gold accent bar (standard shade — correct on dark) + heading + lede + CTA. */
+  .home-personas__bar {
+    display: block;
+    width: 48px;
+    height: 4px;
+    margin-bottom: clamp(16px, 2vw, 24px);
+    background: var(--gold);
+  }
+
+  .home-personas__heading {
+    margin: 0;
+    max-width: 20ch;
+    font-family: var(--font-body);
+    font-size: clamp(28px, 3.4vw, 42px);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    color: var(--off-white);
+  }
+
+  .home-personas__lede {
+    margin: 16px 0 0;
+    max-width: 34ch;
+    font-size: clamp(15px, 1.2vw, 17px);
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.72);
+  }
+
+  .home-personas__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 28px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    color: var(--mint);
+    text-decoration: none;
+    transition: color 0.15s ease-out;
+  }
+  .home-personas__cta-arrow {
+    transition: transform 0.18s ease-out;
+  }
+  .home-personas__cta:hover { color: var(--off-white); }
+  .home-personas__cta:hover .home-personas__cta-arrow { transform: translateX(4px); }
+
+  /* Elevated card: lifted navy panel, soft shadow, hairline-divided cells. */
+  .home-personas__card {
+    background: var(--navy);
+    border-radius: 14px;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    padding: clamp(8px, 1vw, 12px);
+  }
+
+  .home-personas__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .home-personas__cell {
+    position: relative;
+    background: var(--navy);
+    transition: background 0.18s ease-out;
+  }
+
+  /* Mint left-bar accent on hover/focus — the de-boxed callout treatment. */
+  .home-personas__cell::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--mint);
+    transform: scaleY(0);
+    transform-origin: top center;
+    transition: transform 0.2s ease-out;
+  }
+  .home-personas__cell:hover,
+  .home-personas__cell:focus-within {
+    background: rgba(104, 227, 190, 0.06);
+  }
+  .home-personas__cell:hover::before,
+  .home-personas__cell:focus-within::before {
+    transform: scaleY(1);
+  }
+
+  .home-personas__link {
+    display: block;
+    height: 100%;
+    padding: clamp(22px, 2.6vw, 32px) clamp(20px, 2.4vw, 28px);
+    text-decoration: none;
+    color: inherit;
+  }
+  .home-personas__link:focus-visible {
+    outline: 2px solid var(--mint);
+    outline-offset: -2px;
+  }
+
+  .home-personas__role {
+    margin: 0 0 8px;
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mint);
+  }
+
+  .home-personas__label {
+    margin: 0 0 10px;
+    font-family: var(--font-body);
+    font-size: clamp(19px, 2vw, 24px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: var(--off-white);
+  }
+
+  .home-personas__line {
+    margin: 0;
+    max-width: 34ch;
+    font-size: clamp(13.5px, 1.3vw, 15.5px);
+    line-height: 1.5;
+    color: rgba(245, 248, 250, 0.7);
+  }
+
+  .home-personas__arrow {
+    display: inline-block;
+    margin-top: clamp(14px, 2vw, 20px);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--mint);
+    transition: transform 0.18s ease-out;
+  }
+  .home-personas__cell:hover .home-personas__arrow,
+  .home-personas__cell:focus-within .home-personas__arrow {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 980px) {
+    .home-personas__layout {
+      grid-template-columns: 1fr;
+      gap: clamp(28px, 5vw, 40px);
+      align-items: stretch;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .home-personas__grid {
+      grid-template-columns: 1fr;
+    }
+    .home-personas__rail {
+      text-align: center;
+    }
+    .home-personas__bar {
+      margin-inline: auto;
+    }
+    .home-personas__heading,
+    .home-personas__lede {
+      margin-inline: auto;
+    }
+    .home-personas__cta {
+      margin-inline: auto;
+    }
+  }
+</style>

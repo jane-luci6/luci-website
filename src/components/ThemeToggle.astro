@@ -1,0 +1,88 @@
+---
+---
+<button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch color theme">
+  <span class="theme-toggle__icon theme-toggle__icon--dark" aria-hidden="true">☀</span>
+  <span class="theme-toggle__icon theme-toggle__icon--light" aria-hidden="true">☾</span>
+  <span class="theme-toggle__label">Theme</span>
+</button>
+
+<script is:inline>
+  (function initThemeToggle() {
+    const KEY = 'luci-theme';
+    const root = document.documentElement;
+    const btn = document.getElementById('theme-toggle');
+
+    function apply(theme) {
+      root.setAttribute('data-theme', theme);
+      if (btn) btn.setAttribute('data-active', theme);
+      try {
+        localStorage.setItem(KEY, theme);
+      } catch (e) {
+        /* private browsing */
+      }
+    }
+
+    if (btn) {
+      btn.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        apply(next);
+      });
+      btn.setAttribute('data-active', root.getAttribute('data-theme') || 'dark');
+    }
+  })();
+</script>
+
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 10px;
+    font-family: var(--font-display);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid var(--header-border);
+    color: var(--header-text);
+    cursor: pointer;
+    min-height: 36px;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--mint);
+    color: var(--mint);
+  }
+
+  .theme-toggle:focus-visible {
+    outline: 2px solid var(--mint);
+    outline-offset: 2px;
+  }
+
+  .theme-toggle__label {
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    .theme-toggle__label {
+      display: inline;
+    }
+  }
+
+  .theme-toggle__icon--light {
+    display: none;
+  }
+
+  [data-theme='light'] .theme-toggle__icon--dark {
+    display: none;
+  }
+
+  [data-theme='light'] .theme-toggle__icon--light {
+    display: inline;
+  }
+
+  [data-theme='dark'] .theme-toggle__icon--dark {
+    display: inline;
+  }
+</style>

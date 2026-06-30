@@ -1,0 +1,141 @@
+---
+import { homeTrust } from '../data/site';
+
+const { eyebrow, strips } = homeTrust;
+// Duplicate the set so the marquee can loop seamlessly.
+const track = [...strips, ...strips];
+---
+
+<section class="home-trust" aria-label="Casino and hospitality operators running LUCI">
+  <div class="home-trust__inner container container--wide">
+    <p class="home-trust__eyebrow">{eyebrow}</p>
+    <div class="home-trust__marquee">
+      <ul class="home-trust__track" role="list">
+        {track.map((strip, i) => (
+          <li class="home-trust__cell">
+            <img
+              class="home-trust__strip"
+              src={strip.src}
+              alt={i < strips.length ? strip.alt : ''}
+              aria-hidden={i >= strips.length ? 'true' : undefined}
+              loading="lazy"
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-trust {
+    background: var(--off-white);
+    border-top: 1px solid rgba(10, 22, 28, 0.08);
+  }
+
+  .home-trust__inner {
+    padding-block: clamp(40px, 5vw, 64px);
+  }
+
+  .home-trust__eyebrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(10px, 1.4vw, 16px);
+    margin: 0 0 clamp(28px, 3.6vw, 44px);
+    font-family: var(--font-body);
+    font-size: clamp(15px, 1.9vw, 21px);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    color: var(--ink-strong);
+    text-align: center;
+  }
+  .home-trust__eyebrow::before {
+    content: '';
+    width: 40px;
+    height: 3px;
+    background: var(--mint);
+    border-radius: 9999px;
+  }
+
+  /* Edge-faded viewport for the scrolling logo track */
+  .home-trust__marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 6%,
+      #000 94%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 6%,
+      #000 94%,
+      transparent
+    );
+  }
+
+  .home-trust__track {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    width: max-content;
+    /* Gap matches the ~0.226× logo-height spacing baked into each strip, so logos
+       read evenly spaced across strip boundaries (no wide gaps between strips). */
+    gap: clamp(16px, 1.8vw, 24px);
+    /* Slow, gentle drift — roughly 90 seconds per full cycle */
+    animation: home-trust-scroll 90s linear infinite;
+  }
+
+  .home-trust__cell {
+    flex: 0 0 auto;
+  }
+
+  .home-trust__strip {
+    display: block;
+    /* Each strip is 4 logos wide — sized up so individual logos read clearly */
+    height: clamp(68px, 8vw, 104px);
+    width: auto;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+  }
+
+  .home-trust__strip:hover {
+    opacity: 1;
+  }
+
+  @keyframes home-trust-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      /* -50% shifts one full set; the extra half-gap corrects the flex-gap seam
+         so the loop is frame-perfect at every viewport. */
+      transform: translateX(calc(-50% - clamp(8px, 0.9vw, 12px)));
+    }
+  }
+
+  .home-trust__marquee:hover .home-trust__track {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-trust__track {
+      animation: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      gap: clamp(28px, 4vw, 48px);
+      row-gap: clamp(24px, 3vw, 36px);
+    }
+    .home-trust__marquee {
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+  }
+</style>

@@ -1,0 +1,1364 @@
+---
+import { floorControl, floorSystems, floorCascades } from '../data/floorControl';
+
+interface Props {
+  /** Show the "LUCI controls…" header inside the stage. */
+  header?: boolean;
+  /** Fill the parent box (absolute inset:0) instead of using an intrinsic aspect ratio. */
+  fill?: boolean;
+  /** Eager-load the floorplan image (use in the hero). */
+  eager?: boolean;
+}
+
+const { header = false, fill = false, eager = false } = Astro.props;
+
+// Group-based timeline: pairs share a slot, but the second item waits until the
+// halfway point. If a pair gets 3.4s total, item two appears at 1.7s.
+const SLOT = 3.4;
+const INTRA = SLOT / 2;
+// The Jackpot cascade is the hero moment. The trigger pops, the four endpoint
+// labels land one-by-one, then the whole moment sits for a few seconds and
+// fades — well before the cycle ends, so it never overlaps the next rotation.
+// One clean showing per cycle (no re-pop, no blink).
+const CASCADE_SLOTS = 3;
+// Trim to the first three staggered pairs so the cascade gets the majority of the
+// cycle (its labels stay visible far longer than they're gone). The slot-floor and
+// house-lights systems still appear — as cascade endpoints — so no capability is
+// lost from the story; the floor just stops showing more than it needs to.
+const systemsUsed = floorSystems.filter((s) => s.group <= 2);
+const groupIds = [...new Set(systemsUsed.map((s) => s.group))].sort((a, b) => a - b);
+const NUM_GROUPS = groupIds.length;
+const totalSlots = NUM_GROUPS + CASCADE_SLOTS * floorCascades.length;
+const CYCLE = +(totalSlots * SLOT).toFixed(2);
+
+const groupSeen: Record<number, number> = {};
+const demos = systemsUsed.map((s) => {
+  const gi = groupIds.indexOf(s.group);
+  const k = (groupSeen[s.group] = (groupSeen[s.group] ?? -1) + 1);
+  return { ...s, delay: `${(gi * SLOT + k * INTRA).toFixed(2)}s` };
+});
+const cascades = floorCascades.map((c, j) => ({
+  ...c,
+  delay: `${((NUM_GROUPS + j * CASCADE_SLOTS) * SLOT).toFixed(2)}s`,
+}));
+---
+
+<div class:list={['fp-stage', { 'fp-stage--fill': fill }]} style={`--cycle:${CYCLE}s`}>
+  <img class="fp-stage__img" src={floorControl.src} alt={floorControl.alt} loading={eager ? 'eager' : 'lazy'} decoding="async" width="1024" height="890" />
+
+  {header && (
+    <div class="fp-header">
+      <span class="fp-header__k">One platform &middot; the whole floor</span>
+      <b>LUCI controls&hellip;</b>
+    </div>
+  )}
+
+  {demos.map((d) => (
+    <div
+      class:list={['fp-seq', { 'fp-seq--left': d.side === 'left' }]}
+      style={`left:${d.left}%;top:${d.top}%;--d:${d.delay};`}
+    >
+      {d.zone && <span class="fp-zone" />}
+      <span class="fp-seq__dot" />
+      <span class="fp-seq__ring" />
+
+      <div class="fp-card">
+        <span class="fp-card__name">{d.name}</span>
+
+        {d.widget === 'radio' && (
+          <span class="fp-radio">
+            <span class="ro is-a"><i class="ro__dot" /><b>{d.from}</b></span>
+            <span class="ro is-b"><i class="ro__dot" /><b>{d.to}</b></span>
+          </span>
+        )}
+
+        {d.widget === 'slider' && (
+          <span
+            class="fp-slider"
+            style={`--from:${d.from}%;--to:${d.to}%;--nf:${d.numFrom};--nt:${d.numTo};--unit:'${d.unit}'`}
+          >
+            <span class="sl__track">
+              <i class="sl__fill" />
+              <i class="sl__knob" />
+            </span>
+            <span class="sl__val" />
+          </span>
+        )}
+
+        {d.widget === 'push' && (
+          <span class="fp-push">
+            <i class="pu__btn">
+              <b class="pu__a">{d.push}</b>
+              <b class="pu__b">{d.done}</b>
+            </i>
+          </span>
+        )}
+
+        {d.widget === 'screen' && (
+          <span class="fp-screen">
+            <span class="sc__tv">
+              <span class="sc__live" />
+              <b class="sc__a">{d.from}</b>
+              <b class="sc__b">{d.to}</b>
+              <i class="sc__flash" />
+            </span>
+          </span>
+        )}
+
+        {d.widget === 'select' && (
+          <span class="fp-select">
+            <span class="se__field">
+              <span class="se__txt">
+                <b class="se__a">{d.from}</b>
+                <b class="se__b">{d.to}</b>
+              </span>
+              <i class="se__chev" />
+            </span>
+            <span class="se__menu">
+              {d.options.map((o) => (
+                <i class:list={['se__opt', { 'is-pick': o === d.to }]}>{o}</i>
+              ))}
+            </span>
+          </span>
+        )}
+
+        {d.widget === 'toggle' && (
+          <span class="fp-card__toggle">
+            <i class="fp-card__switch" />
+            <em>{d.state}</em>
+          </span>
+        )}
+
+        {d.widget === 'swap' && (
+          <span class="fp-card__swap">
+            <b class="is-from">{d.from}</b>
+            <b class="is-to">{d.to}</b>
+          </span>
+        )}
+      </div>
+    </div>
+  ))}
+
+  {cascades.map((c) => (
+    <div class="fp-casc" style={`--d:${c.delay}`}>
+      <svg class="casc__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        {c.targets.map((t, ti) => (
+          <line
+            class="casc__line"
+            x1={c.trigger.left}
+            y1={c.trigger.top}
+            x2={t.left}
+            y2={t.top}
+            pathLength="1"
+            style={`--td:${(ti * 0.55).toFixed(2)}s`}
+          />
+        ))}
+      </svg>
+
+      {c.targets.map((t, ti) => (
+        <Fragment>
+          {t.zone && (
+            <span
+              class="casc__zone"
+              style={`left:${t.zone.left}%;top:${t.zone.top}%;width:${t.zone.w}%;height:${t.zone.h}%;--td:${(ti * 0.55).toFixed(2)}s`}
+            />
+          )}
+          <div class="casc__node" style={`left:${t.left}%;top:${t.top}%;--td:${(ti * 0.55).toFixed(2)}s`}>
+            <span class="casc__dot" />
+            <span class="casc__chip">
+              <b class="casc__name">{t.name}</b>
+              {t.widget === 'swap' && (
+                <span class="casc__swap">
+                  <i class="cf-from">{t.from}</i>
+                  <i class="cf-to">{t.to}</i>
+                </span>
+              )}
+              {t.widget === 'slider' && (
+                <span
+                  class="casc__sld"
+                  style={`--from:${t.from}%;--to:${t.to}%;--nf:${t.numFrom};--nt:${t.numTo};--unit:'${t.unit}'`}
+                >
+                  <span class="casc__track"><i class="casc__fill" /><i class="casc__knob" /></span>
+                  <span class="casc__val" />
+                </span>
+              )}
+              {t.widget === 'toggle' && (
+                <span class="casc__tog">
+                  <i class="casc__togsw" />
+                  <span class="casc__toglbl">
+                    <i class="cf-from">{t.from}</i>
+                    <i class="cf-to">{t.to}</i>
+                  </span>
+                </span>
+              )}
+            </span>
+          </div>
+        </Fragment>
+      ))}
+
+      <div class="casc__trig" style={`left:${c.trigger.left}%;top:${c.trigger.top}%`}>
+        <span class="casc__trigdot" />
+        <div class="casc__card">
+          <span class="casc__tag">{c.tag}</span>
+          <span class="casc__big">{c.event}</span>
+          <span class="casc__sub">{c.sub}</span>
+        </div>
+      </div>
+    </div>
+  ))}
+
+  <span class="fp-note">For illustrative purposes only.</span>
+</div>
+
+<style>
+  .fp-stage {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    background: var(--navy-deep);
+    aspect-ratio: 1024 / 890;
+    box-shadow: 0 24px 48px rgba(10, 22, 28, 0.18);
+  }
+
+  /* Fill the parent box instead of using the intrinsic ratio (hero) */
+  .fp-stage--fill {
+    position: absolute;
+    inset: 0;
+    aspect-ratio: auto;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .fp-icons {
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+
+  .fp-stage__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* darken the plan so the demos read */
+  .fp-stage::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: radial-gradient(120% 90% at 55% 45%, rgba(10, 22, 28, 0.22) 0%, rgba(10, 22, 28, 0.6) 100%);
+    pointer-events: none;
+  }
+
+  .fp-header {
+    position: absolute;
+    inset: 0 0 auto 0;
+    z-index: 7;
+    padding: clamp(14px, 2.4vw, 22px) clamp(16px, 3vw, 26px) 44px;
+    background: linear-gradient(180deg, rgba(10, 22, 28, 0.9) 0%, rgba(10, 22, 28, 0) 100%);
+    pointer-events: none;
+  }
+
+  .fp-header__k {
+    font-family: var(--font-display, inherit);
+    font-size: clamp(10px, 1.1vw, 13px);
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mint, #68e3be);
+  }
+
+  .fp-header b {
+    display: block;
+    margin-top: 4px;
+    font-size: clamp(22px, 4vw, 36px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #f5f8fa;
+  }
+
+  /* ---- "Illustrative" disclaimer — tucked bottom-right ---- */
+  .fp-note {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    z-index: 8;
+    max-width: 240px;
+    padding: 4px 9px;
+    background: rgba(10, 22, 28, 0.5);
+    font-size: clamp(9px, 0.95vw, 11px);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    font-style: italic;
+    text-align: right;
+    color: rgba(245, 248, 250, 0.55);
+    pointer-events: none;
+  }
+
+  /* ---- Control demos that hop around the floor ---- */
+  .fp-seq {
+    --dot: clamp(11px, 1.3vw, 15px);
+    position: absolute;
+    z-index: 5;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    animation: fpPop var(--cycle) linear infinite;
+    animation-delay: var(--d);
+  }
+
+  .fp-seq__dot {
+    position: relative;
+    display: block;
+    width: var(--dot);
+    height: var(--dot);
+    border-radius: 50%;
+    background: var(--mint, #68e3be);
+    box-shadow: 0 0 0 4px rgba(104, 227, 190, 0.2), 0 0 16px rgba(104, 227, 190, 0.75);
+    animation: fpDot var(--cycle) ease-out infinite;
+    animation-delay: var(--d);
+  }
+
+  .fp-seq__ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--dot);
+    height: var(--dot);
+    margin: calc(var(--dot) / -2) 0 0 calc(var(--dot) / -2);
+    border: 2px solid var(--mint, #68e3be);
+    border-radius: 50%;
+    opacity: 0;
+    animation: fpPing var(--cycle) ease-out infinite;
+    animation-delay: var(--d);
+  }
+
+  /* ---- Demo card ---- */
+  .fp-card {
+    position: absolute;
+    top: 50%;
+    left: calc(var(--dot) + 12px);
+    transform: translateY(-50%);
+    min-width: 118px;
+    padding: 8px 11px;
+    background: rgba(13, 28, 36, 0.96);
+    border-left: 3px solid var(--mint, #68e3be);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.42);
+    white-space: nowrap;
+  }
+
+  .fp-seq--left .fp-card {
+    left: auto;
+    right: calc(var(--dot) + 12px);
+    border-left: none;
+    border-right: 3px solid var(--mint, #68e3be);
+    text-align: right;
+  }
+
+  .fp-card__name {
+    display: block;
+    margin-bottom: 5px;
+    font-size: clamp(9px, 1vw, 11px);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mint, #68e3be);
+  }
+
+  /* radio: the selected dot jumps from option A to option B */
+  .fp-radio {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .ro {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: clamp(13px, 1.4vw, 16px);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .fp-seq--left .ro {
+    flex-direction: row-reverse;
+  }
+
+  .ro__dot {
+    position: relative;
+    flex: none;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    border: 2px solid rgba(245, 248, 250, 0.45);
+  }
+
+  .ro__dot::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border-radius: 50%;
+    background: var(--mint, #68e3be);
+    opacity: 0;
+  }
+
+  .is-a .ro__dot::after {
+    animation: fpFrom var(--cycle) linear infinite;
+    animation-delay: var(--d);
+  }
+  .is-b .ro__dot::after {
+    animation: fpTo var(--cycle) linear infinite;
+    animation-delay: var(--d);
+  }
+  .is-a b {
+    color: #fff;
+    animation: fpRadioDim var(--cycle) linear infinite;
+    animation-delay: var(--d);
+  }
+  .is-b b {
+    color: rgba(245, 248, 250, 0.5);
+    animation: fpRadioLit var(--cycle) linear infinite;
+    animation-delay: var(--d);
+  }
+  .is-a .ro__dot {
+    animation: fpRadioBorderDim var(--cycle) linear infinite;
+    animation-delay: var(--d);
+  }
+  .is-b .ro__dot {
+    animation: fpRadioBorderLit var(--cycle) linear infinite;
+    animation-delay: var(--d);
+  }
+
+  /* slider: a handle slides from --from to --to, fill follows */
+  .fp-slider {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .fp-seq--left .fp-slider {
+    flex-direction: row-reverse;
+  }
+
+  .sl__track {
+    position: relative;
+    width: clamp(66px, 7vw, 88px);
+    height: 6px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  .sl__fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: var(--from);
+    background: var(--mint, #68e3be);
+    border-radius: 9999px;
+    animation: fpFill var(--cycle) ease-out infinite;
+    animation-delay: var(--d);
+  }
+
+  .sl__knob {
+    position: absolute;
+    top: 50%;
+    left: var(--from);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.55);
+    transform: translate(-50%, -50%);
+    animation: fpKnob var(--cycle) ease-out infinite;
+    animation-delay: var(--d);
+  }
+
+  /* the value counts along with the handle (registered prop = animatable integer) */
+  @property --fpnum {
+    syntax: '<integer>';
+    inherits: false;
+    initial-value: 0;
+  }
+
+  .sl__val {
+    --fpnum: var(--nf);
+    counter-reset: n var(--fpnum);
+    font-size: clamp(13px, 1.4vw, 16px);
+    font-weight: 700;
+    color: #fff;
+    animation: fpNum var(--cycle) ease-out infinite;
+    animation-delay: var(--d);
+  }
+
+  .sl__val::after {
+    content: counter(n) var(--unit);
+  }
+
+  /* push: a deploy button presses and confirms (publishing designed content) */
+  .fp-push {
+    display: flex;
+  }
+
+  .fp-seq--left .fp-push {
+    justify-content: flex-end;
+  }
+
+  .pu__btn {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    padding: 6px 13px;
+    border: 1.5px solid rgba(104, 227, 190, 0.6);
+    border-radius: 9999px;
+    background: rgba(104, 227, 190, 0.08);
+    animation: fpPushBtn var(--cycle) ease-out infinite;
+    animation-delay: var(--d);
+  }
+
+  .pu__a,
+  .pu__b {
+    grid-area: 1 / 1;
+    font-size: clamp(12px, 1.3vw, 14px);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+  }
+
+  .pu__a {
+    color: #fff;
+    animation: fpFrom var(--cycle) linear infinite;
+    animation-delay: var(--d);
+  }
+
+  .pu__b {
+    color: #0a161c;
+    opacity: 0;
+    animation: fpPushIn var(--cycle) linear infinite;
+    animation-delay: var(--d);
+  }
+
+  /* screen: a monitor tile whose feed flips from -> to behind a quick signal flash */
+  .fp-screen {
+    display: flex;
+  }
+
+  .fp-seq--left .fp-screen {
+    justify-content: flex-end;
+  }
+
+  .sc__tv {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-width: clamp(96px, 11vw, 128px);
+    padding: 11px 13px;
+    background: #0a141a;
+    border: 1.5px solid rgba(104, 227, 190, 0.4);
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: inset 0 0 18px rgba(104, 227, 190, 0.1);
+  }
+
+  .sc__live {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #ff5a5a;
+    box-shadow: 0 0 6px rgba(255, 90, 90, 0.9);
+  }
+
+  .sc__a,
+  .sc__b {
+    grid-area: 1 / 1;
+    font-size: clamp(13px, 1.5vw, 16px);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  .sc__a {
+    color: #fff;
+    animation: fpScFrom var(--cycle) linear infinite;
+    animation-delay: var(--d);
+  }
+
+  .sc__b {
+    color: #fff;
+    opacity: 0;
+    animation: fpScTo var(--cycle) linear infinite;
+    animation-delay: var(--d);
+  }
+
+  .sc__flash {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(104, 227, 190, 0.5));
+    opacity: 0;
+    animation: fpScFlash var(--cycle) ease-out infinite;
+    animation-delay: var(--d);
+  }
+
+  /* select: a content picker opens a menu and the choice lands on the field */
+  .fp-select {
+    position: relative;
+    display: inline-block;
+  }
+
+  .se__field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border: 1.5px solid rgba(245, 248, 250, 0.25);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .fp-seq--left .se__field {
+    flex-direction: row-reverse;
+  }
+
+  .se__txt {
+    position: relative;
+    display: grid;
+  }
+
+  .se__a,
+  .se__b {
+    grid-area: 1 / 1;
+    font-size: clamp(13px, 1.4vw, 16px);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .se__a {
+    color: #fff;
+    animation: fpSelFrom var(--cycle) linear infinite;
+    animation-delay: var(--d);
+  }
+
+  .se__b {
+    color: var(--mint, #68e3be);
+    opacity: 0;
+    animation: fpSelTo var(--cycle) linear infinite;
+    animation-delay: var(--d);
+  }
+
+  .se__chev {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid rgba(245, 248, 250, 0.7);
+    transform-origin: center 40%;
+    animation: fpSelChev var(--cycle) ease-out infinite;
+    animation-delay: var(--d);
+  }
+
+  .se__menu {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    min-width: 100%;
+    padding: 4px;
+    background: rgba(9, 18, 24, 0.98);
+    border: 1px solid rgba(104, 227, 190, 0.3);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+    transform-origin: top center;
+    transform: scaleY(0);
+    opacity: 0;
+    z-index: 3;
+    animation: fpSelMenu var(--cycle) ease-out infinite;
+    animation-delay: var(--d);
+  }
+
+  .fp-seq--left .se__menu {
+    left: auto;
+    right: 0;
+  }
+
+  .se__opt {
+    display: block;
+    padding: 4px 9px;
+    font-size: clamp(12px, 1.3vw, 14px);
+    font-weight: 600;
+    font-style: normal;
+    color: rgba(245, 248, 250, 0.7);
+    white-space: nowrap;
+    border-radius: 4px;
+    text-align: left;
+  }
+
+  .se__opt.is-pick {
+    animation: fpSelPick var(--cycle) ease-out infinite;
+    animation-delay: var(--d);
+  }
+
+  /* swap: a single value crossfades A -> B (accent) */
+  .fp-card__swap {
+    position: relative;
+    display: grid;
+    font-size: clamp(14px, 1.5vw, 18px);
+    font-weight: 700;
+    line-height: 1.15;
+  }
+
+  .fp-card__swap b {
+    grid-area: 1 / 1;
+  }
+
+  .is-from {
+    color: rgba(245, 248, 250, 0.72);
+    animation: fpFrom var(--cycle) linear infinite;
+    animation-delay: var(--d);
+  }
+
+  .is-to {
+    color: var(--mint, #68e3be);
+    opacity: 0;
+    animation: fpTo var(--cycle) linear infinite;
+    animation-delay: var(--d);
+  }
+
+  /* zone: dashed outline around the spot to read as a physical area */
+  .fp-zone {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: clamp(78px, 9vw, 104px);
+    height: clamp(58px, 6.5vw, 78px);
+    transform: translate(-50%, -50%);
+    border: 1.5px dashed rgba(104, 227, 190, 0.65);
+    border-radius: 8px;
+    background: rgba(104, 227, 190, 0.07);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* toggle: switch flips on */
+  .fp-card__toggle {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .fp-seq--left .fp-card__toggle {
+    flex-direction: row-reverse;
+  }
+
+  .fp-card__switch {
+    position: relative;
+    width: 34px;
+    height: 18px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.18);
+    flex: none;
+    animation: fpTogBg var(--cycle) linear infinite;
+    animation-delay: var(--d);
+  }
+
+  .fp-card__switch::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    animation: fpTogKnob var(--cycle) ease-out infinite;
+    animation-delay: var(--d);
+  }
+
+  .fp-card__toggle em {
+    font-style: normal;
+    font-size: clamp(13px, 1.4vw, 16px);
+    font-weight: 700;
+    color: #fff;
+  }
+
+  /* ---- cascade: one trigger fans out to several endpoints at once ---- */
+  .fp-casc {
+    position: absolute;
+    inset: 0;
+    z-index: 6;
+    opacity: 0;
+    animation: fpPopWide var(--cycle) linear infinite;
+    animation-delay: var(--d);
+    pointer-events: none;
+  }
+
+  .casc__lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .casc__line {
+    fill: none;
+    stroke: var(--mint, #68e3be);
+    stroke-width: 1.25;
+    vector-effect: non-scaling-stroke;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    opacity: 0.85;
+    filter: drop-shadow(0 0 2px rgba(104, 227, 190, 0.55));
+    animation: fpDraw var(--cycle) ease-out infinite;
+    animation-delay: calc(var(--d) + var(--td, 0s));
+  }
+
+  /* zone outline = the physical area being controlled */
+  .casc__zone {
+    position: absolute;
+    z-index: 1;
+    border: 1.5px dashed rgba(104, 227, 190, 0.7);
+    border-radius: 8px;
+    background: rgba(104, 227, 190, 0.08);
+    opacity: 0;
+    animation: fpCascFade var(--cycle) ease-out infinite;
+    animation-delay: calc(var(--d) + var(--td, 0s));
+  }
+
+  .casc__node {
+    position: absolute;
+    z-index: 2;
+  }
+
+  .casc__dot {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--mint, #68e3be);
+    box-shadow: 0 0 0 4px rgba(104, 227, 190, 0.22), 0 0 16px rgba(104, 227, 190, 0.8);
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 0;
+    animation: fpCascDot var(--cycle) ease-out infinite;
+    animation-delay: calc(var(--d) + var(--td, 0s));
+  }
+
+  .casc__chip {
+    position: absolute;
+    left: 0;
+    bottom: 13px;
+    transform: translateX(-50%);
+    padding: 7px 10px;
+    background: rgba(13, 28, 36, 0.96);
+    border-left: 3px solid var(--mint, #68e3be);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.45);
+    white-space: nowrap;
+    opacity: 0;
+    animation: fpCascChip var(--cycle) ease-out infinite;
+    animation-delay: calc(var(--d) + var(--td, 0s));
+  }
+
+  .casc__name {
+    display: block;
+    margin-bottom: 4px;
+    font-size: clamp(9px, 1vw, 11px);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mint, #68e3be);
+  }
+
+  /* cascade swap: from -> to crossfade (staggered per target) */
+  .casc__swap {
+    position: relative;
+    display: grid;
+    font-size: clamp(13px, 1.5vw, 16px);
+    font-weight: 700;
+    line-height: 1.15;
+  }
+  .casc__swap i {
+    grid-area: 1 / 1;
+    font-style: normal;
+  }
+  .cf-from {
+    color: rgba(245, 248, 250, 0.7);
+    animation: fpFrom var(--cycle) linear infinite;
+    animation-delay: calc(var(--d) + var(--td, 0s));
+  }
+  .cf-to {
+    color: var(--mint, #68e3be);
+    opacity: 0;
+    animation: fpTo var(--cycle) linear infinite;
+    animation-delay: calc(var(--d) + var(--td, 0s));
+  }
+
+  /* cascade slider: handle + counting value (staggered) */
+  .casc__sld {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .casc__track {
+    position: relative;
+    width: clamp(58px, 6vw, 76px);
+    height: 6px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.18);
+  }
+  .casc__fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: var(--from);
+    background: var(--mint, #68e3be);
+    border-radius: 9999px;
+    animation: fpFill var(--cycle) ease-out infinite;
+    animation-delay: calc(var(--d) + var(--td, 0s));
+  }
+  .casc__knob {
+    position: absolute;
+    top: 50%;
+    left: var(--from);
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.55);
+    transform: translate(-50%, -50%);
+    animation: fpKnob var(--cycle) ease-out infinite;
+    animation-delay: calc(var(--d) + var(--td, 0s));
+  }
+  .casc__val {
+    --fpnum: var(--nf);
+    counter-reset: n var(--fpnum);
+    font-size: clamp(13px, 1.4vw, 15px);
+    font-weight: 700;
+    color: #fff;
+    animation: fpNum var(--cycle) ease-out infinite;
+    animation-delay: calc(var(--d) + var(--td, 0s));
+  }
+  .casc__val::after {
+    content: counter(n) var(--unit);
+  }
+
+  /* cascade toggle: switch flips on, label crossfades Standard → Celebration */
+  .casc__tog {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .casc__togsw {
+    position: relative;
+    width: 30px;
+    height: 16px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.18);
+    flex: none;
+    animation: fpTogBg var(--cycle) linear infinite;
+    animation-delay: calc(var(--d) + var(--td, 0s));
+  }
+
+  .casc__togsw::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    animation: fpTogKnob var(--cycle) ease-out infinite;
+    animation-delay: calc(var(--d) + var(--td, 0s));
+  }
+
+  .casc__toglbl {
+    position: relative;
+    display: grid;
+    font-size: clamp(13px, 1.5vw, 16px);
+    font-weight: 700;
+    line-height: 1.15;
+  }
+
+  .casc__toglbl i {
+    grid-area: 1 / 1;
+    font-style: normal;
+  }
+
+  .casc__trig {
+    position: absolute;
+    z-index: 3;
+  }
+
+  .casc__trigdot {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--mint, #68e3be);
+    box-shadow: 0 0 0 6px rgba(104, 227, 190, 0.25), 0 0 22px rgba(104, 227, 190, 0.95);
+    transform: translate(-50%, -50%);
+  }
+
+  .casc__card {
+    position: absolute;
+    left: 24px;
+    top: -28px;
+    min-width: 184px;
+    padding: 10px 13px;
+    background: rgba(13, 28, 36, 0.97);
+    border-left: 3px solid var(--mint, #68e3be);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
+    opacity: 0;
+    transform: scale(0.9);
+    transform-origin: left center;
+    animation: fpCascCard var(--cycle) ease-out infinite;
+    animation-delay: var(--d);
+  }
+
+  .casc__tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #0a161c;
+    background: var(--mint, #68e3be);
+    padding: 2px 7px;
+  }
+
+  .casc__big {
+    display: block;
+    margin-top: 7px;
+    font-size: clamp(16px, 2vw, 21px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #fff;
+  }
+
+  .casc__sub {
+    display: block;
+    margin-top: 3px;
+    font-size: clamp(11px, 1.2vw, 12px);
+    font-weight: 600;
+    color: var(--mint, #68e3be);
+  }
+
+  /* ---- timing (all keyed to one --cycle so cards fire one-by-one) ---- */
+  /* Grouped cards: visible window ≈ one SLOT (1/7 ≈ 14.3% of the cycle), so a pair
+     holds together; their micro-interactions all complete in the first ~6% then hold. */
+  @keyframes fpPop {
+    0% { opacity: 0; }
+    1.5% { opacity: 1; }
+    12% { opacity: 1; }
+    13.5% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+
+  /* Cascade: the trigger pops at 1%, the four labels land one-by-one over the next
+     couple of seconds, then the whole moment sits until ~35% and fades by 39% — so
+     the jackpot is visible for a few seconds, clears before the cycle ends, and the
+     cadence restarts cleanly. One clean showing per cycle, no re-pop, no overlap. */
+  @keyframes fpPopWide {
+    0% { opacity: 0; }
+    1% { opacity: 1; }
+    35% { opacity: 1; }
+    39% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+
+  @keyframes fpDot {
+    0% { transform: scale(0.3); }
+    1.6% { transform: scale(1.18); }
+    3.5% { transform: scale(1); }
+    9.6% { transform: scale(1); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes fpPing {
+    0% { opacity: 0; transform: scale(0.5); }
+    1.6% { opacity: 0.9; }
+    7% { opacity: 0; transform: scale(3.2); }
+    100% { opacity: 0; }
+  }
+
+  @keyframes fpFrom {
+    0% { opacity: 1; }
+    3.4% { opacity: 1; }
+    4.8% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+
+  @keyframes fpTo {
+    0% { opacity: 0; }
+    3.4% { opacity: 0; }
+    4.8% { opacity: 1; }
+    35% { opacity: 1; }
+    39% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+
+  @keyframes fpFill {
+    0% { width: var(--from); }
+    2% { width: var(--from); }
+    6.5% { width: var(--to); }
+    35% { width: var(--to); }
+    39% { width: var(--from); }
+    100% { width: var(--from); }
+  }
+
+  @keyframes fpKnob {
+    0% { left: var(--from); }
+    2% { left: var(--from); }
+    6.5% { left: var(--to); }
+    35% { left: var(--to); }
+    39% { left: var(--from); }
+    100% { left: var(--from); }
+  }
+
+  @keyframes fpNum {
+    0% { --fpnum: var(--nf); }
+    2% { --fpnum: var(--nf); }
+    6.5% { --fpnum: var(--nt); }
+    35% { --fpnum: var(--nt); }
+    39% { --fpnum: var(--nf); }
+    100% { --fpnum: var(--nf); }
+  }
+
+  /* push button: hold, then a tactile press as it fills mint and confirms */
+  @keyframes fpPushBtn {
+    0% { background: rgba(104, 227, 190, 0.08); border-color: rgba(104, 227, 190, 0.6); transform: scale(1); }
+    3.2% { background: rgba(104, 227, 190, 0.08); border-color: rgba(104, 227, 190, 0.6); transform: scale(1); }
+    3.8% { transform: scale(0.92); }
+    4.2% { background: var(--mint, #68e3be); border-color: var(--mint, #68e3be); }
+    4.8% { transform: scale(1); }
+    100% { background: var(--mint, #68e3be); border-color: var(--mint, #68e3be); transform: scale(1); }
+  }
+
+  @keyframes fpPushIn {
+    0% { opacity: 0; }
+    4.2% { opacity: 0; }
+    4.8% { opacity: 1; }
+    100% { opacity: 1; }
+  }
+
+  /* screen: a quick signal flash masks the feed flipping to the new game */
+  @keyframes fpScFlash {
+    0% { opacity: 0; }
+    3.2% { opacity: 0; }
+    3.7% { opacity: 0.85; }
+    4.4% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+
+  @keyframes fpScFrom {
+    0% { opacity: 1; }
+    3.6% { opacity: 1; }
+    4.1% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+
+  @keyframes fpScTo {
+    0% { opacity: 0; }
+    3.9% { opacity: 0; }
+    4.4% { opacity: 1; }
+    100% { opacity: 1; }
+  }
+
+  /* select: menu opens, the pick highlights, menu closes, field settles on the new value */
+  @keyframes fpSelMenu {
+    0% { opacity: 0; transform: scaleY(0); }
+    2% { opacity: 0; transform: scaleY(0); }
+    2.8% { opacity: 1; transform: scaleY(1); }
+    4.4% { opacity: 1; transform: scaleY(1); }
+    5% { opacity: 0; transform: scaleY(0); }
+    100% { opacity: 0; transform: scaleY(0); }
+  }
+
+  @keyframes fpSelPick {
+    0% { background: transparent; color: rgba(245, 248, 250, 0.7); }
+    3.2% { background: transparent; color: rgba(245, 248, 250, 0.7); }
+    3.7% { background: var(--mint, #68e3be); color: #0a161c; }
+    100% { background: var(--mint, #68e3be); color: #0a161c; }
+  }
+
+  @keyframes fpSelChev {
+    0% { transform: rotate(0); }
+    2.4% { transform: rotate(0); }
+    2.9% { transform: rotate(180deg); }
+    4.4% { transform: rotate(180deg); }
+    5% { transform: rotate(0); }
+    100% { transform: rotate(0); }
+  }
+
+  @keyframes fpSelFrom {
+    0% { opacity: 1; }
+    4.4% { opacity: 1; }
+    5% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+
+  @keyframes fpSelTo {
+    0% { opacity: 0; }
+    4.4% { opacity: 0; }
+    5% { opacity: 1; }
+    100% { opacity: 1; }
+  }
+
+  /* cascade sub-animations — the trigger leads, then each endpoint lands as its
+     connector line finishes drawing. The chip/dot appear at 4.8%, the exact moment
+     the shared fpTo/fpFrom swap completes, so labels pop in already showing their
+     final state (no from→to flicker). Per-target --td spaces them one-by-one. */
+  @keyframes fpDraw {
+    0% { stroke-dashoffset: 1; }
+    2% { stroke-dashoffset: 1; }
+    4.8% { stroke-dashoffset: 0; }
+    35% { stroke-dashoffset: 0; }
+    39% { stroke-dashoffset: 1; }
+    100% { stroke-dashoffset: 1; }
+  }
+
+  @keyframes fpCascCard {
+    0% { opacity: 0; transform: scale(0.9); }
+    1% { opacity: 0; transform: scale(0.9); }
+    1.5% { opacity: 1; transform: scale(1); }
+    35% { opacity: 1; transform: scale(1); }
+    39% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 0; transform: scale(0.9); }
+  }
+
+  @keyframes fpCascDot {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
+    3.4% { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
+    4.8% { opacity: 1; transform: translate(-50%, -50%) scale(1.3); }
+    5.6% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    35% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    39% { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
+  }
+
+  @keyframes fpCascChip {
+    0% { opacity: 0; transform: translateX(-50%) translateY(4px); }
+    3.4% { opacity: 0; transform: translateX(-50%) translateY(4px); }
+    4.8% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    35% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    39% { opacity: 0; transform: translateX(-50%) translateY(4px); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(4px); }
+  }
+
+  @keyframes fpCascFade {
+    0% { opacity: 0; }
+    3.4% { opacity: 0; }
+    4.8% { opacity: 1; }
+    35% { opacity: 1; }
+    39% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+
+  @keyframes fpRadioDim {
+    0% { color: #fff; }
+    3.4% { color: #fff; }
+    4.8% { color: rgba(245, 248, 250, 0.5); }
+    100% { color: rgba(245, 248, 250, 0.5); }
+  }
+
+  @keyframes fpRadioLit {
+    0% { color: rgba(245, 248, 250, 0.5); }
+    3.4% { color: rgba(245, 248, 250, 0.5); }
+    4.8% { color: var(--mint, #68e3be); }
+    100% { color: var(--mint, #68e3be); }
+  }
+
+  @keyframes fpRadioBorderDim {
+    0% { border-color: var(--mint, #68e3be); }
+    3.4% { border-color: var(--mint, #68e3be); }
+    4.8% { border-color: rgba(245, 248, 250, 0.45); }
+    100% { border-color: rgba(245, 248, 250, 0.45); }
+  }
+
+  @keyframes fpRadioBorderLit {
+    0% { border-color: rgba(245, 248, 250, 0.45); }
+    3.4% { border-color: rgba(245, 248, 250, 0.45); }
+    4.8% { border-color: var(--mint, #68e3be); }
+    100% { border-color: var(--mint, #68e3be); }
+  }
+
+  @keyframes fpTogBg {
+    0% { background: rgba(255, 255, 255, 0.18); }
+    3.2% { background: rgba(255, 255, 255, 0.18); }
+    5% { background: var(--mint, #68e3be); }
+    35% { background: var(--mint, #68e3be); }
+    39% { background: rgba(255, 255, 255, 0.18); }
+    100% { background: rgba(255, 255, 255, 0.18); }
+  }
+
+  @keyframes fpTogKnob {
+    0% { transform: translateX(0); }
+    3.2% { transform: translateX(0); }
+    5% { transform: translateX(16px); }
+    35% { transform: translateX(16px); }
+    39% { transform: translateX(0); }
+    100% { transform: translateX(0); }
+  }
+
+  /* Narrow screens: give the floor more height so the plan + demos breathe */
+  @media (max-width: 640px) {
+    .fp-stage {
+      aspect-ratio: 4 / 5;
+    }
+    .fp-header {
+      padding-bottom: 28px;
+    }
+    .fp-header b {
+      font-size: 22px;
+    }
+    .fp-seq {
+      --dot: 13px;
+    }
+    .fp-card__swap,
+    .sl__val,
+    .ro,
+    .fp-card__toggle em {
+      font-size: 15px;
+    }
+  }
+
+  /* Reduced motion: freeze to anchor dots + static ticker, hide the demo cards */
+  @media (prefers-reduced-motion: reduce) {
+    .fp-seq,
+    .fp-seq__dot,
+    .fp-seq__ring,
+    .is-from,
+    .is-to,
+    .is-a .ro__dot::after,
+    .is-b .ro__dot::after,
+    .is-a b,
+    .is-b b,
+    .is-a .ro__dot,
+    .is-b .ro__dot,
+    .sl__fill,
+    .sl__knob,
+    .sl__val,
+    .fp-card__switch,
+    .fp-card__switch::after {
+      animation: none;
+    }
+    .sl__val { --fpnum: var(--nt); }
+    .fp-seq { opacity: 1; }
+    .fp-seq__dot { transform: scale(1); }
+    .fp-seq__ring { opacity: 0; }
+    .fp-card,
+    .fp-zone,
+    .fp-casc { display: none; }
+  }
+</style>

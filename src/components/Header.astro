@@ -2,6 +2,12 @@
 import { site } from '../data/site';
 import { industries } from '../data/industries';
 
+interface Props {
+  dark?: boolean;
+}
+
+const { dark = false } = Astro.props;
+
 const nav = [
   { href: '/platform', label: 'Platform' },
   {
@@ -27,15 +33,32 @@ const nav = [
 const path = Astro.url.pathname;
 ---
 
-<header class="site-header">
+<header class:list={['site-header', dark && 'site-header--on-hero']}>
   <div class="site-header__inner container container--wide">
-    <a class="site-header__logo" href="/">{site.name}</a>
+    <a class="site-header__logo" href="/">
+      <img
+        class="site-header__logoimg site-header__logoimg--dark"
+        src="/images/logos/luci-full-mintmark-white.png"
+        alt="LUCI Systems"
+        width="2224"
+        height="571"
+        loading="eager"
+      />
+      <img
+        class="site-header__logoimg site-header__logoimg--light"
+        src="/images/logos/luci-full-mintmark-blacktext.png"
+        alt="LUCI Systems"
+        width="2224"
+        height="571"
+        loading="eager"
+      />
+    </a>
     <nav class="site-header__nav" aria-label="Primary">
       {
         nav.map((item) =>
           item.children ? (
             <div class="site-header__item site-header__item--menu">
-              <span class="site-header__link">{item.label}</span>
+              <span class="site-header__link">{item.label}<span class="site-header__caret" aria-hidden="true">▾</span></span>
               <div class="site-header__dropdown" role="menu">
                 {item.children.map((child) => (
                   <a
@@ -59,7 +82,9 @@ const path = Astro.url.pathname;
         )
       }
     </nav>
-    <a class="site-header__cta btn btn--primary" href="/contact">{site.ctaPrimary}</a>
+    <div class="site-header__actions">
+      <a class="site-header__cta btn btn--primary" href="/contact">{site.ctaPrimary}</a>
+    </div>
   </div>
 </header>
 
@@ -68,56 +93,138 @@ const path = Astro.url.pathname;
     position: sticky;
     top: 0;
     z-index: 100;
-    background: var(--sand);
-    border-bottom: 3px solid var(--mint);
+    background: var(--header-bg);
+    border-bottom: 2px solid var(--header-border);
+  }
+
+  [data-theme='dark'] .site-header--on-hero {
+    background: var(--navy-deep);
+    border-bottom-color: rgba(var(--mint-rgb), 0.35);
   }
 
   .site-header__inner {
     display: flex;
     align-items: center;
-    gap: var(--space-3);
-    min-height: 72px;
+    gap: var(--space-5);
+    min-height: 96px;
+    max-width: 1400px;
   }
 
+  /* Logo lockup — mint mark + wordmark, sized by height, theme-aware swap */
   .site-header__logo {
-    font-family: var(--font-display);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--navy);
+    display: inline-flex;
+    align-items: center;
     text-decoration: none;
     flex-shrink: 0;
   }
 
+  .site-header__logoimg {
+    height: clamp(30px, 2.7vw, 38px);
+    width: auto;
+    display: block;
+  }
+
+  .site-header__logoimg--light {
+    display: none;
+  }
+
+  [data-theme='light'] .site-header__logoimg--dark {
+    display: none;
+  }
+
+  [data-theme='light'] .site-header__logoimg--light {
+    display: block;
+  }
+
   .site-header__nav {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
-    gap: 4px 20px;
+    justify-content: center;
+    gap: 4px clamp(14px, 1.4vw, 30px);
     flex: 1;
-    font-size: 14px;
-    font-weight: 500;
+    min-width: 0;
+    font-size: clamp(16px, 1.3vw, 20px);
+    font-weight: 600;
+    font-family: var(--font-body);
   }
 
   .site-header__link {
-    color: var(--navy);
+    position: relative;
+    color: var(--header-text);
     text-decoration: none;
-    padding: 8px 0;
+    padding: 12px 2px;
+    white-space: nowrap;
+    transition: color 0.15s ease-out;
+  }
+
+  /* Mint hairline underline reveals on hover/active — LUCI accent cue */
+  .site-header__link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 4px;
+    height: 2px;
+    background: var(--mint);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.18s ease-out;
+  }
+
+  [data-theme='light'] .site-header__link::after {
+    background: var(--accent-light);
   }
 
   .site-header__link:hover,
   .site-header__link.is-active {
-    color: var(--accent-light);
+    color: var(--link);
+  }
+
+  .site-header__link:hover::after,
+  .site-header__link.is-active::after {
+    transform: scaleX(1);
+  }
+
+  [data-theme='dark'] .site-header--on-hero .site-header__link:hover,
+  [data-theme='dark'] .site-header--on-hero .site-header__link.is-active {
+    color: var(--mint);
+  }
+
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-shrink: 0;
+  }
+
+  [data-theme='dark'] .site-header--on-hero .site-header__cta {
+    background: var(--mint);
+    color: var(--navy-deep);
+  }
+
+  [data-theme='dark'] .site-header--on-hero .site-header__cta:hover {
+    background: #7aebc8;
+    color: var(--navy-deep);
   }
 
   .site-header__item--menu {
     position: relative;
   }
 
-  .site-header__item--menu > .site-header__link::after {
-    content: ' ▾';
-    font-size: 0.75em;
+  .site-header__caret {
+    margin-left: 4px;
+    font-size: 0.7em;
     opacity: 0.6;
+  }
+
+  .site-header__item--menu > .site-header__link::after {
+    left: 0;
+    right: 0;
+  }
+
+  .site-header__item--menu > .site-header__link::after {
+    bottom: 4px;
   }
 
   .site-header__dropdown {
@@ -126,7 +233,7 @@ const path = Astro.url.pathname;
     top: 100%;
     left: 0;
     min-width: 240px;
-    background: #fff;
+    background: var(--surface-raised);
     border: 1px solid var(--rule-light);
     box-shadow: 0 8px 24px rgba(10, 22, 28, 0.08);
     padding: 8px 0;
@@ -139,11 +246,11 @@ const path = Astro.url.pathname;
 
   .site-header__dropdown a {
     display: block;
-    padding: 10px 16px;
+    padding: 12px 18px;
     color: var(--ink);
     text-decoration: none;
-    font-weight: 400;
-    font-size: 14px;
+    font-weight: 500;
+    font-size: 15px;
   }
 
   .site-header__dropdown a:hover {
@@ -152,17 +259,24 @@ const path = Astro.url.pathname;
   }
 
   .site-header__cta {
-    flex-shrink: 0;
     font-family: var(--font-display);
-    font-size: 10px;
-    letter-spacing: 0.06em;
+    font-size: clamp(10px, 0.8vw, 12px);
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    padding: 12px 16px;
+    padding: clamp(11px, 1vw, 13px) clamp(16px, 1.3vw, 22px);
   }
 
-  @media (max-width: 900px) {
+  /* Below laptop width, drop to the mobile header (nav hidden) */
+  @media (max-width: 1180px) {
     .site-header__nav {
       display: none;
+    }
+    .site-header__inner {
+      min-height: 80px;
+      gap: var(--space-3);
+    }
+    .site-header__logoimg {
+      height: 30px;
     }
   }
 </style>
