@@ -144,6 +144,8 @@ h2,
 /* Gold — secondary accent (kickers, rules, pills, card labels) */
 .section--accent-gold { border-top: 4px solid var(--gold); }
 
+[data-theme='light'] .section--accent-gold { border-top-color: var(--gold-deep); }
+
 .section-block__kicker--gold { color: var(--gold); }
 
 [data-theme='light'] .section-block__kicker--gold {
@@ -156,7 +158,7 @@ h2,
 
 .callout--gold { border-left-color: var(--gold); }
 
-[data-theme='light'] .callout--gold { border-left-color: var(--gold); }
+[data-theme='light'] .callout--gold { border-left-color: var(--gold-deep); }
 
 /* De-boxed list rows */
 .rows {
@@ -446,7 +448,7 @@ h2,
 
 [data-theme='light'] .zone-card__nested {
   background: var(--off-white);
-  border-left-color: var(--gold);
+  border-left-color: var(--gold-deep);
 }
 
 .zone-card .rows__title {

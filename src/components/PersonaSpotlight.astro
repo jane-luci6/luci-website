@@ -1,0 +1,57 @@
+---
+interface Props {
+  label: string;
+  text: string;
+  accent: string;
+}
+
+const { label, text, accent } = Astro.props;
+---
+
+<aside class="persona-spotlight" data-reveal>
+  <p class="persona-spotlight__label">{label}</p>
+  <p class="persona-spotlight__text">
+    {text} <span class="persona-spotlight__accent">{accent}</span>
+  </p>
+</aside>
+
+<style>
+  .persona-spotlight {
+    position: relative;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: clamp(28px, 4vw, 40px) clamp(24px, 3.5vw, 36px);
+    border-left: 4px solid var(--accent-light);
+    background: rgba(43, 158, 128, 0.06);
+  }
+
+  .persona-spotlight__label {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin: 0 0 var(--space-3);
+  }
+
+  .persona-spotlight__text {
+    font-family: var(--font-body);
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: var(--ink-strong);
+    margin: 0;
+  }
+
+  .persona-spotlight__accent {
+    color: var(--accent-light);
+  }
+
+  @media (max-width: 640px) {
+    .persona-spotlight {
+      padding: 24px 20px;
+    }
+  }
+</style>

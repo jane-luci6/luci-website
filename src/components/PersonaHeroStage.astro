@@ -1,0 +1,148 @@
+---
+interface Props {
+  heroImage: string;
+  heroAlt?: string;
+  kicker: string;
+  lockupName: string;
+  lockupRole: string;
+  deck: string;
+}
+
+const { heroImage, heroAlt = '', kicker, lockupName, lockupRole, deck } = Astro.props;
+---
+
+<section id="persona-thesis" class="persona-hero">
+  <img
+    class="persona-hero__img"
+    src={heroImage}
+    alt={heroAlt}
+    width="1920"
+    height="1080"
+    loading="eager"
+    decoding="async"
+    fetchpriority="high"
+  />
+  <span class="persona-hero__scrim" aria-hidden="true"></span>
+  <span class="persona-hero__grain" aria-hidden="true"></span>
+
+  <div class="persona-hero__inner container container--wide">
+    <p class="persona-hero__kicker display-label">{kicker}</p>
+    <div class="header-lockup is-in" data-reveal>
+      <h2 class="header-lockup__name">{lockupName}</h2>
+      <span class="header-lockup__rule" aria-hidden="true"></span>
+      <p class="header-lockup__role">{lockupRole}</p>
+    </div>
+    <p class="persona-hero__deck">{deck}</p>
+  </div>
+</section>
+
+<style>
+  .persona-hero {
+    position: relative;
+    width: 100%;
+    min-height: clamp(420px, 56vw, 660px);
+    aspect-ratio: 21 / 9;
+    max-height: 76vh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    color: var(--off-white);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .persona-hero__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+    display: block;
+  }
+
+  .persona-hero__scrim {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(105deg, rgba(8, 17, 22, 0.92) 0%, rgba(8, 17, 22, 0.5) 44%, rgba(8, 17, 22, 0.22) 100%),
+      linear-gradient(to top, rgba(8, 17, 22, 0.94) 0%, rgba(8, 17, 22, 0.38) 50%, transparent 74%);
+  }
+
+  .persona-hero__grain {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.26;
+    background-image: url('/images/textures/texture-circuit-navy-steel-dense.png');
+    background-size: 680px;
+    mix-blend-mode: soft-light;
+  }
+
+  .persona-hero__inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding-block: clamp(96px, 12vw, 140px) clamp(44px, 7vw, 84px);
+  }
+
+  .persona-hero__kicker {
+    color: var(--mint);
+    margin: 0 0 var(--space-3);
+    letter-spacing: 0.2em;
+  }
+
+  .persona-hero .header-lockup {
+    display: block;
+    margin-bottom: var(--space-3);
+  }
+
+  .persona-hero .header-lockup__name {
+    font-family: var(--font-body);
+    font-size: clamp(38px, 6vw, 64px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+    margin: 0;
+  }
+
+  .persona-hero .header-lockup__rule {
+    display: block;
+    width: 40px;
+    height: 3px;
+    margin: 16px 0 12px;
+    background: var(--mint);
+    border-radius: 2px;
+  }
+
+  .persona-hero .header-lockup__role {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    line-height: 1.35;
+    color: var(--mint);
+    margin: 0;
+  }
+
+  .persona-hero__deck {
+    max-width: var(--measure);
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: clamp(17px, 1.6vw, 20px);
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.9);
+    text-align: left;
+  }
+
+  @media (max-width: 720px) {
+    .persona-hero {
+      aspect-ratio: auto;
+      min-height: clamp(440px, 82vw, 540px);
+      max-height: none;
+    }
+  }
+</style>

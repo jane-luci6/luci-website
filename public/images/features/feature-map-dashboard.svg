@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img" aria-label="A property map on a live dashboard with glowing location markers">
+  <defs>
+    <linearGradient id="m-screen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#143042"/>
+      <stop offset="1" stop-color="#0A1A24"/>
+    </linearGradient>
+    <radialGradient id="m-halo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#68E3BE" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#68E3BE" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="m-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#68E3BE" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#68E3BE" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .pin { transform-box: fill-box; transform-origin: center; animation: m-pulse 3.2s ease-in-out infinite; }
+      .pin-b { animation-delay: -1.1s; }
+      .pin-g { animation: m-pulse-g 2.8s ease-in-out infinite; }
+      @keyframes m-pulse { 0%,100% { opacity: 0.55; transform: scale(0.82); } 50% { opacity: 1; transform: scale(1.12); } }
+      @keyframes m-pulse-g { 0%,100% { opacity: 0.7; transform: scale(0.85); } 50% { opacity: 1; transform: scale(1.15); } }
+      @media (prefers-reduced-motion: reduce) { .pin, .pin-g { animation: none; } }
+    </style>
+  </defs>
+  <rect width="320" height="180" fill="url(#m-glow)"/>
+  <rect x="38" y="24" width="244" height="132" rx="13" fill="url(#m-screen)" stroke="rgba(104,227,190,0.28)" stroke-width="1"/>
+  <circle cx="55" cy="40" r="3.6" fill="#68E3BE"/>
+  <rect x="65" y="37" width="46" height="6" rx="3" fill="#E6F5EF" opacity="0.22"/>
+  <rect x="236" y="37" width="30" height="6" rx="3" fill="#E6F5EF" opacity="0.12"/>
+  <g stroke="#68E3BE" stroke-opacity="0.30" stroke-width="1.4" fill="none">
+    <rect x="58" y="56" width="204" height="84"/>
+    <path d="M132 56v40M132 96h130M198 96v44M58 116h74"/>
+  </g>
+  <g fill="#68E3BE" opacity="0.07">
+    <rect x="58" y="56" width="74" height="40"/>
+    <rect x="198" y="96" width="64" height="44"/>
+  </g>
+  <circle class="pin" cx="96" cy="80" r="17" fill="url(#m-halo)"/>
+  <circle cx="96" cy="80" r="5" fill="#68E3BE"/><circle cx="96" cy="80" r="2" fill="#0A1A24"/>
+  <circle class="pin pin-b" cx="226" cy="120" r="17" fill="url(#m-halo)"/>
+  <circle cx="226" cy="120" r="5" fill="#68E3BE"/><circle cx="226" cy="120" r="2" fill="#0A1A24"/>
+  <circle class="pin pin-g" cx="170" cy="74" r="6" fill="#EDD086"/><circle cx="170" cy="74" r="2.4" fill="#0A1A24"/>
+  <circle class="pin pin-b" cx="108" cy="126" r="5" fill="#68E3BE"/><circle cx="108" cy="126" r="2" fill="#0A1A24"/>
+  <circle cx="172" cy="118" r="4.5" fill="#68E3BE" opacity="0.85"/>
+</svg>

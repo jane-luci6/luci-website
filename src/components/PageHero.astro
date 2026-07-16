@@ -4,12 +4,13 @@ interface Props {
   title: string;
   lead?: string;
   deep?: boolean;
+  color?: boolean;
 }
 
-const { kicker, title, lead, deep = false } = Astro.props;
+const { kicker, title, lead, deep = false, color = false } = Astro.props;
 ---
 
-<section class:list={['section', deep ? 'section--deep' : 'section--light', 'page-hero']}>
+<section class:list={['section', deep ? 'section--deep' : 'section--light', 'page-hero', color && 'page-hero--color']}>
   <div class="container">
     {kicker && <p class="display-label page-hero__kicker">{kicker}</p>}
     <h1 class="page-hero__title">{title}</h1>
@@ -42,5 +43,32 @@ const { kicker, title, lead, deep = false } = Astro.props;
 
   .section--deep .page-hero__lead {
     color: rgba(245, 248, 250, 0.88);
+  }
+
+  /* Opt-in colored hero — mint + gold aurora over deep navy. */
+  .page-hero--color {
+    background:
+      radial-gradient(72% 92% at 10% 16%, rgba(104, 227, 190, 0.22), transparent 62%),
+      radial-gradient(60% 80% at 90% 84%, rgba(206, 176, 110, 0.16), transparent 60%),
+      radial-gradient(42% 60% at 52% 52%, rgba(104, 227, 190, 0.06), transparent 72%),
+      var(--navy-deep);
+  }
+  .page-hero--color .page-hero__title {
+    background: linear-gradient(120deg, #FFFFFF 0%, #D7F6EC 55%, #68E3BE 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .page-hero--color {
+      background-size: 140% 140%, 140% 140%, 100% 100%, 100% 100%;
+      background-position: 0% 0%, 100% 100%, 50% 50%, 0% 0%;
+      animation: hero-aurora 22s ease-in-out infinite alternate;
+    }
+    @keyframes hero-aurora {
+      0% { background-position: 0% 0%, 100% 100%, 50% 50%, 0% 0%; }
+      100% { background-position: 12% 10%, 86% 90%, 54% 46%, 0% 0%; }
+    }
   }
 </style>

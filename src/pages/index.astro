@@ -9,19 +9,21 @@ import HomeTrustBar from '../components/HomeTrustBar.astro';
 import HomeProof from '../components/HomeProof.astro';
 import HomePersonas from '../components/HomePersonas.astro';
 import HomeResources from '../components/HomeResources.astro';
+import HomeWhyItMatters from '../components/HomeWhyItMatters.astro';
 import SectionBlock from '../components/SectionBlock.astro';
 import { site } from '../data/site';
 ---
 
 <BaseLayout title="Home" description={site.subTagline} darkHeader>
-  <HomeHero />
+  <HomeHero variant="none" zones />
   <HomeDifferentiator />
-  <HomeLedger />
-  <HomeIndustries />
   <HomeIntro />
-  <HomeTrustBar />
-  <HomePersonas />
+  <HomeLedger />
+  <HomeWhyItMatters />
+  <HomeIndustries />
   <HomeProof />
+  <HomePersonas />
+  <HomeTrustBar />
   <HomeResources />
 
   <SectionBlock tone="deep">

@@ -1,146 +1,418 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHero from '../components/PageHero.astro';
 import SectionBlock from '../components/SectionBlock.astro';
-import { site, oneOffering, variableReduction } from '../data/site';
+import PlatformChapterNav from '../components/PlatformChapterNav.astro';
+import PlatformArchitectureStage from '../components/PlatformArchitectureStage.astro';
+import PlatformOrbit from '../components/PlatformOrbit.astro';
+import { site, oneOffering } from '../data/site';
 import { features } from '../data/features';
-import { services, servicesIntro } from '../data/services';
 
-const luciIs = [
-  'An operating system that connects infrastructure',
-  'Software, hardware, operating model, and embedded engineering — delivered as one system',
-  'A platform that appreciates over time',
-  'A team of seasoned engineers accountable from design through ongoing refinement',
+const chapters = [
+  { id: 'what-luci-is', label: 'What LUCI is' },
+  { id: 'features', label: 'Capabilities' },
+  { id: 'embedded-operation', label: 'Systems' },
+  { id: 'platform', label: 'Architecture' },
+  { id: 'platform-cta', label: 'Next step' },
 ];
 
-const luciIsNot = [
-  'A control panel (runs one system at a time)',
-  "A dashboard (reports on a property, doesn't operate one)",
-  'A point solution that creates an integration problem',
-  'A vendor that hands off after deployment',
+const archCallouts = [
+  {
+    svg: `<svg viewBox="0 0 24 24" fill="none"><path d="M4 9h16M4 15h16M9 4v16M15 4v16" stroke="#68E3BE" stroke-width="1.5" stroke-opacity="0.55"/><rect x="3" y="3" width="18" height="18" rx="2" stroke="#68E3BE" stroke-width="1.8"/><circle cx="12" cy="12" r="2" fill="#68E3BE" fill-opacity="0.2" stroke="#68E3BE" stroke-width="1.8"/><path d="M12 10V7" stroke="#CEB06E" stroke-width="1.8" stroke-linecap="round"/></svg>`,
+    title: 'Standard network',
+    body: 'Runs over your existing property network — no parallel infrastructure to build or maintain.',
+  },
+  {
+    svg: `<svg viewBox="0 0 24 24" fill="none"><path d="M9 3v4M15 3v4" stroke="#68E3BE" stroke-width="1.8" stroke-linecap="round"/><rect x="6.5" y="7" width="11" height="6" rx="2" fill="#68E3BE" fill-opacity="0.18" stroke="#68E3BE" stroke-width="1.8"/><path d="M12 13v4M8 21h8" stroke="#68E3BE" stroke-width="1.8" stroke-linecap="round"/><circle cx="18" cy="17" r="1.6" fill="#CEB06E"/></svg>`,
+    title: 'Open APIs',
+    body: 'Documented, open interfaces integrate the systems and content sources you already run.',
+  },
+  {
+    svg: `<svg viewBox="0 0 24 24" fill="none"><rect x="5" y="3.5" width="14" height="17" rx="2" fill="#68E3BE" fill-opacity="0.16" stroke="#68E3BE" stroke-width="1.8"/><path d="M8 8h8M8 12h8M8 16h5" stroke="#68E3BE" stroke-width="1.5" stroke-opacity="0.6"/><circle cx="16" cy="16" r="1.5" fill="#CEB06E"/></svg>`,
+    title: 'Minimal head end',
+    body: 'One standardized rack replaces racks of single-purpose boxes — less to power and refresh.',
+  },
+];
+
+const featureImages = [
+  '/images/features/feature-map-dashboard.svg',
+  '/images/features/feature-open-integration.svg',
+  '/images/features/feature-pin-control.svg?v=2',
+  '/images/features/feature-monitoring.svg',
+  '/images/features/feature-presets.svg',
+  '/images/features/feature-automation.svg?v=2',
 ];
 ---
 
 <BaseLayout title="Platform" description={oneOffering.platform}>
-  <PageHero title={site.tagline} lead={site.subTagline} deep />
+  <h1 class="platform-sr-only">Platform — {site.tagline}</h1>
+  <PlatformChapterNav chapters={chapters} />
 
-  <SectionBlock title="The problem">
-    <p class="measure">{variableReduction.accumulation}</p>
-  </SectionBlock>
-
-  <SectionBlock kicker="What you get" title={oneOffering.summary} tone="deep">
-    <figure class="offering-figure">
+  <SectionBlock
+    id="what-luci-is"
+    lockupName="What LUCI is"
+    lockupRole="Two forces working as one"
+    deck={oneOffering.summary}
+    tone="light"
+    wide
+  >
+    <figure class="diagram-block diagram-block--parent diagram-reveal">
       <img
-        src="/images/diagrams/luci-what-luci-is.dark.svg?v=3"
-        alt="LUCI + Systems — LUCI, the orchestration platform (A/V rack plus control software on any device), plus Systems, the embedded operation (team, processes, and standards)"
-        width="560"
+        src="/images/diagrams/luci-what-luci-is.anim.svg?v=4"
+        alt="What LUCI is: LUCI, the orchestration platform — one A/V equipment rack plus the control platform on any device — plus Systems, the embedded operation that runs it."
+        width="580"
         height="300"
-        loading="lazy"
+        loading="eager"
         decoding="async"
       />
     </figure>
-    <div class="offering-pillars">
-      <div>
-        <p class="display-label offering-pillars__label">Platform</p>
-        <p class="offering-pillars__body">{oneOffering.platform}</p>
-      </div>
-      <div>
-        <p class="display-label offering-pillars__label">Partnership</p>
-        <p class="offering-pillars__body">{oneOffering.partnership}</p>
-      </div>
-    </div>
   </SectionBlock>
 
-  <SectionBlock title="How it works" tone="sand">
-    <div class="visual-placeholder">Product screenshot · map-based control UI</div>
-  </SectionBlock>
-
-  <SectionBlock id="capabilities" kicker="Capabilities" title="Key features">
-    <ul class="rows">
-      {features.map((f) => (
-        <li>
-          <p class="rows__title">{f.title}</p>
-          <p>{f.body}</p>
+  <SectionBlock
+    id="features"
+    lockupName="LUCI"
+    lockupRole="The Orchestration Platform"
+    deck="Every capability below lives inside one interface — standard across every property on the platform, regardless of the systems behind it."
+    tone="deep"
+    wide
+  >
+    <ul class="feature-grid" role="list">
+      {features.map((f, i) => (
+        <li class="feature-card" style={`--i:${i}`}>
+          <div class="feature-card__inner" data-tilt>
+            <div class="feature-card__media">
+              <img src={featureImages[i]} alt="" width="320" height="180" loading="lazy" decoding="async" />
+            </div>
+            <div class="feature-card__copy">
+              <p class="feature-card__title">{f.title}</p>
+              <p class="feature-card__body">{f.body}</p>
+            </div>
+          </div>
         </li>
       ))}
     </ul>
   </SectionBlock>
 
-  <SectionBlock title={variableReduction.headline} tone="sand">
-    <p class="measure">{variableReduction.subtraction}</p>
-    <div style="display: grid; gap: 2rem; margin-top: 2rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr))">
-      <div>
-        <p class="display-label" style="margin-bottom: 0.75rem">LUCI is</p>
-        <ul class="rows">
-          {luciIs.map((item) => <li>{item}</li>)}
-        </ul>
-      </div>
-      <div>
-        <p class="display-label" style="margin-bottom: 0.75rem">LUCI is not</p>
-        <ul class="rows">
-          {luciIsNot.map((item) => <li>{item}</li>)}
-        </ul>
-      </div>
-    </div>
+  <SectionBlock
+    id="embedded-operation"
+    lockupName="Systems"
+    lockupRole="The Embedded Operation"
+    deck="One accountable team gets you live, then stays — operating and refining LUCI for the life of the relationship."
+    tone="light"
+    wide
+  >
+    <PlatformOrbit />
   </SectionBlock>
 
-  <SectionBlock id="partnership" kicker="How we work with you" title={servicesIntro}>
-    <p class="measure">{oneOffering.offering}</p>
-    <ul class="rows" style="margin-top: 1.5rem">
-      {services.map((s) => (
-        <li>
-          <p class="rows__title">{s.num} · {s.title}</p>
-          <p>{s.body}</p>
+  <SectionBlock
+    id="platform"
+    lockupName="How LUCI connects"
+    lockupRole="The System Architecture"
+    deck="Sources in, the whole property out — orchestrated from one standardized rack, over the network you already run, operated from any browser."
+    tone="deep"
+    wide
+  >
+    <PlatformArchitectureStage />
+    <ul class="callout-grid">
+      {archCallouts.map((c) => (
+        <li class="callout">
+          <span class="callout__icon" aria-hidden="true" set:html={c.svg} />
+          <div>
+            <p class="callout__title">{c.title}</p>
+            <p class="callout__body">{c.body}</p>
+          </div>
         </li>
       ))}
     </ul>
   </SectionBlock>
 
-  <SectionBlock tone="deep">
-    <h2 class="h2">{site.ctaPrimary}</h2>
-    <div class="btn-row">
-      <a class="btn btn--primary" href="/contact">{site.ctaPrimary}</a>
+  <SectionBlock id="platform-cta" tone="deep">
+    <div class="platform-cta">
+      <p class="display-label platform-cta__kicker">Next step</p>
+      <h2 class="h2 platform-cta__title">See LUCI on your floor.</h2>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="/contact">{site.ctaPrimary}</a>
+      </div>
     </div>
   </SectionBlock>
 </BaseLayout>
 
 <style>
-  .offering-figure {
-    margin: var(--space-3) 0 0;
-    max-width: 760px;
+  .platform-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
-  .offering-figure img {
+  #what-luci-is,
+  #features,
+  #embedded-operation,
+  #platform,
+  #platform-cta {
+    scroll-margin-top: 156px;
+  }
+
+  @media (max-width: 640px) {
+    #what-luci-is,
+    #features,
+    #embedded-operation,
+    #platform,
+    #platform-cta {
+      scroll-margin-top: 132px;
+    }
+  }
+
+  /* ---------- What LUCI is (light, wide) — scene entry ---------- */
+  #what-luci-is {
+    padding-block: clamp(32px, 5vw, 64px) clamp(48px, 8vw, 96px);
+  }
+  .diagram-block--parent {
+    width: 100%;
+    max-width: 860px;
+  }
+  .diagram-block--parent img {
     display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: 560 / 300;
   }
 
-  .offering-pillars {
+  /* ---------- Architecture callouts (deep) ---------- */
+  .callout-grid {
+    list-style: none;
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-4);
-    margin-top: clamp(28px, 4vw, 40px);
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+    max-width: var(--content-wide);
   }
-
-  .offering-pillars__label {
-    margin-bottom: var(--space-1);
-    color: var(--mint);
-  }
-
-  .offering-pillars__body {
-    margin: 0;
-    font-size: clamp(16px, 1.8vw, 19px);
-    line-height: 1.5;
-    color: rgba(245, 248, 250, 0.82);
-    max-width: 40ch;
-  }
-
   @media (min-width: 760px) {
-    .offering-pillars {
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(24px, 3vw, 48px);
+    .callout-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
+  .callout {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 16px;
+    align-items: start;
+    padding: var(--space-3);
+    background: rgba(104, 227, 190, 0.06);
+    box-shadow: inset 0 0 0 1px rgba(104, 227, 190, 0.18);
+  }
+  .callout__icon {
+    display: flex;
+  }
+  .callout__icon :global(svg) {
+    width: 30px;
+    height: 30px;
+    display: block;
+  }
+  .callout__title {
+    font-weight: 700;
+    color: var(--off-white);
+    font-size: 16px;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .callout__body {
+    color: rgba(245, 248, 250, 0.78);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* ---------- Diagram reveal (light) ---------- */
+  .diagram-reveal {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .diagram-reveal.is-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ---------- Features (deep) ---------- */
+  #features {
+    position: relative;
+    overflow: hidden;
+  }
+  /* Drifting mint aurora — depth without noise. */
+  #features::before {
+    content: "";
+    position: absolute;
+    inset: -20% -10% auto -10%;
+    height: 140%;
+    background:
+      radial-gradient(40% 30% at 18% 22%, rgba(104, 227, 190, 0.1), transparent 70%),
+      radial-gradient(38% 28% at 82% 78%, rgba(206, 176, 110, 0.07), transparent 70%);
+    filter: blur(22px);
+    pointer-events: none;
+    z-index: 0;
+    animation: feature-aurora 18s ease-in-out infinite alternate;
+  }
+  @keyframes feature-aurora {
+    0% { transform: translate3d(-2%, 0, 0); }
+    100% { transform: translate3d(2%, 1%, 0); }
+  }
+  #features > .container { position: relative; z-index: 1; }
+  .feature-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(20px, 2.4vw, 32px);
+    max-width: var(--content-wide);
+  }
+  @media (min-width: 620px) {
+    .feature-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 1040px) {
+    .feature-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  /* Cell carries the scroll-bloom (opacity + translate) + supplies the 3D
+     perspective for the inner's tilt. */
+  .feature-card {
+    perspective: 900px;
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .feature-card.is-in {
+    opacity: 1;
+    transform: none;
+  }
+  /* Inner carries the 3D tilt (JS owns transform here). */
+  .feature-card__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(104, 227, 190, 0.06), rgba(104, 227, 190, 0.02));
+    border: 1px solid rgba(104, 227, 190, 0.14);
+    border-radius: 16px;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: transform 0.2s ease-out, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .feature-card__inner:hover {
+    border-color: rgba(104, 227, 190, 0.34);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.34);
+  }
+  .feature-card__media {
+    aspect-ratio: 320 / 180;
+    background: #0A1A24;
+    border-bottom: 1px solid rgba(104, 227, 190, 0.14);
+    transform: translateZ(40px);
+  }
+  .feature-card__media img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+  .feature-card__copy {
+    padding: clamp(18px, 2vw, 24px);
+    transform: translateZ(20px);
+  }
+  .feature-card__title {
+    font-weight: 700;
+    color: var(--off-white);
+    font-size: clamp(16px, 1.6vw, 18px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+  .feature-card__body {
+    color: rgba(245, 248, 250, 0.78);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  /* ---------- End CTA (deep) ---------- */
+  #platform-cta .platform-cta {
+    text-align: center;
+    padding-block: clamp(24px, 4vw, 40px);
+  }
+  .platform-cta__kicker {
+    color: var(--mint);
+    margin-bottom: var(--space-2);
+  }
+  .platform-cta__title {
+    color: var(--off-white);
+    margin-bottom: var(--space-4);
+    max-width: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .diagram-reveal,
+    .feature-card {
+      transition: none;
+      opacity: 1;
+      transform: none;
+    }
+    #features::before { animation: none; }
+  }
 </style>
+
+<noscript>
+  <style>
+    .diagram-reveal,
+    .feature-card {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  </style>
+</noscript>
+
+<script>
+  const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canHover = window.matchMedia('(hover: hover)').matches && !prefersReduce;
+
+  // Scroll bloom — fade + rise the diagram and each feature cell on enter.
+  const bloomTargets = document.querySelectorAll<HTMLElement>('.diagram-reveal, .feature-card');
+  if (prefersReduce || !('IntersectionObserver' in window)) {
+    bloomTargets.forEach((el) => el.classList.add('is-in'));
+  } else {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target as HTMLElement;
+          const i = Number(el.style.getPropertyValue('--i') || '0');
+          el.style.transitionDelay = `${Math.min(i, 5) * 80}ms`;
+          el.classList.add('is-in');
+          io.unobserve(el);
+        });
+      },
+      { threshold: 0.18, rootMargin: '0px 0px -8% 0px' }
+    );
+    bloomTargets.forEach((el) => io.observe(el));
+  }
+
+  // Subtle 3D tilt on feature cards (pointer-follow parallax).
+  if (canHover) {
+    const MAX = 6;
+    const cards = document.querySelectorAll<HTMLElement>('[data-tilt]');
+    cards.forEach((card) => {
+      let raf = 0;
+      card.addEventListener('pointermove', (e) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          card.style.transform =
+            `rotateX(${(-py * MAX).toFixed(2)}deg) rotateY(${(px * MAX).toFixed(2)}deg)`;
+        });
+      });
+      card.addEventListener('pointerleave', () => {
+        cancelAnimationFrame(raf);
+        card.style.transform = '';
+      });
+    });
+  }
+</script>

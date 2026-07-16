@@ -6,21 +6,23 @@ const { setupLead, line2Lead, line2Accent, line2Tail, foot } = homeDifferentiato
 const destinationLead = line2Lead.replace('With LUCI, ', '');
 const [footBefore, footAfter = ''] = foot.split('open APIs');
 
-// Ticker icons (the systems a property runs today) — duotone: mint primary strokes
-// with one gold accent element each, mirroring the Capabilities doc soft-icon treatment.
-// Gold elements carry .ic-gold (stroke) or .ic-gold-fill (fill, no outline); the rest
-// inherit mint from .home-diff__item-ic svg.
+// Ticker icons (the systems a property runs today) — Commitments-style duotone, drawn
+// to match the Capabilities doc soft icons: mint-dark #2b9e80 primary stroke + a soft
+// mint-tinted fill on the main shape, with one gold #CEB06E accent element each. Shown
+// inline (no tile) on the dark ticker, scaled up so the duotone reads on its own. The
+// star (Event AV) carries the gold as a gold→mint gradient on the star itself instead
+// of a separate accent dot.
 const icons: Record<string, string> = {
-  monitor: `<svg viewBox="0 0 16 16"><rect x="1.5" y="2.5" width="13" height="9"/><path d="M5.5 14h5M8 11.5V14"/><circle class="ic-gold-fill" cx="12.7" cy="4.5" r="0.8"/></svg>`,
-  grid: `<svg viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12"/><path d="M2 6h12M2 10h12M6 2v12M10 2v12"/><rect class="ic-gold-fill" x="6" y="6" width="4" height="4"/></svg>`,
-  bulb: `<svg viewBox="0 0 16 16"><path d="M8 1.7a3.8 3.8 0 0 0-2.3 6.8c.5.4.8 1 .8 1.6h3a2 2 0 0 1 .8-1.6A3.8 3.8 0 0 0 8 1.7Z"/><path class="ic-gold" d="M6.3 12.6h3.4M6.8 14.2h2.4"/></svg>`,
-  wave: `<svg viewBox="0 0 16 16"><path d="M1.5 8c1.8-3 3.6 3 5.2 0s3.6-3 5.2 0"/><circle class="ic-gold-fill" cx="13.3" cy="8" r="1"/></svg>`,
-  sign: `<svg viewBox="0 0 16 16"><rect x="2" y="2.5" width="12" height="7.5"/><path d="M8 10v3M5.5 13.5h5"/><path class="ic-gold" d="M5 6h6"/></svg>`,
-  speaker: `<svg viewBox="0 0 16 16"><path d="M3 6v4h2.3L9 12.6V3.4L5.3 6H3Z"/><path class="ic-gold" d="M11 5.6c1.1 1.4 1.1 4.4 0 5.8"/></svg>`,
-  play: `<svg viewBox="0 0 16 16"><rect x="1.5" y="3" width="13" height="10"/><path class="ic-gold-fill" d="M6.6 6l3.4 2-3.4 2V6Z"/></svg>`,
-  gear: `<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.2"/><path d="M8 1.7v2M8 12.3v2M1.7 8h2M12.3 8h2M3.6 3.6l1.4 1.4M11 11l1.4 1.4M12.4 3.6l-1.4 1.4M5 11l-1.4 1.4"/><circle class="ic-gold-fill" cx="8" cy="8" r="1"/></svg>`,
-  slider: `<svg viewBox="0 0 16 16"><path d="M3 2v12M8 2v12M13 2v12"/><rect x="1.6" y="4.5" width="2.8" height="2.4"/><rect class="ic-gold-fill" x="6.6" y="8" width="2.8" height="2.4"/><rect x="11.6" y="6" width="2.8" height="2.4"/></svg>`,
-  star: `<svg viewBox="0 0 16 16"><path d="M8 1.6l1.6 4.2 4.4.3-3.4 2.8 1.1 4.3L8 10.8 4.3 13.2l1.1-4.3L2 6.1l4.4-.3L8 1.6Z"/><circle class="ic-gold-fill" cx="13.1" cy="3" r="1.1"/></svg>`,
+  monitor: `<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="13" rx="2" fill="#68E3BE" fill-opacity="0.20" stroke="#2b9e80" stroke-width="1.8"/><path d="M9 21h6M12 17v4" stroke="#2b9e80" stroke-width="1.8" stroke-linecap="round"/><circle cx="17.5" cy="8" r="1.5" fill="#CEB06E"/></svg>`,
+  grid: `<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" fill="#68E3BE" fill-opacity="0.18" stroke="#2b9e80" stroke-width="1.8"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18" stroke="#2b9e80" stroke-width="1.4"/><rect x="9" y="9" width="6" height="6" fill="#CEB06E" fill-opacity="0.9"/></svg>`,
+  bulb: `<svg viewBox="0 0 24 24" fill="none"><path d="M12 3a6 6 0 0 0-3.8 10.6c.8.6 1.3 1.5 1.3 2.4h5c0-.9.5-1.8 1.3-2.4A6 6 0 0 0 12 3Z" fill="#CEB06E" fill-opacity="0.85" stroke="#2b9e80" stroke-width="1.8" stroke-linejoin="round"/><path d="M9.5 18.5h5M10 21h4" stroke="#2b9e80" stroke-width="1.8" stroke-linecap="round"/></svg>`,
+  wave: `<svg viewBox="0 0 24 24" fill="none"><path d="M3 12c2-4 4 4 6 0s4-4 6 0 4 4 6 0" stroke="#2b9e80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20.5" cy="12" r="1.7" fill="#CEB06E"/></svg>`,
+  sign: `<svg viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="11" rx="1.5" fill="#68E3BE" fill-opacity="0.20" stroke="#2b9e80" stroke-width="1.8"/><path d="M12 14v6M8 20h8" stroke="#2b9e80" stroke-width="1.8" stroke-linecap="round"/><path d="M7 7h6" stroke="#CEB06E" stroke-width="1.8" stroke-linecap="round"/></svg>`,
+  speaker: `<svg viewBox="0 0 24 24" fill="none"><path d="M4 9v6h3l5 4V5L7 9H4Z" fill="#68E3BE" fill-opacity="0.20" stroke="#2b9e80" stroke-width="1.8" stroke-linejoin="round"/><path d="M15 8.5c1.5 2 1.5 5 0 7M17.5 6c2.5 3 2.5 9 0 12" stroke="#CEB06E" stroke-width="1.8" stroke-linecap="round"/></svg>`,
+  play: `<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" fill="#68E3BE" fill-opacity="0.20" stroke="#2b9e80" stroke-width="1.8"/><path d="M10 9l6 3-6 3V9Z" fill="#CEB06E"/></svg>`,
+  gear: `<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3.5" fill="#68E3BE" fill-opacity="0.20" stroke="#2b9e80" stroke-width="1.8"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.5 5.5l1.8 1.8M16.7 16.7l1.8 1.8M18.5 5.5l-1.8 1.8M7.3 16.7l-1.8 1.8" stroke="#CEB06E" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="1.3" fill="#CEB06E"/></svg>`,
+  slider: `<svg viewBox="0 0 24 24" fill="none"><path d="M6 3v18M12 3v18M18 3v18" stroke="#2b9e80" stroke-width="1.8" stroke-linecap="round"/><rect x="3.5" y="6" width="5" height="4" rx="1" fill="#CEB06E"/><rect x="9.5" y="13" width="5" height="4" rx="1" fill="#CEB06E"/><rect x="15.5" y="8" width="5" height="4" rx="1" fill="#CEB06E"/></svg>`,
+  star: `<svg viewBox="0 0 24 24" fill="none"><defs><linearGradient id="diff-star-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#CEB06E"/><stop offset="1" stop-color="#68E3BE"/></linearGradient></defs><path d="M12 3l2.4 5.6 6 .5-4.6 3.9 1.4 5.9L12 16l-5.2 3.8 1.4-5.9L3.6 9.6l6-.5L12 3Z" fill="url(#diff-star-grad)" fill-opacity="0.78" stroke="#2b9e80" stroke-width="1.8" stroke-linejoin="round"/></svg>`,
 };
 
 // Seamless -50% loop.
@@ -58,7 +60,7 @@ const funnel = Array.from({ length: 9 }, (_, i) => +(((i + 0.5) / 9) * 100).toFi
     <svg class="home-diff__converge" viewBox="0 0 100 120" preserveAspectRatio="none" aria-hidden="true">
       <defs>
         <linearGradient id="diff-funnel" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#c9a24e" stop-opacity="0.5" />
+          <stop offset="0" stop-color="#edd086" stop-opacity="0.5" />
           <stop offset="1" stop-color="#68e3be" stop-opacity="0.45" />
         </linearGradient>
       </defs>
@@ -146,7 +148,7 @@ const funnel = Array.from({ length: 9 }, (_, i) => +(((i + 0.5) / 9) * 100).toFi
   .home-diff__item {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     font-family: var(--font-body);
     font-size: clamp(15px, 1.7vw, 19px);
     font-weight: 600;
@@ -154,22 +156,22 @@ const funnel = Array.from({ length: 9 }, (_, i) => +(((i + 0.5) / 9) * 100).toFi
     color: rgba(245, 248, 250, 0.82);
   }
 
+  /* Duotone icons inline on the dark ticker — no tile (the tiles overtook the page).
+     Same Commitments duotone palette (mint-dark + gold-deep + soft mint fill), scaled
+     up so the duotone reads on its own without a container. */
   .home-diff__item-ic {
     display: inline-flex;
-    width: clamp(18px, 2vw, 22px);
-    height: clamp(18px, 2vw, 22px);
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: clamp(26px, 2.8vw, 32px);
+    height: clamp(26px, 2.8vw, 32px);
   }
   .home-diff__item-ic :global(svg) {
     width: 100%;
     height: 100%;
-    stroke: var(--mint);
-    stroke-width: 1.4;
-    fill: none;
     display: block;
   }
-  /* Duotone accents — one gold element per icon (matches Capabilities doc). */
-  .home-diff__item-ic :global(.ic-gold) { stroke: var(--gold); }
-  .home-diff__item-ic :global(.ic-gold-fill) { fill: var(--gold); stroke: none; }
 
   /* Converging funnel from the ticker down toward the statement */
   .home-diff__converge {

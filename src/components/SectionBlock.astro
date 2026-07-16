@@ -3,17 +3,33 @@ interface Props {
   id?: string;
   kicker?: string;
   title?: string;
+  lockupName?: string;
+  lockupRole?: string;
+  deck?: string;
   tone?: 'white' | 'light' | 'sand' | 'deep';
+  wide?: boolean;
 }
 
-const { id, kicker, title, tone = 'white' } = Astro.props;
+const { id, kicker, title, lockupName, lockupRole, deck, tone = 'white', wide = false } = Astro.props;
 const toneClass = `section--${tone}`;
 ---
 
 <section id={id} class:list={['section', toneClass]}>
-  <div class="container">
+  <div class:list={['container', wide && 'container--wide']}>
     {kicker && <p class="display-label section-block__kicker">{kicker}</p>}
     {title && <h2 class="h2 section-block__title">{title}</h2>}
+    {lockupName && (
+      <div class="header-lockup" data-reveal>
+        <h2 class="header-lockup__name">{lockupName}</h2>
+        {lockupRole && (
+          <>
+            <span class="header-lockup__rule" aria-hidden="true"></span>
+            <p class="header-lockup__role">{lockupRole}</p>
+          </>
+        )}
+      </div>
+    )}
+    {deck && <p class="section-deck">{deck}</p>}
     <slot />
   </div>
 </section>
@@ -32,4 +48,135 @@ const toneClass = `section--${tone}`;
     margin-bottom: var(--space-3);
     max-width: 48ch;
   }
+
+  /* Thesis line — one Inter sentence under the lockup, left-aligned. */
+  .section-deck {
+    max-width: var(--measure);
+    margin: 0 0 var(--space-5);
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--ink);
+    text-align: left;
+  }
+
+  .section--deep .section-deck {
+    color: rgba(245, 248, 250, 0.82);
+  }
+
+  /* ---------- Header lockup — stacked, diagram order (Option 1) ---------- */
+  /* Big name, short mint accent rule, small tracked role beneath it — the
+     left-aligned stack a canonical diagram gives its own labeled nodes
+     (name big, role small, name first). Reusable site-wide section header.
+     See luci-modern-design-guidelines.mdc §3.5. Reveals on scroll: name
+     rises, rule draws from the left, role settles in. */
+  .header-lockup {
+    display: block;
+    margin-bottom: var(--space-3);
+  }
+  .header-lockup__name {
+    font-family: var(--font-body);
+    font-size: clamp(34px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink-strong);
+    margin: 0;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .header-lockup.is-in .header-lockup__name {
+    opacity: 1;
+    transform: none;
+  }
+  .section--deep .header-lockup__name {
+    color: var(--off-white);
+  }
+  .header-lockup__rule {
+    display: block;
+    width: 40px;
+    height: 3px;
+    margin: 14px 0 12px;
+    background: var(--accent-light);
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+  }
+  .header-lockup.is-in .header-lockup__rule {
+    transform: scaleX(1);
+  }
+  .section--deep .header-lockup__rule {
+    background: var(--mint);
+  }
+  .header-lockup__role {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    line-height: 1.35;
+    color: var(--accent-light);
+    margin: 0;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s;
+  }
+  .header-lockup.is-in .header-lockup__role {
+    opacity: 1;
+    transform: none;
+  }
+  .section--deep .header-lockup__role {
+    color: var(--mint);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .header-lockup__name,
+    .header-lockup__role {
+      transition: none;
+      opacity: 1;
+      transform: none;
+    }
+    .header-lockup__rule {
+      transition: none;
+      transform: scaleX(1);
+    }
+  }
 </style>
+
+<noscript>
+  <style>
+    .header-lockup__name,
+    .header-lockup__role {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    .header-lockup__rule {
+      transform: scaleX(1) !important;
+    }
+  </style>
+</noscript>
+
+<script>
+  const targets = document.querySelectorAll<HTMLElement>('.header-lockup[data-reveal]');
+  if (targets.length) {
+    const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduce || !('IntersectionObserver' in window)) {
+      targets.forEach((el) => el.classList.add('is-in'));
+    } else {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-in');
+            io.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.3, rootMargin: '0px 0px -8% 0px' }
+      );
+      targets.forEach((el) => io.observe(el));
+    }
+  }
+</script>

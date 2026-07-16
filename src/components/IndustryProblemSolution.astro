@@ -1,0 +1,330 @@
+---
+import type { IndustrySolution } from '../data/industryDetails';
+
+interface Props {
+  solutions: IndustrySolution[];
+}
+
+const { solutions } = Astro.props;
+
+const arrowSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>`;
+---
+
+<div class="ind-solve">
+  <ol class="ind-solve__list" role="list">
+    {solutions.map((item, i) => (
+      <li class="ind-solve__row" data-reveal-row>
+        <div class="ind-solve__visual" data-reveal-visual>
+          {item.image && (
+            <img
+              class="ind-solve__img"
+              src={item.image}
+              alt={item.imageAlt ?? ''}
+              loading={i < 2 ? 'eager' : 'lazy'}
+              decoding="async"
+              width="1280"
+              height="853"
+              style={item.imagePosition ? `object-position: ${item.imagePosition}` : undefined}
+            />
+          )}
+        </div>
+
+        <div class="ind-solve__panel" data-reveal-panel>
+          <div class="ind-solve__before" data-reveal-before>
+            <span class="ind-solve__label">Before</span>
+            <p class="ind-solve__problem">{item.problem}</p>
+          </div>
+
+          <span class="ind-solve__arrow" aria-hidden="true" data-reveal-arrow set:html={arrowSvg} />
+
+          <div class="ind-solve__after" data-reveal-after>
+            <span class="ind-solve__label ind-solve__label--after">After</span>
+            <span class="ind-solve__rule" aria-hidden="true"></span>
+            <h3 class="ind-solve__headline">{item.headline}</h3>
+            <p class="ind-solve__body">{item.answer}</p>
+          </div>
+        </div>
+      </li>
+    ))}
+  </ol>
+</div>
+
+<script>
+  const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const reveal = (selector: string, stagger = 0) => {
+    const targets = document.querySelectorAll<HTMLElement>(selector);
+    if (!targets.length) return;
+
+    if (prefersReduce || !('IntersectionObserver' in window)) {
+      targets.forEach((el) => el.classList.add('is-in'));
+      return;
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target as HTMLElement;
+          const delay = Number(el.dataset.revealDelay ?? stagger);
+          window.setTimeout(() => {
+            el.classList.add('is-in');
+          }, delay);
+          io.unobserve(el);
+        });
+      },
+      { threshold: 0.18, rootMargin: '0px 0px -6% 0px' }
+    );
+
+    targets.forEach((el, i) => {
+      el.dataset.revealDelay = String(i * 80);
+      io.observe(el);
+    });
+  };
+
+  reveal('.ind-solve [data-reveal-row]');
+</script>
+
+<noscript>
+  <style>
+    .ind-solve [data-reveal-row],
+    .ind-solve [data-reveal-visual],
+    .ind-solve [data-reveal-panel],
+    .ind-solve [data-reveal-before],
+    .ind-solve [data-reveal-arrow],
+    .ind-solve [data-reveal-after] {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    .ind-solve__rule {
+      transform: scaleX(1) !important;
+    }
+  </style>
+</noscript>
+
+<style>
+  .ind-solve {
+    max-width: var(--content-wide);
+  }
+
+  .ind-solve__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(48px, 6vw, 80px);
+  }
+
+  .ind-solve__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(24px, 3vw, 32px);
+    align-items: stretch;
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.65s ease,
+      transform 0.65s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .ind-solve__row.is-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (min-width: 880px) {
+    .ind-solve__row {
+      grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+      gap: clamp(32px, 4vw, 48px);
+      align-items: center;
+    }
+
+    .ind-solve__row:nth-child(even) .ind-solve__visual {
+      order: 2;
+    }
+
+    .ind-solve__row:nth-child(even) .ind-solve__panel {
+      order: 1;
+    }
+  }
+
+  /* ---------- Image ---------- */
+  .ind-solve__visual {
+    position: relative;
+    min-height: clamp(220px, 28vw, 340px);
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--navy-deep);
+    border: 1px solid rgba(104, 227, 190, 0.12);
+    opacity: 0;
+    transform: translateY(16px) scale(0.985);
+    transition:
+      opacity 0.6s ease 0.08s,
+      transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.08s;
+  }
+
+  .ind-solve__row.is-in .ind-solve__visual {
+    opacity: 1;
+    transform: none;
+  }
+
+  .ind-solve__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ---------- Copy panel ---------- */
+  .ind-solve__panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: clamp(24px, 3vw, 32px);
+    border-radius: 16px;
+    background: linear-gradient(155deg, rgba(104, 227, 190, 0.07) 0%, rgba(104, 227, 190, 0.02) 100%);
+    border: 1px solid rgba(104, 227, 190, 0.14);
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.55s ease 0.18s,
+      transform 0.55s ease 0.18s;
+  }
+
+  .ind-solve__row.is-in .ind-solve__panel {
+    opacity: 1;
+    transform: none;
+  }
+
+  .ind-solve__label {
+    display: block;
+    margin-bottom: 8px;
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(245, 248, 250, 0.42);
+  }
+
+  .ind-solve__label--after {
+    color: var(--mint);
+    margin-bottom: 0;
+  }
+
+  .ind-solve__before {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.45s ease 0.28s, transform 0.45s ease 0.28s;
+  }
+
+  .ind-solve__row.is-in .ind-solve__before {
+    opacity: 1;
+    transform: none;
+  }
+
+  .ind-solve__problem {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.45;
+    color: rgba(245, 248, 250, 0.58);
+    max-width: 42ch;
+  }
+
+  .ind-solve__arrow {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    color: var(--gold);
+    opacity: 0;
+    transform: translateY(-6px);
+    transition:
+      opacity 0.4s ease 0.38s,
+      transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) 0.38s;
+  }
+
+  .ind-solve__arrow :global(svg) {
+    width: 20px;
+    height: 20px;
+  }
+
+  .ind-solve__row.is-in .ind-solve__arrow {
+    opacity: 1;
+    transform: none;
+  }
+
+  .ind-solve__after {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease 0.46s, transform 0.5s ease 0.46s;
+  }
+
+  .ind-solve__row.is-in .ind-solve__after {
+    opacity: 1;
+    transform: none;
+  }
+
+  .ind-solve__rule {
+    display: block;
+    width: 40px;
+    height: 3px;
+    margin: 10px 0 16px;
+    background: var(--mint);
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.52s;
+  }
+
+  .ind-solve__row.is-in .ind-solve__rule {
+    transform: scaleX(1);
+  }
+
+  .ind-solve__headline {
+    margin: 0 0 12px;
+    font-family: var(--font-body);
+    font-size: clamp(22px, 2.2vw, 28px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+    max-width: 28ch;
+  }
+
+  .ind-solve__body {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.78);
+    max-width: 48ch;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ind-solve__row,
+    .ind-solve__visual,
+    .ind-solve__panel,
+    .ind-solve__before,
+    .ind-solve__arrow,
+    .ind-solve__after {
+      transition: none;
+      opacity: 1;
+      transform: none;
+    }
+
+    .ind-solve__rule {
+      transition: none;
+      transform: scaleX(1);
+    }
+  }
+</style>

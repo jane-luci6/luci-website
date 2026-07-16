@@ -1,0 +1,607 @@
+---
+import { ameristarCaseStudy } from '../data/site';
+import { ameristarCaseStudyDetail as cs } from '../data/caseStudyAmeristar';
+
+const { dek, logoSrc } = ameristarCaseStudy;
+---
+
+<article class="cs-page">
+  <div class="cs-page__sheet">
+    <header class="cs-hero">
+      <div class="cs-hero__kicker"><span>Case Study</span></div>
+      <h1 class="cs-hero__title" set:html={cs.heroTitle} />
+      <p class="cs-hero__dek">{dek}</p>
+      <div class="cs-hero__actions">
+        <a class="cs-download" href={cs.pdfHref} download={cs.pdfFilename}>
+          <span class="cs-download__icon" aria-hidden="true">↓</span>
+          Download PDF
+        </a>
+      </div>
+      <p class="cs-hero__property">
+        {cs.property}
+        <span>{cs.propertyMeta}</span>
+      </p>
+    </header>
+
+    <section class="cs-glance" aria-label="At a glance">
+      <div class="cs-glance__logo">
+        <img src={logoSrc} alt="Ameristar Council Bluffs" width="220" height="44" />
+      </div>
+
+      <div class="cs-facts">
+        {cs.facts.map((fact) => (
+          <div>
+            <p class="cs-facts__label">{fact.label}</p>
+            <p class="cs-facts__value">{fact.value}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="cs-summary">
+        {cs.summary.map((cell) => (
+          <div class="cs-summary__cell">
+            <p class="cs-summary__label">{cell.label}</p>
+            <p class="cs-summary__text">{cell.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="cs-sec cs-sec--white">
+      <h2 class="cs-sec__title">{cs.challenge.title}</h2>
+      <div class="cs-copy">
+        {cs.challenge.paragraphs.map((p) => <p>{p}</p>)}
+      </div>
+    </section>
+
+    <section class="cs-sec cs-sec--mid">
+      <h2 class="cs-sec__title">{cs.approach.title}</h2>
+      <div class="cs-copy">
+        {cs.approach.paragraphs.map((p) => <p>{p}</p>)}
+        <ul class="cs-scope">
+          {cs.approach.scope.map((item) => <li>{item}</li>)}
+        </ul>
+        <p>{cs.approach.closing}</p>
+      </div>
+    </section>
+
+    <section class="cs-quote">
+      <blockquote class="cs-quote__text">&ldquo;{cs.quote.text}&rdquo;</blockquote>
+      <p class="cs-quote__attrib">
+        <span>{cs.quote.role}</span>
+        <span>{cs.quote.org}</span>
+      </p>
+    </section>
+
+    <section class="cs-sec cs-sec--dark">
+      <h2 class="cs-sec__title">{cs.results.title}</h2>
+      <ul class="cs-results">
+        {cs.results.bullets.map((item) => <li>{item}</li>)}
+      </ul>
+      <div class="cs-copy">
+        {cs.results.paragraphs.map((p) => <p>{p}</p>)}
+      </div>
+    </section>
+
+    <section class="cs-sec cs-sec--light">
+      <h2 class="cs-sec__title">{cs.whatsNext.title}</h2>
+      <div class="cs-copy">
+        <p>{cs.whatsNext.intro}</p>
+        <ul class="cs-plan">
+          {cs.whatsNext.plans.map((item) => (
+            <li>
+              <span>
+                <strong>{item.title}</strong> {item.body}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p class="cs-bottom-line">{cs.whatsNext.bottomLine}</p>
+      </div>
+    </section>
+
+    <section class="cs-cta">
+      <p class="cs-cta__body">{cs.cta.body}</p>
+      <div class="cs-cta__actions">
+        <a class="cs-cta-btn" href="/contact">
+          Talk to LUCI
+          <span class="cs-cta-btn__arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="cs-cta-btn cs-cta-btn--secondary" href={cs.pdfHref} download={cs.pdfFilename}>
+          <span class="cs-download__icon" aria-hidden="true">↓</span>
+          Download PDF
+        </a>
+      </div>
+      <div class="cs-cta__about">
+        <p class="cs-cta__about-label">{cs.cta.aboutLabel}</p>
+        <p class="cs-cta__statement">{cs.cta.aboutStatement}</p>
+      </div>
+    </section>
+  </div>
+</article>
+
+<style>
+  .cs-page {
+    background: var(--navy-deep);
+    padding-bottom: clamp(48px, 8vw, 96px);
+  }
+
+  .cs-page__sheet {
+    max-width: 880px;
+    margin: 0 auto;
+    background: #fff;
+  }
+
+  /* Hero */
+  .cs-hero {
+    background: var(--navy-deep);
+    padding: clamp(40px, 8vw, 84px) clamp(28px, 6vw, 64px) clamp(40px, 7vw, 72px);
+    border-bottom: 4px solid var(--mint);
+  }
+
+  .cs-hero__kicker {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+
+  .cs-hero__kicker::before {
+    content: '';
+    width: 28px;
+    height: 2px;
+    background: var(--mint);
+  }
+
+  .cs-hero__kicker span {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mint);
+  }
+
+  .cs-hero__title {
+    margin: 0 0 26px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(34px, 6.5vw, 60px);
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    color: var(--off-white);
+    max-width: 16ch;
+  }
+
+  .cs-hero__title :global(em) {
+    font-style: normal;
+    color: var(--mint);
+  }
+
+  .cs-hero__dek {
+    margin: 0 0 30px;
+    font-size: clamp(17px, 2.2vw, 20px);
+    line-height: 1.6;
+    color: rgba(235, 245, 248, 0.82);
+    max-width: 58ch;
+  }
+
+  .cs-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+
+  .cs-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    color: var(--mint);
+    border: 1px solid rgba(104, 227, 190, 0.45);
+    padding: 12px 20px;
+    transition: background 0.15s, border-color 0.15s;
+  }
+
+  .cs-download:hover {
+    background: rgba(104, 227, 190, 0.08);
+    border-color: var(--mint);
+  }
+
+  .cs-download__icon {
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  .cs-hero__property {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin: 0;
+    padding-top: 24px;
+    border-top: 1px solid rgba(104, 227, 190, 0.15);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--mint);
+  }
+
+  .cs-hero__property span {
+    color: rgba(165, 179, 188, 0.7);
+    font-weight: 500;
+  }
+
+  /* Glance */
+  .cs-glance {
+    background: var(--off-white);
+    padding: clamp(32px, 5vw, 48px) clamp(28px, 6vw, 64px);
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  .cs-glance__logo {
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  .cs-glance__logo img {
+    height: 44px;
+    width: auto;
+    display: block;
+  }
+
+  .cs-facts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 36px;
+  }
+
+  @media (max-width: 620px) {
+    .cs-facts {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px 24px;
+    }
+  }
+
+  .cs-facts__label {
+    margin: 0 0 8px;
+    font-family: var(--font-display);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+  }
+
+  .cs-facts__value {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--navy);
+  }
+
+  .cs-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule-light);
+    border: 1px solid var(--rule-light);
+  }
+
+  @media (max-width: 620px) {
+    .cs-summary {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .cs-summary__cell {
+    background: #fff;
+    padding: 22px;
+  }
+
+  .cs-summary__label {
+    margin: 0 0 10px;
+    font-family: var(--font-display);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+  }
+
+  .cs-summary__text {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+
+  /* Sections */
+  .cs-sec {
+    padding: clamp(44px, 6vw, 72px) clamp(28px, 6vw, 64px);
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  .cs-sec--white {
+    background: #fff;
+  }
+
+  .cs-sec--light {
+    background: var(--off-white);
+  }
+
+  .cs-sec--mid {
+    background: var(--navy-mid);
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .cs-sec--dark {
+    background: var(--navy);
+    border-bottom-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .cs-sec__title {
+    margin: 0 0 22px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(24px, 4vw, 34px);
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    max-width: 24ch;
+  }
+
+  .cs-sec--white .cs-sec__title,
+  .cs-sec--light .cs-sec__title {
+    color: var(--navy);
+  }
+
+  .cs-sec--mid .cs-sec__title,
+  .cs-sec--dark .cs-sec__title {
+    color: var(--off-white);
+  }
+
+  .cs-copy p {
+    margin: 0 0 18px;
+    font-size: 17px;
+    line-height: 1.72;
+    max-width: 64ch;
+  }
+
+  .cs-copy p:last-child {
+    margin-bottom: 0;
+  }
+
+  .cs-sec--white .cs-copy p,
+  .cs-sec--light .cs-copy p {
+    color: var(--ink);
+  }
+
+  .cs-sec--mid .cs-copy p {
+    color: rgba(235, 245, 248, 0.88);
+  }
+
+  .cs-sec--dark .cs-copy p {
+    color: rgba(235, 245, 248, 0.92);
+  }
+
+  .cs-scope {
+    list-style: none;
+    margin: 4px 0 22px;
+    padding: 0;
+    max-width: 64ch;
+  }
+
+  .cs-scope li {
+    position: relative;
+    padding-left: 24px;
+    font-size: 17px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    color: rgba(235, 245, 248, 0.9);
+  }
+
+  .cs-scope li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 12px;
+    height: 2px;
+    background: var(--mint);
+  }
+
+  .cs-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 1px;
+    background: rgba(104, 227, 190, 0.18);
+    list-style: none;
+    margin: 0 0 32px;
+    padding: 0;
+    counter-reset: cs-result;
+  }
+
+  .cs-results li {
+    background: var(--navy);
+    padding: 22px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--off-white);
+  }
+
+  .cs-results li::before {
+    content: counter(cs-result, decimal-leading-zero);
+    counter-increment: cs-result;
+    display: block;
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--mint);
+    margin-bottom: 10px;
+  }
+
+  .cs-plan {
+    list-style: none;
+    margin: 22px 0 26px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    max-width: 64ch;
+  }
+
+  .cs-plan li {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 14px;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  .cs-plan li::before {
+    content: '✓';
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent-light);
+    line-height: 1.3;
+  }
+
+  .cs-plan strong {
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .cs-bottom-line {
+    margin-top: 4px;
+    padding-top: 26px;
+    border-top: 1px solid var(--rule-light);
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--navy);
+  }
+
+  /* Quote */
+  .cs-quote {
+    background: var(--navy-deep);
+    padding: clamp(44px, 7vw, 76px) clamp(28px, 6vw, 64px);
+    border-bottom: 1px solid rgba(104, 227, 190, 0.12);
+  }
+
+  .cs-quote__text {
+    margin: 0 0 20px;
+    font-size: clamp(22px, 3.4vw, 30px);
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--off-white);
+    border-left: 4px solid var(--mint);
+    padding: 8px 0 8px 26px;
+    max-width: 26ch;
+  }
+
+  .cs-quote__attrib {
+    margin: 0;
+    padding-left: 30px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.6;
+  }
+
+  .cs-quote__attrib span {
+    display: block;
+    color: var(--mint);
+  }
+
+  /* CTA */
+  .cs-cta {
+    background: var(--navy-deep);
+    padding: clamp(44px, 7vw, 76px) clamp(28px, 6vw, 64px);
+    border-top: 4px solid var(--mint);
+  }
+
+  .cs-cta__body {
+    margin: 0 0 24px;
+    font-weight: 700;
+    font-size: clamp(22px, 3vw, 30px);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+    max-width: 24ch;
+  }
+
+  .cs-cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .cs-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    color: var(--navy);
+    background: var(--mint);
+    padding: 16px 28px;
+    transition: background 0.15s;
+  }
+
+  .cs-cta-btn:hover {
+    background: #7aedc8;
+  }
+
+  .cs-cta-btn__arrow {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .cs-cta-btn--secondary {
+    background: transparent;
+    color: var(--mint);
+    border: 1px solid rgba(104, 227, 190, 0.45);
+  }
+
+  .cs-cta-btn--secondary:hover {
+    background: rgba(104, 227, 190, 0.08);
+  }
+
+  .cs-cta__about {
+    margin-top: 40px;
+    padding-top: 26px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 62ch;
+  }
+
+  .cs-cta__about-label {
+    margin: 0 0 10px;
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(104, 227, 190, 0.7);
+  }
+
+  .cs-cta__statement {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.65;
+    color: rgba(165, 179, 188, 0.88);
+  }
+</style>

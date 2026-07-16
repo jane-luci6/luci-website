@@ -1,0 +1,308 @@
+---
+import type { PersonaCapability } from '../data/personaDetails';
+
+interface Props {
+  capabilities: PersonaCapability[];
+  lead: string;
+  takeaway: string;
+}
+
+const { capabilities, lead, takeaway } = Astro.props;
+---
+
+<div class="persona-caps-intro" data-reveal>
+  <p class="persona-caps__lead">{lead}</p>
+  <p class="persona-caps__takeaway">{takeaway}</p>
+</div>
+
+<ul class="persona-caps" role="list" data-persona-caps>
+  {capabilities.map((cap, i) => (
+    <li class="persona-caps__row" data-row>
+      <button
+        type="button"
+        class="persona-caps__trigger"
+        id={`cap-trigger-${i}`}
+        aria-expanded={i === 0 ? 'true' : 'false'}
+        aria-controls={`cap-panel-${i}`}
+      >
+        <span class="persona-caps__num" aria-hidden="true">{cap.index}</span>
+        <span class="persona-caps__head">{cap.head}</span>
+        <span class="persona-caps__chevron" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </span>
+      </button>
+      <div
+        class="persona-caps__panel"
+        id={`cap-panel-${i}`}
+        role="region"
+        aria-labelledby={`cap-trigger-${i}`}
+        inert={i === 0 ? undefined : ''}
+      >
+        <div class="persona-caps__panel-inner">
+          <p class="persona-caps__desc">{cap.desc}</p>
+          <ul class="persona-caps__benefits" role="list">
+            {cap.benefits.map((b) => (
+              <li>{b}</li>
+            ))}
+          </ul>
+          <p class="persona-caps__try">
+            <span class="persona-caps__try-label">Try it →</span>
+            <span class="persona-caps__try-text">{cap.try}</span>
+          </p>
+        </div>
+      </div>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .persona-caps-intro {
+    max-width: var(--measure);
+    margin: 0 0 clamp(28px, 4vw, 44px);
+  }
+  .persona-caps__lead {
+    font-family: var(--font-body);
+    font-size: clamp(19px, 2.4vw, 24px);
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    color: var(--off-white);
+    margin: 0 0 var(--space-3);
+  }
+  .persona-caps__takeaway {
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.78);
+    margin: 0;
+  }
+
+  .persona-caps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .persona-caps__row {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .persona-caps__trigger {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: clamp(14px, 2vw, 24px);
+    width: 100%;
+    padding: clamp(20px, 2.6vw, 28px) 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    text-align: left;
+    color: var(--off-white);
+    font-family: var(--font-body);
+    transition: color 0.15s ease-out;
+  }
+  .persona-caps__trigger:hover {
+    color: var(--mint);
+  }
+  .persona-caps__trigger:focus-visible {
+    outline: 2px solid var(--mint);
+    outline-offset: 6px;
+    border-radius: 2px;
+  }
+
+  .persona-caps__num {
+    font-family: var(--font-display);
+    font-size: clamp(13px, 1.2vw, 15px);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--mint);
+    min-width: 2.4em;
+  }
+
+  .persona-caps__head {
+    font-family: var(--font-body);
+    font-size: clamp(18px, 2.2vw, 24px);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: inherit;
+  }
+
+  .persona-caps__chevron {
+    display: inline-flex;
+    width: 28px;
+    height: 28px;
+    color: var(--mint);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .persona-caps__chevron svg {
+    width: 100%;
+    height: 100%;
+  }
+  .persona-caps__row[data-open] .persona-caps__chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Accordion panel — grid-rows transition for smooth height. */
+  .persona-caps__panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.34s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .persona-caps__row[data-open] .persona-caps__panel {
+    grid-template-rows: 1fr;
+  }
+  .persona-caps__panel-inner {
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .persona-caps__panel-inner {
+    padding: 0 0 clamp(24px, 3vw, 32px);
+    padding-left: calc(2.4em + clamp(14px, 2vw, 24px));
+  }
+
+  .persona-caps__desc {
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.65;
+    color: rgba(245, 248, 250, 0.84);
+    max-width: 64ch;
+    margin: 0 0 var(--space-4);
+  }
+
+  .persona-caps__benefits {
+    list-style: none;
+    margin: 0 0 var(--space-4);
+    padding: 0;
+    display: grid;
+    gap: 10px;
+    max-width: 64ch;
+  }
+  .persona-caps__benefits li {
+    position: relative;
+    padding-left: 22px;
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.55;
+    color: rgba(245, 248, 250, 0.78);
+  }
+  .persona-caps__benefits li::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 0.62em;
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: var(--mint);
+    opacity: 0.85;
+  }
+
+  .persona-caps__try {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    padding: 14px 18px;
+    border-left: 3px solid var(--mint);
+    background: rgba(104, 227, 190, 0.08);
+    max-width: 64ch;
+  }
+  .persona-caps__try-label {
+    flex-shrink: 0;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mint);
+  }
+  .persona-caps__try-text {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--off-white);
+  }
+
+  @media (max-width: 640px) {
+    .persona-caps__trigger {
+      gap: 12px;
+    }
+    .persona-caps__num {
+      min-width: 2em;
+    }
+    .persona-caps__panel-inner {
+      padding-left: calc(2em + 12px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .persona-caps__panel {
+      transition: none;
+    }
+    .persona-caps__chevron {
+      transition: none;
+    }
+  }
+</style>
+
+<noscript>
+  <style>
+    .persona-caps__panel {
+      grid-template-rows: 1fr !important;
+    }
+    .persona-caps__chevron {
+      transform: rotate(180deg) !important;
+    }
+  </style>
+</noscript>
+
+<script>
+  const rows = Array.from(document.querySelectorAll<HTMLElement>('[data-persona-caps] [data-row]'));
+  if (rows.length) {
+    const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const setRow = (row: HTMLElement, open: boolean) => {
+      const trigger = row.querySelector<HTMLButtonElement>('.persona-caps__trigger');
+      const panel = row.querySelector<HTMLElement>('.persona-caps__panel');
+      if (!trigger || !panel) return;
+      trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (open) {
+        row.setAttribute('data-open', '');
+        panel.removeAttribute('inert');
+      } else {
+        row.removeAttribute('data-open');
+        panel.setAttribute('inert', '');
+      }
+    };
+
+    rows.forEach((row) => {
+      const trigger = row.querySelector<HTMLButtonElement>('.persona-caps__trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', () => {
+        const isOpen = row.hasAttribute('data-open');
+        if (isOpen) {
+          setRow(row, false);
+          return;
+        }
+        // single-open accordion: close the others
+        rows.forEach((other) => {
+          if (other !== row) setRow(other, false);
+        });
+        setRow(row, true);
+      });
+    });
+
+    // ensure initial state matches markup (first open, rest closed)
+    rows.forEach((row, i) => setRow(row, i === 0));
+
+    // reduced-motion: no smooth scroll on open; nothing else needed
+    void prefersReduce;
+  }
+</script>

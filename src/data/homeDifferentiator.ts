@@ -5,8 +5,8 @@ export const homeDifferentiator = {
   // Below it, converging lines tie all of those systems down to the single payoff line —
   // visually: many systems → one.
   setupLead: 'Today, separate A/V technology lives in separate silos',
-  line2Lead: 'With LUCI, you can run ',
-  line2Accent: 'them all',
+  line2Lead: 'With LUCI, you can ',
+  line2Accent: 'run them all',
   line2Tail: '.',
   foot: 'Regardless of make, model, or protocol — through open APIs.',
 } as const;

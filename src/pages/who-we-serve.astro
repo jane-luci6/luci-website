@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import SectionBlock from '../components/SectionBlock.astro';
 import { personas } from '../data/personas';
+import { hasPersonaDetail } from '../data/personaDetails';
 import { site } from '../data/site';
 ---
 
@@ -13,17 +14,34 @@ import { site } from '../data/site';
     deep
   />
 
-  <SectionBlock title="By function">
-    <p class="scaffold-note">LUCI capabilities by role — workshop pending</p>
-    <ul class="rows" style="margin-top: 1rem">
-      {personas.map((p) => (
-        <li id={p.id}>
-          <p class="rows__title">{p.label}</p>
-          <p class="scaffold-note">{p.role}</p>
-          <p style="margin-top: 0.5rem">{p.line}</p>
-          <p class="callout" style="margin-top: 0.75rem"><em>{p.belief}</em></p>
-        </li>
-      ))}
+  <SectionBlock lockupName="By function" lockupRole="What each role can do with LUCI">
+    <p class="measure scaffold-note" style="margin-bottom: 1.5rem">
+      Every team that shares your floor works the same platform toward the same guest.
+      Open a role to see what it can do — and what to try this week.
+    </p>
+    <ul class="rows persona-rows" style="margin-top: 1rem">
+      {personas.map((p) => {
+        const linked = hasPersonaDetail(p.id);
+        return (
+          <li id={p.id} class:list={['persona-row', linked && 'persona-row--linked']}>
+            {linked ? (
+              <a class="persona-row__link" href={`/who-we-serve/${p.id}`}>
+                <span class="rows__title">{p.label}</span>
+                <span class="scaffold-note persona-row__role">{p.role}</span>
+                <span class="persona-row__line">{p.line}</span>
+                <span class="persona-row__cta">See what you can do <span aria-hidden="true">→</span></span>
+              </a>
+            ) : (
+              <div class="persona-row__static">
+                <span class="rows__title">{p.label}</span>
+                <span class="scaffold-note persona-row__role">{p.role}</span>
+                <span class="persona-row__line">{p.line}</span>
+                <span class="persona-row__soon">Coming soon</span>
+              </div>
+            )}
+          </li>
+        );
+      })}
     </ul>
   </SectionBlock>
 
@@ -34,3 +52,104 @@ import { site } from '../data/site';
     </div>
   </SectionBlock>
 </BaseLayout>
+
+<style>
+  .persona-rows {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .persona-row {
+    border-top: 1px solid var(--rule-light);
+    padding-block: clamp(18px, 2.4vw, 26px);
+  }
+  .persona-row:last-child {
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  .persona-row__link,
+  .persona-row__static {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'title role'
+      'line line'
+      'cta cta';
+    gap: 6px 16px;
+    text-decoration: none;
+    color: inherit;
+  }
+  .persona-row__link {
+    transition: color 0.15s ease-out;
+  }
+  .persona-row__link:hover {
+    color: var(--accent-light);
+  }
+  .persona-row__link:focus-visible {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 6px;
+    border-radius: 2px;
+  }
+
+  .persona-row .rows__title {
+    grid-area: title;
+    margin: 0;
+    font-size: clamp(20px, 2.4vw, 24px);
+  }
+  .persona-row__role {
+    grid-area: role;
+    align-self: baseline;
+    text-align: right;
+    margin: 0;
+  }
+  .persona-row__line {
+    grid-area: line;
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--navy-muted);
+    max-width: 64ch;
+    margin: 0;
+  }
+  .persona-row__cta {
+    grid-area: cta;
+    margin-top: 6px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+  }
+  .persona-row__soon {
+    grid-area: cta;
+    align-self: end;
+    justify-self: end;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--navy-muted);
+    opacity: 0.7;
+  }
+
+  @media (max-width: 640px) {
+    .persona-row__link,
+    .persona-row__static {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        'title'
+        'role'
+        'line'
+        'cta';
+    }
+    .persona-row__role {
+      text-align: left;
+    }
+    .persona-row__soon {
+      justify-self: start;
+    }
+  }
+</style>

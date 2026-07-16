@@ -6,7 +6,7 @@ export const site = {
   tagline: 'The Orchestration Engine for Enterprise Multimedia',
   subTagline: 'One interface to control, automate, and execute the entire guest experience.',
   /** Homepage entry section — Syncopate headline + tagline left, map right (full viewport) */
-  heroHeadline: 'Control the whole floor.',
+  heroHeadline: 'Control your whole property.',
   taglineDisplay: {
     lead: 'The ',
     accent: 'Orchestration Engine',
@@ -44,6 +44,8 @@ export const ameristarCaseStudy = {
   title: 'Three days to a future-ready platform',
   dek: "LUCI completed a full retrofit of Ameristar Council Bluffs' AV infrastructure in under three days, modernizing a system that had run since 2012 and centralizing control on land to prepare the property for its next phase of growth.",
   slug: 'ameristar-council-bluffs',
+  property: 'Ameristar Council Bluffs',
+  location: 'Council Bluffs, Iowa',
   // Short homepage tease — validates the single-interface promise on a real property.
   homeHeadline: 'Three days to a future-ready platform',
   homeDek:
@@ -58,10 +60,26 @@ export const ameristarCaseStudy = {
     { title: 'The new build plugs in', body: 'New construction runs on the platform already powering the property — no second install.' },
     { title: 'Growth is built in', body: 'The property keeps expanding without the A/V complications that pile up over time.' },
   ],
-  homeEyebrow: 'Customer story',
+  homeEyebrow: 'LUCI in Action',
+  homeBandKicker: 'LUCI in Action',
   homeCta: 'Read the full case study',
   logoSrc: '/images/logos/ameristar-council-bluffs.svg',
+  logoSrcDark: '/images/logos/ameristar-logo-white.png',
+  cardMedia: '/images/logos/ameristar-council-bluffs-white.svg',
+  pdfHref: '/downloads/LUCI-Case-Study-Ameristar-Council-Bluffs.pdf',
   moveDiagramSrc: '/images/case-relocation.svg?v=1',
+} as const;
+
+// Tachi Palace Casino Resort — bingo hall LED + audio refresh (Issue 02 field story).
+export const tachiCaseStudy = {
+  title: 'One week to a foundation for growth',
+  dek: "LUCI brought Tachi Palace's bingo hall alive in one week — eight new LED video walls, audio under one interface, and an immersive room that sets the stage for the rest of the resort.",
+  slug: 'tachi-palace',
+  property: 'Tachi Palace Casino Resort',
+  location: 'Lemoore, California',
+  poster: '/images/case-studies/tachi/tachi-reel-poster.jpg',
+  logoSrc: '/images/logos/tachi-palace.png',
+  pdfHref: '/downloads/LUCI-Case-Study-Tachi-Palace.pdf',
 } as const;
 
 // Trust strip under the hero callout — real client logos, scrolling marquee.
@@ -76,23 +94,14 @@ export const homeTrust = {
   ],
 } as const;
 
-// Consolidation ledger — Option A: a "Today / With LUCI" before→after ledger.
-// All six canonical figures (capabilities brochure p.04). The "before" figure is
-// shown large but muted/ghosted (the heavy old way); the LUCI figure is bright.
+// Consolidation ledger — canonical "The Collapse" graphic (software + hardware funnel,
+// then network / service / code rows). Rendered as the website's own SVG copy.
 export const homeLedger = {
   kicker: 'Consolidation you can see',
   headingLead: 'Less hardware. Fewer vendors. ',
-  headingAccent: 'One team in control.',
+  headingAccent: 'Your team in control.',
   lede:
-    'LUCI collapses the stack of platforms, receivers, and racks you manage today into a single orchestration layer your own team runs.',
+    'LUCI collapses four or more multimedia systems, five or more racks, and one hundred plus devices into one interface and one equipment rack — then carries that same consolidation through your network, service model, and code.',
   ctaLabel: 'See it on your floor',
   ctaHref: '/contact',
-  rows: [
-    { icon: 'hex',    fromNum: '3+',      fromLabel: 'control platforms',                fromUnit: '',   num: '1',     to: 'orchestration platform' },
-    { icon: 'sat',    fromNum: '15+',     fromLabel: 'satellite receivers',              fromUnit: '',   num: '3',     to: 'rack units' },
-    { icon: 'rack',   fromNum: '5+',      fromLabel: 'equipment racks',                  fromUnit: '',   num: '1',     to: 'standardized rack' },
-    { icon: 'code',   fromNum: '10+',     fromLabel: 'control languages & programmers',  fromUnit: '',   num: '1',     to: 'standard, run by one team' },
-    { icon: 'wrench', fromNum: '$1,000s', fromLabel: 'per change in truck rolls',        fromUnit: '',   num: 'No',    to: 'truck roll for routine changes', q: true },
-    { icon: 'lock',   fromNum: 'Locked',  fromLabel: 'code held hostage by the programmer', fromUnit: '', num: 'Yours', to: 'standardized, documented, owned', q: true },
-  ],
 } as const;

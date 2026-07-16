@@ -1,0 +1,224 @@
+---
+export interface Chapter {
+  id: string;
+  label: string;
+}
+
+interface Props {
+  chapters: Chapter[];
+  contextLabel?: string;
+}
+
+const { chapters, contextLabel = 'Platform' } = Astro.props;
+---
+
+<nav class="platform-chapters" aria-label="On this page" data-platform-chapters>
+  <div class="platform-chapters__inner container container--wide">
+    <p class="platform-chapters__context display-label">{contextLabel}</p>
+    <ul class="platform-chapters__list" role="list">
+      {chapters.map((chapter, i) => (
+        <li>
+          <a
+            href={`#${chapter.id}`}
+            class:list={['platform-chapters__link', i === 0 && 'is-active']}
+            data-chapter={chapter.id}
+            aria-current={i === 0 ? 'location' : undefined}
+          >
+            {chapter.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<script>
+  const nav = document.querySelector('[data-platform-chapters]');
+  if (!nav) {
+    /* no-op */
+  } else {
+    const links = Array.from(nav.querySelectorAll<HTMLAnchorElement>('[data-chapter]'));
+    const ids = links.map((l) => l.getAttribute('data-chapter')).filter(Boolean) as string[];
+    const sections = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => Boolean(el));
+
+    const headerOffset = () => {
+      const header = document.querySelector('.site-header');
+      const navH = nav.getBoundingClientRect().height;
+      return (header?.getBoundingClientRect().height ?? 96) + navH + 8;
+    };
+
+    const setActive = (id: string) => {
+      links.forEach((link) => {
+        const on = link.getAttribute('data-chapter') === id;
+        link.classList.toggle('is-active', on);
+        if (on) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    };
+
+    links.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        const id = link.getAttribute('data-chapter');
+        if (!id) return;
+        const target = document.getElementById(id);
+        if (!target) return;
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - headerOffset();
+        window.scrollTo({ top, behavior: 'smooth' });
+        history.replaceState(null, '', `#${id}`);
+        setActive(id);
+      });
+    });
+
+    if (sections.length && 'IntersectionObserver' in window) {
+      const visible = new Map<string, number>();
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const id = entry.target.id;
+            if (entry.isIntersecting) visible.set(id, entry.intersectionRatio);
+            else visible.delete(id);
+          });
+
+          if (visible.size) {
+            const best = [...visible.entries()].sort((a, b) => b[1] - a[1])[0]?.[0];
+            if (best) setActive(best);
+            return;
+          }
+
+          const offset = headerOffset();
+          const next =
+            sections.find((s) => s.getBoundingClientRect().top >= offset - 24) ??
+            sections[sections.length - 1];
+          if (next) setActive(next.id);
+        },
+        { rootMargin: '-32% 0px -48% 0px', threshold: [0, 0.1, 0.25, 0.5, 0.75] }
+      );
+      sections.forEach((s) => io.observe(s));
+    }
+  }
+</script>
+
+<style>
+  .platform-chapters {
+    position: sticky;
+    top: 96px;
+    z-index: 90;
+    background: rgba(245, 248, 250, 0.94);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  [data-theme='dark'] .platform-chapters {
+    background: rgba(10, 26, 36, 0.94);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .platform-chapters__inner {
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 3vw, 32px);
+    min-height: 52px;
+    padding-block: 8px;
+  }
+
+  .platform-chapters__context {
+    flex-shrink: 0;
+    color: var(--accent-light);
+    margin: 0;
+    letter-spacing: 0.2em;
+  }
+
+  [data-theme='dark'] .platform-chapters__context {
+    color: var(--mint);
+  }
+
+  .platform-chapters__list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 1.6vw, 20px);
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    mask-image: linear-gradient(90deg, #000 92%, transparent);
+  }
+
+  .platform-chapters__list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .platform-chapters__link {
+    display: block;
+    padding: 8px 2px;
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1.1vw, 15px);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--navy-muted);
+    text-decoration: none;
+    white-space: nowrap;
+    position: relative;
+    transition: color 0.15s ease-out;
+  }
+
+  [data-theme='dark'] .platform-chapters__link {
+    color: rgba(245, 248, 250, 0.62);
+  }
+
+  .platform-chapters__link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 2px;
+    height: 2px;
+    background: var(--accent-light);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.18s ease-out;
+  }
+
+  [data-theme='dark'] .platform-chapters__link::after {
+    background: var(--mint);
+  }
+
+  .platform-chapters__link:hover,
+  .platform-chapters__link.is-active {
+    color: var(--ink-strong);
+  }
+
+  [data-theme='dark'] .platform-chapters__link:hover,
+  [data-theme='dark'] .platform-chapters__link.is-active {
+    color: var(--off-white);
+  }
+
+  .platform-chapters__link:hover::after,
+  .platform-chapters__link.is-active::after {
+    transform: scaleX(1);
+  }
+
+  @media (max-width: 640px) {
+    .platform-chapters {
+      top: 72px;
+    }
+
+    .platform-chapters__inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      min-height: auto;
+      padding-block: 12px;
+    }
+
+    .platform-chapters__list {
+      width: 100%;
+      mask-image: linear-gradient(90deg, #000 88%, transparent);
+    }
+  }
+</style>

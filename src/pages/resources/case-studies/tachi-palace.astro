@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CaseStudyTachi from '../../../components/CaseStudyTachi.astro';
+import { tachiCaseStudy } from '../../../data/site';
+---
+
+<BaseLayout
+  title="Tachi Palace Casino Resort"
+  description={tachiCaseStudy.dek}
+  darkHeader
+>
+  <CaseStudyTachi />
+</BaseLayout>

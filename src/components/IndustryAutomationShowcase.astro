@@ -1,0 +1,236 @@
+---
+import type { IndustryAutomation } from '../data/industryDetails';
+
+interface Props {
+  automations: IndustryAutomation[];
+}
+
+const { automations } = Astro.props;
+
+const flipGlyph = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg>`;
+---
+
+<ul class="ind-auto" role="list">
+  {automations.map((item) => (
+    <li class="ind-auto__item" tabindex="0">
+      <div class="ind-auto__card">
+        <div class="ind-auto__face ind-auto__face--front">
+          <span class="ind-auto__watermark" aria-hidden="true">{item.index}</span>
+          <p class="ind-auto__trigger">{item.trigger}</p>
+          <span class="ind-auto__flip" aria-hidden="true" set:html={flipGlyph} />
+        </div>
+        <div class="ind-auto__face ind-auto__face--back">
+          <span class="ind-auto__back-index">{item.index}</span>
+          <p class="ind-auto__back-title">{item.title}</p>
+          <p class="ind-auto__detail">{item.detail}</p>
+          <span class="ind-auto__flip ind-auto__flip--back" aria-hidden="true" set:html={flipGlyph} />
+        </div>
+      </div>
+    </li>
+  ))}
+</ul>
+
+<script>
+  const section = document.querySelector('.ind-auto');
+  if (section && window.matchMedia('(hover: none)').matches) {
+    section.querySelectorAll('.ind-auto__item').forEach((item) => {
+      item.addEventListener('click', () => item.classList.toggle('is-flipped'));
+    });
+  }
+</script>
+
+<style>
+  .ind-auto {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(20px, 2.6vw, 32px);
+    max-width: var(--content-wide);
+  }
+
+  @media (min-width: 640px) {
+    .ind-auto {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .ind-auto {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .ind-auto__item:last-child:nth-child(3n + 2) {
+      grid-column: 2 / 3;
+    }
+  }
+
+  .ind-auto__item {
+    position: relative;
+    height: clamp(244px, 26vw, 296px);
+    perspective: 1400px;
+  }
+
+  .ind-auto__item:focus-visible {
+    outline: 2px solid var(--mint);
+    outline-offset: 4px;
+    border-radius: 18px;
+  }
+
+  .ind-auto__card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  @media (hover: hover) {
+    .ind-auto__item:hover .ind-auto__card,
+    .ind-auto__item:focus-within .ind-auto__card {
+      transform: rotateY(180deg);
+    }
+  }
+
+  .ind-auto__item.is-flipped .ind-auto__card {
+    transform: rotateY(180deg);
+  }
+
+  .ind-auto__face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(24px, 2.6vw, 32px);
+    border-radius: 14px;
+    overflow: hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    box-shadow: 0 16px 32px rgba(10, 22, 28, 0.3);
+  }
+
+  .ind-auto__face--front {
+    justify-content: space-between;
+    background:
+      radial-gradient(circle at 78% 88%, rgba(104, 227, 190, 0.22) 0%, rgba(104, 227, 190, 0) 55%),
+      linear-gradient(155deg, rgba(104, 227, 190, 0.08) 0%, rgba(104, 227, 190, 0.02) 100%);
+    box-shadow: 0 16px 32px rgba(10, 22, 28, 0.3), inset 0 0 0 1px rgba(104, 227, 190, 0.22);
+  }
+
+  .ind-auto__watermark {
+    position: absolute;
+    right: clamp(10px, 1.4vw, 20px);
+    bottom: -0.16em;
+    font-family: var(--font-display);
+    font-size: clamp(88px, 9vw, 140px);
+    font-weight: 700;
+    line-height: 1;
+    color: rgba(104, 227, 190, 0.14);
+    pointer-events: none;
+    z-index: 0;
+    transition: color 0.3s ease;
+  }
+
+  .ind-auto__trigger {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    max-width: 14ch;
+    font-family: var(--font-body);
+    font-size: clamp(22px, 2.2vw, 28px);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+  }
+
+  .ind-auto__flip {
+    position: relative;
+    z-index: 1;
+    align-self: flex-start;
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 9999px;
+    color: var(--mint);
+    background: rgba(104, 227, 190, 0.14);
+    box-shadow: inset 0 0 0 1px rgba(104, 227, 190, 0.42);
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), background 0.25s ease;
+  }
+
+  .ind-auto__flip :global(svg) {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
+
+  @media (hover: hover) {
+    .ind-auto__item:hover .ind-auto__flip,
+    .ind-auto__item:focus-within .ind-auto__flip {
+      transform: rotate(180deg);
+      background: rgba(104, 227, 190, 0.24);
+    }
+
+    .ind-auto__item:hover .ind-auto__watermark {
+      color: rgba(104, 227, 190, 0.22);
+    }
+  }
+
+  .ind-auto__face--back {
+    transform: rotateY(180deg);
+    justify-content: flex-start;
+    gap: 10px;
+    background: linear-gradient(160deg, #0c1a22 0%, #08131a 100%);
+    box-shadow: 0 16px 32px rgba(10, 22, 28, 0.3), inset 0 0 0 1px rgba(104, 227, 190, 0.28);
+    border-top: 3px solid var(--mint);
+  }
+
+  .ind-auto__back-index {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--mint);
+  }
+
+  .ind-auto__back-title {
+    margin: 0;
+    max-width: 26ch;
+    font-family: var(--font-body);
+    font-size: clamp(15px, 1.4vw, 18px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--off-white);
+  }
+
+  .ind-auto__detail {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: clamp(14px, 1.25vw, 16px);
+    font-weight: 400;
+    line-height: 1.55;
+    color: rgba(245, 248, 250, 0.84);
+  }
+
+  .ind-auto__flip--back {
+    margin-top: auto;
+    align-self: flex-start;
+  }
+
+  @media (max-width: 480px) {
+    .ind-auto__item {
+      height: clamp(264px, 34vw, 300px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ind-auto__card,
+    .ind-auto__flip {
+      transition: none;
+    }
+  }
+</style>

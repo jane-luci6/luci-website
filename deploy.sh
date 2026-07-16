@@ -34,4 +34,8 @@ echo "==> Syncing dist/ -> $VM_HOST:$VM_PATH ..."
 rsync -avz --delete --chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r -e "$SSH_OPTS" dist/ "$VM_HOST:$VM_PATH/"
 
 echo
+echo "==> Fixing asset permissions on VM (nginx must read as www-data) ..."
+$SSH_OPTS "$VM_HOST" "find $VM_PATH -type f -exec chmod 644 {} + && find $VM_PATH -type d -exec chmod 755 {} +"
+
+echo
 echo "==> Deployed. Review at: http://10.10.1.37"

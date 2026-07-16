@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { propertyZones } from '../data/floorControl';
+
+// Build a tiled SVG of the zone list, used as a background that gets clipped
+// to the headline letters via background-clip:text.
+function zoneTileSvg(fill: string): string {
+  const line = propertyZones.join('  \u00B7  ').replace(/&/g, '&amp;');
+  const rowH = 19;
+  const rows = 9;
+  const tileW = 1600;
+  const tileH = rows * rowH;
+  let body = '';
+  for (let r = 0; r < rows; r++) {
+    const y = r * rowH + 14;
+    const x = (r % 2) * -150;
+    body += '<text x="' + x + '" y="' + y + '" font-family="Space Grotesk, Arial, sans-serif" font-size="12" font-weight="600" fill="' + fill + '" letter-spacing="0.4">' + line + '    ' + line + '</text>';
+  }
+  const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + tileW + '" height="' + tileH + '" viewBox="0 0 ' + tileW + ' ' + tileH + '">' + body + '</svg>';
+  return 'data:image/svg+xml,' + encodeURIComponent(svg);
+}
+
+const mintTile = zoneTileSvg('#68e3be');
+const whiteTile = zoneTileSvg('#f5f8fa');
+---
+
+<BaseLayout title="Hero text-fill — zone names in the headline" description="Preview: zone names filling the headline letters" darkHeader>
+  <div class="topts">
+    <div class="topts__intro">
+      <span class="topts__intro-k">Idea — zone names inside the headline letters</span>
+      <span class="topts__intro-d">The location list becomes a typographic texture: the zone names are tiled and clipped to the shape of the headline letters. The word still reads as the word; up close it is made of every space LUCI runs. Three scales below — full headline, “Whole Property”, and “Property” alone.</span>
+    </div>
+
+    <div class="topts__card">
+      <div class="topts__card-head">
+        <span class="topts__card-k">Variant A</span>
+        <span class="topts__card-d">Full headline. “Control your” in off-white, “Whole Property.” in mint. Biggest letters, most legible inner text — but the hero headline gets very large.</span>
+      </div>
+      <div class="topts__stage">
+        <h1 class="tfill">
+          <span class="tfill--white" style={`background-image: url("${whiteTile}");`}>Control your</span>
+          <span class="tfill--mint" style={`background-image: url("${mintTile}");`}>Whole property.</span>
+        </h1>
+      </div>
+    </div>
+
+    <div class="topts__card">
+      <div class="topts__card-head">
+        <span class="topts__card-k">Variant B</span>
+        <span class="topts__card-d">Only the accent line is filled. “Control your” stays solid off-white; “Whole Property.” carries the zone texture in mint. Keeps the current headline size relationship; the texture is the reward on the emphasized words.</span>
+      </div>
+      <div class="topts__stage">
+        <h1 class="tfill tfill--hybrid">
+          <span class="tfill__solid">Control your</span>
+          <span class="tfill--mint" style={`background-image: url("${mintTile}");`}>Whole property.</span>
+        </h1>
+      </div>
+    </div>
+
+    <div class="topts__card">
+      <div class="topts__card-head">
+        <span class="topts__card-k">Variant C</span>
+        <span class="topts__card-d">Single word. “Property.” alone, oversized, mint-filled. The purest version of the idea — one word that is literally made of every space. Most striking, but it drops “control your whole” from the hero.</span>
+      </div>
+      <div class="topts__stage">
+        <h1 class="tfill tfill--big">
+          <span class="tfill--mint" style={`background-image: url("${mintTile}");`}>Property.</span>
+        </h1>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .topts {
+    background: var(--navy-deep);
+    padding-bottom: 80px;
+  }
+  .topts__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 22px var(--page-pad);
+    background: var(--navy);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .topts__intro-k {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mint);
+  }
+  .topts__intro-d {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: rgba(245, 248, 250, 0.72);
+    max-width: 70ch;
+  }
+
+  .topts__card {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+  .topts__card-head {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 28px var(--page-pad) 0;
+  }
+  .topts__card-k {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mint);
+  }
+  .topts__card-d {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: rgba(245, 248, 250, 0.62);
+    max-width: 64ch;
+  }
+  .topts__stage {
+    padding: 40px var(--page-pad) 56px;
+    overflow: hidden;
+  }
+
+  .tfill {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 0.92;
+    letter-spacing: 0.04em;
+  }
+  .tfill > span {
+    display: block;
+    white-space: nowrap;
+  }
+
+  /* The clipped fill */
+  .tfill--mint,
+  .tfill--white {
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-repeat: repeat;
+    background-size: auto;
+  }
+
+  /* Variant A — full headline, large (sized so both lines fit the stage) */
+  .topts__card:first-of-type .tfill {
+    font-size: clamp(44px, 8.5vw, 108px);
+  }
+
+  /* Variant B — hybrid: solid lead + filled accent */
+  .tfill--hybrid {
+    font-size: clamp(40px, 8vw, 104px);
+  }
+  .tfill__solid {
+    color: var(--off-white);
+  }
+  .tfill--hybrid .tfill--mint {
+    margin-top: 0.04em;
+  }
+
+  /* Variant C — single oversized word (sized to fit the stage width) */
+  .tfill--big {
+    font-size: clamp(64px, 13vw, 168px);
+  }
+</style>

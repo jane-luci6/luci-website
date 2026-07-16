@@ -6,31 +6,205 @@ interface Props {
   headline?: string;
   headlineAccent?: string;
   taglineDisplay?: typeof site.taglineDisplay;
+  variant?: 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'none';
+  /** Show the static property-zone caption bar at the foot of the floorplan. */
+  zones?: boolean;
 }
 
 const {
-  headline = 'CONTROL THE',
-  headlineAccent = 'WHOLE FLOOR.',
+  headline = 'CONTROL YOUR',
+  headlineAccent = 'WHOLE PROPERTY.',
   taglineDisplay = site.taglineDisplay,
+  variant = 'b',
+  zones = false,
 } = Astro.props;
+
+const heroId = `home-hero-title-${variant}`;
+
+// Full property-zone set (used by the laundry-list variants a/b/c).
+const zoneList = [
+  'Ballrooms',
+  'Pool decks',
+  'Conference centers',
+  'Restaurants & bars',
+  'Lobby & porte-cochère',
+  'Guest rooms',
+  'Casino floor & sports book',
+  'Retail',
+  'Parking structures',
+  'Outdoor & wayfinding',
+  'Marquee & exterior signage',
+  'Back-of-house',
+];
+
+// Rotating example zones for the animated "fliplist" variant (d).
+const exZones = [
+  'Ballrooms',
+  'Pool decks',
+  'Casino floors',
+  'Conference centers',
+  'Guest rooms',
+  'Parking decks',
+];
+
+// Pared zone set for the minimal fliplist (g, h) — the main area types.
+const flipZones = [
+  'Lobby',
+  'Bar & lounge',
+  'Sportsbook',
+  'Ballroom',
+  'Conference Room',
+  'Event Venue',
+  'Theater',
+  'Pool',
+  'Parking structure',
+  'Wayfinding sign',
+  'Marquee',
+];
+
+// Iconified scope categories for the tile variant (e).
+const cats = [
+  {
+    label: 'Front of house',
+    svg: `<svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="12" r="6" /><path d="M14 18v5" /><circle cx="5" cy="12" r="1.5" fill="#edd086" stroke="none" /><circle cx="23" cy="12" r="1.5" fill="#edd086" stroke="none" /></svg>`,
+  },
+  {
+    label: 'Back of house',
+    svg: `<svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="5" width="14" height="18" rx="2" /><path d="M7 11h14M7 17h14" /><circle cx="17.5" cy="8" r="1.2" fill="#edd086" stroke="none" /></svg>`,
+  },
+  {
+    label: 'Indoors & outdoors',
+    svg: `<svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 23V10l8-4v17" /><path d="M11 23V13l7-3v13" /><path d="M3 23h22" /><path d="M22 23v-5" stroke="#edd086" /><path d="M22 18c-2.2 0-3.4-1.2-3.4-3.2 0-2.2 1.6-3.8 3.4-3.8s3.4 1.6 3.4 3.8c0 2-1.2 3.2-3.4 3.2z" stroke="#edd086" /></svg>`,
+  },
+  {
+    label: 'Guest & public',
+    svg: `<svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V11M3 15h22v6M3 21h22" /><path d="M25 21v-4a3 3 0 0 0-3-3h-7v4" /><rect x="6.5" y="11.5" width="5" height="3" rx="1" fill="#edd086" stroke="none" /></svg>`,
+  },
+];
 ---
 
-<section class="home-entry" aria-labelledby="home-hero-title">
+<section class="home-entry" data-variant={variant} aria-labelledby={heroId}>
   <div class="home-entry__glow" aria-hidden="true"></div>
   <div class="home-entry__layout">
     <div class="home-entry__copy">
-      <h1 id="home-hero-title" class="home-entry__title">
+      <h1 id={heroId} class="home-entry__title">
         {headline}<br />
         <em>{headlineAccent}</em>
       </h1>
       <p class="home-entry__tagline">
-        {taglineDisplay.lead}<em>{taglineDisplay.accent}</em>{taglineDisplay.tail}
+        <span class="home-entry__with">with</span> {taglineDisplay.lead}<em>{taglineDisplay.accent}</em>{taglineDisplay.tail}
       </p>
+
+      {(variant === 'a' || variant === 'b') && (
+        <div class="home-entry__zonebox">
+          <p class="home-entry__zonebox-list">
+            {zoneList.map((z, i) => (
+              <Fragment>
+                <span class="home-entry__zone">{z}</span>
+                {i < zoneList.length - 1 && <span class="home-entry__dot"> · </span>}
+              </Fragment>
+            ))}
+          </p>
+        </div>
+      )}
+
+      {variant === 'c' && (
+        <div class="home-entry__zonebox">
+          <ul class="home-entry__zonebox-list home-entry__zonebox-list--chips">
+            {zoneList.map((z) => (<li class="home-entry__chip">{z}</li>))}
+          </ul>
+        </div>
+      )}
+
+      {variant === 'd' && (
+        <div class="home-entry__zonebox home-entry__zonebox--scope">
+          <span class="home-entry__scope-kicker">Every zone, one platform</span>
+          <p class="home-entry__scope-line">
+            One platform runs every zone on the property — like
+            <span class="home-entry__flip home-entry__flip--single" aria-live="polite">
+              {exZones.map((z, i) => (
+                <span class="home-entry__flip-word" style={`--i:${i};`}>{z}</span>
+              ))}
+            </span>
+          </p>
+        </div>
+      )}
+
+      {variant === 'e' && (
+        <div class="home-entry__zonebox home-entry__zonebox--cats">
+          <span class="home-entry__scope-kicker">Every zone, one platform</span>
+          <div class="home-entry__cats">
+            {cats.map((c) => (
+              <div class="home-entry__cat">
+                <span class="home-entry__cat-icon" set:html={c.svg} />
+                <span class="home-entry__cat-label">{c.label}</span>
+              </div>
+            ))}
+          </div>
+          <p class="home-entry__cats-line">From ballrooms to parking decks — every zone on the property, one platform.</p>
+        </div>
+      )}
+
+      {variant === 'f' && (
+        <div class="home-entry__zonebox home-entry__zonebox--stat">
+          <div class="home-entry__stat">
+            <span class="home-entry__stat-num">12</span>
+            <span class="home-entry__stat-label">zone types,<br />one platform</span>
+          </div>
+          <p class="home-entry__stat-line">From ballrooms to parking decks — every zone on the property, run from one interface.</p>
+        </div>
+      )}
+
+      {variant === 'g' && (
+        <div class="home-entry__zonebox home-entry__zonebox--flipmin">
+          <span class="home-entry__flipmin-lead">Control every</span>
+          <span class="home-entry__flipmin" aria-live="polite">
+            {flipZones.map((z, i) => (
+              <span class="home-entry__flipmin-word" style={`--i:${i};`}>{z}</span>
+            ))}
+          </span>
+        </div>
+      )}
+
+      {variant === 'h' && (
+        <div class="home-entry__zonebox home-entry__zonebox--flipmin home-entry__zonebox--flipbare">
+          <span class="home-entry__flipdot" aria-hidden="true"></span>
+          <span class="home-entry__flipmin" aria-live="polite">
+            {flipZones.map((z, i) => (
+              <span class="home-entry__flipmin-word" style={`--i:${i};`}>{z}</span>
+            ))}
+          </span>
+        </div>
+      )}
+
+      {variant === 'i' && (
+        <div class="home-entry__vflip-wrap">
+          <span class="home-entry__vflip-lead">Control A/V for every</span>
+          <div class="home-entry__vflip" aria-live="polite">
+            <div class="home-entry__vflip-track">
+              {flipZones.map((z) => (<span class="home-entry__vflip-item">{z}</span>))}
+              {flipZones.map((z) => (<span class="home-entry__vflip-item" aria-hidden="true">{z}</span>))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {variant === 'j' && (
+        <div class="home-entry__vflip-wrap">
+          <div class="home-entry__vflip" aria-live="polite">
+            <div class="home-entry__vflip-track">
+              {flipZones.map((z) => (<span class="home-entry__vflip-item">{z}</span>))}
+              {flipZones.map((z) => (<span class="home-entry__vflip-item" aria-hidden="true">{z}</span>))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
     <div class="home-entry__visual">
       <div class="home-entry__stage">
-        <FloorControlStage fill eager />
+        <FloorControlStage fill eager zones={zones} />
       </div>
+      {zones && <p class="home-entry__stage-note">For illustrative purposes only.</p>}
     </div>
   </div>
 </section>
@@ -39,6 +213,8 @@ const {
   .home-entry {
     --entry-header-offset: 96px;
     position: relative;
+    display: flex;
+    flex-direction: column;
     height: calc(100dvh - var(--entry-header-offset));
     height: calc(100svh - var(--entry-header-offset));
     max-height: calc(100dvh - var(--entry-header-offset));
@@ -68,7 +244,8 @@ const {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
-    height: 100%;
+    flex: 1 1 auto;
+    min-height: 0;
     padding: var(--space-3) var(--page-pad);
     box-sizing: border-box;
   }
@@ -78,13 +255,15 @@ const {
     min-width: 0;
     position: relative;
     z-index: 2;
+    display: flex;
+    flex-direction: column;
   }
 
   .home-entry__title {
     margin: 0;
-    max-width: 11ch;
+    max-width: 13ch;
     font-family: var(--font-display);
-    font-size: clamp(32px, 6vw, 48px);
+    font-size: clamp(30px, 6.5vw, 46px);
     font-weight: 700;
     line-height: 0.95;
     letter-spacing: 0.05em;
@@ -115,11 +294,367 @@ const {
     color: var(--gold);
   }
 
+  /* small "with" connector that leads the tagline */
+  .home-entry__with {
+    font-size: 0.62em;
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: 0.02em;
+    color: rgba(245, 248, 250, 0.5);
+    margin-right: 0.18em;
+  }
+
+  /* zone box — small, light, unassuming; contained in the left column */
+  .home-entry__zonebox {
+    margin-top: var(--space-3);
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 10px;
+    max-width: 40ch;
+  }
+
+  .home-entry__zonebox-list {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: clamp(11px, 1.15vw, 13px);
+    font-weight: 500;
+    line-height: 1.55;
+    letter-spacing: 0.01em;
+    color: rgba(245, 248, 250, 0.62);
+  }
+
+  .home-entry__zone {
+    white-space: nowrap;
+  }
+
+  .home-entry__dot {
+    color: rgba(104, 227, 190, 0.42);
+  }
+
+  /* Option C — wrapped pill chips */
+  .home-entry__zonebox-list--chips {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+  }
+
+  .home-entry__chip {
+    font-family: var(--font-body);
+    font-size: clamp(11px, 1.05vw, 12px);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    color: rgba(245, 248, 250, 0.62);
+    padding: 4px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.03);
+    white-space: nowrap;
+  }
+
+  [data-variant='c'] .home-entry__zonebox {
+    max-width: 30ch;
+    padding: 14px;
+  }
+
+  /* Shared scope kicker (d, e) */
+  .home-entry__scope-kicker {
+    display: block;
+    margin-bottom: 8px;
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mint);
+  }
+
+  /* Option D — animated fliplist */
+  .home-entry__scope-line {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: clamp(14px, 1.5vw, 17px);
+    font-weight: 500;
+    line-height: 1.45;
+    color: rgba(245, 248, 250, 0.82);
+  }
+
+  .home-entry__flip {
+    position: relative;
+    display: inline-block;
+    min-width: 19ch;
+    height: 1.4em;
+    vertical-align: bottom;
+    color: var(--mint);
+    font-weight: 700;
+  }
+
+  .home-entry__flip-word {
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+    opacity: 0;
+    animation: flip6 12s infinite;
+    animation-delay: calc(var(--i) * -2s);
+  }
+
+  @keyframes flip6 {
+    0%     { opacity: 0; transform: translateY(0.5em); }
+    2%     { opacity: 1; transform: translateY(0); }
+    14.7%  { opacity: 1; transform: translateY(0); }
+    16.7%  { opacity: 0; transform: translateY(-0.5em); }
+    100%   { opacity: 0; transform: translateY(-0.5em); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-entry__flip-word {
+      animation: none !important;
+    }
+    .home-entry__flip .home-entry__flip-word:first-child {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Option E — iconified category tiles */
+  .home-entry__cats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 18px;
+    margin-bottom: 12px;
+  }
+
+  .home-entry__cat {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .home-entry__cat-icon {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--mint);
+  }
+
+  .home-entry__cat-icon :global(svg) {
+    width: 26px;
+    height: 26px;
+  }
+
+  .home-entry__cat-label {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+    color: rgba(245, 248, 250, 0.9);
+  }
+
+  .home-entry__cats-line {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.45;
+    color: rgba(245, 248, 250, 0.6);
+  }
+
+  [data-variant='e'] .home-entry__zonebox {
+    padding: 16px;
+  }
+
+  /* Option F — stat block */
+  .home-entry__zonebox--stat {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .home-entry__stat {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .home-entry__stat-num {
+    font-family: var(--font-body);
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--mint);
+    letter-spacing: -0.02em;
+  }
+
+  .home-entry__stat-label {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1.3;
+    color: rgba(245, 248, 250, 0.7);
+  }
+
+  .home-entry__stat-line {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.45;
+    color: rgba(245, 248, 250, 0.7);
+  }
+
+  /* Options G & H — minimal running fliplist (pared zone set) */
+  .home-entry__zonebox--flipmin {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px;
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .home-entry__zonebox--flipbare {
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border-color: transparent;
+  }
+
+  .home-entry__flipmin-lead {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(245, 248, 250, 0.5);
+    white-space: nowrap;
+  }
+
+  .home-entry__flipdot {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--mint);
+    flex-shrink: 0;
+    box-shadow: 0 0 8px rgba(var(--mint-rgb), 0.45);
+  }
+
+  .home-entry__flipmin {
+    position: relative;
+    display: inline-block;
+    min-width: 15ch;
+    height: 1.3em;
+    vertical-align: bottom;
+  }
+
+  .home-entry__flipmin-word {
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--mint);
+    opacity: 0;
+    animation: flip7 12.6s infinite;
+    animation-delay: calc(var(--i) * -1.8s);
+  }
+
+  @keyframes flip7 {
+    0%     { opacity: 0; transform: translateY(0.5em); }
+    1.5%   { opacity: 1; transform: translateY(0); }
+    12.8%  { opacity: 1; transform: translateY(0); }
+    14.3%  { opacity: 0; transform: translateY(-0.5em); }
+    100%   { opacity: 0; transform: translateY(-0.5em); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-entry__flipmin-word {
+      animation: none !important;
+    }
+    .home-entry__flipmin .home-entry__flipmin-word:first-child {
+      opacity: 1;
+      transform: none;
+    }
+    .home-entry__vflip-track {
+      animation: none !important;
+    }
+  }
+
+  /* Options I & J — vertical ticker (one-line window, scrolls up through zones) */
+  .home-entry__vflip-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: var(--space-3);
+    width: fit-content;
+    max-width: 100%;
+    align-self: flex-start;
+  }
+
+  .home-entry__vflip-lead {
+    font-family: var(--font-body);
+    font-size: clamp(14px, 1.5vw, 16px);
+    font-weight: 500;
+    color: rgba(165, 179, 188, 0.5);
+    white-space: nowrap;
+  }
+
+  .home-entry__vflip {
+    font-size: clamp(14px, 1.5vw, 16px);
+    line-height: 1.4;
+    height: 1.4em;
+    overflow: hidden;
+    position: relative;
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .home-entry__vflip-track {
+    display: flex;
+    flex-direction: column;
+    animation: vstep 26.4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .home-entry__vflip-item {
+    display: block;
+    height: 1.4em;
+    line-height: 1.4;
+    font-family: var(--font-body);
+    font-weight: 600;
+    letter-spacing: 0;
+    color: rgba(165, 179, 188, 0.82);
+    white-space: nowrap;
+  }
+
+  @keyframes vstep {
+    0%, 6%          { transform: translateY(0); }
+    9.09%, 15.09%   { transform: translateY(-1.4em); }
+    18.18%, 24.18%  { transform: translateY(-2.8em); }
+    27.27%, 33.27%  { transform: translateY(-4.2em); }
+    36.36%, 42.36%  { transform: translateY(-5.6em); }
+    45.45%, 51.45%  { transform: translateY(-7em); }
+    54.55%, 60.55%  { transform: translateY(-8.4em); }
+    63.64%, 69.64%  { transform: translateY(-9.8em); }
+    72.73%, 78.73%  { transform: translateY(-11.2em); }
+    81.82%, 87.82%  { transform: translateY(-12.6em); }
+    90.91%, 96.91%  { transform: translateY(-14em); }
+    100%            { transform: translateY(-15.4em); }
+  }
+
   .home-entry__visual {
     flex: 1 1 auto;
     min-width: 0;
     min-height: 0;
     display: flex;
+    flex-direction: column;
     align-items: stretch;
     justify-content: center;
     position: relative;
@@ -129,14 +664,29 @@ const {
   .home-entry__stage {
     position: relative;
     width: 100%;
-    height: 100%;
+    flex: 1 1 auto;
     min-height: 0;
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
   }
 
-  /* Side-by-side: copy left, map right (variant C) */
+  .home-entry__stage-note {
+    flex: none;
+    margin: 8px 2px 0;
+    font-family: var(--font-body);
+    font-size: clamp(9px, 0.95vw, 11px);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    font-style: italic;
+    text-align: right;
+    color: rgba(245, 248, 250, 0.5);
+  }
+
+  /* Side-by-side: copy left, map right. The copy column sizes to its content
+     (no forced height, no baseline pin) so the zone box sits with the headers
+     and stays contained on the left. */
   @media (min-width: 768px) {
     .home-entry__layout {
       flex-direction: row;
@@ -146,15 +696,20 @@ const {
     }
 
     .home-entry__copy {
-      flex: 0 0 38%;
-      width: 38%;
-      max-width: 420px;
+      flex: 0 0 40%;
+      width: 40%;
+      max-width: 540px;
       align-self: center;
     }
 
+    /* Option A — top-anchored cluster */
+    [data-variant='a'] .home-entry__copy {
+      align-self: flex-start;
+    }
+
     .home-entry__title {
-      font-size: clamp(44px, 5.2vw, 64px);
-      max-width: 12ch;
+      font-size: clamp(40px, 4.6vw, 54px);
+      max-width: 15ch;
     }
 
     .home-entry__tagline {
@@ -163,17 +718,51 @@ const {
       max-width: 26ch;
     }
 
+    .home-entry__zonebox {
+      margin-top: var(--space-4);
+    }
+
+    /* New designed treatments (d/e/f) — sit a little lower, a little wider */
+    [data-variant='d'] .home-entry__zonebox,
+    [data-variant='e'] .home-entry__zonebox,
+    [data-variant='f'] .home-entry__zonebox {
+      max-width: 48ch;
+      margin-top: var(--space-5);
+    }
+
+    /* Minimal fliplist (g/h) — sit a little lower, stay small/quiet */
+    [data-variant='g'] .home-entry__zonebox,
+    [data-variant='h'] .home-entry__zonebox {
+      margin-top: var(--space-5);
+    }
+
+    /* Vertical ticker — j sits lower; i pins to the floorplan baseline */
+    [data-variant='j'] .home-entry__vflip-wrap {
+      margin-top: var(--space-6);
+    }
+    [data-variant='i'] .home-entry__copy {
+      height: min(78vh, 660px);
+    }
+    /* Re-center the headline + tagline cluster (top auto-margin pairs with the
+       ticker's bottom auto-margin to split the free space), keeping the ticker
+       pinned to the floorplan baseline. */
+    [data-variant='i'] .home-entry__title {
+      margin-top: auto;
+    }
+    [data-variant='i'] .home-entry__vflip-wrap {
+      margin-top: auto;
+    }
+
     .home-entry__visual {
-      flex: 1 1 62%;
-      height: calc(100dvh - var(--entry-header-offset) - var(--space-6));
-      height: calc(100svh - var(--entry-header-offset) - var(--space-6));
+      flex: 1 1 60%;
+      align-self: center;
+      height: min(78vh, 660px);
       justify-content: center;
       padding-right: var(--page-pad);
     }
 
     .home-entry__stage {
       max-height: min(78vh, 660px);
-      align-self: center;
     }
   }
 </style>

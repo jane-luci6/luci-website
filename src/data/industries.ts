@@ -29,12 +29,6 @@ export const industries = [
     teaser: 'Meeting spaces, digital signage, event turnover',
     personas: ['operations', 'facilities'] as const,
   },
-  {
-    slug: 'corporate-campus-properties',
-    name: 'Corporate & campus properties',
-    teaser: 'HQ and multi-building campuses; AV, signage, and building tech as one layer',
-    personas: ['technology', 'leadership'] as const,
-  },
 ] as const;
 
 export type IndustrySlug = (typeof industries)[number]['slug'];

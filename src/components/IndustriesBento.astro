@@ -1,0 +1,197 @@
+---
+import { industries } from '../data/industries';
+import { bentoCells } from '../data/industriesHub';
+---
+
+<ul class="ind-bento" role="list">
+  {industries.map((industry) => (
+    <li class:list={['ind-bento__cell', bentoCells[industry.slug]]}>
+      <a class="ind-bento__card" href={`/industries/${industry.slug}`}>
+        <img
+          class="ind-bento__img"
+          src={`/images/industries/${industry.slug}.jpg`}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          width="1280"
+          height="853"
+        />
+        <span class="ind-bento__scrim" aria-hidden="true"></span>
+        <span class="ind-bento__body">
+          <span class="ind-bento__name">{industry.name}</span>
+          <span class="ind-bento__teaser">{industry.teaser}</span>
+          <span class="ind-bento__cta">Explore <span aria-hidden="true">→</span></span>
+        </span>
+      </a>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .ind-bento {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: minmax(120px, auto);
+    gap: clamp(14px, 1.6vw, 20px);
+  }
+
+  .ind-bento__cell--casinos { grid-column: 1 / 3; grid-row: 1 / 3; }
+  .ind-bento__cell--sports { grid-column: 3 / 5; grid-row: 1 / 2; }
+  .ind-bento__cell--hotels { grid-column: 3; grid-row: 2; }
+  .ind-bento__cell--airports { grid-column: 4; grid-row: 2; }
+  .ind-bento__cell--conference { grid-column: 1 / -1; grid-row: 3; }
+
+  .ind-bento__card {
+    position: relative;
+    display: block;
+    height: 100%;
+    min-height: 140px;
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background: var(--navy);
+  }
+
+  .ind-bento__cell--casinos .ind-bento__card { min-height: 280px; }
+  .ind-bento__cell--sports .ind-bento__card { min-height: 132px; }
+  .ind-bento__cell--conference .ind-bento__card { min-height: 160px; }
+
+  .ind-bento__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s ease-out;
+  }
+
+  .ind-bento__scrim {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      to top,
+      rgba(8, 17, 22, 0.94) 0%,
+      rgba(8, 17, 22, 0.55) 42%,
+      rgba(8, 17, 22, 0.08) 72%,
+      transparent 88%
+    );
+    transition: background 0.3s ease-out;
+  }
+
+  .ind-bento__card:hover .ind-bento__scrim,
+  .ind-bento__card:focus-visible .ind-bento__scrim {
+    background: linear-gradient(
+      to top,
+      rgba(8, 17, 22, 0.97) 0%,
+      rgba(8, 17, 22, 0.72) 50%,
+      rgba(8, 17, 22, 0.22) 78%,
+      transparent 95%
+    );
+  }
+
+  .ind-bento__card:hover .ind-bento__img,
+  .ind-bento__card:focus-visible .ind-bento__img {
+    transform: scale(1.05);
+  }
+
+  .ind-bento__body {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: clamp(16px, 1.8vw, 22px);
+    z-index: 1;
+  }
+
+  .ind-bento__name {
+    font-family: var(--font-body);
+    font-size: clamp(17px, 1.7vw, 20px);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    color: var(--off-white);
+  }
+
+  .ind-bento__cell--casinos .ind-bento__name,
+  .ind-bento__cell--sports .ind-bento__name {
+    font-size: clamp(19px, 2vw, 24px);
+  }
+
+  .ind-bento__teaser {
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1.15vw, 14.5px);
+    font-weight: 400;
+    line-height: 1.45;
+    color: rgba(245, 248, 250, 0.82);
+  }
+
+  .ind-bento__cta {
+    margin-top: 8px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mint);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+  }
+
+  .ind-bento__card:hover .ind-bento__cta,
+  .ind-bento__card:focus-visible .ind-bento__cta {
+    opacity: 1;
+    transform: none;
+  }
+
+  .ind-bento__card:focus-visible {
+    outline: 2px solid var(--mint);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 900px) {
+    .ind-bento {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ind-bento__cell--casinos { grid-column: 1 / -1; grid-row: auto; }
+    .ind-bento__cell--sports { grid-column: 1 / -1; grid-row: auto; }
+    .ind-bento__cell--hotels { grid-column: auto; grid-row: auto; }
+    .ind-bento__cell--airports { grid-column: auto; grid-row: auto; }
+    .ind-bento__cell--conference { grid-column: 1 / -1; grid-row: auto; }
+
+    .ind-bento__cell--casinos .ind-bento__card { min-height: 240px; }
+    .ind-bento__cta {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .ind-bento {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ind-bento__img,
+    .ind-bento__scrim,
+    .ind-bento__cta {
+      transition: none;
+    }
+
+    .ind-bento__cta {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>

@@ -1,0 +1,359 @@
+---
+import { services } from '../data/services';
+import orbitRaw from '../assets/orbit-interactive.svg?raw';
+---
+
+<div class="platform-orbit" data-orbit>
+  <div class="orbit-stage">
+    <div class="orbit-stage__grid">
+      <div class="orbit-graphic">
+        <div class="orbit-sweep" aria-hidden="true"></div>
+        <div class="orbit-graphic__inner" set:html={orbitRaw} />
+      </div>
+      <div class="orbit-aside">
+        <div class="orbit-card" aria-live="polite">
+          {services.map((s, i) => (
+            <div
+              class={`orbit-card__entry${i === 0 ? ' is-active' : ''}`}
+              data-card={i}
+              aria-hidden={i === 0 ? 'false' : 'true'}
+            >
+              <h3 class="orbit-card__title">{s.title}</h3>
+              <p class="orbit-card__body">{s.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const root = document.querySelector('[data-orbit]') as HTMLElement | null;
+  if (root) {
+    const svg = root.querySelector('.orbit-svg') as SVGElement | null;
+    const nodes = Array.from(root.querySelectorAll<SVGElement>('.orbit-node'));
+    const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-card]'));
+    const pulses = Array.from(root.querySelectorAll<SVGElement>('.orbit-spokes__pulse line'));
+    const cardShell = root.querySelector('.orbit-card') as HTMLElement | null;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const order = [0, 1, 4, 5, 3, 2];
+    let active = 0;
+    let pinned = false;
+    let timer: number | undefined;
+
+    function setActive(i: number) {
+      active = i;
+      const key = String(i);
+      nodes.forEach((n) => {
+        n.classList.toggle('is-active', n.getAttribute('data-node') === key);
+      });
+      cards.forEach((c) => {
+        const on = c.getAttribute('data-card') === key;
+        c.classList.toggle('is-active', on);
+        c.setAttribute('aria-hidden', on ? 'false' : 'true');
+      });
+      if (svg) svg.classList.add('has-active');
+      pulses.forEach((p) => p.classList.toggle('is-active', p.getAttribute('data-pulse') === key));
+      if (cardShell && !reduce) {
+        cardShell.classList.remove('is-swap');
+        void cardShell.offsetWidth;
+        cardShell.classList.add('is-swap');
+      }
+    }
+
+    function start() {
+      if (reduce || pinned) return;
+      stop();
+      timer = window.setInterval(() => {
+        const pos = order.indexOf(active);
+        setActive(order[(pos + 1) % order.length]);
+      }, 4500);
+    }
+    function stop() {
+      if (timer) window.clearInterval(timer);
+    }
+    function pin(i: number) {
+      pinned = true;
+      stop();
+      setActive(i);
+    }
+
+    const preview = (i: number) => {
+      stop();
+      setActive(i);
+    };
+    nodes.forEach((n) => {
+      const i = Number(n.getAttribute('data-node'));
+      n.addEventListener('click', () => pin(i));
+      n.addEventListener('mouseenter', () => preview(i));
+      n.addEventListener('focus', () => preview(i));
+      n.addEventListener('mouseleave', start);
+      n.addEventListener('blur', start);
+    });
+
+    let assembled = false;
+    const assemble = (animate = true) => {
+      if (assembled) return;
+      assembled = true;
+      root.classList.add('is-assembled');
+      if (svg) {
+        if (animate && !reduce) {
+          svg.classList.add('is-assembling');
+          requestAnimationFrame(() => svg.classList.add('is-assembled'));
+        } else {
+          svg.classList.add('is-assembled');
+        }
+      }
+      setActive(0);
+      start();
+    };
+
+    const inView = () => {
+      const r = root.getBoundingClientRect();
+      return r.top < window.innerHeight * 0.92 && r.bottom > window.innerHeight * 0.08;
+    };
+
+    if (reduce) {
+      assemble(false);
+    } else if ('IntersectionObserver' in window) {
+      if (inView()) {
+        assemble(false);
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                io.disconnect();
+                assemble(true);
+              }
+            });
+          },
+          { threshold: 0.08, rootMargin: '0px 0px -5% 0px' }
+        );
+        io.observe(root);
+      }
+    } else {
+      assemble(false);
+    }
+  }
+</script>
+
+<style>
+  .platform-orbit {
+    width: 100%;
+  }
+
+  /* ---------- Dark cosmos stage embedded in the light section ---------- */
+  .orbit-stage {
+    max-width: var(--content-wide);
+    margin-inline: auto;
+    border-radius: 20px;
+    padding: clamp(16px, 2vw, 28px);
+    background:
+      radial-gradient(120% 90% at 50% 0%, #123040 0%, var(--navy) 42%, var(--navy-deep) 100%);
+    border: 1px solid rgba(var(--mint-rgb), 0.16);
+    box-shadow: 0 32px 64px rgba(0, 0, 0, 0.55);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Aurora drift — slow mint/gold light leak behind the whole stage. */
+  .orbit-stage::before {
+    content: '';
+    position: absolute;
+    inset: -30% -10%;
+    background:
+      radial-gradient(40% 50% at 18% 22%, rgba(var(--mint-rgb), 0.16), transparent 70%),
+      radial-gradient(38% 46% at 88% 84%, rgba(var(--gold-rgb), 0.12), transparent 70%);
+    filter: blur(40px);
+    animation: orbit-aurora 22s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+  }
+  @keyframes orbit-aurora {
+    0% { transform: translate3d(-4%, -2%, 0) scale(1); }
+    100% { transform: translate3d(5%, 3%, 0) scale(1.08); }
+  }
+
+  .orbit-stage__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(220px, 22%, 260px);
+    gap: clamp(20px, 3vw, 32px);
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 860px) {
+    .orbit-stage__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+    .orbit-graphic {
+      order: 1;
+      min-height: clamp(300px, 74vw, 420px);
+    }
+    .orbit-graphic__inner :global(.orbit-svg) {
+      max-height: none;
+    }
+    .orbit-aside { order: 2; }
+  }
+
+  /* ---------- Orbit graphic (inlined SVG) + conic sweep overlay ---------- */
+  .orbit-graphic {
+    position: relative;
+    width: 100%;
+    min-height: clamp(400px, 46vw, 560px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    overflow: visible;
+    padding-block: 8px 20px;
+  }
+  .orbit-graphic__inner {
+    width: 100%;
+    aspect-ratio: 728 / 458;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+  }
+  .orbit-graphic__inner :global(.orbit-svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-height: clamp(400px, 46vw, 560px);
+    overflow: visible;
+  }
+
+  /* Conic sweep — tracks hub center (≈49.7%, 48% of viewBox). */
+  .orbit-sweep {
+    position: absolute;
+    left: 49.7%;
+    top: 48%;
+    width: 58%;
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    -webkit-mask: radial-gradient(circle at center, transparent 45%, #000 47%, #000 50%, transparent 52%);
+    mask: radial-gradient(circle at center, transparent 45%, #000 47%, #000 50%, transparent 52%);
+  }
+  .orbit-sweep::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      transparent 210deg,
+      rgba(104, 227, 190, 0.5) 300deg,
+      rgba(237, 208, 134, 0.42) 340deg,
+      transparent 360deg
+    );
+    animation: orbit-sweep 16s linear infinite;
+  }
+  @keyframes orbit-sweep {
+    to { transform: rotate(360deg); }
+  }
+
+  /* ---------- Aside: single cycling detail card ---------- */
+  .orbit-aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .orbit-card {
+    position: relative;
+    background: rgba(16, 35, 45, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(var(--mint-rgb), 0.28);
+    border-left: 3px solid var(--mint);
+    border-radius: 12px;
+    padding: 24px 24px;
+    min-height: 140px;
+    box-shadow:
+      0 0 24px rgba(104, 227, 190, 0.16),
+      inset 0 0 0 1px rgba(var(--mint-rgb), 0.06);
+    transition: box-shadow 0.35s ease;
+  }
+  .orbit-card__entry {
+    display: none;
+  }
+  .orbit-card__entry.is-active {
+    display: block;
+  }
+  .orbit-card.is-swap .orbit-card__entry.is-active {
+    animation: orbit-card-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .orbit-card.is-swap {
+    box-shadow:
+      0 0 28px rgba(104, 227, 190, 0.28),
+      0 0 8px rgba(237, 208, 134, 0.12),
+      inset 0 0 0 1px rgba(var(--mint-rgb), 0.1);
+  }
+  .orbit-card__title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--mint);
+    margin: 0 0 8px;
+  }
+  .orbit-card__body {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.55;
+    color: rgba(245, 248, 250, 0.78);
+    margin: 0;
+  }
+
+  @keyframes orbit-card-pop {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orbit-card.is-swap .orbit-card__entry.is-active {
+      animation: none;
+    }
+    .orbit-stage::before {
+      animation: none;
+    }
+    .orbit-sweep::before {
+      animation: none;
+      opacity: 0.35;
+    }
+  }
+
+  /* Assembly entrance — card fades in when section enters view. */
+  .platform-orbit:not(.is-assembled) .orbit-card {
+    opacity: 1;
+    transform: none;
+  }
+  .platform-orbit.is-assembled .orbit-card {
+    animation: orbit-card-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s both;
+  }
+  @keyframes orbit-card-in {
+    from { opacity: 0.72; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .platform-orbit.is-assembled .orbit-card {
+      animation: none;
+    }
+  }
+</style>

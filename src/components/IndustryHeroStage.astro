@@ -1,0 +1,199 @@
+---
+interface Props {
+  lockupName: string;
+  lockupRole: string;
+  deck: string;
+  videoSrc?: string;
+  posterSrc?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+}
+
+const { lockupName, lockupRole, deck, videoSrc, posterSrc, imageSrc, imageAlt = '' } = Astro.props;
+---
+
+<section id="industry-thesis" class="ind-hero">
+  {videoSrc ? (
+    <>
+      <video
+        class="ind-hero__video"
+        src={videoSrc}
+        poster={posterSrc}
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        aria-hidden="true"
+      >
+        <source src={videoSrc} type="video/mp4" />
+      </video>
+      {posterSrc && (
+        <img
+          class="ind-hero__poster"
+          src={posterSrc}
+          alt=""
+          width="1920"
+          height="820"
+          loading="eager"
+          decoding="async"
+          aria-hidden="true"
+        />
+      )}
+    </>
+  ) : (
+    <img
+      class="ind-hero__img"
+      src={imageSrc}
+      alt={imageAlt}
+      width="1920"
+      height="1080"
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+    />
+  )}
+  <span class="ind-hero__scrim" aria-hidden="true"></span>
+  <span class="ind-hero__grain" aria-hidden="true"></span>
+
+  <div class="ind-hero__inner container container--wide">
+    <div class="header-lockup is-in" data-reveal>
+      <h2 class="header-lockup__name">{lockupName}</h2>
+      <span class="header-lockup__rule" aria-hidden="true"></span>
+      <p class="header-lockup__role">{lockupRole}</p>
+    </div>
+    <p class="ind-hero__deck">{deck}</p>
+  </div>
+</section>
+
+<style>
+  .ind-hero {
+    position: relative;
+    width: 100%;
+    min-height: clamp(380px, 52vw, 620px);
+    aspect-ratio: 21 / 9;
+    max-height: 72vh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    color: var(--off-white);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .ind-hero__video,
+  .ind-hero__poster,
+  .ind-hero__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 42%;
+    display: block;
+  }
+
+  .ind-hero__video {
+    transform: scale(1.08);
+    transform-origin: center center;
+  }
+
+  .ind-hero__scrim {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(105deg, rgba(8, 17, 22, 0.9) 0%, rgba(8, 17, 22, 0.45) 42%, rgba(8, 17, 22, 0.2) 100%),
+      linear-gradient(to top, rgba(8, 17, 22, 0.92) 0%, rgba(8, 17, 22, 0.35) 48%, transparent 72%);
+  }
+
+  .ind-hero__grain {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.28;
+    background-image: url('/images/textures/texture-circuit-navy-steel-dense.png');
+    background-size: 680px;
+    mix-blend-mode: soft-light;
+  }
+
+  .ind-hero__inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding-block: clamp(96px, 12vw, 140px) clamp(40px, 7vw, 80px);
+  }
+
+  .ind-hero .header-lockup {
+    display: block;
+    margin-bottom: var(--space-3);
+  }
+
+  .ind-hero .header-lockup__name {
+    font-family: var(--font-body);
+    font-size: clamp(34px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+    margin: 0;
+  }
+
+  .ind-hero .header-lockup__rule {
+    display: block;
+    width: 40px;
+    height: 3px;
+    margin: 14px 0 12px;
+    background: var(--mint);
+    border-radius: 2px;
+  }
+
+  .ind-hero .header-lockup__role {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    line-height: 1.35;
+    color: var(--mint);
+    margin: 0;
+  }
+
+  .ind-hero__deck {
+    max-width: var(--measure);
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.55;
+    color: rgba(245, 248, 250, 0.88);
+    text-align: left;
+  }
+
+  @media (max-width: 720px) {
+    .ind-hero {
+      aspect-ratio: auto;
+      min-height: clamp(420px, 78vw, 520px);
+      max-height: none;
+    }
+
+    .ind-hero__video {
+      transform: scale(1.14);
+    }
+  }
+
+  .ind-hero__poster {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ind-hero__video {
+      display: none;
+    }
+
+    .ind-hero__poster {
+      display: block;
+      transform: scale(1.08);
+      transform-origin: center center;
+    }
+  }
+</style>

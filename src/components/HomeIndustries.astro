@@ -1,20 +1,71 @@
 ---
 import { industries } from '../data/industries';
 
-const kicker = 'Running on floors like yours';
+const headingLead = 'Running on ';
+const headingAccent = 'floors like yours';
+const lede = 'From gaming floors to sports venues — one orchestration layer runs them all.';
+const stripIndustries = [...industries, ...industries];
 ---
 
-<section class="home-industries" aria-label="Industries LUCI serves">
-  <div class="home-industries__inner container container--wide">
-    <p class="home-industries__kicker">{kicker}</p>
-    <nav class="home-industries__row" aria-label="Industries">
-      {industries.map((i, idx) => (
-        <Fragment>
-          <a class="home-industries__link" href={`/industries/${i.slug}`}>{i.name}</a>
-          {idx < industries.length - 1 && <span class="home-industries__sep" aria-hidden="true">·</span>}
-        </Fragment>
-      ))}
-    </nav>
+<section class="home-industries" aria-labelledby="home-industries-title">
+  <div class="home-industries__inner">
+    <header class="home-industries__head container container--wide">
+      <h2 id="home-industries-title" class="home-industries__heading">
+        {headingLead}<em class="home-industries__heading-accent">{headingAccent}</em>
+      </h2>
+      <p class="home-industries__lede">{lede}</p>
+    </header>
+
+    <div class="home-industries__rail-wrap">
+      <button
+        type="button"
+        class="home-industries__arrow home-industries__arrow--left"
+        data-filmstrip-prev
+        aria-label="Move industries left"
+      >
+        ‹
+      </button>
+      <button
+        type="button"
+        class="home-industries__arrow home-industries__arrow--right"
+        data-filmstrip-next
+        aria-label="Move industries right"
+      >
+        ›
+      </button>
+      <div
+        class="home-industries__rail"
+        data-home-industries-filmstrip
+        tabindex="0"
+        aria-label="Industry filmstrip — drag, scroll, or use the arrows to move either direction"
+      >
+        <div class="home-industries__track" data-filmstrip-track>
+          {stripIndustries.map((i) => (
+            <a
+              class="home-industries__card"
+              href={`/industries/${i.slug}`}
+              draggable="false"
+            >
+              <img
+                class="home-industries__img"
+                src={`/images/industries/${i.slug}.jpg`}
+                alt={i.name}
+                loading="lazy"
+                decoding="async"
+                draggable="false"
+                width="1280"
+                height="853"
+              />
+              <span class="home-industries__scrim" aria-hidden="true"></span>
+              <span class="home-industries__body">
+                <span class="home-industries__name">{i.name}</span>
+                <span class="home-industries__teaser">{i.teaser}</span>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -30,10 +81,12 @@ const kicker = 'Running on floors like yours';
     content: '';
     position: absolute;
     inset: 0;
-    background-image: url('/images/patterns/pattern-5.svg');
-    background-size: cover;
+    background-image: url('/images/textures/texture-circuit-navy-steel.png');
+    background-size: 680px;
+    background-repeat: repeat;
     background-position: center;
-    opacity: 0.08;
+    mix-blend-mode: lighten;
+    opacity: 0.6;
     pointer-events: none;
     z-index: 0;
   }
@@ -41,47 +94,373 @@ const kicker = 'Running on floors like yours';
   .home-industries__inner {
     position: relative;
     z-index: 1;
-    padding-block: clamp(28px, 3.6vw, 44px);
-    text-align: center;
+    padding-block: clamp(56px, 8vw, 88px);
   }
 
-  .home-industries__kicker {
-    margin: 0 0 clamp(10px, 1.4vw, 14px);
-    font-family: var(--font-display);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--mint);
+  .home-industries__head {
+    max-width: 60ch;
+    margin-bottom: clamp(28px, 4vw, 44px);
   }
 
-  .home-industries__row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(8px, 1.4vw, 18px);
-    max-width: 960px;
-    margin: 0 auto;
-  }
-
-  .home-industries__link {
+  .home-industries__heading {
+    margin: 0;
     font-family: var(--font-body);
-    font-size: clamp(15px, 1.6vw, 19px);
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    color: rgba(245, 248, 250, 0.86);
-    text-decoration: none;
-    white-space: nowrap;
-    transition: color 0.15s ease-out;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: var(--off-white);
   }
 
-  .home-industries__link:hover {
+  .home-industries__heading-accent {
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  .home-industries__lede {
+    margin: 16px 0 0;
+    max-width: 46ch;
+    font-size: clamp(15px, 1.4vw, 18px);
+    line-height: 1.55;
+    color: rgba(245, 248, 250, 0.72);
+  }
+
+  .home-industries__rail-wrap {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .home-industries__rail-wrap::before,
+  .home-industries__rail-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: clamp(40px, 8vw, 120px);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .home-industries__rail-wrap::before {
+    left: 0;
+    background: linear-gradient(to right, var(--navy-mid), transparent);
+  }
+
+  .home-industries__rail-wrap::after {
+    right: 0;
+    background: linear-gradient(to left, var(--navy-mid), transparent);
+  }
+
+  .home-industries__rail {
+    display: block;
+    padding: 4px 0 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .home-industries__rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .home-industries__rail.is-grabbing {
+    cursor: grabbing;
+  }
+
+  .home-industries__track {
+    display: flex;
+    gap: clamp(16px, 2vw, 24px);
+    padding-inline: var(--page-pad);
+    flex-shrink: 0;
+    width: max-content;
+  }
+
+  .home-industries__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 9999px;
+    border: 1px solid rgba(var(--mint-rgb), 0.4);
+    background: rgba(16, 35, 45, 0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     color: var(--mint);
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.2s ease-out, border-color 0.2s ease-out, transform 0.2s ease-out;
   }
 
-  .home-industries__sep {
-    color: rgba(245, 248, 250, 0.3);
-    font-weight: 400;
+  .home-industries__arrow:hover {
+    background: rgba(var(--mint-rgb), 0.16);
+    border-color: var(--mint);
+  }
+
+  .home-industries__arrow:focus-visible {
+    outline: 2px solid var(--mint);
+    outline-offset: 2px;
+    background: rgba(var(--mint-rgb), 0.16);
+    border-color: var(--mint);
+  }
+
+  .home-industries__arrow:active {
+    transform: translateY(-50%) scale(0.94);
+  }
+
+  .home-industries__arrow--left {
+    left: clamp(10px, 2vw, 18px);
+  }
+
+  .home-industries__arrow--right {
+    right: clamp(10px, 2vw, 18px);
+  }
+
+  .home-industries__card {
+    position: relative;
+    flex: 0 0 clamp(280px, 38vw, 380px);
+    aspect-ratio: 3 / 4;
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background: var(--navy);
+  }
+
+  .home-industries__card:focus-visible {
+    outline: 2px solid var(--mint);
+    outline-offset: 2px;
+  }
+
+  .home-industries__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease-out;
+  }
+
+  .home-industries__card:hover .home-industries__img,
+  .home-industries__card:focus-visible .home-industries__img {
+    transform: scale(1.04);
+  }
+
+  .home-industries__scrim {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      to top,
+      rgba(8, 17, 22, 0.95) 0%,
+      rgba(8, 17, 22, 0.35) 50%,
+      rgba(8, 17, 22, 0.05) 80%
+    );
+  }
+
+  .home-industries__body {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: clamp(18px, 2vw, 24px);
+    z-index: 1;
+  }
+
+  .home-industries__name {
+    font-family: var(--font-body);
+    font-size: clamp(17px, 1.7vw, 20px);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    color: var(--off-white);
+  }
+
+  .home-industries__teaser {
+    font-size: clamp(13px, 1.15vw, 14.5px);
+    line-height: 1.45;
+    color: rgba(245, 248, 250, 0.82);
+  }
+
+  @media (max-width: 560px) {
+    .home-industries__arrow {
+      width: 38px;
+      height: 38px;
+      font-size: 19px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-industries__img {
+      transition: none;
+    }
+
+    .home-industries__card:hover .home-industries__img,
+    .home-industries__card:focus-visible .home-industries__img {
+      transform: none;
+    }
   }
 </style>
+
+<script>
+  function initHomeIndustriesFilmstrip(rail: HTMLElement) {
+    const track = rail.querySelector<HTMLElement>('[data-filmstrip-track]');
+    if (!track) return;
+
+    let halfWidth = track.scrollWidth / 2;
+    const measure = () => {
+      halfWidth = track.scrollWidth / 2;
+    };
+    new ResizeObserver(measure).observe(track);
+    window.addEventListener('load', measure);
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const DRIFT = 0.35;
+    const SCRUB = 5;
+    let auto = !reducedMotion;
+    let manualDir = 0;
+    let dragging = false;
+    let downX = 0;
+    let downScroll = 0;
+    let moved = false;
+    let downTarget: HTMLAnchorElement | null = null;
+
+    const wrap = () => {
+      if (halfWidth <= 0) return;
+      if (rail.scrollLeft >= halfWidth) rail.scrollLeft -= halfWidth;
+      else if (rail.scrollLeft < 0) rail.scrollLeft += halfWidth;
+    };
+
+    const step = (dir: number) => {
+      const card = track.querySelector<HTMLElement>('.home-industries__card');
+      const gap = parseFloat(getComputedStyle(track).gap) || 24;
+      const amt = card ? card.offsetWidth + gap : 320;
+      rail.scrollLeft += dir * amt;
+      wrap();
+    };
+
+    const tick = () => {
+      if (!dragging) {
+        if (manualDir !== 0) rail.scrollLeft += manualDir * SCRUB;
+        else if (auto) rail.scrollLeft += DRIFT;
+        wrap();
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+
+    rail.addEventListener(
+      'wheel',
+      (e) => {
+        const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+        if (delta !== 0) {
+          rail.scrollLeft += delta;
+          wrap();
+          e.preventDefault();
+        }
+      },
+      { passive: false },
+    );
+
+    rail.addEventListener('pointerdown', (e) => {
+      if (e.button && e.button !== 0) return;
+      dragging = true;
+      moved = false;
+      downX = e.clientX;
+      downScroll = rail.scrollLeft;
+      downTarget = (e.target as Element).closest<HTMLAnchorElement>('a.home-industries__card');
+      rail.classList.add('is-grabbing');
+      try {
+        rail.setPointerCapture(e.pointerId);
+      } catch {
+        /* ignore */
+      }
+      e.preventDefault();
+    });
+
+    rail.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      const dx = e.clientX - downX;
+      if (Math.abs(dx) > 5) moved = true;
+      rail.scrollLeft = downScroll - dx;
+      wrap();
+    });
+
+    const endDrag = () => {
+      if (!dragging) return;
+      dragging = false;
+      rail.classList.remove('is-grabbing');
+      if (!moved && downTarget) {
+        const href = downTarget.getAttribute('href');
+        if (href) window.location.href = href;
+      }
+      downTarget = null;
+    };
+
+    rail.addEventListener('pointerup', endDrag);
+    rail.addEventListener('pointercancel', endDrag);
+    rail.addEventListener('lostpointercapture', endDrag);
+
+    rail.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        step(-1);
+        e.preventDefault();
+      } else if (e.key === 'ArrowRight') {
+        step(1);
+        e.preventDefault();
+      }
+    });
+
+    const wrapEl = rail.closest('.home-industries__rail-wrap');
+    const wireArrow = (sel: string, dir: number) => {
+      const btn = wrapEl?.querySelector<HTMLButtonElement>(sel);
+      if (!btn) return;
+      let downTime = 0;
+      btn.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        manualDir = dir;
+        downTime = performance.now();
+      });
+      const release = () => {
+        if (manualDir === dir) manualDir = 0;
+        const held = downTime ? performance.now() - downTime : 0;
+        if (downTime && held < 220) step(dir);
+        downTime = 0;
+      };
+      btn.addEventListener('pointerup', release);
+      btn.addEventListener('pointerleave', () => {
+        if (manualDir === dir) manualDir = 0;
+        downTime = 0;
+      });
+      btn.addEventListener('pointercancel', () => {
+        if (manualDir === dir) manualDir = 0;
+        downTime = 0;
+      });
+      btn.addEventListener('keydown', (e) => {
+        if (e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+          step(dir);
+        }
+      });
+    };
+
+    wireArrow('[data-filmstrip-prev]', -1);
+    wireArrow('[data-filmstrip-next]', 1);
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-home-industries-filmstrip]').forEach(initHomeIndustriesFilmstrip);
+</script>

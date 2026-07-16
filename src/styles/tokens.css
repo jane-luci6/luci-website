@@ -8,12 +8,12 @@
   --navy-muted: #49616e;
   --mint: #68e3be;
   --mint-rgb: 104, 227, 190;
-  --accent-light: #176b54;
+  --accent-light: #2b9e80;  /* canonized light-surface accent — every light accent (links, kickers, labels, bars) */
 
-  /* Secondary accent — gold only */
-  --gold: #c9a24e;
-  --gold-rgb: 201, 162, 78;
-  --gold-deep: #9a7548;
+  /* Secondary accent — gold (canonical LUCI scale, mirrors sales docs) */
+  --gold: #edd086;       /* bright gold — the ONLY gold for text; dark surfaces only (fails contrast on light) */
+  --gold-rgb: 237, 208, 134;
+  --gold-deep: #ceb06e;  /* gold for icons/backgrounds/highlights/gradients on light — never text */
 
   --sand: #e5e3df;
   --off-white: #f5f8fa;

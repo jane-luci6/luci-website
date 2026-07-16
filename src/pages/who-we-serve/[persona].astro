@@ -1,0 +1,151 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionBlock from '../../components/SectionBlock.astro';
+import PlatformChapterNav from '../../components/PlatformChapterNav.astro';
+import PersonaHeroStage from '../../components/PersonaHeroStage.astro';
+import PersonaCapabilities from '../../components/PersonaCapabilities.astro';
+import PersonaSpotlight from '../../components/PersonaSpotlight.astro';
+import { personas } from '../../data/personas';
+import { getPersonaDetail, hasPersonaDetail } from '../../data/personaDetails';
+import { site } from '../../data/site';
+
+export function getStaticPaths() {
+  return personas
+    .filter((p) => hasPersonaDetail(p.id))
+    .map((persona) => ({
+      params: { persona: persona.id },
+      props: { persona },
+    }));
+}
+
+const { persona } = Astro.props;
+if (!persona) return Astro.redirect('/who-we-serve');
+
+const detail = getPersonaDetail(persona.id);
+if (!detail) return Astro.redirect('/who-we-serve');
+---
+
+<BaseLayout
+  title={`${persona.label} — ${persona.role}`}
+  description={detail.heroDeck}
+  darkHeader
+>
+  <h1 class="persona-sr-only">{persona.label} — {persona.role}</h1>
+  <PlatformChapterNav chapters={detail.chapters} contextLabel={persona.label} />
+
+  <PersonaHeroStage
+    heroImage={detail.heroImage}
+    heroAlt={detail.heroAlt}
+    kicker={detail.heroKicker}
+    lockupName={persona.label}
+    lockupRole={persona.role}
+    deck={detail.heroDeck}
+  />
+
+  <SectionBlock
+    id="persona-narrative"
+    lockupName={detail.narrativeLockup.lockupName}
+    lockupRole={detail.narrativeLockup.lockupRole}
+    tone="white"
+  >
+    <div class="persona-narrative">
+      {detail.narrative.map((para) => (
+        <p>{para}</p>
+      ))}
+    </div>
+  </SectionBlock>
+
+  <SectionBlock
+    id="persona-capabilities"
+    lockupName={detail.capabilitiesLockup.lockupName}
+    lockupRole={detail.capabilitiesLockup.lockupRole}
+    tone="deep"
+    wide
+  >
+    <PersonaCapabilities
+      capabilities={detail.capabilities}
+      lead={detail.lead}
+      takeaway={detail.takeaway}
+    />
+  </SectionBlock>
+
+  <SectionBlock id="persona-spotlight" tone="sand">
+    <PersonaSpotlight
+      label={detail.spotlight.label}
+      text={detail.spotlight.text}
+      accent={detail.spotlight.accent}
+    />
+  </SectionBlock>
+
+  <SectionBlock id="persona-cta" tone="deep">
+    <div class="persona-cta">
+      <p class="display-label persona-cta__kicker">Next step</p>
+      <h2 class="h2 persona-cta__title">{detail.ctaTitle}</h2>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="/contact">{site.ctaPrimary}</a>
+        <a class="btn btn--ghost" href="/platform">Explore the platform</a>
+      </div>
+    </div>
+  </SectionBlock>
+</BaseLayout>
+
+<style>
+  .persona-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  #persona-thesis,
+  #persona-narrative,
+  #persona-capabilities,
+  #persona-spotlight,
+  #persona-cta {
+    scroll-margin-top: 156px;
+  }
+
+  @media (max-width: 640px) {
+    #persona-thesis,
+    #persona-narrative,
+    #persona-capabilities,
+    #persona-spotlight,
+    #persona-cta {
+      scroll-margin-top: 132px;
+    }
+  }
+
+  .persona-narrative {
+    max-width: var(--measure);
+  }
+  .persona-narrative p {
+    font-family: var(--font-body);
+    font-size: clamp(18px, 2vw, 20px);
+    font-weight: 400;
+    line-height: 1.68;
+    color: var(--ink);
+    margin: 0 0 var(--space-4);
+  }
+  .persona-narrative p:last-child {
+    margin-bottom: 0;
+  }
+
+  .persona-cta {
+    text-align: center;
+    padding-block: clamp(24px, 4vw, 40px);
+  }
+  .persona-cta__kicker {
+    color: var(--mint);
+    margin-bottom: var(--space-2);
+  }
+  .persona-cta__title {
+    color: var(--off-white);
+    margin-bottom: var(--space-4);
+    max-width: none;
+  }
+</style>

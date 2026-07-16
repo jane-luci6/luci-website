@@ -2,7 +2,14 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import SectionBlock from '../../components/SectionBlock.astro';
+import PlatformChapterNav from '../../components/PlatformChapterNav.astro';
+import IndustryHeroStage from '../../components/IndustryHeroStage.astro';
+import IndustryChallenges from '../../components/IndustryChallenges.astro';
+import IndustryProblemSolution from '../../components/IndustryProblemSolution.astro';
+import IndustryAutomationShowcase from '../../components/IndustryAutomationShowcase.astro';
+import HomeProof from '../../components/HomeProof.astro';
 import { industries } from '../../data/industries';
+import { getIndustryDetail } from '../../data/industryDetails';
 import { pillars } from '../../data/pillars';
 import { ameristarCaseStudy, site } from '../../data/site';
 
@@ -15,29 +22,149 @@ export function getStaticPaths() {
 
 const { industry } = Astro.props;
 if (!industry) return Astro.redirect('/404');
+
+const detail = getIndustryDetail(industry.slug);
 ---
 
-<BaseLayout title={industry.name} description={industry.teaser}>
-  <PageHero title={industry.name} lead={industry.teaser} deep />
+<BaseLayout
+  title={industry.name}
+  description={detail?.thesis.deck ?? industry.teaser}
+  darkHeader={!!detail}
+>
+  {detail ? (
+    <>
+      <h1 class="ind-page-sr-only">{industry.name} — {detail.thesis.lockupRole}</h1>
+      <PlatformChapterNav chapters={detail.chapters} contextLabel={industry.name} />
 
-  <SectionBlock title="Vertical challenges">
-    <p class="measure scaffold-note">Vertical-specific pain points — TBD per industry</p>
-  </SectionBlock>
+      <IndustryHeroStage
+        lockupName={detail.thesis.lockupName}
+        lockupRole={detail.thesis.lockupRole}
+        deck={detail.thesis.deck}
+        videoSrc={detail.heroVideo}
+        posterSrc={detail.heroPoster}
+        imageSrc={detail.heroImage}
+      />
 
-  <SectionBlock title="How LUCI fits" tone="sand">
-    <p class="rows__title">{pillars[2].title}</p>
-    <p class="measure" style="margin-top: 0.5rem">{pillars[2].body}</p>
-  </SectionBlock>
+      <SectionBlock
+        id="industry-challenges"
+        lockupName={detail.challengesLockup.lockupName}
+        lockupRole={detail.challengesLockup.lockupRole}
+        tone="deep"
+        wide
+      >
+        <IndustryChallenges challenges={detail.challenges} callout={detail.challengesCallout} />
+      </SectionBlock>
 
-  <SectionBlock title="Proof">
-    <div class="callout">
-      <p class="rows__title">{ameristarCaseStudy.title}</p>
-      <p>{ameristarCaseStudy.dek}</p>
-    </div>
-    <div class="visual-placeholder" style="margin-top: 1.5rem">Vertical logo subset</div>
-  </SectionBlock>
+      <SectionBlock
+        id="industry-solutions"
+        lockupName={detail.solutionsLockup.lockupName}
+        lockupRole={detail.solutionsLockup.lockupRole}
+        tone="deep"
+        wide
+      >
+        <IndustryProblemSolution solutions={detail.solutions} />
+      </SectionBlock>
 
-  <SectionBlock tone="deep">
-    <a class="btn btn--primary" href="/contact">{site.ctaPrimary}</a>
-  </SectionBlock>
+      <HomeProof />
+
+      <SectionBlock
+        id="industry-automation"
+        lockupName={detail.automationLockup.lockupName}
+        lockupRole={detail.automationLockup.lockupRole}
+        tone="deep"
+        wide
+      >
+        <IndustryAutomationShowcase automations={detail.automations} />
+      </SectionBlock>
+
+      <SectionBlock id="industry-cta" tone="deep">
+        <div class="ind-page-cta">
+          <p class="display-label ind-page-cta__kicker">Next step</p>
+          <h2 class="h2 ind-page-cta__title">{detail.ctaTitle}</h2>
+          <div class="btn-row">
+            <a class="btn btn--primary" href="/contact">{site.ctaPrimary}</a>
+            <a class="btn btn--ghost" href="/platform">Explore the platform</a>
+          </div>
+        </div>
+      </SectionBlock>
+    </>
+  ) : (
+    <>
+      <PageHero title={industry.name} lead={industry.teaser} deep />
+
+      <SectionBlock lockupName="Vertical challenges" lockupRole="Specific to your property type">
+        <p class="measure scaffold-note">Vertical-specific pain points — TBD per industry</p>
+      </SectionBlock>
+
+      <SectionBlock lockupName="How LUCI fits" lockupRole="Mapped to the four pillars" tone="sand">
+        <p class="rows__title">{pillars[2].title}</p>
+        <p class="measure" style="margin-top: 0.5rem">{pillars[2].body}</p>
+      </SectionBlock>
+
+      <SectionBlock lockupName="Proof" lockupRole="Results from the field">
+        <div class="callout">
+          <p class="rows__title">{ameristarCaseStudy.title}</p>
+          <p>{ameristarCaseStudy.dek}</p>
+        </div>
+        <div class="visual-placeholder" style="margin-top: 1.5rem">Vertical logo subset</div>
+      </SectionBlock>
+
+      <SectionBlock tone="deep">
+        <a class="btn btn--primary" href="/contact">{site.ctaPrimary}</a>
+      </SectionBlock>
+    </>
+  )}
 </BaseLayout>
+
+<style>
+  .ind-page-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  #industry-thesis,
+  #industry-challenges,
+  #industry-solutions,
+  #industry-automation,
+  #industry-cta {
+    scroll-margin-top: 156px;
+  }
+
+  @media (max-width: 640px) {
+    #industry-thesis,
+    #industry-challenges,
+    #industry-solutions,
+    #industry-automation,
+    #industry-cta {
+      scroll-margin-top: 132px;
+    }
+  }
+
+  #industry-challenges,
+  #industry-solutions {
+    padding-block: clamp(48px, 8vw, 96px);
+  }
+
+  .ind-page-cta {
+    text-align: center;
+    padding-block: clamp(24px, 4vw, 40px);
+  }
+
+  .ind-page-cta__kicker {
+    color: var(--mint);
+    margin-bottom: var(--space-2);
+  }
+
+  .ind-page-cta__title {
+    color: var(--off-white);
+    margin-bottom: var(--space-4);
+    max-width: none;
+  }
+</style>

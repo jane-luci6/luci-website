@@ -1,0 +1,231 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="88 20 728 458" class="orbit-svg" font-family="'Space Grotesk',system-ui,sans-serif" role="group" aria-label="The Embedded Operation: one accountable team surrounded by six services on a ring.">
+  <title>LUCI - The Embedded Operation (orbit, names only)</title>
+
+    <style>
+    .orbit-svg text{font-family:'Space Grotesk',system-ui,sans-serif;}
+    .orbit-node{cursor:pointer;transition:opacity .3s ease;}
+    .orbit-node__halo{transition:transform .35s cubic-bezier(.34,1.25,.64,1),opacity .3s ease;transform-box:fill-box;transform-origin:center;}
+    .orbit-chip{transition:transform .35s cubic-bezier(.34,1.25,.64,1),filter .3s ease;transform-box:fill-box;transform-origin:center;}
+    .orbit-node__title{fill:rgba(245,248,250,0.92);font-size:17px;font-weight:700;letter-spacing:-0.015em;transition:fill .25s ease,font-size .35s cubic-bezier(.34,1.25,.64,1);}
+    .orbit-svg.has-active .orbit-node:not(.is-active){opacity:.38;}
+    .orbit-node.is-active .orbit-node__halo{transform:scale(1.12);}
+    .orbit-node.is-active .orbit-chip{transform:scale(1.28);filter:drop-shadow(0 0 14px rgba(104,227,190,.7)) drop-shadow(0 0 4px rgba(237,208,134,.45));}
+    .orbit-node.is-active .orbit-node__title{fill:#68E3BE;font-size:19px;font-weight:700;}
+    .orbit-node:focus{outline:none;}
+    .orbit-node:focus-visible .orbit-chip{filter:drop-shadow(0 0 4px rgba(43,158,128,.9));}
+    @media (prefers-reduced-motion:reduce){.orbit-node__halo,.orbit-chip,.orbit-node__title{transition:none;}}
+    .orbit-spokes__pulse line{animation:spokeFlow 1.4s linear infinite;}
+    @keyframes spokeFlow{to{stroke-dashoffset:-18;}}
+    /* Hub stays static — ring/spoke motion only. */
+    .orbit-hub{transform-box:fill-box;transform-origin:450px 240px;}
+    /* When a node is active, dim the other pulses and spotlight the active spoke. */
+    .orbit-svg.has-active .orbit-spokes__pulse line{stroke-opacity:0.22;stroke-width:2;}
+    .orbit-svg.has-active .orbit-spokes__pulse line.is-active{stroke-opacity:1;stroke-width:2.6;}
+    @media (prefers-reduced-motion:reduce){
+      .orbit-spokes__pulse line{animation:none;stroke-opacity:0.4;}
+    }
+    /* Scroll-triggered assembly: subtle staggered fade — nodes stay visible if JS never runs. */
+    .orbit-svg .orbit-node{opacity:1;}
+    .orbit-svg.is-assembling .orbit-node{opacity:0;}
+    .orbit-svg.is-assembling.is-assembled .orbit-node{animation:orbitNodeIn .6s cubic-bezier(.2,.7,.2,1) forwards;}
+    .orbit-svg.is-assembled .orbit-node[data-node="0"]{animation-delay:.04s}
+    .orbit-svg.is-assembled .orbit-node[data-node="1"]{animation-delay:.12s}
+    .orbit-svg.is-assembled .orbit-node[data-node="4"]{animation-delay:.20s}
+    .orbit-svg.is-assembled .orbit-node[data-node="5"]{animation-delay:.28s}
+    .orbit-svg.is-assembled .orbit-node[data-node="3"]{animation-delay:.36s}
+    .orbit-svg.is-assembled .orbit-node[data-node="2"]{animation-delay:.44s}
+    @keyframes orbitNodeIn{to{opacity:1;}}
+    @media (prefers-reduced-motion:reduce){
+      .orbit-svg .orbit-node{opacity:1;animation:none;}
+      .orbit-node,.orbit-node__halo,.orbit-chip,.orbit-node__title{transition:none;}
+    }
+  </style>
+
+  <defs>
+    <!-- mint hub sphere -->
+    <radialGradient id="hubGrad" cx="0.5" cy="0.40" r="0.68">
+      <stop offset="0" stop-color="#AEF3DD"/>
+      <stop offset="0.55" stop-color="#74E6C0"/>
+      <stop offset="1" stop-color="#4ED1A4"/>
+    </radialGradient>
+    <radialGradient id="hubHalo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#68E3BE" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#68E3BE" stop-opacity="0"/>
+    </radialGradient>
+    <!-- navy gradient "core" for service chips (matches page-04) -->
+    <radialGradient id="nodeCore" cx="0.5" cy="0.38" r="0.72">
+      <stop offset="0" stop-color="#1C4555"/>
+      <stop offset="1" stop-color="#0E222C"/>
+    </radialGradient>
+    <radialGradient id="nodeHalo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#68E3BE" stop-opacity="0.20"/>
+      <stop offset="1" stop-color="#68E3BE" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+      <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#0E222C" flood-opacity="0.20"/>
+    </filter>
+    <filter id="softSm" x="-70%" y="-70%" width="240%" height="240%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#0E222C" flood-opacity="0.24"/>
+    </filter>
+  </defs>
+
+  <!-- Ring (structural — mint, with a faint wide glow underlay) -->
+  <g class="orbit-ring" fill="none" stroke="#68E3BE" stroke-linecap="round">
+    <g stroke-width="6" stroke-opacity="0.10">
+      <path d="M645.1,267.4 A197,197 0 0 1 571.3,395.2"/>
+      <path d="M523.8,422.7 A197,197 0 0 1 376.2,422.7"/>
+      <path d="M328.7,395.2 A197,197 0 0 1 254.9,267.4"/>
+      <path d="M254.9,212.6 A197,197 0 0 1 328.7,84.8"/>
+      <path d="M376.2,57.3 A197,197 0 0 1 523.8,57.3"/>
+      <path d="M571.3,84.8 A197,197 0 0 1 645.1,212.6"/>
+    </g>
+    <g stroke-width="1.5" stroke-opacity="0.85">
+      <path d="M645.1,267.4 A197,197 0 0 1 571.3,395.2"/>
+      <path d="M523.8,422.7 A197,197 0 0 1 376.2,422.7"/>
+      <path d="M328.7,395.2 A197,197 0 0 1 254.9,267.4"/>
+      <path d="M254.9,212.6 A197,197 0 0 1 328.7,84.8"/>
+      <path d="M376.2,57.3 A197,197 0 0 1 523.8,57.3"/>
+      <path d="M571.3,84.8 A197,197 0 0 1 645.1,212.6"/>
+    </g>
+  </g>
+
+  <!-- Spokes: every service feeds the one team. Rails + inward-marching pulse. -->
+  <g class="orbit-spokes" fill="none" stroke-linecap="round">
+    <g stroke="#68E3BE" stroke-opacity="0.14" stroke-width="1.4">
+      <line data-spoke="0" x1="351.5" y1="69.5"  x2="450" y2="240"/>
+      <line data-spoke="1" x1="548.5" y1="69.5"  x2="450" y2="240"/>
+      <line data-spoke="2" x1="253"   y1="240"   x2="450" y2="240"/>
+      <line data-spoke="3" x1="351.5" y1="410.5" x2="450" y2="240"/>
+      <line data-spoke="4" x1="647"   y1="240"   x2="450" y2="240"/>
+      <line data-spoke="5" x1="548.5" y1="410.5" x2="450" y2="240"/>
+    </g>
+    <g class="orbit-spokes__pulse" stroke="#68E3BE" stroke-width="2" stroke-opacity="0.9" stroke-dasharray="3 15">
+      <line data-pulse="0" x1="351.5" y1="69.5"  x2="450" y2="240"/>
+      <line data-pulse="1" x1="548.5" y1="69.5"  x2="450" y2="240"/>
+      <line data-pulse="2" x1="253"   y1="240"   x2="450" y2="240"/>
+      <line data-pulse="3" x1="351.5" y1="410.5" x2="450" y2="240"/>
+      <line data-pulse="4" x1="647"   y1="240"   x2="450" y2="240"/>
+      <line data-pulse="5" x1="548.5" y1="410.5" x2="450" y2="240"/>
+    </g>
+  </g>
+
+  <!-- Hub — mint sphere with glow halo + concentric pulse rings -->
+  <g class="orbit-hub">
+  <circle cx="450" cy="240" r="134" fill="none" stroke="#68E3BE" stroke-width="1" stroke-opacity="0.22"/>
+  <circle cx="450" cy="240" r="122" fill="none" stroke="#68E3BE" stroke-width="1.2" stroke-opacity="0.40"/>
+  <circle cx="450" cy="240" r="112" fill="url(#hubGrad)" filter="url(#soft)"/>
+  <text x="450" y="228" text-anchor="middle" fill="#0E222C" font-size="19" font-weight="700">One accountable</text>
+  <text x="450" y="250" text-anchor="middle" fill="#0E222C" font-size="19" font-weight="700">team</text>
+  <text x="450" y="276" text-anchor="middle" fill="#2b9e80" font-size="13.5" letter-spacing="0.32">day one &#8594; year five+</text>
+  </g>
+
+  <!-- FDE - top-left -->
+  <g class="orbit-node" data-node="0" role="button" tabindex="0" aria-label="LUCI FDE">
+  <circle class="orbit-node__halo" cx="351.5" cy="69.5" r="31" fill="url(#nodeHalo)"/>
+  <g class="orbit-chip">
+  <rect x="329.5" y="47.5" width="44" height="44" rx="11" fill="url(#nodeCore)" filter="url(#softSm)"/>
+  <g transform="translate(339.5,57.5) scale(0.95)">
+    <g fill="#EDD086">
+      <rect x="8" y="0.6" width="1.8" height="3.6" rx="0.6"/><rect x="14.2" y="0.6" width="1.8" height="3.6" rx="0.6"/>
+      <rect x="8" y="19.8" width="1.8" height="3.6" rx="0.6"/><rect x="14.2" y="19.8" width="1.8" height="3.6" rx="0.6"/>
+      <rect x="19.8" y="8" width="3.6" height="1.8" rx="0.6"/><rect x="19.8" y="14.2" width="3.6" height="1.8" rx="0.6"/>
+      <rect x="0.6" y="8" width="3.6" height="1.8" rx="0.6"/><rect x="0.6" y="14.2" width="3.6" height="1.8" rx="0.6"/>
+    </g>
+    <rect x="4" y="4" width="16" height="16" rx="2.6" fill="#EDD086"/>
+    <rect x="8.4" y="8.4" width="7.2" height="7.2" rx="1.3" fill="#0E222C"/>
+    <rect x="10.6" y="10.6" width="2.8" height="2.8" rx="0.6" fill="#68E3BE"/>
+  </g>
+  </g>
+  <text class="orbit-node__title" x="296" y="72" text-anchor="end" font-size="17" font-weight="700">LUCI FDE</text>
+  </g>
+
+  <!-- Design & Deployment - top-right -->
+  <g class="orbit-node" data-node="1" role="button" tabindex="0" aria-label="Design and Deployment">
+  <circle class="orbit-node__halo" cx="548.5" cy="69.5" r="31" fill="url(#nodeHalo)"/>
+  <g class="orbit-chip">
+  <rect x="526.5" y="47.5" width="44" height="44" rx="11" fill="url(#nodeCore)" filter="url(#softSm)"/>
+  <g transform="translate(536.5,57.5) scale(0.95)">
+    <rect x="3" y="14.6" width="18" height="4.6" rx="1.6" fill="#EDD086" opacity="0.5"/>
+    <rect x="3" y="9.8" width="18" height="4.6" rx="1.6" fill="#EDD086" opacity="0.78"/>
+    <rect x="3" y="5" width="18" height="4.6" rx="1.6" fill="#68E3BE"/>
+  </g>
+  </g>
+  <text class="orbit-node__title" x="598" y="68" text-anchor="start" font-size="17" font-weight="700">Design &amp;</text>
+  <text class="orbit-node__title" x="598" y="86" text-anchor="start" font-size="17" font-weight="700">Deployment</text>
+  </g>
+
+  <!-- Support & Operations - right -->
+  <g class="orbit-node" data-node="4" role="button" tabindex="0" aria-label="Support and Operations">
+  <circle class="orbit-node__halo" cx="647" cy="240" r="31" fill="url(#nodeHalo)"/>
+  <g class="orbit-chip">
+  <rect x="625" y="218" width="44" height="44" rx="11" fill="url(#nodeCore)" filter="url(#softSm)"/>
+  <g transform="translate(635,228) scale(0.95)">
+    <g fill="#EDD086">
+      <circle cx="12" cy="12" r="7.6"/>
+      <rect x="10.6" y="0.8" width="2.8" height="4.2" rx="0.7"/>
+      <rect x="10.6" y="0.8" width="2.8" height="4.2" rx="0.7" transform="rotate(45 12 12)"/>
+      <rect x="10.6" y="0.8" width="2.8" height="4.2" rx="0.7" transform="rotate(90 12 12)"/>
+      <rect x="10.6" y="0.8" width="2.8" height="4.2" rx="0.7" transform="rotate(135 12 12)"/>
+      <rect x="10.6" y="0.8" width="2.8" height="4.2" rx="0.7" transform="rotate(180 12 12)"/>
+      <rect x="10.6" y="0.8" width="2.8" height="4.2" rx="0.7" transform="rotate(225 12 12)"/>
+      <rect x="10.6" y="0.8" width="2.8" height="4.2" rx="0.7" transform="rotate(270 12 12)"/>
+      <rect x="10.6" y="0.8" width="2.8" height="4.2" rx="0.7" transform="rotate(315 12 12)"/>
+    </g>
+    <circle cx="12" cy="12" r="3.3" fill="#0E222C"/>
+    <circle cx="12" cy="12" r="1.7" fill="#68E3BE"/>
+  </g>
+  </g>
+  <text class="orbit-node__title" x="698" y="232" text-anchor="start" font-size="17" font-weight="700">Support &amp;</text>
+  <text class="orbit-node__title" x="698" y="250" text-anchor="start" font-size="17" font-weight="700">Operations</text>
+  </g>
+
+  <!-- Continuous Refinement - bottom-right -->
+  <g class="orbit-node" data-node="5" role="button" tabindex="0" aria-label="Continuous Refinement">
+  <circle class="orbit-node__halo" cx="548.5" cy="410.5" r="31" fill="url(#nodeHalo)"/>
+  <g class="orbit-chip">
+  <rect x="526.5" y="388.5" width="44" height="44" rx="11" fill="url(#nodeCore)" filter="url(#softSm)"/>
+  <g transform="translate(536.5,398.5) scale(0.95)">
+    <g fill="none" stroke="#EDD086" stroke-width="3" stroke-linecap="round">
+      <path d="M4.6 8.4 A8.4 8.4 0 0 1 18.8 7.4"/>
+      <path d="M19.4 15.6 A8.4 8.4 0 0 1 5.2 16.6"/>
+    </g>
+    <polygon points="20.6 3.2 21.2 9.6 15.2 7.6" fill="#EDD086"/>
+    <polygon points="3.4 20.8 2.8 14.4 8.8 16.4" fill="#EDD086"/>
+    <circle cx="12" cy="12" r="2.3" fill="#68E3BE"/>
+  </g>
+  </g>
+  <text class="orbit-node__title" x="598" y="410" text-anchor="start" font-size="17" font-weight="700">Continuous</text>
+  <text class="orbit-node__title" x="598" y="428" text-anchor="start" font-size="17" font-weight="700">Refinement</text>
+  </g>
+
+  <!-- Training & Enablement - bottom-left -->
+  <g class="orbit-node" data-node="3" role="button" tabindex="0" aria-label="Training and Enablement">
+  <circle class="orbit-node__halo" cx="351.5" cy="410.5" r="31" fill="url(#nodeHalo)"/>
+  <g class="orbit-chip">
+  <rect x="329.5" y="388.5" width="44" height="44" rx="11" fill="url(#nodeCore)" filter="url(#softSm)"/>
+  <g transform="translate(339.5,398.5) scale(0.95)">
+    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" fill="#EDD086"/>
+    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" fill="#EDD086" opacity="0.82"/>
+    <path d="M14.6 3 h3.4 v7 l-1.7 -1.5 l-1.7 1.5 z" fill="#68E3BE"/>
+  </g>
+  </g>
+  <text class="orbit-node__title" x="296" y="410" text-anchor="end" font-size="17" font-weight="700">Training &amp;</text>
+  <text class="orbit-node__title" x="296" y="428" text-anchor="end" font-size="17" font-weight="700">Enablement</text>
+  </g>
+
+  <!-- Owner's-Rep Partnership - left -->
+  <g class="orbit-node" data-node="2" role="button" tabindex="0" aria-label="Owner's-Rep Partnership">
+  <circle class="orbit-node__halo" cx="253" cy="240" r="31" fill="url(#nodeHalo)"/>
+  <g class="orbit-chip">
+  <rect x="231" y="218" width="44" height="44" rx="11" fill="url(#nodeCore)" filter="url(#softSm)"/>
+  <g transform="translate(241,228) scale(0.95)">
+    <path d="M8 7 V5 a2 2 0 0 1 2 -2 h4 a2 2 0 0 1 2 2 v2" fill="none" stroke="#EDD086" stroke-width="2.4" stroke-linecap="round"/>
+    <rect x="2" y="7" width="20" height="14" rx="2.2" fill="#EDD086"/>
+    <rect x="2" y="12.3" width="20" height="2.2" fill="#0E222C" opacity="0.4"/>
+    <rect x="9.6" y="10.9" width="4.8" height="4" rx="0.7" fill="#68E3BE"/>
+  </g>
+  </g>
+  <text class="orbit-node__title" x="212" y="232" text-anchor="end" font-size="17" font-weight="700">Owner&#8217;s-Rep</text>
+  <text class="orbit-node__title" x="212" y="250" text-anchor="end" font-size="17" font-weight="700">Partnership</text>
+  </g>
+</svg>

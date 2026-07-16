@@ -84,3 +84,21 @@ export const floorTicker = [
   { icon: 'grid', label: 'Scoreboards' },
   { icon: 'star', label: 'Event AV' },
 ] as const;
+
+/** Property spaces LUCI controls — bare list shown as a static caption at the
+ *  foot of the floorplan. "Every space on the property" told at a glance. */
+export const propertyZones = [
+  'Lobby',
+  'Bar & lounge',
+  'Sportsbook',
+  'Ballroom',
+  'Conference Room',
+  'Event Venue',
+  'Theater',
+  'Pool',
+  'Restaurant',
+  'Casino floor',
+  'Parking structure',
+  'Wayfinding sign',
+  'Marquee',
+] as const;

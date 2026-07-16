@@ -1,16 +1,15 @@
 ---
 import { homeLedger } from '../data/site';
 
-const { kicker, headingLead, headingAccent, lede, ctaLabel, ctaHref, rows } = homeLedger;
+const { kicker, headingLead, headingAccent, lede, ctaLabel, ctaHref } = homeLedger;
 
-const arrow = `<svg viewBox="0 0 24 16" fill="none"><path d="M1 8h20M15 2l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const ledgerAlt =
+  'Consolidation ledger: today four or more multimedia systems, five or more equipment racks, fifteen or more receivers, and one hundred plus hardware devices, forty gig AV-over-IP links, thousands per change, and locked code. With LUCI: one interface, one equipment rack, one gig consolidated network, changes included in service, and code that is yours.';
 ---
 
 <section class="home-ledger" aria-labelledby="home-ledger-title">
   <div class="container container--wide">
     <div class="home-ledger__layout">
-      <!-- Framing rail: the section's takeaway + a contextual CTA live in the space
-           reclaimed by narrowing the comparison card. -->
       <header class="home-ledger__rail">
         <p class="home-ledger__kicker">{kicker}</p>
         <h2 id="home-ledger-title" class="home-ledger__heading">{headingLead}<em class="home-ledger__heading-accent">{headingAccent}</em></h2>
@@ -18,27 +17,16 @@ const arrow = `<svg viewBox="0 0 24 16" fill="none"><path d="M1 8h20M15 2l6 6-6 
         <a class="home-ledger__cta btn btn--primary" href={ctaHref}>{ctaLabel}</a>
       </header>
 
-      <!-- Split ledger: light "Today" panel (dark figures) → dark "With LUCI" panel (colored figures).
-           Each side is a stacked unit — NUMBER on top (takes precedence), descriptive LABEL nested
-           directly beneath. The two units flank the center arrow with a symmetric gap on both sides. -->
-      <div class="home-ledger__grid">
-        <div class="lg-cell lg-cell--today lg-head">Today</div>
-        <div class="lg-cell lg-cell--luci lg-head">With LUCI</div>
-
-        {rows.map((r) => (
-          <Fragment>
-            <div class:list={['lg-cell', 'lg-cell--today']}>
-              <span class="lg-num lg-num--today">{r.fromNum}</span>
-              <span class="lg-label lg-label--today">{r.fromLabel}</span>
-            </div>
-            <div class:list={["lg-cell", "lg-cell--luci", { "is-q": r.q }]}>
-              <span class="lg-seam" aria-hidden="true" set:html={arrow} />
-              <span class="lg-num lg-num--luci">{r.num}</span>
-              <span class="lg-label lg-label--luci">{r.to}</span>
-            </div>
-          </Fragment>
-        ))}
-      </div>
+      <figure class="home-ledger__fig">
+        <img
+          src="/images/diagrams/luci-consolidation-ledger.svg?v=1"
+          alt={ledgerAlt}
+          width="720"
+          height="680"
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
     </div>
   </div>
 </section>
@@ -50,12 +38,11 @@ const arrow = `<svg viewBox="0 0 24 16" fill="none"><path d="M1 8h20M15 2l6 6-6 
   }
 
   .home-ledger .container {
-    padding-block: clamp(56px, 9vw, 96px);
+    padding-top: clamp(56px, 9vw, 96px);
+    padding-bottom: clamp(12px, 1.8vw, 24px);
     max-width: 1180px;
   }
 
-  /* Two-column: framing rail (takeaway + CTA) | comparison card. The rail occupies
-     the space previously left empty on either side of the centered card. */
   .home-ledger__layout {
     display: grid;
     grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
@@ -99,8 +86,6 @@ const arrow = `<svg viewBox="0 0 24 16" fill="none"><path d="M1 8h20M15 2l6 6-6 
     color: rgba(245, 248, 250, 0.72);
   }
 
-  /* Section sits on --navy, the same as .btn--primary's default fill — so give the
-     CTA an explicit mint treatment to lift it off the background. */
   .home-ledger__cta {
     align-self: start;
     background: var(--mint);
@@ -111,121 +96,19 @@ const arrow = `<svg viewBox="0 0 24 16" fill="none"><path d="M1 8h20M15 2l6 6-6 
     color: var(--navy-deep);
   }
 
-  /* ---- Split grid: each row = a Today cell (light) + a With-LUCI cell (dark). ---- */
-  .home-ledger__grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    overflow: hidden;
-    border-radius: 14px;
+  .home-ledger__fig {
+    margin: 0;
+    width: 100%;
+  }
+
+  .home-ledger__fig img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0;
     box-shadow: 0 24px 48px rgba(10, 22, 28, 0.35);
   }
 
-  .lg-cell {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: clamp(18px, 2.4vw, 26px) clamp(20px, 2.6vw, 34px);
-  }
-
-  /* TODAY — flat quiet grey box. Stacked unit (number on top, label beneath)
-     hugs the seam on the right, so the number sits close to the arrow. */
-  .lg-cell--today {
-    background: #c7cdd1;
-    border-bottom: 1px solid rgba(10, 22, 28, 0.14);
-    align-items: flex-end;
-    text-align: right;
-    gap: 4px;
-    padding-right: clamp(34px, 4vw, 56px);
-  }
-
-  /* WITH LUCI — near-black panel. Stacked unit (number on top, label beneath)
-     hugs the seam on the left. Left padding clears the arrow chip and matches the
-     Today side's right padding, so the number-to-arrow gap is symmetric. */
-  .lg-cell--luci {
-    position: relative;
-    background: var(--navy-deep);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    align-items: flex-start;
-    text-align: left;
-    gap: 4px;
-    padding-left: clamp(34px, 4vw, 56px);
-  }
-
-  .lg-head {
-    align-items: end;
-    padding-top: clamp(14px, 1.8vw, 18px);
-    padding-bottom: clamp(10px, 1.4vw, 14px);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
-  .lg-cell--today.lg-head { color: rgba(10, 22, 28, 0.6); align-items: flex-end; padding-right: clamp(34px, 4vw, 56px); }
-  .lg-cell--luci.lg-head { color: var(--mint); align-items: flex-start; padding-left: clamp(34px, 4vw, 56px); }
-
-  .lg-num {
-    font-size: clamp(32px, 4.2vw, 52px);
-    font-weight: 700;
-    letter-spacing: -0.04em;
-    line-height: 0.9;
-    flex: none;
-  }
-  /* Before side: navy figures on the quiet grey panel — readable but clearly the
-     "before", so the bright LUCI side and arrows still carry the win. */
-  .lg-num--today {
-    color: #0a161c;
-    font-size: clamp(24px, 3vw, 36px);
-    font-weight: 600;
-    text-align: right;
-  }
-  .lg-num--luci { color: var(--mint); }
-  /* Qualitative rows keep the same size as the numeric rows so every number-to-label
-     pair shares one rhythm; only the color changes to gold. */
-  .is-q .lg-num--luci {
-    color: var(--gold);
-  }
-
-  .lg-label {
-    font-size: clamp(14px, 1.5vw, 17px);
-    line-height: 1.3;
-    max-width: 26ch;
-  }
-  .lg-label--today { color: rgba(10, 22, 28, 0.72); text-align: right; }
-  .lg-label--luci {
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    color: var(--off-white);
-    text-align: left;
-  }
-
-  /* Arrow straddles the center seam as a bold filled chip — the clear
-     "move from undesirable → desirable" signal. Mint for count rows, gold for the
-     two qualitative rows (No / Yours). No background connector line: it read as a
-     faint strike through the figures on the right. */
-  .lg-seam {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: clamp(40px, 3.4vw, 52px);
-    height: clamp(40px, 3.4vw, 52px);
-    display: grid;
-    place-items: center;
-    color: var(--navy-deep);
-    background: var(--mint);
-    border-radius: 9999px;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
-    z-index: 3;
-  }
-  .is-q .lg-seam {
-    background: var(--gold);
-    color: var(--navy-deep);
-  }
-  .lg-seam :global(svg) { width: clamp(22px, 1.9vw, 30px); height: auto; display: block; }
-
-  /* Tablet/down: stack the rail above the card so neither column gets squeezed. */
   @media (max-width: 900px) {
     .home-ledger__layout {
       grid-template-columns: 1fr;
@@ -237,18 +120,6 @@ const arrow = `<svg viewBox="0 0 24 16" fill="none"><path d="M1 8h20M15 2l6 6-6 
   }
 
   @media (max-width: 720px) {
-    .home-ledger__grid {
-      grid-template-columns: 1fr;
-    }
-    /* Stack each pair: Today (light) directly above its With-LUCI (dark) */
-    .lg-head { display: none; }
-    .lg-cell--today { border-bottom: 0; }
-    .lg-cell--luci { margin-bottom: 10px; }
-    .lg-cell--luci:last-child { margin-bottom: 0; }
-    .lg-seam { display: none; }
-
-    /* Center the rail (header first) and center each stacked ledger unit so the
-       mobile read is a clean centered column rather than a left/right zigzag. */
     .home-ledger__rail {
       text-align: center;
     }
@@ -259,16 +130,6 @@ const arrow = `<svg viewBox="0 0 24 16" fill="none"><path d="M1 8h20M15 2l6 6-6 
     }
     .home-ledger__cta {
       align-self: center;
-    }
-    .lg-cell--today,
-    .lg-cell--luci {
-      align-items: center;
-      text-align: center;
-    }
-    .lg-num--today,
-    .lg-label--today,
-    .lg-label--luci {
-      text-align: center;
     }
   }
 </style>

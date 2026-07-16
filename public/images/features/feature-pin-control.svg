@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img" aria-label="A phone keypad granting PIN access to one zone while others stay locked">
+  <defs>
+    <linearGradient id="p-phone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#143042"/>
+      <stop offset="1" stop-color="#0A1A24"/>
+    </linearGradient>
+    <radialGradient id="p-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#68E3BE" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#68E3BE" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .p-dot { transform-box: fill-box; transform-origin: center; animation: p-dot 2.6s ease-in-out infinite; }
+      .p-dot--b { animation-delay: 0.25s; }
+      .p-dot--c { animation-delay: 0.5s; }
+      .p-dot--d { animation-delay: 0.75s; }
+      .p-key { transform-box: fill-box; transform-origin: center; animation: p-key 1.8s ease-in-out infinite; }
+      .p-grant { animation: p-grant 2.6s ease-in-out infinite; animation-delay: 1s; }
+      .p-check { transform-box: fill-box; transform-origin: center; animation: p-check 2.6s ease-in-out infinite; animation-delay: 1s; }
+      @keyframes p-dot { 0%,100% { opacity: 0.25; transform: scale(0.6); } 20%,70% { opacity: 1; transform: scale(1); } }
+      @keyframes p-key { 0%,100% { opacity: 0.6; transform: scale(0.85); } 50% { opacity: 1; transform: scale(1.18); } }
+      @keyframes p-grant { 0%,100% { opacity: 0.5; } 35%,75% { opacity: 1; } }
+      @keyframes p-check { 0%,100% { opacity: 0.15; transform: scale(0.9); } 35%,75% { opacity: 0.5; transform: scale(1.25); } }
+      @media (prefers-reduced-motion: reduce) { .p-dot, .p-key, .p-grant, .p-check { animation: none; } }
+    </style>
+  </defs>
+  <rect width="320" height="180" fill="url(#p-glow)"/>
+  <!-- zone cards (dark)  one granted (mint), two locked (muted) -->
+  <g stroke="rgba(104,227,190,0.26)" stroke-width="1">
+    <rect x="18" y="34" width="150" height="34" rx="8" fill="#132a38"/>
+    <rect x="18" y="76" width="150" height="34" rx="8" fill="#10232D"/>
+    <rect x="18" y="118" width="150" height="34" rx="8" fill="#10232D"/>
+  </g>
+  <rect class="p-grant" x="18" y="34" width="4" height="34" rx="2" fill="#68E3BE"/>
+  <circle class="p-check" cx="42" cy="51" r="9" fill="#68E3BE" opacity="0.2"/>
+  <path d="M37 51l3.5 3.5 6-7" fill="none" stroke="#68E3BE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="60" y="45" width="56" height="4.5" rx="2" fill="#E6F5EF" opacity="0.85"/><rect x="60" y="54" width="38" height="3.5" rx="1.8" fill="#E6F5EF" opacity="0.4"/>
+  <rect x="18" y="76" width="4" height="34" rx="2" fill="#5A6F78"/>
+  <rect x="35" y="88" width="9" height="9" rx="1.5" fill="none" stroke="#6E838C" stroke-width="1.6"/>
+  <path d="M37 88v-2a3 3 0 0 1 6 0v2" fill="none" stroke="#6E838C" stroke-width="1.6"/>
+  <rect x="60" y="87" width="56" height="4.5" rx="2" fill="#E6F5EF" opacity="0.3"/><rect x="60" y="96" width="38" height="3.5" rx="1.8" fill="#E6F5EF" opacity="0.18"/>
+  <rect x="18" y="118" width="4" height="34" rx="2" fill="#5A6F78"/>
+  <rect x="35" y="130" width="9" height="9" rx="1.5" fill="none" stroke="#6E838C" stroke-width="1.6"/>
+  <path d="M37 130v-2a3 3 0 0 1 6 0v2" fill="none" stroke="#6E838C" stroke-width="1.6"/>
+  <rect x="60" y="129" width="56" height="4.5" rx="2" fill="#E6F5EF" opacity="0.3"/><rect x="60" y="138" width="38" height="3.5" rx="1.8" fill="#E6F5EF" opacity="0.18"/>
+  <!-- phone -->
+  <rect x="158" y="14" width="92" height="152" rx="16" fill="url(#p-phone)" stroke="rgba(104,227,190,0.32)" stroke-width="1"/>
+  <rect x="190" y="20" width="28" height="5" rx="2.5" fill="#E6F5EF" opacity="0.18"/>
+  <!-- open padlock -->
+  <rect x="196" y="40" width="16" height="12" rx="2" fill="#68E3BE"/>
+  <path d="M199 40v-3a5 5 0 0 1 9.6-2" fill="none" stroke="#68E3BE" stroke-width="2" stroke-linecap="round"/>
+  <rect x="203" y="44" width="2" height="4" rx="1" fill="#0A1A24"/>
+  <!-- pin dots (cascade fill = entering a PIN) -->
+  <circle class="p-dot" cx="187" cy="66" r="3.4" fill="#68E3BE"/>
+  <circle class="p-dot p-dot--b" cx="199" cy="66" r="3.4" fill="#68E3BE"/>
+  <circle class="p-dot p-dot--c" cx="211" cy="66" r="3.4" fill="#68E3BE"/>
+  <circle class="p-dot p-dot--d" cx="223" cy="66" r="3.4" fill="#68E3BE"/>
+  <!-- keypad -->
+  <g fill="#68E3BE" fill-opacity="0.10" stroke="#68E3BE" stroke-opacity="0.32" stroke-width="1.2">
+    <circle cx="184" cy="92" r="8.5"/><circle cx="204" cy="92" r="8.5"/><circle cx="224" cy="92" r="8.5"/>
+    <circle cx="184" cy="116" r="8.5"/><circle cx="224" cy="116" r="8.5"/>
+    <circle cx="184" cy="140" r="8.5"/><circle cx="204" cy="140" r="8.5"/><circle cx="224" cy="140" r="8.5"/>
+  </g>
+  <circle class="p-key" cx="204" cy="116" r="8.5" fill="#EDD086"/>
+</svg>

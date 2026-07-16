@@ -1,39 +1,53 @@
 ---
 import { personas } from '../data/personas';
 
-const heading = 'The right tools for every person in the building.';
-const lede = 'Six functions, one platform. Pick your role to see exactly how LUCI fits your day-to-day.';
+const headingLead = 'How will LUCI ';
+const headingAccent = 'support you';
+const headingTail = '?';
+const lede = 'Pick your role to see exactly how LUCI fits your day-to-day.';
 const ctaLabel = 'See every role';
 const ctaHref = '/who-we-serve';
+
+// Per-role line icons (mint) — replace the old text arrows with meaningful
+// icons that signal each card is its own destination.
+const icons: Record<string, string> = {
+  leadership: `<svg viewBox="0 0 24 24" fill="none"><path d="M12 4l2.2 4.9 5.3.5-4 3.5 1.2 5.2L12 15.6 7.3 18.6l1.2-5.2-4-3.5 5.3-.5L12 4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/></svg>`,
+  operations: `<svg viewBox="0 0 24 24" fill="none"><path d="M4 8h11M19 8h1M4 16h4M12 16h8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="16" cy="8" r="2.2" stroke="currentColor" stroke-width="1.7"/><circle cx="9" cy="16" r="2.2" stroke="currentColor" stroke-width="1.7"/></svg>`,
+  technology: `<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="6" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="14" width="18" height="6" rx="1.5" stroke="currentColor" stroke-width="1.7"/><path d="M7 7h.01M7 17h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>`,
+  finance: `<svg viewBox="0 0 24 24" fill="none"><path d="M4 20h16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><rect x="6" y="13" width="3" height="5" stroke="currentColor" stroke-width="1.6"/><rect x="11" y="9" width="3" height="9" stroke="currentColor" stroke-width="1.6"/><rect x="16" y="6" width="3" height="12" stroke="currentColor" stroke-width="1.6"/></svg>`,
+  marketing: `<svg viewBox="0 0 24 24" fill="none"><path d="M4 9v6l10 5V4L4 9z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 8c1.8 1.2 1.8 6.8 0 8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M7 15v3.5c0 1 2.2 1 2.2 0V15.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  facilities: `<svg viewBox="0 0 24 24" fill="none"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+};
 ---
 
 <section class="home-personas" aria-labelledby="home-personas-title">
   <div class="home-personas__inner container container--wide">
-    <div class="home-personas__layout">
-      <header class="home-personas__rail">
-        <span class="home-personas__bar" aria-hidden="true"></span>
-        <h2 id="home-personas-title" class="home-personas__heading">{heading}</h2>
+    <header class="home-personas__head">
+      <div class="home-personas__head-text">
+        <h2 id="home-personas-title" class="home-personas__heading">
+          {headingLead}<em class="home-personas__heading-accent">{headingAccent}</em>{headingTail}
+        </h2>
         <p class="home-personas__lede">{lede}</p>
-        <a class="home-personas__cta" href={ctaHref}>
-          <span>{ctaLabel}</span>
-          <span class="home-personas__cta-arrow" aria-hidden="true">→</span>
-        </a>
-      </header>
-
-      <div class="home-personas__card">
-        <ul class="home-personas__grid" role="list">
-          {personas.map((p) => (
-            <li class="home-personas__cell">
-              <a class="home-personas__link" href={`/who-we-serve#${p.id}`}>
-                <p class="home-personas__role">{p.role}</p>
-                <h3 class="home-personas__label">{p.label}</h3>
-                <p class="home-personas__line">{p.line}</p>
-                <span class="home-personas__arrow" aria-hidden="true">→</span>
-              </a>
-            </li>
-          ))}
-        </ul>
       </div>
+      <a class="home-personas__cta" href={ctaHref}>
+        <span>{ctaLabel}</span>
+        <span class="home-personas__cta-arrow" aria-hidden="true">→</span>
+      </a>
+    </header>
+
+    <div class="home-personas__card">
+      <ul class="home-personas__grid" role="list">
+        {personas.map((p) => (
+          <li class="home-personas__cell">
+            <a class="home-personas__link" href={`/who-we-serve#${p.id}`}>
+              <p class="home-personas__role">{p.role}</p>
+              <h3 class="home-personas__label">{p.label}</h3>
+              <p class="home-personas__line">{p.line}</p>
+              <span class="home-personas__action" aria-hidden="true" set:html={icons[p.id]} />
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </div>
 </section>
@@ -46,45 +60,25 @@ const ctaHref = '/who-we-serve';
     overflow: hidden;
   }
 
-  /* Brand texture — mint line pattern (pattern-05) as an ambient overlay behind
-     the rail. The elevated card sits on top, so the texture frames the section. */
-  .home-personas::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url('/images/patterns/pattern-5.svg');
-    background-size: cover;
-    background-position: center;
-    opacity: 0.1;
-    pointer-events: none;
-    z-index: 0;
-  }
-
   .home-personas__inner {
-    position: relative;
-    z-index: 1;
     padding-block: clamp(64px, 9vw, 104px);
   }
 
-  .home-personas__layout {
-    display: grid;
-    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.3fr);
-    gap: clamp(32px, 5vw, 72px);
-    align-items: center;
+  /* Header on top: heading + lede on the left, CTA aligned to the right. */
+  .home-personas__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: clamp(20px, 3vw, 40px);
+    margin-bottom: clamp(32px, 4vw, 48px);
   }
-
-  /* Rail: gold accent bar (standard shade — correct on dark) + heading + lede + CTA. */
-  .home-personas__bar {
-    display: block;
-    width: 48px;
-    height: 4px;
-    margin-bottom: clamp(16px, 2vw, 24px);
-    background: var(--gold);
+  .home-personas__head-text {
+    max-width: 64ch;
   }
-
   .home-personas__heading {
     margin: 0;
-    max-width: 20ch;
+    max-width: 26ch;
     font-family: var(--font-body);
     font-size: clamp(28px, 3.4vw, 42px);
     font-weight: 700;
@@ -92,20 +86,22 @@ const ctaHref = '/who-we-serve';
     letter-spacing: -0.025em;
     color: var(--off-white);
   }
-
+  .home-personas__heading-accent {
+    font-style: normal;
+    color: var(--gold);
+  }
   .home-personas__lede {
     margin: 16px 0 0;
-    max-width: 34ch;
+    max-width: 56ch;
     font-size: clamp(15px, 1.2vw, 17px);
     line-height: 1.6;
     color: rgba(245, 248, 250, 0.72);
   }
-
   .home-personas__cta {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    margin-top: 28px;
+    flex-shrink: 0;
     font-family: var(--font-body);
     font-size: 15px;
     font-weight: 600;
@@ -120,7 +116,7 @@ const ctaHref = '/who-we-serve';
   .home-personas__cta:hover { color: var(--off-white); }
   .home-personas__cta:hover .home-personas__cta-arrow { transform: translateX(4px); }
 
-  /* Elevated card: lifted navy panel, soft shadow, hairline-divided cells. */
+  /* Elevated card holding the 3x2 grid. */
   .home-personas__card {
     background: var(--navy);
     border-radius: 14px;
@@ -128,23 +124,20 @@ const ctaHref = '/who-we-serve';
     overflow: hidden;
     padding: clamp(8px, 1vw, 12px);
   }
-
   .home-personas__grid {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1px;
     background: rgba(255, 255, 255, 0.08);
   }
-
   .home-personas__cell {
     position: relative;
     background: var(--navy);
     transition: background 0.18s ease-out;
   }
-
   /* Mint left-bar accent on hover/focus — the de-boxed callout treatment. */
   .home-personas__cell::before {
     content: '';
@@ -188,43 +181,54 @@ const ctaHref = '/who-we-serve';
     text-transform: uppercase;
     color: var(--mint);
   }
-
   .home-personas__label {
     margin: 0 0 10px;
     font-family: var(--font-body);
-    font-size: clamp(19px, 2vw, 24px);
+    font-size: clamp(18px, 1.7vw, 22px);
     font-weight: 700;
     letter-spacing: -0.02em;
     line-height: 1.1;
     color: var(--off-white);
   }
-
   .home-personas__line {
     margin: 0;
-    max-width: 34ch;
-    font-size: clamp(13.5px, 1.3vw, 15.5px);
+    font-size: clamp(13px, 1.2vw, 15px);
     line-height: 1.5;
     color: rgba(245, 248, 250, 0.7);
   }
 
-  .home-personas__arrow {
-    display: inline-block;
-    margin-top: clamp(14px, 2vw, 20px);
-    font-size: 17px;
-    font-weight: 600;
+  /* Role icon as the clickable affordance (replaces the old text arrow). */
+  .home-personas__action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: clamp(16px, 2vw, 22px);
+    width: 40px;
+    height: 40px;
+    border-radius: 9999px;
+    border: 1px solid rgba(104, 227, 190, 0.28);
+    background: rgba(104, 227, 190, 0.06);
     color: var(--mint);
-    transition: transform 0.18s ease-out;
+    transition: transform 0.18s ease-out, background 0.18s ease-out, border-color 0.18s ease-out;
   }
-  .home-personas__cell:hover .home-personas__arrow,
-  .home-personas__cell:focus-within .home-personas__arrow {
-    transform: translateX(4px);
+  .home-personas__action :global(svg) {
+    width: 19px;
+    height: 19px;
+    display: block;
+  }
+  .home-personas__cell:hover .home-personas__action,
+  .home-personas__cell:focus-within .home-personas__action {
+    transform: translate(2px, -2px);
+    background: rgba(104, 227, 190, 0.16);
+    border-color: rgba(104, 227, 190, 0.5);
   }
 
   @media (max-width: 980px) {
-    .home-personas__layout {
-      grid-template-columns: 1fr;
-      gap: clamp(28px, 5vw, 40px);
-      align-items: stretch;
+    .home-personas__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .home-personas__head {
+      align-items: flex-start;
     }
   }
 
@@ -232,18 +236,9 @@ const ctaHref = '/who-we-serve';
     .home-personas__grid {
       grid-template-columns: 1fr;
     }
-    .home-personas__rail {
-      text-align: center;
-    }
-    .home-personas__bar {
-      margin-inline: auto;
-    }
-    .home-personas__heading,
-    .home-personas__lede {
-      margin-inline: auto;
-    }
-    .home-personas__cta {
-      margin-inline: auto;
+    .home-personas__head {
+      flex-direction: column;
+      align-items: flex-start;
     }
   }
 </style>

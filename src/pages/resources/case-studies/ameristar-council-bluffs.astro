@@ -1,29 +1,13 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import PageHero from '../../../components/PageHero.astro';
-import SectionBlock from '../../../components/SectionBlock.astro';
-import { ameristarCaseStudy, site } from '../../../data/site';
+import CaseStudyAmeristar from '../../../components/CaseStudyAmeristar.astro';
+import { ameristarCaseStudy } from '../../../data/site';
 ---
 
-<BaseLayout title="Ameristar Council Bluffs" description={ameristarCaseStudy.dek}>
-  <PageHero kicker="Case study" title={ameristarCaseStudy.title} lead={ameristarCaseStudy.dek} deep />
-
-  <SectionBlock title="At a glance">
-    <ul class="rows">
-      <li><strong>Operator:</strong> Penn Entertainment</li>
-      <li><strong>Location:</strong> Council Bluffs, Iowa</li>
-      <li><strong>Retrofit completed:</strong> Under 3 days</li>
-    </ul>
-    <p class="scaffold-note" style="margin-top: 1rem">
-      Full case study content migrates from luci-design/ui_kits/case-studies/ameristar-council-bluffs.html
-    </p>
-  </SectionBlock>
-
-  <SectionBlock title="Challenge · Approach · Outcomes" tone="sand">
-    <p class="measure">Long-form sections: challenge, approach, results, quote, CTA — to be migrated.</p>
-  </SectionBlock>
-
-  <SectionBlock tone="deep">
-    <a class="btn btn--primary" href="/contact">{site.ctaPrimary}</a>
-  </SectionBlock>
+<BaseLayout
+  title="Ameristar Council Bluffs"
+  description={ameristarCaseStudy.dek}
+  darkHeader
+>
+  <CaseStudyAmeristar />
 </BaseLayout>

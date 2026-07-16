@@ -8,7 +8,7 @@ import { ameristarCaseStudy, portfolioLine } from '../../data/site';
 <BaseLayout title="Resources" description="Case studies, articles, and support for enterprise property teams.">
   <PageHero title="Resources" lead="Case studies, articles, and support for enterprise property teams." deep />
 
-  <SectionBlock title="Featured">
+  <SectionBlock lockupName="Featured" lockupRole="Ameristar Council Bluffs">
     <div class="callout">
       <p class="rows__title">{ameristarCaseStudy.title}</p>
       <p>{ameristarCaseStudy.dek}</p>
@@ -18,7 +18,7 @@ import { ameristarCaseStudy, portfolioLine } from '../../data/site';
     </div>
   </SectionBlock>
 
-  <SectionBlock title="Browse" tone="sand">
+  <SectionBlock lockupName="Browse" lockupRole="Case studies, blog, support" tone="sand">
     <ul class="rows">
       <li><a href="/resources/case-studies">Case studies</a> — {portfolioLine.slice(0, 80)}…</li>
       <li><a href="/blog">Blog</a> — Variable reduction, engagement cycle, deep dives</li>

@@ -1,0 +1,93 @@
+---
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+
+const archRaw = readFileSync(
+  path.join(process.cwd(), 'public/images/diagrams/luci-system-architecture.dark.svg'),
+  'utf-8',
+);
+---
+
+<div class="arch-stage" data-arch-stage>
+  <div class="arch-stage__inset">
+    <div class="arch-stage__frame">
+      <div class="arch-stage__svg" set:html={archRaw} />
+    </div>
+  </div>
+</div>
+
+<script>
+  const stage = document.querySelector('[data-arch-stage]') as HTMLElement | null;
+  if (!stage) {
+    /* no-op */
+  } else if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    stage.classList.add('is-live');
+  } else if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            stage.classList.add('is-live');
+            io.disconnect();
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    io.observe(stage);
+  } else {
+    stage.classList.add('is-live');
+  }
+</script>
+
+<style>
+  .arch-stage {
+    max-width: var(--content-wide);
+  }
+
+  .arch-stage__inset {
+    background: var(--navy);
+    border: 1px solid rgba(104, 227, 190, 0.16);
+    border-radius: 16px;
+    padding: clamp(16px, 2.5vw, 24px);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+  }
+
+  .arch-stage__frame {
+    position: relative;
+    width: 100%;
+  }
+
+  .arch-stage__svg :global(svg) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Data-flow animation on connector arrows */
+  .arch-stage.is-live :global(.arch-flow) {
+    stroke-dasharray: 7 16;
+    animation: arch-flow 1.6s linear infinite;
+  }
+  .arch-stage.is-live :global(.arch-flow--in) {
+    animation-duration: 1.9s;
+  }
+  .arch-stage.is-live :global(.arch-flow--out) {
+    animation-duration: 1.45s;
+  }
+  .arch-stage.is-live :global(.arch-flow[data-flow='1']) { animation-delay: 0.12s; }
+  .arch-stage.is-live :global(.arch-flow[data-flow='2']) { animation-delay: 0.24s; }
+  .arch-stage.is-live :global(.arch-flow[data-flow='3']) { animation-delay: 0.36s; }
+  .arch-stage.is-live :global(.arch-flow[data-flow='4']) { animation-delay: 0.48s; }
+
+  @keyframes arch-flow {
+    to { stroke-dashoffset: -23; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .arch-stage.is-live :global(.arch-flow) {
+      animation: none;
+      stroke-dasharray: none;
+    }
+  }
+</style>

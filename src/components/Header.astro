@@ -11,7 +11,7 @@ const { dark = false } = Astro.props;
 const nav = [
   { href: '/platform', label: 'Platform' },
   {
-    href: '/industries/casinos-gaming',
+    href: '/industries',
     label: 'Industries',
     children: industries.map((i) => ({ href: `/industries/${i.slug}`, label: i.name })),
   },
@@ -58,7 +58,15 @@ const path = Astro.url.pathname;
         nav.map((item) =>
           item.children ? (
             <div class="site-header__item site-header__item--menu">
-              <span class="site-header__link">{item.label}<span class="site-header__caret" aria-hidden="true">▾</span></span>
+              <a
+                class:list={[
+                  'site-header__link',
+                  path.startsWith(item.href) && item.href !== '/' && 'is-active',
+                ]}
+                href={item.href}
+              >
+                {item.label}<span class="site-header__caret" aria-hidden="true">▾</span>
+              </a>
               <div class="site-header__dropdown" role="menu">
                 {item.children.map((child) => (
                   <a
@@ -199,13 +207,13 @@ const path = Astro.url.pathname;
   }
 
   [data-theme='dark'] .site-header--on-hero .site-header__cta {
-    background: var(--mint);
-    color: var(--navy-deep);
+    background: var(--navy-deep);
+    color: var(--gold);
   }
 
   [data-theme='dark'] .site-header--on-hero .site-header__cta:hover {
-    background: #7aebc8;
-    color: var(--navy-deep);
+    background: var(--navy);
+    color: var(--gold);
   }
 
   .site-header__item--menu {
@@ -221,9 +229,6 @@ const path = Astro.url.pathname;
   .site-header__item--menu > .site-header__link::after {
     left: 0;
     right: 0;
-  }
-
-  .site-header__item--menu > .site-header__link::after {
     bottom: 4px;
   }
 
@@ -264,6 +269,14 @@ const path = Astro.url.pathname;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     padding: clamp(11px, 1vw, 13px) clamp(16px, 1.3vw, 22px);
+    /* Gold text on the navy chip — bright --gold (#EDD086), the canonical gold
+       for text on dark, matching the other gold text across the site. */
+    color: var(--gold);
+    transition: color 0.15s ease-out, background 0.15s ease-out;
+  }
+
+  .site-header__cta:hover {
+    color: var(--gold);
   }
 
   /* Below laptop width, drop to the mobile header (nav hidden) */

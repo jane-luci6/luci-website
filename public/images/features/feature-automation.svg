@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img" aria-label="An incoming event triggering coordinated responses across multiple displays">
+  <defs>
+    <linearGradient id="a-node" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1C4555"/>
+      <stop offset="1" stop-color="#0E222C"/>
+    </linearGradient>
+    <linearGradient id="a-lit" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8FEBD0"/>
+      <stop offset="1" stop-color="#4FB59A"/>
+    </linearGradient>
+    <radialGradient id="a-spark" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#EDD086" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#EDD086" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="a-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#68E3BE" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#68E3BE" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .a-arc { animation: a-ripple 1.8s ease-out infinite; }
+      .a-arc.b { animation-delay: -0.6s; }
+      .a-flow { stroke-dasharray: 4 12; animation: a-march 0.6s linear infinite; }
+      .a-run { stroke-dasharray: 4 12; animation: a-march 0.7s linear infinite; }
+      .a-run--b { animation-delay: -0.25s; }
+      .a-run--c { animation-delay: -0.45s; }
+      .a-screen { transform-box: fill-box; transform-origin: center; animation: a-screen 2.6s ease-in-out infinite; }
+      .a-screen.b { animation-delay: -0.9s; }
+      .a-screen.c { animation-delay: -1.7s; }
+      @keyframes a-ripple { 0% { opacity: 0; transform: translateX(-4px); } 40% { opacity: 0.9; } 100% { opacity: 0; transform: translateX(4px); } }
+      @keyframes a-march { to { stroke-dashoffset: -16; } }
+      @keyframes a-screen { 0%,100% { opacity: 0.7; } 50% { opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) { .a-arc, .a-flow, .a-run, .a-screen { animation: none; stroke-dasharray: none; } }
+    </style>
+  </defs>
+  <rect width="320" height="180" fill="url(#a-glow)"/>
+  <!-- incoming event arcs (ripple) -->
+  <g fill="none" stroke="#EDD086" stroke-width="2" stroke-linecap="round">
+    <path class="a-arc" d="M14 78a16 16 0 0 1 0 24"/>
+    <path class="a-arc b" d="M22 84a8 8 0 0 1 0 12"/>
+  </g>
+  <!-- trigger node -->
+  <circle cx="54" cy="90" r="30" fill="url(#a-spark)"/>
+  <rect x="32" y="68" width="44" height="44" rx="12" fill="url(#a-node)" stroke="rgba(104,227,190,0.4)" stroke-width="1"/>
+  <polygon points="58,74 44,93 53,93 49,108 64,87 55,87" fill="#EDD086"/>
+  <!-- flow trigger -> core -->
+  <line class="a-flow" x1="78" y1="90" x2="120" y2="90" stroke="#68E3BE" stroke-width="2.4"/>
+  <polygon points="120,85 130,90 120,95" fill="#68E3BE"/>
+  <!-- LUCI core -->
+  <rect x="132" y="70" width="42" height="40" rx="10" fill="url(#a-node)" stroke="rgba(104,227,190,0.4)" stroke-width="1"/>
+  <circle cx="153" cy="90" r="11" fill="none" stroke="#68E3BE" stroke-width="2"/>
+  <circle cx="153" cy="90" r="3" fill="#68E3BE"/>
+  <!-- branches core -> screens (faint guides + marching flow that runs through the arrows to the right) -->
+  <g fill="none" stroke="#68E3BE" stroke-width="2.2" stroke-opacity="0.26">
+    <path d="M174 84 C 200 70, 212 58, 230 50"/>
+    <path d="M176 90 H 228"/>
+    <path d="M174 96 C 200 110, 212 122, 230 130"/>
+  </g>
+  <g fill="none" stroke="#68E3BE" stroke-width="2.4" stroke-linecap="round">
+    <path class="a-run" d="M174 84 C 200 70, 212 58, 230 50"/>
+    <path class="a-run a-run--b" d="M176 90 H 228"/>
+    <path class="a-run a-run--c" d="M174 96 C 200 110, 212 122, 230 130"/>
+  </g>
+  <g fill="#68E3BE"><polygon points="228,46 238,48 230,55"/><polygon points="228,86 238,90 228,94"/><polygon points="228,126 238,131 230,134"/></g>
+  <!-- lit screens -->
+  <g stroke="rgba(104,227,190,0.3)" stroke-width="1">
+    <rect class="a-screen" x="238" y="30" width="54" height="36" rx="6" fill="#0A1A24"/>
+    <rect class="a-screen b" x="238" y="72" width="54" height="36" rx="6" fill="#0A1A24"/>
+    <rect class="a-screen c" x="238" y="114" width="54" height="36" rx="6" fill="#0A1A24"/>
+  </g>
+  <rect x="242" y="34" width="46" height="24" rx="3" fill="url(#a-lit)"/>
+  <rect x="256" y="66" width="18" height="3" rx="1.5" fill="#68E3BE"/>
+  <polygon points="261,41 261,51 270,46" fill="#0A1A24" opacity="0.65"/>
+  <rect x="242" y="76" width="46" height="24" rx="3" fill="url(#a-lit)"/>
+  <rect x="256" y="108" width="18" height="3" rx="1.5" fill="#68E3BE"/>
+  <polygon points="261,83 261,93 270,88" fill="#0A1A24" opacity="0.65"/>
+  <rect x="242" y="118" width="46" height="24" rx="3" fill="url(#a-lit)"/>
+  <rect x="256" y="150" width="18" height="3" rx="1.5" fill="#68E3BE"/>
+  <polygon points="261,125 261,135 270,130" fill="#0A1A24" opacity="0.65"/>
+</svg>
