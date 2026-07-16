@@ -38,4 +38,16 @@ echo "==> Fixing asset permissions on VM (nginx must read as www-data) ..."
 $SSH_OPTS "$VM_HOST" "find $VM_PATH -type f -exec chmod 644 {} + && find $VM_PATH -type d -exec chmod 755 {} +"
 
 echo
-echo "==> Deployed. Review at: http://10.10.1.37"
+REVIEW_URL="http://10.10.1.37"
+echo "==> Verifying deploy is live at $REVIEW_URL ..."
+sleep 1
+HTTP_CODE="$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 "$REVIEW_URL/" || true)"
+if [[ "$HTTP_CODE" == "200" ]]; then
+  echo
+  echo "[LIVE + VERIFIED] HTTP 200 at $REVIEW_URL"
+  echo "  Hard-refresh in your browser: Cmd+Shift+R"
+else
+  echo
+  echo "[WARNING] Deploy finished but review URL returned HTTP ${HTTP_CODE:-(no response)}."
+  echo "  Re-run ./deploy.sh and hard-refresh (Cmd+Shift+R) before debugging the code."
+fi
