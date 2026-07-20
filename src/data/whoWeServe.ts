@@ -47,7 +47,7 @@ export const whoWeServe = {
   teams: [
     {
       id: 'marketing',
-      label: 'Marketing / Guest experience',
+      label: 'Marketing',
       role: 'CMO',
       line:
         "Programs every screen on the property by zone and moment — a casino's dining daypart, a hotel's event board, an airport's retail push.",
@@ -79,7 +79,7 @@ export const whoWeServe = {
     },
     {
       id: 'facilities',
-      label: 'Technical / Facilities',
+      label: 'Facilities',
       role: 'A/V Manager',
       line:
         "Manages the whole property from a tablet — closing service calls without a walk, on a hotel floor or a sports concourse.",
@@ -87,7 +87,7 @@ export const whoWeServe = {
     },
     {
       id: 'leadership',
-      label: 'Leadership',
+      label: 'General management',
       role: 'CEO / GM',
       line:
         'Sees and directs the whole guest experience from one screen — and makes sure no team leaves capability on the table.',

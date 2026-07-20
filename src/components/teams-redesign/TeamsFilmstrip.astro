@@ -8,45 +8,52 @@ const short: Record<string, string> = {
   technology: 'Technology',
   finance: 'Finance',
   facilities: 'Facilities',
-  leadership: 'Leadership',
+  leadership: 'General management',
 };
 const teams = whoWeServe.teams.map((t, i) => ({ ...t, i, short: short[t.id] ?? t.label, linked: hasPersonaDetail(t.id as any) }));
+const initialIdx = Math.max(0, teams.findIndex((t) => t.linked));
 ---
 
-<div class="trf" data-teams-filmstrip>
+<div class="trf" data-teams-filmstrip data-initial={initialIdx}>
   <div class="trf__beam-wrap" aria-hidden="true">
     <div class="trf__beam"></div>
     <div class="trf__pulse"></div>
   </div>
   <div class="trf__stations">
     {teams.map((t) => (
-      <button
-        type="button"
-        class:list={['trf__station', t.i === 0 && 'is-active']}
-        data-node={t.i}
-        aria-pressed={t.i === 0 ? 'true' : 'false'}
-        aria-label={`${t.label} — ${t.role}`}
-      >
-        <span class="trf__station-badge" set:html={t.icon} />
-        <span class="trf__station-label">{t.short}</span>
-      </button>
+      t.linked ? (
+        <a
+          href={`/who-we-serve/${t.id}`}
+          class:list={['trf__station', t.i === initialIdx && 'is-active']}
+          data-node={t.i}
+          aria-label={`${t.short} team — open its page`}
+        >
+          <span class="trf__station-badge" set:html={t.icon} />
+          <span class="trf__station-label">{t.short}</span>
+        </a>
+      ) : (
+        <button
+          type="button"
+          class:list={['trf__station', t.i === initialIdx && 'is-active']}
+          data-node={t.i}
+          aria-pressed={t.i === initialIdx ? 'true' : 'false'}
+          aria-label={`${t.short} team — coming soon`}
+        >
+          <span class="trf__station-badge" set:html={t.icon} />
+          <span class="trf__station-label">{t.short}</span>
+        </button>
+      )
     ))}
-  </div>
-
-  <div class="trf__guest" aria-hidden="true">
-    <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.6-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.4-7 10-7 10z" fill="rgba(206,176,110,0.18)" stroke="#CEB06E" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 11h6M12 8v6" stroke="#68E3BE" stroke-width="1.6" stroke-linecap="round"/></svg>
-    <span>The <em class="trf__guest-accent">guest experience</em> runs through every station</span>
   </div>
 
   <div class="trf__detail">
     {teams.map((t) => (
-      <div class:list={['trf__entry', t.i === 0 && 'is-active']} data-entry={t.i}>
-        <p class="trf__entry-role">{t.role}</p>
+        <div class:list={['trf__entry', t.i === initialIdx && 'is-active']} data-entry={t.i}>
         <h3 class="trf__entry-label">{t.label}</h3>
         <p class="trf__entry-line">{t.line}</p>
         {t.linked ? (
-          <a class="trf__entry-link" href={`/who-we-serve/${t.id}`}>
-            View this role
+          <a class="trf__entry-cta" href={`/who-we-serve/${t.id}`}>
+            <span>Explore {t.short}</span>
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
         ) : (
@@ -78,6 +85,7 @@ const teams = whoWeServe.teams.map((t, i) => ({ ...t, i, short: short[t.id] ?? t
   .trf__station {
     display: flex; flex-direction: column; align-items: center; gap: 10px;
     background: none; border: 0; padding: 4px; cursor: pointer; color: var(--off-white);
+    text-decoration: none;
   }
   .trf__station-badge {
     display: flex; align-items: center; justify-content: center;
@@ -104,29 +112,27 @@ const teams = whoWeServe.teams.map((t, i) => ({ ...t, i, short: short[t.id] ?? t
   .trf__station-label {
     font-family: var(--font-body); font-size: 10px; font-weight: 700;
     letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245, 248, 250, 0.7);
-    text-align: center;
+    text-align: center; line-height: 1.3; max-width: 12ch;
   }
   .trf__station.is-active .trf__station-label { color: var(--mint); }
-
-  .trf__guest {
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-    margin-bottom: clamp(24px, 3vw, 32px);
-    font-family: var(--font-body); font-size: 12px; font-weight: 600;
-    letter-spacing: 0.04em; color: rgba(245, 248, 250, 0.55);
-  }
-  .trf__guest svg { width: 20px; height: 20px; flex-shrink: 0; }
-  .trf__guest-accent { font-style: normal; color: var(--gold); }
 
   .trf__detail { text-align: center; min-height: 150px; }
   .trf__entry { display: none; }
   .trf__entry.is-active { display: block; animation: trf-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
   @keyframes trf-pop { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-  .trf__entry-role { margin: 0 0 6px; font-family: var(--font-display); font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mint); }
   .trf__entry-label { margin: 0 0 10px; font-family: var(--font-body); font-size: clamp(20px, 2.6vw, 26px); font-weight: 700; color: var(--off-white); }
-  .trf__entry-line { margin: 0 auto 16px; max-width: 46ch; font-family: var(--font-body); font-size: 15px; line-height: 1.55; color: rgba(245, 248, 250, 0.78); }
-  .trf__entry-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-body); font-size: 13px; font-weight: 700; color: var(--mint); text-decoration: none; }
-  .trf__entry-link svg { width: 16px; height: 16px; transition: transform 0.15s ease; }
-  .trf__entry-link:hover svg { transform: translateX(3px); }
+  .trf__entry-line { margin: 0 auto 18px; max-width: 46ch; font-family: var(--font-body); font-size: 15px; line-height: 1.55; color: rgba(245, 248, 250, 0.78); }
+  .trf__entry-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 18px; border-radius: 9999px;
+    border: 1px solid var(--mint); background: rgba(104, 227, 190, 0.12);
+    color: var(--mint);
+    font-family: var(--font-body); font-size: 13px; font-weight: 700; letter-spacing: 0.02em;
+    text-decoration: none; transition: all 0.2s ease;
+  }
+  .trf__entry-cta svg { width: 16px; height: 16px; transition: transform 0.15s ease; }
+  .trf__entry-cta:hover { background: var(--mint); color: var(--navy-deep); }
+  .trf__entry-cta:hover svg { transform: translateX(3px); }
   .trf__entry-soon { display: inline-block; padding: 5px 10px; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(245, 248, 250, 0.55); border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 9999px; }
 
   @media (max-width: 640px) {
@@ -140,10 +146,11 @@ const teams = whoWeServe.teams.map((t, i) => ({ ...t, i, short: short[t.id] ?? t
 
 <script>
   document.querySelectorAll<HTMLElement>('[data-teams-filmstrip]').forEach((root) => {
-    const stations = Array.from(root.querySelectorAll<HTMLButtonElement>('.trf__station'));
+    const stations = Array.from(root.querySelectorAll<HTMLElement>('.trf__station'));
     const entries = Array.from(root.querySelectorAll<HTMLElement>('[data-entry]'));
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let active = 0, pinned = false, timer: number | undefined;
+    const initial = Number(root.getAttribute('data-initial')) || 0;
+    let active = initial, pinned = false, timer: number | undefined;
     function set(i: number) {
       active = i;
       stations.forEach((n) => n.classList.toggle('is-active', n.getAttribute('data-node') === String(i)));
@@ -153,11 +160,12 @@ const teams = whoWeServe.teams.map((t, i) => ({ ...t, i, short: short[t.id] ?? t
     function stop() { if (timer) window.clearInterval(timer); }
     stations.forEach((n) => {
       const i = Number(n.getAttribute('data-node'));
+      // Anchors navigate on click; buttons (coming soon) just pin the preview.
       n.addEventListener('click', () => { pinned = true; stop(); set(i); });
       n.addEventListener('mouseenter', () => { stop(); set(i); });
       n.addEventListener('mouseleave', start);
     });
-    set(0);
+    set(initial);
     if (!reduce) start();
   });
 </script>
