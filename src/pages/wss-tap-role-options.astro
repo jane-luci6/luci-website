@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WhoWeServeTeams from '../components/WhoWeServeTeams.astro';
-import WssHeader from '../components/WssHeader.astro';
 
 const variants = [
   { id: 'float', tag: 'E', title: 'Floating typography', desc: 'No container at all. The role, label, and line float on the dark stage with a faint mint radial glow behind them — same atmosphere as the ring.' },
@@ -10,16 +9,12 @@ const variants = [
 ];
 ---
 
-<BaseLayout title="Tap a role — options" description="Three de-boxed directions for the teams-ring detail panel.">
+<BaseLayout title="Tap a role — options" description="Four directions for the teams-ring interaction affordance.">
   <div class="tap-opts">
     <div class="tap-opts__intro container container--wide">
-      <WssHeader
-        as="h1"
-        lead="Detail"
-        rest=" panel — three de-boxed directions"
-        sub="The boxy detail card clashes with the soft, organic ring. These three directions de-box the detail panel so it harmonizes with the ring. Same ring, same content — only the panel treatment changes. Scroll through and compare."
-        tone="dark"
-      />
+      <p class="display-label">Options</p>
+      <h1 class="h2">Detail panel — three de-boxed directions</h1>
+      <p class="measure">The boxy detail card clashes with the soft, organic ring. These three directions de-box the detail panel so it harmonizes with the ring. Same ring, same content — only the panel treatment changes. Scroll through and compare.</p>
     </div>
 
     {variants.map((v) => (
@@ -42,6 +37,9 @@ const variants = [
 <style>
   .tap-opts { padding-block: clamp(40px, 6vw, 64px); }
   .tap-opts__intro { max-width: 64ch; margin-bottom: clamp(28px, 4vw, 44px); }
+  .tap-opts__intro .display-label { color: var(--mint); letter-spacing: 0.2em; }
+  .tap-opts__intro .h2 { color: var(--off-white); margin: 0.5rem 0 1rem; }
+  .tap-opts__intro .measure { color: rgba(245, 248, 250, 0.72); }
 
   .tap-opts__variant + .tap-opts__variant { margin-top: clamp(40px, 6vw, 72px); padding-top: clamp(40px, 6vw, 72px); border-top: 1px solid rgba(255, 255, 255, 0.1); }
   .tap-opts__variant-head { display: flex; gap: 16px; align-items: flex-start; margin-bottom: clamp(20px, 3vw, 28px); }

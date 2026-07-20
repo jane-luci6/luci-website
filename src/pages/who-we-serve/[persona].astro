@@ -5,7 +5,6 @@ import PlatformChapterNav from '../../components/PlatformChapterNav.astro';
 import PersonaHeroStage from '../../components/PersonaHeroStage.astro';
 import PersonaCapabilities from '../../components/PersonaCapabilities.astro';
 import PersonaSpotlight from '../../components/PersonaSpotlight.astro';
-import WssHeader from '../../components/WssHeader.astro';
 import { personas } from '../../data/personas';
 import { getPersonaDetail, hasPersonaDetail } from '../../data/personaDetails';
 import { site } from '../../data/site';
@@ -24,14 +23,6 @@ if (!persona) return Astro.redirect('/who-we-serve');
 
 const detail = getPersonaDetail(persona.id);
 if (!detail) return Astro.redirect('/who-we-serve');
-
-const splitLead = (s: string) => {
-  const m = s.match(/^(\S+)(.*)$/);
-  return { lead: m ? m[1] : s, rest: m ? m[2] : '' };
-};
-const narrativeHead = splitLead(detail.narrativeLockup.lockupName);
-const capabilitiesHead = splitLead(detail.capabilitiesLockup.lockupName);
-const ctaHead = splitLead(detail.ctaTitle);
 ---
 
 <BaseLayout
@@ -45,17 +36,18 @@ const ctaHead = splitLead(detail.ctaTitle);
   <PersonaHeroStage
     heroImage={detail.heroImage}
     heroAlt={detail.heroAlt}
-    lead={persona.label}
-    sub={detail.heroDeck}
+    kicker={detail.heroKicker}
+    lockupName={persona.label}
+    lockupRole={persona.role}
+    deck={detail.heroDeck}
   />
 
-  <SectionBlock id="persona-narrative" tone="white">
-    <WssHeader
-      lead={narrativeHead.lead}
-      rest={narrativeHead.rest}
-      sub={detail.narrativeLockup.lockupRole}
-      tone="light"
-    />
+  <SectionBlock
+    id="persona-narrative"
+    lockupName={detail.narrativeLockup.lockupName}
+    lockupRole={detail.narrativeLockup.lockupRole}
+    tone="white"
+  >
     <div class="persona-narrative">
       {detail.narrative.map((para) => (
         <p>{para}</p>
@@ -63,13 +55,13 @@ const ctaHead = splitLead(detail.ctaTitle);
     </div>
   </SectionBlock>
 
-  <SectionBlock id="persona-capabilities" tone="deep" wide>
-    <WssHeader
-      lead={capabilitiesHead.lead}
-      rest={capabilitiesHead.rest}
-      sub={detail.capabilitiesLockup.lockupRole}
-      tone="dark"
-    />
+  <SectionBlock
+    id="persona-capabilities"
+    lockupName={detail.capabilitiesLockup.lockupName}
+    lockupRole={detail.capabilitiesLockup.lockupRole}
+    tone="deep"
+    wide
+  >
     <PersonaCapabilities
       capabilities={detail.capabilities}
       lead={detail.lead}
@@ -87,12 +79,8 @@ const ctaHead = splitLead(detail.ctaTitle);
 
   <SectionBlock id="persona-cta" tone="deep">
     <div class="persona-cta">
-      <WssHeader
-        lead={ctaHead.lead}
-        rest={ctaHead.rest}
-        tone="dark"
-        class="persona-cta__head"
-      />
+      <p class="display-label persona-cta__kicker">Next step</p>
+      <h2 class="h2 persona-cta__title">{detail.ctaTitle}</h2>
       <div class="btn-row">
         <a class="btn btn--primary" href="/contact">{site.ctaPrimary}</a>
         <a class="btn btn--ghost" href="/platform">Explore the platform</a>
@@ -151,14 +139,13 @@ const ctaHead = splitLead(detail.ctaTitle);
     text-align: center;
     padding-block: clamp(24px, 4vw, 40px);
   }
-  .persona-cta :global(.persona-cta__head) {
-    margin-inline: auto;
-    text-align: center;
-    margin-bottom: var(--space-4);
+  .persona-cta__kicker {
+    color: var(--mint);
+    margin-bottom: var(--space-2);
   }
-  .persona-cta :global(.persona-cta__head .wss-header__head),
-  .persona-cta :global(.persona-cta__head .wss-header__sub) {
-    margin-inline: auto;
-    text-align: center;
+  .persona-cta__title {
+    color: var(--off-white);
+    margin-bottom: var(--space-4);
+    max-width: none;
   }
 </style>

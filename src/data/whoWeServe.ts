@@ -23,9 +23,11 @@ export interface WhoWeServeIndustry {
 
 export const whoWeServe = {
   hero: {
-    lead: 'Every team',
-    rest: ' on your floor, on one platform.',
-    sub: 'LUCI serves the onsite teams that deliver your guest experience — across casinos, hotels, arenas, airports, and convention centers.',
+    kicker: 'Who we serve',
+    lockupName: 'One floor. Every team. One guest.',
+    lockupRole: 'How LUCI brings your onsite teams together',
+    deck:
+      "LUCI looks like an A/V solution. It's a guest-experience solution. Across casinos, hotels, arenas, airports, and convention centers, your teams stop working separate equipment and start working the same floor — together.",
   },
   reframe: {
     label: 'The reframe',
@@ -34,19 +36,16 @@ export const whoWeServe = {
     close: "You're not fighting technology anymore. You're fully leveraging it.",
   },
   teamsLockup: {
-    lead: 'Your teams',
-    rest: ', on the same floor',
-    sub: 'Six functions, one platform, one guest.',
+    lockupName: 'Your teams, on the same floor',
+    lockupRole: 'Six functions, one platform, one guest',
   },
   industriesLockup: {
-    lead: 'Across',
-    rest: ' every environment',
-    sub: 'What teams-together looks like in your world.',
+    lockupName: 'Across every environment',
+    lockupRole: 'What teams-together looks like in your world',
   },
   personasLockup: {
-    lead: 'What',
-    rest: ' does that look like for you?',
-    sub: 'Open your role to see what you can do.',
+    lockupName: 'What does that look like for you?',
+    lockupRole: 'Open your role to see what you can do',
   },
   teams: [
     {

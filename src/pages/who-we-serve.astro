@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionBlock from '../components/SectionBlock.astro';
 import PersonaHeroStage from '../components/PersonaHeroStage.astro';
-import WssHeader from '../components/WssHeader.astro';
 import WhoWeServeReframe from '../components/WhoWeServeReframe.astro';
 import WhoWeServeTeams from '../components/WhoWeServeTeams.astro';
 import WhoWeServeIndustries from '../components/WhoWeServeIndustries.astro';
@@ -15,51 +14,53 @@ const h = whoWeServe.hero;
 const iconById = Object.fromEntries(whoWeServe.teams.map((t) => [t.id, t.icon]));
 ---
 
-<BaseLayout title="Who We Serve" description={h.sub} darkHeader>
-  <h1 class="wss-sr-only">Who we serve — {h.lead}{h.rest}</h1>
+<BaseLayout title="Who We Serve" description={h.deck} darkHeader>
+  <h1 class="wss-sr-only">Who we serve — {h.lockupName}</h1>
 
   <PersonaHeroStage
     sectionId="wss-hero"
     heroImage="/images/who-we-serve/who-we-serve-hero.jpg"
     heroAlt="A venue operations team at a unified control surface — tablets and screens coordinating a property"
-    lead={h.lead}
-    rest={h.rest}
-    sub={h.sub}
+    kicker={h.kicker}
+    lockupName={h.lockupName}
+    lockupRole={h.lockupRole}
+    deck={h.deck}
   />
 
   <WhoWeServeReframe
+    label={whoWeServe.reframe.label}
     line1={whoWeServe.reframe.line1}
     line2={whoWeServe.reframe.line2}
     close={whoWeServe.reframe.close}
   />
 
-  <SectionBlock id="wss-teams" tone="deep" wide>
-    <WssHeader
-      lead={whoWeServe.teamsLockup.lead}
-      rest={whoWeServe.teamsLockup.rest}
-      sub={whoWeServe.teamsLockup.sub}
-      tone="dark"
-    />
+  <SectionBlock
+    id="wss-teams"
+    lockupName={whoWeServe.teamsLockup.lockupName}
+    lockupRole={whoWeServe.teamsLockup.lockupRole}
+    tone="deep"
+    wide
+  >
     <WhoWeServeTeams />
   </SectionBlock>
 
-  <SectionBlock id="wss-industries" tone="white" wide>
-    <WssHeader
-      lead={whoWeServe.industriesLockup.lead}
-      rest={whoWeServe.industriesLockup.rest}
-      sub={whoWeServe.industriesLockup.sub}
-      tone="light"
-    />
+  <SectionBlock
+    id="wss-industries"
+    lockupName={whoWeServe.industriesLockup.lockupName}
+    lockupRole={whoWeServe.industriesLockup.lockupRole}
+    tone="white"
+    wide
+  >
     <WhoWeServeIndustries />
   </SectionBlock>
 
-  <SectionBlock id="wss-personas" tone="deep" wide>
-    <WssHeader
-      lead={whoWeServe.personasLockup.lead}
-      rest={whoWeServe.personasLockup.rest}
-      sub={whoWeServe.personasLockup.sub}
-      tone="dark"
-    />
+  <SectionBlock
+    id="wss-personas"
+    lockupName={whoWeServe.personasLockup.lockupName}
+    lockupRole={whoWeServe.personasLockup.lockupRole}
+    tone="deep"
+    wide
+  >
     <ul class="wss-personas" role="list">
       {personas.map((p) => {
         const linked = hasPersonaDetail(p.id);
@@ -88,13 +89,8 @@ const iconById = Object.fromEntries(whoWeServe.teams.map((t) => [t.id, t.icon]))
 
   <SectionBlock id="wss-cta" tone="sand">
     <div class="wss-cta">
-      <WssHeader
-        lead="See"
-        rest=" what your team can do."
-        sub="Your teams are already on the floor. LUCI puts them on the same platform."
-        tone="light"
-        class="wss-cta__head"
-      />
+      <h2 class="h2 wss-cta__title">{whoWeServe.ctaTitle}</h2>
+      <p class="measure wss-cta__sub">Your teams are already on the floor. LUCI puts them on the same platform.</p>
       <div class="btn-row">
         <a class="btn btn--primary" href="/contact">{site.ctaPrimary}</a>
         <a class="btn btn--outline" href="/platform">Explore the platform</a>
@@ -255,16 +251,14 @@ const iconById = Object.fromEntries(whoWeServe.teams.map((t) => [t.id, t.icon]))
     text-align: center;
     padding-block: clamp(16px, 3vw, 28px);
   }
-  .wss-cta :global(.wss-cta__head) {
+  .wss-cta__title {
+    color: var(--ink-strong);
+    margin-bottom: var(--space-2);
+    max-width: 22ch;
     margin-inline: auto;
-    text-align: center;
   }
-  .wss-cta :global(.wss-cta__head .wss-header__head),
-  .wss-cta :global(.wss-cta__head .wss-header__sub) {
-    margin-inline: auto;
-    text-align: center;
-  }
-  .wss-cta :global(.wss-cta__head .wss-header__sub) {
-    margin-bottom: var(--space-4);
+  .wss-cta__sub {
+    margin: 0 auto var(--space-4);
+    color: var(--navy-muted);
   }
 </style>

@@ -1,15 +1,17 @@
 ---
 interface Props {
+  label: string;
   line1: string;
   line2: string;
   close: string;
 }
 
-const { line1, line2, close } = Astro.props;
+const { label, line1, line2, close } = Astro.props;
 ---
 
-<section class="wss-reframe" aria-label="The reframe">
+<section class="wss-reframe" aria-labelledby="wss-reframe-label">
   <div class="wss-reframe__inner container container--wide">
+    <p class="wss-reframe__label display-label" id="wss-reframe-label">{label}</p>
     <p class="wss-reframe__line wss-reframe__line--strike">{line1}</p>
     <p class="wss-reframe__line wss-reframe__line--accent">{line2}</p>
     <p class="wss-reframe__close">{close}</p>
@@ -28,6 +30,12 @@ const { line1, line2, close } = Astro.props;
   .wss-reframe__inner {
     text-align: center;
     padding-block: clamp(56px, 9vw, 104px);
+  }
+
+  .wss-reframe__label {
+    color: var(--mint);
+    margin: 0 0 var(--space-5);
+    letter-spacing: 0.2em;
   }
 
   .wss-reframe__line {
