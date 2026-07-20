@@ -27,7 +27,6 @@ export const whoWeServe = {
     lockupRole: 'LUCI helps you deliver a singular guest experience',
   },
   reframe: {
-    label: 'Why this works',
     line1: 'Every team negotiating its own priorities.',
     line2: 'Every team executing toward one guest experience.',
     close:
