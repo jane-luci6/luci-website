@@ -2,16 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionBlock from '../components/SectionBlock.astro';
 import PersonaHeroStage from '../components/PersonaHeroStage.astro';
-import WhoWeServeReframe from '../components/WhoWeServeReframe.astro';
-import WhoWeServeTeams from '../components/WhoWeServeTeams.astro';
-import WhoWeServeIndustries from '../components/WhoWeServeIndustries.astro';
-import { personas } from '../data/personas';
-import { hasPersonaDetail } from '../data/personaDetails';
+import TeamsFilmstrip from '../components/teams-redesign/TeamsFilmstrip.astro';
 import { whoWeServe } from '../data/whoWeServe';
 import { site } from '../data/site';
 
 const h = whoWeServe.hero;
-const iconById = Object.fromEntries(whoWeServe.teams.map((t) => [t.id, t.icon]));
 ---
 
 <BaseLayout title="Who We Serve" description={h.lockupRole} darkHeader>
@@ -25,63 +20,8 @@ const iconById = Object.fromEntries(whoWeServe.teams.map((t) => [t.id, t.icon]))
     lockupRole={h.lockupRole}
   />
 
-  <WhoWeServeReframe
-    line1={whoWeServe.reframe.line1}
-    line2={whoWeServe.reframe.line2}
-    close={whoWeServe.reframe.close}
-  />
-
-  <SectionBlock
-    id="wss-teams"
-    lockupName={whoWeServe.teamsLockup.lockupName}
-    lockupRole={whoWeServe.teamsLockup.lockupRole}
-    tone="deep"
-    wide
-  >
-    <WhoWeServeTeams />
-  </SectionBlock>
-
-  <SectionBlock
-    id="wss-industries"
-    lockupName={whoWeServe.industriesLockup.lockupName}
-    lockupRole={whoWeServe.industriesLockup.lockupRole}
-    tone="white"
-    wide
-  >
-    <WhoWeServeIndustries />
-  </SectionBlock>
-
-  <SectionBlock
-    id="wss-personas"
-    lockupName={whoWeServe.personasLockup.lockupName}
-    lockupRole={whoWeServe.personasLockup.lockupRole}
-    tone="deep"
-    wide
-  >
-    <ul class="wss-personas" role="list">
-      {personas.map((p) => {
-        const linked = hasPersonaDetail(p.id);
-        return (
-          <li class:list={['wss-personas__cell', !linked && 'wss-personas__cell--soon']}>
-            {linked ? (
-              <a class="wss-personas__link" href={`/who-we-serve/${p.id}`}>
-                <p class="wss-personas__role">{p.role}</p>
-                <h3 class="wss-personas__label">{p.label}</h3>
-                <p class="wss-personas__line">{p.line}</p>
-                <span class="wss-personas__action" aria-hidden="true" set:html={iconById[p.id]} />
-              </a>
-            ) : (
-              <div class="wss-personas__static">
-                <p class="wss-personas__role">{p.role}</p>
-                <h3 class="wss-personas__label">{p.label}</h3>
-                <p class="wss-personas__line">{p.line}</p>
-                <span class="wss-personas__soon">Coming soon</span>
-              </div>
-            )}
-          </li>
-        );
-      })}
-    </ul>
+  <SectionBlock id="wss-teams" title="Who's on your floor?" tone="deep" wide>
+    <TeamsFilmstrip />
   </SectionBlock>
 
   <SectionBlock id="wss-cta" tone="sand">
@@ -110,137 +50,8 @@ const iconById = Object.fromEntries(whoWeServe.teams.map((t) => [t.id, t.icon]))
   }
 
   #wss-teams,
-  #wss-industries,
-  #wss-personas,
   #wss-cta {
     scroll-margin-top: 120px;
-  }
-
-  /* ---------- Persona grid (mirrors HomePersonas, links to persona pages) ---------- */
-  .wss-personas {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1px;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 14px;
-    overflow: hidden;
-  }
-  .wss-personas__cell {
-    position: relative;
-    background: var(--navy);
-    transition: background 0.18s ease-out;
-  }
-  .wss-personas__cell::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: var(--mint);
-    transform: scaleY(0);
-    transform-origin: top center;
-    transition: transform 0.2s ease-out;
-  }
-  .wss-personas__cell:hover,
-  .wss-personas__cell:focus-within {
-    background: rgba(104, 227, 190, 0.06);
-  }
-  .wss-personas__cell:hover::before,
-  .wss-personas__cell:focus-within::before {
-    transform: scaleY(1);
-  }
-  .wss-personas__cell--soon {
-    opacity: 0.66;
-  }
-
-  .wss-personas__link,
-  .wss-personas__static {
-    display: block;
-    height: 100%;
-    padding: clamp(22px, 2.6vw, 32px) clamp(20px, 2.4vw, 28px);
-    text-decoration: none;
-    color: inherit;
-  }
-  .wss-personas__link:focus-visible {
-    outline: 2px solid var(--mint);
-    outline-offset: -2px;
-  }
-
-  .wss-personas__role {
-    margin: 0 0 8px;
-    font-family: var(--font-display);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mint);
-  }
-  .wss-personas__label {
-    margin: 0 0 10px;
-    font-family: var(--font-body);
-    font-size: clamp(18px, 1.7vw, 22px);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    color: var(--off-white);
-  }
-  .wss-personas__line {
-    margin: 0;
-    font-size: clamp(13px, 1.2vw, 15px);
-    line-height: 1.5;
-    color: rgba(245, 248, 250, 0.7);
-  }
-  .wss-personas__action {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: clamp(16px, 2vw, 22px);
-    width: 40px;
-    height: 40px;
-    border-radius: 9999px;
-    border: 1px solid rgba(104, 227, 190, 0.28);
-    background: rgba(104, 227, 190, 0.06);
-    color: var(--mint);
-    transition: transform 0.18s ease-out, background 0.18s ease-out, border-color 0.18s ease-out;
-  }
-  .wss-personas__action :global(svg) {
-    width: 19px;
-    height: 19px;
-    display: block;
-  }
-  .wss-personas__cell:hover .wss-personas__action,
-  .wss-personas__cell:focus-within .wss-personas__action {
-    transform: translate(2px, -2px);
-    background: rgba(104, 227, 190, 0.16);
-    border-color: rgba(104, 227, 190, 0.5);
-  }
-  .wss-personas__soon {
-    display: inline-block;
-    margin-top: clamp(16px, 2vw, 22px);
-    padding: 5px 10px;
-    font-family: var(--font-body);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: rgba(245, 248, 250, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 9999px;
-  }
-
-  @media (max-width: 980px) {
-    .wss-personas {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-  @media (max-width: 640px) {
-    .wss-personas {
-      grid-template-columns: 1fr;
-    }
   }
 
   /* ---------- CTA ---------- */

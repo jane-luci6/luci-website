@@ -1,0 +1,194 @@
+---
+import { whoWeServe } from '../../data/whoWeServe';
+import { hasPersonaDetail } from '../../data/personaDetails';
+
+const short: Record<string, string> = {
+  marketing: 'Marketing',
+  operations: 'Operations',
+  technology: 'Technology',
+  finance: 'Finance',
+  facilities: 'Facilities',
+  leadership: 'Leadership',
+};
+
+const R = 47;
+const teams = whoWeServe.teams.map((t, i) => {
+  const aDeg = -90 + i * 60;
+  const aRad = (aDeg * Math.PI) / 180;
+  const x = 50 + R * Math.cos(aRad);
+  const y = 50 + R * Math.sin(aRad);
+  return { ...t, i, x, y, aDeg, short: short[t.id] ?? t.label, linked: hasPersonaDetail(t.id as any) };
+});
+---
+
+<div class="trd" data-teams-dial>
+  <div class="trd__dial">
+    <svg class="trd__ticks" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="47" class="trd__ring" />
+      {teams.map((t) => (
+        <line
+          data-tick={t.i}
+          class="trd__tick"
+          x1={50 + 43 * Math.cos((t.aDeg * Math.PI) / 180)}
+          y1={50 + 43 * Math.sin((t.aDeg * Math.PI) / 180)}
+          x2={50 + 49 * Math.cos((t.aDeg * Math.PI) / 180)}
+          y2={50 + 49 * Math.sin((t.aDeg * Math.PI) / 180)}
+        />
+      ))}
+      <line class="trd__needle" data-needle x1="50" y1="50" x2="50" y2="10" />
+      <circle cx="50" cy="50" r="2.6" class="trd__hub" />
+    </svg>
+
+    <div class="trd__readout">
+      <p class="trd__readout-role" data-role>Guest</p>
+      <h3 class="trd__readout-label" data-label>experience</h3>
+      <p class="trd__readout-line" data-line>Six roles, one property, one outcome. Select a role on the dial.</p>
+      <a class="trd__readout-link" data-link href="#" hidden>
+        View this role
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <span class="trd__readout-soon" data-soon hidden>Coming soon</span>
+    </div>
+
+    {teams.map((t) => (
+      <button
+        type="button"
+        class:list={['trd__label', t.i === 0 && 'is-active']}
+        data-node={t.i}
+        data-persona={t.id}
+        data-linked={t.linked ? '1' : '0'}
+        data-role={t.role}
+        data-lname={t.label}
+        data-lline={t.line}
+        style={`left:${t.x}%;top:${t.y}%`}
+        aria-pressed={t.i === 0 ? 'true' : 'false'}
+      >
+        {t.short}
+      </button>
+    ))}
+  </div>
+</div>
+
+<style>
+  .trd { width: 100%; max-width: 560px; margin-inline: auto; }
+  .trd__dial {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    margin-inline: auto;
+    border-radius: 50%;
+    background: radial-gradient(120% 90% at 50% 0%, #123040 0%, var(--navy) 46%, var(--navy-deep) 100%);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+  }
+  .trd__ticks { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .trd__ring { fill: none; stroke: rgba(255, 255, 255, 0.1); stroke-width: 0.5; }
+  .trd__tick { stroke: rgba(245, 248, 250, 0.3); stroke-width: 0.8; vector-effect: non-scaling-stroke; }
+  .trd__needle {
+    stroke: var(--mint);
+    stroke-width: 1;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+    transform-origin: 50px 50px;
+    transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+    filter: drop-shadow(0 0 4px rgba(104, 227, 190, 0.7));
+  }
+  .trd__hub { fill: var(--mint); }
+
+  .trd__readout {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 62%;
+    text-align: center;
+  }
+  .trd__readout-role {
+    margin: 0 0 4px;
+    font-family: var(--font-display); font-size: 10px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--mint);
+    transition: opacity 0.2s ease;
+  }
+  .trd__readout-label {
+    margin: 0 0 8px;
+    font-family: var(--font-body); font-size: clamp(15px, 2.6vw, 20px); font-weight: 700;
+    line-height: 1.15; color: var(--off-white);
+    transition: opacity 0.2s ease;
+  }
+  .trd__readout-line {
+    margin: 0 0 10px;
+    font-family: var(--font-body); font-size: 12px; line-height: 1.45;
+    color: rgba(245, 248, 250, 0.72);
+  }
+  .trd__readout-link {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-family: var(--font-body); font-size: 12px; font-weight: 700;
+    color: var(--mint); text-decoration: none;
+  }
+  .trd__readout-link svg { width: 14px; height: 14px; }
+  .trd__readout-soon {
+    display: inline-block; padding: 4px 9px; font-size: 9px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245, 248, 250, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 9999px;
+  }
+
+  .trd__label {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    padding: 6px 12px;
+    border-radius: 9999px;
+    background: rgba(16, 35, 45, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: rgba(245, 248, 250, 0.8);
+    font-family: var(--font-body); font-size: 11px; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  .trd__label.is-active,
+  .trd__label:hover,
+  .trd__label:focus-visible {
+    background: rgba(104, 227, 190, 0.2);
+    border-color: var(--mint);
+    color: var(--mint);
+    box-shadow: 0 0 18px rgba(104, 227, 190, 0.3);
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-teams-dial]').forEach((root) => {
+    const labels = Array.from(root.querySelectorAll<HTMLButtonElement>('.trd__label'));
+    const needle = root.querySelector<SVGLineElement>('[data-needle]');
+    const roleEl = root.querySelector<HTMLElement>('[data-role]');
+    const labelEl = root.querySelector<HTMLElement>('[data-label]');
+    const lineEl = root.querySelector<HTMLElement>('[data-line]');
+    const linkEl = root.querySelector<HTMLAnchorElement>('[data-link]');
+    const soonEl = root.querySelector<HTMLElement>('[data-soon]');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const angles = labels.map((_, i) => -90 + i * 60);
+    let active = -1, pinned = false, timer: number | undefined;
+
+    function set(i: number) {
+      active = i;
+      const btn = labels[i];
+      labels.forEach((n) => n.classList.toggle('is-active', n === btn));
+      if (needle) needle.style.transform = `rotate(${angles[i]}deg)`;
+      if (roleEl) roleEl.textContent = btn.dataset.role || '';
+      if (labelEl) labelEl.textContent = btn.dataset.lname || '';
+      if (lineEl) lineEl.textContent = btn.dataset.lline || '';
+      const linked = btn.dataset.linked === '1';
+      if (linkEl) { linkEl.hidden = !linked; linkEl.href = `/who-we-serve/${btn.dataset.persona}`; }
+      if (soonEl) soonEl.hidden = linked;
+    }
+    function start() { if (reduce || pinned) return; stop(); timer = window.setInterval(() => set((active + 1) % labels.length), 4500); }
+    function stop() { if (timer) window.clearInterval(timer); }
+
+    labels.forEach((n, i) => {
+      n.addEventListener('click', () => { pinned = true; stop(); set(i); });
+      n.addEventListener('mouseenter', () => { stop(); set(i); });
+      n.addEventListener('mouseleave', start);
+    });
+    set(0);
+    if (!reduce) start();
+  });
+</script>

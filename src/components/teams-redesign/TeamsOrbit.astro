@@ -1,0 +1,174 @@
+---
+import { whoWeServe } from '../../data/whoWeServe';
+import { hasPersonaDetail } from '../../data/personaDetails';
+
+const R = 41;
+const short: Record<string, string> = {
+  marketing: 'Marketing',
+  operations: 'Operations',
+  technology: 'Technology',
+  finance: 'Finance',
+  facilities: 'Facilities',
+  leadership: 'Leadership',
+};
+
+const teams = whoWeServe.teams.map((t, i) => {
+  const aDeg = -90 + i * 60;
+  const aRad = (aDeg * Math.PI) / 180;
+  const x = 50 + R * Math.cos(aRad);
+  const y = 50 + R * Math.sin(aRad);
+  return { ...t, i, x, y, short: short[t.id] ?? t.label, linked: hasPersonaDetail(t.id as any) };
+});
+---
+
+<div class="tro" data-teams-orbit>
+  <div class="tro__stage">
+    {teams.map((t) => (
+      <button
+        type="button"
+        class:list={['tro__node', t.i === 0 && 'is-active']}
+        data-node={t.i}
+        style={`left:${t.x}%;top:${t.y}%`}
+        aria-pressed={t.i === 0 ? 'true' : 'false'}
+        aria-label={`${t.label} — ${t.role}`}
+      >
+        <span class="tro__node-badge" set:html={t.icon} />
+        <span class="tro__node-label">{t.short}</span>
+      </button>
+    ))}
+    <div class="tro__core" aria-hidden="true">
+      <span class="tro__core-glyph">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.6-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.4-7 10-7 10z" fill="rgba(104,227,190,0.16)" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 11h6M12 8v6" stroke="#CEB06E" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </span>
+      <span class="tro__core-label">Guest<br>experience</span>
+    </div>
+  </div>
+
+  <div class="tro__detail">
+    {teams.map((t) => (
+      <div class:list={['tro__entry', t.i === 0 && 'is-active']} data-entry={t.i}>
+        <p class="tro__entry-role">{t.role}</p>
+        <h3 class="tro__entry-label">{t.label}</h3>
+        <p class="tro__entry-line">{t.line}</p>
+        {t.linked ? (
+          <a class="tro__entry-link" href={`/who-we-serve/${t.id}`}>
+            View this role
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        ) : (
+          <span class="tro__entry-soon">Coming soon</span>
+        )}
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .tro { width: 100%; max-width: 760px; margin-inline: auto; }
+  .tro__stage {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto clamp(28px, 4vw, 40px);
+    border-radius: 50%;
+    background: radial-gradient(120% 90% at 50% 0%, #123040 0%, var(--navy) 46%, var(--navy-deep) 100%);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(104, 227, 190, 0.14);
+  }
+  .tro__stage::before {
+    content: '';
+    position: absolute;
+    inset: 6%;
+    border-radius: 50%;
+    border: 1px dashed rgba(104, 227, 190, 0.16);
+  }
+  .tro__core {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    text-align: center;
+    pointer-events: none;
+  }
+  .tro__core-glyph {
+    display: flex; align-items: center; justify-content: center;
+    width: clamp(84px, 18vw, 120px); height: clamp(84px, 18vw, 120px);
+    border-radius: 9999px;
+    color: var(--mint);
+    background: rgba(104, 227, 190, 0.12);
+    border: 1px solid rgba(104, 227, 190, 0.45);
+    box-shadow: 0 0 40px rgba(104, 227, 190, 0.3);
+  }
+  .tro__core-glyph svg { width: 46%; height: 46%; }
+  .tro__core-label {
+    font-family: var(--font-body); font-size: clamp(13px, 1.8vw, 15px);
+    font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--off-white);
+  }
+  .tro__node {
+    position: absolute; transform: translate(-50%, -50%);
+    display: flex; flex-direction: column; align-items: center; gap: 7px;
+    background: none; border: 0; padding: 0; cursor: pointer; color: var(--off-white);
+  }
+  .tro__node-badge {
+    display: flex; align-items: center; justify-content: center;
+    width: clamp(46px, 9vw, 60px); height: clamp(46px, 9vw, 60px);
+    border-radius: 9999px;
+    background: rgba(16, 35, 45, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: rgba(245, 248, 250, 0.8);
+    backdrop-filter: blur(6px);
+    transition: all 0.2s ease;
+  }
+  .tro__node-badge :global(svg) { width: 46%; height: 46%; }
+  .tro__node.is-active .tro__node-badge,
+  .tro__node:hover .tro__node-badge,
+  .tro__node:focus-visible .tro__node-badge {
+    background: rgba(104, 227, 190, 0.18);
+    border-color: var(--mint);
+    color: var(--mint);
+    box-shadow: 0 0 22px rgba(104, 227, 190, 0.3);
+    transform: scale(1.08);
+  }
+  .tro__node-label {
+    font-family: var(--font-body); font-size: 10px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245, 248, 250, 0.7);
+  }
+  .tro__node.is-active .tro__node-label { color: var(--mint); }
+
+  .tro__detail { text-align: center; min-height: 150px; }
+  .tro__entry { display: none; }
+  .tro__entry.is-active { display: block; animation: tro-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  @keyframes tro-pop { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .tro__entry-role { margin: 0 0 6px; font-family: var(--font-display); font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mint); }
+  .tro__entry-label { margin: 0 0 10px; font-family: var(--font-body); font-size: clamp(20px, 2.6vw, 26px); font-weight: 700; color: var(--off-white); }
+  .tro__entry-line { margin: 0 auto 16px; max-width: 46ch; font-family: var(--font-body); font-size: 15px; line-height: 1.55; color: rgba(245, 248, 250, 0.78); }
+  .tro__entry-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-body); font-size: 13px; font-weight: 700; color: var(--mint); text-decoration: none; }
+  .tro__entry-link svg { width: 16px; height: 16px; transition: transform 0.15s ease; }
+  .tro__entry-link:hover svg { transform: translateX(3px); }
+  .tro__entry-soon { display: inline-block; padding: 5px 10px; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(245, 248, 250, 0.55); border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 9999px; }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-teams-orbit]').forEach((root) => {
+    const nodes = Array.from(root.querySelectorAll<HTMLButtonElement>('.tro__node'));
+    const entries = Array.from(root.querySelectorAll<HTMLElement>('[data-entry]'));
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let active = 0, pinned = false, timer: number | undefined;
+    function set(i: number) {
+      active = i;
+      nodes.forEach((n) => n.classList.toggle('is-active', n.getAttribute('data-node') === String(i)));
+      entries.forEach((e) => e.classList.toggle('is-active', e.getAttribute('data-entry') === String(i)));
+    }
+    function start() { if (reduce || pinned) return; stop(); timer = window.setInterval(() => set((active + 1) % nodes.length), 4500); }
+    function stop() { if (timer) window.clearInterval(timer); }
+    nodes.forEach((n) => {
+      const i = Number(n.getAttribute('data-node'));
+      n.addEventListener('click', () => { pinned = true; stop(); set(i); });
+      n.addEventListener('mouseenter', () => { stop(); set(i); });
+      n.addEventListener('mouseleave', start);
+    });
+    set(0);
+    if (!reduce) start();
+  });
+</script>
