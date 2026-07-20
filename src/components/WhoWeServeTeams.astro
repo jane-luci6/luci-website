@@ -1,0 +1,544 @@
+---
+import { whoWeServe } from '../data/whoWeServe';
+
+type TapVariant = 'remove' | 'inline' | 'pulse' | 'counter';
+type PanelStyle = 'box' | 'float' | 'tint' | 'hairline';
+interface Props {
+  tapVariant?: TapVariant;
+  panelStyle?: PanelStyle;
+}
+const { tapVariant = 'inline', panelStyle = 'box' } = Astro.props;
+
+const R = 40; // ring radius, as % of the (square) stage / svg units
+const short: Record<string, string> = {
+  marketing: 'Marketing',
+  operations: 'Operations',
+  technology: 'Technology',
+  finance: 'Finance',
+  facilities: 'Facilities',
+  leadership: 'Leadership',
+};
+
+const teams = whoWeServe.teams.map((t, i) => {
+  const aDeg = -90 + i * 60;
+  const aRad = (aDeg * Math.PI) / 180;
+  const x = 50 + R * Math.cos(aRad);
+  const y = 50 + R * Math.sin(aRad);
+  return { ...t, i, x, y, short: short[t.id] ?? t.label };
+});
+---
+
+<div class:list={["wss-teams", tapVariant === 'pulse' && 'wss-teams--pulse']} data-wss-teams data-variant={tapVariant}>
+  <div class="wss-teams__grid">
+    <div class="wss-teams__stage">
+      <svg class="wss-teams__spokes" viewBox="0 0 100 100" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+        {teams.map((t) => (
+          <line class="wss-teams__spoke" data-spoke={t.i} x1="50" y1="50" x2={t.x} y2={t.y} />
+        ))}
+      </svg>
+
+      <div class="wss-teams__core" aria-hidden="true">
+        <span class="wss-teams__core-glyph">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.6-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.4-7 10-7 10z" fill="rgba(104,227,190,0.14)" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 11h6M12 8v6" stroke="#CEB06E" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </span>
+        <span class="wss-teams__core-label">Guest<br>experience</span>
+      </div>
+
+      {teams.map((t, i) => (
+        <button
+          type="button"
+          class:list={['wss-teams__node', i === 0 && 'is-active']}
+          data-node={i}
+          style={`left:${t.x}%;top:${t.y}%`}
+          aria-pressed={i === 0 ? 'true' : 'false'}
+          aria-label={`${t.label} — ${t.role}`}
+        >
+          <span class="wss-teams__node-badge" set:html={t.icon} />
+          <span class="wss-teams__node-label">{t.short}</span>
+        </button>
+      ))}
+    </div>
+
+    <div class="wss-teams__aside">
+      {tapVariant === 'inline' && (
+        <p class="wss-teams__hint wss-teams__hint--inline">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 3l14 8-6 1-3 6-5-15z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/></svg>
+          <span>Hover or tap a role</span>
+        </p>
+      )}
+      {tapVariant === 'counter' && (
+        <p class="wss-teams__hint wss-teams__hint--pill">
+          <span class="wss-teams__hint-dot" aria-hidden="true"></span>
+          <span>{teams.length} roles · tap to explore</span>
+        </p>
+      )}
+      <div class:list={["wss-teams__panel", `wss-teams__panel--${panelStyle}`]} aria-live="polite">
+        {teams.map((t, i) => (
+          <div class:list={['wss-teams__entry', i === 0 && 'is-active']} data-entry={i} aria-hidden={i === 0 ? 'false' : 'true'}>
+            <p class="wss-teams__entry-role">{t.role}</p>
+            <h3 class="wss-teams__entry-label">{t.label}</h3>
+            <p class="wss-teams__entry-line">{t.line}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .wss-teams {
+    width: 100%;
+  }
+
+  .wss-teams__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(240px, 26%, 300px);
+    gap: clamp(24px, 4vw, 48px);
+    align-items: center;
+    max-width: var(--content-wide);
+    margin-inline: auto;
+  }
+
+  /* ---------- Stage: square, dark, with the ring ---------- */
+  .wss-teams__stage {
+    position: relative;
+    width: 100%;
+    max-width: 540px;
+    aspect-ratio: 1 / 1;
+    margin-inline: auto;
+    border-radius: 20px;
+    padding: 8px;
+    background:
+      radial-gradient(120% 90% at 50% 0%, #123040 0%, var(--navy) 42%, var(--navy-deep) 100%);
+    border: 1px solid rgba(var(--mint-rgb), 0.16);
+    box-shadow: 0 32px 64px rgba(0, 0, 0, 0.55);
+    overflow: hidden;
+  }
+  .wss-teams__stage::before {
+    content: '';
+    position: absolute;
+    inset: -30% -10%;
+    background:
+      radial-gradient(40% 50% at 18% 22%, rgba(var(--mint-rgb), 0.14), transparent 70%),
+      radial-gradient(38% 46% at 88% 84%, rgba(var(--gold-rgb), 0.1), transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wss-teams__spokes {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .wss-teams__spoke {
+    stroke: rgba(245, 248, 250, 0.14);
+    stroke-width: 0.5;
+    vector-effect: non-scaling-stroke;
+    transition: stroke 0.25s ease, stroke-width 0.25s ease;
+  }
+  .wss-teams__spoke.is-active {
+    stroke: var(--mint);
+    stroke-width: 0.9;
+  }
+
+  /* ---------- Core: the guest at the center ---------- */
+  .wss-teams__core {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    pointer-events: none;
+  }
+  .wss-teams__core-glyph {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(64px, 13vw, 92px);
+    height: clamp(64px, 13vw, 92px);
+    border-radius: 9999px;
+    color: var(--mint);
+    background: rgba(104, 227, 190, 0.1);
+    border: 1px solid rgba(var(--mint-rgb), 0.4);
+    box-shadow: 0 0 28px rgba(104, 227, 190, 0.22), inset 0 0 0 1px rgba(var(--mint-rgb), 0.08);
+  }
+  .wss-teams__core-glyph svg {
+    width: 44%;
+    height: 44%;
+  }
+  .wss-teams__core-label {
+    font-family: var(--font-body);
+    font-size: clamp(11px, 1.4vw, 13px);
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    line-height: 1.25;
+    color: var(--off-white);
+  }
+
+  /* ---------- Nodes: the six teams on the ring ---------- */
+  .wss-teams__node {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    color: var(--off-white);
+  }
+  .wss-teams__node:focus-visible {
+    outline: none;
+  }
+  .wss-teams__node:focus-visible .wss-teams__node-badge,
+  .wss-teams__node:hover .wss-teams__node-badge,
+  .wss-teams__node.is-active .wss-teams__node-badge {
+    background: rgba(104, 227, 190, 0.16);
+    border-color: var(--mint);
+    color: var(--mint);
+    box-shadow: 0 0 20px rgba(104, 227, 190, 0.28);
+  }
+  .wss-teams__node-badge {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(52px, 10.5vw, 72px);
+    height: clamp(52px, 10.5vw, 72px);
+    border-radius: 9999px;
+    color: rgba(245, 248, 250, 0.82);
+    background: rgba(16, 35, 45, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .wss-teams__node-badge :global(svg) {
+    width: 46%;
+    height: 46%;
+  }
+  .wss-teams__node.is-active .wss-teams__node-badge {
+    transform: scale(1.06);
+  }
+  .wss-teams__node-label {
+    font-family: var(--font-body);
+    font-size: clamp(10px, 1.25vw, 12px);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245, 248, 250, 0.78);
+    transition: color 0.2s ease;
+    white-space: nowrap;
+  }
+  .wss-teams__node.is-active .wss-teams__node-label,
+  .wss-teams__node:hover .wss-teams__node-label {
+    color: var(--mint);
+  }
+
+  /* ---------- Aside: cycling detail panel ---------- */
+  .wss-teams__aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .wss-teams__hint {
+    margin: 0 0 var(--space-3);
+    font-family: var(--font-body);
+  }
+  .wss-teams__hint--inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: rgba(245, 248, 250, 0.62);
+  }
+  .wss-teams__hint--inline svg {
+    width: 16px;
+    height: 16px;
+    color: var(--mint);
+  }
+  .wss-teams__hint--pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 9999px;
+    border: 1px solid rgba(var(--mint-rgb), 0.3);
+    background: rgba(104, 227, 190, 0.08);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mint);
+  }
+  .wss-teams__hint-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 9999px;
+    background: var(--mint);
+    animation: wss-dot 1.8s ease-out infinite;
+  }
+  @keyframes wss-dot {
+    0% { box-shadow: 0 0 0 0 rgba(104, 227, 190, 0.5); }
+    70% { box-shadow: 0 0 0 8px rgba(104, 227, 190, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(104, 227, 190, 0); }
+  }
+
+  /* Pulse variant: a breathing ring invites a tap on the active node. */
+  .wss-teams--pulse .wss-teams__node.is-active .wss-teams__node-badge::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 9999px;
+    border: 2px solid rgba(104, 227, 190, 0.6);
+    animation: wss-node-pulse 2s ease-out infinite;
+    pointer-events: none;
+  }
+  @keyframes wss-node-pulse {
+    0% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1.9); opacity: 0; }
+  }
+  .wss-teams__panel {
+    position: relative;
+    min-height: 168px;
+    background: rgba(16, 35, 45, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(var(--mint-rgb), 0.28);
+    border-left: 3px solid var(--mint);
+    border-radius: 12px;
+    padding: clamp(20px, 2.4vw, 28px);
+    box-shadow: 0 0 24px rgba(104, 227, 190, 0.14);
+  }
+
+  /* ---- De-boxed panel treatments (harmonize with the ring) ---- */
+
+  /* Float: no container at all — typography on the stage with a faint mint glow. */
+  .wss-teams__panel--float {
+    background: none;
+    border: 0;
+    border-left: 0;
+    border-radius: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    padding: clamp(8px, 1vw, 16px) 0;
+  }
+  .wss-teams__panel--float::before {
+    content: '';
+    position: absolute;
+    inset: -10% -20%;
+    z-index: -1;
+    background: radial-gradient(60% 80% at 30% 30%, rgba(104, 227, 190, 0.14), transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Tint: a soft, low-contrast surface that echoes the node badges — no hard border, no left bar, no shadow. */
+  .wss-teams__panel--tint {
+    background: rgba(104, 227, 190, 0.05);
+    border: 1px solid rgba(104, 227, 190, 0.12);
+    border-left: 0;
+    border-radius: 18px;
+    box-shadow: none;
+  }
+
+  /* Hairline: no container — a short mint rule above the content, that's it. */
+  .wss-teams__panel--hairline {
+    background: none;
+    border: 0;
+    border-left: 0;
+    border-radius: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    padding: clamp(8px, 1vw, 16px) 0;
+  }
+  .wss-teams__panel--hairline::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 3px;
+    margin-bottom: 14px;
+    background: var(--mint);
+    border-radius: 2px;
+  }
+  .wss-teams__entry {
+    display: none;
+  }
+  .wss-teams__entry.is-active {
+    display: block;
+    animation: wss-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .wss-teams__entry-role {
+    margin: 0 0 6px;
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mint);
+  }
+  .wss-teams__entry-label {
+    margin: 0 0 10px;
+    font-family: var(--font-body);
+    font-size: clamp(19px, 2.2vw, 24px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--off-white);
+  }
+  .wss-teams__entry-line {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.55;
+    color: rgba(245, 248, 250, 0.8);
+  }
+  @keyframes wss-pop {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  /* ---------- Mobile: ring becomes a 2-col grid ---------- */
+  @media (max-width: 860px) {
+    .wss-teams__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+    .wss-teams__stage {
+      max-width: 100%;
+      aspect-ratio: auto;
+      padding: clamp(16px, 4vw, 24px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .wss-teams__spokes {
+      display: none;
+    }
+    .wss-teams__core {
+      position: static;
+      transform: none;
+      grid-column: 1 / -1;
+      flex-direction: row;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+    .wss-teams__core-glyph {
+      width: 56px;
+      height: 56px;
+    }
+    .wss-teams__core-label {
+      text-align: left;
+    }
+    .wss-teams__node {
+      position: static;
+      transform: none;
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(16, 35, 45, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .wss-teams__node-badge {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+    }
+    .wss-teams__node-label {
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-transform: none;
+    }
+    .wss-teams__node.is-active .wss-teams__node-badge {
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wss-teams__entry.is-active {
+      animation: none;
+    }
+    .wss-teams__hint-dot,
+    .wss-teams--pulse .wss-teams__node.is-active .wss-teams__node-badge::after {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLElement>('[data-wss-teams]').forEach((root) => {
+    const nodes = Array.from(root.querySelectorAll<HTMLButtonElement>('.wss-teams__node'));
+    const entries = Array.from(root.querySelectorAll<HTMLElement>('[data-entry]'));
+    const spokes = Array.from(root.querySelectorAll<SVGLineElement>('[data-spoke]'));
+    let active = 0;
+    let pinned = false;
+    let timer: number | undefined;
+
+    function setActive(i: number) {
+      active = i;
+      const key = String(i);
+      nodes.forEach((n) => {
+        const on = n.getAttribute('data-node') === key;
+        n.classList.toggle('is-active', on);
+        n.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      entries.forEach((e) => {
+        const on = e.getAttribute('data-entry') === key;
+        e.classList.toggle('is-active', on);
+        e.setAttribute('aria-hidden', on ? 'false' : 'true');
+      });
+      spokes.forEach((s) => s.classList.toggle('is-active', s.getAttribute('data-spoke') === key));
+    }
+
+    function start() {
+      if (reduce || pinned) return;
+      stop();
+      timer = window.setInterval(() => setActive((active + 1) % nodes.length), 4500);
+    }
+    function stop() {
+      if (timer) window.clearInterval(timer);
+    }
+    function pin(i: number) {
+      pinned = true;
+      stop();
+      setActive(i);
+    }
+    function preview(i: number) {
+      stop();
+      setActive(i);
+    }
+
+    nodes.forEach((n) => {
+      const i = Number(n.getAttribute('data-node'));
+      n.addEventListener('click', () => pin(i));
+      n.addEventListener('mouseenter', () => preview(i));
+      n.addEventListener('focus', () => preview(i));
+      n.addEventListener('mouseleave', start);
+      n.addEventListener('blur', start);
+    });
+
+    setActive(0);
+    if (!reduce) start();
+  });
+</script>

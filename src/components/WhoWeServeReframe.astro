@@ -1,0 +1,108 @@
+---
+interface Props {
+  line1: string;
+  line2: string;
+  close: string;
+}
+
+const { line1, line2, close } = Astro.props;
+---
+
+<section class="wss-reframe" aria-label="The reframe">
+  <div class="wss-reframe__inner container container--wide">
+    <p class="wss-reframe__line wss-reframe__line--strike">{line1}</p>
+    <p class="wss-reframe__line wss-reframe__line--accent">{line2}</p>
+    <p class="wss-reframe__close">{close}</p>
+  </div>
+</section>
+
+<style>
+  .wss-reframe {
+    background: var(--navy-deep);
+    color: var(--off-white);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+  }
+
+  .wss-reframe__inner {
+    text-align: center;
+    padding-block: clamp(56px, 9vw, 104px);
+  }
+
+  .wss-reframe__line {
+    font-family: var(--font-body);
+    font-size: clamp(26px, 5.2vw, 56px);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    margin: 0;
+  }
+
+  .wss-reframe__line--strike {
+    color: rgba(245, 248, 250, 0.4);
+    position: relative;
+    display: inline-block;
+  }
+  /* Strike through the old framing — the reframe made visual. */
+  .wss-reframe__line--strike::after {
+    content: '';
+    position: absolute;
+    left: -2%;
+    right: -2%;
+    top: 52%;
+    height: clamp(3px, 0.5vw, 5px);
+    background: rgba(245, 248, 250, 0.32);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+  }
+  .wss-reframe.is-in .wss-reframe__line--strike::after {
+    transform: scaleX(1);
+  }
+
+  .wss-reframe__line--accent {
+    color: var(--mint);
+    margin-top: clamp(8px, 1.4vw, 16px);
+  }
+
+  .wss-reframe__close {
+    max-width: 52ch;
+    margin: clamp(28px, 4vw, 40px) auto 0;
+    font-family: var(--font-body);
+    font-size: clamp(16px, 1.8vw, 20px);
+    font-weight: 400;
+    line-height: 1.55;
+    color: rgba(245, 248, 250, 0.78);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wss-reframe__line--strike::after {
+      transform: scaleX(1);
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const el = document.querySelector('.wss-reframe');
+  if (el) {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) {
+      el.classList.add('is-in');
+    } else {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              el.classList.add('is-in');
+              io.disconnect();
+            }
+          });
+        },
+        { threshold: 0.35 }
+      );
+      io.observe(el);
+    }
+  }
+</script>

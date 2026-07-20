@@ -12,7 +12,7 @@ const { capabilities, lead, takeaway } = Astro.props;
 
 <div class="persona-caps-intro" data-reveal>
   <p class="persona-caps__lead">{lead}</p>
-  <p class="persona-caps__takeaway">{takeaway}</p>
+  {takeaway && <p class="persona-caps__takeaway">{takeaway}</p>}
 </div>
 
 <ul class="persona-caps" role="list" data-persona-caps>
@@ -67,15 +67,16 @@ const { capabilities, lead, takeaway } = Astro.props;
     line-height: 1.4;
     letter-spacing: -0.01em;
     color: var(--off-white);
-    margin: 0 0 var(--space-3);
+    margin: 0 0 var(--space-4);
   }
   .persona-caps__takeaway {
     font-family: var(--font-body);
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 1.6;
-    color: rgba(245, 248, 250, 0.78);
-    margin: 0;
+    color: rgba(245, 248, 250, 0.72);
+    margin: 0 0 var(--space-4);
+    max-width: 64ch;
   }
 
   .persona-caps {

@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WhoWeServeTeams from '../components/WhoWeServeTeams.astro';
+import WssHeader from '../components/WssHeader.astro';
+
+const variants = [
+  { id: 'float', tag: 'E', title: 'Floating typography', desc: 'No container at all. The role, label, and line float on the dark stage with a faint mint radial glow behind them — same atmosphere as the ring.' },
+  { id: 'tint', tag: 'F', title: 'Soft tint capsule', desc: 'A low-contrast mint-tinted surface with a faint hairline and no left bar or shadow. Echoes the softness of the node badges without reading as a hard box.' },
+  { id: 'hairline', tag: 'G', title: 'Hairline + glow', desc: 'No container — just a short mint rule above the content. The most minimal; lets the ring stay the hero.' },
+];
+---
+
+<BaseLayout title="Tap a role — options" description="Three de-boxed directions for the teams-ring detail panel.">
+  <div class="tap-opts">
+    <div class="tap-opts__intro container container--wide">
+      <WssHeader
+        as="h1"
+        lead="Detail"
+        rest=" panel — three de-boxed directions"
+        sub="The boxy detail card clashes with the soft, organic ring. These three directions de-box the detail panel so it harmonizes with the ring. Same ring, same content — only the panel treatment changes. Scroll through and compare."
+        tone="dark"
+      />
+    </div>
+
+    {variants.map((v) => (
+      <section class="tap-opts__variant" id={`variant-${v.id}`}>
+        <div class="tap-opts__variant-head container container--wide">
+          <span class="tap-opts__tag">{v.tag}</span>
+          <div>
+            <h2 class="tap-opts__title">{v.title}</h2>
+            <p class="tap-opts__desc">{v.desc}</p>
+          </div>
+        </div>
+        <div class="tap-opts__ring container container--wide">
+          <WhoWeServeTeams tapVariant="remove" panelStyle={v.id as any} />
+        </div>
+      </section>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .tap-opts { padding-block: clamp(40px, 6vw, 64px); }
+  .tap-opts__intro { max-width: 64ch; margin-bottom: clamp(28px, 4vw, 44px); }
+
+  .tap-opts__variant + .tap-opts__variant { margin-top: clamp(40px, 6vw, 72px); padding-top: clamp(40px, 6vw, 72px); border-top: 1px solid rgba(255, 255, 255, 0.1); }
+  .tap-opts__variant-head { display: flex; gap: 16px; align-items: flex-start; margin-bottom: clamp(20px, 3vw, 28px); }
+  .tap-opts__tag {
+    flex-shrink: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; border-radius: 9999px;
+    background: rgba(104, 227, 190, 0.14); color: var(--mint);
+    font-family: var(--font-display); font-size: 13px; font-weight: 700;
+  }
+  .tap-opts__title {
+    margin: 0 0 6px;
+    font-family: var(--font-body); font-size: clamp(20px, 2vw, 26px); font-weight: 700;
+    letter-spacing: -0.015em; line-height: 1.15; color: var(--off-white);
+  }
+  .tap-opts__desc { margin: 0; max-width: 70ch; font-size: 15px; line-height: 1.5; color: rgba(245, 248, 250, 0.72); }
+  .tap-opts__ring { max-width: var(--content-wide); }
+</style>

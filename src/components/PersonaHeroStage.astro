@@ -2,16 +2,16 @@
 interface Props {
   heroImage: string;
   heroAlt?: string;
-  kicker: string;
-  lockupName: string;
-  lockupRole: string;
-  deck: string;
+  lead: string;
+  rest?: string;
+  sub?: string;
+  sectionId?: string;
 }
 
-const { heroImage, heroAlt = '', kicker, lockupName, lockupRole, deck } = Astro.props;
+const { heroImage, heroAlt = '', lead, rest = '', sub = '', sectionId = 'persona-thesis' } = Astro.props;
 ---
 
-<section id="persona-thesis" class="persona-hero">
+<section id={sectionId} class="persona-hero">
   <img
     class="persona-hero__img"
     src={heroImage}
@@ -26,13 +26,10 @@ const { heroImage, heroAlt = '', kicker, lockupName, lockupRole, deck } = Astro.
   <span class="persona-hero__grain" aria-hidden="true"></span>
 
   <div class="persona-hero__inner container container--wide">
-    <p class="persona-hero__kicker display-label">{kicker}</p>
-    <div class="header-lockup is-in" data-reveal>
-      <h2 class="header-lockup__name">{lockupName}</h2>
-      <span class="header-lockup__rule" aria-hidden="true"></span>
-      <p class="header-lockup__role">{lockupRole}</p>
+    <div class="persona-hero__head">
+      <span class="wss-header__accent">{lead}</span>{rest}
     </div>
-    <p class="persona-hero__deck">{deck}</p>
+    {sub && <p class="persona-hero__sub">{sub}</p>}
   </div>
 </section>
 
@@ -86,18 +83,7 @@ const { heroImage, heroAlt = '', kicker, lockupName, lockupRole, deck } = Astro.
     padding-block: clamp(96px, 12vw, 140px) clamp(44px, 7vw, 84px);
   }
 
-  .persona-hero__kicker {
-    color: var(--mint);
-    margin: 0 0 var(--space-3);
-    letter-spacing: 0.2em;
-  }
-
-  .persona-hero .header-lockup {
-    display: block;
-    margin-bottom: var(--space-3);
-  }
-
-  .persona-hero .header-lockup__name {
+  .persona-hero__head {
     font-family: var(--font-body);
     font-size: clamp(38px, 6vw, 64px);
     font-weight: 700;
@@ -105,31 +91,13 @@ const { heroImage, heroAlt = '', kicker, lockupName, lockupRole, deck } = Astro.
     letter-spacing: -0.02em;
     color: var(--off-white);
     margin: 0;
+    max-width: 16ch;
   }
+  .persona-hero .wss-header__accent { color: var(--mint); }
 
-  .persona-hero .header-lockup__rule {
-    display: block;
-    width: 40px;
-    height: 3px;
-    margin: 16px 0 12px;
-    background: var(--mint);
-    border-radius: 2px;
-  }
-
-  .persona-hero .header-lockup__role {
-    font-family: var(--font-body);
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    line-height: 1.35;
-    color: var(--mint);
-    margin: 0;
-  }
-
-  .persona-hero__deck {
+  .persona-hero__sub {
     max-width: var(--measure);
-    margin: 0;
+    margin: 18px 0 0;
     font-family: var(--font-body);
     font-size: clamp(17px, 1.6vw, 20px);
     font-weight: 400;

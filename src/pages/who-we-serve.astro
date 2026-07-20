@@ -1,42 +1,83 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHero from '../components/PageHero.astro';
 import SectionBlock from '../components/SectionBlock.astro';
+import PersonaHeroStage from '../components/PersonaHeroStage.astro';
+import WssHeader from '../components/WssHeader.astro';
+import WhoWeServeReframe from '../components/WhoWeServeReframe.astro';
+import WhoWeServeTeams from '../components/WhoWeServeTeams.astro';
+import WhoWeServeIndustries from '../components/WhoWeServeIndustries.astro';
 import { personas } from '../data/personas';
 import { hasPersonaDetail } from '../data/personaDetails';
+import { whoWeServe } from '../data/whoWeServe';
 import { site } from '../data/site';
+
+const h = whoWeServe.hero;
+const iconById = Object.fromEntries(whoWeServe.teams.map((t) => [t.id, t.icon]));
 ---
 
-<BaseLayout title="Who We Serve" description="Multimedia orchestration — one platform, every function connected.">
-  <PageHero
-    title="Who we serve"
-    lead="Multimedia orchestration — one platform, every function connected."
-    deep
+<BaseLayout title="Who We Serve" description={h.sub} darkHeader>
+  <h1 class="wss-sr-only">Who we serve — {h.lead}{h.rest}</h1>
+
+  <PersonaHeroStage
+    sectionId="wss-hero"
+    heroImage="/images/who-we-serve/who-we-serve-hero.jpg"
+    heroAlt="A venue operations team at a unified control surface — tablets and screens coordinating a property"
+    lead={h.lead}
+    rest={h.rest}
+    sub={h.sub}
   />
 
-  <SectionBlock lockupName="By function" lockupRole="What each role can do with LUCI">
-    <p class="measure scaffold-note" style="margin-bottom: 1.5rem">
-      Every team that shares your floor works the same platform toward the same guest.
-      Open a role to see what it can do — and what to try this week.
-    </p>
-    <ul class="rows persona-rows" style="margin-top: 1rem">
+  <WhoWeServeReframe
+    line1={whoWeServe.reframe.line1}
+    line2={whoWeServe.reframe.line2}
+    close={whoWeServe.reframe.close}
+  />
+
+  <SectionBlock id="wss-teams" tone="deep" wide>
+    <WssHeader
+      lead={whoWeServe.teamsLockup.lead}
+      rest={whoWeServe.teamsLockup.rest}
+      sub={whoWeServe.teamsLockup.sub}
+      tone="dark"
+    />
+    <WhoWeServeTeams />
+  </SectionBlock>
+
+  <SectionBlock id="wss-industries" tone="white" wide>
+    <WssHeader
+      lead={whoWeServe.industriesLockup.lead}
+      rest={whoWeServe.industriesLockup.rest}
+      sub={whoWeServe.industriesLockup.sub}
+      tone="light"
+    />
+    <WhoWeServeIndustries />
+  </SectionBlock>
+
+  <SectionBlock id="wss-personas" tone="deep" wide>
+    <WssHeader
+      lead={whoWeServe.personasLockup.lead}
+      rest={whoWeServe.personasLockup.rest}
+      sub={whoWeServe.personasLockup.sub}
+      tone="dark"
+    />
+    <ul class="wss-personas" role="list">
       {personas.map((p) => {
         const linked = hasPersonaDetail(p.id);
         return (
-          <li id={p.id} class:list={['persona-row', linked && 'persona-row--linked']}>
+          <li class:list={['wss-personas__cell', !linked && 'wss-personas__cell--soon']}>
             {linked ? (
-              <a class="persona-row__link" href={`/who-we-serve/${p.id}`}>
-                <span class="rows__title">{p.label}</span>
-                <span class="scaffold-note persona-row__role">{p.role}</span>
-                <span class="persona-row__line">{p.line}</span>
-                <span class="persona-row__cta">See what you can do <span aria-hidden="true">→</span></span>
+              <a class="wss-personas__link" href={`/who-we-serve/${p.id}`}>
+                <p class="wss-personas__role">{p.role}</p>
+                <h3 class="wss-personas__label">{p.label}</h3>
+                <p class="wss-personas__line">{p.line}</p>
+                <span class="wss-personas__action" aria-hidden="true" set:html={iconById[p.id]} />
               </a>
             ) : (
-              <div class="persona-row__static">
-                <span class="rows__title">{p.label}</span>
-                <span class="scaffold-note persona-row__role">{p.role}</span>
-                <span class="persona-row__line">{p.line}</span>
-                <span class="persona-row__soon">Coming soon</span>
+              <div class="wss-personas__static">
+                <p class="wss-personas__role">{p.role}</p>
+                <h3 class="wss-personas__label">{p.label}</h3>
+                <p class="wss-personas__line">{p.line}</p>
+                <span class="wss-personas__soon">Coming soon</span>
               </div>
             )}
           </li>
@@ -45,111 +86,185 @@ import { site } from '../data/site';
     </ul>
   </SectionBlock>
 
-  <SectionBlock tone="sand">
-    <div class="btn-row">
-      <a class="btn btn--primary" href="/platform">Explore the platform</a>
-      <a class="btn btn--outline" href="/contact">{site.ctaPrimary}</a>
+  <SectionBlock id="wss-cta" tone="sand">
+    <div class="wss-cta">
+      <WssHeader
+        lead="See"
+        rest=" what your team can do."
+        sub="Your teams are already on the floor. LUCI puts them on the same platform."
+        tone="light"
+        class="wss-cta__head"
+      />
+      <div class="btn-row">
+        <a class="btn btn--primary" href="/contact">{site.ctaPrimary}</a>
+        <a class="btn btn--outline" href="/platform">Explore the platform</a>
+      </div>
     </div>
   </SectionBlock>
 </BaseLayout>
 
 <style>
-  .persona-rows {
+  .wss-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  #wss-teams,
+  #wss-industries,
+  #wss-personas,
+  #wss-cta {
+    scroll-margin-top: 120px;
+  }
+
+  /* ---------- Persona grid (mirrors HomePersonas, links to persona pages) ---------- */
+  .wss-personas {
     list-style: none;
     margin: 0;
     padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    overflow: hidden;
   }
-  .persona-row {
-    border-top: 1px solid var(--rule-light);
-    padding-block: clamp(18px, 2.4vw, 26px);
+  .wss-personas__cell {
+    position: relative;
+    background: var(--navy);
+    transition: background 0.18s ease-out;
   }
-  .persona-row:last-child {
-    border-bottom: 1px solid var(--rule-light);
+  .wss-personas__cell::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--mint);
+    transform: scaleY(0);
+    transform-origin: top center;
+    transition: transform 0.2s ease-out;
+  }
+  .wss-personas__cell:hover,
+  .wss-personas__cell:focus-within {
+    background: rgba(104, 227, 190, 0.06);
+  }
+  .wss-personas__cell:hover::before,
+  .wss-personas__cell:focus-within::before {
+    transform: scaleY(1);
+  }
+  .wss-personas__cell--soon {
+    opacity: 0.66;
   }
 
-  .persona-row__link,
-  .persona-row__static {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    grid-template-areas:
-      'title role'
-      'line line'
-      'cta cta';
-    gap: 6px 16px;
+  .wss-personas__link,
+  .wss-personas__static {
+    display: block;
+    height: 100%;
+    padding: clamp(22px, 2.6vw, 32px) clamp(20px, 2.4vw, 28px);
     text-decoration: none;
     color: inherit;
   }
-  .persona-row__link {
-    transition: color 0.15s ease-out;
-  }
-  .persona-row__link:hover {
-    color: var(--accent-light);
-  }
-  .persona-row__link:focus-visible {
-    outline: 2px solid var(--accent-light);
-    outline-offset: 6px;
-    border-radius: 2px;
+  .wss-personas__link:focus-visible {
+    outline: 2px solid var(--mint);
+    outline-offset: -2px;
   }
 
-  .persona-row .rows__title {
-    grid-area: title;
-    margin: 0;
-    font-size: clamp(20px, 2.4vw, 24px);
-  }
-  .persona-row__role {
-    grid-area: role;
-    align-self: baseline;
-    text-align: right;
-    margin: 0;
-  }
-  .persona-row__line {
-    grid-area: line;
-    font-family: var(--font-body);
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.55;
-    color: var(--navy-muted);
-    max-width: 64ch;
-    margin: 0;
-  }
-  .persona-row__cta {
-    grid-area: cta;
-    margin-top: 6px;
-    font-family: var(--font-body);
-    font-size: 12px;
+  .wss-personas__role {
+    margin: 0 0 8px;
+    font-family: var(--font-display);
+    font-size: 10px;
     font-weight: 700;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--accent-light);
+    color: var(--mint);
   }
-  .persona-row__soon {
-    grid-area: cta;
-    align-self: end;
-    justify-self: end;
+  .wss-personas__label {
+    margin: 0 0 10px;
     font-family: var(--font-body);
-    font-size: 11px;
+    font-size: clamp(18px, 1.7vw, 22px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: var(--off-white);
+  }
+  .wss-personas__line {
+    margin: 0;
+    font-size: clamp(13px, 1.2vw, 15px);
+    line-height: 1.5;
+    color: rgba(245, 248, 250, 0.7);
+  }
+  .wss-personas__action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: clamp(16px, 2vw, 22px);
+    width: 40px;
+    height: 40px;
+    border-radius: 9999px;
+    border: 1px solid rgba(104, 227, 190, 0.28);
+    background: rgba(104, 227, 190, 0.06);
+    color: var(--mint);
+    transition: transform 0.18s ease-out, background 0.18s ease-out, border-color 0.18s ease-out;
+  }
+  .wss-personas__action :global(svg) {
+    width: 19px;
+    height: 19px;
+    display: block;
+  }
+  .wss-personas__cell:hover .wss-personas__action,
+  .wss-personas__cell:focus-within .wss-personas__action {
+    transform: translate(2px, -2px);
+    background: rgba(104, 227, 190, 0.16);
+    border-color: rgba(104, 227, 190, 0.5);
+  }
+  .wss-personas__soon {
+    display: inline-block;
+    margin-top: clamp(16px, 2vw, 22px);
+    padding: 5px 10px;
+    font-family: var(--font-body);
+    font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--navy-muted);
-    opacity: 0.7;
+    color: rgba(245, 248, 250, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 9999px;
   }
 
+  @media (max-width: 980px) {
+    .wss-personas {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
   @media (max-width: 640px) {
-    .persona-row__link,
-    .persona-row__static {
+    .wss-personas {
       grid-template-columns: 1fr;
-      grid-template-areas:
-        'title'
-        'role'
-        'line'
-        'cta';
     }
-    .persona-row__role {
-      text-align: left;
-    }
-    .persona-row__soon {
-      justify-self: start;
-    }
+  }
+
+  /* ---------- CTA ---------- */
+  .wss-cta {
+    text-align: center;
+    padding-block: clamp(16px, 3vw, 28px);
+  }
+  .wss-cta :global(.wss-cta__head) {
+    margin-inline: auto;
+    text-align: center;
+  }
+  .wss-cta :global(.wss-cta__head .wss-header__head),
+  .wss-cta :global(.wss-cta__head .wss-header__sub) {
+    margin-inline: auto;
+    text-align: center;
+  }
+  .wss-cta :global(.wss-cta__head .wss-header__sub) {
+    margin-bottom: var(--space-4);
   }
 </style>
