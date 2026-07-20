@@ -23,17 +23,15 @@ export interface WhoWeServeIndustry {
 
 export const whoWeServe = {
   hero: {
-    kicker: 'Who we serve',
-    lockupName: 'One floor. Every team. One guest.',
-    lockupRole: 'How LUCI brings your onsite teams together',
-    deck:
-      "LUCI looks like an A/V solution. It's a guest-experience solution. Across casinos, hotels, arenas, airports, and convention centers, your teams stop working separate equipment and start working the same floor — together.",
+    lockupName: 'One platform for every team.',
+    lockupRole: 'LUCI helps you deliver a singular guest experience',
   },
   reframe: {
-    label: 'The reframe',
-    line1: 'It might look like an A/V solution.',
-    line2: "It's a guest-experience solution.",
-    close: "You're not fighting technology anymore. You're fully leveraging it.",
+    label: 'Why this works',
+    line1: 'Every team negotiating its own priorities.',
+    line2: 'Every team executing toward one guest experience.',
+    close:
+      'LUCI aligns your teams by default — so the A/V infrastructure you already run becomes a strategic tool for revenue, retention, and brand, not a stack of separate systems everyone has to work around.',
   },
   teamsLockup: {
     lockupName: 'Your teams, on the same floor',

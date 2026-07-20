@@ -14,17 +14,15 @@ const h = whoWeServe.hero;
 const iconById = Object.fromEntries(whoWeServe.teams.map((t) => [t.id, t.icon]));
 ---
 
-<BaseLayout title="Who We Serve" description={h.deck} darkHeader>
+<BaseLayout title="Who We Serve" description={h.lockupRole} darkHeader>
   <h1 class="wss-sr-only">Who we serve — {h.lockupName}</h1>
 
   <PersonaHeroStage
     sectionId="wss-hero"
     heroImage="/images/who-we-serve/who-we-serve-hero.jpg"
     heroAlt="A venue operations team at a unified control surface — tablets and screens coordinating a property"
-    kicker={h.kicker}
     lockupName={h.lockupName}
     lockupRole={h.lockupRole}
-    deck={h.deck}
   />
 
   <WhoWeServeReframe
