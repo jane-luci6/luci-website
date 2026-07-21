@@ -134,7 +134,7 @@ export const whoWeServe = {
   support: {
     lockupName: 'How LUCI supports your role',
     lockupRole: 'From silos to one platform',
-    deck: "Today's venue and property teams are forced to work in technological silos — each function in its own screens and racks. LUCI flips the script: one platform where every team can strategize and tackle the property's A/V together.",
+    deck: "Today's venue and property teams work in silos. LUCI flips the script: one platform where every team can strategize and tackle the guest experience together.",
     points: [
       {
         head: 'One map of the property',
