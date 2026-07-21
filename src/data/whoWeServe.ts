@@ -134,25 +134,22 @@ export const whoWeServe = {
   support: {
     lockupName: 'How LUCI supports your role',
     lockupRole: 'From silos to one platform',
-    deck: "Today's venue and property teams are forced to work in technological silos — each function in its own screens, racks, and walkie-talkies. LUCI flips the script: one platform where every team can strategize and tackle the property's A/V together.",
+    deck: "Today's venue and property teams are forced to work in technological silos — each function in its own screens and racks. LUCI flips the script: one platform where every team can strategize and tackle the property's A/V together.",
     points: [
       {
-        index: '01',
         head: 'One map of the property',
         detail:
           "Every function works from the same live map — zones, screens, audio, and signals in one place — so marketing, ops, and A/V see the same floor, not three versions of it.",
       },
       {
-        index: '02',
-        head: 'One plan, not three handoffs',
+        head: 'Schedule every zone',
         detail:
-          "Schedule screens, audio, and modes by zone and moment on one timeline. Marketing's campaign and A/V's setup become one plan, not a chain of after-hours change orders.",
+          "Each zone runs its own timeline lane — screens, audio, and modes by moment — all on one platform, so a campaign in one zone and A/V setup in another stay aligned instead of colliding.",
       },
       {
-        index: '03',
-        head: 'One team, accountable',
+        head: 'One team, planning together',
         detail:
-          "LUCI's embedded operations team owns the platform end-to-end. The same people who deploy it stay accountable — no ticket thrown over the wall, no vendor to chase.",
+          "Your teams become one team because they finally have the tools to plan together — set presets, schedule events, and talk through strategy on one platform — instead of reacting to each other's changes after the fact.",
       },
     ],
   },
