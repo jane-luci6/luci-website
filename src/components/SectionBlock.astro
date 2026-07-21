@@ -8,13 +8,15 @@ interface Props {
   deck?: string;
   tone?: 'white' | 'light' | 'sand' | 'deep';
   wide?: boolean;
+  pattern?: boolean;
 }
 
-const { id, kicker, title, lockupName, lockupRole, deck, tone = 'white', wide = false } = Astro.props;
+const { id, kicker, title, lockupName, lockupRole, deck, tone = 'white', wide = false, pattern = false } = Astro.props;
 const toneClass = `section--${tone}`;
 ---
 
-<section id={id} class:list={['section', toneClass]}>
+<section id={id} class:list={['section', toneClass, pattern && 'section--pattern']}>
+  {pattern && <span class="section__pattern" aria-hidden="true"></span>}
   <div class:list={['container', wide && 'container--wide']}>
     {kicker && <p class="display-label section-block__kicker">{kicker}</p>}
     {title && <h2 class="h2 section-block__title">{title}</h2>}
@@ -42,6 +44,27 @@ const toneClass = `section--${tone}`;
 
   .section--deep .section-block__kicker {
     color: var(--mint);
+  }
+
+  /* ---------- Optional circuit pattern background ---------- */
+  .section--pattern {
+    position: relative;
+    isolation: isolate;
+  }
+  .section__pattern {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.14;
+    mix-blend-mode: soft-light;
+    background-image: url('/images/textures/texture-circuit-navy-steel-dense.png');
+    background-size: 680px;
+    background-position: center;
+  }
+  .section--pattern > .container {
+    position: relative;
+    z-index: 1;
   }
 
   .section-block__title {

@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionBlock from '../components/SectionBlock.astro';
+import IndustriesAdaptFlip from '../components/IndustriesAdaptFlip.astro';
+import { whoWeServe } from '../data/whoWeServe';
+
+const s = whoWeServe.support;
+
+const photos = [
+  { src: '/images/industries/industries-hero.jpg', alt: 'A venue property at a glance' },
+  { src: '/images/industries/hotel/solution-event-boards.jpg', alt: 'Event boards and signage scheduled by zone' },
+  { src: '/images/industries/sports-venues/solution-embedded-team.jpg', alt: 'An embedded team at a unified control surface' },
+];
+
+const variants: { id: string; label: string; variant: 'icons' | 'photos' | 'both' }[] = [
+  { id: 'opt-icons', label: 'A — Graphics (duotone line icons)', variant: 'icons' },
+  { id: 'opt-photos', label: 'B — Photos (venue photo per card)', variant: 'photos' },
+  { id: 'opt-both', label: 'C — Both (icon + faint photo wash)', variant: 'both' },
+];
+---
+
+<BaseLayout title="How LUCI supports — options" description="Flip card visual options" darkHeader>
+  <div class="opts">
+    <div class="opts__intro container container--wide">
+      <p class="display-label">Options</p>
+      <h1 class="h1">How LUCI supports — flip card treatments</h1>
+      <p class="measure">Three directions for the card fronts. Each section below also carries the circuit pattern background. Pick A, B, or C.</p>
+    </div>
+
+    {variants.map((v) => (
+      <SectionBlock
+        id={v.id}
+        lockupName={s.lockupName}
+        lockupRole={s.lockupRole}
+        deck={s.deck}
+        tone="deep"
+        wide
+        pattern
+      >
+        <p class="opts__tag">{v.label}</p>
+        <IndustriesAdaptFlip points={s.points as any} cardVariant={v.variant} photos={photos} />
+      </SectionBlock>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .opts__intro {
+    padding-block: clamp(48px, 7vw, 80px) clamp(24px, 3vw, 36px);
+  }
+  .opts__intro .h1 {
+    margin: var(--space-2) 0 var(--space-3);
+  }
+  .opts__intro .measure {
+    color: var(--navy-muted);
+    max-width: var(--measure);
+  }
+  .opts__tag {
+    margin: 0 0 var(--space-4);
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-deep, #CEB06E);
+  }
+</style>
