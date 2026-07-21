@@ -69,7 +69,7 @@ const n = narrative;
     font-weight: 700;
     line-height: 1.18;
     letter-spacing: -0.02em;
-    color: var(--ink-strong);
+    color: var(--off-white);
   }
 
   .pnt__stage {
@@ -84,7 +84,7 @@ const n = narrative;
     overflow: visible;
   }
   .pnt__axis {
-    stroke: var(--rule-light);
+    stroke: rgba(245, 248, 250, 0.18);
     stroke-width: 1;
     stroke-dasharray: 3 5;
   }
@@ -96,8 +96,8 @@ const n = narrative;
   @keyframes pntDraw { to { stroke-dashoffset: 0; } }
   .pnt__glow { fill: rgba(104, 227, 190, 0.22); }
   .pnt__dot {
-    fill: var(--off-white);
-    stroke: var(--accent-light);
+    fill: var(--navy-deep);
+    stroke: var(--mint);
     stroke-width: 2;
     opacity: 0;
     animation: pntPop 0.5s ease-out forwards;
@@ -132,7 +132,7 @@ const n = narrative;
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--accent-light);
+    color: var(--mint);
     white-space: nowrap;
   }
   .pnt__mark-c {
@@ -141,7 +141,7 @@ const n = narrative;
     font-family: 'Inter', system-ui, sans-serif;
     font-size: clamp(13px, 1.1vw, 15px);
     line-height: 1.5;
-    color: var(--ink);
+    color: rgba(245, 248, 250, 0.82);
   }
 
   .pnt__support {
@@ -150,7 +150,7 @@ const n = narrative;
     font-family: 'Inter', system-ui, sans-serif;
     font-size: clamp(16px, 1.4vw, 18px);
     line-height: 1.6;
-    color: var(--ink);
+    color: rgba(245, 248, 250, 0.82);
   }
   .pnt__closing {
     margin: 0;
@@ -160,8 +160,8 @@ const n = narrative;
     font-weight: 700;
     line-height: 1.3;
     letter-spacing: -0.01em;
-    color: var(--ink-strong);
-    border-top: 1px solid var(--rule-light);
+    color: var(--off-white);
+    border-top: 1px solid rgba(245, 248, 250, 0.16);
     padding-top: clamp(16px, 2vw, 24px);
   }
 

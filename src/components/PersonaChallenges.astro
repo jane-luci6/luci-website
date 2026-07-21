@@ -45,7 +45,7 @@ let n = 0;
     font-weight: 700;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--accent-light);
+    color: var(--mint);
   }
   .pch__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
   .pch__row {
@@ -53,15 +53,15 @@ let n = 0;
     grid-template-columns: 56px 1fr 1fr;
     gap: 24px;
     padding: 26px 0;
-    border-top: 1px solid var(--rule-light);
+    border-top: 1px solid rgba(245, 248, 250, 0.14);
     align-items: start;
   }
-  .pch__row:last-child { border-bottom: 1px solid var(--rule-light); }
+  .pch__row:last-child { border-bottom: 1px solid rgba(245, 248, 250, 0.14); }
   .pch__num {
     font-family: var(--font-display);
     font-size: 14px;
     font-weight: 700;
-    color: var(--accent-light);
+    color: var(--mint);
     padding-top: 2px;
   }
   .pch__friction-head {
@@ -71,16 +71,16 @@ let n = 0;
     font-weight: 700;
     line-height: 1.25;
     letter-spacing: -0.01em;
-    color: var(--ink-strong);
+    color: var(--off-white);
   }
   .pch__friction-body {
     margin: 0;
     font-family: 'Inter', system-ui, sans-serif;
     font-size: 14.5px;
     line-height: 1.55;
-    color: var(--navy-muted);
+    color: rgba(245, 248, 250, 0.62);
   }
-  .pch__fix { border-left: 2px solid var(--accent-light); padding-left: 20px; }
+  .pch__fix { border-left: 2px solid var(--mint); padding-left: 20px; }
   .pch__fix-k {
     display: block;
     margin-bottom: 8px;
@@ -89,7 +89,7 @@ let n = 0;
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--navy-muted);
+    color: rgba(245, 248, 250, 0.5);
   }
   .pch__fix-text {
     margin: 0;
@@ -97,7 +97,7 @@ let n = 0;
     font-size: clamp(15px, 1.3vw, 17px);
     font-weight: 500;
     line-height: 1.45;
-    color: var(--ink-strong);
+    color: var(--off-white);
   }
   @media (max-width: 860px) {
     .pch__row { grid-template-columns: 40px 1fr; gap: 14px; }
