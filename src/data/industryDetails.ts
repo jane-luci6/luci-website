@@ -771,6 +771,8 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     ],
   },
   'conference-convention-centers': {
+    heroVideo: '/videos/luci-convention-center.mp4?v=1',
+    heroPoster: '/images/industries/conference-convention-centers/hero-main-stage-poster.jpg?v=1',
     heroImage: '/images/industries/conference-convention-centers.jpg?v=1',
     thesis: {
       lockupName: 'Conferences & Convention Centers',
