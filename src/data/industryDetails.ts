@@ -573,8 +573,8 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     ],
   },
   'airports-transportation': {
-    heroVideo: '/videos/luci-airport-terminal.mp4?v=2',
-    heroPoster: '/images/industries/airports-transportation/hero-terminal-poster.jpg?v=2',
+    heroVideo: '/videos/luci-airport-terminal.mp4?v=3',
+    heroPoster: '/images/industries/airports-transportation/hero-terminal-poster.jpg?v=3',
     heroImage: '/images/industries/airports-transportation.jpg?v=2',
     thesis: {
       lockupName: 'Airports & Transportation',
