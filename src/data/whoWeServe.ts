@@ -131,5 +131,30 @@ export const whoWeServe = {
         'A/V, ops, and sales reconfigure divisible rooms without a teardown — and turn the floor over in minutes.',
     },
   ] as WhoWeServeIndustry[],
+  support: {
+    lockupName: 'How LUCI supports your role',
+    lockupRole: 'From silos to one platform',
+    deck: "Today's venue and property teams are forced to work in technological silos — each function in its own screens, racks, and walkie-talkies. LUCI flips the script: one platform where every team can strategize and tackle the property's A/V together.",
+    points: [
+      {
+        index: '01',
+        head: 'One map of the property',
+        detail:
+          "Every function works from the same live map — zones, screens, audio, and signals in one place — so marketing, ops, and A/V see the same floor, not three versions of it.",
+      },
+      {
+        index: '02',
+        head: 'One plan, not three handoffs',
+        detail:
+          "Schedule screens, audio, and modes by zone and moment on one timeline. Marketing's campaign and A/V's setup become one plan, not a chain of after-hours change orders.",
+      },
+      {
+        index: '03',
+        head: 'One team, accountable',
+        detail:
+          "LUCI's embedded operations team owns the platform end-to-end. The same people who deploy it stay accountable — no ticket thrown over the wall, no vendor to chase.",
+      },
+    ],
+  },
   ctaTitle: 'See what your team can do.',
 } as const;

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionBlock from '../../components/SectionBlock.astro';
+import PersonaHeroStage from '../../components/PersonaHeroStage.astro';
 import IndustriesAdaptFlip from '../../components/IndustriesAdaptFlip.astro';
 import IndustriesBento from '../../components/IndustriesBento.astro';
 import { industriesHub } from '../../data/industriesHub';
@@ -10,13 +11,13 @@ import { site } from '../../data/site';
 <BaseLayout title="Industries" description={industriesHub.deck} darkHeader>
   <h1 class="ind-hub-sr-only">Industries — {industriesHub.lockupName}</h1>
 
-  <SectionBlock
-    id="industries-overview"
+  <PersonaHeroStage
+    sectionId="industries-overview"
+    heroImage="/images/industries/industries-hero.jpg"
+    heroAlt="A venue property at a glance — screens, signage, and a unified control surface spanning the floor"
     lockupName={industriesHub.lockupName}
     lockupRole={industriesHub.lockupRole}
     deck={industriesHub.deck}
-    tone="deep"
-    wide
   />
 
   <SectionBlock

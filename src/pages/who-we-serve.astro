@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionBlock from '../components/SectionBlock.astro';
 import PersonaHeroStage from '../components/PersonaHeroStage.astro';
 import TeamsFilmstrip from '../components/teams-redesign/TeamsFilmstrip.astro';
+import IndustriesAdaptFlip from '../components/IndustriesAdaptFlip.astro';
 import { whoWeServe } from '../data/whoWeServe';
 import { site } from '../data/site';
 
@@ -22,6 +23,17 @@ const h = whoWeServe.hero;
 
   <SectionBlock id="wss-teams" tone="deep" wide>
     <TeamsFilmstrip variant="cinema" />
+  </SectionBlock>
+
+  <SectionBlock
+    id="wss-support"
+    lockupName={whoWeServe.support.lockupName}
+    lockupRole={whoWeServe.support.lockupRole}
+    deck={whoWeServe.support.deck}
+    tone="deep"
+    wide
+  >
+    <IndustriesAdaptFlip points={whoWeServe.support.points as any} />
   </SectionBlock>
 
   <SectionBlock id="wss-cta" tone="sand">
@@ -50,6 +62,7 @@ const h = whoWeServe.hero;
   }
 
   #wss-teams,
+  #wss-support,
   #wss-cta {
     scroll-margin-top: 120px;
   }
