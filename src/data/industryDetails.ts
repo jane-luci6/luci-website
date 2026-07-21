@@ -228,8 +228,8 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     ],
   },
   'hotels-resorts': {
-    heroVideo: '/videos/luci-hotel-lobby.mp4?v=2',
-    heroPoster: '/images/industries/hotel/hero-lobby-poster.jpg?v=2',
+    heroVideo: '/videos/luci-hotel-lobby.mp4?v=3',
+    heroPoster: '/images/industries/hotel/hero-lobby-poster.jpg?v=3',
     heroImage: '/images/industries/hotels-resorts.jpg?v=1',
     thesis: {
       lockupName: 'Hotels & Resorts',
