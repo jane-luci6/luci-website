@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionBlock from '../components/SectionBlock.astro';
+import TeamsFilmstrip from '../components/teams-redesign/TeamsFilmstrip.astro';
+
+const variants = [
+  { id: 'bold', label: 'A', name: 'Bold spine', note: 'Bigger badges, thicker glowing beam, pulsing ring on the active station, larger detail.' },
+  { id: 'card', label: 'B', name: 'Card row', note: 'Each station becomes a substantial card with a border and fill — more meat per team.' },
+  { id: 'cinema', label: 'C', name: 'Cinematic', note: 'Very large stations, wide luminous beam, slow dramatic pulse, biggest detail.' },
+];
+---
+
+<BaseLayout title="Filmstrip prominence — options" description="Three prominence treatments for the Who We Serve filmstrip" darkHeader>
+  <style>
+    .fso { padding-block: clamp(48px, 6vw, 72px); }
+    .fso__head { max-width: 760px; margin: 0 auto clamp(32px, 4vw, 48px); text-align: center; }
+    .fso__kicker { color: var(--mint); margin-bottom: var(--space-2); }
+    .fso__title { color: var(--off-white); margin: 0 0 var(--space-3); }
+    .fso__lede { color: rgba(245, 248, 250, 0.72); margin: 0; }
+    .fso__variant { padding-block: clamp(40px, 5vw, 64px); border-top: 1px solid rgba(255, 255, 255, 0.08); }
+    .fso__variant-head { max-width: 760px; margin: 0 auto clamp(24px, 3vw, 36px); }
+    .fso__tag { display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; border-radius: 9999px; border: 1px solid rgba(206, 176, 110, 0.5); color: var(--gold); font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px; }
+    .fso__vname { color: var(--off-white); margin: 0 0 6px; font-family: var(--font-body); font-size: clamp(22px, 2.6vw, 28px); font-weight: 700; letter-spacing: -0.02em; }
+    .fso__vnote { color: rgba(245, 248, 250, 0.62); margin: 0; font-size: 15px; line-height: 1.5; }
+  </style>
+
+  <section class="fso section--deep">
+    <div class="container container--wide">
+      <div class="fso__head">
+        <p class="display-label fso__kicker">Who We Serve · filmstrip</p>
+        <h1 class="h1 fso__title">How prominent should the team picker be?</h1>
+        <p class="fso__lede">Three directions for making the filmstrip the meat of the page. Pick A, B, or C.</p>
+      </div>
+    </div>
+  </section>
+
+  {variants.map((v) => (
+    <SectionBlock tone="deep" wide>
+      <div class="fso__variant-head">
+        <span class="fso__tag">Option {v.label}</span>
+        <h2 class="fso__vname">{v.name}</h2>
+        <p class="fso__vnote">{v.note}</p>
+      </div>
+      <TeamsFilmstrip variant={v.id as any} />
+    </SectionBlock>
+  ))}
+</BaseLayout>
