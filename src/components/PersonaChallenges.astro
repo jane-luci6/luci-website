@@ -1,0 +1,106 @@
+---
+import type { PersonaChallengeGroup } from '../data/personaDetails';
+
+interface Props {
+  groups: PersonaChallengeGroup[];
+}
+
+const { groups } = Astro.props;
+let n = 0;
+---
+
+<div class="pch">
+  {groups.map((group) => (
+    <section class="pch__group">
+      <p class="pch__group-label">{group.label}</p>
+      <ul class="pch__list" role="list">
+        {group.items.map((c) => {
+          n += 1;
+          const idx = String(n).padStart(2, '0');
+          return (
+            <li class="pch__row">
+              <span class="pch__num">{idx}</span>
+              <div class="pch__friction">
+                <h3 class="pch__friction-head">{c.friction}</h3>
+                <p class="pch__friction-body">{c.frictionBody}</p>
+              </div>
+              <div class="pch__fix">
+                <span class="pch__fix-k">With LUCI</span>
+                <p class="pch__fix-text">{c.relief}</p>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  ))}
+</div>
+
+<style>
+  .pch { display: flex; flex-direction: column; gap: clamp(28px, 4vw, 44px); }
+  .pch__group-label {
+    margin: 0 0 18px;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+  }
+  .pch__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .pch__row {
+    display: grid;
+    grid-template-columns: 56px 1fr 1fr;
+    gap: 24px;
+    padding: 26px 0;
+    border-top: 1px solid var(--rule-light);
+    align-items: start;
+  }
+  .pch__row:last-child { border-bottom: 1px solid var(--rule-light); }
+  .pch__num {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent-light);
+    padding-top: 2px;
+  }
+  .pch__friction-head {
+    margin: 0 0 8px;
+    font-family: var(--font-body);
+    font-size: clamp(16px, 1.5vw, 19px);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--ink-strong);
+  }
+  .pch__friction-body {
+    margin: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--navy-muted);
+  }
+  .pch__fix { border-left: 2px solid var(--accent-light); padding-left: 20px; }
+  .pch__fix-k {
+    display: block;
+    margin-bottom: 8px;
+    font-family: var(--font-display);
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--navy-muted);
+  }
+  .pch__fix-text {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: clamp(15px, 1.3vw, 17px);
+    font-weight: 500;
+    line-height: 1.45;
+    color: var(--ink-strong);
+  }
+  @media (max-width: 860px) {
+    .pch__row { grid-template-columns: 40px 1fr; gap: 14px; }
+    .pch__fix { grid-column: 1 / -1; margin-left: 54px; }
+  }
+</style>

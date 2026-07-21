@@ -3,9 +3,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionBlock from '../../components/SectionBlock.astro';
 import PlatformChapterNav from '../../components/PlatformChapterNav.astro';
 import PersonaHeroStage from '../../components/PersonaHeroStage.astro';
-import PersonaCapabilitiesFlow from '../../components/PersonaCapabilitiesFlow.astro';
 import PersonaNarrativeTimeline from '../../components/PersonaNarrativeTimeline.astro';
-import PersonaSpotlight from '../../components/PersonaSpotlight.astro';
+import PersonaTwoShifts from '../../components/PersonaTwoShifts.astro';
+import PersonaChallenges from '../../components/PersonaChallenges.astro';
+import PersonaIndustrySwitcher from '../../components/PersonaIndustrySwitcher.astro';
+import PersonaCapabilitiesFlow from '../../components/PersonaCapabilitiesFlow.astro';
 import { personas } from '../../data/personas';
 import { getPersonaDetail, hasPersonaDetail } from '../../data/personaDetails';
 import { site } from '../../data/site';
@@ -54,6 +56,36 @@ if (!detail) return Astro.redirect('/who-we-serve');
   </SectionBlock>
 
   <SectionBlock
+    id="persona-two-shifts"
+    lockupName={detail.twoShiftsLockup.lockupName}
+    lockupRole={detail.twoShiftsLockup.lockupRole}
+    tone="sand"
+    wide
+  >
+    <PersonaTwoShifts shifts={detail.twoShifts} />
+  </SectionBlock>
+
+  <SectionBlock
+    id="persona-challenges"
+    lockupName={detail.challengesLockup.lockupName}
+    lockupRole={detail.challengesLockup.lockupRole}
+    tone="white"
+    wide
+  >
+    <PersonaChallenges groups={detail.challenges} />
+  </SectionBlock>
+
+  <SectionBlock
+    id="persona-industries"
+    lockupName={detail.industryLockup.lockupName}
+    lockupRole={detail.industryLockup.lockupRole}
+    tone="sand"
+    wide
+  >
+    <PersonaIndustrySwitcher stakes={detail.industryStakes} />
+  </SectionBlock>
+
+  <SectionBlock
     id="persona-capabilities"
     lockupName={detail.capabilitiesLockup.lockupName}
     lockupRole={detail.capabilitiesLockup.lockupRole}
@@ -67,18 +99,11 @@ if (!detail) return Astro.redirect('/who-we-serve');
     />
   </SectionBlock>
 
-  <SectionBlock id="persona-spotlight" tone="sand">
-    <PersonaSpotlight
-      label={detail.spotlight.label}
-      text={detail.spotlight.text}
-      accent={detail.spotlight.accent}
-    />
-  </SectionBlock>
-
   <SectionBlock id="persona-cta" tone="deep">
     <div class="persona-cta">
       <p class="display-label persona-cta__kicker">Next step</p>
       <h2 class="h2 persona-cta__title">{detail.ctaTitle}</h2>
+      <p class="persona-cta__deck">Let us show you what it looks like when it isn’t — on your floor, with your team, on your existing setup.</p>
       <div class="btn-row">
         <a class="btn btn--primary" href="/contact">{site.ctaPrimary}</a>
         <a class="btn btn--ghost" href="/platform">Explore the platform</a>
@@ -102,8 +127,10 @@ if (!detail) return Astro.redirect('/who-we-serve');
 
   #persona-thesis,
   #persona-narrative,
+  #persona-two-shifts,
+  #persona-challenges,
+  #persona-industries,
   #persona-capabilities,
-  #persona-spotlight,
   #persona-cta {
     scroll-margin-top: 156px;
   }
@@ -111,8 +138,10 @@ if (!detail) return Astro.redirect('/who-we-serve');
   @media (max-width: 640px) {
     #persona-thesis,
     #persona-narrative,
+    #persona-two-shifts,
+    #persona-challenges,
+    #persona-industries,
     #persona-capabilities,
-    #persona-spotlight,
     #persona-cta {
       scroll-margin-top: 132px;
     }
@@ -128,7 +157,16 @@ if (!detail) return Astro.redirect('/who-we-serve');
   }
   .persona-cta__title {
     color: var(--off-white);
-    margin-bottom: var(--space-4);
-    max-width: none;
+    margin-bottom: var(--space-3);
+    max-width: 22ch;
+    margin-inline: auto;
+  }
+  .persona-cta__deck {
+    max-width: 52ch;
+    margin: 0 auto var(--space-4);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.78);
   }
 </style>

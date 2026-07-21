@@ -1,0 +1,80 @@
+---
+import type { PersonaTwoShifts } from '../data/personaDetails';
+
+interface Props {
+  shifts: PersonaTwoShifts;
+}
+
+const { shifts } = Astro.props;
+const s = shifts;
+---
+
+<div class="pts">
+  <div class="pts__grid">
+    <div class="pts__col pts__col--smooth">
+      <p class="pts__head">When it just works</p>
+      <ul class="pts__list" role="list">
+        {s.smooth.map((line) => (
+          <li class="pts__row"><span class="pts__dot" aria-hidden="true"></span><span class="pts__text">{line}</span></li>
+        ))}
+      </ul>
+    </div>
+    <div class="pts__col pts__col--broken">
+      <p class="pts__head">When it doesn’t</p>
+      <ul class="pts__list" role="list">
+        {s.broken.map((line) => (
+          <li class="pts__row"><span class="pts__dot pts__dot--bad" aria-hidden="true"></span><span class="pts__text">{line}</span></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<style>
+  .pts__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--rule-light);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .pts__col { padding: clamp(24px, 3vw, 36px); display: flex; flex-direction: column; gap: 18px; }
+  .pts__col--smooth { background: #fff; }
+  .pts__col--broken { background: var(--navy-deep); color: var(--off-white); }
+  .pts__head {
+    margin: 0 0 4px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--navy-muted);
+  }
+  .pts__col--broken .pts__head { color: var(--mint); }
+  .pts__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .pts__row {
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    gap: 14px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--rule-light);
+    align-items: flex-start;
+  }
+  .pts__col--broken .pts__row { border-bottom: 1px solid rgba(245, 248, 250, 0.12); }
+  .pts__row:last-child { border-bottom: none; }
+  .pts__dot {
+    width: 9px; height: 9px; border-radius: 9999px; margin-top: 7px;
+    background: var(--accent-light);
+    box-shadow: 0 0 0 4px rgba(43, 158, 128, 0.12);
+  }
+  .pts__dot--bad { background: #e36868; box-shadow: 0 0 0 4px rgba(227, 104, 104, 0.16); }
+  .pts__text {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: clamp(15px, 1.3vw, 17px);
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .pts__col--broken .pts__text { color: rgba(245, 248, 250, 0.82); }
+  @media (max-width: 720px) { .pts__grid { grid-template-columns: 1fr; } }
+</style>
