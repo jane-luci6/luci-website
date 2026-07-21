@@ -46,7 +46,12 @@ const toneClass = `section--${tone}`;
     color: var(--mint);
   }
 
-  /* ---------- Optional circuit pattern background ---------- */
+  /* ---------- Optional circuit pattern background (standardized) ----------
+     Matches the site's house content-band treatment (navy-steel + lighten
+     blend, so the section color stays true and only the light circuit lines
+     read), but at the PDF band tile size (560px, not the huge 680px hero
+     tile) and a lower opacity so text-heavy areas stay readable. Applied to
+     the first dark section of each non-homepage page. */
   .section--pattern {
     position: relative;
     isolation: isolate;
@@ -56,11 +61,12 @@ const toneClass = `section--${tone}`;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.14;
-    mix-blend-mode: soft-light;
-    background-image: url('/images/textures/texture-circuit-navy-steel-dense.png');
-    background-size: 680px;
+    background-image: url('/images/textures/texture-circuit-navy-steel.png');
+    background-size: 560px;
+    background-repeat: repeat;
     background-position: center;
+    mix-blend-mode: lighten;
+    opacity: 0.4;
   }
   .section--pattern > .container {
     position: relative;

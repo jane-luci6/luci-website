@@ -1,48 +1,20 @@
 ---
 import { industriesHub } from '../data/industriesHub';
 
-interface Photo {
-  src: string;
-  alt: string;
-}
-
 interface Props {
   points?: { index?: string; head: string; detail: string }[];
-  cardVariant?: 'icons' | 'photos' | 'both';
-  photos?: Photo[];
 }
 
-const { points = industriesHub.adaptPoints, cardVariant, photos = [] } = Astro.props;
+const { points = industriesHub.adaptPoints } = Astro.props;
 
 const flipGlyph = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg>`;
-
-const GOLD = '#CEB06E';
-
-const icons = [
-  // 0 — One map of the property: property outline, zone dividers, gold location pin
-  `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="9" width="34" height="30" rx="3"/><path d="M7 19h34M7 29h34M24 9v30"/><path d="M33 16c0 2.2-3 5-3 5s-3-2.8-3-5a3 3 0 0 1 6 0z" fill="${GOLD}" stroke="${GOLD}" stroke-width="1.3"/></svg>`,
-  // 1 — Schedule every zone: three zone lanes, markers in each
-  `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 14h32M8 24h32M8 34h32"/><circle cx="16" cy="14" r="2.6" fill="${GOLD}" stroke="${GOLD}"/><circle cx="28" cy="24" r="2.6" fill="${GOLD}" stroke="${GOLD}"/><circle cx="34" cy="34" r="2.6" fill="currentColor" stroke="currentColor"/></svg>`,
-  // 2 — One team, planning together: connected people, gold center
-  `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="16" r="3.6" fill="${GOLD}" stroke="${GOLD}"/><circle cx="11" cy="33" r="3.1"/><circle cx="37" cy="33" r="3.1"/><path d="M21.6 18.9l-7.9 9.4M26.4 18.9l7.9 9.4M14 33h20"/></svg>`,
-];
-
-const showIcon = cardVariant === 'icons' || cardVariant === 'both';
-const showPhoto = cardVariant === 'photos' || cardVariant === 'both';
-const photoFaint = cardVariant === 'both';
 ---
 
-<ul class="ind-adapt" data-variant={cardVariant ?? 'plain'} role="list">
-  {points.map((point, i) => (
+<ul class="ind-adapt" role="list">
+  {points.map((point) => (
     <li class="ind-adapt__item" tabindex="0">
       <div class="ind-adapt__card">
         <div class="ind-adapt__face ind-adapt__face--front">
-          {showPhoto && photos[i] && (
-            <span class="ind-adapt__photo" class:list={{ 'ind-adapt__photo--faint': photoFaint }} aria-hidden="true">
-              <img src={photos[i].src} alt="" loading="lazy" decoding="async" />
-            </span>
-          )}
-          {showIcon && <span class="ind-adapt__icon" set:html={icons[i % icons.length]} />}
           {point.index && <span class="ind-adapt__watermark" aria-hidden="true">{point.index}</span>}
           <p class="ind-adapt__head">{point.head}</p>
           <span class="ind-adapt__flip" aria-hidden="true" set:html={flipGlyph} />
@@ -138,52 +110,6 @@ const photoFaint = cardVariant === 'both';
     box-shadow: 0 16px 32px rgba(10, 22, 28, 0.3), inset 0 0 0 1px rgba(104, 227, 190, 0.22);
   }
 
-  /* ---------- Photo layer (photos / both) ---------- */
-  .ind-adapt__photo {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-  }
-  .ind-adapt__photo::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(155deg, rgba(8, 17, 22, 0.62) 0%, rgba(8, 17, 22, 0.34) 46%, rgba(8, 17, 22, 0.72) 100%);
-  }
-  .ind-adapt__photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .ind-adapt__photo--faint img {
-    opacity: 0.22;
-    filter: saturate(0.7);
-  }
-  .ind-adapt__photo--faint::after {
-    background: linear-gradient(155deg, rgba(8, 17, 22, 0.86) 0%, rgba(8, 17, 22, 0.74) 100%);
-  }
-
-  /* ---------- Icon tile (icons / both) ---------- */
-  .ind-adapt__icon {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    place-items: center;
-    width: clamp(60px, 7vw, 76px);
-    height: clamp(60px, 7vw, 76px);
-    border-radius: 16px;
-    color: var(--mint);
-    background: rgba(104, 227, 190, 0.1);
-    box-shadow: inset 0 0 0 1px rgba(104, 227, 190, 0.24);
-  }
-  .ind-adapt__icon :global(svg) {
-    width: 62%;
-    height: 62%;
-    display: block;
-  }
-
   .ind-adapt__watermark {
     position: absolute;
     right: clamp(10px, 1.4vw, 20px);
@@ -242,12 +168,6 @@ const photoFaint = cardVariant === 'both';
     .ind-adapt__item:hover .ind-adapt__watermark {
       color: rgba(104, 227, 190, 0.22);
     }
-  }
-
-  /* When an icon is present, push the head to the bottom of the front face */
-  .ind-adapt[data-variant='icons'] .ind-adapt__face--front,
-  .ind-adapt[data-variant='both'] .ind-adapt__face--front {
-    justify-content: space-between;
   }
 
   .ind-adapt__face--back {
