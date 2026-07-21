@@ -70,27 +70,13 @@ import { site } from '../../data/site';
     padding-block: clamp(32px, 5vw, 64px) clamp(48px, 8vw, 96px);
   }
 
-  /* Bento stage — textured dark band (matches homepage industries atmosphere). */
+  /* Bento stage — plain dark band (pattern reserved for the first section only). */
   .ind-hub-bento {
     position: relative;
     background: var(--navy-mid);
     color: var(--off-white);
     overflow: hidden;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .ind-hub-bento::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url('/images/textures/texture-circuit-navy-steel.png');
-    background-size: 680px;
-    background-repeat: repeat;
-    background-position: center;
-    mix-blend-mode: lighten;
-    opacity: 0.6;
-    pointer-events: none;
-    z-index: 0;
   }
 
   .ind-hub-bento__inner {
