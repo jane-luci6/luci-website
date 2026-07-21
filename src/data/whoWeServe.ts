@@ -137,16 +137,19 @@ export const whoWeServe = {
     deck: "Today's venue and property teams work in silos. LUCI flips the script: one platform where every team can strategize and tackle the guest experience together.",
     points: [
       {
+        kicker: 'The map',
         head: 'One map of the property',
         detail:
           "Every function works from the same live map — zones, screens, audio, and signals in one place — so marketing, ops, and A/V see the same floor, not three versions of it.",
       },
       {
+        kicker: 'The schedule',
         head: 'Schedule every zone',
         detail:
           "Each zone runs its own timeline lane — screens, audio, and modes by moment — all on one platform, so a campaign in one zone and A/V setup in another stay aligned instead of colliding.",
       },
       {
+        kicker: 'The team',
         head: 'One team, planning together',
         detail:
           "Your teams become one team because they finally have the tools to plan together — set presets, schedule events, and talk through strategy on one platform — instead of reacting to each other's changes after the fact.",

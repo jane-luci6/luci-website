@@ -1,12 +1,26 @@
 ---
 import { site } from '../data/site';
 import { industries } from '../data/industries';
+import { personas } from '../data/personas';
+import type { PersonaId } from '../data/personas';
+import { hasPersonaDetail } from '../data/personaDetails';
 
 interface Props {
   dark?: boolean;
 }
 
 const { dark = false } = Astro.props;
+
+/* Who We Serve dropdown — mirrors the hub's team order. Entries auto-enable
+   (full opacity, clickable) once a persona's detail page exists. */
+const wssOrder: PersonaId[] = ['marketing', 'operations', 'technology', 'finance', 'facilities', 'leadership'];
+const whoWeServeChildren = [
+  { href: '/who-we-serve', label: 'Hub' },
+  ...wssOrder.map((id) => {
+    const p = personas.find((x) => x.id === id)!;
+    return { href: `/who-we-serve/${id}`, label: p.label, comingSoon: !hasPersonaDetail(id) };
+  }),
+];
 
 const nav = [
   { href: '/platform', label: 'Platform' },
@@ -15,7 +29,7 @@ const nav = [
     label: 'Industries',
     children: industries.map((i) => ({ href: `/industries/${i.slug}`, label: i.name })),
   },
-  { href: '/who-we-serve', label: 'Who We Serve' },
+  { href: '/who-we-serve', label: 'Who We Serve', children: whoWeServeChildren },
   {
     href: '/resources',
     label: 'Resources',
@@ -69,13 +83,25 @@ const path = Astro.url.pathname;
               </a>
               <div class="site-header__dropdown" role="menu">
                 {item.children.map((child) => (
-                  <a
-                    href={child.href}
-                    role="menuitem"
-                    {...(child.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                  >
-                    {child.label}
-                  </a>
+                  child.comingSoon ? (
+                    <span
+                      class="site-header__dropdown-item site-header__dropdown-item--soon"
+                      role="menuitem"
+                      aria-disabled="true"
+                    >
+                      <span>{child.label}</span>
+                      <em class="site-header__soon">Coming soon</em>
+                    </span>
+                  ) : (
+                    <a
+                      class="site-header__dropdown-item"
+                      href={child.href}
+                      role="menuitem"
+                      {...(child.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                    >
+                      {child.label}
+                    </a>
+                  )
                 ))}
               </div>
             </div>
@@ -238,9 +264,9 @@ const path = Astro.url.pathname;
     top: 100%;
     left: 0;
     min-width: 240px;
-    background: var(--surface-raised);
+    background: var(--off-white);
     border: 1px solid var(--rule-light);
-    box-shadow: 0 8px 24px rgba(10, 22, 28, 0.08);
+    box-shadow: 0 10px 28px rgba(10, 22, 28, 0.16);
     padding: 8px 0;
   }
 
@@ -249,18 +275,44 @@ const path = Astro.url.pathname;
     display: block;
   }
 
-  .site-header__dropdown a {
-    display: block;
+  .site-header__dropdown-item {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
     padding: 12px 18px;
-    color: var(--ink);
+    color: var(--ink-strong);
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 700;
     font-size: 15px;
   }
 
-  .site-header__dropdown a:hover {
-    background: var(--off-white);
+  .site-header__dropdown-item:hover {
+    background: rgba(var(--mint-rgb), 0.1);
     color: var(--accent-light);
+  }
+
+  /* Not-yet-built pages: dimmed, non-interactive, flagged "Coming soon". */
+  .site-header__dropdown-item--soon {
+    color: var(--navy-muted);
+    font-weight: 500;
+    cursor: default;
+  }
+
+  .site-header__dropdown-item--soon:hover {
+    background: transparent;
+    color: var(--navy-muted);
+  }
+
+  .site-header__soon {
+    font-style: normal;
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    white-space: nowrap;
   }
 
   .site-header__cta {

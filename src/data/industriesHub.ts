@@ -11,16 +11,19 @@ export const industriesHub = {
   exploreLockupRole: 'Five environments · one orchestration layer',
   adaptPoints: [
     {
+      kicker: 'The stack',
       head: 'Your stack, not ours',
       detail:
         'Open APIs integrate the systems and content sources you already run — no rip-and-replace to get live.',
     },
     {
+      kicker: 'The map',
       head: 'Any floor plan, one map',
       detail:
         'Map-based control scales from a single room to a whole multi-building property — same interface, your layout.',
     },
     {
+      kicker: 'The team',
       head: 'One team, every vertical',
       detail:
         'The embedded operation that deploys LUCI in gaming is the same team that stays in airports and resorts — no handoff by industry.',

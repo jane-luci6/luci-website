@@ -2,7 +2,7 @@
 import { industriesHub } from '../data/industriesHub';
 
 interface Props {
-  points?: { index?: string; head: string; detail: string }[];
+  points?: { kicker?: string; head: string; detail: string }[];
 }
 
 const { points = industriesHub.adaptPoints } = Astro.props;
@@ -15,12 +15,13 @@ const flipGlyph = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" st
     <li class="ind-adapt__item" tabindex="0">
       <div class="ind-adapt__card">
         <div class="ind-adapt__face ind-adapt__face--front">
-          {point.index && <span class="ind-adapt__watermark" aria-hidden="true">{point.index}</span>}
-          <p class="ind-adapt__head">{point.head}</p>
+          <div class="ind-adapt__top">
+            {point.kicker && <p class="ind-adapt__kicker">{point.kicker}</p>}
+            <p class="ind-adapt__head">{point.head}</p>
+          </div>
           <span class="ind-adapt__flip" aria-hidden="true" set:html={flipGlyph} />
         </div>
         <div class="ind-adapt__face ind-adapt__face--back">
-          {point.index && <span class="ind-adapt__back-index">{point.index}</span>}
           <p class="ind-adapt__back-head">{point.head}</p>
           <p class="ind-adapt__detail">{point.detail}</p>
           <span class="ind-adapt__flip ind-adapt__flip--back" aria-hidden="true" set:html={flipGlyph} />
@@ -121,9 +122,9 @@ const flipGlyph = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" st
   .ind-adapt__face--front {
     justify-content: space-between;
     background:
-      radial-gradient(circle at 22% 16%, rgba(104, 227, 190, 0.32) 0%, rgba(104, 227, 190, 0) 52%),
-      radial-gradient(circle at 84% 88%, rgba(206, 176, 110, 0.22) 0%, rgba(206, 176, 110, 0) 50%),
-      linear-gradient(155deg, #0e1f29 0%, #0a161c 58%, #08131a 100%);
+      radial-gradient(circle at 88% 100%, rgba(104, 227, 190, 0.38) 0%, rgba(104, 227, 190, 0) 46%),
+      radial-gradient(circle at 12% 100%, rgba(206, 176, 110, 0.42) 0%, rgba(206, 176, 110, 0) 46%),
+      linear-gradient(160deg, #0e1f29 0%, #0a161c 54%, #08131a 100%);
     box-shadow:
       0 18px 36px rgba(10, 22, 28, 0.42),
       inset 0 0 0 1px rgba(104, 227, 190, 0.24),
@@ -151,18 +152,19 @@ const flipGlyph = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" st
     }
   }
 
-  .ind-adapt__watermark {
-    position: absolute;
-    right: clamp(10px, 1.4vw, 20px);
-    bottom: -0.16em;
-    font-family: var(--font-display);
-    font-size: clamp(88px, 9vw, 140px);
+  .ind-adapt__top {
+    position: relative;
+    z-index: 1;
+  }
+
+  .ind-adapt__kicker {
+    margin: 0 0 14px;
+    font-family: var(--font-body);
+    font-size: 11px;
     font-weight: 700;
-    line-height: 1;
-    color: rgba(104, 227, 190, 0.14);
-    pointer-events: none;
-    z-index: 0;
-    transition: color 0.3s ease;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mint);
   }
 
   .ind-adapt__head {
@@ -206,10 +208,6 @@ const flipGlyph = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" st
       background: rgba(104, 227, 190, 0.26);
       box-shadow: inset 0 0 0 1px rgba(104, 227, 190, 0.6), 0 0 18px rgba(104, 227, 190, 0.28);
     }
-
-    .ind-adapt__item:hover .ind-adapt__watermark {
-      color: rgba(104, 227, 190, 0.22);
-    }
   }
 
   .ind-adapt__face--back {
@@ -224,14 +222,6 @@ const flipGlyph = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" st
       0 18px 36px rgba(10, 22, 28, 0.42),
       inset 0 0 0 1px rgba(104, 227, 190, 0.3);
     border-top: 3px solid var(--mint);
-  }
-
-  .ind-adapt__back-index {
-    font-family: var(--font-display);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    color: var(--mint);
   }
 
   .ind-adapt__back-head {
