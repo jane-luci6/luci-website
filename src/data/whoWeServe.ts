@@ -41,8 +41,8 @@ export const whoWeServe = {
     lockupRole: 'What teams-together looks like in your world',
   },
   personasLockup: {
-    lockupName: 'What does that look like for you?',
-    lockupRole: 'Open your role to see what you can do',
+    lockupName: 'Choose your role',
+    lockupRole: 'Open yours to see what you can do',
   },
   teams: [
     {

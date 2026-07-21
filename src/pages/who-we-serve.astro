@@ -33,7 +33,13 @@ const h = whoWeServe.hero;
     <IndustriesAdaptFlip points={whoWeServe.support.points as any} />
   </SectionBlock>
 
-  <SectionBlock id="wss-teams" tone="deep" wide>
+  <SectionBlock
+    id="wss-teams"
+    lockupName={whoWeServe.personasLockup.lockupName}
+    lockupRole={whoWeServe.personasLockup.lockupRole}
+    tone="deep"
+    wide
+  >
     <TeamsFilmstrip variant="cinema" />
   </SectionBlock>
 
