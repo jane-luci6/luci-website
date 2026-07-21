@@ -4,6 +4,7 @@ import SectionBlock from '../../components/SectionBlock.astro';
 import PlatformChapterNav from '../../components/PlatformChapterNav.astro';
 import PersonaHeroStage from '../../components/PersonaHeroStage.astro';
 import PersonaCapabilitiesFlow from '../../components/PersonaCapabilitiesFlow.astro';
+import PersonaNarrativeTimeline from '../../components/PersonaNarrativeTimeline.astro';
 import PersonaSpotlight from '../../components/PersonaSpotlight.astro';
 import { personas } from '../../data/personas';
 import { getPersonaDetail, hasPersonaDetail } from '../../data/personaDetails';
@@ -48,11 +49,7 @@ if (!detail) return Astro.redirect('/who-we-serve');
     lockupRole={detail.narrativeLockup.lockupRole}
     tone="white"
   >
-    <div class="persona-narrative">
-      {detail.narrative.map((para) => (
-        <p>{para}</p>
-      ))}
-    </div>
+    <PersonaNarrativeTimeline narrative={detail.narrative} />
   </SectionBlock>
 
   <SectionBlock
@@ -118,21 +115,6 @@ if (!detail) return Astro.redirect('/who-we-serve');
     #persona-cta {
       scroll-margin-top: 132px;
     }
-  }
-
-  .persona-narrative {
-    max-width: var(--measure);
-  }
-  .persona-narrative p {
-    font-family: var(--font-body);
-    font-size: clamp(18px, 2vw, 20px);
-    font-weight: 400;
-    line-height: 1.68;
-    color: var(--ink);
-    margin: 0 0 var(--space-4);
-  }
-  .persona-narrative p:last-child {
-    margin-bottom: 0;
   }
 
   .persona-cta {

@@ -16,6 +16,24 @@ export interface PersonaCapability {
   outcome: string;
 }
 
+export interface PersonaNarrativeMoment {
+  /** Short time/trigger label on the arc, e.g. "3 PM", "Jackpot", "Saturday night". */
+  time: string;
+  /** One-line caption for that moment. */
+  caption: string;
+}
+
+export interface PersonaNarrative {
+  /** Sub-lead that opens the arc. */
+  subLead: string;
+  /** The moments along the day-arc. */
+  moments: PersonaNarrativeMoment[];
+  /** Supporting line beneath the arc. */
+  support: string;
+  /** Closing tagline. */
+  closing: string;
+}
+
 export interface PersonaDetail {
   id: PersonaId;
   /** Hero */
@@ -23,9 +41,9 @@ export interface PersonaDetail {
   heroAlt: string;
   heroKicker: string;
   heroDeck: string;
-  /** Narrative — "who this is", second person */
+  /** Narrative — "who this is", second person, as a day-arc timeline */
   narrativeLockup: { lockupName: string; lockupRole: string };
-  narrative: string[];
+  narrative: PersonaNarrative;
   /** Capabilities — "what you can DO" */
   capabilitiesLockup: { lockupName: string; lockupRole: string };
   lead: string;
@@ -45,14 +63,23 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     heroAlt: 'A casino gaming floor at evening peak, glowing signage and slot banks seen from an elevated angle',
     heroKicker: 'Who we serve',
     heroDeck:
-      "You run the floor everyone else talks about. LUCI puts the whole property — every zone, every signal, every response — in your hands as one instrument you can play.",
+      "You run the floor everyone else talks about. With LUCI in your hands, you can tune the whole property to the rhythm of your guests.",
     narrativeLockup: {
       lockupName: 'Who this is',
       lockupRole: 'Operations, in your words',
     },
-    narrative: [
-      "You're the one the floor reports to — the energy at three in the afternoon, the answer when a jackpot hits, the launch of a new bank. LUCI doesn't replace your judgment; it hands you the controls. The audio curve, the jackpot response, the mode that flips the whole property for a Saturday night become settings, not a shift of setup. You reach for one screen, not five people.",
-    ],
+    narrative: {
+      subLead: "You're the one the floor answers to.",
+      moments: [
+        { time: '3 PM', caption: 'You control the energy at three in the afternoon.' },
+        { time: 'Jackpot', caption: 'The response when a jackpot hits.' },
+        { time: 'New slot bank', caption: 'The launch of a new slot bank.' },
+        { time: 'Saturday night', caption: 'The whole atmosphere of Saturday night.' },
+      ],
+      support:
+        'LUCI hands you the controls — adjust the audio curve, the screen strategy, and the whole atmosphere — on a schedule or in real-time.',
+      closing: 'You reach for one screen, not five people to make it happen.',
+    },
     capabilitiesLockup: {
       lockupName: 'What you can do',
       lockupRole: 'Four ways to put LUCI to work',
