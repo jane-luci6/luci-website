@@ -12,34 +12,39 @@ const n = narrative;
 <div class="pnt">
   <p class="pnt__sublead">{n.subLead}</p>
 
-  <div class="pnt__arc">
-    <svg class="pnt__wave" viewBox="0 0 1000 140" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+  <div class="pnt__stage">
+    <svg class="pnt__wave" viewBox="0 0 1000 240" preserveAspectRatio="none" aria-hidden="true" focusable="false">
       <defs>
-        <linearGradient id="pntWaveMint" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="#2b9e80" stop-opacity="0" />
-          <stop offset="0.5" stop-color="#2b9e80" stop-opacity="0.55" />
-          <stop offset="1" stop-color="#2b9e80" stop-opacity="0" />
+        <linearGradient id="pntFill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#68e3be" stop-opacity="0.26" />
+          <stop offset="1" stop-color="#68e3be" stop-opacity="0" />
         </linearGradient>
-        <linearGradient id="pntWaveGold" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="#ceb06e" stop-opacity="0" />
-          <stop offset="0.5" stop-color="#ceb06e" stop-opacity="0.4" />
-          <stop offset="1" stop-color="#ceb06e" stop-opacity="0" />
+        <linearGradient id="pntStroke" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#2b9e80" />
+          <stop offset="0.55" stop-color="#68e3be" />
+          <stop offset="1" stop-color="#ceb06e" />
         </linearGradient>
       </defs>
-      <g class="pnt__wave-group">
-        <path d="M-50,70 Q 75,25 200,70 T 450,70 T 700,70 T 950,70 T 1200,70" />
-        <path d="M-50,86 Q 75,46 200,86 T 450,86 T 700,86 T 950,86 T 1200,86" />
+      <line class="pnt__axis" x1="0" y1="196" x2="1000" y2="196" />
+      <path class="pnt__area" d="M0,195 C 70,195 80,130 125,130 C 170,130 210,185 250,185 C 290,185 320,95 375,95 C 430,95 460,180 500,180 C 540,180 580,62 625,62 C 670,62 710,175 750,175 C 790,175 840,30 875,30 C 920,30 960,165 1000,165 L 1000,240 L 0,240 Z" fill="url(#pntFill)" />
+      <path class="pnt__line" d="M0,195 C 70,195 80,130 125,130 C 170,130 210,185 250,185 C 290,185 320,95 375,95 C 430,95 460,180 500,180 C 540,180 580,62 625,62 C 670,62 710,175 750,175 C 790,175 840,30 875,30 C 920,30 960,165 1000,165" fill="none" stroke="url(#pntStroke)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+      <g class="pnt__dots">
+        <circle class="pnt__glow" cx="125" cy="130" r="13" />
+        <circle class="pnt__glow" cx="375" cy="95" r="13" />
+        <circle class="pnt__glow" cx="625" cy="62" r="13" />
+        <circle class="pnt__glow" cx="875" cy="30" r="13" />
+        <circle class="pnt__dot" cx="125" cy="130" r="6.5" />
+        <circle class="pnt__dot" cx="375" cy="95" r="6.5" />
+        <circle class="pnt__dot" cx="625" cy="62" r="6.5" />
+        <circle class="pnt__dot" cx="875" cy="30" r="6.5" />
       </g>
     </svg>
 
-    <span class="pnt__axis" aria-hidden="true"></span>
-
-    <ol class="pnt__moments" role="list">
+    <ol class="pnt__marks" role="list">
       {n.moments.map((m) => (
-        <li class="pnt__node">
-          <span class="pnt__time">{m.time}</span>
-          <span class="pnt__dot" aria-hidden="true"></span>
-          <p class="pnt__cap">{m.caption}</p>
+        <li class="pnt__mark">
+          <span class="pnt__mark-t">{m.time}</span>
+          <p class="pnt__mark-c">{m.caption}</p>
         </li>
       ))}
     </ol>
@@ -58,72 +63,70 @@ const n = narrative;
   }
   .pnt__sublead {
     margin: 0;
+    max-width: 40ch;
     font-family: var(--font-body);
-    font-size: clamp(15px, 1.4vw, 17px);
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    color: var(--accent-light);
+    font-size: clamp(22px, 2.6vw, 30px);
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    color: var(--ink-strong);
   }
 
-  .pnt__arc {
+  .pnt__stage {
     position: relative;
-    margin: clamp(8px, 1.5vw, 20px) 0 clamp(8px, 1vw, 16px);
+    margin: clamp(12px, 2vw, 24px) 0;
     padding: 8px 0 0;
   }
   .pnt__wave {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: -10px;
     width: 100%;
-    height: 150px;
+    height: clamp(160px, 22vw, 240px);
+    display: block;
     overflow: visible;
-    pointer-events: none;
   }
-  .pnt__wave-group {
-    animation: pntDrift 9s linear infinite;
-  }
-  .pnt__wave path {
-    fill: none;
-    stroke-width: 2;
-    stroke-linecap: round;
-  }
-  .pnt__wave path:nth-child(1) {
-    stroke: url(#pntWaveMint);
-  }
-  .pnt__wave path:nth-child(2) {
-    stroke: url(#pntWaveGold);
-  }
-  @keyframes pntDrift {
-    to { transform: translateX(-150px); }
-  }
-
   .pnt__axis {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 70px;
-    height: 1px;
-    background: var(--rule-light);
+    stroke: var(--rule-light);
+    stroke-width: 1;
+    stroke-dasharray: 3 5;
+  }
+  .pnt__line {
+    stroke-dasharray: 2600;
+    stroke-dashoffset: 2600;
+    animation: pntDraw 2.4s ease-out 0.2s forwards;
+  }
+  @keyframes pntDraw { to { stroke-dashoffset: 0; } }
+  .pnt__glow { fill: rgba(104, 227, 190, 0.22); }
+  .pnt__dot {
+    fill: var(--off-white);
+    stroke: var(--accent-light);
+    stroke-width: 2;
+    opacity: 0;
+    animation: pntPop 0.5s ease-out forwards;
+  }
+  .pnt__dots circle.pnt__dot:nth-child(5) { animation-delay: 0.7s; }
+  .pnt__dots circle.pnt__dot:nth-child(6) { animation-delay: 1.2s; }
+  .pnt__dots circle.pnt__dot:nth-child(7) { animation-delay: 1.7s; }
+  .pnt__dots circle.pnt__dot:nth-child(8) { animation-delay: 2.2s; }
+  @keyframes pntPop {
+    from { opacity: 0; transform: scale(0.4); }
+    to { opacity: 1; transform: scale(1); }
   }
 
-  .pnt__moments {
+  .pnt__marks {
     list-style: none;
-    margin: 0;
+    margin: clamp(14px, 2vw, 22px) 0 0;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: clamp(12px, 2vw, 24px);
-    position: relative;
   }
-  .pnt__node {
+  .pnt__mark {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 10px;
+    gap: 8px;
   }
-  .pnt__time {
+  .pnt__mark-t {
     font-family: var(--font-body);
     font-size: 11px;
     font-weight: 700;
@@ -132,18 +135,11 @@ const n = narrative;
     color: var(--accent-light);
     white-space: nowrap;
   }
-  .pnt__dot {
-    width: 14px;
-    height: 14px;
-    border-radius: 9999px;
-    background: var(--off-white);
-    box-shadow: 0 0 0 2px var(--accent-light), 0 0 14px rgba(43, 158, 128, 0.35);
-  }
-  .pnt__cap {
+  .pnt__mark-c {
     margin: 0;
     max-width: 22ch;
     font-family: 'Inter', system-ui, sans-serif;
-    font-size: clamp(14px, 1.2vw, 16px);
+    font-size: clamp(13px, 1.1vw, 15px);
     line-height: 1.5;
     color: var(--ink);
   }
@@ -170,42 +166,13 @@ const n = narrative;
   }
 
   @media (max-width: 760px) {
-    .pnt__wave {
-      display: none;
-    }
-    .pnt__arc {
-      padding: 0;
-    }
-    .pnt__axis {
-      top: 0;
-      left: 7px;
-      width: 1px;
-      height: 100%;
-      background: var(--rule-light);
-    }
-    .pnt__moments {
-      grid-template-columns: 1fr;
-      gap: 0;
-    }
-    .pnt__node {
-      flex-direction: row;
-      align-items: flex-start;
-      text-align: left;
-      gap: 14px;
-      padding: 0 0 clamp(18px, 4vw, 26px) 0;
-    }
-    .pnt__dot {
-      flex: 0 0 auto;
-      margin-top: 3px;
-    }
-    .pnt__cap {
-      max-width: none;
-    }
+    .pnt__marks { grid-template-columns: 1fr; }
+    .pnt__mark { flex-direction: row; align-items: flex-start; text-align: left; gap: 14px; }
+    .pnt__mark-c { max-width: none; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .pnt__wave-group {
-      animation: none;
-    }
+    .pnt__line { animation: none; stroke-dashoffset: 0; }
+    .pnt__dot { animation: none; opacity: 1; }
   }
 </style>

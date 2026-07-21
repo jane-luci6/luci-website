@@ -65,7 +65,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     heroDeck:
       "You run the floor everyone else talks about. With LUCI in your hands, you can tune the whole property to the rhythm of your guests.",
     narrativeLockup: {
-      lockupName: 'Who this is',
+      lockupName: 'The role',
       lockupRole: 'Operations, in your words',
     },
     narrative: {
