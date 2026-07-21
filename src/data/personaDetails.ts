@@ -10,11 +10,10 @@
 import type { PersonaId } from './personas';
 
 export interface PersonaCapability {
-  index: string;
-  head: string;
-  desc: string;
-  benefits: string[];
-  try: string;
+  /** Short, punchy "what you can do" — left side of the flow. */
+  action: string;
+  /** Short, punchy result — the outcome that feeds the guest experience. */
+  outcome: string;
 }
 
 export interface PersonaDetail {
@@ -62,48 +61,20 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     takeaway: '',
     capabilities: [
       {
-        index: '01',
-        head: "Set your floor's audio to match the room's energy, all day.",
-        desc: "Build an audio schedule that moves with your floor — lighter mornings, building afternoons, peaking evenings, easing back late. Each zone follows its own curve, and the transitions happen on their own.",
-        benefits: [
-          'Keep the room feeling alive without a manager riding the faders',
-          'Match energy to the crowd you actually have at each hour',
-          'Give every shift the same intended sound',
-        ],
-        try: 'Map your ideal audio curve for a weekday and build it as a scheduled preset.',
+        action: 'Schedule the audio curve by zone and hour',
+        outcome: "the room's energy matches the crowd you actually have.",
       },
       {
-        index: '02',
-        head: 'Make every jackpot a floor event, automatically.',
-        desc: "When a jackpot hits, a coordinated preset fires in that zone — lights pulse, audio swells, nearby screens celebrate — then resets on its own, calibrated to the space.",
-        benefits: [
-          "Turn one guest's win into energy the whole floor feels",
-          'Create a sense of action that keeps nearby players engaged',
-          'Deliver it every time, without any manual effort',
-        ],
-        try: 'Work with A/V to build a jackpot preset for one zone, then test it in a low-traffic window.',
+        action: 'Turn every jackpot into a floor event',
+        outcome: "one win becomes energy the whole floor feels.",
       },
       {
-        index: '03',
-        head: 'Reconfigure the entire property in seconds.',
-        desc: "Each mode — weekday, Saturday peak, fight night, holiday, a ballroom event — becomes a complete configuration of audio, screens, and lighting. Some run on a tap; others hold a standing identity.",
-        benefits: [
-          'Reconfigure the entire property in seconds, not a shift of setup',
-          "Run premium spaces consistently no matter who's working",
-          'Let predictable zones open and close themselves on schedule',
-        ],
-        try: 'Identify the three or four modes you run most often and build a preset for each.',
+        action: 'Reconfigure the whole property in one tap',
+        outcome: "Saturday night is a setting, not a shift of setup.",
       },
       {
-        index: '04',
-        head: 'Direct guest attention to a new game area from the moment it opens.',
-        desc: "When a new slot bank or table section launches, set the surrounding zones to point toward it — ambient screens, tuned audio — for the first few weeks, then revert on its own.",
-        benefits: [
-          'Drive traffic to new product while it most needs the lift',
-          'Make the floor itself part of the launch, not just signage',
-          'Hand the spotlight back automatically when the window closes',
-        ],
-        try: 'Plan the A/V component of your next new-game launch before the hardware arrives.',
+        action: 'Point guests at a new game area',
+        outcome: "traffic goes where you want it, then hands the spotlight back.",
       },
     ],
     spotlight: {

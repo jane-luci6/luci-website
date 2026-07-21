@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionBlock from '../../components/SectionBlock.astro';
 import PlatformChapterNav from '../../components/PlatformChapterNav.astro';
 import PersonaHeroStage from '../../components/PersonaHeroStage.astro';
-import PersonaCapabilities from '../../components/PersonaCapabilities.astro';
+import PersonaCapabilitiesFlow from '../../components/PersonaCapabilitiesFlow.astro';
 import PersonaSpotlight from '../../components/PersonaSpotlight.astro';
 import { personas } from '../../data/personas';
 import { getPersonaDetail, hasPersonaDetail } from '../../data/personaDetails';
@@ -63,10 +63,9 @@ if (!detail) return Astro.redirect('/who-we-serve');
     wide
     pattern
   >
-    <PersonaCapabilities
+    <PersonaCapabilitiesFlow
       capabilities={detail.capabilities}
       lead={detail.lead}
-      takeaway={detail.takeaway}
     />
   </SectionBlock>
 
