@@ -396,8 +396,8 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     ],
   },
   'sports-venues': {
-    heroVideo: '/videos/luci-sports-arena.mp4?v=2',
-    heroPoster: '/images/industries/sports-venues/hero-arena-poster.jpg?v=2',
+    heroVideo: '/videos/luci-sports-arena.mp4?v=3',
+    heroPoster: '/images/industries/sports-venues/hero-arena-poster.jpg?v=3',
     heroImage: '/images/industries/sports-venues.jpg?v=3',
     thesis: {
       lockupName: 'Sports & Venues',
