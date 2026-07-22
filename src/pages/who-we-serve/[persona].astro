@@ -39,7 +39,6 @@ if (!detail) return Astro.redirect('/who-we-serve');
   <PersonaHeroStage
     heroImage={detail.heroImage}
     heroAlt={detail.heroAlt}
-    kicker={detail.heroKicker}
     lockupName={persona.label}
     lockupRole={persona.role}
     deck={detail.heroDeck}
@@ -56,16 +55,6 @@ if (!detail) return Astro.redirect('/who-we-serve');
   </SectionBlock>
 
   <SectionBlock
-    id="persona-two-shifts"
-    lockupName={detail.twoShiftsLockup.lockupName}
-    lockupRole={detail.twoShiftsLockup.lockupRole}
-    tone="light"
-    wide
-  >
-    <PersonaTwoShifts shifts={detail.twoShifts} />
-  </SectionBlock>
-
-  <SectionBlock
     id="persona-challenges"
     lockupName={detail.challengesLockup.lockupName}
     lockupRole={detail.challengesLockup.lockupRole}
@@ -73,16 +62,6 @@ if (!detail) return Astro.redirect('/who-we-serve');
     wide
   >
     <PersonaChallenges groups={detail.challenges} />
-  </SectionBlock>
-
-  <SectionBlock
-    id="persona-industries"
-    lockupName={detail.industryLockup.lockupName}
-    lockupRole={detail.industryLockup.lockupRole}
-    tone="light"
-    wide
-  >
-    <PersonaIndustrySwitcher stakes={detail.industryStakes} />
   </SectionBlock>
 
   <SectionBlock
@@ -97,6 +76,26 @@ if (!detail) return Astro.redirect('/who-we-serve');
       capabilities={detail.capabilities}
       lead={detail.lead}
     />
+  </SectionBlock>
+
+  <SectionBlock
+    id="persona-two-shifts"
+    lockupName={detail.twoShiftsLockup.lockupName}
+    lockupRole={detail.twoShiftsLockup.lockupRole}
+    tone="light"
+    wide
+  >
+    <PersonaTwoShifts shifts={detail.twoShifts} />
+  </SectionBlock>
+
+  <SectionBlock
+    id="persona-industries"
+    lockupName={detail.industryLockup.lockupName}
+    lockupRole={detail.industryLockup.lockupRole}
+    tone="light"
+    wide
+  >
+    <PersonaIndustrySwitcher stakes={detail.industryStakes} />
   </SectionBlock>
 
   <SectionBlock id="persona-cta" tone="deep">

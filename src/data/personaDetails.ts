@@ -106,28 +106,40 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     id: 'operations',
     heroImage: '/images/who-we-serve/operations-hero.jpg',
     heroAlt: 'A casino gaming floor at evening peak, glowing signage and slot banks seen from an elevated angle',
-    heroKicker: 'Who we serve',
+    heroKicker: '',
     heroDeck:
       "You run the floor everyone else talks about. With LUCI in your hands, you can tune the whole property to the rhythm of your guests.",
     narrativeLockup: {
-      lockupName: 'The role',
-      lockupRole: 'Operations, in your words',
+      lockupName: "You're the one the floor answers to",
+      lockupRole: 'A day on your floor',
     },
     narrative: {
-      subLead: "You're the one the floor answers to.",
+      subLead: '',
       moments: [
-        { time: '3 PM', caption: 'You control the energy at three in the afternoon.' },
-        { time: 'Jackpot', caption: 'The response when a jackpot hits.' },
-        { time: 'New slot bank', caption: 'The launch of a new slot bank.' },
-        { time: 'Saturday night', caption: 'The whole atmosphere of Saturday night.' },
+        {
+          time: 'Doors open',
+          caption: 'The room is ready before the first guest walks in.',
+        },
+        {
+          time: 'Event trigger',
+          caption: 'A jackpot hits, a goal scores, a flight delays — the floor responds in the moment.',
+        },
+        {
+          time: 'Room turnover',
+          caption: 'The space becomes what the next event needs, on schedule.',
+        },
+        {
+          time: 'Saturday night',
+          caption: 'Sold-out show, packed floor, high-traffic rush — the atmosphere holds.',
+        },
       ],
       support:
         'LUCI hands you the controls — adjust the audio curve, the screen strategy, and the whole atmosphere — on a schedule or in real-time.',
       closing: 'You reach for one screen, not five people to make it happen.',
     },
     twoShiftsLockup: {
-      lockupName: 'Two very different shifts',
-      lockupRole: 'The difference you actually feel',
+      lockupName: 'The difference you actually feel',
+      lockupRole: 'When it works — and when it doesn’t',
     },
     twoShifts: {
       smooth: [
@@ -142,8 +154,8 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       ],
     },
     challengesLockup: {
-      lockupName: 'Small annoyances, until they’re not',
-      lockupRole: 'What gets in your way',
+      lockupName: 'What gets in your way',
+      lockupRole: 'Friction you feel every shift',
     },
     challenges: [
       {
@@ -206,8 +218,8 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       },
     ],
     industryLockup: {
-      lockupName: 'The stakes change. The relief doesn’t.',
-      lockupRole: 'Wherever you operate',
+      lockupName: 'LUCI lives wherever you operate',
+      lockupRole: 'The stakes change. The relief doesn’t',
     },
     industryStakes: [
       {
@@ -278,11 +290,11 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     ctaTitle: 'A/V should support your job, not block it.',
     chapters: [
       { id: 'persona-thesis', label: 'Overview' },
-      { id: 'persona-narrative', label: 'The role' },
-      { id: 'persona-two-shifts', label: 'The two shifts' },
+      { id: 'persona-narrative', label: 'A day on your floor' },
       { id: 'persona-challenges', label: 'What gets in your way' },
-      { id: 'persona-industries', label: 'Wherever you operate' },
       { id: 'persona-capabilities', label: 'What you can do' },
+      { id: 'persona-two-shifts', label: 'The difference' },
+      { id: 'persona-industries', label: 'Wherever you operate' },
       { id: 'persona-cta', label: 'Next step' },
     ],
   },
