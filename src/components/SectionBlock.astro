@@ -8,14 +8,16 @@ interface Props {
   deck?: string;
   tone?: 'white' | 'light' | 'sand' | 'deep';
   wide?: boolean;
-  pattern?: boolean;
+  /** Circuit-texture background. true = navy-steel (default); 'mintgold' = mint/gold variant. */
+  pattern?: boolean | 'mintgold';
 }
 
 const { id, kicker, title, lockupName, lockupRole, deck, tone = 'white', wide = false, pattern = false } = Astro.props;
 const toneClass = `section--${tone}`;
+const patternClass = pattern === 'mintgold' ? 'section--pattern section--pattern-mintgold' : pattern ? 'section--pattern' : '';
 ---
 
-<section id={id} class:list={['section', toneClass, pattern && 'section--pattern']}>
+<section id={id} class:list={['section', toneClass, patternClass]}>
   {pattern && <span class="section__pattern" aria-hidden="true"></span>}
   <div class:list={['container', wide && 'container--wide']}>
     {kicker && <p class="display-label section-block__kicker">{kicker}</p>}
@@ -71,6 +73,51 @@ const toneClass = `section--${tone}`;
   .section--pattern > .container {
     position: relative;
     z-index: 1;
+  }
+
+  /* Mint/gold circuit variant — same lighten-blend logic as the steel pattern so the
+     section's navy stays true and only the mint/gold circuit lines read. The source
+     tile is NOT seamlessly tileable (its diagonal period ≠ tile edge), so we render a
+     single tile with `cover` + `no-repeat` — one continuous tile, no inter-tile seams.
+     Opacity tuned lower than steel since mint/gold is the intended accent. */
+  .section--pattern-mintgold .section__pattern {
+    background-image: url('/images/textures/texture-circuit-header-mintgold.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    mix-blend-mode: lighten;
+    opacity: 0.22;
+  }
+
+  /* Horizontal navy veil — phases the pattern out behind the centered content column
+     (header, graphic, closing) and lets it read only at the far left/right margins.
+     Strong in the content band so the tile's inherent vertical features don't read
+     as seams. Sits above the pattern (z 0, paints after the span) and below the
+     container (z 1). */
+  .section--pattern-mintgold::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(10, 22, 28, 0.86) 16%,
+      rgba(10, 22, 28, 0.86) 84%,
+      transparent 100%
+    );
+  }
+  @media (max-width: 720px) {
+    .section--pattern-mintgold::after {
+      background: linear-gradient(
+        90deg,
+        rgba(10, 22, 28, 0.55) 0%,
+        rgba(10, 22, 28, 0.9) 18%,
+        rgba(10, 22, 28, 0.9) 82%,
+        rgba(10, 22, 28, 0.55) 100%
+      );
+    }
   }
 
   .section-block__title {
