@@ -63,12 +63,12 @@ const patternClass = pattern === 'mintgold' ? 'section--pattern section--pattern
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background-image: url('/images/textures/texture-circuit-navy-steel.png');
-    background-size: 560px;
-    background-repeat: repeat;
+    background-image: url('/images/textures/texture-circuit-mintgold-seamless.png');
+    background-size: cover;
+    background-repeat: no-repeat;
     background-position: center;
     mix-blend-mode: lighten;
-    opacity: 0.4;
+    opacity: 0.22;
   }
   .section--pattern > .container {
     position: relative;
@@ -81,7 +81,7 @@ const patternClass = pattern === 'mintgold' ? 'section--pattern section--pattern
      single tile with `cover` + `no-repeat` — one continuous tile, no inter-tile seams.
      Opacity tuned lower than steel since mint/gold is the intended accent. */
   .section--pattern-mintgold .section__pattern {
-    background-image: url('/images/textures/texture-circuit-header-mintgold.png');
+    background-image: url('/images/textures/texture-circuit-mintgold-seamless.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -94,7 +94,7 @@ const patternClass = pattern === 'mintgold' ? 'section--pattern section--pattern
      Strong in the content band so the tile's inherent vertical features don't read
      as seams. Sits above the pattern (z 0, paints after the span) and below the
      container (z 1). */
-  .section--pattern-mintgold::after {
+  .section--pattern::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -109,7 +109,7 @@ const patternClass = pattern === 'mintgold' ? 'section--pattern section--pattern
     );
   }
   @media (max-width: 720px) {
-    .section--pattern-mintgold::after {
+    .section--pattern::after {
       background: linear-gradient(
         90deg,
         rgba(10, 22, 28, 0.55) 0%,
