@@ -83,12 +83,41 @@ const funnel = Array.from({ length: 9 }, (_, i) => +(((i + 0.5) / 9) * 100).toFi
 
 <style>
   .home-diff {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     background: var(--navy);
     color: var(--off-white);
     border-top: 1px solid rgba(var(--mint-rgb), 0.18);
   }
 
+  /* Mint/gold circuit pattern — site standard: single tile, cover (enlarge+crop, no
+     seam), lighten blend, 0.22, with the navy veil that fades it behind the content. */
+  .home-diff::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: url('/images/textures/texture-circuit-header-mintgold.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    mix-blend-mode: lighten;
+    opacity: 0.22;
+  }
+  .home-diff::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent 0%, rgba(10, 22, 28, 0.86) 16%, rgba(10, 22, 28, 0.86) 84%, transparent 100%);
+  }
+
   .home-diff__inner {
+    position: relative;
+    z-index: 1;
     padding-block: clamp(64px, 10vw, 120px);
     padding-inline: var(--page-pad);
     text-align: center;

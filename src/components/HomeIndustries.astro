@@ -77,21 +77,6 @@ const stripIndustries = [...industries, ...industries];
     overflow: hidden;
   }
 
-  /* Circuit texture — faint trace only; muted so the imagery leads. */
-  .home-industries::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url('/images/textures/texture-circuit-header-mintgold.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    mix-blend-mode: lighten;
-    opacity: 0.06;
-    pointer-events: none;
-    z-index: 0;
-  }
-
   .home-industries__inner {
     position: relative;
     z-index: 1;
