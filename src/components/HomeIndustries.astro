@@ -77,6 +77,7 @@ const stripIndustries = [...industries, ...industries];
     overflow: hidden;
   }
 
+  /* Circuit texture — faint trace only; muted so the imagery leads. */
   .home-industries::before {
     content: '';
     position: absolute;
@@ -86,7 +87,7 @@ const stripIndustries = [...industries, ...industries];
     background-repeat: no-repeat;
     background-position: center;
     mix-blend-mode: lighten;
-    opacity: 0.13;
+    opacity: 0.06;
     pointer-events: none;
     z-index: 0;
   }
