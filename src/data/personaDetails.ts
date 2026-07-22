@@ -110,7 +110,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     heroDeck:
       "You run the floor everyone else talks about. With LUCI in your hands, you can tune the whole property to the rhythm of your guests.",
     narrativeLockup: {
-      lockupName: "You're the one the floor answers to",
+      lockupName: 'The entire property is in your hands',
       lockupRole: 'A day on your floor',
     },
     narrative: {
@@ -135,7 +135,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       ],
       support:
         'LUCI hands you the controls — adjust the audio curve, the screen strategy, and the whole atmosphere — on a schedule or in real-time.',
-      closing: 'You reach for one screen, not five people to make it happen.',
+      closing: 'You reach for ONE screen to coordinate sound, video, and lighting.',
     },
     twoShiftsLockup: {
       lockupName: 'The difference you actually feel',
