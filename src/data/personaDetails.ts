@@ -135,7 +135,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       ],
       support:
         'LUCI hands you the controls — adjust the audio curve, the screen strategy, and the whole atmosphere — on a schedule or in real-time.',
-      closing: 'You reach for ONE screen to coordinate sound, video, and lighting.',
+      closing: 'You reach for <em>ONE</em> screen to coordinate sound, video, and lighting.',
     },
     twoShiftsLockup: {
       lockupName: 'The difference you actually feel',

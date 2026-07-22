@@ -55,7 +55,7 @@ const n = narrative;
 
   <div class="pnt__payoff">
     <p class="pnt__support">{n.support}</p>
-    <blockquote class="pnt__closing">{n.closing}</blockquote>
+    <blockquote class="pnt__closing" set:html={n.closing}></blockquote>
   </div>
 </div>
 
@@ -180,17 +180,21 @@ const n = narrative;
   }
   .pnt__closing {
     margin: 0;
-    max-width: 34ch;
-    padding: 4px 0 4px 20px;
-    border-left: 3px solid var(--mint);
-    text-align: left;
+    width: 100%;
+    padding-top: clamp(18px, 2vw, 24px);
+    border-top: 2px solid var(--mint);
+    text-align: center;
     font-family: var(--font-body);
-    font-size: clamp(18px, 2vw, 22px);
+    font-size: clamp(24px, 3.4vw, 40px);
     font-weight: 700;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
     color: var(--off-white);
     font-style: normal;
+  }
+  .pnt__closing em {
+    font-style: normal;
+    color: var(--mint);
   }
 
   @media (max-width: 760px) {
