@@ -4,7 +4,6 @@ import SectionBlock from '../../components/SectionBlock.astro';
 import PlatformChapterNav from '../../components/PlatformChapterNav.astro';
 import PersonaHeroStage from '../../components/PersonaHeroStage.astro';
 import PersonaNarrativeTimeline from '../../components/PersonaNarrativeTimeline.astro';
-import PersonaTwoShifts from '../../components/PersonaTwoShifts.astro';
 import PersonaChallenges from '../../components/PersonaChallenges.astro';
 import PersonaIndustrySwitcher from '../../components/PersonaIndustrySwitcher.astro';
 import PersonaCapabilitiesFlow from '../../components/PersonaCapabilitiesFlow.astro';
@@ -80,16 +79,6 @@ if (!detail) return Astro.redirect('/who-we-serve');
   </SectionBlock>
 
   <SectionBlock
-    id="persona-two-shifts"
-    lockupName={detail.twoShiftsLockup.lockupName}
-    lockupRole={detail.twoShiftsLockup.lockupRole}
-    tone="light"
-    wide
-  >
-    <PersonaTwoShifts shifts={detail.twoShifts} />
-  </SectionBlock>
-
-  <SectionBlock
     id="persona-industries"
     lockupName={detail.industryLockup.lockupName}
     lockupRole={detail.industryLockup.lockupRole}
@@ -127,7 +116,6 @@ if (!detail) return Astro.redirect('/who-we-serve');
 
   #persona-thesis,
   #persona-narrative,
-  #persona-two-shifts,
   #persona-challenges,
   #persona-industries,
   #persona-capabilities,
@@ -138,7 +126,6 @@ if (!detail) return Astro.redirect('/who-we-serve');
   @media (max-width: 640px) {
     #persona-thesis,
     #persona-narrative,
-    #persona-two-shifts,
     #persona-challenges,
     #persona-industries,
     #persona-capabilities,

@@ -80,9 +80,6 @@ export interface PersonaDetail {
   /** Narrative — "who this is", second person, as a day-arc timeline */
   narrativeLockup: { lockupName: string; lockupRole: string };
   narrative: PersonaNarrative;
-  /** The two shifts — works-vs-broken contrast */
-  twoShiftsLockup: { lockupName: string; lockupRole: string };
-  twoShifts: PersonaTwoShifts;
   /** Challenges — friction → relief, flat list (compact: friction headline + always-visible LUCI relief) */
   challengesLockup: { lockupName: string; lockupRole: string };
   challenges: PersonaChallenge[];
@@ -139,22 +136,6 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       support: '',
       closing:
         '<span class="pnt__luci">With LUCI</span>, you reach for <em>ONE</em> screen to coordinate sound, video, and lighting.',
-    },
-    twoShiftsLockup: {
-      lockupName: 'The difference you actually feel',
-      lockupRole: 'When it works — and when it doesn’t',
-    },
-    twoShifts: {
-      smooth: [
-        'The space is ready for the next event without a service call.',
-        'Any staff member changes what’s on screen in seconds.',
-        'You never think about it — you’re with your guests and your team.',
-      ],
-      broken: [
-        'A dark screen at doors-open. A dead zone at peak.',
-        'Nobody on shift knows how to fix it. Who do you call?',
-        'It’s in front of guests, it’s on you, and it’s happening now.',
-      ],
     },
     challengesLockup: {
       lockupName: 'What gets in your way',
@@ -267,7 +248,6 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       { id: 'persona-narrative', label: 'What you manage' },
       { id: 'persona-challenges', label: 'What gets in your way' },
       { id: 'persona-capabilities', label: 'What you can do' },
-      { id: 'persona-two-shifts', label: 'The difference' },
       { id: 'persona-industries', label: 'Wherever you operate' },
       { id: 'persona-cta', label: 'Next step' },
     ],
