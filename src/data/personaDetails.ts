@@ -237,9 +237,9 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
           'Weekday, Saturday peak, marquee event, holiday \u2014 each becomes one configuration of audio, screens, and lighting. Some run on a tap; premium spaces keep a standing identity.',
       },
       {
-        front: 'Direct guest attention to a new area from the moment it opens.',
+        front: 'Reconfigure a video wall for a tournament, tip-off, or keynote \u2014 with a tap.',
         back:
-          'When a new section launches \u2014 a slot bank, retail outlet, renovated wing, new gate \u2014 surrounding zones point toward it for the first few weeks, then revert once it\u2019s established.',
+          'Presets switch the wall between a full layout and zoned views with a tap or on a schedule. When the event ends, one tap restores the everyday layout.',
       },
     ],
     ctaTitle: 'A/V should support your job, not block it.',
