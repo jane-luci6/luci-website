@@ -184,27 +184,29 @@ const n = narrative;
     padding-top: clamp(18px, 2vw, 24px);
     border-top: 2px solid var(--mint);
     text-align: center;
-    font-family: var(--font-body);
-    font-size: clamp(24px, 3.4vw, 40px);
-    font-weight: 700;
-    line-height: 1.18;
-    letter-spacing: -0.02em;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: clamp(20px, 2.6vw, 30px);
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
     color: var(--off-white);
     font-style: normal;
   }
-  .pnt__closing em {
+  /* set:html content — :global so the scope attribute isn't required on
+     the injected elements. */
+  .pnt__closing :global(em) {
     font-style: normal;
     color: var(--mint);
   }
   /* "With LUCI" underline — same mint underline + glow as the homepage
      differentiator statement. */
-  .pnt__closing .pnt__luci {
+  .pnt__closing :global(.pnt__luci) {
     position: relative;
     display: inline-block;
     color: var(--off-white);
     text-shadow: 0 0 20px rgba(var(--mint-rgb), 0.26);
   }
-  .pnt__closing .pnt__luci::after {
+  .pnt__closing :global(.pnt__luci::after) {
     content: '';
     position: absolute;
     left: 0.05em;
