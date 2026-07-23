@@ -2,7 +2,7 @@
 import type { PersonaCapability } from '../data/personaDetails';
 interface Props { capabilities: PersonaCapability[]; lead?: string; }
 const { capabilities, lead } = Astro.props;
-const hubIcon = `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="13" r="8.5" fill="#CEB06E" fill-opacity="0.85"/><path d="M11 62c0-12.6 9.4-24 21-24s21 11.4 21 24"/></svg>`;
+const hubIcon = `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="22" r="8" fill="#CEB06E" fill-opacity="0.85"/><path d="M8 62c0-7 6-30 24-30s24 7 24 30"/></svg>`;
 ---
 
 <div class="pcf">
@@ -76,7 +76,7 @@ const hubIcon = `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stro
   .pcf__hub-rings::after { content: ''; position: absolute; inset: 20%; border-radius: 9999px; border: 1px solid rgba(var(--gold-rgb), 0.22); }
   .pcf__hub-icon { position: absolute; inset: 3%; width: 94%; height: 94%; color: var(--mint); z-index: 1; }
   .pcf__hub-icon :global(svg) { width: 100%; height: 100%; display: block; }
-  .pcf__hub-label { position: absolute; left: 50%; top: 73%; transform: translate(-50%, -50%); z-index: 2; margin: 0; max-width: 72%; font-family: var(--font-body); font-size: clamp(14px, 1.6vw, 20px); font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; color: var(--mint); text-align: center; }
+  .pcf__hub-label { position: absolute; left: 50%; top: 80%; transform: translate(-50%, -50%); z-index: 2; margin: 0; max-width: 68%; font-family: var(--font-body); font-size: clamp(13px, 1.5vw, 18px); font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; color: var(--mint); text-align: center; }
 
   .pcf__card {
     position: relative; perspective: 1400px; cursor: pointer;
