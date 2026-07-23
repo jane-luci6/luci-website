@@ -21,7 +21,7 @@ const icons = [
   `<svg viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="4" rx="1" fill="#68E3BE" fill-opacity="0.2" stroke="#2b9e80" stroke-width="1.8"/><rect x="4" y="10" width="16" height="4" rx="1" stroke="#2b9e80" stroke-width="1.8"/><rect x="4" y="15" width="16" height="4" rx="1" stroke="#CEB06E" stroke-width="1.8"/></svg>`,
 ];
 
-const xMark = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>`;
+const xMark = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>`;
 ---
 
 <div class="pch" data-pch>
@@ -57,55 +57,51 @@ const xMark = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 <style>
   .pch { display: flex; flex-direction: column; }
   .pch__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+
+  /* Rows are separated by whitespace + the mint solution band — no hairlines. */
   .pch__row {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 22px 0;
-    border-top: 1px solid rgba(245, 248, 250, 0.14);
+    gap: 14px;
+    padding: 24px 0;
   }
-  .pch__row:last-child { border-bottom: 1px solid rgba(245, 248, 250, 0.14); }
+  .pch__row + .pch__row { border-top: 1px solid rgba(245, 248, 250, 0.08); }
 
-  /* Challenge — neutral x marker + friction headline (no fill). */
+  /* Challenge — a small inline x glyph + the friction headline. No tile, no fill. */
   .pch__challenge {
-    display: grid;
-    grid-template-columns: 40px 1fr;
-    gap: 16px;
-    align-items: start;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
   }
   .pch__x {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-    background: rgba(245, 248, 250, 0.05);
-    box-shadow: inset 0 0 0 1px rgba(245, 248, 250, 0.16);
-    color: rgba(245, 248, 250, 0.5);
+    width: 16px;
+    height: 16px;
     flex: none;
+    color: rgba(245, 248, 250, 0.42);
+    transform: translateY(2px);
   }
-  .pch__x :global(svg) { width: 18px; height: 18px; display: block; }
+  .pch__x :global(svg) { width: 16px; height: 16px; display: block; }
 
   .pch__friction-head {
     margin: 0;
-    padding-top: 7px;
     font-family: var(--font-body);
     font-size: clamp(16px, 1.5vw, 19px);
-    font-weight: 700;
-    line-height: 1.25;
+    font-weight: 600;
+    line-height: 1.3;
     letter-spacing: -0.01em;
-    color: var(--off-white);
+    color: rgba(245, 248, 250, 0.82);
   }
 
-  /* Solution — mint/gold icon + always-visible LUCI relief, on the mint
-     background highlight (the treatment Jane liked before). */
+  /* Solution — the ONE container per row: mint highlight + 3px mint left bar.
+     The duotone icon sits directly on the band (no light tile). */
   .pch__solution {
-    display: grid;
-    grid-template-columns: 56px 1fr;
-    gap: 20px;
-    align-items: start;
-    padding: 16px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 14px 20px 14px 18px;
     background: rgba(104, 227, 190, 0.08);
     border-left: 3px solid var(--mint);
     border-radius: 0 10px 10px 0;
@@ -114,14 +110,12 @@ const xMark = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 56px;
-    height: 56px;
-    border-radius: 16px;
-    background: linear-gradient(155deg, #E6F5EF 0%, #F3FAF8 100%);
-    box-shadow: inset 0 0 0 1px rgba(43, 158, 128, 0.14);
+    width: 30px;
+    height: 30px;
     flex: none;
+    margin-top: 2px;
   }
-  .pch__icon :global(svg) { width: 28px; height: 28px; display: block; }
+  .pch__icon :global(svg) { width: 30px; height: 30px; display: block; }
 
   .pch__relief {
     margin: 0;
@@ -135,11 +129,9 @@ const xMark = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   .pch__luci { font-weight: 700; color: var(--mint); }
 
   @media (max-width: 640px) {
-    .pch__challenge { grid-template-columns: 36px 1fr; gap: 12px; }
-    .pch__x { width: 36px; height: 36px; border-radius: 10px; }
-    .pch__x :global(svg) { width: 16px; height: 16px; }
-    .pch__solution { grid-template-columns: 48px 1fr; gap: 14px; padding: 14px 14px; }
-    .pch__icon { width: 48px; height: 48px; border-radius: 14px; }
-    .pch__icon :global(svg) { width: 24px; height: 24px; }
+    .pch__row { gap: 10px; padding: 20px 0; }
+    .pch__solution { gap: 12px; padding: 12px 14px; }
+    .pch__icon { width: 26px; height: 26px; }
+    .pch__icon :global(svg) { width: 26px; height: 26px; }
   }
 </style>
