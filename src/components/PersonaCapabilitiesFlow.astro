@@ -66,17 +66,30 @@ const hubIcon = `<svg viewBox="0 0 16 16" fill="none"><path fill-rule="evenodd" 
     // Gold inner ring is inset 20% → radius is 40% of hub diameter = 80% of outer radius
     const hubR = (hubRect.width / 2) * 0.8;
 
-    const cardCenter = (r) => ({
-      x: r.left + r.width / 2 - stageRect.left,
-      y: r.top + r.height / 2 - stageRect.top,
-    });
+    // Exit point where the ray from card center → hub crosses the card's outer edge
+    const edgeTowardHub = (r) => {
+      const left = r.left - stageRect.left;
+      const top = r.top - stageRect.top;
+      const right = left + r.width;
+      const bottom = top + r.height;
+      const cx = left + r.width / 2;
+      const cy = top + r.height / 2;
+      const dx = hubCx - cx;
+      const dy = hubCy - cy;
+      let t = Infinity;
+      if (dx > 0) t = Math.min(t, (right - cx) / dx);
+      else if (dx < 0) t = Math.min(t, (left - cx) / dx);
+      if (dy > 0) t = Math.min(t, (bottom - cy) / dy);
+      else if (dy < 0) t = Math.min(t, (top - cy) / dy);
+      return { x: cx + dx * t, y: cy + dy * t };
+    };
 
     const cards = stage.querySelectorAll('.pcf__card');
     const paths = svg.querySelectorAll('.pcf__spoke');
     cards.forEach((card, i) => {
       const path = paths[i];
       if (!path) return;
-      const start = cardCenter(card.getBoundingClientRect());
+      const start = edgeTowardHub(card.getBoundingClientRect());
       const dx = hubCx - start.x;
       const dy = hubCy - start.y;
       const dist = Math.hypot(dx, dy) || 1;
