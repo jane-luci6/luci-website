@@ -2,7 +2,6 @@
 import type { PersonaCapability } from '../data/personaDetails';
 interface Props { capabilities: PersonaCapability[]; lead?: string; }
 const { capabilities, lead } = Astro.props;
-const hubIcon = `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="24" r="9" fill="#CEB06E" fill-opacity="0.85"/><path d="M16 52c0-9.94 8.06-18 16-18s16 8.06 16 18"/></svg>`;
 ---
 
 <div class="pcf">
@@ -15,22 +14,19 @@ const hubIcon = `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stro
 
     <div class="pcf__hub">
       <span class="pcf__hub-rings" aria-hidden="true"></span>
-      <span class="pcf__hub-icon" set:html={hubIcon} />
-      <p class="pcf__hub-kicker">The guest experience</p>
-      <h3 class="pcf__hub-title">Every control lands here</h3>
-      <p class="pcf__hub-sub">The one thing you&rsquo;re actually judged on.</p>
+      <p class="pcf__hub-label">The Guest Experience</p>
     </div>
 
     {capabilities.map((c, i) => (
       <button class="pcf__card" type="button" aria-label={`Use case ${i + 1}: ${c.front}. Hover to see how it works.`}>
         <span class="pcf__card-inner">
           <span class="pcf__face pcf__face--front">
-            <span class="pcf__num">{String(i + 1).padStart(2, '0')}</span>
+            <span class="pcf__watermark" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
             <span class="pcf__front">{c.front}</span>
             <span class="pcf__flip">How it works &rarr;</span>
           </span>
           <span class="pcf__face pcf__face--back">
-            <span class="pcf__num pcf__num--back">{String(i + 1).padStart(2, '0')}</span>
+            <span class="pcf__back-index">{String(i + 1).padStart(2, '0')}</span>
             <span class="pcf__back">{c.back}</span>
           </span>
         </span>
@@ -57,7 +53,7 @@ const hubIcon = `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stro
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    gap: clamp(56px, 9vw, 104px) clamp(150px, 26vw, 280px);
+    gap: clamp(72px, 11vw, 132px) clamp(220px, 34vw, 380px);
     width: 100%;
     padding-block: clamp(24px, 4vw, 48px);
   }
@@ -68,27 +64,26 @@ const hubIcon = `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stro
   .pcf__hub {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
     z-index: 2;
-    display: flex; flex-direction: column; align-items: center; gap: 10px;
-    text-align: center; width: clamp(180px, 16vw, 230px);
+    display: grid; place-items: center;
+    width: clamp(260px, 30vw, 340px);
+    aspect-ratio: 1;
+    text-align: center;
   }
-  .pcf__hub-rings { position: absolute; inset: -28% -14%; z-index: -1; border-radius: 9999px; border: 1px solid rgba(var(--mint-rgb), 0.18); box-shadow: 0 0 0 1px rgba(var(--mint-rgb), 0.08), 0 0 60px rgba(var(--mint-rgb), 0.14); }
-  .pcf__hub-rings::before { content: ''; position: absolute; inset: 14%; border-radius: 9999px; border: 1px solid rgba(var(--mint-rgb), 0.14); }
-  .pcf__hub-icon { width: clamp(40px, 4vw, 52px); height: clamp(40px, 4vw, 52px); color: var(--mint); }
-  .pcf__hub-icon :global(svg) { width: 100%; height: 100%; display: block; }
-  .pcf__hub-kicker { margin: 0; font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mint); }
-  .pcf__hub-title { margin: 0; font-family: var(--font-body); font-size: clamp(20px, 2.4vw, 30px); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: var(--off-white); }
-  .pcf__hub-sub { margin: 0; font-family: 'Inter', system-ui, sans-serif; font-size: clamp(13px, 1.1vw, 15px); line-height: 1.45; color: rgba(245, 248, 250, 0.66); }
+  .pcf__hub-rings { position: absolute; inset: 0; z-index: -1; border-radius: 9999px; border: 1px solid rgba(var(--mint-rgb), 0.24); box-shadow: 0 0 0 1px rgba(var(--mint-rgb), 0.08), 0 0 72px rgba(var(--mint-rgb), 0.2); }
+  .pcf__hub-rings::before { content: ''; position: absolute; inset: 9%; border-radius: 9999px; border: 1px solid rgba(var(--mint-rgb), 0.16); }
+  .pcf__hub-rings::after { content: ''; position: absolute; inset: 20%; border-radius: 9999px; border: 1px solid rgba(var(--mint-rgb), 0.12); }
+  .pcf__hub-label { margin: 0; padding: 0 10%; font-family: var(--font-body); font-size: clamp(22px, 2.6vw, 34px); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: var(--mint); text-align: center; }
 
   .pcf__card {
     position: relative; perspective: 1400px; cursor: pointer;
-    min-height: clamp(180px, 20vw, 260px);
+    min-height: clamp(168px, 17vw, 224px);
     background: none; border: 0; padding: 0; text-align: left; font: inherit; color: inherit;
   }
   .pcf__card:focus-visible { outline: 2px solid var(--mint); outline-offset: 4px; border-radius: 14px; }
   .pcf__face {
-    position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    position: absolute; inset: 0; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden;
     display: flex; flex-direction: column; gap: 12px;
-    padding: clamp(18px, 1.8vw, 26px);
+    padding: clamp(16px, 1.6vw, 24px);
     border-radius: 14px;
     background: linear-gradient(160deg, rgba(10, 22, 28, 0.72) 0%, rgba(10, 22, 28, 0.5) 100%);
     box-shadow: inset 0 0 0 1px rgba(var(--mint-rgb), 0.22), 0 18px 40px rgba(0, 0, 0, 0.28);
@@ -102,16 +97,17 @@ const hubIcon = `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stro
   }
   .pcf__face--back { transform: rotateY(180deg); justify-content: center; }
 
-  .pcf__num { display: block; font-family: var(--font-display); font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mint); }
-  .pcf__front { font-family: var(--font-body); font-weight: 700; font-size: clamp(17px, 1.6vw, 22px); line-height: 1.22; letter-spacing: -0.015em; color: var(--off-white); }
-  .pcf__flip { margin-top: auto; font-family: 'Inter', system-ui, sans-serif; font-size: 12.5px; font-weight: 600; letter-spacing: 0.02em; color: var(--mint); }
+  .pcf__watermark { position: absolute; right: clamp(8px, 1.2vw, 16px); bottom: -0.16em; font-family: var(--font-display); font-size: clamp(88px, 9vw, 120px); font-weight: 700; line-height: 1; color: rgba(104, 227, 190, 0.14); pointer-events: none; z-index: 0; }
+  .pcf__front { position: relative; z-index: 1; font-family: var(--font-body); font-weight: 700; font-size: clamp(16px, 1.5vw, 21px); line-height: 1.22; letter-spacing: -0.015em; color: var(--off-white); }
+  .pcf__flip { position: relative; z-index: 1; margin-top: auto; font-family: 'Inter', system-ui, sans-serif; font-size: 12.5px; font-weight: 600; letter-spacing: 0.02em; color: var(--mint); }
 
+  .pcf__back-index { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.22em; color: var(--mint); }
   .pcf__back { font-family: 'Inter', system-ui, sans-serif; font-size: clamp(14px, 1.2vw, 16px); line-height: 1.5; color: rgba(245, 248, 250, 0.84); }
 
   @media (max-width: 899px) {
     .pcf__stage { grid-template-columns: 1fr; grid-template-rows: auto; gap: 16px; }
     .pcf__lines { display: none; }
-    .pcf__hub { position: static; transform: none; width: auto; padding: 24px 0; }
+    .pcf__hub { position: static; transform: none; width: auto; aspect-ratio: auto; padding: 28px 0; }
     .pcf__hub-rings { display: none; }
   }
   @media (prefers-reduced-motion: reduce) { .pcf__card-inner { transition: none; } }

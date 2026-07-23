@@ -241,14 +241,14 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     takeaway: '',
     capabilities: [
       {
-        front: 'Set your floor\u2019s audio to match the room\u2019s energy, all day.',
+        front: 'Set your property\u2019s audio to match the room\u2019s energy, all day.',
         back:
-          'Build an audio schedule that moves the way your floor does \u2014 lighter mornings, building afternoons, peaking evenings, easing back as the crowd thins. Each zone follows its own curve, and the transitions happen on their own.',
+          'Build an audio schedule that moves the way your property does \u2014 lighter mornings, building afternoons, peaking evenings, easing back as the crowd thins. Each zone follows its own curve, and the transitions happen on their own.',
       },
       {
-        front: 'Turn a signature moment into a floor event, automatically.',
+        front: 'Turn a signature moment into a localized event, automatically.',
         back:
-          'When a big moment hits \u2014 a jackpot, a goal, a headline, a VIP arrival \u2014 a coordinated preset fires in that zone. Accent lights pulse, audio swells for a beat, nearby screens flash a celebration, then everything resets on its own.',
+          'When a big moment hits \u2014 a jackpot, a touchdown, a headline, a VIP arrival \u2014 a coordinated preset fires in that zone. Accent lights pulse, audio swells for a beat, nearby screens flash a celebration, then everything resets on its own.',
       },
       {
         front: 'Reconfigure the entire property in seconds.',
