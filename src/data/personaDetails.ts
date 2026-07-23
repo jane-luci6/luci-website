@@ -118,19 +118,22 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       moments: [
         {
           time: 'Doors open',
-          caption: 'The room is ready before the first guest walks in.',
+          caption: 'You make sure the property is ready before the first guest walks in.',
         },
         {
           time: 'Event trigger',
-          caption: 'A jackpot hits, a goal scores, a flight delays — the floor responds in the moment.',
+          caption:
+            'You orchestrate the location to respond to important moments — a goal scores, a jackpot hits, a flight delays.',
         },
         {
           time: 'Room turnover',
-          caption: 'The space becomes what the next event needs, on schedule.',
+          caption:
+            'You flip all the switches so the space becomes what the next event needs, on schedule.',
         },
         {
           time: 'Saturday night',
-          caption: 'Sold-out show, packed floor, high-traffic rush — the atmosphere holds.',
+          caption:
+            'You hold the atmosphere at the sold-out show, packed floor, or high-traffic rush.',
         },
       ],
       support: '',
@@ -257,7 +260,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     ctaTitle: 'A/V should support your job, not block it.',
     chapters: [
       { id: 'persona-thesis', label: 'Overview' },
-      { id: 'persona-narrative', label: 'A day on your floor' },
+      { id: 'persona-narrative', label: 'What you manage' },
       { id: 'persona-challenges', label: 'What gets in your way' },
       { id: 'persona-capabilities', label: 'What you can do' },
       { id: 'persona-two-shifts', label: 'The difference' },
