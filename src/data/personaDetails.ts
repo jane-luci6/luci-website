@@ -224,22 +224,22 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       {
         front: 'Set your property\u2019s audio to match the room\u2019s energy, all day.',
         back:
-          'Build an audio schedule that moves the way your property does \u2014 lighter mornings, building afternoons, peaking evenings, easing back as the crowd thins. Each zone follows its own curve, and the transitions happen on their own.',
+          'Build an audio schedule that moves with your property \u2014 lighter mornings, building afternoons, peaking evenings. Transitions happen on their own.',
       },
       {
         front: 'Turn a signature moment into a localized event, automatically.',
         back:
-          'When a big moment hits \u2014 a jackpot, a touchdown, a headline, a VIP arrival \u2014 a coordinated preset fires in that zone. Accent lights pulse, audio swells for a beat, nearby screens flash a celebration, then everything resets on its own.',
+          'When a big moment hits \u2014 a jackpot, a touchdown, a headline, a VIP arrival \u2014 a coordinated preset fires. Lights, audio, and screens celebrate for a beat, then reset.',
       },
       {
         front: 'Reconfigure the entire property in seconds.',
         back:
-          'Each mode your property runs \u2014 a normal weekday, a Saturday peak, a marquee event, a holiday, a private function \u2014 becomes one complete configuration of audio, screens, and lighting. Some run on a tap; others, like a premium space, hold a standing identity that never needs a manual touch.',
+          'Weekday, Saturday peak, marquee event, holiday \u2014 each becomes one configuration of audio, screens, and lighting. Some run on a tap; premium spaces keep a standing identity.',
       },
       {
         front: 'Direct guest attention to a new area from the moment it opens.',
         back:
-          'When a new section launches \u2014 a slot bank, a retail outlet, a renovated wing, a new gate \u2014 set the surrounding zones to point toward it for the first few weeks. The ambient content and audio tune themselves to give the area its own energy, then revert automatically once it\u2019s established.',
+          'When a new section launches \u2014 a slot bank, retail outlet, renovated wing, new gate \u2014 surrounding zones point toward it for the first few weeks, then revert once it\u2019s established.',
       },
     ],
     ctaTitle: 'A/V should support your job, not block it.',
