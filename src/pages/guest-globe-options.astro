@@ -4,56 +4,66 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const options = [
   {
     n: '01',
-    name: 'The guest',
-    desc: 'A single person — gold head, mint shoulders. The most literal: the experience is for the guest. (Refined version of what is live today.)',
-    svg: `<svg viewBox="0 0 64 64" fill="none" stroke="#2b9e80" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="24" r="9" fill="#CEB06E" fill-opacity="0.85"/><path d="M16 52c0-9.94 8.06-18 16-18s16 8.06 16 18"/></svg>`,
+    name: 'The energy waveform',
+    desc: 'A horizontal sound/energy curve that fills the landing zone — the atmosphere the guest feels, drawn as a living wave. Rhymes with the energy-curve motif already on the page and the “audio curve by zone” capability. No circle.',
+    svg: `<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid meet"><defs><linearGradient id="gwf" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2b9e80"/><stop offset="0.6" stop-color="#68e3be"/><stop offset="1" stop-color="#ceb06e"/></linearGradient></defs><path d="M0,128 C40,128 50,64 90,64 C130,64 140,146 180,146 C220,146 230,40 270,40 C300,40 310,104 320,104" fill="none" stroke="url(#gwf)" stroke-width="3" stroke-linecap="round"/><path d="M0,128 C40,128 50,64 90,64 C130,64 140,146 180,146 C220,146 230,40 270,40 C300,40 310,104 320,104 L320,200 L0,200 Z" fill="url(#gwf)" opacity="0.12"/><circle cx="270" cy="40" r="5" fill="#CEB06E"/><circle cx="270" cy="40" r="11" fill="none" stroke="#CEB06E" stroke-opacity="0.4" stroke-width="1.4"/></svg>`,
   },
   {
     n: '02',
-    name: 'Radiant guest',
-    desc: 'The guest at the center with the experience radiating outward across the property — concentric rings (mint, gold dashed, faint mint).',
-    svg: `<svg viewBox="0 0 64 64" fill="none" stroke-linecap="round"><circle cx="32" cy="28" r="6" fill="#CEB06E" fill-opacity="0.9"/><path d="M22 46c0-5.5 4.5-10 10-10s10 4.5 10 10" stroke="#2b9e80" stroke-width="2.2" stroke-linejoin="round"/><circle cx="32" cy="32" r="13" stroke="#2b9e80" stroke-width="1.8" stroke-opacity="0.55"/><circle cx="32" cy="32" r="20" stroke="#CEB06E" stroke-width="1.6" stroke-opacity="0.45" stroke-dasharray="3 5"/><circle cx="32" cy="32" r="27" stroke="#2b9e80" stroke-width="1.4" stroke-opacity="0.28"/></svg>`,
+    name: 'Layered ambiance strata',
+    desc: 'Stacked horizontal gradient bands — light, sound, screens — the layered environment the guest moves through. Reads as the multi-system ambiance LUCI consolidates, not a single object. No circle.',
+    svg: `<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid meet"><rect x="0" y="36" width="320" height="26" fill="#CEB06E" opacity="0.24" rx="4"/><rect x="0" y="74" width="320" height="26" fill="#68e3be" opacity="0.30" rx="4"/><rect x="0" y="112" width="320" height="26" fill="#2b9e80" opacity="0.36" rx="4"/><rect x="0" y="150" width="320" height="20" fill="#68e3be" opacity="0.16" rx="4"/></svg>`,
   },
   {
     n: '03',
-    name: 'The crowd',
-    desc: 'A central gold guest with smaller mint guests orbiting around it — every guest, at scale. Reads as: the whole room, not one person.',
-    svg: `<svg viewBox="0 0 64 64" fill="none" stroke="#2b9e80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="30" r="6" fill="#CEB06E" fill-opacity="0.9"/><path d="M24 46c0-4.4 3.6-8 8-8s8 3.6 8 8"/><circle cx="14" cy="18" r="3"/><path d="M10 26c0-2.2 1.8-4 4-4s4 1.8 4 4"/><circle cx="50" cy="16" r="3"/><path d="M46 24c0-2.2 1.8-4 4-4s4 1.8 4 4"/><circle cx="12" cy="46" r="3"/><path d="M8 54c0-2.2 1.8-4 4-4s4 1.8 4 4"/><circle cx="52" cy="44" r="3"/><path d="M48 52c0-2.2 1.8-4 4-4s4 1.8 4 4"/></svg>`,
+    name: 'Guest pin on a floorplan',
+    desc: 'A small property floorplan with a glowing “you are here” guest pin. Ties directly to LUCI’s map-based interface — the guest experience is a place, not an abstraction. No circle.',
+    svg: `<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid meet"><rect x="20" y="28" width="120" height="84" fill="none" stroke="#2b9e80" stroke-opacity="0.4" stroke-width="1.6" rx="4"/><rect x="160" y="28" width="140" height="50" fill="none" stroke="#2b9e80" stroke-opacity="0.4" stroke-width="1.6" rx="4"/><rect x="160" y="90" width="64" height="62" fill="none" stroke="#2b9e80" stroke-opacity="0.4" stroke-width="1.6" rx="4"/><path d="M150,152 L150,120 L160,120 L160,152" fill="none" stroke="#2b9e80" stroke-opacity="0.3" stroke-width="1.4"/><path d="M244,40 C236,40 236,54 244,64 C252,54 252,40 244,40 Z" fill="#CEB06E"/><circle cx="244" cy="46" r="3.2" fill="#0A161C"/><line x1="244" y1="50" x2="244" y2="74" stroke="#CEB06E" stroke-width="2.2" stroke-linecap="round"/><circle cx="244" cy="40" r="16" fill="none" stroke="#CEB06E" stroke-opacity="0.35" stroke-width="1.2"/></svg>`,
   },
   {
     n: '04',
-    name: 'Atmosphere orb',
-    desc: 'No person at all — a gold core with radiating mint rings, a dashed gold outer ring, and four gold rays. Pure ambiance: the energy the guest feels.',
-    svg: `<svg viewBox="0 0 64 64" fill="none" stroke-linecap="round"><circle cx="32" cy="32" r="6" fill="#CEB06E" fill-opacity="0.95"/><circle cx="32" cy="32" r="13" stroke="#2b9e80" stroke-width="2" stroke-opacity="0.7"/><circle cx="32" cy="32" r="20" stroke="#2b9e80" stroke-width="1.6" stroke-opacity="0.45"/><circle cx="32" cy="32" r="27" stroke="#CEB06E" stroke-width="1.4" stroke-opacity="0.4" stroke-dasharray="3 5"/><path d="M32 5v7M32 52v7M5 32h7M52 32h7" stroke="#CEB06E" stroke-width="2" stroke-opacity="0.55"/></svg>`,
+    name: 'Editorial photo (duotone)',
+    desc: 'A real photograph of a guest in the environment, cropped and duotoned navy→mint. Humanizes the payoff — shows a real moment instead of an abstraction. Most “marketing” of the five. No circle, no icon. (Mock uses a placeholder tint; final would be a real guest photo.)',
+    photo: true,
   },
   {
     n: '05',
-    name: 'Spotlight guest',
-    desc: 'A guest standing in a cone of light — the guest as the focus, the star of the show. The beam is gold; the guest is gold-headed, mint-shouldered.',
-    svg: `<svg viewBox="0 0 64 64" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4L42 4L46 28L18 28Z" fill="#CEB06E" fill-opacity="0.2" stroke="#CEB06E" stroke-width="1.6" stroke-opacity="0.6"/><circle cx="32" cy="40" r="6" fill="#CEB06E" fill-opacity="0.9"/><path d="M22 56c0-5.5 4.5-10 10-10s10 4.5 10 10" stroke="#2b9e80" stroke-width="2.2"/></svg>`,
+    name: 'The moment — a ray burst',
+    desc: 'A free-standing burst of rays from a single point — the “moment” a jackpot, a goal, or a sold-out show creates. Dynamic, no container. Reads as in-the-moment energy, the payoff operations orchestrates.',
+    svg: `<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid meet"><g transform="translate(160,100)"><g stroke="#CEB06E" stroke-width="2.4" stroke-linecap="round"><line x1="0" y1="0" x2="0" y2="-72"/><line x1="0" y1="0" x2="0" y2="72"/><line x1="0" y1="0" x2="-72" y2="0"/><line x1="0" y1="0" x2="72" y2="0"/><line x1="0" y1="0" x2="-52" y2="-52"/><line x1="0" y1="0" x2="52" y2="-52"/><line x1="0" y1="0" x2="-52" y2="52"/><line x1="0" y1="0" x2="52" y2="52"/></g><g stroke="#68e3be" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"><line x1="0" y1="0" x2="0" y2="-50"/><line x1="0" y1="0" x2="0" y2="50"/><line x1="0" y1="0" x2="-40" y2="0"/><line x1="0" y1="0" x2="40" y2="0"/></g><circle cx="0" cy="0" r="9" fill="#CEB06E"/><circle cx="0" cy="0" r="18" fill="none" stroke="#CEB06E" stroke-opacity="0.4" stroke-width="1.4"/></g></svg>`,
   },
 ];
 ---
 
-<BaseLayout title="Guest experience globe — options" description="Five visualizations for the guest-experience landing zone on the Operations page" darkHeader>
+<BaseLayout title="Guest experience — options (non-orb)" description="Five non-orb ways to represent the guest experience on the Operations page" darkHeader>
   <div class="ggo">
     <div class="ggo__intro">
-      <span class="ggo__intro-k">Guest experience globe — 5 options</span>
-      <span class="ggo__intro-d">Five directions for the orb at the end of the “What you can do” flow on the Operations page. Each is shown in the same dark-orb treatment (gold border, mint+gold gradient) it will live in. Pick one and we will wire it in. (The orb container itself is not changing — only the figure inside.)</span>
+      <span class="ggo__intro-k">Guest experience — 5 non-orb directions</span>
+      <span class="ggo__intro-d">Five genuinely different forms for the landing zone at the end of the “What you can do” flow — not all circles. Each is shown roughly as it would sit in that half-page zone. Pick one and we will wire it in (the converging arrows will be re-aimed at its focal point).</span>
     </div>
 
-    <div class="ggo__grid">
+    <div class="ggo__list">
       {options.map((o) => (
-        <figure class="ggo__card">
-          <div class="ggo__orb">
-            <div class="ggo__orb-figure" set:html={o.svg} />
+        <article class="ggo__item">
+          <div class="ggo__panel">
+            {o.photo ? (
+              <div class="ggo__photo" role="img" aria-label="Editorial duotone guest photo placeholder">
+                <img class="ggo__photo-img" src="/images/industries/casinos-gaming.jpg" alt="" loading="lazy" />
+                <div class="ggo__photo-tint"></div>
+                <div class="ggo__photo-guest" aria-hidden="true">
+                  <svg viewBox="0 0 64 64" fill="none" stroke="#0A161C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="24" r="9" fill="#0A161C"/><path d="M16 52c0-9.94 8.06-18 16-18s16 8.06 16 18"/></svg>
+                </div>
+              </div>
+            ) : (
+              <div class="ggo__panel-art" set:html={o.svg} />
+            )}
+            <span class="ggo__panel-n">{o.n}</span>
           </div>
-          <span class="ggo__card-n">{o.n}</span>
-        </figure>
-        <figcaption class="ggo__card-meta">
-          <h3 class="ggo__card-name">{o.name}</h3>
-          <p class="ggo__card-desc">{o.desc}</p>
-        </figcaption>
+          <div class="ggo__item-meta">
+            <h3 class="ggo__item-name">{o.name}</h3>
+            <p class="ggo__item-desc">{o.desc}</p>
+          </div>
+        </article>
       ))}
     </div>
   </div>
@@ -83,50 +93,79 @@ const options = [
     font-weight: 500;
     line-height: 1.5;
     color: rgba(245, 248, 250, 0.72);
-    max-width: 80ch;
+    max-width: 86ch;
   }
 
-  .ggo__grid {
+  .ggo__list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: clamp(28px, 3vw, 48px) clamp(20px, 3vw, 40px);
-    padding: clamp(40px, 6vw, 80px) var(--page-pad);
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: clamp(28px, 3vw, 44px);
+    padding: clamp(40px, 6vw, 72px) var(--page-pad);
   }
 
-  .ggo__card {
-    margin: 0;
+  .ggo__item {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 18px;
   }
-  .ggo__orb {
+  .ggo__panel {
     position: relative;
     display: grid;
     place-items: center;
-    width: clamp(220px, 22vw, 300px);
-    height: clamp(220px, 22vw, 300px);
-    border-radius: 9999px;
+    aspect-ratio: 16 / 10;
+    width: 100%;
+    border-radius: 14px;
     background:
-      radial-gradient(circle at 50% 40%, rgba(104, 227, 190, 0.2) 0%, rgba(104, 227, 190, 0) 60%),
-      linear-gradient(160deg, rgba(206, 176, 110, 0.22) 0%, rgba(8, 17, 22, 0.4) 100%);
-    box-shadow:
-      inset 0 0 0 1px rgba(206, 176, 110, 0.42),
-      0 0 48px rgba(var(--mint-rgb), 0.16);
+      radial-gradient(circle at 50% 38%, rgba(104, 227, 190, 0.08) 0%, rgba(104, 227, 190, 0) 60%),
+      linear-gradient(160deg, rgba(206, 176, 110, 0.08) 0%, rgba(8, 17, 22, 0.5) 100%);
+    box-shadow: inset 0 0 0 1px rgba(206, 176, 110, 0.22);
+    overflow: hidden;
   }
-  .ggo__orb-figure { width: 58%; height: 58%; display: grid; place-items: center; }
-  .ggo__orb-figure :global(svg) { width: 100%; height: 100%; display: block; }
-
-  .ggo__card-n {
+  .ggo__panel-art { width: 100%; height: 100%; display: grid; place-items: center; padding: 8px; }
+  .ggo__panel-art :global(svg) { width: 100%; height: 100%; display: block; }
+  .ggo__panel-n {
+    position: absolute;
+    top: 14px;
+    left: 16px;
     font-family: var(--font-body);
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.06em;
-    color: rgba(206, 176, 110, 0.5);
+    color: rgba(206, 176, 110, 0.55);
   }
 
-  .ggo__card-meta { max-width: 36ch; text-align: center; }
-  .ggo__card-name {
+  /* Editorial photo option */
+  .ggo__photo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  .ggo__photo-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.05) brightness(0.9);
+  }
+  .ggo__photo-tint {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(10, 22, 28, 0.55) 0%, rgba(10, 22, 28, 0.2) 40%, rgba(104, 227, 190, 0.34) 100%);
+    mix-blend-mode: color;
+  }
+  .ggo__photo-guest {
+    position: absolute;
+    left: 50%;
+    bottom: 18%;
+    transform: translateX(-50%);
+    width: 26%;
+    filter: drop-shadow(0 0 10px rgba(104, 227, 190, 0.5));
+  }
+  .ggo__photo-guest :global(svg) { width: 100%; height: 100%; display: block; }
+
+  .ggo__item-meta { max-width: 44ch; }
+  .ggo__item-name {
     margin: 0 0 6px;
     font-family: var(--font-body);
     font-size: 18px;
@@ -134,7 +173,7 @@ const options = [
     letter-spacing: -0.01em;
     color: var(--off-white);
   }
-  .ggo__card-desc {
+  .ggo__item-desc {
     margin: 0;
     font-family: 'Inter', system-ui, sans-serif;
     font-size: 14px;
