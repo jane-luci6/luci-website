@@ -2,7 +2,7 @@
 import type { PersonaCapability } from '../data/personaDetails';
 interface Props { capabilities: PersonaCapability[]; lead?: string; }
 const { capabilities, lead } = Astro.props;
-const hubIcon = `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="24" r="9" fill="#CEB06E" fill-opacity="0.85"/><path d="M16 52c0-9.94 8.06-18 16-18s16 8.06 16 18"/></svg>`;
+const hubIcon = `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="13" r="8.5" fill="#CEB06E" fill-opacity="0.85"/><path d="M11 62c0-12.6 9.4-24 21-24s21 11.4 21 24"/></svg>`;
 ---
 
 <div class="pcf">
@@ -74,9 +74,9 @@ const hubIcon = `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stro
   .pcf__hub-rings { position: absolute; inset: 0; z-index: -1; border-radius: 9999px; border: 1px solid rgba(var(--mint-rgb), 0.24); box-shadow: 0 0 0 1px rgba(var(--mint-rgb), 0.08), 0 0 72px rgba(var(--mint-rgb), 0.2); }
   .pcf__hub-rings::before { content: ''; position: absolute; inset: 9%; border-radius: 9999px; border: 1px solid rgba(var(--mint-rgb), 0.16); }
   .pcf__hub-rings::after { content: ''; position: absolute; inset: 20%; border-radius: 9999px; border: 1px solid rgba(var(--gold-rgb), 0.22); }
-  .pcf__hub-icon { width: clamp(40px, 4vw, 52px); height: clamp(40px, 4vw, 52px); color: var(--mint); }
+  .pcf__hub-icon { position: absolute; inset: 3%; width: 94%; height: 94%; color: var(--mint); z-index: 1; }
   .pcf__hub-icon :global(svg) { width: 100%; height: 100%; display: block; }
-  .pcf__hub-label { margin: 0; max-width: 82%; font-family: var(--font-body); font-size: clamp(22px, 2.6vw, 34px); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: var(--mint); text-align: center; }
+  .pcf__hub-label { position: absolute; left: 50%; top: 73%; transform: translate(-50%, -50%); z-index: 2; margin: 0; max-width: 72%; font-family: var(--font-body); font-size: clamp(14px, 1.6vw, 20px); font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; color: var(--mint); text-align: center; }
 
   .pcf__card {
     position: relative; perspective: 1400px; cursor: pointer;
