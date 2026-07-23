@@ -1,227 +1,123 @@
 ---
 import type { PersonaCapability } from '../data/personaDetails';
-
-interface Props {
-  capabilities: PersonaCapability[];
-  lead?: string;
-}
-
+interface Props { capabilities: PersonaCapability[]; lead?: string; }
 const { capabilities, lead } = Astro.props;
+const hubIcon = `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="24" r="9" fill="#CEB06E" fill-opacity="0.85"/><path d="M16 52c0-9.94 8.06-18 16-18s16 8.06 16 18"/></svg>`;
 ---
 
 <div class="pcf">
   {lead && <p class="pcf__lead">{lead}</p>}
 
   <div class="pcf__stage">
-    <ul class="pcf__actions" role="list">
-      {capabilities.map((c, i) => (
-        <li class="pcf__row">
-          <span class="pcf__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-          <div class="pcf__row-text">
-            <p class="pcf__action">{c.action}</p>
-            <p class="pcf__outcome">{c.outcome}</p>
-          </div>
-        </li>
-      ))}
-    </ul>
+    <svg class="pcf__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M50,50 L14,14" /><path d="M50,50 L86,14" /><path d="M50,50 L14,86" /><path d="M50,50 L86,86" />
+    </svg>
 
-    <div class="pcf__flow" aria-hidden="true">
-      <svg class="pcf__flow-svg" viewBox="0 0 120 100" preserveAspectRatio="none" focusable="false">
-        <defs>
-          <linearGradient id="pcfFlow" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stop-color="#68e3be" stop-opacity="0.18" />
-            <stop offset="0.45" stop-color="#68e3be" stop-opacity="0.85" />
-            <stop offset="0.8" stop-color="#ceb06e" stop-opacity="0.95" />
-            <stop offset="1" stop-color="#edd086" stop-opacity="1" />
-          </linearGradient>
-        </defs>
-        <path d="M0,15 C60,15 60,50 114,50" />
-        <path d="M0,38 C60,38 60,50 114,50" />
-        <path d="M0,62 C60,62 60,50 114,50" />
-        <path d="M0,85 C60,85 60,50 114,50" />
-        <path d="M114,50 l-7,-4 m7,4 l-7,4" class="pcf__flow-head" />
-      </svg>
+    <div class="pcf__hub">
+      <span class="pcf__hub-rings" aria-hidden="true"></span>
+      <span class="pcf__hub-icon" set:html={hubIcon} />
+      <p class="pcf__hub-kicker">The guest experience</p>
+      <h3 class="pcf__hub-title">Every control lands here</h3>
+      <p class="pcf__hub-sub">The one thing you&rsquo;re actually judged on.</p>
     </div>
 
-    <div class="pcf__guest">
-      <p class="pcf__guest-label">The guest experience</p>
-      <div class="pcf__guest-figure">
-        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="32" cy="24" r="9" fill="#CEB06E" fill-opacity="0.85" />
-          <path d="M16 52c0-9.94 8.06-18 16-18s16 8.06 16 18" />
-        </svg>
-      </div>
-    </div>
+    {capabilities.map((c, i) => (
+      <button class="pcf__card" type="button" aria-label={`Use case ${i + 1}: ${c.front}. Tap to see how it works.`}>
+        <span class="pcf__card-inner">
+          <span class="pcf__face pcf__face--front">
+            <span class="pcf__num">{String(i + 1).padStart(2, '0')}</span>
+            <span class="pcf__front">{c.front}</span>
+            <span class="pcf__flip">How it works &rarr;</span>
+          </span>
+          <span class="pcf__face pcf__face--back">
+            <span class="pcf__back-label">How it works</span>
+            <span class="pcf__back-desc">{c.backDesc}</span>
+            <ul class="pcf__back-bullets">
+              {c.backBullets.map((b) => <li>{b}</li>)}
+            </ul>
+            <span class="pcf__back-try"><span class="pcf__back-try-k">Try it &rarr;</span> {c.backTry}</span>
+          </span>
+        </span>
+      </button>
+    ))}
   </div>
 </div>
 
+<script>
+  document.querySelectorAll('.pcf__card').forEach((card) => {
+    card.addEventListener('click', () => card.classList.toggle('is-flipped'));
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.classList.toggle('is-flipped'); }
+    });
+  });
+</script>
+
 <style>
-  .pcf {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(24px, 3vw, 40px);
-  }
-  .pcf__lead {
-    max-width: 62ch;
-    margin: 0;
-    font-family: var(--font-body);
-    font-size: clamp(17px, 1.5vw, 20px);
-    line-height: 1.6;
-    color: rgba(245, 248, 250, 0.84);
-  }
+  .pcf { display: flex; flex-direction: column; gap: clamp(24px, 3vw, 40px); }
+  .pcf__lead { max-width: 62ch; margin: 0; font-family: var(--font-body); font-size: clamp(17px, 1.5vw, 20px); line-height: 1.6; color: rgba(245, 248, 250, 0.84); }
 
   .pcf__stage {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) clamp(56px, 6vw, 96px) minmax(240px, 50%);
-    align-items: center;
-    gap: 0;
-  }
-
-  .pcf__actions {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(14px, 1.6vw, 22px);
-  }
-  .pcf__row {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    align-items: start;
-    column-gap: clamp(16px, 2vw, 26px);
-    padding: clamp(14px, 1.6vw, 20px) 0;
-    border-top: 1px solid rgba(var(--gold-rgb), 0.16);
-  }
-  .pcf__row:first-child {
-    border-top: none;
-    padding-top: 0;
-  }
-
-  /* Faded large numeral — the house "oversized numeral" treatment, ghosted gold. */
-  .pcf__num {
-    font-family: var(--font-body);
-    font-size: clamp(40px, 5vw, 58px);
-    font-weight: 700;
-    line-height: 0.85;
-    letter-spacing: -0.02em;
-    color: rgba(206, 176, 110, 0.26);
-    user-select: none;
-  }
-
-  .pcf__row-text {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    padding-top: 4px;
-  }
-  /* Prominent first line. */
-  .pcf__action {
-    margin: 0;
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: clamp(18px, 1.7vw, 22px);
-    line-height: 1.2;
-    letter-spacing: -0.015em;
-    color: var(--off-white);
-  }
-  /* Receded descriptive text. */
-  .pcf__outcome {
-    margin: 0;
-    font-family: 'Inter', system-ui, sans-serif;
-    font-weight: 400;
-    font-size: clamp(14px, 1.2vw, 16px);
-    line-height: 1.5;
-    color: rgba(245, 248, 250, 0.56);
-  }
-
-  .pcf__flow {
     position: relative;
-    height: 100%;
-    min-height: 220px;
-  }
-  .pcf__flow-svg {
-    position: absolute;
-    inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: clamp(56px, 9vw, 104px) clamp(150px, 26vw, 280px);
     width: 100%;
-    height: 100%;
-    overflow: visible;
-  }
-  .pcf__flow-svg path {
-    fill: none;
-    stroke: url(#pcfFlow);
-    stroke-width: 1.6;
-    stroke-linecap: round;
-    stroke-dasharray: 6 8;
-    animation: pcfFlow 1.6s linear infinite;
-  }
-  .pcf__flow-head {
-    stroke: var(--gold-deep);
-    stroke-width: 2;
-    stroke-dasharray: none;
-    animation: none;
-  }
-  @keyframes pcfFlow {
-    to { stroke-dashoffset: -28; }
+    padding-block: clamp(24px, 4vw, 48px);
   }
 
-  .pcf__guest {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
+  .pcf__lines { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: visible; }
+  .pcf__lines path { fill: none; stroke: rgba(104, 227, 190, 0.32); stroke-width: 1; stroke-dasharray: 3 6; vector-effect: non-scaling-stroke; }
+
+  .pcf__hub {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    z-index: 2;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    text-align: center; width: clamp(180px, 16vw, 230px);
   }
-  .pcf__guest-label {
-    margin: 0;
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold-deep);
-    text-align: center;
+  .pcf__hub-rings { position: absolute; inset: -28% -14%; z-index: -1; border-radius: 9999px; border: 1px solid rgba(var(--mint-rgb), 0.18); box-shadow: 0 0 0 1px rgba(var(--mint-rgb), 0.08), 0 0 60px rgba(var(--mint-rgb), 0.14); }
+  .pcf__hub-rings::before { content: ''; position: absolute; inset: 14%; border-radius: 9999px; border: 1px solid rgba(var(--mint-rgb), 0.14); }
+  .pcf__hub-icon { width: clamp(40px, 4vw, 52px); height: clamp(40px, 4vw, 52px); color: var(--mint); }
+  .pcf__hub-icon :global(svg) { width: 100%; height: 100%; display: block; }
+  .pcf__hub-kicker { margin: 0; font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mint); }
+  .pcf__hub-title { margin: 0; font-family: var(--font-body); font-size: clamp(20px, 2.4vw, 30px); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: var(--off-white); }
+  .pcf__hub-sub { margin: 0; font-family: 'Inter', system-ui, sans-serif; font-size: clamp(13px, 1.1vw, 15px); line-height: 1.45; color: rgba(245, 248, 250, 0.66); }
+
+  .pcf__card {
+    position: relative; perspective: 1400px; cursor: pointer;
+    min-height: clamp(180px, 20vw, 260px);
+    background: none; border: 0; padding: 0; text-align: left; font: inherit; color: inherit;
   }
-  .pcf__guest-figure {
-    display: grid;
-    place-items: center;
-    width: clamp(200px, 24vw, 300px);
-    height: clamp(200px, 24vw, 300px);
-    border-radius: 9999px;
-    color: var(--mint);
-    background:
-      radial-gradient(circle at 50% 40%, rgba(104, 227, 190, 0.2) 0%, rgba(104, 227, 190, 0) 60%),
-      linear-gradient(160deg, rgba(206, 176, 110, 0.22) 0%, rgba(8, 17, 22, 0.4) 100%);
-    box-shadow:
-      inset 0 0 0 1px rgba(206, 176, 110, 0.42),
-      0 0 48px rgba(var(--mint-rgb), 0.16);
+  .pcf__card:focus-visible { outline: 2px solid var(--mint); outline-offset: 4px; border-radius: 14px; }
+  .pcf__face {
+    position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    display: flex; flex-direction: column; gap: 12px;
+    padding: clamp(18px, 1.8vw, 26px);
+    border-radius: 14px;
+    background: linear-gradient(160deg, rgba(10, 22, 28, 0.72) 0%, rgba(10, 22, 28, 0.5) 100%);
+    box-shadow: inset 0 0 0 1px rgba(var(--mint-rgb), 0.22), 0 18px 40px rgba(0, 0, 0, 0.28);
   }
-  .pcf__guest-figure svg {
-    width: 58%;
-    height: 58%;
-  }
+  .pcf__card-inner { display: block; position: absolute; inset: 0; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1); }
+  .pcf__card.is-flipped .pcf__card-inner { transform: rotateY(180deg); }
+  .pcf__face--back { transform: rotateY(180deg); }
+
+  .pcf__num { position: absolute; top: clamp(14px, 1.6vw, 20px); right: clamp(16px, 1.8vw, 24px); font-family: var(--font-body); font-size: 13px; font-weight: 700; letter-spacing: 0.06em; color: rgba(206, 176, 110, 0.6); }
+  .pcf__front { font-family: var(--font-body); font-weight: 700; font-size: clamp(17px, 1.6vw, 22px); line-height: 1.22; letter-spacing: -0.015em; color: var(--off-white); margin-top: 6px; }
+  .pcf__flip { margin-top: auto; font-family: 'Inter', system-ui, sans-serif; font-size: 12.5px; font-weight: 600; letter-spacing: 0.02em; color: var(--mint); }
+
+  .pcf__back-label { font-family: var(--font-display); font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-deep); }
+  .pcf__back-desc { font-family: 'Inter', system-ui, sans-serif; font-size: clamp(13px, 1.1vw, 15px); line-height: 1.5; color: rgba(245, 248, 250, 0.82); }
+  .pcf__back-bullets { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .pcf__back-bullets li { position: relative; padding-left: 18px; font-family: 'Inter', system-ui, sans-serif; font-size: clamp(12.5px, 1vw, 14px); line-height: 1.45; color: rgba(245, 248, 250, 0.72); }
+  .pcf__back-bullets li::before { content: ''; position: absolute; left: 2px; top: 0.62em; width: 6px; height: 6px; border-radius: 9999px; background: var(--mint); box-shadow: 0 0 8px rgba(var(--mint-rgb), 0.6); }
+  .pcf__back-try { margin-top: auto; padding-top: 10px; border-top: 1px solid rgba(var(--mint-rgb), 0.18); font-family: 'Inter', system-ui, sans-serif; font-size: clamp(12.5px, 1vw, 14px); line-height: 1.45; color: rgba(245, 248, 250, 0.7); }
+  .pcf__back-try-k { color: var(--gold-deep); font-weight: 700; }
 
   @media (max-width: 899px) {
-    .pcf__stage {
-      grid-template-columns: 1fr;
-      gap: 18px;
-    }
-    .pcf__flow {
-      min-height: 0;
-      height: 40px;
-    }
-    .pcf__flow-svg {
-      transform: rotate(90deg);
-      transform-origin: center;
-    }
-    .pcf__guest {
-      order: 3;
-    }
+    .pcf__stage { grid-template-columns: 1fr; grid-template-rows: auto; gap: 16px; }
+    .pcf__lines { display: none; }
+    .pcf__hub { position: static; transform: none; width: auto; padding: 24px 0; }
+    .pcf__hub-rings { display: none; }
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    .pcf__flow-svg path {
-      animation: none;
-    }
-  }
+  @media (prefers-reduced-motion: reduce) { .pcf__card-inner { transition: none; } }
 </style>
