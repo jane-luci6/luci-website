@@ -123,17 +123,17 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
         {
           time: 'Event trigger',
           caption:
-            'You orchestrate the location to respond to important moments — a goal scores, a jackpot hits, a flight delays.',
+            'You are the energy orchestrator for the moment — a goal scores, a jackpot hits, a flight delays.',
         },
         {
           time: 'Room turnover',
           caption:
-            'You flip all the switches so the space becomes what the next event needs, on schedule.',
+            'You flip the switch so the space becomes what the next event needs, on schedule.',
         },
         {
           time: 'Saturday night',
           caption:
-            'You hold the atmosphere at the sold-out show, packed floor, or high-traffic rush.',
+            'You hold the atmosphere for a sold-out show, packed floor, or high-traffic rush.',
         },
       ],
       support: '',
