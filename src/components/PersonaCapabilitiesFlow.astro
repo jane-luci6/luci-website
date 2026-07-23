@@ -14,9 +14,9 @@ const { capabilities, lead } = Astro.props;
 
   <div class="pcf__stage">
     <ul class="pcf__actions" role="list">
-      {capabilities.map((c) => (
+      {capabilities.map((c, i) => (
         <li class="pcf__row">
-          <span class="pcf__row-marker" aria-hidden="true"></span>
+          <span class="pcf__row-marker" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
           <p class="pcf__row-text">
             <span class="pcf__action">{c.action}</span>
             <span class="pcf__arrow-inline" aria-hidden="true">→</span>
@@ -72,7 +72,7 @@ const { capabilities, lead } = Astro.props;
 
   .pcf__stage {
     display: grid;
-    grid-template-columns: 1fr clamp(64px, 7vw, 104px) clamp(220px, 22vw, 280px);
+    grid-template-columns: minmax(0, 1fr) clamp(56px, 6vw, 96px) minmax(240px, 50%);
     align-items: center;
     gap: 0;
   }
@@ -98,12 +98,13 @@ const { capabilities, lead } = Astro.props;
   }
   .pcf__row-marker {
     flex: 0 0 auto;
-    width: 8px;
-    height: 8px;
-    margin-top: 7px;
-    border-radius: 9999px;
-    background: var(--mint);
-    box-shadow: 0 0 12px rgba(var(--mint-rgb), 0.6);
+    min-width: 2.4em;
+    margin-top: 2px;
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1.1vw, 15px);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--mint);
   }
   .pcf__row-text {
     margin: 0;
@@ -181,8 +182,8 @@ const { capabilities, lead } = Astro.props;
   .pcf__guest-figure {
     display: grid;
     place-items: center;
-    width: clamp(150px, 16vw, 200px);
-    height: clamp(150px, 16vw, 200px);
+    width: clamp(200px, 24vw, 300px);
+    height: clamp(200px, 24vw, 300px);
     border-radius: 9999px;
     color: var(--mint);
     background:

@@ -237,7 +237,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       lockupName: 'What you can do',
       lockupRole: 'Four ways to put LUCI to work',
     },
-    lead: "The floor's environment is now a single instrument you can play — the energy guests feel is something you set on purpose, by zone and by hour.",
+    lead: '',
     takeaway: '',
     capabilities: [
       {
