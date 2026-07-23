@@ -24,6 +24,8 @@ export interface PersonaNarrativeMoment {
 }
 
 export interface PersonaNarrative {
+  /** Optional chapter label above the arc, e.g. "The energy curve", "The life of a message". */
+  chapterLabel?: string;
   /** Sub-lead that opens the arc. */
   subLead: string;
   /** The moments along the day-arc. */
@@ -79,6 +81,8 @@ export interface PersonaDetail {
   heroDeck: string;
   /** Narrative — "who this is", second person, as a day-arc timeline */
   narrativeLockup: { lockupName: string; lockupRole: string };
+  /** Optional intro deck under the narrative lockup. */
+  narrativeDeck?: string;
   narrative: PersonaNarrative;
   /** Challenges — friction → relief, flat list (compact: friction headline + always-visible LUCI relief) */
   challengesLockup: { lockupName: string; lockupRole: string };
@@ -90,11 +94,19 @@ export interface PersonaDetail {
   capabilitiesLockup: { lockupName: string; lockupRole: string };
   lead: string;
   takeaway: string;
+  /** Hub label in the capabilities convergence graphic. Defaults to "The Guest Experience". */
+  hubLabel?: string;
+  /** Optional payoff line under the hub label. */
+  hubSub?: string;
   capabilities: PersonaCapability[];
   /** Spotlight — "the bigger picture" (optional; omitted when the closer carries the frame) */
   spotlight?: { label: string; text: string; accent: string };
+  /** Industry switcher photo kicker. Defaults to "What a failure costs here". */
+  industryKicker?: string;
   /** CTA */
   ctaTitle: string;
+  /** Optional CTA deck under the title. */
+  ctaDeck?: string;
   chapters: { id: string; label: string }[];
 }
 
@@ -111,6 +123,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       lockupRole: 'What operations has to manage',
     },
     narrative: {
+      chapterLabel: 'The energy curve',
       subLead: '',
       moments: [
         {
@@ -243,6 +256,180 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       },
     ],
     ctaTitle: 'A/V should support your job, not block it.',
+    ctaDeck:
+      'Let us show you what it looks like when it isn’t — on your floor, with your team, on your existing setup.',
+    chapters: [
+      { id: 'persona-thesis', label: 'Overview' },
+      { id: 'persona-narrative', label: 'What you manage' },
+      { id: 'persona-challenges', label: 'What gets in your way' },
+      { id: 'persona-capabilities', label: 'What you can do' },
+      { id: 'persona-industries', label: 'Wherever you operate' },
+      { id: 'persona-cta', label: 'Next step' },
+    ],
+  },
+  marketing: {
+    id: 'marketing',
+    heroImage: '/images/who-we-serve/marketing-hero.jpg',
+    heroAlt:
+      'A luxury lobby at dusk with a large digital welcome display beside the reception desk',
+    heroKicker: '',
+    heroDeck:
+      "You own the brand and the message across the whole property. It\u2019s your biggest channel \u2014 and the one you can\u2019t publish to yourself. LUCI hands you the keys.",
+    narrativeLockup: {
+      lockupName: 'Your best channel is the one you don\u2019t control',
+      lockupRole: 'What marketing is accountable for',
+    },
+    narrativeDeck:
+      'You can push a campaign to email, social, and web in minutes. But the property \u2014 where your most engaged guests already are \u2014 takes a request, a hand-off, and a wait.',
+    narrative: {
+      chapterLabel: 'The life of a message',
+      subLead: '',
+      moments: [
+        {
+          time: 'The idea',
+          caption:
+            'You have the offer, the promotion, the moment \u2014 and you know exactly where it should show up: the concourse screens, the lobby wall, the floor.',
+        },
+        {
+          time: 'The hand-off',
+          caption:
+            'You file the request and send the assets to whoever controls the displays. Now it\u2019s out of your hands.',
+        },
+        {
+          time: 'The wait',
+          caption:
+            'Days pass. You\u2019re not sure it\u2019s on brand, on the right screens, or even live yet.',
+        },
+        {
+          time: 'The miss',
+          caption:
+            'By the time it\u2019s up, the moment has passed \u2014 or the screen is still showing last week\u2019s message.',
+        },
+      ],
+      support: '',
+      closing:
+        '<span class="pnt__luci">With LUCI</span>, the whole property becomes a channel you publish to yourself \u2014 in <em>minutes</em>, on brand, from one screen.',
+    },
+    challengesLockup: {
+      lockupName: 'What gets in your way',
+      lockupRole: 'Friction between you and your guests',
+    },
+    challenges: [
+      {
+        friction:
+          'Your property is your highest-impact channel, but you can\u2019t publish to it directly.',
+        relief:
+          'LUCI lets you push content to every screen and zone yourself \u2014 like any other channel, in minutes, without filing a ticket or waiting on another team.',
+      },
+      {
+        friction: 'Content goes stale, and a stale screen makes your brand look neglected.',
+        relief:
+          'LUCI schedules and updates everything centrally, so every display shows what\u2019s happening now \u2014 never last week\u2019s promo.',
+      },
+      {
+        friction: 'With so many screens and so many hands, the brand drifts across the property.',
+        relief:
+          'LUCI holds one look and one message across every display, on brand everywhere, with control over what stays locked.',
+      },
+      {
+        friction:
+          'A jackpot, a goal, a headline act, a flash sale \u2014 and the property can\u2019t react before the moment passes.',
+        relief:
+          'LUCI turns a moment into a property-wide event instantly, bringing screens, sound, and lighting together the second it happens.',
+      },
+      {
+        friction:
+          'Your most valuable channel is also your least accountable \u2014 you can\u2019t show what it drives.',
+        relief:
+          'LUCI makes the property a channel you actually run \u2014 scheduled, controlled, and finally visible alongside the rest of your marketing.',
+      },
+    ],
+    industryLockup: {
+      lockupName: 'LUCI lives wherever you operate',
+      lockupRole: 'The message changes. The control doesn\u2019t',
+    },
+    industryKicker: 'What control unlocks here',
+    industryStakes: [
+      {
+        slug: 'casinos-gaming',
+        name: 'Casinos & gaming',
+        image: '/images/industries/casinos-gaming.jpg',
+        callout:
+          'Your promotions, jackpots, and player-club messaging change by the hour. LUCI lets you turn a jackpot into floor-wide energy the instant it hits, keep every offer current across the floor, and finally run the gaming floor as the revenue channel it already is.',
+        emphasis:
+          'Real-time promo and jackpot moments \u00b7 on-brand loyalty messaging on every screen \u00b7 the floor as a channel you control.',
+      },
+      {
+        slug: 'hotels-resorts',
+        name: 'Hotels & resorts',
+        image: '/images/industries/hotels-resorts.jpg',
+        callout:
+          'Your brand has to feel premium and consistent across the lobby, restaurants, meeting space, and amenities. LUCI keeps every space on brand, promotes the right offer in the right place at the right time, and turns your displays into on-property revenue.',
+        emphasis:
+          'Consistent upscale brand everywhere \u00b7 in-the-moment upsell and cross-sell \u00b7 displays that never look stale.',
+      },
+      {
+        slug: 'sports-venues',
+        name: 'Sports & venues',
+        image: '/images/industries/sports-venues.jpg',
+        callout:
+          'Gameday runs on energy and sponsor commitments. LUCI orchestrates crowd moments across the bowl instantly, delivers and documents sponsor placements, and keeps every concourse and zone on one message.',
+        emphasis:
+          'Live moment orchestration \u00b7 sponsor activation you can prove \u00b7 one brand voice across the whole venue.',
+      },
+      {
+        slug: 'airports-transportation',
+        name: 'Airports & transportation',
+        image: '/images/industries/airports-transportation.jpg',
+        callout:
+          'Your commercial and brand messaging spans a huge, multi-tenant footprint. LUCI lets you manage advertising and brand content across terminals from one place and keep it current \u2014 turning the display network into non-aeronautical revenue.',
+        emphasis:
+          'Ad and commercial revenue from the display network \u00b7 consistent brand across every terminal \u00b7 current content with no deployment bottleneck.',
+      },
+      {
+        slug: 'conference-convention-centers',
+        name: 'Conference & convention centers',
+        image: '/images/industries/conference-convention-centers.jpg',
+        callout:
+          'Every client and event needs the space to look like theirs, and every day the schedule changes. LUCI rebrands spaces per event in a tap, keeps wayfinding and promo content correct across simultaneous events, and shows planners a venue that\u2019s modern and in control.',
+        emphasis:
+          'Instant per-event branding \u00b7 correct content across concurrent events \u00b7 a venue brand that sells itself.',
+      },
+    ],
+    capabilitiesLockup: {
+      lockupName: 'What you can do',
+      lockupRole: 'Four ways to run the property as a channel',
+    },
+    lead: '',
+    takeaway:
+      'Four ways to run your biggest channel. <strong>One experience, and the revenue that follows.</strong>',
+    hubLabel: 'The Guest Experience',
+    hubSub: 'Better experience, more spend, guests who come back.',
+    capabilities: [
+      {
+        front: 'Launch a promotion across the whole property in minutes.',
+        back:
+          'The offer goes live where guests already are, the moment you\u2019re ready \u2014 no hand-off, no wait.',
+      },
+      {
+        front: 'Turn a big moment into a property-wide event, automatically.',
+        back:
+          'A jackpot, a game-winning play, an artist taking the stage \u2014 one moment becomes energy the whole property feels, on brand.',
+      },
+      {
+        front: 'Refresh every screen for a new day, event, or season with one push.',
+        back:
+          'The property always looks current \u2014 no stale slides, no frozen promos, no neglected screens.',
+      },
+      {
+        front: 'Keep the brand consistent across every display.',
+        back:
+          'One look, one voice, everywhere guests look \u2014 locked to your brand, edited by you.',
+      },
+    ],
+    ctaTitle: 'Your property is your best channel. Run it like one.',
+    ctaDeck:
+      'Let us show you what it looks like to publish to the property yourself \u2014 on brand, in the moment, without waiting on anyone.',
     chapters: [
       { id: 'persona-thesis', label: 'Overview' },
       { id: 'persona-narrative', label: 'What you manage' },

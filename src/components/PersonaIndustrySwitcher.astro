@@ -3,9 +3,10 @@ import type { PersonaIndustryStake } from '../data/personaDetails';
 
 interface Props {
   stakes: PersonaIndustryStake[];
+  kicker?: string;
 }
 
-const { stakes } = Astro.props;
+const { stakes, kicker = 'What a failure costs here' } = Astro.props;
 const tabs = stakes;
 ---
 
@@ -36,7 +37,7 @@ const tabs = stakes;
         <div class="pis__media">
           <img class="pis__img" src={`${t.image}?v=1`} alt="" loading={i === 0 ? 'eager' : 'lazy'} decoding="async" width="1280" height="853" />
           <span class="pis__scrim" aria-hidden="true"></span>
-          <p class="pis__kicker">What a failure costs here</p>
+          <p class="pis__kicker">{kicker}</p>
         </div>
         <div class="pis__body">
           <p class="pis__name">{t.name}</p>

@@ -44,7 +44,7 @@ export const personas = [
   {
     id: 'marketing' as const,
     label: 'Marketing',
-    role: 'Shape the guest experience',
+    role: 'Own the message',
     line: 'Deliver the right experience, in the right zone, at exactly the right moment — every time, across the whole property.',
     belief:
       "Campaigns aren't limited to marketing's screens — schedule and coordinate across the whole property.",

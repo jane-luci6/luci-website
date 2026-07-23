@@ -1,7 +1,19 @@
 ---
 import type { PersonaCapability } from '../data/personaDetails';
-interface Props { capabilities: PersonaCapability[]; lead?: string; }
-const { capabilities, lead } = Astro.props;
+interface Props {
+  capabilities: PersonaCapability[];
+  lead?: string;
+  takeaway?: string;
+  hubLabel?: string;
+  hubSub?: string;
+}
+const {
+  capabilities,
+  lead,
+  takeaway = '',
+  hubLabel = 'The Guest Experience',
+  hubSub = '',
+} = Astro.props;
 const hubIcon = `<svg viewBox="0 0 16 16" fill="none"><path fill-rule="evenodd" d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" fill="#CEB06E" fill-opacity="0.92"/><path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1z" fill="currentColor"/></svg>`;
 ---
 
@@ -16,7 +28,8 @@ const hubIcon = `<svg viewBox="0 0 16 16" fill="none"><path fill-rule="evenodd" 
     <div class="pcf__hub">
       <span class="pcf__hub-rings" aria-hidden="true"></span>
       <span class="pcf__hub-icon" set:html={hubIcon} />
-      <p class="pcf__hub-label">The Guest Experience</p>
+      <p class="pcf__hub-label">{hubLabel}</p>
+      {hubSub && <p class="pcf__hub-sub">{hubSub}</p>}
     </div>
 
     {capabilities.map((c, i) => (
@@ -35,6 +48,8 @@ const hubIcon = `<svg viewBox="0 0 16 16" fill="none"><path fill-rule="evenodd" 
       </button>
     ))}
   </div>
+
+  {takeaway && <p class="pcf__takeaway" set:html={takeaway} />}
 </div>
 
 <script>
@@ -148,9 +163,39 @@ const hubIcon = `<svg viewBox="0 0 16 16" fill="none"><path fill-rule="evenodd" 
   }
   .pcf__hub-rings::before { content: ''; position: absolute; inset: 9%; border-radius: 9999px; border: 1px solid rgba(var(--mint-rgb), 0.16); }
   .pcf__hub-rings::after { content: ''; position: absolute; inset: 20%; border-radius: 9999px; border: 1px solid rgba(var(--gold-rgb), 0.28); }
-  .pcf__hub-icon { width: clamp(52px, 6vw, 72px); height: auto; color: var(--mint); }
+  .pcf__hub:has(.pcf__hub-sub) {
+    gap: clamp(6px, 0.8vw, 10px);
+  }
+  .pcf__hub:has(.pcf__hub-sub) .pcf__hub-icon {
+    width: clamp(40px, 4.5vw, 56px);
+  }
+  .pcf__hub:has(.pcf__hub-sub) .pcf__hub-label {
+    font-size: clamp(16px, 1.8vw, 22px);
+  }
   .pcf__hub-icon :global(svg) { width: 100%; height: auto; display: block; }
   .pcf__hub-label { margin: 0; max-width: 78%; font-family: var(--font-body); font-size: clamp(20px, 2.4vw, 30px); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: var(--mint); text-align: center; }
+  .pcf__hub-sub {
+    margin: 0;
+    max-width: 22ch;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: clamp(12px, 1.1vw, 14px);
+    line-height: 1.4;
+    color: rgba(245, 248, 250, 0.72);
+    text-align: center;
+  }
+  .pcf__takeaway {
+    margin: 0 auto;
+    max-width: 48ch;
+    text-align: center;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: clamp(15px, 1.3vw, 17px);
+    line-height: 1.55;
+    color: rgba(245, 248, 250, 0.82);
+  }
+  .pcf__takeaway :global(strong) {
+    color: var(--gold);
+    font-weight: 600;
+  }
 
   @keyframes pcf-pulse {
     0%, 100% {

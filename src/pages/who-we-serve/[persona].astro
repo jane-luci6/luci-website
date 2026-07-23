@@ -47,6 +47,7 @@ if (!detail) return Astro.redirect('/who-we-serve');
     id="persona-narrative"
     lockupName={detail.narrativeLockup.lockupName}
     lockupRole={detail.narrativeLockup.lockupRole}
+    deck={detail.narrativeDeck}
     tone="deep"
     wide
     pattern="mintgold"
@@ -76,6 +77,9 @@ if (!detail) return Astro.redirect('/who-we-serve');
     <PersonaCapabilitiesFlow
       capabilities={detail.capabilities}
       lead={detail.lead}
+      takeaway={detail.takeaway}
+      hubLabel={detail.hubLabel}
+      hubSub={detail.hubSub}
     />
   </SectionBlock>
 
@@ -86,14 +90,14 @@ if (!detail) return Astro.redirect('/who-we-serve');
     tone="sand"
     wide
   >
-    <PersonaIndustrySwitcher stakes={detail.industryStakes} />
+    <PersonaIndustrySwitcher stakes={detail.industryStakes} kicker={detail.industryKicker} />
   </SectionBlock>
 
   <SectionBlock id="persona-cta" tone="deep">
     <div class="persona-cta">
       <p class="display-label persona-cta__kicker">Next step</p>
       <h2 class="h2 persona-cta__title">{detail.ctaTitle}</h2>
-      <p class="persona-cta__deck">Let us show you what it looks like when it isn’t — on your floor, with your team, on your existing setup.</p>
+      {detail.ctaDeck && <p class="persona-cta__deck">{detail.ctaDeck}</p>}
       <div class="btn-row">
         <a class="btn btn--primary" href="/contact">{site.ctaPrimary}</a>
         <a class="btn btn--ghost" href="/platform">Explore the platform</a>

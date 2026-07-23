@@ -13,7 +13,7 @@ const n = narrative;
   {n.subLead && <p class="pnt__sublead">{n.subLead}</p>}
 
   <div class="pnt__chapter">
-    <p class="pnt__chapter-label">The energy curve</p>
+    <p class="pnt__chapter-label">{n.chapterLabel || 'The energy curve'}</p>
     <div class="pnt__stage">
       <svg class="pnt__wave" viewBox="0 0 1000 240" preserveAspectRatio="none" aria-hidden="true" focusable="false">
         <defs>
