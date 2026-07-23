@@ -92,7 +92,7 @@ const tabs = stakes;
   .pis__tab.is-on { background: var(--accent-light); color: #fff; border-color: var(--accent-light); font-weight: 700; }
   .pis__panels { position: relative; }
   .pis__panel { display: none; }
-  .pis__panel.is-on { display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; border: 1px solid var(--rule-light); border-radius: 14px; overflow: hidden; }
+  .pis__panel.is-on { display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; border: 1px solid rgba(var(--gold-rgb), 0.28); border-radius: 14px; overflow: hidden; background: #fff; }
   .pis__media { position: relative; min-height: clamp(220px, 30vw, 320px); }
   .pis__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .pis__scrim { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(10,22,28,0.55) 0%, rgba(10,22,28,0.2) 45%, rgba(10,22,28,0.65) 100%); }
@@ -101,7 +101,7 @@ const tabs = stakes;
     margin: 0;
     font-family: var(--font-display);
     font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--mint);
+    color: var(--gold);
   }
   .pis__body { padding: clamp(24px, 3vw, 36px); display: flex; flex-direction: column; gap: 18px; background: #fff; }
   .pis__name {
@@ -118,11 +118,11 @@ const tabs = stakes;
     line-height: 1.55;
     color: var(--ink);
   }
-  .pis__emphasis { margin-top: auto; border-left: 3px solid var(--accent-light); padding: 4px 0 4px 18px; }
+  .pis__emphasis { margin-top: auto; border-left: 3px solid var(--gold-deep); padding: 4px 0 4px 18px; }
   .pis__emphasis-k {
     display: block; margin-bottom: 6px;
     font-family: var(--font-display); font-size: 9.5px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--navy-muted);
+    color: var(--gold-deep);
   }
   .pis__emphasis-text {
     margin: 0;

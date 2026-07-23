@@ -95,15 +95,14 @@ const xMark = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
     color: rgba(245, 248, 250, 0.82);
   }
 
-  /* Solution — the ONE container per row: mint highlight + 3px mint left bar.
-     The duotone icon sits directly on the band (no light tile). */
+  /* Solution — mint tint band with a gold accent bar (brochure mint+gold pairing). */
   .pch__solution {
     display: flex;
     align-items: flex-start;
     gap: 16px;
     padding: 14px 20px 14px 18px;
     background: rgba(104, 227, 190, 0.08);
-    border-left: 3px solid var(--mint);
+    border-left: 3px solid var(--gold);
     border-radius: 0 10px 10px 0;
   }
   .pch__icon {
@@ -126,7 +125,7 @@ const xMark = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
     line-height: 1.5;
     color: rgba(245, 248, 250, 0.86);
   }
-  .pch__luci { font-weight: 700; color: var(--mint); }
+  .pch__luci { font-weight: 700; color: var(--gold); }
 
   @media (max-width: 640px) {
     .pch__row { gap: 10px; padding: 20px 0; }

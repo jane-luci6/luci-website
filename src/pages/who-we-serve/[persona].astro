@@ -60,6 +60,7 @@ if (!detail) return Astro.redirect('/who-we-serve');
     lockupRole={detail.challengesLockup.lockupRole}
     tone="deep"
     wide
+    pattern="mintgold"
   >
     <PersonaChallenges challenges={detail.challenges} />
   </SectionBlock>
@@ -70,7 +71,7 @@ if (!detail) return Astro.redirect('/who-we-serve');
     lockupRole={detail.capabilitiesLockup.lockupRole}
     tone="deep"
     wide
-    pattern
+    pattern="mintgold"
   >
     <PersonaCapabilitiesFlow
       capabilities={detail.capabilities}
@@ -82,7 +83,7 @@ if (!detail) return Astro.redirect('/who-we-serve');
     id="persona-industries"
     lockupName={detail.industryLockup.lockupName}
     lockupRole={detail.industryLockup.lockupRole}
-    tone="light"
+    tone="sand"
     wide
   >
     <PersonaIndustrySwitcher stakes={detail.industryStakes} />
@@ -139,7 +140,7 @@ if (!detail) return Astro.redirect('/who-we-serve');
     padding-block: clamp(24px, 4vw, 40px);
   }
   .persona-cta__kicker {
-    color: var(--mint);
+    color: var(--gold);
     margin-bottom: var(--space-2);
   }
   .persona-cta__title {
