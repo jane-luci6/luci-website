@@ -2,6 +2,7 @@
 import type { PersonaCapability } from '../data/personaDetails';
 interface Props { capabilities: PersonaCapability[]; lead?: string; }
 const { capabilities, lead } = Astro.props;
+const hubIcon = `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="24" r="9" fill="#CEB06E" fill-opacity="0.85"/><path d="M16 52c0-9.94 8.06-18 16-18s16 8.06 16 18"/></svg>`;
 ---
 
 <div class="pcf">
@@ -14,6 +15,7 @@ const { capabilities, lead } = Astro.props;
 
     <div class="pcf__hub">
       <span class="pcf__hub-rings" aria-hidden="true"></span>
+      <span class="pcf__hub-icon" set:html={hubIcon} />
       <p class="pcf__hub-label">The Guest Experience</p>
     </div>
 
@@ -64,15 +66,17 @@ const { capabilities, lead } = Astro.props;
   .pcf__hub {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
     z-index: 2;
-    display: grid; place-items: center;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
     width: clamp(260px, 30vw, 340px);
     aspect-ratio: 1;
     text-align: center;
   }
   .pcf__hub-rings { position: absolute; inset: 0; z-index: -1; border-radius: 9999px; border: 1px solid rgba(var(--mint-rgb), 0.24); box-shadow: 0 0 0 1px rgba(var(--mint-rgb), 0.08), 0 0 72px rgba(var(--mint-rgb), 0.2); }
   .pcf__hub-rings::before { content: ''; position: absolute; inset: 9%; border-radius: 9999px; border: 1px solid rgba(var(--mint-rgb), 0.16); }
-  .pcf__hub-rings::after { content: ''; position: absolute; inset: 20%; border-radius: 9999px; border: 1px solid rgba(var(--mint-rgb), 0.12); }
-  .pcf__hub-label { margin: 0; padding: 0 10%; font-family: var(--font-body); font-size: clamp(22px, 2.6vw, 34px); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: var(--mint); text-align: center; }
+  .pcf__hub-rings::after { content: ''; position: absolute; inset: 20%; border-radius: 9999px; border: 1px solid rgba(var(--gold-rgb), 0.22); }
+  .pcf__hub-icon { width: clamp(40px, 4vw, 52px); height: clamp(40px, 4vw, 52px); color: var(--mint); }
+  .pcf__hub-icon :global(svg) { width: 100%; height: 100%; display: block; }
+  .pcf__hub-label { margin: 0; max-width: 82%; font-family: var(--font-body); font-size: clamp(22px, 2.6vw, 34px); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: var(--mint); text-align: center; }
 
   .pcf__card {
     position: relative; perspective: 1400px; cursor: pointer;
@@ -97,11 +101,11 @@ const { capabilities, lead } = Astro.props;
   }
   .pcf__face--back { transform: rotateY(180deg); justify-content: center; }
 
-  .pcf__watermark { position: absolute; right: clamp(8px, 1.2vw, 16px); bottom: -0.16em; font-family: var(--font-display); font-size: clamp(88px, 9vw, 120px); font-weight: 700; line-height: 1; color: rgba(104, 227, 190, 0.14); pointer-events: none; z-index: 0; }
+  .pcf__watermark { position: absolute; right: clamp(8px, 1.2vw, 16px); bottom: -0.16em; font-family: var(--font-display); font-size: clamp(88px, 9vw, 120px); font-weight: 700; line-height: 1; color: rgba(206, 176, 110, 0.14); pointer-events: none; z-index: 0; }
   .pcf__front { position: relative; z-index: 1; font-family: var(--font-body); font-weight: 700; font-size: clamp(16px, 1.5vw, 21px); line-height: 1.22; letter-spacing: -0.015em; color: var(--off-white); }
   .pcf__flip { position: relative; z-index: 1; margin-top: auto; font-family: 'Inter', system-ui, sans-serif; font-size: 12.5px; font-weight: 600; letter-spacing: 0.02em; color: var(--mint); }
 
-  .pcf__back-index { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.22em; color: var(--mint); }
+  .pcf__back-index { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.22em; color: var(--gold); }
   .pcf__back { font-family: 'Inter', system-ui, sans-serif; font-size: clamp(14px, 1.2vw, 16px); line-height: 1.5; color: rgba(245, 248, 250, 0.84); }
 
   @media (max-width: 899px) {
