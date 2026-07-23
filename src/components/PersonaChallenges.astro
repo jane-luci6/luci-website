@@ -1,11 +1,11 @@
 ---
-import type { PersonaChallengeGroup } from '../data/personaDetails';
+import type { PersonaChallenge } from '../data/personaDetails';
 
 interface Props {
-  groups: PersonaChallengeGroup[];
+  challenges: PersonaChallenge[];
 }
 
-const { groups } = Astro.props;
+const { challenges } = Astro.props;
 
 /** Soft-icon duotone set (mint primary + gold accent) — one per challenge, in order. */
 const icons = [
@@ -17,102 +17,46 @@ const icons = [
   `<svg viewBox="0 0 24 24" fill="none"><circle cx="8.5" cy="8" r="3" fill="#68E3BE" fill-opacity="0.22" stroke="#2b9e80" stroke-width="1.8"/><path d="M3.5 19a5 5 0 0 1 10 0" stroke="#2b9e80" stroke-width="1.8" stroke-linecap="round"/><circle cx="17" cy="9.5" r="2.4" stroke="#CEB06E" stroke-width="1.8"/><path d="M14.5 19a3.5 3.5 0 0 1 7 0" stroke="#CEB06E" stroke-width="1.8" stroke-linecap="round"/></svg>`,
   // Alert / on-shift failure
   `<svg viewBox="0 0 24 24" fill="none"><path d="M12 4l8.5 15H3.5L12 4z" fill="#68E3BE" fill-opacity="0.18" stroke="#2b9e80" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v4" stroke="#CEB06E" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="16.5" r="1" fill="#CEB06E"/></svg>`,
-  // Budget / experience squeeze
-  `<svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="6" width="17" height="12" rx="2" fill="#68E3BE" fill-opacity="0.18" stroke="#2b9e80" stroke-width="1.8"/><path d="M3.5 10h17" stroke="#2b9e80" stroke-width="1.8"/><path d="M8 14h3.5" stroke="#CEB06E" stroke-width="1.8" stroke-linecap="round"/></svg>`,
-  // Refresh without rebuild
-  `<svg viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 0 1 13.5-5.8" stroke="#2b9e80" stroke-width="1.8" stroke-linecap="round"/><path d="M18 4v4.5h-4.5" stroke="#2b9e80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 12a8 8 0 0 1-13.5 5.8" stroke="#CEB06E" stroke-width="1.8" stroke-linecap="round"/><path d="M6 20v-4.5H10.5" stroke="#CEB06E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-  // Safety / shield
-  `<svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z" fill="#68E3BE" fill-opacity="0.2" stroke="#2b9e80" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12l2 2 4-4.2" stroke="#CEB06E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   // Patchwork / layers
   `<svg viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="4" rx="1" fill="#68E3BE" fill-opacity="0.2" stroke="#2b9e80" stroke-width="1.8"/><rect x="4" y="10" width="16" height="4" rx="1" stroke="#2b9e80" stroke-width="1.8"/><rect x="4" y="15" width="16" height="4" rx="1" stroke="#CEB06E" stroke-width="1.8"/></svg>`,
 ];
-
-let iconIdx = 0;
 ---
 
 <div class="pch" data-pch>
-  {groups.map((group) => (
-    <section class="pch__group">
-      <p class="pch__group-label">{group.label}</p>
-      <ul class="pch__list" role="list">
-        {group.items.map((c) => {
-          const icon = icons[iconIdx % icons.length];
-          iconIdx += 1;
-          const panelId = `pch-panel-${iconIdx}`;
-          return (
-            <li class="pch__row">
-              <span class="pch__icon" aria-hidden="true" set:html={icon} />
-              <div class="pch__main">
-                <h3 class="pch__friction-head">{c.friction}</h3>
-                <p class="pch__friction-body">{c.frictionBody}</p>
-                <button
-                  class="pch__toggle"
-                  type="button"
-                  aria-expanded="false"
-                  aria-controls={panelId}
-                  data-pch-toggle
-                >
-                  See how LUCI helps
-                  <span class="pch__toggle-arrow" aria-hidden="true">→</span>
-                </button>
-                <div class="pch__fix" id={panelId} data-pch-panel hidden>
-                  <span class="pch__fix-k">With LUCI</span>
-                  <p class="pch__fix-text">{c.relief}</p>
-                </div>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-    </section>
-  ))}
+  <ul class="pch__list" role="list">
+    {challenges.map((c, i) => {
+      const icon = icons[i % icons.length];
+      const startsWithLuci = c.relief.startsWith('LUCI ');
+      return (
+        <li class="pch__row">
+          <span class="pch__icon" aria-hidden="true" set:html={icon} />
+          <div class="pch__main">
+            <h3 class="pch__friction-head">{c.friction}</h3>
+            <p class="pch__relief">
+              {startsWithLuci ? (
+                <>
+                  <strong class="pch__luci">LUCI</strong>{' '}
+                  {c.relief.slice(5)}
+                </>
+              ) : (
+                c.relief
+              )}
+            </p>
+          </div>
+        </li>
+      );
+    })}
+  </ul>
 </div>
 
-<script>
-  const root = document.querySelector<HTMLElement>('[data-pch]');
-  if (root) {
-    root.querySelectorAll<HTMLButtonElement>('[data-pch-toggle]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const row = btn.closest('.pch__row');
-        const panel = row?.querySelector<HTMLElement>('[data-pch-panel]');
-        if (!panel) return;
-        const open = panel.hasAttribute('hidden');
-        // Close others in the same list (one open at a time per group)
-        const list = btn.closest('.pch__list');
-        list?.querySelectorAll<HTMLElement>('[data-pch-panel]').forEach((p) => {
-          p.setAttribute('hidden', '');
-        });
-        list?.querySelectorAll<HTMLButtonElement>('[data-pch-toggle]').forEach((b) => {
-          b.setAttribute('aria-expanded', 'false');
-          b.classList.remove('is-open');
-        });
-        if (open) {
-          panel.removeAttribute('hidden');
-          btn.setAttribute('aria-expanded', 'true');
-          btn.classList.add('is-open');
-        }
-      });
-    });
-  }
-</script>
-
 <style>
-  .pch { display: flex; flex-direction: column; gap: clamp(28px, 4vw, 44px); }
-  .pch__group-label {
-    margin: 0 0 18px;
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--mint);
-  }
+  .pch { display: flex; flex-direction: column; }
   .pch__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
   .pch__row {
     display: grid;
     grid-template-columns: 56px 1fr;
     gap: 20px;
-    padding: 26px 0;
+    padding: 22px 0;
     border-top: 1px solid rgba(245, 248, 250, 0.14);
     align-items: start;
   }
@@ -137,7 +81,7 @@ let iconIdx = 0;
 
   .pch__main { min-width: 0; }
   .pch__friction-head {
-    margin: 0 0 8px;
+    margin: 0 0 10px;
     padding-top: 4px;
     font-family: var(--font-body);
     font-size: clamp(16px, 1.5vw, 19px);
@@ -146,75 +90,27 @@ let iconIdx = 0;
     letter-spacing: -0.01em;
     color: var(--off-white);
   }
-  .pch__friction-body {
-    margin: 0 0 14px;
-    max-width: 58ch;
-    font-family: 'Inter', system-ui, sans-serif;
-    font-size: 14.5px;
-    line-height: 1.55;
-    color: rgba(245, 248, 250, 0.62);
-  }
 
-  .pch__toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 0;
-    border: 0;
-    background: none;
-    cursor: pointer;
-    font-family: var(--font-body);
-    font-size: 13.5px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    color: var(--mint);
-  }
-  .pch__toggle:hover { color: #8eecd0; }
-  .pch__toggle-arrow {
-    display: inline-block;
-    transition: transform 0.2s ease;
-  }
-  .pch__toggle.is-open .pch__toggle-arrow { transform: rotate(90deg); }
-
-  .pch__fix {
-    margin-top: 16px;
-    padding: 18px 20px;
-    border-left: 3px solid var(--mint);
-    background: rgba(104, 227, 190, 0.08);
-    border-radius: 0 10px 10px 0;
-    animation: pchIn 0.28s ease-out;
-  }
-  @keyframes pchIn {
-    from { opacity: 0; transform: translateY(-6px); }
-    to { opacity: 1; transform: none; }
-  }
-  .pch__fix-k {
-    display: block;
-    margin-bottom: 8px;
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--mint);
-  }
-  .pch__fix-text {
+  /* The LUCI relief — always present (no toggle). Mint left bar marks it as
+     the answer; the leading "LUCI" reads in mint. */
+  .pch__relief {
     margin: 0;
-    font-family: var(--font-body);
-    font-size: clamp(16px, 1.4vw, 19px);
-    font-weight: 600;
-    line-height: 1.4;
-    color: var(--off-white);
+    max-width: 62ch;
+    padding-left: 14px;
+    border-left: 3px solid var(--mint);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: clamp(15px, 1.3vw, 17px);
+    line-height: 1.5;
+    color: rgba(245, 248, 250, 0.82);
+  }
+  .pch__luci {
+    font-weight: 700;
+    color: var(--mint);
   }
 
   @media (max-width: 640px) {
     .pch__row { grid-template-columns: 48px 1fr; gap: 14px; }
     .pch__icon { width: 48px; height: 48px; border-radius: 14px; }
     .pch__icon :global(svg) { width: 24px; height: 24px; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .pch__fix { animation: none; }
-    .pch__toggle-arrow { transition: none; }
   }
 </style>

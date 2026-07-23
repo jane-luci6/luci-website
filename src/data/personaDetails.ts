@@ -46,8 +46,8 @@ export interface PersonaTwoShifts {
 export interface PersonaChallenge {
   /** Short headline of the friction, in the operator's terms. */
   friction: string;
-  /** One-line elaboration of the friction. */
-  frictionBody: string;
+  /** Optional one-line elaboration of the friction (omitted on the compact persona layout). */
+  frictionBody?: string;
   /** The "With LUCI" relief line, in their currencies. */
   relief: string;
 }
@@ -83,9 +83,9 @@ export interface PersonaDetail {
   /** The two shifts — works-vs-broken contrast */
   twoShiftsLockup: { lockupName: string; lockupRole: string };
   twoShifts: PersonaTwoShifts;
-  /** Challenges — friction → relief, grouped Daily / Strategic */
+  /** Challenges — friction → relief, flat list (compact: friction headline + always-visible LUCI relief) */
   challengesLockup: { lockupName: string; lockupRole: string };
-  challenges: PersonaChallengeGroup[];
+  challenges: PersonaChallenge[];
   /** Industry switcher — per-industry stakes + solution */
   industryLockup: { lockupName: string; lockupRole: string };
   industryStakes: PersonaIndustryStake[];
@@ -159,62 +159,29 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     },
     challenges: [
       {
-        label: 'Daily',
-        items: [
-          {
-            friction: 'You’re the hub holding it all together',
-            frictionBody:
-              'Every moving part runs through you. The last thing you need is one more interface to learn or one more vendor to chase.',
-            relief: 'One place to control everything guests see and hear — so it’s one less thing to chase.',
-          },
-          {
-            friction: 'Spaces have to be ready — on schedule, every time',
-            frictionBody:
-              'Turnovers and conversions run on tight, repeating windows. Readiness can’t wait on someone technical to reset the room.',
-            relief: 'The room becomes what the next event needs in seconds, not a service call.',
-          },
-          {
-            friction: 'Your team is stretched, and not technical',
-            frictionBody:
-              'The floor runs on rotating, understaffed shifts. Anything that needs a specialist either doesn’t get done or gets done wrong.',
-            relief: 'If they can use a tablet, they can run the floor. No specialist required.',
-          },
-          {
-            friction: 'When it fails, it fails on your shift',
-            frictionBody:
-              'A live failure isn’t tomorrow’s ticket. It’s in front of guests, and it’s yours to solve right now.',
-            relief: 'When something’s off, you see it and fix it yourself — right then, without waiting on anyone.',
-          },
-        ],
+        friction: 'You have to prioritize the guest experience, but coordinating media gets in the way.',
+        relief:
+          'LUCI brings your screens, sound, and lighting under one interface, so it supports the guest experience instead of competing for your attention.',
       },
       {
-        label: 'Strategic',
-        items: [
-          {
-            friction: 'A rising guest-experience standard, on a flat budget',
-            frictionBody:
-              'Guest expectations keep climbing; budgets don’t. Every investment is judged on whether it eases that squeeze or adds to it.',
-            relief: 'Less spent keeping the tech alive. More spent on the guest.',
-          },
-          {
-            friction: 'Keeping the space feeling current — without disrupting the building',
-            frictionBody:
-              'The building has to feel modern as expectations rise. Making it feel fresh usually implies a disruptive, expensive change.',
-            relief: 'Refresh the experience without tearing the building apart.',
-          },
-          {
-            friction: 'Safety, compliance, and audit — every day, all day',
-            frictionBody:
-              'Life-safety and regulatory obligations never let up. Systems that aren’t reliable or unified become a liability you personally answer for.',
-            relief: 'The systems you answer for stay dependable — and you can prove it.',
-          },
-          {
-            friction: 'An inherited patchwork you can’t take offline',
-            frictionBody:
-              'You inherited systems stacked up over years. Fixing it seems to mean ripping everything out — a cost and disruption you can’t absorb.',
-            relief: 'Start with what you have. Expand when you’re ready. No rip-and-replace.',
-          },
-        ],
+        friction: 'Turning a room over is a logistical and technical scramble.',
+        relief:
+          'LUCI recalls the right setup for any event instantly, so the space is ready on schedule.',
+      },
+      {
+        friction: 'Your team already has too many platforms and vendors to chase.',
+        relief:
+          'LUCI is simple enough that any staff member can run it, without adding another specialist.',
+      },
+      {
+        friction: 'When something breaks mid-event, it’s live, in front of guests, and hard to fix fast.',
+        relief:
+          'LUCI shows what’s wrong and lets your team fix it from one place, right then.',
+      },
+      {
+        friction: 'Your setup is an aging patchwork that’s expensive and disruptive to replace.',
+        relief:
+          'LUCI runs on the hardware you already have and expands in phases, so there’s no rip-and-replace.',
       },
     ],
     industryLockup: {
