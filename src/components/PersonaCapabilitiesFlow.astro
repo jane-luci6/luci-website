@@ -22,7 +22,7 @@ const hubIcon = `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stro
     </div>
 
     {capabilities.map((c, i) => (
-      <button class="pcf__card" type="button" aria-label={`Use case ${i + 1}: ${c.front}. Tap to see how it works.`}>
+      <button class="pcf__card" type="button" aria-label={`Use case ${i + 1}: ${c.front}. Hover to see how it works.`}>
         <span class="pcf__card-inner">
           <span class="pcf__face pcf__face--front">
             <span class="pcf__num">{String(i + 1).padStart(2, '0')}</span>
@@ -30,12 +30,8 @@ const hubIcon = `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stro
             <span class="pcf__flip">How it works &rarr;</span>
           </span>
           <span class="pcf__face pcf__face--back">
-            <span class="pcf__back-label">How it works</span>
-            <span class="pcf__back-desc">{c.backDesc}</span>
-            <ul class="pcf__back-bullets">
-              {c.backBullets.map((b) => <li>{b}</li>)}
-            </ul>
-            <span class="pcf__back-try"><span class="pcf__back-try-k">Try it &rarr;</span> {c.backTry}</span>
+            <span class="pcf__num pcf__num--back">{String(i + 1).padStart(2, '0')}</span>
+            <span class="pcf__back">{c.back}</span>
           </span>
         </span>
       </button>
@@ -44,12 +40,12 @@ const hubIcon = `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stro
 </div>
 
 <script>
-  document.querySelectorAll('.pcf__card').forEach((card) => {
-    card.addEventListener('click', () => card.classList.toggle('is-flipped'));
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.classList.toggle('is-flipped'); }
+  // Hover + keyboard flip the card via CSS. On touch (no hover), fall back to tap-to-flip.
+  if (window.matchMedia('(hover: none)').matches) {
+    document.querySelectorAll('.pcf__card').forEach((card) => {
+      card.addEventListener('click', () => card.classList.toggle('is-flipped'));
     });
-  });
+  }
 </script>
 
 <style>
@@ -99,19 +95,18 @@ const hubIcon = `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stro
   }
   .pcf__card-inner { display: block; position: absolute; inset: 0; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1); }
   .pcf__card.is-flipped .pcf__card-inner { transform: rotateY(180deg); }
-  .pcf__face--back { transform: rotateY(180deg); }
+  @media (hover: hover) {
+    .pcf__card:hover .pcf__card-inner,
+    .pcf__card:focus-visible .pcf__card-inner,
+    .pcf__card:focus-within .pcf__card-inner { transform: rotateY(180deg); }
+  }
+  .pcf__face--back { transform: rotateY(180deg); justify-content: center; }
 
-  .pcf__num { position: absolute; top: clamp(14px, 1.6vw, 20px); right: clamp(16px, 1.8vw, 24px); font-family: var(--font-body); font-size: 13px; font-weight: 700; letter-spacing: 0.06em; color: rgba(206, 176, 110, 0.6); }
-  .pcf__front { font-family: var(--font-body); font-weight: 700; font-size: clamp(17px, 1.6vw, 22px); line-height: 1.22; letter-spacing: -0.015em; color: var(--off-white); margin-top: 6px; }
+  .pcf__num { display: block; font-family: var(--font-display); font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mint); }
+  .pcf__front { font-family: var(--font-body); font-weight: 700; font-size: clamp(17px, 1.6vw, 22px); line-height: 1.22; letter-spacing: -0.015em; color: var(--off-white); }
   .pcf__flip { margin-top: auto; font-family: 'Inter', system-ui, sans-serif; font-size: 12.5px; font-weight: 600; letter-spacing: 0.02em; color: var(--mint); }
 
-  .pcf__back-label { font-family: var(--font-display); font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-deep); }
-  .pcf__back-desc { font-family: 'Inter', system-ui, sans-serif; font-size: clamp(13px, 1.1vw, 15px); line-height: 1.5; color: rgba(245, 248, 250, 0.82); }
-  .pcf__back-bullets { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
-  .pcf__back-bullets li { position: relative; padding-left: 18px; font-family: 'Inter', system-ui, sans-serif; font-size: clamp(12.5px, 1vw, 14px); line-height: 1.45; color: rgba(245, 248, 250, 0.72); }
-  .pcf__back-bullets li::before { content: ''; position: absolute; left: 2px; top: 0.62em; width: 6px; height: 6px; border-radius: 9999px; background: var(--mint); box-shadow: 0 0 8px rgba(var(--mint-rgb), 0.6); }
-  .pcf__back-try { margin-top: auto; padding-top: 10px; border-top: 1px solid rgba(var(--mint-rgb), 0.18); font-family: 'Inter', system-ui, sans-serif; font-size: clamp(12.5px, 1vw, 14px); line-height: 1.45; color: rgba(245, 248, 250, 0.7); }
-  .pcf__back-try-k { color: var(--gold-deep); font-weight: 700; }
+  .pcf__back { font-family: 'Inter', system-ui, sans-serif; font-size: clamp(14px, 1.2vw, 16px); line-height: 1.5; color: rgba(245, 248, 250, 0.84); }
 
   @media (max-width: 899px) {
     .pcf__stage { grid-template-columns: 1fr; grid-template-rows: auto; gap: 16px; }

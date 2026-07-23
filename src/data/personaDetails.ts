@@ -10,14 +10,10 @@
 import type { PersonaId } from './personas';
 
 export interface PersonaCapability {
-  /** The descriptive front sentence — what you can DO, clear enough to stand alone. */
+  /** Front: one descriptive sentence — what you can DO, clear enough to stand alone. */
   front: string;
-  /** Fuller explanation for the back of the card. */
-  backDesc: string;
-  /** Benefit bullets for the back of the card. */
-  backBullets: string[];
-  /** A concrete "try it" task for the back of the card. */
-  backTry: string;
+  /** Back: 1–2 narrative sentences with a little more detail. */
+  back: string;
 }
 
 export interface PersonaNarrativeMoment {
@@ -246,47 +242,23 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     capabilities: [
       {
         front: 'Set your floor\u2019s audio to match the room\u2019s energy, all day.',
-        backDesc:
-          'Build an audio schedule that moves the way your floor does \u2014 lighter mornings, building afternoons, peaking evenings, easing back as the late-night crowd thins. Each zone follows its own curve, and the transitions happen on their own.',
-        backBullets: [
-          'Keep the room feeling alive without a manager riding the faders',
-          'Match energy to the crowd you actually have at each hour',
-          'Give every shift the same intended sound',
-        ],
-        backTry: 'Map your ideal audio curve for a weekday and build it as a scheduled preset.',
+        back:
+          'Build an audio schedule that moves the way your floor does \u2014 lighter mornings, building afternoons, peaking evenings, easing back as the crowd thins. Each zone follows its own curve, and the transitions happen on their own.',
       },
       {
-        front: 'Make every jackpot a floor event, automatically.',
-        backDesc:
-          'When a jackpot hits, a coordinated preset fires in that zone \u2014 accent lights pulse, audio swells for a beat, nearby screens flash a celebration \u2014 then everything resets on its own. Calibrated per area so it fits the space.',
-        backBullets: [
-          'Turn one guest\u2019s win into energy the whole floor feels',
-          'Create a sense of action that keeps nearby players engaged',
-          'Deliver it every time, without manual effort',
-        ],
-        backTry: 'Work with A/V to build a jackpot preset for one zone, then test it in a low-traffic window.',
+        front: 'Turn a signature moment into a floor event, automatically.',
+        back:
+          'When a big moment hits \u2014 a jackpot, a goal, a headline, a VIP arrival \u2014 a coordinated preset fires in that zone. Accent lights pulse, audio swells for a beat, nearby screens flash a celebration, then everything resets on its own.',
       },
       {
         front: 'Reconfigure the entire property in seconds.',
-        backDesc:
-          'Each mode your property runs \u2014 normal weekday, Saturday peak, fight night, holiday, a private event in the ballroom \u2014 becomes a complete configuration of audio, screens, and lighting. Some run on a tap; others, like the high-limit room, hold a standing identity that never needs a manual touch.',
-        backBullets: [
-          'Reconfigure the entire property in seconds, not a shift of setup',
-          'Run premium spaces consistently no matter who\u2019s working',
-          'Let predictable zones open and close themselves on schedule',
-        ],
-        backTry: 'Identify the three or four modes you run most often and build a preset for each.',
+        back:
+          'Each mode your property runs \u2014 a normal weekday, a Saturday peak, a marquee event, a holiday, a private function \u2014 becomes one complete configuration of audio, screens, and lighting. Some run on a tap; others, like a premium space, hold a standing identity that never needs a manual touch.',
       },
       {
-        front: 'Direct guest attention to a new game area from the moment it opens.',
-        backDesc:
-          'When a new slot bank or table section launches, set the surrounding zones to point toward it \u2014 ambient content on nearby screens, audio tuned to give the area its own energy \u2014 for the first few weeks, then revert automatically once it\u2019s established.',
-        backBullets: [
-          'Drive traffic to new product while it most needs the lift',
-          'Make the floor itself part of the launch, not just signage',
-          'Hand the spotlight back automatically when the window closes',
-        ],
-        backTry: 'Plan the A/V component of your next new-game launch before the hardware arrives.',
+        front: 'Direct guest attention to a new area from the moment it opens.',
+        back:
+          'When a new section launches \u2014 a slot bank, a retail outlet, a renovated wing, a new gate \u2014 set the surrounding zones to point toward it for the first few weeks. The ambient content and audio tune themselves to give the area its own energy, then revert automatically once it\u2019s established.',
       },
     ],
     ctaTitle: 'A/V should support your job, not block it.',
