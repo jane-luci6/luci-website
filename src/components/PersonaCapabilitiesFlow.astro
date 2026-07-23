@@ -10,7 +10,7 @@ const hubIcon = `<svg viewBox="0 0 16 16" fill="none"><path fill-rule="evenodd" 
 
   <div class="pcf__stage">
     <svg class="pcf__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M50,50 L14,14" /><path d="M50,50 L86,14" /><path d="M50,50 L14,86" /><path d="M50,50 L86,86" />
+      <path class="pcf__spoke" /><path class="pcf__spoke" /><path class="pcf__spoke" /><path class="pcf__spoke" />
     </svg>
 
     <div class="pcf__hub">
@@ -44,6 +44,51 @@ const hubIcon = `<svg viewBox="0 0 16 16" fill="none"><path fill-rule="evenodd" 
       card.addEventListener('click', () => card.classList.toggle('is-flipped'));
     });
   }
+
+  // Draw spoke paths from each card toward the hub, stopping at the gold inner ring.
+  function updateSpokes() {
+    const stage = document.querySelector('.pcf__stage');
+    const hub = document.querySelector('.pcf__hub');
+    const svg = document.querySelector('.pcf__lines');
+    if (!stage || !hub || !svg) return;
+    if (window.matchMedia('(max-width: 899px)').matches) return;
+
+    const stageRect = stage.getBoundingClientRect();
+    const hubRect = hub.getBoundingClientRect();
+    const w = stageRect.width;
+    const h = stageRect.height;
+    if (w < 1 || h < 1) return;
+
+    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+
+    const hubCx = hubRect.left + hubRect.width / 2 - stageRect.left;
+    const hubCy = hubRect.top + hubRect.height / 2 - stageRect.top;
+    // Gold inner ring is inset 20% → radius is 40% of hub diameter = 80% of outer radius
+    const hubR = (hubRect.width / 2) * 0.8;
+
+    const cardCenter = (r) => ({
+      x: r.left + r.width / 2 - stageRect.left,
+      y: r.top + r.height / 2 - stageRect.top,
+    });
+
+    const cards = stage.querySelectorAll('.pcf__card');
+    const paths = svg.querySelectorAll('.pcf__spoke');
+    cards.forEach((card, i) => {
+      const path = paths[i];
+      if (!path) return;
+      const start = cardCenter(card.getBoundingClientRect());
+      const dx = hubCx - start.x;
+      const dy = hubCy - start.y;
+      const dist = Math.hypot(dx, dy) || 1;
+      const endX = hubCx - (dx / dist) * hubR;
+      const endY = hubCy - (dy / dist) * hubR;
+      path.setAttribute('d', `M${start.x},${start.y} L${endX},${endY}`);
+    });
+  }
+
+  updateSpokes();
+  window.addEventListener('resize', updateSpokes);
+  if (document.fonts?.ready) document.fonts.ready.then(updateSpokes);
 </script>
 
 <style>
@@ -61,7 +106,18 @@ const hubIcon = `<svg viewBox="0 0 16 16" fill="none"><path fill-rule="evenodd" 
   }
 
   .pcf__lines { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: visible; }
-  .pcf__lines path { fill: none; stroke: rgba(104, 227, 190, 0.32); stroke-width: 1; stroke-dasharray: 3 6; vector-effect: non-scaling-stroke; }
+  .pcf__spoke {
+    fill: none;
+    stroke: rgba(104, 227, 190, 0.42);
+    stroke-width: 1.5;
+    stroke-dasharray: 5 10;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+    animation: pcf-flow 1.6s linear infinite;
+  }
+  @keyframes pcf-flow {
+    to { stroke-dashoffset: -30; }
+  }
 
   .pcf__hub {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -71,12 +127,30 @@ const hubIcon = `<svg viewBox="0 0 16 16" fill="none"><path fill-rule="evenodd" 
     aspect-ratio: 1;
     text-align: center;
   }
-  .pcf__hub-rings { position: absolute; inset: 0; z-index: -1; border-radius: 9999px; border: 1px solid rgba(var(--mint-rgb), 0.24); box-shadow: 0 0 0 1px rgba(var(--mint-rgb), 0.08), 0 0 72px rgba(var(--mint-rgb), 0.2); }
+  .pcf__hub-rings {
+    position: absolute; inset: 0; z-index: -1; border-radius: 9999px;
+    border: 1px solid rgba(var(--mint-rgb), 0.24);
+    box-shadow: 0 0 0 1px rgba(var(--mint-rgb), 0.08), 0 0 72px rgba(var(--mint-rgb), 0.2);
+    animation: pcf-pulse 2.8s ease-in-out infinite;
+  }
   .pcf__hub-rings::before { content: ''; position: absolute; inset: 9%; border-radius: 9999px; border: 1px solid rgba(var(--mint-rgb), 0.16); }
-  .pcf__hub-rings::after { content: ''; position: absolute; inset: 20%; border-radius: 9999px; border: 1px solid rgba(var(--gold-rgb), 0.22); }
+  .pcf__hub-rings::after { content: ''; position: absolute; inset: 20%; border-radius: 9999px; border: 1px solid rgba(var(--gold-rgb), 0.28); }
   .pcf__hub-icon { width: clamp(52px, 6vw, 72px); height: auto; color: var(--mint); }
   .pcf__hub-icon :global(svg) { width: 100%; height: auto; display: block; }
   .pcf__hub-label { margin: 0; max-width: 78%; font-family: var(--font-body); font-size: clamp(20px, 2.4vw, 30px); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: var(--mint); text-align: center; }
+
+  @keyframes pcf-pulse {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 0 0 1px rgba(var(--mint-rgb), 0.08), 0 0 56px rgba(var(--mint-rgb), 0.16);
+      border-color: rgba(var(--mint-rgb), 0.2);
+    }
+    50% {
+      transform: scale(1.045);
+      box-shadow: 0 0 0 1px rgba(var(--mint-rgb), 0.18), 0 0 96px rgba(var(--mint-rgb), 0.42);
+      border-color: rgba(var(--mint-rgb), 0.4);
+    }
+  }
 
   .pcf__card {
     position: relative; perspective: 1400px; cursor: pointer;
@@ -114,5 +188,9 @@ const hubIcon = `<svg viewBox="0 0 16 16" fill="none"><path fill-rule="evenodd" 
     .pcf__hub { position: static; transform: none; width: auto; aspect-ratio: auto; padding: 28px 0; }
     .pcf__hub-rings { display: none; }
   }
-  @media (prefers-reduced-motion: reduce) { .pcf__card-inner { transition: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .pcf__card-inner { transition: none; }
+    .pcf__spoke,
+    .pcf__hub-rings { animation: none; }
+  }
 </style>
