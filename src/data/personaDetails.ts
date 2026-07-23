@@ -161,7 +161,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       {
         friction: 'You have to prioritize the guest experience, but coordinating media gets in the way.',
         relief:
-          'LUCI brings your screens, sound, and lighting under one interface, so it supports the guest experience instead of competing for your attention.',
+          'LUCI brings your screens, sound, and lighting under one interface, so you switch things up with a button push or an automated preset — instead of coordinating people and technology.',
       },
       {
         friction: 'Turning a room over is a logistical and technical scramble.',
@@ -176,7 +176,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       {
         friction: 'When something breaks mid-event, it’s live, in front of guests, and hard to fix fast.',
         relief:
-          'LUCI shows what’s wrong and lets your team fix it from one place, right then.',
+          'LUCI’s map-based interface surfaces issues immediately so you can fix them before they disrupt your attendees.',
       },
       {
         friction: 'Your setup is an aging patchwork that’s expensive and disruptive to replace.',

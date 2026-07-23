@@ -7,7 +7,7 @@ interface Props {
 
 const { challenges } = Astro.props;
 
-/** Soft-icon duotone set (mint primary + gold accent) — one per challenge, in order. */
+/** Solution icons — mint/gold duotone, one per challenge, in order. */
 const icons = [
   // Hub / coordination
   `<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" fill="#68E3BE" fill-opacity="0.22" stroke="#2b9e80" stroke-width="1.8"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3" stroke="#2b9e80" stroke-width="1.8" stroke-linecap="round"/><path d="M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" stroke="#CEB06E" stroke-width="1.8" stroke-linecap="round"/></svg>`,
@@ -15,11 +15,13 @@ const icons = [
   `<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" fill="#68E3BE" fill-opacity="0.2" stroke="#2b9e80" stroke-width="1.8"/><path d="M12 8v4.2l2.8 1.8" stroke="#2b9e80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 5.2l1.2-1.2M19.8 7.5l1.2-1.2" stroke="#CEB06E" stroke-width="1.8" stroke-linecap="round"/></svg>`,
   // Team / people
   `<svg viewBox="0 0 24 24" fill="none"><circle cx="8.5" cy="8" r="3" fill="#68E3BE" fill-opacity="0.22" stroke="#2b9e80" stroke-width="1.8"/><path d="M3.5 19a5 5 0 0 1 10 0" stroke="#2b9e80" stroke-width="1.8" stroke-linecap="round"/><circle cx="17" cy="9.5" r="2.4" stroke="#CEB06E" stroke-width="1.8"/><path d="M14.5 19a3.5 3.5 0 0 1 7 0" stroke="#CEB06E" stroke-width="1.8" stroke-linecap="round"/></svg>`,
-  // Alert / on-shift failure
-  `<svg viewBox="0 0 24 24" fill="none"><path d="M12 4l8.5 15H3.5L12 4z" fill="#68E3BE" fill-opacity="0.18" stroke="#2b9e80" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v4" stroke="#CEB06E" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="16.5" r="1" fill="#CEB06E"/></svg>`,
+  // Map / surface issues
+  `<svg viewBox="0 0 24 24" fill="none"><path d="M3 6l6-2 6 2 6-2 6 2v14l-6-2-6 2-6-2-6 2V6z" fill="#68E3BE" fill-opacity="0.18" stroke="#2b9e80" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 4v16M15 6v14" stroke="#2b9e80" stroke-width="1.4"/><circle cx="12" cy="11" r="1.6" fill="#CEB06E"/></svg>`,
   // Patchwork / layers
   `<svg viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="4" rx="1" fill="#68E3BE" fill-opacity="0.2" stroke="#2b9e80" stroke-width="1.8"/><rect x="4" y="10" width="16" height="4" rx="1" stroke="#2b9e80" stroke-width="1.8"/><rect x="4" y="15" width="16" height="4" rx="1" stroke="#CEB06E" stroke-width="1.8"/></svg>`,
 ];
+
+const xMark = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>`;
 ---
 
 <div class="pch" data-pch>
@@ -29,9 +31,12 @@ const icons = [
       const startsWithLuci = c.relief.startsWith('LUCI ');
       return (
         <li class="pch__row">
-          <span class="pch__icon" aria-hidden="true" set:html={icon} />
-          <div class="pch__main">
+          <div class="pch__challenge">
+            <span class="pch__x" aria-hidden="true" set:html={xMark} />
             <h3 class="pch__friction-head">{c.friction}</h3>
+          </div>
+          <div class="pch__solution">
+            <span class="pch__icon" aria-hidden="true" set:html={icon} />
             <p class="pch__relief">
               {startsWithLuci ? (
                 <>
@@ -53,15 +58,58 @@ const icons = [
   .pch { display: flex; flex-direction: column; }
   .pch__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
   .pch__row {
-    display: grid;
-    grid-template-columns: 56px 1fr;
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     padding: 22px 0;
     border-top: 1px solid rgba(245, 248, 250, 0.14);
-    align-items: start;
   }
   .pch__row:last-child { border-bottom: 1px solid rgba(245, 248, 250, 0.14); }
 
+  /* Challenge — neutral x marker + friction headline (no fill). */
+  .pch__challenge {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  .pch__x {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: rgba(245, 248, 250, 0.05);
+    box-shadow: inset 0 0 0 1px rgba(245, 248, 250, 0.16);
+    color: rgba(245, 248, 250, 0.5);
+    flex: none;
+  }
+  .pch__x :global(svg) { width: 18px; height: 18px; display: block; }
+
+  .pch__friction-head {
+    margin: 0;
+    padding-top: 7px;
+    font-family: var(--font-body);
+    font-size: clamp(16px, 1.5vw, 19px);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--off-white);
+  }
+
+  /* Solution — mint/gold icon + always-visible LUCI relief, on the mint
+     background highlight (the treatment Jane liked before). */
+  .pch__solution {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 20px;
+    align-items: start;
+    padding: 16px 18px;
+    background: rgba(104, 227, 190, 0.08);
+    border-left: 3px solid var(--mint);
+    border-radius: 0 10px 10px 0;
+  }
   .pch__icon {
     display: flex;
     align-items: center;
@@ -73,43 +121,24 @@ const icons = [
     box-shadow: inset 0 0 0 1px rgba(43, 158, 128, 0.14);
     flex: none;
   }
-  .pch__icon :global(svg) {
-    width: 28px;
-    height: 28px;
-    display: block;
-  }
+  .pch__icon :global(svg) { width: 28px; height: 28px; display: block; }
 
-  .pch__main { min-width: 0; }
-  .pch__friction-head {
-    margin: 0 0 10px;
-    padding-top: 4px;
-    font-family: var(--font-body);
-    font-size: clamp(16px, 1.5vw, 19px);
-    font-weight: 700;
-    line-height: 1.25;
-    letter-spacing: -0.01em;
-    color: var(--off-white);
-  }
-
-  /* The LUCI relief — always present (no toggle). Mint left bar marks it as
-     the answer; the leading "LUCI" reads in mint. */
   .pch__relief {
     margin: 0;
     max-width: 62ch;
-    padding-left: 14px;
-    border-left: 3px solid var(--mint);
+    align-self: center;
     font-family: 'Inter', system-ui, sans-serif;
     font-size: clamp(15px, 1.3vw, 17px);
     line-height: 1.5;
-    color: rgba(245, 248, 250, 0.82);
+    color: rgba(245, 248, 250, 0.86);
   }
-  .pch__luci {
-    font-weight: 700;
-    color: var(--mint);
-  }
+  .pch__luci { font-weight: 700; color: var(--mint); }
 
   @media (max-width: 640px) {
-    .pch__row { grid-template-columns: 48px 1fr; gap: 14px; }
+    .pch__challenge { grid-template-columns: 36px 1fr; gap: 12px; }
+    .pch__x { width: 36px; height: 36px; border-radius: 10px; }
+    .pch__x :global(svg) { width: 16px; height: 16px; }
+    .pch__solution { grid-template-columns: 48px 1fr; gap: 14px; padding: 14px 14px; }
     .pch__icon { width: 48px; height: 48px; border-radius: 14px; }
     .pch__icon :global(svg) { width: 24px; height: 24px; }
   }
