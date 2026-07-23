@@ -23,8 +23,9 @@ const n = narrative;
           </linearGradient>
           <linearGradient id="pntStroke" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0" stop-color="#2b9e80" />
-            <stop offset="0.55" stop-color="#68e3be" />
-            <stop offset="1" stop-color="#ceb06e" />
+            <stop offset="0.4" stop-color="#68e3be" />
+            <stop offset="0.78" stop-color="#ceb06e" />
+            <stop offset="1" stop-color="#edd086" />
           </linearGradient>
         </defs>
         <line class="pnt__axis" x1="0" y1="196" x2="1000" y2="196" />
@@ -34,11 +35,11 @@ const n = narrative;
           <circle class="pnt__glow" cx="125" cy="130" r="13" />
           <circle class="pnt__glow" cx="375" cy="95" r="13" />
           <circle class="pnt__glow" cx="625" cy="62" r="13" />
-          <circle class="pnt__glow" cx="875" cy="30" r="13" />
+          <circle class="pnt__glow pnt__glow--gold" cx="875" cy="30" r="13" />
           <circle class="pnt__dot" cx="125" cy="130" r="6.5" />
           <circle class="pnt__dot" cx="375" cy="95" r="6.5" />
           <circle class="pnt__dot" cx="625" cy="62" r="6.5" />
-          <circle class="pnt__dot" cx="875" cy="30" r="6.5" />
+          <circle class="pnt__dot pnt__dot--gold" cx="875" cy="30" r="6.5" />
         </g>
       </svg>
 
@@ -115,12 +116,17 @@ const n = narrative;
   }
   @keyframes pntDraw { to { stroke-dashoffset: 0; } }
   .pnt__glow { fill: rgba(104, 227, 190, 0.22); }
+  .pnt__glow--gold { fill: rgba(206, 176, 110, 0.32); }
   .pnt__dot {
     fill: var(--navy-deep);
     stroke: var(--mint);
     stroke-width: 2;
     opacity: 0;
     animation: pntPop 0.5s ease-out forwards;
+  }
+  .pnt__dot--gold {
+    fill: var(--navy-deep);
+    stroke: var(--gold);
   }
   .pnt__dots circle.pnt__dot:nth-child(5) { animation-delay: 0.7s; }
   .pnt__dots circle.pnt__dot:nth-child(6) { animation-delay: 1.2s; }
