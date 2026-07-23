@@ -111,7 +111,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       "You run the floor everyone else talks about. With LUCI in your hands, you can tune the whole property to the rhythm of your guests.",
     narrativeLockup: {
       lockupName: 'The entire property is in your hands',
-      lockupRole: 'A day on your floor',
+      lockupRole: 'What operations has to manage',
     },
     narrative: {
       subLead: '',
@@ -133,9 +133,9 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
           caption: 'Sold-out show, packed floor, high-traffic rush — the atmosphere holds.',
         },
       ],
-      support:
-        'LUCI hands you the controls — adjust the audio curve, the screen strategy, and the whole atmosphere — on a schedule or in real-time.',
-      closing: 'You reach for <em>ONE</em> screen to coordinate sound, video, and lighting.',
+      support: '',
+      closing:
+        '<span class="pnt__luci">With LUCI</span>, you reach for <em>ONE</em> screen to coordinate sound, video, and lighting.',
     },
     twoShiftsLockup: {
       lockupName: 'The difference you actually feel',

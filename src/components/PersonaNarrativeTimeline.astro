@@ -54,7 +54,7 @@ const n = narrative;
   </div>
 
   <div class="pnt__payoff">
-    <p class="pnt__support">{n.support}</p>
+    {n.support && <p class="pnt__support">{n.support}</p>}
     <blockquote class="pnt__closing" set:html={n.closing}></blockquote>
   </div>
 </div>
@@ -195,6 +195,24 @@ const n = narrative;
   .pnt__closing em {
     font-style: normal;
     color: var(--mint);
+  }
+  /* "With LUCI" underline — same mint underline + glow as the homepage
+     differentiator statement. */
+  .pnt__closing .pnt__luci {
+    position: relative;
+    display: inline-block;
+    color: var(--off-white);
+    text-shadow: 0 0 20px rgba(var(--mint-rgb), 0.26);
+  }
+  .pnt__closing .pnt__luci::after {
+    content: '';
+    position: absolute;
+    left: 0.05em;
+    right: 0.05em;
+    bottom: -0.08em;
+    height: 0.08em;
+    background: var(--mint);
+    box-shadow: 0 0 14px rgba(var(--mint-rgb), 0.5);
   }
 
   @media (max-width: 760px) {
