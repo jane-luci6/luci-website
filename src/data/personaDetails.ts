@@ -340,7 +340,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       },
       {
         friction:
-          'A jackpot, a goal, a headline act, a flash sale \u2014 and the property can\u2019t react before the moment passes.',
+          'Big moments like a jackpot, a touchdown, or a headline act feel stale because the property isn\u2019t wired to react to them.',
         relief:
           'LUCI turns a moment into a property-wide event instantly, bringing screens, sound, and lighting together the second it happens.',
       },
@@ -414,24 +414,24 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     hubSub: 'Better experience, more spend, guests who come back.',
     capabilities: [
       {
-        front: 'Launch a promotion across the whole property in minutes.',
+        front: 'Push a message to every screen in under two minutes.',
         back:
-          'The offer goes live where guests already are, the moment you\u2019re ready \u2014 no hand-off, no wait.',
+          'Make the edit on your own device, send it to the whole floor or a single set of zones, and it\u2019s live in moments \u2014 then drop back to the scheduled plan when you\u2019re done.',
       },
       {
-        front: 'Turn a big moment into a property-wide event, automatically.',
+        front: 'Daypart your restaurant promotions to catch guests at the decision point.',
         back:
-          'A jackpot, a game-winning play, an artist taking the stage \u2014 one moment becomes energy the whole property feels, on brand.',
+          'Schedule a dining spot to run across the floor in the hour before lunch and again before dinner \u2014 the windows when guests are deciding whether to stay on property or head out \u2014 then reset the regular rotation automatically. Set the timing once and it repeats every day.',
       },
       {
-        front: 'Refresh every screen for a new day, event, or season with one push.',
+        front: 'Run customized content by zone \u2014 indoor and outdoor \u2014 from one control panel.',
         back:
-          'The property always looks current \u2014 no stale slides, no frozen promos, no neglected screens.',
+          'The sports book, the main floor, the bar, and the marquee can each run their own schedule at the same time, every display managed from the same place \u2014 including external signage connected through LUCI. Program each space for what it needs in the moment instead of broadcasting one message everywhere.',
       },
       {
-        front: 'Keep the brand consistent across every display.',
+        front: 'Build an event campaign that escalates automatically.',
         back:
-          'One look, one voice, everywhere guests look \u2014 locked to your brand, edited by you.',
+          'Schedule a rotation that grows an event\u2019s presence \u2014 more zones, more frequency \u2014 as the date approaches, and fills your slow dayparts with loyalty and dining offers in between. Build it once; it ramps and resets on its own.',
       },
     ],
     ctaTitle: 'Your property is your best channel. <em>Run it like one.</em>',
