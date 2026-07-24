@@ -122,8 +122,8 @@ export interface PersonaDetail {
 export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
   operations: {
     id: 'operations',
-    heroImage: '/images/who-we-serve/operations-hero.jpg',
-    heroAlt: 'A casino gaming floor at evening peak, glowing signage and slot banks seen from an elevated angle',
+    heroImage: '/images/who-we-serve/operations-hero.jpg?v=2',
+    heroAlt: 'Two operations professionals coordinating on a property floor — one with a tablet, one with a radio — against soft digital displays in the background',
     heroKicker: '',
     heroDeck:
       "You run the floor everyone else talks about. With LUCI in your hands, you can tune the whole property to the rhythm of your guests.",
