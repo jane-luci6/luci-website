@@ -282,7 +282,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     heroDeck:
       "You own the brand and the message across the whole property. It\u2019s your biggest channel \u2014 and the one you can\u2019t publish to yourself. LUCI hands you the keys.",
     narrativeLockup: {
-      lockupName: 'Your property is your <em>best channel</em>. Run it like one.',
+      lockupName: 'Your property is your best channel. <em>Run it like one.</em>',
       lockupRole: 'What marketing is accountable for',
     },
     narrativeDeck:
