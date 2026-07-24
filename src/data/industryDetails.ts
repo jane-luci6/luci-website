@@ -70,7 +70,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         'Every screen, zone, and channel on your floor — signage, sportsbook, restaurants, the pit — moves through the same platform. Marketing, gaming operations, A/V, and IT stop working separate equipment that happens to share a building, and start running one floor together.',
     },
     challengesLockup: {
-      lockupName: 'Why casino floors get <em>complicated</em>',
+      lockupName: 'Why casino floors <em>get complicated</em>',
     },
     challenges: [
       {
@@ -238,7 +238,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         'Lobby signage, ballrooms, meeting rooms, restaurants, and pool decks — every guest-facing display and zone runs through one platform. Your team runs one property from a single interface, and your brand runs the same way across every property in the portfolio.',
     },
     challengesLockup: {
-      lockupName: 'Why hotel A/V gets <em>complicated</em>',
+      lockupName: 'Why hotel A/V <em>gets complicated</em>',
     },
     challenges: [
       {
