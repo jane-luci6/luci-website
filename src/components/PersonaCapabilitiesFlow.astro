@@ -148,40 +148,76 @@ const hubIcon = `<svg viewBox="0 0 16 16" fill="none"><path fill-rule="evenodd" 
   }
 
   .pcf__hub {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    --pcf-hub-size: clamp(260px, 30vw, 340px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 2;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(10px, 1.4vw, 18px);
-    width: clamp(260px, 30vw, 340px);
-    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(8px, 1vw, 14px);
+    box-sizing: border-box;
+    width: var(--pcf-hub-size);
+    height: var(--pcf-hub-size);
+    max-width: var(--pcf-hub-size);
+    max-height: var(--pcf-hub-size);
+    aspect-ratio: 1 / 1;
+    padding: 22%;
+    overflow: hidden;
     text-align: center;
   }
   .pcf__hub-rings {
-    position: absolute; inset: 0; z-index: -1; border-radius: 9999px;
+    position: absolute; inset: 0; z-index: -1; border-radius: 50%;
     border: 1px solid rgba(var(--mint-rgb), 0.24);
     box-shadow: 0 0 0 1px rgba(var(--mint-rgb), 0.08), 0 0 72px rgba(var(--mint-rgb), 0.2);
     animation: pcf-pulse 2.8s ease-in-out infinite;
   }
-  .pcf__hub-rings::before { content: ''; position: absolute; inset: 9%; border-radius: 9999px; border: 1px solid rgba(var(--mint-rgb), 0.16); }
-  .pcf__hub-rings::after { content: ''; position: absolute; inset: 20%; border-radius: 9999px; border: 1px solid rgba(var(--gold-rgb), 0.28); }
+  .pcf__hub-rings::before { content: ''; position: absolute; inset: 9%; border-radius: 50%; border: 1px solid rgba(var(--mint-rgb), 0.16); }
+  .pcf__hub-rings::after { content: ''; position: absolute; inset: 20%; border-radius: 50%; border: 1px solid rgba(var(--gold-rgb), 0.28); }
+  .pcf__hub-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(36px, 4vw, 48px);
+    flex: none;
+    color: var(--mint);
+  }
   .pcf__hub:has(.pcf__hub-sub) {
-    gap: clamp(6px, 0.8vw, 10px);
+    --pcf-hub-size: clamp(288px, 33vw, 372px);
+    gap: clamp(4px, 0.6vw, 8px);
   }
   .pcf__hub:has(.pcf__hub-sub) .pcf__hub-icon {
-    width: clamp(40px, 4.5vw, 56px);
+    width: clamp(28px, 3.2vw, 40px);
   }
   .pcf__hub:has(.pcf__hub-sub) .pcf__hub-label {
-    font-size: clamp(16px, 1.8vw, 22px);
+    font-size: clamp(15px, 1.55vw, 19px);
+    max-width: 10ch;
   }
   .pcf__hub-icon :global(svg) { width: 100%; height: auto; display: block; }
-  .pcf__hub-label { margin: 0; max-width: 78%; font-family: var(--font-body); font-size: clamp(20px, 2.4vw, 30px); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: var(--mint); text-align: center; }
+  .pcf__hub-label {
+    margin: 0;
+    max-width: 11ch;
+    font-family: var(--font-body);
+    font-size: clamp(18px, 2vw, 26px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--mint);
+    text-align: center;
+    text-wrap: balance;
+  }
   .pcf__hub-sub {
     margin: 0;
-    max-width: 22ch;
+    max-width: 16ch;
     font-family: 'Inter', system-ui, sans-serif;
-    font-size: clamp(12px, 1.1vw, 14px);
-    line-height: 1.4;
+    font-size: clamp(11px, 0.95vw, 13px);
+    line-height: 1.35;
     color: rgba(245, 248, 250, 0.72);
     text-align: center;
+    text-wrap: balance;
   }
   .pcf__takeaway {
     margin: 0 auto;
@@ -243,7 +279,17 @@ const hubIcon = `<svg viewBox="0 0 16 16" fill="none"><path fill-rule="evenodd" 
   @media (max-width: 899px) {
     .pcf__stage { grid-template-columns: 1fr; grid-template-rows: auto; gap: 16px; }
     .pcf__lines { display: none; }
-    .pcf__hub { position: static; transform: none; width: auto; aspect-ratio: auto; padding: 28px 0; }
+    .pcf__hub {
+      position: static;
+      transform: none;
+      width: auto;
+      height: auto;
+      max-width: none;
+      max-height: none;
+      aspect-ratio: auto;
+      padding: 28px 0;
+      overflow: visible;
+    }
     .pcf__hub-rings { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {

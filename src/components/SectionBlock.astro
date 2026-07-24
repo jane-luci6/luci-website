@@ -6,7 +6,7 @@ interface Props {
   lockupName?: string;
   lockupRole?: string;
   deck?: string;
-  tone?: 'white' | 'light' | 'sand' | 'deep';
+  tone?: 'white' | 'light' | 'sand' | 'deep' | 'mid';
   wide?: boolean;
   /** Circuit-texture background. true = navy-steel (default); 'mintgold' = mint/gold variant. */
   pattern?: boolean | 'mintgold';
@@ -24,7 +24,7 @@ const patternClass = pattern === 'mintgold' ? 'section--pattern section--pattern
     {title && <h2 class="h2 section-block__title">{title}</h2>}
     {lockupName && (
       <div class="header-lockup" data-reveal>
-        <h2 class="header-lockup__name">{lockupName}</h2>
+        <h2 class="header-lockup__name" set:html={lockupName} />
         {lockupRole && (
           <>
             <span class="header-lockup__rule" aria-hidden="true"></span>
@@ -44,7 +44,8 @@ const patternClass = pattern === 'mintgold' ? 'section--pattern section--pattern
     margin-bottom: var(--space-2);
   }
 
-  .section--deep .section-block__kicker {
+  .section--deep .section-block__kicker,
+  .section--mid .section-block__kicker {
     color: var(--mint);
   }
 
@@ -137,7 +138,8 @@ const patternClass = pattern === 'mintgold' ? 'section--pattern section--pattern
     text-align: left;
   }
 
-  .section--deep .section-deck {
+  .section--deep .section-deck,
+  .section--mid .section-deck {
     color: rgba(245, 248, 250, 0.82);
   }
 
@@ -167,8 +169,17 @@ const patternClass = pattern === 'mintgold' ? 'section--pattern section--pattern
     opacity: 1;
     transform: none;
   }
-  .section--deep .header-lockup__name {
+  .section--deep .header-lockup__name,
+  .section--mid .header-lockup__name {
     color: var(--off-white);
+  }
+  .header-lockup__name em {
+    font-style: normal;
+    color: var(--gold-deep);
+  }
+  .section--deep .header-lockup__name em,
+  .section--mid .header-lockup__name em {
+    color: var(--gold);
   }
   .header-lockup__rule {
     display: block;
@@ -184,7 +195,8 @@ const patternClass = pattern === 'mintgold' ? 'section--pattern section--pattern
   .header-lockup.is-in .header-lockup__rule {
     transform: scaleX(1);
   }
-  .section--deep .header-lockup__rule {
+  .section--deep .header-lockup__rule,
+  .section--mid .header-lockup__rule {
     background: var(--mint);
   }
   .header-lockup__role {
@@ -204,7 +216,8 @@ const patternClass = pattern === 'mintgold' ? 'section--pattern section--pattern
     opacity: 1;
     transform: none;
   }
-  .section--deep .header-lockup__role {
+  .section--deep .header-lockup__role,
+  .section--mid .header-lockup__role {
     color: var(--mint);
   }
 

@@ -81,7 +81,7 @@ const detail = getIndustryDetail(industry.slug);
       <SectionBlock id="industry-cta" tone="deep">
         <div class="ind-page-cta">
           <p class="display-label ind-page-cta__kicker">Next step</p>
-          <h2 class="h2 ind-page-cta__title">{detail.ctaTitle}</h2>
+          <h2 class="h2 ind-page-cta__title" set:html={detail.ctaTitle} />
           <div class="btn-row">
             <a class="btn btn--primary" href="/contact">{site.ctaPrimary}</a>
             <a class="btn btn--ghost" href="/platform">Explore the platform</a>
@@ -167,5 +167,9 @@ const detail = getIndustryDetail(industry.slug);
     color: var(--off-white);
     margin-bottom: var(--space-4);
     max-width: none;
+  }
+  .ind-page-cta__title em {
+    font-style: normal;
+    color: var(--mint);
   }
 </style>

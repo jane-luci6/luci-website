@@ -57,7 +57,7 @@ const { lockupName, lockupRole, deck, videoSrc, posterSrc, imageSrc, imageAlt = 
 
   <div class="ind-hero__inner container container--wide">
     <div class="header-lockup is-in" data-reveal>
-      <h2 class="header-lockup__name">{lockupName}</h2>
+      <h2 class="header-lockup__name" set:html={lockupName} />
       <span class="header-lockup__rule" aria-hidden="true"></span>
       <p class="header-lockup__role">{lockupRole}</p>
     </div>
@@ -118,13 +118,18 @@ const { lockupName, lockupRole, deck, videoSrc, posterSrc, imageSrc, imageAlt = 
   }
 
   .ind-hero .header-lockup__name {
-    font-family: var(--font-body);
+    font-family: var(--font-display);
     font-size: clamp(34px, 5vw, 52px);
     font-weight: 700;
     line-height: 1;
     letter-spacing: -0.02em;
     color: var(--off-white);
     margin: 0;
+    text-transform: uppercase;
+  }
+  .ind-hero .header-lockup__name em {
+    font-style: normal;
+    color: var(--mint);
   }
 
   .ind-hero .header-lockup__rule {

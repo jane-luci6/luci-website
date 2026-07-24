@@ -59,9 +59,8 @@ if (!detail) return Astro.redirect('/who-we-serve');
     id="persona-challenges"
     lockupName={detail.challengesLockup.lockupName}
     lockupRole={detail.challengesLockup.lockupRole}
-    tone="deep"
+    tone="mid"
     wide
-    pattern="mintgold"
   >
     <PersonaChallenges challenges={detail.challenges} />
   </SectionBlock>
@@ -96,7 +95,7 @@ if (!detail) return Astro.redirect('/who-we-serve');
   <SectionBlock id="persona-cta" tone="deep">
     <div class="persona-cta">
       <p class="display-label persona-cta__kicker">Next step</p>
-      <h2 class="h2 persona-cta__title">{detail.ctaTitle}</h2>
+      <h2 class="h2 persona-cta__title" set:html={detail.ctaTitle} />
       {detail.ctaDeck && <p class="persona-cta__deck">{detail.ctaDeck}</p>}
       <div class="btn-row">
         <a class="btn btn--primary" href="/contact">{site.ctaPrimary}</a>
@@ -152,6 +151,10 @@ if (!detail) return Astro.redirect('/who-we-serve');
     margin-bottom: var(--space-3);
     max-width: 22ch;
     margin-inline: auto;
+  }
+  .persona-cta__title em {
+    font-style: normal;
+    color: var(--mint);
   }
   .persona-cta__deck {
     max-width: 52ch;

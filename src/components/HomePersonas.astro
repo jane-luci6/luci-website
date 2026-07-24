@@ -1,5 +1,6 @@
 ---
 import { personas } from '../data/personas';
+import { hasPersonaDetail } from '../data/personaDetails';
 
 const headingLead = 'How will LUCI ';
 const headingAccent = 'support you';
@@ -39,7 +40,10 @@ const icons: Record<string, string> = {
       <ul class="home-personas__grid" role="list">
         {personas.map((p) => (
           <li class="home-personas__cell">
-            <a class="home-personas__link" href={`/who-we-serve#${p.id}`}>
+            <a
+              class="home-personas__link"
+              href={hasPersonaDetail(p.id) ? `/who-we-serve/${p.id}` : `/who-we-serve#${p.id}`}
+            >
               <p class="home-personas__role">{p.role}</p>
               <h3 class="home-personas__label">{p.label}</h3>
               <p class="home-personas__line">{p.line}</p>

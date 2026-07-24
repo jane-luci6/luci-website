@@ -64,13 +64,13 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     heroVideo: '/videos/luci-led-sportsbook.mp4?v=2',
     heroPoster: '/images/industries/casino/hero-sportsbook-poster.jpg?v=2',
     thesis: {
-      lockupName: 'Casinos & Gaming',
+      lockupName: 'Casinos & <em>Gaming</em>',
       lockupRole: 'One platform for the whole floor',
       deck:
         'Every screen, zone, and channel on your floor — signage, sportsbook, restaurants, the pit — moves through the same platform. Marketing, gaming operations, A/V, and IT stop working separate equipment that happens to share a building, and start running one floor together.',
     },
     challengesLockup: {
-      lockupName: 'Why casino floors get complicated',
+      lockupName: 'Why casino floors get <em>complicated</em>',
     },
     challenges: [
       {
@@ -116,7 +116,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       },
     ],
     solutionsLockup: {
-      lockupName: 'What LUCI changes',
+      lockupName: 'What LUCI <em>changes</em>',
       lockupRole: '',
     },
     solutions: [
@@ -178,7 +178,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       attribution: 'We\u2019ve heard this one a thousand times.',
     },
     automationLockup: {
-      lockupName: 'Automation & presets',
+      lockupName: '<em>Automation</em> & presets',
       lockupRole: 'Set it once — the floor runs itself',
     },
     automations: [
@@ -218,7 +218,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
           'Trigger a preset for a drawing or announcement, set it to revert after a set time, and the floor snaps back to baseline automatically.',
       },
     ],
-    ctaTitle: 'See LUCI on your floor.',
+    ctaTitle: 'See LUCI on <em>your floor</em>.',
     chapters: [
       { id: 'industry-thesis', label: 'Overview' },
       { id: 'industry-challenges', label: 'Challenges' },
@@ -232,13 +232,13 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     heroPoster: '/images/industries/hotel/hero-lobby-poster.jpg?v=12',
     heroImage: '/images/industries/hotels-resorts.jpg?v=1',
     thesis: {
-      lockupName: 'Hotels & Resorts',
+      lockupName: 'Hotels & <em>Resorts</em>',
       lockupRole: 'One platform for every property.',
       deck:
         'Lobby signage, ballrooms, meeting rooms, restaurants, and pool decks — every guest-facing display and zone runs through one platform. Your team runs one property from a single interface, and your brand runs the same way across every property in the portfolio.',
     },
     challengesLockup: {
-      lockupName: 'Why hotel A/V gets complicated',
+      lockupName: 'Why hotel A/V gets <em>complicated</em>',
     },
     challenges: [
       {
@@ -290,7 +290,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       attribution: 'Multi-property brands live this every week.',
     },
     solutionsLockup: {
-      lockupName: 'What LUCI changes',
+      lockupName: 'What LUCI <em>changes</em>',
       lockupRole: '',
     },
     solutions: [
@@ -346,7 +346,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       },
     ],
     automationLockup: {
-      lockupName: 'Automation & presets',
+      lockupName: '<em>Automation</em> & presets',
       lockupRole: 'Set it once — the property runs itself',
     },
     automations: [
@@ -386,7 +386,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
           'Trigger a preset for an announcement or promotion, set it to revert after a set time, and the property snaps back to baseline automatically.',
       },
     ],
-    ctaTitle: 'See LUCI on your property.',
+    ctaTitle: 'See LUCI on <em>your property</em>.',
     chapters: [
       { id: 'industry-thesis', label: 'Overview' },
       { id: 'industry-challenges', label: 'Challenges' },
@@ -400,13 +400,13 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     heroPoster: '/images/industries/sports-venues/hero-arena-poster.jpg?v=4',
     heroImage: '/images/industries/sports-venues.jpg?v=3',
     thesis: {
-      lockupName: 'Sports & Venues',
+      lockupName: 'Sports & <em>Venues</em>',
       lockupRole: 'One platform for the hardest A/V environment there is',
       deck:
         'A venue is the hardest A/V environment there is — tens of thousands of seats, boards that read from three hundred feet, and three straight hours with no restart at halftime. LUCI puts every system behind one interface your team can run.',
     },
     challengesLockup: {
-      lockupName: 'What venues actually deal with',
+      lockupName: 'What venues actually <em>deal with</em>',
     },
     challenges: [
       {
@@ -462,7 +462,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       attribution: 'Every venue team has lived a version of this.',
     },
     solutionsLockup: {
-      lockupName: 'What LUCI changes',
+      lockupName: 'What LUCI <em>changes</em>',
       lockupRole: '',
     },
     solutions: [
@@ -523,7 +523,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       },
     ],
     automationLockup: {
-      lockupName: 'Automation & presets',
+      lockupName: '<em>Automation</em> & presets',
       lockupRole: 'Set it once — the building runs itself',
     },
     automations: [
@@ -563,7 +563,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
           'Trigger a sponsor takeover or in-game promotion, set it to revert after a set time, and the building snaps back to baseline automatically.',
       },
     ],
-    ctaTitle: 'See LUCI in your building.',
+    ctaTitle: 'See LUCI in <em>your building</em>.',
     chapters: [
       { id: 'industry-thesis', label: 'Overview' },
       { id: 'industry-challenges', label: 'Challenges' },
@@ -577,13 +577,13 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     heroPoster: '/images/industries/airports-transportation/hero-terminal-poster.jpg?v=3',
     heroImage: '/images/industries/airports-transportation.jpg?v=2',
     thesis: {
-      lockupName: 'Airports & Transportation',
+      lockupName: 'Airports & <em>Transportation</em>',
       lockupRole: 'A/V as life-safety, not decoration',
       deck:
         'A terminal or station never closes — a 4 a.m. red-eye is as live as a 6 p.m. rush. The A/V is life-safety: paging is the fire alarm, understood over jet engines and departing trains. LUCI puts every board and speaker behind one interface your team can run.',
     },
     challengesLockup: {
-      lockupName: 'What terminals and stations actually deal with',
+      lockupName: 'What terminals and stations actually <em>deal with</em>',
     },
     challenges: [
       {
@@ -649,7 +649,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       attribution: 'Every terminal and station team has lived a version of this.',
     },
     solutionsLockup: {
-      lockupName: 'What LUCI changes',
+      lockupName: 'What LUCI <em>changes</em>',
       lockupRole: '',
     },
     solutions: [
@@ -721,7 +721,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       },
     ],
     automationLockup: {
-      lockupName: 'Automation & presets',
+      lockupName: '<em>Automation</em> & presets',
       lockupRole: 'Set it once — the building runs itself',
     },
     automations: [
@@ -761,7 +761,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
           'The system keeps every board, gate, and platform display in sync with the live data — and the moment one drifts, points it back before a passenger reads the wrong gate.',
       },
     ],
-    ctaTitle: 'See LUCI in your terminal or station.',
+    ctaTitle: 'See LUCI in <em>your terminal or station</em>.',
     chapters: [
       { id: 'industry-thesis', label: 'Overview' },
       { id: 'industry-challenges', label: 'Challenges' },
@@ -775,13 +775,13 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     heroPoster: '/images/industries/conference-convention-centers/hero-main-stage-poster.jpg?v=1',
     heroImage: '/images/industries/conference-convention-centers.jpg?v=1',
     thesis: {
-      lockupName: 'Conferences & Convention Centers',
+      lockupName: 'Conferences & Convention <em>Centers</em>',
       lockupRole: 'One platform for a building that reconfigures every few hours',
       deck:
         'A convention center is not running one show — it is running many, back to back and side by side, and the same hall becomes a different technical environment every few hours. LUCI puts every room — main stage, breakouts, divisible halls, and the hybrid broadcast — behind one interface your team runs from one tap.',
     },
     challengesLockup: {
-      lockupName: 'What convention centers actually deal with',
+      lockupName: 'What convention centers actually <em>deal with</em>',
     },
     challenges: [
       {
@@ -840,7 +840,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       attribution: 'Convention operators say this about every turnover.',
     },
     solutionsLockup: {
-      lockupName: 'What LUCI changes',
+      lockupName: 'What LUCI <em>changes</em>',
       lockupRole: '',
     },
     solutions: [
@@ -906,7 +906,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       },
     ],
     automationLockup: {
-      lockupName: 'Automation & presets',
+      lockupName: '<em>Automation</em> & presets',
       lockupRole: 'Set it once — the venue runs itself',
     },
     automations: [
@@ -946,7 +946,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
           'Trigger a preset for an award cue or announcement, set it to revert after a set time, and the room snaps back to baseline automatically.',
       },
     ],
-    ctaTitle: 'See LUCI in your venue.',
+    ctaTitle: 'See LUCI in <em>your venue</em>.',
     chapters: [
       { id: 'industry-thesis', label: 'Overview' },
       { id: 'industry-challenges', label: 'Challenges' },

@@ -128,16 +128,27 @@ h2,
   border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Mid navy — same blue as the homepage "one interface" band (HomeIntro). */
+.section--mid {
+  background: var(--navy-mid);
+  color: rgba(245, 248, 250, 0.9);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
 .section--deep h2,
-.section--deep .h2 {
+.section--deep .h2,
+.section--mid h2,
+.section--mid .h2 {
   color: var(--off-white);
 }
 
-.section--deep a {
+.section--deep a,
+.section--mid a {
   color: var(--mint);
 }
 
-.section--deep .display-label {
+.section--deep .display-label,
+.section--mid .display-label {
   color: var(--mint);
 }
 

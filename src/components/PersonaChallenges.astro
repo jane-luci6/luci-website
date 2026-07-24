@@ -127,6 +127,40 @@ const xMark = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   }
   .pch__luci { font-weight: 700; color: var(--gold); }
 
+  /* Light canvas (section--light / sand / white) — friction list as reading band. */
+  :global(.section--light) .pch__row + .pch__row,
+  :global(.section--sand) .pch__row + .pch__row,
+  :global(.section--white) .pch__row + .pch__row {
+    border-top-color: rgba(28, 43, 51, 0.1);
+  }
+  :global(.section--light) .pch__x,
+  :global(.section--sand) .pch__x,
+  :global(.section--white) .pch__x {
+    color: rgba(73, 97, 110, 0.55);
+  }
+  :global(.section--light) .pch__friction-head,
+  :global(.section--sand) .pch__friction-head,
+  :global(.section--white) .pch__friction-head {
+    color: var(--ink-strong);
+  }
+  :global(.section--light) .pch__solution,
+  :global(.section--sand) .pch__solution,
+  :global(.section--white) .pch__solution {
+    background: linear-gradient(155deg, #e6f5ef 0%, #f3faf8 100%);
+    box-shadow: inset 0 0 0 1px rgba(43, 158, 128, 0.14);
+    border-left-color: var(--gold-deep, #ceb06e);
+  }
+  :global(.section--light) .pch__relief,
+  :global(.section--sand) .pch__relief,
+  :global(.section--white) .pch__relief {
+    color: var(--ink);
+  }
+  :global(.section--light) .pch__luci,
+  :global(.section--sand) .pch__luci,
+  :global(.section--white) .pch__luci {
+    color: var(--accent-light);
+  }
+
   @media (max-width: 640px) {
     .pch__row { gap: 10px; padding: 20px 0; }
     .pch__solution { gap: 12px; padding: 12px 14px; }

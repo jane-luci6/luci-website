@@ -34,30 +34,44 @@ const tabs = stakes;
         data-pis-panel={t.slug}
         hidden={i !== 0}
       >
-        <div class="pis__media">
-          <img class="pis__img" src={`${t.image}?v=1`} alt="" loading={i === 0 ? 'eager' : 'lazy'} decoding="async" width="1280" height="853" />
-          <span class="pis__scrim" aria-hidden="true"></span>
-          <p class="pis__kicker">{kicker}</p>
-        </div>
-        <div class="pis__body">
-          <p class="pis__name">{t.name}</p>
-          <p class="pis__callout">{t.callout}</p>
-          <div class="pis__emphasis">
-            <span class="pis__emphasis-k">How LUCI shows up</span>
-            <p class="pis__emphasis-text">{t.emphasis}</p>
+        <a class="pis__hit" href={`/industries/${t.slug}`}>
+          <div class="pis__media">
+            <img
+              class="pis__img"
+              src={`${t.image}?v=1`}
+              alt=""
+              loading={i === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+              width="1280"
+              height="853"
+            />
+            <span class="pis__scrim" aria-hidden="true"></span>
+            <p class="pis__kicker">{kicker}</p>
           </div>
-        </div>
+          <div class="pis__body">
+            <p class="pis__name">{t.name}</p>
+            <p class="pis__callout">{t.callout}</p>
+            <div class="pis__emphasis">
+              <span class="pis__emphasis-k">How LUCI shows up</span>
+              <p class="pis__emphasis-text">{t.emphasis}</p>
+            </div>
+            <span class="pis__cta">
+              Explore {t.name}
+              <span class="pis__cta-arrow" aria-hidden="true">→</span>
+            </span>
+          </div>
+        </a>
       </div>
     ))}
   </div>
 </div>
 
 <script>
-  const root = document.querySelector<HTMLElement>('[data-pis]');
+  const root = document.querySelector('[data-pis]');
   if (root) {
-    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-pis-tab]'));
-    const panels = Array.from(root.querySelectorAll<HTMLElement>('[data-pis-panel]'));
-    const select = (slug: string) => {
+    const tabs = Array.from(root.querySelectorAll('[data-pis-tab]'));
+    const panels = Array.from(root.querySelectorAll('[data-pis-panel]'));
+    const select = (slug) => {
       tabs.forEach((tb) => {
         const on = tb.dataset.pisTab === slug;
         tb.classList.toggle('is-on', on);
@@ -93,9 +107,30 @@ const tabs = stakes;
   .pis__tab.is-on { background: var(--accent-light); color: #fff; border-color: var(--accent-light); font-weight: 700; }
   .pis__panels { position: relative; }
   .pis__panel { display: none; }
-  .pis__panel.is-on { display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; border: 1px solid rgba(var(--gold-rgb), 0.28); border-radius: 14px; overflow: hidden; background: #fff; }
+  .pis__panel.is-on { display: block; }
+  .pis__hit {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 0;
+    border: 1px solid rgba(var(--gold-rgb), 0.28);
+    border-radius: 14px;
+    overflow: hidden;
+    background: #fff;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  }
+  .pis__hit:hover {
+    border-color: rgba(var(--gold-rgb), 0.55);
+    box-shadow: 0 16px 36px rgba(16, 35, 45, 0.1);
+  }
+  .pis__hit:focus-visible {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 3px;
+  }
   .pis__media { position: relative; min-height: clamp(220px, 30vw, 320px); }
-  .pis__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .pis__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.35s ease; }
+  .pis__hit:hover .pis__img { transform: scale(1.03); }
   .pis__scrim { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(10,22,28,0.55) 0%, rgba(10,22,28,0.2) 45%, rgba(10,22,28,0.65) 100%); }
   .pis__kicker {
     position: absolute; left: 22px; bottom: 18px; z-index: 1;
@@ -119,7 +154,7 @@ const tabs = stakes;
     line-height: 1.55;
     color: var(--ink);
   }
-  .pis__emphasis { margin-top: auto; border-left: 3px solid var(--gold-deep); padding: 4px 0 4px 18px; }
+  .pis__emphasis { border-left: 3px solid var(--gold-deep); padding: 4px 0 4px 18px; }
   .pis__emphasis-k {
     display: block; margin-bottom: 6px;
     font-family: var(--font-display); font-size: 9.5px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
@@ -131,8 +166,29 @@ const tabs = stakes;
     font-size: 14.5px; font-weight: 500; line-height: 1.5;
     color: var(--ink-strong);
   }
+  .pis__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 4px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    color: var(--accent-light);
+  }
+  .pis__cta-arrow {
+    transition: transform 0.18s ease;
+  }
+  .pis__hit:hover .pis__cta-arrow { transform: translateX(4px); }
   @media (max-width: 820px) {
-    .pis__panel.is-on { grid-template-columns: 1fr; }
+    .pis__hit { grid-template-columns: 1fr; }
     .pis__media { min-height: 200px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pis__img,
+    .pis__cta-arrow { transition: none; }
+    .pis__hit:hover .pis__img { transform: none; }
   }
 </style>

@@ -7,9 +7,38 @@ interface Props {
 
 const { narrative } = Astro.props;
 const n = narrative;
+const curve = n.curve ?? 'rise';
+
+/** Four-point paths. Rise = Ops energy peak; fall = Marketing message decay → LUCI flips it. */
+const paths = {
+  rise: {
+    area: 'M0,195 C 70,195 80,130 125,130 C 170,130 210,185 250,185 C 290,185 320,95 375,95 C 430,95 460,180 500,180 C 540,180 580,62 625,62 C 670,62 710,175 750,175 C 790,175 840,30 875,30 C 920,30 960,165 1000,165 L 1000,240 L 0,240 Z',
+    line: 'M0,195 C 70,195 80,130 125,130 C 170,130 210,185 250,185 C 290,185 320,95 375,95 C 430,95 460,180 500,180 C 540,180 580,62 625,62 C 670,62 710,175 750,175 C 790,175 840,30 875,30 C 920,30 960,165 1000,165',
+    dots: [
+      { cx: 125, cy: 130 },
+      { cx: 375, cy: 95 },
+      { cx: 625, cy: 62 },
+      { cx: 875, cy: 30 },
+    ],
+  },
+  /* Idea high → hand-off slips → wait sinks → miss at the floor. Gold marks the miss. */
+  fall: {
+    area: 'M0,40 C 50,40 80,50 125,50 C 170,50 210,95 250,95 C 290,95 320,130 375,130 C 430,130 460,155 500,155 C 540,155 580,175 625,175 C 670,175 710,190 750,190 C 790,190 840,196 875,196 C 920,196 960,196 1000,196 L 1000,240 L 0,240 Z',
+    line: 'M0,40 C 50,40 80,50 125,50 C 170,50 210,95 250,95 C 290,95 320,130 375,130 C 430,130 460,155 500,155 C 540,155 580,175 625,175 C 670,175 710,190 750,190 C 790,190 840,196 875,196 C 920,196 960,196 1000,196',
+    dots: [
+      { cx: 125, cy: 50 },
+      { cx: 375, cy: 130 },
+      { cx: 625, cy: 175 },
+      { cx: 875, cy: 196 },
+    ],
+  },
+} as const;
+
+const path = paths[curve];
+const uid = `pnt-${curve}`;
 ---
 
-<div class="pnt">
+<div class:list={['pnt', `pnt--${curve}`]}>
   {n.subLead && <p class="pnt__sublead">{n.subLead}</p>}
 
   <div class="pnt__chapter">
@@ -17,11 +46,11 @@ const n = narrative;
     <div class="pnt__stage">
       <svg class="pnt__wave" viewBox="0 0 1000 240" preserveAspectRatio="none" aria-hidden="true" focusable="false">
         <defs>
-          <linearGradient id="pntFill" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient id={`${uid}-fill`} x1="0" y1="0" x2="0" y2="1">
             <stop offset="0" stop-color="#68e3be" stop-opacity="0.26" />
             <stop offset="1" stop-color="#68e3be" stop-opacity="0" />
           </linearGradient>
-          <linearGradient id="pntStroke" x1="0" y1="0" x2="1" y2="0">
+          <linearGradient id={`${uid}-stroke`} x1="0" y1="0" x2="1" y2="0">
             <stop offset="0" stop-color="#2b9e80" />
             <stop offset="0.4" stop-color="#68e3be" />
             <stop offset="0.78" stop-color="#ceb06e" />
@@ -29,17 +58,15 @@ const n = narrative;
           </linearGradient>
         </defs>
         <line class="pnt__axis" x1="0" y1="196" x2="1000" y2="196" />
-        <path class="pnt__area" d="M0,195 C 70,195 80,130 125,130 C 170,130 210,185 250,185 C 290,185 320,95 375,95 C 430,95 460,180 500,180 C 540,180 580,62 625,62 C 670,62 710,175 750,175 C 790,175 840,30 875,30 C 920,30 960,165 1000,165 L 1000,240 L 0,240 Z" fill="url(#pntFill)" />
-        <path class="pnt__line" d="M0,195 C 70,195 80,130 125,130 C 170,130 210,185 250,185 C 290,185 320,95 375,95 C 430,95 460,180 500,180 C 540,180 580,62 625,62 C 670,62 710,175 750,175 C 790,175 840,30 875,30 C 920,30 960,165 1000,165" fill="none" stroke="url(#pntStroke)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path class="pnt__area" d={path.area} fill={`url(#${uid}-fill)`} />
+        <path class="pnt__line" d={path.line} fill="none" stroke={`url(#${uid}-stroke)`} stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
         <g class="pnt__dots">
-          <circle class="pnt__glow" cx="125" cy="130" r="13" />
-          <circle class="pnt__glow" cx="375" cy="95" r="13" />
-          <circle class="pnt__glow" cx="625" cy="62" r="13" />
-          <circle class="pnt__glow pnt__glow--gold" cx="875" cy="30" r="13" />
-          <circle class="pnt__dot" cx="125" cy="130" r="6.5" />
-          <circle class="pnt__dot" cx="375" cy="95" r="6.5" />
-          <circle class="pnt__dot" cx="625" cy="62" r="6.5" />
-          <circle class="pnt__dot pnt__dot--gold" cx="875" cy="30" r="6.5" />
+          {path.dots.map((d, i) => (
+            <>
+              <circle class:list={['pnt__glow', i === 3 && 'pnt__glow--gold']} cx={d.cx} cy={d.cy} r="13" />
+              <circle class:list={['pnt__dot', i === 3 && 'pnt__dot--gold']} cx={d.cx} cy={d.cy} r="6.5" />
+            </>
+          ))}
         </g>
       </svg>
 
@@ -128,9 +155,9 @@ const n = narrative;
     fill: var(--navy-deep);
     stroke: var(--gold);
   }
-  .pnt__dots circle.pnt__dot:nth-child(5) { animation-delay: 0.7s; }
-  .pnt__dots circle.pnt__dot:nth-child(6) { animation-delay: 1.2s; }
-  .pnt__dots circle.pnt__dot:nth-child(7) { animation-delay: 1.7s; }
+  .pnt__dots circle.pnt__dot:nth-child(2) { animation-delay: 0.7s; }
+  .pnt__dots circle.pnt__dot:nth-child(4) { animation-delay: 1.2s; }
+  .pnt__dots circle.pnt__dot:nth-child(6) { animation-delay: 1.7s; }
   .pnt__dots circle.pnt__dot:nth-child(8) { animation-delay: 2.2s; }
   @keyframes pntPop {
     from { opacity: 0; transform: scale(0.4); }

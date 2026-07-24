@@ -26,6 +26,12 @@ export interface PersonaNarrativeMoment {
 export interface PersonaNarrative {
   /** Optional chapter label above the arc, e.g. "The energy curve", "The life of a message". */
   chapterLabel?: string;
+  /**
+   * Shape of the four-point graphic.
+   * - `rise` — Ops energy curve (builds to a peak)
+   * - `fall` — Marketing message journey (idea → hand-off → wait → miss), then the payoff flips it
+   */
+  curve?: 'rise' | 'fall';
   /** Sub-lead that opens the arc. */
   subLead: string;
   /** The moments along the day-arc. */
@@ -119,7 +125,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     heroDeck:
       "You run the floor everyone else talks about. With LUCI in your hands, you can tune the whole property to the rhythm of your guests.",
     narrativeLockup: {
-      lockupName: 'The entire property is in your hands',
+      lockupName: 'The entire property is in <em>your hands</em>',
       lockupRole: 'What operations has to manage',
     },
     narrative: {
@@ -151,7 +157,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
         '<span class="pnt__luci">With LUCI</span>, you reach for <em>ONE</em> screen to coordinate sound, video, and lighting.',
     },
     challengesLockup: {
-      lockupName: 'What gets in your way',
+      lockupName: 'What gets in <em>your way</em>',
       lockupRole: 'Friction you feel every shift',
     },
     challenges: [
@@ -182,7 +188,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       },
     ],
     industryLockup: {
-      lockupName: 'LUCI lives wherever you operate',
+      lockupName: 'LUCI lives <em>wherever you operate</em>',
       lockupRole: 'The stakes change. The relief doesn’t',
     },
     industryStakes: [
@@ -228,7 +234,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       },
     ],
     capabilitiesLockup: {
-      lockupName: 'What you can do',
+      lockupName: 'What you <em>can do</em>',
       lockupRole: 'Four ways to put LUCI to work',
     },
     lead: '',
@@ -255,7 +261,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
           'Presets switch the wall between a full layout and zoned views with a tap or on a schedule. When the event ends, one tap restores the everyday layout.',
       },
     ],
-    ctaTitle: 'A/V should support your job, not block it.',
+    ctaTitle: 'A/V should <em>support your job</em>, not block it.',
     ctaDeck:
       'Let us show you what it looks like when it isn’t — on your floor, with your team, on your existing setup.',
     chapters: [
@@ -276,13 +282,14 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     heroDeck:
       "You own the brand and the message across the whole property. It\u2019s your biggest channel \u2014 and the one you can\u2019t publish to yourself. LUCI hands you the keys.",
     narrativeLockup: {
-      lockupName: 'Your best channel is the one you don\u2019t control',
+      lockupName: 'Your property is your <em>best channel</em>. Run it like one.',
       lockupRole: 'What marketing is accountable for',
     },
     narrativeDeck:
       'You can push a campaign to email, social, and web in minutes. But the property \u2014 where your most engaged guests already are \u2014 takes a request, a hand-off, and a wait.',
     narrative: {
       chapterLabel: 'The life of a message',
+      curve: 'fall',
       subLead: '',
       moments: [
         {
@@ -311,7 +318,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
         '<span class="pnt__luci">With LUCI</span>, the whole property becomes a channel you publish to yourself \u2014 in <em>minutes</em>, on brand, from one screen.',
     },
     challengesLockup: {
-      lockupName: 'What gets in your way',
+      lockupName: 'What gets in <em>your way</em>',
       lockupRole: 'Friction between you and your guests',
     },
     challenges: [
@@ -345,7 +352,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       },
     ],
     industryLockup: {
-      lockupName: 'LUCI lives wherever you operate',
+      lockupName: 'LUCI lives <em>wherever you operate</em>',
       lockupRole: 'The message changes. The control doesn\u2019t',
     },
     industryKicker: 'What control unlocks here',
@@ -397,7 +404,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       },
     ],
     capabilitiesLockup: {
-      lockupName: 'What you can do',
+      lockupName: 'What you <em>can do</em>',
       lockupRole: 'Four ways to run the property as a channel',
     },
     lead: '',
@@ -427,7 +434,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
           'One look, one voice, everywhere guests look \u2014 locked to your brand, edited by you.',
       },
     ],
-    ctaTitle: 'Your property is your best channel. Run it like one.',
+    ctaTitle: 'Your property is your best channel. <em>Run it like one.</em>',
     ctaDeck:
       'Let us show you what it looks like to publish to the property yourself \u2014 on brand, in the moment, without waiting on anyone.',
     chapters: [
