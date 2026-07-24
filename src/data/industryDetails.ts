@@ -64,7 +64,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     heroVideo: '/videos/luci-led-sportsbook.mp4?v=2',
     heroPoster: '/images/industries/casino/hero-sportsbook-poster.jpg?v=2',
     thesis: {
-      lockupName: 'Casinos & <em>Gaming</em>',
+      lockupName: 'Casinos & Gaming',
       lockupRole: 'One platform for the whole floor',
       deck:
         'Every screen, zone, and channel on your floor — signage, sportsbook, restaurants, the pit — moves through the same platform. Marketing, gaming operations, A/V, and IT stop working separate equipment that happens to share a building, and start running one floor together.',
@@ -232,7 +232,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     heroPoster: '/images/industries/hotel/hero-lobby-poster.jpg?v=12',
     heroImage: '/images/industries/hotels-resorts.jpg?v=1',
     thesis: {
-      lockupName: 'Hotels & <em>Resorts</em>',
+      lockupName: 'Hotels & Resorts',
       lockupRole: 'One platform for every property.',
       deck:
         'Lobby signage, ballrooms, meeting rooms, restaurants, and pool decks — every guest-facing display and zone runs through one platform. Your team runs one property from a single interface, and your brand runs the same way across every property in the portfolio.',
@@ -400,7 +400,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     heroPoster: '/images/industries/sports-venues/hero-arena-poster.jpg?v=4',
     heroImage: '/images/industries/sports-venues.jpg?v=3',
     thesis: {
-      lockupName: 'Sports & <em>Venues</em>',
+      lockupName: 'Sports & Venues',
       lockupRole: 'One platform for the hardest A/V environment there is',
       deck:
         'A venue is the hardest A/V environment there is — tens of thousands of seats, boards that read from three hundred feet, and three straight hours with no restart at halftime. LUCI puts every system behind one interface your team can run.',
@@ -577,7 +577,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     heroPoster: '/images/industries/airports-transportation/hero-terminal-poster.jpg?v=3',
     heroImage: '/images/industries/airports-transportation.jpg?v=2',
     thesis: {
-      lockupName: 'Airports & <em>Transportation</em>',
+      lockupName: 'Airports & Transportation',
       lockupRole: 'A/V as life-safety, not decoration',
       deck:
         'A terminal or station never closes — a 4 a.m. red-eye is as live as a 6 p.m. rush. The A/V is life-safety: paging is the fire alarm, understood over jet engines and departing trains. LUCI puts every board and speaker behind one interface your team can run.',
@@ -775,7 +775,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     heroPoster: '/images/industries/conference-convention-centers/hero-main-stage-poster.jpg?v=1',
     heroImage: '/images/industries/conference-convention-centers.jpg?v=1',
     thesis: {
-      lockupName: 'Conferences & Convention <em>Centers</em>',
+      lockupName: 'Conferences & Convention Centers',
       lockupRole: 'One platform for a building that reconfigures every few hours',
       deck:
         'A convention center is not running one show — it is running many, back to back and side by side, and the same hall becomes a different technical environment every few hours. LUCI puts every room — main stage, breakouts, divisible halls, and the hybrid broadcast — behind one interface your team runs from one tap.',

@@ -173,12 +173,12 @@ const patternClass = pattern === 'mintgold' ? 'section--pattern section--pattern
   .section--mid .header-lockup__name {
     color: var(--off-white);
   }
-  .header-lockup__name em {
+  .header-lockup__name :global(em) {
     font-style: normal;
     color: var(--gold-deep);
   }
-  .section--deep .header-lockup__name em,
-  .section--mid .header-lockup__name em {
+  .section--deep .header-lockup__name :global(em),
+  .section--mid .header-lockup__name :global(em) {
     color: var(--gold);
   }
   .header-lockup__rule {
