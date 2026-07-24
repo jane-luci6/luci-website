@@ -2,6 +2,8 @@
 interface Props {
   heroImage: string;
   heroAlt?: string;
+  heroVideo?: string;
+  heroPoster?: string;
   kicker?: string;
   lockupName: string;
   lockupRole: string;
@@ -9,20 +11,58 @@ interface Props {
   sectionId?: string;
 }
 
-const { heroImage, heroAlt = '', kicker = '', lockupName, lockupRole, deck = '', sectionId = 'persona-thesis' } = Astro.props;
+const {
+  heroImage,
+  heroAlt = '',
+  heroVideo = '',
+  heroPoster = '',
+  kicker = '',
+  lockupName,
+  lockupRole,
+  deck = '',
+  sectionId = 'persona-thesis',
+} = Astro.props;
 ---
 
 <section id={sectionId} class="persona-hero">
-  <img
-    class="persona-hero__img"
-    src={heroImage}
-    alt={heroAlt}
-    width="1920"
-    height="1080"
-    loading="eager"
-    decoding="async"
-    fetchpriority="high"
-  />
+  {heroVideo ? (
+    <>
+      <video
+        class="persona-hero__video"
+        src={heroVideo}
+        poster={heroPoster || heroImage}
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        aria-hidden="true"
+      >
+        <source src={heroVideo} type="video/mp4" />
+      </video>
+      <img
+        class="persona-hero__poster"
+        src={heroPoster || heroImage}
+        alt=""
+        width="1920"
+        height="820"
+        loading="eager"
+        decoding="async"
+        aria-hidden="true"
+      />
+    </>
+  ) : (
+    <img
+      class="persona-hero__img"
+      src={heroImage}
+      alt={heroAlt}
+      width="1920"
+      height="1080"
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+    />
+  )}
   <span class="persona-hero__scrim" aria-hidden="true"></span>
   <span class="persona-hero__grain" aria-hidden="true"></span>
 
@@ -51,7 +91,9 @@ const { heroImage, heroAlt = '', kicker = '', lockupName, lockupRole, deck = '',
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  .persona-hero__img {
+  .persona-hero__img,
+  .persona-hero__video,
+  .persona-hero__poster {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -59,6 +101,15 @@ const { heroImage, heroAlt = '', kicker = '', lockupName, lockupRole, deck = '',
     object-fit: cover;
     object-position: center 40%;
     display: block;
+  }
+
+  .persona-hero__video {
+    transform: scale(1.08);
+    transform-origin: center center;
+  }
+
+  .persona-hero__poster {
+    display: none;
   }
 
   .persona-hero__scrim {
@@ -146,6 +197,22 @@ const { heroImage, heroAlt = '', kicker = '', lockupName, lockupRole, deck = '',
       aspect-ratio: auto;
       min-height: clamp(440px, 82vw, 540px);
       max-height: none;
+    }
+
+    .persona-hero__video {
+      transform: scale(1.14);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .persona-hero__video {
+      display: none;
+    }
+
+    .persona-hero__poster {
+      display: block;
+      transform: scale(1.08);
+      transform-origin: center center;
     }
   }
 </style>

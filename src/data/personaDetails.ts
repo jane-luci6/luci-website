@@ -83,6 +83,9 @@ export interface PersonaDetail {
   /** Hero */
   heroImage: string;
   heroAlt: string;
+  /** Optional looping hero video (industry-style ambient cover). Falls back to heroImage. */
+  heroVideo?: string;
+  heroPoster?: string;
   heroKicker: string;
   heroDeck: string;
   /** Narrative — "who this is", second person, as a day-arc timeline */
@@ -119,13 +122,15 @@ export interface PersonaDetail {
 export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
   operations: {
     id: 'operations',
-    heroImage: '/images/who-we-serve/operations-hero.jpg',
-    heroAlt: 'A casino gaming floor at evening peak, glowing signage and slot banks seen from an elevated angle',
+    heroImage: '/images/who-we-serve/operations-hero-poster.jpg?v=1',
+    heroAlt: 'Ambient property environments across hotels, gaming floors, arenas, terminals, and venues',
+    heroVideo: '/videos/luci-operations-hero.mp4?v=1',
+    heroPoster: '/images/who-we-serve/operations-hero-poster.jpg?v=1',
     heroKicker: '',
     heroDeck:
       "You run the floor everyone else talks about. With LUCI in your hands, you can tune the whole property to the rhythm of your guests.",
     narrativeLockup: {
-      lockupName: 'The entire property is in <em>your hands</em>',
+      lockupName: 'The entire property <em>is in your hands</em>',
       lockupRole: 'What operations has to manage',
     },
     narrative: {
@@ -408,30 +413,27 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       lockupRole: 'Four ways to run the property as a channel',
     },
     lead: '',
-    takeaway:
-      'Four ways to run your biggest channel. <strong>One experience, and the revenue that follows.</strong>',
-    hubLabel: 'The Guest Experience',
-    hubSub: 'Better experience, more spend, guests who come back.',
+    takeaway: '',
     capabilities: [
       {
         front: 'Push a message to every screen in under two minutes.',
         back:
-          'Make the edit on your own device, send it to the whole floor or a single set of zones, and it\u2019s live in moments \u2014 then drop back to the scheduled plan when you\u2019re done.',
+          'Edit on your own device, send it to the whole floor or a set of zones, and it\u2019s live in moments \u2014 then drop back to the scheduled plan.',
       },
       {
-        front: 'Daypart your restaurant promotions to catch guests at the decision point.',
+        front: 'Daypart restaurant promotions to catch guests at the decision point.',
         back:
-          'Schedule a dining spot to run across the floor in the hour before lunch and again before dinner \u2014 the windows when guests are deciding whether to stay on property or head out \u2014 then reset the regular rotation automatically. Set the timing once and it repeats every day.',
+          'Run a dining spot across the floor before lunch and dinner \u2014 when guests decide whether to stay \u2014 then reset automatically. Set it once; it repeats every day.',
       },
       {
-        front: 'Run customized content by zone \u2014 indoor and outdoor \u2014 from one control panel.',
+        front: 'Run customized content by zone from one control panel.',
         back:
-          'The sports book, the main floor, the bar, and the marquee can each run their own schedule at the same time, every display managed from the same place \u2014 including external signage connected through LUCI. Program each space for what it needs in the moment instead of broadcasting one message everywhere.',
+          'Sports book, main floor, bar, and marquee each run their own schedule from the same place \u2014 including outdoor signage. Program each space for what it needs.',
       },
       {
         front: 'Build an event campaign that escalates automatically.',
         back:
-          'Schedule a rotation that grows an event\u2019s presence \u2014 more zones, more frequency \u2014 as the date approaches, and fills your slow dayparts with loyalty and dining offers in between. Build it once; it ramps and resets on its own.',
+          'Grow an event\u2019s presence \u2014 more zones, more frequency \u2014 as the date approaches, and fill slow dayparts with loyalty and dining offers. Build it once; it ramps and resets on its own.',
       },
     ],
     ctaTitle: 'Your property is your best channel. <em>Run it like one.</em>',
