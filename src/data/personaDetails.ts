@@ -122,10 +122,8 @@ export interface PersonaDetail {
 export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
   operations: {
     id: 'operations',
-    heroImage: '/images/who-we-serve/operations-hero-poster.jpg?v=1',
-    heroAlt: 'Ambient property environments across hotels, gaming floors, arenas, terminals, and venues',
-    heroVideo: '/videos/luci-operations-hero.mp4?v=1',
-    heroPoster: '/images/who-we-serve/operations-hero-poster.jpg?v=1',
+    heroImage: '/images/who-we-serve/operations-hero.jpg',
+    heroAlt: 'A casino gaming floor at evening peak, glowing signage and slot banks seen from an elevated angle',
     heroKicker: '',
     heroDeck:
       "You run the floor everyone else talks about. With LUCI in your hands, you can tune the whole property to the rhythm of your guests.",
