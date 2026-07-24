@@ -87,11 +87,11 @@ const items = [
     color: var(--ink-strong);
   }
 
-  /* Gold-deep underline mark on "commitments" — non-text accent on light.
-     Bright gold fails contrast on light, so the on-light gold lives as a mark. */
+  /* Gold underline mark on "commitments" — non-text accent on light.
+     Bright gold at reduced opacity; the on-light gold lives as a mark. */
   .home-commitments__title-mark {
     text-decoration: underline;
-    text-decoration-color: var(--gold-deep);
+    text-decoration-color: rgba(var(--gold-rgb), 0.55);
     text-decoration-thickness: 3px;
     text-underline-offset: 5px;
   }

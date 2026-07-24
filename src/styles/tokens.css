@@ -13,7 +13,6 @@
   /* Secondary accent — gold (canonical LUCI scale, mirrors sales docs) */
   --gold: #edd086;       /* bright gold — the ONLY gold for text; dark surfaces only (fails contrast on light) */
   --gold-rgb: 237, 208, 134;
-  --gold-deep: #ceb06e;  /* gold for icons/backgrounds/highlights/gradients on light — never text */
 
   --sand: #e5e3df;
   --off-white: #f5f8fa;

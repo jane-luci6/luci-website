@@ -97,14 +97,14 @@ const tabs = stakes;
     font-weight: 500;
     padding: 9px 16px;
     border-radius: 9999px;
-    border: 1px solid var(--rule-light);
+    border: 1px solid rgba(245, 248, 250, 0.15);
     background: transparent;
-    color: var(--navy-muted);
+    color: rgba(245, 248, 250, 0.6);
     cursor: pointer;
     transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   }
-  .pis__tab:hover { color: var(--ink-strong); border-color: var(--navy-muted); }
-  .pis__tab.is-on { background: var(--accent-light); color: #fff; border-color: var(--accent-light); font-weight: 700; }
+  .pis__tab:hover { color: var(--off-white); border-color: rgba(245, 248, 250, 0.3); }
+  .pis__tab.is-on { background: var(--mint); color: var(--navy-deep); border-color: var(--mint); font-weight: 700; }
   .pis__panels { position: relative; }
   .pis__panel { display: none; }
   .pis__panel.is-on { display: block; }
@@ -115,14 +115,14 @@ const tabs = stakes;
     border: 1px solid rgba(var(--gold-rgb), 0.28);
     border-radius: 14px;
     overflow: hidden;
-    background: #fff;
+    background: var(--navy-deep);
     text-decoration: none;
     color: inherit;
     transition: border-color 0.18s ease, box-shadow 0.18s ease;
   }
   .pis__hit:hover {
     border-color: rgba(var(--gold-rgb), 0.55);
-    box-shadow: 0 16px 36px rgba(16, 35, 45, 0.1);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
   }
   .pis__hit:focus-visible {
     outline: 2px solid var(--accent-light);
@@ -139,32 +139,32 @@ const tabs = stakes;
     font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
     color: var(--gold);
   }
-  .pis__body { padding: clamp(24px, 3vw, 36px); display: flex; flex-direction: column; gap: 18px; background: #fff; }
+  .pis__body { padding: clamp(24px, 3vw, 36px); display: flex; flex-direction: column; gap: 18px; background: var(--navy-deep); }
   .pis__name {
     margin: 0;
     font-family: var(--font-body);
     font-size: clamp(18px, 2vw, 24px);
     font-weight: 700; letter-spacing: -0.02em;
-    color: var(--ink-strong);
+    color: var(--off-white);
   }
   .pis__callout {
     margin: 0;
     font-family: 'Inter', system-ui, sans-serif;
     font-size: clamp(15px, 1.4vw, 18px);
     line-height: 1.55;
-    color: var(--ink);
+    color: rgba(245, 248, 250, 0.78);
   }
-  .pis__emphasis { border-left: 3px solid var(--gold-deep); padding: 4px 0 4px 18px; }
+  .pis__emphasis { border-left: 3px solid var(--gold); padding: 4px 0 4px 18px; }
   .pis__emphasis-k {
     display: block; margin-bottom: 6px;
     font-family: var(--font-display); font-size: 9.5px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--gold-deep);
+    color: var(--gold);
   }
   .pis__emphasis-text {
     margin: 0;
     font-family: var(--font-body);
     font-size: 14.5px; font-weight: 500; line-height: 1.5;
-    color: var(--ink-strong);
+    color: var(--off-white);
   }
   .pis__cta {
     display: inline-flex;
@@ -176,7 +176,7 @@ const tabs = stakes;
     font-size: 15px;
     font-weight: 600;
     letter-spacing: -0.005em;
-    color: var(--accent-light);
+    color: var(--mint);
   }
   .pis__cta-arrow {
     transition: transform 0.18s ease;
