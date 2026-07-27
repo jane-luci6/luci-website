@@ -10,7 +10,7 @@ const caseStudies = [ameristarCaseStudy, tachiCaseStudy];
 <BaseLayout title="Case Studies" description={portfolioLine}>
   <PageHero title="Case studies" lead={portfolioLine} deep />
 
-  <SectionBlock lockupName="Featured" lockupRole="Client case studies" tone="light" wide>
+  <SectionBlock lockupName="Featured" tone="light" wide>
     <ul class="cs-index">
       {caseStudies.map((cs) => {
         const href = `/resources/case-studies/${cs.slug}`;

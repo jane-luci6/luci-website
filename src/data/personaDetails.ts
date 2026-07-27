@@ -132,7 +132,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       lockupRole: 'What operations has to manage',
     },
     narrative: {
-      chapterLabel: 'The energy curve',
+      curve: 'rise',
       subLead: '',
       moments: [
         {
@@ -291,7 +291,6 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     narrativeDeck:
       'You can push a campaign to email, social, and web in minutes. But the property \u2014 where your most engaged guests already are \u2014 takes a request, a hand-off, and a wait.',
     narrative: {
-      chapterLabel: 'The life of a message',
       curve: 'fall',
       subLead: '',
       moments: [

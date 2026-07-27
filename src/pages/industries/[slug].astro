@@ -48,7 +48,6 @@ const detail = getIndustryDetail(industry.slug);
       <SectionBlock
         id="industry-challenges"
         lockupName={detail.challengesLockup.lockupName}
-        lockupRole={detail.challengesLockup.lockupRole}
         tone="deep"
         wide
         pattern
@@ -59,7 +58,6 @@ const detail = getIndustryDetail(industry.slug);
       <SectionBlock
         id="industry-solutions"
         lockupName={detail.solutionsLockup.lockupName}
-        lockupRole={detail.solutionsLockup.lockupRole}
         tone="deep"
         wide
       >
@@ -71,7 +69,6 @@ const detail = getIndustryDetail(industry.slug);
       <SectionBlock
         id="industry-automation"
         lockupName={detail.automationLockup.lockupName}
-        lockupRole={detail.automationLockup.lockupRole}
         tone="deep"
         wide
       >
@@ -93,16 +90,16 @@ const detail = getIndustryDetail(industry.slug);
     <>
       <PageHero title={industry.name} lead={industry.teaser} deep />
 
-      <SectionBlock lockupName="Vertical challenges" lockupRole="Specific to your property type">
+      <SectionBlock lockupName="Vertical challenges">
         <p class="measure scaffold-note">Vertical-specific pain points — TBD per industry</p>
       </SectionBlock>
 
-      <SectionBlock lockupName="How LUCI fits" lockupRole="Mapped to the four pillars" tone="sand">
+      <SectionBlock lockupName="How LUCI fits" tone="sand">
         <p class="rows__title">{pillars[2].title}</p>
         <p class="measure" style="margin-top: 0.5rem">{pillars[2].body}</p>
       </SectionBlock>
 
-      <SectionBlock lockupName="Proof" lockupRole="Results from the field">
+      <SectionBlock lockupName="Proof">
         <div class="callout">
           <p class="rows__title">{ameristarCaseStudy.title}</p>
           <p>{ameristarCaseStudy.dek}</p>

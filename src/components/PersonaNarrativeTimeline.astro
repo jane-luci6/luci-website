@@ -9,255 +9,278 @@ const { narrative } = Astro.props;
 const n = narrative;
 const curve = n.curve ?? 'rise';
 
-/** Four-point paths. Rise = Ops energy peak; fall = Marketing message decay → LUCI flips it. */
-const paths = {
-  rise: {
-    area: 'M0,195 C 70,195 80,130 125,130 C 170,130 210,185 250,185 C 290,185 320,95 375,95 C 430,95 460,180 500,180 C 540,180 580,62 625,62 C 670,62 710,175 750,175 C 790,175 840,30 875,30 C 920,30 960,165 1000,165 L 1000,240 L 0,240 Z',
-    line: 'M0,195 C 70,195 80,130 125,130 C 170,130 210,185 250,185 C 290,185 320,95 375,95 C 430,95 460,180 500,180 C 540,180 580,62 625,62 C 670,62 710,175 750,175 C 790,175 840,30 875,30 C 920,30 960,165 1000,165',
-    dots: [
-      { cx: 125, cy: 130 },
-      { cx: 375, cy: 95 },
-      { cx: 625, cy: 62 },
-      { cx: 875, cy: 30 },
-    ],
-  },
-  /* Idea high → hand-off slips → wait sinks → miss at the floor. Gold marks the miss. */
-  fall: {
-    area: 'M0,40 C 50,40 80,50 125,50 C 170,50 210,95 250,95 C 290,95 320,130 375,130 C 430,130 460,155 500,155 C 540,155 580,175 625,175 C 670,175 710,190 750,190 C 790,190 840,196 875,196 C 920,196 960,196 1000,196 L 1000,240 L 0,240 Z',
-    line: 'M0,40 C 50,40 80,50 125,50 C 170,50 210,95 250,95 C 290,95 320,130 375,130 C 430,130 460,155 500,155 C 540,155 580,175 625,175 C 670,175 710,190 750,190 C 790,190 840,196 875,196 C 920,196 960,196 1000,196',
-    dots: [
-      { cx: 125, cy: 50 },
-      { cx: 375, cy: 130 },
-      { cx: 625, cy: 175 },
-      { cx: 875, cy: 196 },
-    ],
-  },
-} as const;
+/** Rise = Ops energy peak (smooth bezier). Fall = Marketing message decay (staircase).
+ *  Rise viewBox: 0 0 1000 380 — curve in top portion, labels below.
+ *  Fall viewBox: 0 0 1200 460 — staircase in top portion, labels below. */
+const risePath = {
+  area: 'M0,195 C 70,195 80,130 125,130 C 170,130 210,185 250,185 C 290,185 320,95 375,95 C 430,95 460,180 500,180 C 540,180 580,62 625,62 C 670,62 710,175 750,175 C 790,175 840,30 875,30 C 920,30 960,165 1000,165 L 1000,240 L 0,240 Z',
+  line: 'M0,195 C 70,195 80,130 125,130 C 170,130 210,185 250,185 C 290,185 320,95 375,95 C 430,95 460,180 500,180 C 540,180 580,62 625,62 C 670,62 710,175 750,175 C 790,175 840,30 875,30 C 920,30 960,165 1000,165',
+  dots: [
+    { cx: 125, cy: 130 },
+    { cx: 375, cy: 95 },
+    { cx: 625, cy: 62 },
+    { cx: 875, cy: 30 },
+  ],
+};
 
-const path = paths[curve];
 const uid = `pnt-${curve}`;
+
+/** Fall staircase: four treads descending, contiguous end-to-end across the full 1000-wide viewBox.
+ *  Each tread 250 wide; centers 300px apart so 230px labels have a 20px gap between them.
+ *  Right end of one = left end of next (vertical drop connectors). */
+const fallTreads = [
+  { x1: 0,   x2: 250, y: 60,  cx: 125, color: '#68E3BE', drop: '#8ed3b5', marker: 'arrowg' },
+  { x1: 250, x2: 500, y: 130, cx: 375, color: '#8ed3b5', drop: '#bcae7a', marker: 'arrowg' },
+  { x1: 500, x2: 750, y: 200, cx: 625, color: '#bcae7a', drop: '#EDD086', marker: 'arrow'  },
+  { x1: 750, x2: 1000, y: 264, cx: 875, color: '#EDD086', drop: null,    marker: null    },
+];
 ---
 
-<div class:list={['pnt', `pnt--${curve}`]}>
-  {n.subLead && <p class="pnt__sublead">{n.subLead}</p>}
+<section class={`pnt pnt--${curve}`} id={uid}>
+  <div class="pnt__inner">
 
-  <div class="pnt__chapter">
-    <p class="pnt__chapter-label">{n.chapterLabel || 'The energy curve'}</p>
-    <div class="pnt__stage">
-      <svg class="pnt__wave" viewBox="0 0 1000 240" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-        <defs>
-          <linearGradient id={`${uid}-fill`} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#68e3be" stop-opacity="0.26" />
-            <stop offset="1" stop-color="#68e3be" stop-opacity="0" />
-          </linearGradient>
-          <linearGradient id={`${uid}-stroke`} x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stop-color="#2b9e80" />
-            <stop offset="0.4" stop-color="#68e3be" />
-            <stop offset="0.78" stop-color="#ceb06e" />
-            <stop offset="1" stop-color="#edd086" />
-          </linearGradient>
-        </defs>
-        <line class="pnt__axis" x1="0" y1="196" x2="1000" y2="196" />
-        <path class="pnt__area" d={path.area} fill={`url(#${uid}-fill)`} />
-        <path class="pnt__line" d={path.line} fill="none" stroke={`url(#${uid}-stroke)`} stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-        <g class="pnt__dots">
-          {path.dots.map((d, i) => (
-            <>
-              <circle class:list={['pnt__glow', i === 3 && 'pnt__glow--gold']} cx={d.cx} cy={d.cy} r="13" />
-              <circle class:list={['pnt__dot', i === 3 && 'pnt__dot--gold']} cx={d.cx} cy={d.cy} r="6.5" />
-            </>
+    {curve === 'rise' ? (
+      <div class="pnt__chart pnt__chart--rise">
+        <svg viewBox="0 0 1000 380" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Energy curve rising to a peak">
+          <defs>
+            <linearGradient id={`${uid}-grad`} x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgba(104,227,190,0.28)" />
+              <stop offset="100%" stop-color="rgba(104,227,190,0)" />
+            </linearGradient>
+          </defs>
+          <path d={risePath.area} fill={`url(#${uid}-grad)`} />
+          <path d={risePath.line} fill="none" stroke="var(--mint)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+          {risePath.dots.map((d, i) => (
+            <circle cx={d.cx} cy={d.cy} r="6" fill="var(--navy-deep)" stroke="var(--mint)" stroke-width="2.5"
+              class={`pnt__dot pnt__dot--${i+1}`} />
           ))}
-        </g>
-      </svg>
+          {risePath.dots.map((d, i) => (
+            <foreignObject x={d.cx - 110} y={255} width="220" height="120">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="pnt__label pnt__label--rise">
+                <span class="pnt__stage">{n.moments[i].time}</span>
+                <span class="pnt__body">{n.moments[i].caption}</span>
+              </div>
+            </foreignObject>
+          ))}
+        </svg>
 
-      <ol class="pnt__marks" role="list">
-        {n.moments.map((m) => (
-          <li class="pnt__mark">
-            <span class="pnt__mark-t">{m.time}</span>
-            <p class="pnt__mark-c">{m.caption}</p>
-          </li>
-        ))}
-      </ol>
-    </div>
-  </div>
+        <div class="pnt__mobile-list" aria-hidden="true">
+          {n.moments.map((m, i) => (
+            <div class={`pnt__mobile-item pnt__mobile-item--rise`}>
+              <span class="pnt__stage">{m.time}</span>
+              <span class="pnt__body">{m.caption}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    ) : (
+      <div class="pnt__chart pnt__chart--fall">
+        <svg viewBox="0 0 1000 460" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Marketing message losing energy at each handoff">
+          <defs>
+            <marker id="arrow" viewBox="0 0 12 12" refX="6" refY="6" markerWidth="9" markerHeight="9" orient="auto">
+              <path d="M 2 2 L 10 6 L 2 10 Z" fill="#EDD086" />
+            </marker>
+            <marker id="arrowg" viewBox="0 0 12 12" refX="6" refY="6" markerWidth="9" markerHeight="9" orient="auto">
+              <path d="M 2 2 L 10 6 L 2 10 Z" fill="#8ed3b5" />
+            </marker>
+          </defs>
 
-  <div class="pnt__payoff">
-    {n.support && <p class="pnt__support">{n.support}</p>}
-    <blockquote class="pnt__closing" set:html={n.closing}></blockquote>
+          {fallTreads.map((t, i) => (
+            <g class={`pnt__tread pnt__tread--${i+1}`}>
+              {t.drop && (
+                <line x1={t.x2} y1={t.y} x2={t.x2} y2={fallTreads[i+1].y} stroke={t.drop} stroke-width="2"
+                  marker-end={`url(#${t.marker})`} class={`pnt__drop pnt__drop--${i+1}`} />
+              )}
+              <line x1={t.x1} y1={t.y} x2={t.x2} y2={t.y}
+                stroke={t.color}
+                stroke-width={i === 3 ? 2 : 3}
+                stroke-dasharray={i === 3 ? '6 6' : 'none'}
+                stroke-linecap="round" />
+              <circle cx={t.cx} cy={t.y} r="6" fill="var(--navy-deep)" stroke={t.color} stroke-width="2.5" />
+            </g>
+          ))}
+
+          {fallTreads.map((t, i) => (
+            <foreignObject x={t.cx - 115} y={t.y + 22} width="230" height="180">
+              <div xmlns="http://www.w3.org/1999/xhtml" class={`pnt__label pnt__label--${i+1}`}>
+                <span class="pnt__stage">{n.moments[i].time}</span>
+                <span class="pnt__body">{n.moments[i].caption}</span>
+              </div>
+            </foreignObject>
+          ))}
+        </svg>
+
+        <div class="pnt__mobile-list" aria-hidden="true">
+          {n.moments.map((m, i) => (
+            <div class={`pnt__mobile-item pnt__mobile-item--${i+1}`}>
+              <span class="pnt__stage">{m.time}</span>
+              <span class="pnt__body">{m.caption}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {n.closing && (
+      <div class="pnt__closing">
+        <div class="pnt__rule"></div>
+        <p class="pnt__closing-text" set:html={n.closing} />
+      </div>
+    )}
   </div>
-</div>
+</section>
 
 <style>
-  .pnt {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(24px, 3vw, 36px);
-    max-width: var(--content-wide, 1120px);
-  }
-  .pnt__sublead {
-    margin: 0;
-    max-width: 40ch;
-    font-family: var(--font-body);
-    font-size: clamp(22px, 2.6vw, 30px);
-    font-weight: 700;
-    line-height: 1.18;
-    letter-spacing: -0.02em;
-    color: var(--off-white);
-  }
+.pnt { width: 100%; }
+.pnt__inner {
+  width: 100%;
+}
 
-  .pnt__chapter {
-    padding: clamp(20px, 3vw, 28px);
-    border: 1px solid rgba(var(--gold-rgb), 0.22);
-    border-radius: 14px;
-    background: rgba(10, 22, 28, 0.35);
-  }
-  .pnt__chapter-label {
-    margin: 0 0 14px;
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
+/* Rise chart (Ops) */
+.pnt__chart--rise svg { width: 100%; height: auto; display: block; }
+.pnt__dot {
+  opacity: 0;
+  animation: pnt-pop 0.5s ease-out forwards;
+}
+.pnt__dot--1 { animation-delay: 0.2s; }
+.pnt__dot--2 { animation-delay: 0.5s; }
+.pnt__dot--3 { animation-delay: 0.8s; }
+.pnt__dot--4 { animation-delay: 1.1s; }
+@keyframes pnt-pop {
+  from { opacity: 0; transform: scale(0.4); }
+  to { opacity: 1; transform: scale(1); }
+}
 
-  .pnt__stage {
-    position: relative;
-    padding: 0;
-  }
-  .pnt__wave {
-    width: 100%;
-    height: clamp(160px, 22vw, 240px);
-    display: block;
-    overflow: visible;
-  }
-  .pnt__axis {
-    stroke: rgba(245, 248, 250, 0.18);
-    stroke-width: 1;
-    stroke-dasharray: 3 5;
-  }
-  .pnt__line {
-    stroke-dasharray: 2600;
-    stroke-dashoffset: 2600;
-    animation: pntDraw 2.4s ease-out 0.2s forwards;
-  }
-  @keyframes pntDraw { to { stroke-dashoffset: 0; } }
-  .pnt__glow { fill: rgba(104, 227, 190, 0.22); }
-  .pnt__glow--gold { fill: rgba(206, 176, 110, 0.32); }
-  .pnt__dot {
-    fill: var(--navy-deep);
-    stroke: var(--mint);
-    stroke-width: 2;
-    opacity: 0;
-    animation: pntPop 0.5s ease-out forwards;
-  }
-  .pnt__dot--gold {
-    fill: var(--navy-deep);
-    stroke: var(--gold);
-  }
-  .pnt__dots circle.pnt__dot:nth-child(2) { animation-delay: 0.7s; }
-  .pnt__dots circle.pnt__dot:nth-child(4) { animation-delay: 1.2s; }
-  .pnt__dots circle.pnt__dot:nth-child(6) { animation-delay: 1.7s; }
-  .pnt__dots circle.pnt__dot:nth-child(8) { animation-delay: 2.2s; }
-  @keyframes pntPop {
-    from { opacity: 0; transform: scale(0.4); }
-    to { opacity: 1; transform: scale(1); }
-  }
+/* Fall chart (Marketing) */
+.pnt__chart--fall svg { width: 100%; height: auto; display: block; overflow: visible; }
+.pnt__tread { opacity: 0; animation: pnt-fadein 0.6s ease-out forwards; }
+.pnt__tread--1 { animation-delay: 0.15s; }
+.pnt__tread--2 { animation-delay: 0.45s; }
+.pnt__tread--3 { animation-delay: 0.75s; }
+.pnt__tread--4 { animation-delay: 1.05s; }
+.pnt__drop { opacity: 0; animation: pnt-fadein 0.4s ease-out forwards; animation-delay: 0.35s; }
+.pnt__drop--2 { animation-delay: 0.65s; }
+.pnt__drop--3 { animation-delay: 0.95s; }
+@keyframes pnt-fadein { to { opacity: 1; } }
 
-  .pnt__marks {
-    list-style: none;
-    margin: clamp(14px, 2vw, 22px) 0 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: clamp(12px, 2vw, 24px);
-  }
-  .pnt__mark {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 8px;
-  }
-  .pnt__mark-t {
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-  .pnt__mark-c {
-    margin: 0;
-    max-width: 30ch;
-    font-family: 'Inter', system-ui, sans-serif;
-    font-size: clamp(13px, 1.1vw, 15px);
-    line-height: 1.5;
-    color: rgba(245, 248, 250, 0.82);
-  }
+.pnt__label {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 0 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pnt__label .pnt__stage {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.pnt__label .pnt__body {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+/* Rise labels: all mint (energy building) */
+.pnt__label--rise .pnt__stage,
+.pnt__label--rise .pnt__body { color: var(--mint); }
+/* Fall labels: color fade across stages */
+.pnt__label--1 .pnt__stage,
+.pnt__label--1 .pnt__body { color: #68E3BE; }
+.pnt__label--2 .pnt__stage,
+.pnt__label--2 .pnt__body { color: #8ed3b5; }
+.pnt__label--3 .pnt__stage,
+.pnt__label--3 .pnt__body { color: #bcae7a; opacity: 0.85; }
+.pnt__label--4 .pnt__stage,
+.pnt__label--4 .pnt__body { color: #EDD086; opacity: 0.7; }
 
-  .pnt__payoff {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    text-align: center;
-  }
-  .pnt__support {
-    margin: 0;
-    max-width: 52ch;
-    font-family: 'Inter', system-ui, sans-serif;
-    font-size: clamp(16px, 1.4vw, 18px);
-    line-height: 1.6;
-    color: rgba(245, 248, 250, 0.82);
-  }
-  .pnt__closing {
-    margin: 0;
-    width: 100%;
-    padding-top: clamp(18px, 2vw, 24px);
-    text-align: center;
-    font-family: 'Inter', system-ui, sans-serif;
-    font-size: clamp(20px, 2.6vw, 30px);
-    font-weight: 500;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    color: var(--off-white);
-    font-style: normal;
-  }
-  /* set:html content — :global so the scope attribute isn't required on
-     the injected elements. */
-  .pnt__closing :global(em) {
-    font-style: normal;
-    color: var(--gold);
-  }
-  /* "With LUCI" underline — same mint underline + glow as the homepage
-     differentiator statement. */
-  .pnt__closing :global(.pnt__luci) {
-    position: relative;
-    display: inline-block;
-    color: var(--off-white);
-    text-shadow: 0 0 20px rgba(var(--mint-rgb), 0.26);
-  }
-  .pnt__closing :global(.pnt__luci::after) {
-    content: '';
-    position: absolute;
-    left: 0.05em;
-    right: 0.05em;
-    bottom: -0.08em;
-    height: 0.08em;
-    background: var(--mint);
-    box-shadow: 0 0 14px rgba(var(--mint-rgb), 0.5);
-  }
+/* Closing / payoff line */
+.pnt__closing {
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(104,227,190,0.18);
+  text-align: center;
+}
+.pnt__closing-text {
+  font-family: var(--font-body);
+  font-size: clamp(22px, 3vw, 28px);
+  line-height: 1.45;
+  color: var(--off-white);
+  margin: 0 auto;
+  max-width: 52ch;
+}
+.pnt__closing-text :global(em) {
+  font-style: normal;
+  color: var(--mint);
+}
+.pnt__closing-text :global(.pnt__luci) {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: var(--off-white);
+  text-shadow: 0 0 20px rgba(var(--mint-rgb), 0.26);
+}
+.pnt__closing-text :global(.pnt__luci)::after {
+  content: '';
+  position: absolute;
+  left: 0.05em;
+  right: 0.05em;
+  bottom: -0.08em;
+  height: 0.08em;
+  background: var(--mint);
+  box-shadow: 0 0 14px rgba(var(--mint-rgb), 0.5);
+}
 
-  @media (max-width: 760px) {
-    .pnt__marks { grid-template-columns: 1fr; }
-    .pnt__mark { flex-direction: row; align-items: flex-start; text-align: left; gap: 14px; }
-    .pnt__mark-c { max-width: none; }
-    .pnt__closing { max-width: none; }
-  }
+/* Mobile: stack the four stages as a list with colored left border */
+.pnt__mobile-list { display: none; flex-direction: column; gap: 18px; margin-top: 8px; }
+.pnt__mobile-item {
+  border-left: 3px solid;
+  padding: 6px 0 6px 16px;
+}
+.pnt__mobile-item .pnt__stage {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+.pnt__mobile-item .pnt__body {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.pnt__mobile-item--1 { border-color: #68E3BE; }
+.pnt__mobile-item--1 .pnt__stage,
+.pnt__mobile-item--1 .pnt__body { color: #68E3BE; }
+.pnt__mobile-item--2 { border-color: #8ed3b5; }
+.pnt__mobile-item--2 .pnt__stage,
+.pnt__mobile-item--2 .pnt__body { color: #8ed3b5; }
+.pnt__mobile-item--3 { border-color: #bcae7a; }
+.pnt__mobile-item--3 .pnt__stage,
+.pnt__mobile-item--3 .pnt__body { color: #bcae7a; }
+.pnt__mobile-item--4 { border-color: #EDD086; }
+.pnt__mobile-item--4 .pnt__stage,
+.pnt__mobile-item--4 .pnt__body { color: #EDD086; opacity: 0.85; }
+.pnt__mobile-item--rise { border-color: var(--mint); }
+.pnt__mobile-item--rise .pnt__stage,
+.pnt__mobile-item--rise .pnt__body { color: var(--mint); }
 
-  @media (prefers-reduced-motion: reduce) {
-    .pnt__line { animation: none; stroke-dashoffset: 0; }
-    .pnt__dot { animation: none; opacity: 1; }
-  }
+@media (max-width: 640px) {
+  .pnt__chart--fall svg,
+  .pnt__chart--rise svg { display: none; }
+  .pnt__chart--fall .pnt__mobile-list,
+  .pnt__chart--rise .pnt__mobile-list { display: flex; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pnt__dot, .pnt__tread, .pnt__drop { animation: none; opacity: 1; }
+}
 </style>
