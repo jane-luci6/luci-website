@@ -30,8 +30,9 @@ export interface PersonaNarrative {
    * Shape of the four-point graphic.
    * - `rise` — Ops energy curve (builds to a peak)
    * - `fall` — Marketing message journey (idea → hand-off → wait → miss), then the payoff flips it
+   * - `stack` — Finance cost accumulation (purchase → vendors → upkeep → surprise), then the payoff resolves it
    */
-  curve?: 'rise' | 'fall';
+  curve?: 'rise' | 'fall' | 'stack';
   /** Sub-lead that opens the arc. */
   subLead: string;
   /** The moments along the day-arc. */
@@ -40,6 +41,8 @@ export interface PersonaNarrative {
   support: string;
   /** Closing tagline. */
   closing: string;
+  /** Optional supporting line under the closing "With LUCI" payoff. */
+  closingSupport?: string;
 }
 
 /** "The two shifts" — the works-vs-broken contrast that names the friction. */
@@ -92,6 +95,8 @@ export interface PersonaDetail {
   narrativeLockup: { lockupName: string; lockupRole: string };
   /** Optional intro deck under the narrative lockup. */
   narrativeDeck?: string;
+  /** Graph section header + deck (introduces the visual specifically) */
+  graphLockup: { lockupName: string; deck: string };
   narrative: PersonaNarrative;
   /** Challenges — friction → relief, flat list (compact: friction headline + always-visible LUCI relief) */
   challengesLockup: { lockupName: string; lockupRole: string };
@@ -131,6 +136,10 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       lockupName: 'The entire property <em>is in your hands</em>',
       lockupRole: 'What operations has to manage',
     },
+    graphLockup: {
+      lockupName: 'The energy curve',
+      deck: 'Your day builds from quiet to peak. Here\u2019s where the energy lives \u2014 and where it strains.',
+    },
     narrative: {
       curve: 'rise',
       subLead: '',
@@ -158,6 +167,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       support: '',
       closing:
         '<span class="pnt__luci">With LUCI</span>, you reach for <em>ONE</em> screen to coordinate sound, video, and lighting.',
+      closingSupport: 'You run the floor everyone else talks about.',
     },
     challengesLockup: {
       lockupName: 'What gets in <em>your way</em>',
@@ -288,6 +298,10 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       lockupName: 'Your property is your best channel. <em>Run it like one.</em>',
       lockupRole: 'What marketing is accountable for',
     },
+    graphLockup: {
+      lockupName: 'The life of a message',
+      deck: 'Every message you send to the property takes a journey. Here\u2019s what happens between the idea and the screen.',
+    },
     narrativeDeck:
       'You can push a campaign to email, social, and web in minutes. But the property \u2014 where your most engaged guests already are \u2014 takes a request, a hand-off, and a wait.',
     narrative: {
@@ -318,6 +332,8 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       support: '',
       closing:
         '<span class="pnt__luci">With LUCI</span>, the whole property becomes a channel you publish to yourself \u2014 in <em>minutes</em>, on brand, from one screen.',
+      closingSupport:
+        'You own the brand and the message across the whole property. It\u2019s your biggest channel \u2014 and the one you can\u2019t publish to yourself.',
     },
     challengesLockup: {
       lockupName: 'What gets in <em>your way</em>',
@@ -436,6 +452,182 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     ctaTitle: 'Your property is your best channel. <em>Run it like one.</em>',
     ctaDeck:
       'Let us show you what it looks like to publish to the property yourself \u2014 on brand, in the moment, without waiting on anyone.',
+    chapters: [
+      { id: 'persona-thesis', label: 'Overview' },
+      { id: 'persona-narrative', label: 'What you manage' },
+      { id: 'persona-challenges', label: 'What gets in your way' },
+      { id: 'persona-capabilities', label: 'What you can do' },
+      { id: 'persona-industries', label: 'Wherever you operate' },
+      { id: 'persona-cta', label: 'Next step' },
+    ],
+  },
+  finance: {
+    id: 'finance',
+    heroImage: '/images/who-we-serve/finance-hero.jpg?v=1',
+    heroAlt:
+      'A finance executive reviewing cost data and dashboards on large wall-mounted displays in a dimly lit modern office',
+    heroKicker: '',
+    heroDeck:
+      'You answer for what the property spends \u2014 and the technology that runs it is a tangle of vendors, contracts, and hidden costs.',
+    narrativeLockup: {
+      lockupName: 'The real cost <em>isn\u2019t on the quote</em>',
+      lockupRole: 'What finance is accountable for',
+    },
+    graphLockup: {
+      lockupName: 'The true cost of the property',
+      deck: 'Every screen, speaker, and control system came with its own vendor, its own contract, and its own service line. The sticker price was just the beginning.',
+    },
+    narrative: {
+      curve: 'stack',
+      subLead: '',
+      moments: [
+        {
+          time: 'The purchase',
+          caption:
+            'You approve the displays, the sound, the signage. The quote looks clear enough.',
+        },
+        {
+          time: 'The vendors',
+          caption:
+            'Each system arrives with its own contract, service agreement, and support line to fund.',
+        },
+        {
+          time: 'The upkeep',
+          caption:
+            'Maintenance, integration, and licensing costs accumulate quietly across every system.',
+        },
+        {
+          time: 'The surprise',
+          caption:
+            'Something ages out and fails \u2014 and now it\u2019s an emergency replacement at emergency prices.',
+        },
+      ],
+      support: '',
+      closing:
+        '<span class="pnt__luci">With LUCI</span>, many systems and vendors become <em>one</em> platform on the hardware you already own \u2014 a total cost you can see, plan, and defend.',
+      closingSupport:
+        'You answer for what the property spends \u2014 and the technology that runs it is a tangle of vendors, contracts, and hidden costs.',
+    },
+    challengesLockup: {
+      lockupName: 'What gets in <em>your way</em>',
+      lockupRole: 'The cost of a fragmented property',
+    },
+    challenges: [
+      {
+        friction:
+          'The true cost of the property\u2019s technology is scattered across too many systems and vendors to see clearly.',
+        relief:
+          'LUCI consolidates them into one platform over your existing hardware, so the total cost of ownership is finally one number you can see and control.',
+      },
+      {
+        friction: 'Every technology request is hard to justify when the return isn\u2019t clear.',
+        relief:
+          'LUCI reduces vendor, maintenance, and support spend and extends the life of what you own \u2014 a payback you can defend to leadership.',
+      },
+      {
+        friction:
+          'Spend is reactive \u2014 systems age out, fail, and become emergencies at the worst time.',
+        relief:
+          'LUCI removes failure points and supports planned lifecycle spend, so capital surprises become predictable budgeting.',
+      },
+      {
+        friction:
+          'Proprietary, hardware-bound systems lock you in and strip your negotiating leverage.',
+        relief:
+          'LUCI is hardware-agnostic and software-first, so you keep your leverage and avoid the lock-in.',
+      },
+      {
+        friction:
+          'Keeping the property modern looks like ripping out and replacing expensive hardware.',
+        relief:
+          'LUCI runs on the infrastructure you already have and scales in phases \u2014 no forklift replacement, no capital event.',
+      },
+    ],
+    industryLockup: {
+      lockupName: 'LUCI lives <em>wherever you operate</em>',
+      lockupRole: 'The budget changes. The discipline doesn\u2019t',
+    },
+    industryKicker: 'What consolidation unlocks here',
+    industryStakes: [
+      {
+        slug: 'casinos-gaming',
+        name: 'Casinos & gaming',
+        image: '/images/industries/casinos-gaming.jpg',
+        callout:
+          'The floor runs on a stack of separate display, audio, and signage systems, each with its own cost. LUCI consolidates them into one lower-TCO platform, gives you spend you can defend to your board or council, and keeps you off proprietary lock-in for expensive floor hardware.',
+        emphasis:
+          'Lower total cost across a complex floor \u00b7 defensible ROI for boards and councils \u00b7 no lock-in on major capital assets.',
+      },
+      {
+        slug: 'hotels-resorts',
+        name: 'Hotels & resorts',
+        image: '/images/industries/hotels-resorts.jpg',
+        callout:
+          'Owners and management companies hold you to disciplined CapEx across renovation cycles and, often, multiple properties. LUCI gives you one platform across many spaces, extends the life of AV assets between PIP cycles, and makes spend predictable enough to survive ownership budget reviews.',
+        emphasis:
+          'Portfolio-level cost visibility \u00b7 asset-life extension between renovations \u00b7 predictable, defensible CapEx.',
+      },
+      {
+        slug: 'sports-venues',
+        name: 'Sports & venues',
+        image: '/images/industries/sports-venues.jpg',
+        callout:
+          'Your LED and sound systems are major capital assets tied to real revenue. LUCI helps you get more revenue-generating life out of them, consolidates the cost of controlling them, and ties the spend to the sponsor revenue it enables.',
+        emphasis:
+          'Maximized return on big-ticket AV capital \u00b7 consolidation savings \u00b7 revenue-linked justification.',
+      },
+      {
+        slug: 'airports-transportation',
+        name: 'Airports & transportation',
+        image: '/images/industries/airports-transportation.jpg',
+        callout:
+          'Public procurement and budget scrutiny run deep, and asset lifecycles are long. LUCI consolidates vendor and maintenance spend across a huge footprint, stays hardware-agnostic to fit anti-lock-in procurement standards, and supports revenue-generating use of the display network.',
+        emphasis:
+          'Vendor and maintenance consolidation at scale \u00b7 hardware-agnostic for procurement \u00b7 defensible public spend.',
+      },
+      {
+        slug: 'conference-convention-centers',
+        name: 'Conference & convention centers',
+        image: '/images/industries/conference-convention-centers.jpg',
+        callout:
+          'Your flexible AV has to serve many event types and earn its keep across all of them. LUCI maximizes the utilization and life of those assets, lets you modernize without a forklift replacement, and lowers the operating cost of serving each event.',
+        emphasis:
+          'Utilization and ROI on flexible AV capital \u00b7 modernize without a capital event \u00b7 lower cost per event.',
+      },
+    ],
+    capabilitiesLockup: {
+      lockupName: 'What you <em>can do</em>',
+      lockupRole: 'Four ways LUCI improves the bottom line',
+    },
+    lead: '',
+    takeaway: '',
+    hubLabel: 'Total Cost of Ownership',
+    hubSub: 'Lower, predictable, and defensible.',
+    capabilities: [
+      {
+        front: 'Replan the capital you\u2019d reserved for the next A/V refresh.',
+        back:
+          'The proprietary hardware that needed a full refresh every five to seven years is replaced by a software platform on a predictable annual line. Capability now arrives through updates rather than capital purchases.',
+      },
+      {
+        front: 'Cut or renegotiate the vendor and integration contracts LUCI replaces.',
+        back:
+          'A large share of A/V\u2019s old operating cost lived outside the property, in vendor and integration contracts that existed because the expertise didn\u2019t. That control is internal now, so the contracts written around the old limitations are yours to consolidate or end.',
+      },
+      {
+        front: 'Start measuring A/V as a revenue contributor, not just a cost.',
+        back:
+          'When marketing runs dining dayparts, loyalty pushes, and event countdowns through LUCI, that activity becomes part of a traceable campaign. Pair it with your performance data and you can compare campaign windows against baseline periods instead of treating A/V as a flat facility cost.',
+      },
+      {
+        front: 'Document and defend your A/V spend with platform data.',
+        back:
+          'For the first time there\u2019s an auditable record beneath the A/V investment \u2014 what\u2019s running, what it costs, and how it\u2019s used across teams. When ownership asks for justification, the utilization and performance data is already there.',
+      },
+    ],
+    ctaTitle: 'One platform, <em>one predictable cost</em>.',
+    ctaDeck:
+      'Let us walk through the total cost of ownership with you \u2014 what you\u2019re spending across systems and vendors now, and what one platform on your existing hardware would change.',
     chapters: [
       { id: 'persona-thesis', label: 'Overview' },
       { id: 'persona-narrative', label: 'What you manage' },

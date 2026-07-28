@@ -34,6 +34,24 @@ const fallTreads = [
   { x1: 500, x2: 750, y: 200, cx: 625, color: '#bcae7a', drop: '#EDD086', marker: 'arrow'  },
   { x1: 750, x2: 1000, y: 264, cx: 875, color: '#EDD086', drop: null,    marker: null    },
 ];
+
+/** Stack accumulation: four columns, each a growing stack of cost layers.
+ *  Stage 1 = 1 block (the purchase, mint). Each stage adds a cooler/heavier layer on top.
+ *  Bottom block always mint (the original purchase); new layers fade to amber.
+ *  viewBox: 0 0 1000 460 — stacks in top portion, labels below (same as fall). */
+const stackBlockW = 168;
+const stackBlockH = 34;
+const stackGap = 5;
+const stackBaseY = 224; // bottom of lowest block
+const stackLayerColors = ['#68E3BE', '#8ed3b5', '#bcae7a', '#EDD086'];
+const stackCols = [125, 375, 625, 875].map((cx, colIdx) => {
+  const layers = [];
+  for (let i = 0; i <= colIdx; i++) {
+    const y = stackBaseY - stackBlockH - i * (stackBlockH + stackGap);
+    layers.push({ y, color: stackLayerColors[i], opacity: 1 - i * 0.06 });
+  }
+  return { cx, layers };
+});
 ---
 
 <section class={`pnt pnt--${curve}`} id={uid}>
@@ -73,7 +91,7 @@ const fallTreads = [
           ))}
         </div>
       </div>
-    ) : (
+    ) : curve === 'fall' ? (
       <div class="pnt__chart pnt__chart--fall">
         <svg viewBox="0 0 1000 460" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Marketing message losing energy at each handoff">
           <defs>
@@ -119,12 +137,55 @@ const fallTreads = [
           ))}
         </div>
       </div>
+    ) : (
+      <div class="pnt__chart pnt__chart--stack">
+        <svg viewBox="0 0 1000 460" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Cost layers accumulating from one purchase into a heavy pile">
+          {stackCols.map((col, i) => (
+            <g class={`pnt__col pnt__col--${i+1}`}>
+              {col.layers.map((layer, j) => (
+                <rect
+                  x={col.cx - stackBlockW / 2}
+                  y={layer.y}
+                  width={stackBlockW}
+                  height={stackBlockH}
+                  rx="5"
+                  fill={layer.color}
+                  fill-opacity={layer.opacity}
+                  class={`pnt__block pnt__block--${j+1}`}
+                />
+              ))}
+              <circle cx={col.cx} cy={stackBaseY - stackBlockH / 2} r="5" fill="var(--navy-deep)" stroke={stackLayerColors[0]} stroke-width="2.5" class={`pnt__stacknode pnt__stacknode--${i+1}`} />
+            </g>
+          ))}
+
+          {stackCols.map((col, i) => (
+            <foreignObject x={col.cx - 115} y={250} width="230" height="180">
+              <div xmlns="http://www.w3.org/1999/xhtml" class={`pnt__label pnt__label--${i+1}`}>
+                <span class="pnt__stage">{n.moments[i].time}</span>
+                <span class="pnt__body">{n.moments[i].caption}</span>
+              </div>
+            </foreignObject>
+          ))}
+        </svg>
+
+        <div class="pnt__mobile-list" aria-hidden="true">
+          {n.moments.map((m, i) => (
+            <div class={`pnt__mobile-item pnt__mobile-item--${i+1}`}>
+              <span class="pnt__stage">{m.time}</span>
+              <span class="pnt__body">{m.caption}</span>
+            </div>
+          ))}
+        </div>
+      </div>
     )}
 
     {n.closing && (
       <div class="pnt__closing">
         <div class="pnt__rule"></div>
         <p class="pnt__closing-text" set:html={n.closing} />
+        {n.closingSupport && (
+          <p class="pnt__closing-support">{n.closingSupport}</p>
+        )}
       </div>
     )}
   </div>
@@ -162,6 +223,22 @@ const fallTreads = [
 .pnt__drop--2 { animation-delay: 0.65s; }
 .pnt__drop--3 { animation-delay: 0.95s; }
 @keyframes pnt-fadein { to { opacity: 1; } }
+
+/* Stack chart (Finance) */
+.pnt__chart--stack svg { width: 100%; height: auto; display: block; overflow: visible; }
+.pnt__col { opacity: 0; animation: pnt-fadein 0.6s ease-out forwards; }
+.pnt__col--1 { animation-delay: 0.15s; }
+.pnt__col--2 { animation-delay: 0.45s; }
+.pnt__col--3 { animation-delay: 0.75s; }
+.pnt__col--4 { animation-delay: 1.05s; }
+.pnt__stacknode {
+  opacity: 0;
+  animation: pnt-pop 0.5s ease-out forwards;
+}
+.pnt__stacknode--1 { animation-delay: 0.3s; }
+.pnt__stacknode--2 { animation-delay: 0.6s; }
+.pnt__stacknode--3 { animation-delay: 0.9s; }
+.pnt__stacknode--4 { animation-delay: 1.2s; }
 
 .pnt__label {
   width: 100%;
@@ -236,6 +313,15 @@ const fallTreads = [
   background: var(--mint);
   box-shadow: 0 0 14px rgba(var(--mint-rgb), 0.5);
 }
+.pnt__closing-support {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(15px, 1.6vw, 18px);
+  font-weight: 400;
+  line-height: 1.6;
+  color: rgba(245, 248, 250, 0.6);
+  max-width: 52ch;
+  margin: 14px auto 0;
+}
 
 /* Mobile: stack the four stages as a list with colored left border */
 .pnt__mobile-list { display: none; flex-direction: column; gap: 18px; margin-top: 8px; }
@@ -275,12 +361,14 @@ const fallTreads = [
 
 @media (max-width: 640px) {
   .pnt__chart--fall svg,
-  .pnt__chart--rise svg { display: none; }
+  .pnt__chart--rise svg,
+  .pnt__chart--stack svg { display: none; }
   .pnt__chart--fall .pnt__mobile-list,
-  .pnt__chart--rise .pnt__mobile-list { display: flex; }
+  .pnt__chart--rise .pnt__mobile-list,
+  .pnt__chart--stack .pnt__mobile-list { display: flex; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pnt__dot, .pnt__tread, .pnt__drop { animation: none; opacity: 1; }
+  .pnt__dot, .pnt__tread, .pnt__drop, .pnt__col, .pnt__stacknode { animation: none; opacity: 1; }
 }
 </style>
