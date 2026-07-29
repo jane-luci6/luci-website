@@ -140,7 +140,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       lockupRole: 'What operations has to manage',
     },
     graphLockup: {
-      lockupName: 'The energy curve',
+      lockupName: 'The <em>energy curve</em>',
       deck: 'Your day builds from quiet to peak. Here\u2019s where the energy lives \u2014 and where it strains.',
     },
     narrative: {
@@ -302,7 +302,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       lockupRole: 'What marketing is accountable for',
     },
     graphLockup: {
-      lockupName: 'The life of a message',
+      lockupName: 'The life of a <em>message</em>',
       deck: 'Every message you send to the property takes a journey. Here\u2019s what happens between the idea and the screen.',
     },
     narrativeDeck:
@@ -477,7 +477,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       lockupRole: 'What finance is accountable for',
     },
     graphLockup: {
-      lockupName: 'The true cost of property-wide A/V',
+      lockupName: 'The true cost of <em>property-wide A/V</em>',
       deck: 'Every screen, speaker, and control system came with its own vendor, its own contract, and its own service line. The sticker price was just the beginning.',
     },
     narrative: {
@@ -1002,7 +1002,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       lockupRole: 'What general management is accountable for',
     },
     graphLockup: {
-      lockupName: 'It all rolls up <em>to you</em>',
+      lockupName: 'It all <em>rolls up to you</em>',
       deck: 'Operations, marketing, finance, technology, facilities \u2014 every function is trying to pull toward one strategy. You\u2019re the one who has to make them move as a single business, and answer for the result.',
     },
     narrative: {
