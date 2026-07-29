@@ -1,6 +1,7 @@
 ---
 import { site } from '../data/site';
 import FloorControlStage from './FloorControlStage.astro';
+import PropertyMapStage from './PropertyMapStage.astro';
 
 interface Props {
   headline?: string;
@@ -9,6 +10,8 @@ interface Props {
   variant?: 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'none';
   /** Show the static property-zone caption bar at the foot of the floorplan. */
   zones?: boolean;
+  /** Which map stage to use. Default keeps the live casino-floor animation. */
+  map?: 'floor' | 'property';
 }
 
 const {
@@ -17,6 +20,7 @@ const {
   taglineDisplay = site.taglineDisplay,
   variant = 'b',
   zones = false,
+  map = 'floor',
 } = Astro.props;
 
 const heroId = `home-hero-title-${variant}`;
@@ -202,7 +206,11 @@ const cats = [
     </div>
     <div class="home-entry__visual">
       <div class="home-entry__stage">
-        <FloorControlStage fill eager zones={zones} />
+        {map === 'property' ? (
+          <PropertyMapStage fill eager zones={zones} />
+        ) : (
+          <FloorControlStage fill eager zones={zones} />
+        )}
       </div>
       {zones && <p class="home-entry__stage-note">For illustrative purposes only.</p>}
     </div>

@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HomeHero from '../components/HomeHero.astro';
+---
+
+<BaseLayout
+  title="Property map hero — prototype"
+  description="Isolated preview of the property-wide hero map. Live homepage is unchanged."
+  darkHeader
+>
+  <div class="pmh-banner">
+    <span class="pmh-banner__k">Prototype — not live</span>
+    <p class="pmh-banner__d">
+      Property-wide map with curated labels and soft zone pulses. The homepage still uses the
+      existing floor animation — this page is the safe sandbox. Label positions are approximate
+      until zoomed shots land (pool, event venue, etc.).
+    </p>
+    <a class="pmh-banner__link" href="/">← Back to live home</a>
+  </div>
+
+  <HomeHero variant="none" zones map="property" />
+</BaseLayout>
+
+<style>
+  .pmh-banner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px 16px;
+    padding: 14px var(--page-pad);
+    background: var(--navy);
+    border-bottom: 1px solid rgba(104, 227, 190, 0.2);
+  }
+
+  .pmh-banner__k {
+    font-family: var(--font-display, 'Syncopate', sans-serif);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mint, #68e3be);
+    flex: 0 0 auto;
+  }
+
+  .pmh-banner__d {
+    margin: 0;
+    flex: 1 1 280px;
+    max-width: 62ch;
+    font-family: var(--font-copy, 'Inter', sans-serif);
+    font-size: 13px;
+    line-height: 1.45;
+    color: rgba(245, 248, 250, 0.72);
+  }
+
+  .pmh-banner__link {
+    flex: 0 0 auto;
+    font-family: var(--font-body, 'Space Grotesk', sans-serif);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--mint, #68e3be);
+    text-decoration: none;
+  }
+
+  .pmh-banner__link:hover {
+    text-decoration: underline;
+  }
+</style>
