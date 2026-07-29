@@ -106,76 +106,68 @@ const defaultCardIcons = [
 ];
 const cardIcons = n.icons ?? defaultCardIcons;
 
-/** Escalate: A/V & Facilities — increasing complexity as a continuum.
- *  Stage 1 (The Estate): ~40 dots, neat grid, mint-dominant — manageable.
- *  Stage 2 (The Sprawl): ~3x dots, crowded, gold-dominant mix — fragmented.
- *  Stage 3 (The Legwork): same dense field + tangled lines, fading gold + muted — the chase.
- *  Stage 4 (The Clock): same + one emergency-red alert node — the failure.
- *  Each column's dot field sits progressively higher (rising baseline = escalating stress).
- *  Colors: LUCI-approved palette (mint, gold, gold-deep, navy-muted) + emergency red for Stage 4.
- *  viewBox: 0 0 1000 500 — dots in top portion, labels below. */
-const escalateStageColors = [
-  // Stage 1: mint-dominant, a few gold — healthy, varied estate
-  ['#68E3BE', '#68E3BE', '#68E3BE', '#EDD086', '#68E3BE', '#68E3BE', '#49616e', '#68E3BE'],
-  // Stage 2: gold-dominant, some mint and muted — caution, fragmentation
-  ['#EDD086', '#EDD086', '#68E3BE', '#49616e', '#EDD086', '#314955', '#EDD086', '#EDD086'],
-  // Stage 3: fading gold + muted navy — the draining chase (LUCI colors only)
-  ['#CEB06E', '#49616e', '#EDD086', '#49616e', '#CEB06E', '#314955', '#49616e', '#CEB06E'],
-  // Stage 4: emergency red + gold — crisis
-  ['#FF3B3B', '#FF3B3B', '#EDD086', '#FF3B3B', '#49616e', '#FF3B3B', '#EDD086', '#FF3B3B'],
-];
-const escalateLineColors = [
-  'rgba(104,227,190,0.3)',
-  'rgba(237,208,134,0.4)',
-  'rgba(237,208,134,0.85)',
-  'rgba(255,59,59,0.5)',
-];
+/** Escalate: A/V & Facilities — rising spine (Variant C).
+ *  Four climbing treads, labels locked under each in HTML.
+ *  Shared palette across all boxes: black / white / mint.
+ *  Only Stage 4 gets an emergency-red alert so it pops.
+ *  Density + tangle escalate left→right; no connector lines.
+ *  viewBox: 0 0 1000 240 — graphic only; labels below in HTML. */
+const escalateBwMint = ['#0A161C', '#F5F8FA', '#68E3BE'];
 const escalateAlertColor = '#FF3B3B';
-const escalateColXs = [165, 390, 615, 840];
-const escalateBaseYs = [308, 280, 280, 280];
-const escalateCols = escalateColXs.map((cx, colIdx) => {
+const escalateLineStroke = 'rgba(104,227,190,0.45)';
+/** Centers align to four equal label columns (125 / 375 / 625 / 875). */
+const escalateTreads = [
+  { cx: 125, x: 50, y: 172, w: 150, h: 48 },
+  { cx: 375, x: 285, y: 132, w: 180, h: 88 },
+  { cx: 625, x: 535, y: 92, w: 180, h: 128 },
+  { cx: 875, x: 775, y: 52, w: 180, h: 168 },
+].map((tread, colIdx) => {
   const dots: { x: number; y: number; r: number; color: string; opacity: number }[] = [];
   const lines: { x1: number; y1: number; x2: number; y2: number }[] = [];
   let alert: { x: number; y: number } | null = null;
-  const startY = escalateBaseYs[colIdx];
-  let connectY = startY;
+  const pad = 14;
+  const innerX = tread.x + pad;
+  const innerY = tread.y + pad;
+  const innerW = tread.w - pad * 2;
+  const innerH = tread.h - pad * 2;
 
   if (colIdx === 0) {
-    // Stage 1: ~40 dots, neat grid, mint-dominant mix
-    const cols = 8, rows = 5, spacing = 18, r = 2.5;
-    const startX = cx - ((cols - 1) * spacing) / 2;
-    const palette = escalateStageColors[0];
+    const cols = 5, rows = 2, r = 3;
+    const spacingX = innerW / (cols - 1);
+    const spacingY = innerH / (rows - 1 || 1);
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
         const idx = row * cols + col;
-        dots.push({ x: startX + col * spacing, y: startY + row * spacing, r, color: palette[idx % palette.length], opacity: 0.72 });
-      }
-    }
-    connectY = startY + (rows - 1) * spacing;
-  } else {
-    // Stages 2-4: ~176 dots, crowded, mixed colors, jittered
-    const cols = 16, rows = 11, spacing = 10, r = 1.6;
-    const startX = cx - ((cols - 1) * spacing) / 2;
-    const stagePalette = escalateStageColors[colIdx];
-    for (let row = 0; row < rows; row++) {
-      for (let col = 0; col < cols; col++) {
-        const idx = row * cols + col;
-        const jX = ((idx * 7) % 5 - 2) * 0.6;
-        const jY = ((idx * 13) % 5 - 2) * 0.6;
-        const cIdx = idx % stagePalette.length;
         dots.push({
-          x: startX + col * spacing + jX,
-          y: startY + row * spacing + jY,
+          x: innerX + col * spacingX,
+          y: innerY + row * spacingY,
           r,
-          color: stagePalette[cIdx],
-          opacity: 0.55 + ((idx * 3) % 5) * 0.07,
+          color: escalateBwMint[idx % 3],
+          opacity: 0.9,
         });
       }
     }
-    connectY = startY + (rows - 1) * spacing;
+  } else {
+    const cols = 8, rows = colIdx === 1 ? 4 : colIdx === 2 ? 5 : 6;
+    const r = 2;
+    const spacingX = innerW / (cols - 1);
+    const spacingY = innerH / (rows - 1);
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        const idx = row * cols + col;
+        const jX = ((idx * 7) % 5 - 2) * 0.7;
+        const jY = ((idx * 13) % 5 - 2) * 0.7;
+        dots.push({
+          x: innerX + col * spacingX + jX,
+          y: innerY + row * spacingY + jY,
+          r,
+          color: escalateBwMint[idx % 3],
+          opacity: 0.55 + ((idx * 3) % 5) * 0.08,
+        });
+      }
+    }
     if (colIdx >= 2) {
-      // Stages 3-4: tangled connection lines
-      for (let i = 0; i < 28; i++) {
+      for (let i = 0; i < (colIdx === 2 ? 10 : 14); i++) {
         const a = (i * 37 + colIdx * 11) % dots.length;
         let b = (i * 53 + colIdx * 19 + 7) % dots.length;
         if (b === a) b = (b + 1) % dots.length;
@@ -183,11 +175,10 @@ const escalateCols = escalateColXs.map((cx, colIdx) => {
       }
     }
     if (colIdx === 3) {
-      // Stage 4: alert node
-      alert = { x: dots[87].x, y: dots[87].y };
+      alert = { x: dots[Math.floor(dots.length / 2)].x, y: dots[Math.floor(dots.length / 2)].y };
     }
   }
-  return { cx, dots, lines, alert, connectY };
+  return { ...tread, dots, lines, alert };
 });
 ---
 
@@ -381,33 +372,42 @@ const escalateCols = escalateColXs.map((cx, colIdx) => {
     )}
     {curve === 'escalate' && (
       <div class="pnt__chart pnt__chart--escalate">
-        <svg viewBox="0 265 1000 215" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Endpoint complexity escalating from a manageable estate through sprawl, diagnostic chase, to a live failure">
-          {escalateCols.map((col, i) => (
+        <svg viewBox="0 0 1000 240" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Endpoint complexity escalating from a manageable estate through sprawl, diagnostic chase, to a live failure">
+          <line x1="40" y1="220" x2="960" y2="220" stroke="rgba(245,248,250,0.08)" stroke-width="1" />
+          {escalateTreads.map((t, i) => (
             <g class={`pnt__esc-col pnt__esc-col--${i+1}`}>
-              {col.lines.map((l) => (
-                <line x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke={escalateLineColors[i]} stroke-width="1.2" />
+              <rect
+                x={t.x} y={t.y} width={t.w} height={t.h}
+                fill="rgba(245,248,250,0.16)"
+                stroke="rgba(104,227,190,0.35)"
+                stroke-width="1"
+              />
+              {t.lines.map((l) => (
+                <line x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke={escalateLineStroke} stroke-width="1.15" />
               ))}
-              {col.dots.map((d) => (
-                <circle cx={d.x} cy={d.y} r={d.r} fill={d.color} fill-opacity={d.opacity} />
+              {t.dots.map((d) => (
+                d.color === '#0A161C'
+                  ? <circle cx={d.x} cy={d.y} r={d.r} fill={d.color} fill-opacity={d.opacity} stroke="rgba(104,227,190,0.4)" stroke-width="0.6" />
+                  : <circle cx={d.x} cy={d.y} r={d.r} fill={d.color} fill-opacity={d.opacity} />
               ))}
-              {col.alert && (
+              {t.alert && (
                 <g class="pnt__esc-alert">
-                  <circle cx={col.alert.x} cy={col.alert.y} r="4" fill={escalateAlertColor} />
-                  <circle cx={col.alert.x} cy={col.alert.y} r="9" fill="none" stroke={escalateAlertColor} stroke-width="1.5" opacity="0.5" class="pnt__esc-wave" />
-                  <circle cx={col.alert.x} cy={col.alert.y} r="14" fill="none" stroke={escalateAlertColor} stroke-width="1" opacity="0.25" class="pnt__esc-wave2" />
+                  <circle cx={t.alert.x} cy={t.alert.y} r="5" fill={escalateAlertColor} />
+                  <circle cx={t.alert.x} cy={t.alert.y} r="11" fill="none" stroke={escalateAlertColor} stroke-width="1.5" opacity="0.5" class="pnt__esc-wave" />
+                  <circle cx={t.alert.x} cy={t.alert.y} r="17" fill="none" stroke={escalateAlertColor} stroke-width="1" opacity="0.22" class="pnt__esc-wave2" />
                 </g>
               )}
             </g>
           ))}
-          {escalateCols.map((col, i) => (
-            <foreignObject x={col.cx - 115} y={col.connectY + 6} width="230" height="80">
-              <div xmlns="http://www.w3.org/1999/xhtml" class={`pnt__label pnt__label--${i+1}`}>
-                <span class="pnt__stage">{n.moments[i].time}</span>
-                <span class="pnt__body">{n.moments[i].caption}</span>
-              </div>
-            </foreignObject>
-          ))}
         </svg>
+        <div class="pnt__esc-labels">
+          {n.moments.map((m, i) => (
+            <div class={`pnt__label pnt__label--${i+1}`}>
+              <span class="pnt__stage">{m.time}</span>
+              <span class="pnt__body">{m.caption}</span>
+            </div>
+          ))}
+        </div>
         <div class="pnt__mobile-list" aria-hidden="true">
           {n.moments.map((m, i) => (
             <div class={`pnt__mobile-item pnt__mobile-item--${i+1}`}>
@@ -549,8 +549,19 @@ const escalateCols = escalateColXs.map((cx, colIdx) => {
 .pnt__card--4 .pnt__card-icon,
 .pnt__card--4 .pnt__card-stage { color: #EDD086; }
 
-/* Escalate chart (A/V & Facilities) */
+/* Escalate chart (A/V & Facilities) — rising spine */
 .pnt__chart--escalate svg { width: 100%; height: auto; display: block; overflow: visible; }
+.pnt__esc-labels {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 4px;
+}
+.pnt__esc-labels .pnt__label {
+  text-align: center;
+  padding: 0 8px;
+  height: auto;
+}
 .pnt__esc-col { opacity: 0; animation: pnt-fadein 0.7s ease-out forwards; }
 .pnt__esc-col--1 { animation-delay: 0.15s; }
 .pnt__esc-col--2 { animation-delay: 0.45s; }
@@ -712,7 +723,8 @@ const escalateCols = escalateColXs.map((cx, colIdx) => {
   .pnt__chart--rise svg,
   .pnt__chart--stack svg,
   .pnt__chart--converge svg,
-  .pnt__chart--escalate svg { display: none; }
+  .pnt__chart--escalate svg,
+  .pnt__chart--escalate .pnt__esc-labels { display: none; }
   .pnt__chart--fall .pnt__mobile-list,
   .pnt__chart--rise .pnt__mobile-list,
   .pnt__chart--stack .pnt__mobile-list,
