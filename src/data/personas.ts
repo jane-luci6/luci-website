@@ -12,10 +12,10 @@ export const personas = [
   {
     id: 'leadership' as const,
     label: 'General management',
-    role: 'Set the direction',
-    line: 'Your floor is already influencing guest behavior. LUCI makes that influence more targeted and activating.',
+    role: 'Run one business',
+    line: 'The whole property is yours to answer for. LUCI helps it run like one business, not many parts.',
     belief:
-      'The floor shapes guest behavior — LUCI makes that influence deliberate and property-wide.',
+      'One property, one system of control — run it as a single business, not many parts.',
   },
   {
     id: 'operations' as const,

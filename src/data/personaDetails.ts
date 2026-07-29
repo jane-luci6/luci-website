@@ -33,7 +33,7 @@ export interface PersonaNarrative {
    * - `stack` — Finance cost accumulation (purchase → vendors → upkeep → refresh), then the payoff resolves it
    * - `converge` — IT network convergence (island → move → surface → page), scattered nodes loading onto a network line
    */
-  curve?: 'rise' | 'fall' | 'stack' | 'converge' | 'iconcards' | 'climb';
+  curve?: 'rise' | 'fall' | 'stack' | 'converge' | 'iconcards' | 'climb' | 'rollup';
   /** Sub-lead that opens the arc. */
   subLead: string;
   /** The moments along the day-arc. */
@@ -981,6 +981,182 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     ctaTitle: 'The whole estate, finally <em>in one place</em>.',
     ctaDeck:
       'Let us show you what it looks like to see, control, and maintain everything you\u2019re responsible for from one interface \u2014 on the systems you already run.',
+    chapters: [
+      { id: 'persona-thesis', label: 'Overview' },
+      { id: 'persona-narrative', label: 'What you manage' },
+      { id: 'persona-challenges', label: 'What gets in your way' },
+      { id: 'persona-capabilities', label: 'What you can do' },
+      { id: 'persona-industries', label: 'Wherever you operate' },
+      { id: 'persona-cta', label: 'Next step' },
+    ],
+  },
+  leadership: {
+    id: 'leadership',
+    heroImage: '/images/who-we-serve/who-we-serve-hero.jpg?v=1',
+    heroAlt:
+      'A senior property executive overlooking a wide property floor from a high vantage point',
+    heroKicker: 'Run one business',
+    heroDeck:
+      'The whole property is yours to answer for \u2014 every department, every result. But it runs on a patchwork of disconnected systems that never gives you one clear view. LUCI helps the property run like one business, not many parts.',
+    narrativeLockup: {
+      lockupName: 'It all rolls up <em>to you</em>',
+      lockupRole: 'What general management is accountable for',
+    },
+    graphLockup: {
+      lockupName: 'It all rolls up <em>to you</em>',
+      deck: 'Operations, marketing, finance, technology, facilities \u2014 every function is trying to pull toward one strategy. You\u2019re the one who has to make them move as a single business, and answer for the result.',
+    },
+    narrative: {
+      curve: 'rollup',
+      subLead: '',
+      moments: [
+        {
+          time: 'Operations',
+          caption: 'The floor, the shifts, the live experience.',
+        },
+        {
+          time: 'Marketing',
+          caption: 'The message, the brand, every screen.',
+        },
+        {
+          time: 'Finance',
+          caption: 'The numbers, the capital, the return.',
+        },
+        {
+          time: 'Technology',
+          caption: 'The infrastructure, the systems, the uptime.',
+        },
+        {
+          time: 'A/V & Facilities',
+          caption: 'The rooms, the gear, the live moments.',
+        },
+      ],
+      support: '',
+      closing:
+        '<span class="pnt__luci">With LUCI</span>, the guest environment across the whole property becomes <em>one system</em> you can see and control \u2014 one concrete step toward running it all as a single business.',
+      closingSupport: 'One business, in one property or across all of them.',
+    },
+    challengesLockup: {
+      lockupName: 'What gets in <em>your way</em>',
+      lockupRole: 'The cost of a property that doesn\u2019t run as one',
+    },
+    challenges: [
+      {
+        friction:
+          'You answer for the whole property, but no single view shows you what\u2019s happening across it in real time.',
+        relief:
+          'LUCI gives you one view and one point of control over the property\u2019s guest environment, so you\u2019re leading with a clear picture instead of a patchwork.',
+      },
+      {
+        friction:
+          'Coordinating departments and vendors that don\u2019t connect turns your team into the glue.',
+        relief:
+          'LUCI consolidates many systems and vendors into one platform, so there\u2019s less to coordinate and more that simply works together.',
+      },
+      {
+        friction:
+          'Keeping the property modern and competitive usually means disruptive, expensive, property-wide change.',
+        relief:
+          'LUCI keeps the whole property current and on brand through software, on the infrastructure you already own \u2014 no tearing it apart.',
+      },
+      {
+        friction:
+          'Every major investment has to be defensible to the owners, board, or council you answer to.',
+        relief:
+          'LUCI consolidates spend, runs on what you already have, and scales in phases \u2014 a capital story you can stand behind.',
+      },
+      {
+        friction:
+          'Running more than one property means every building works differently, with no consistent way to see or run them.',
+        relief:
+          'LUCI deploys as one consistent platform across every property, so you can run them all to one standard with one way to see them.',
+      },
+    ],
+    industryLockup: {
+      lockupName: 'LUCI lives <em>wherever you operate</em>',
+      lockupRole: 'The business changes. The accountability doesn\u2019t',
+    },
+    industryKicker: 'What coherence unlocks here',
+    industryStakes: [
+      {
+        slug: 'casinos-gaming',
+        name: 'Casinos & gaming',
+        image: '/images/industries/casinos-gaming.jpg',
+        callout:
+          'You own the P&L, the floor\u2019s performance, and the property\u2019s integrity \u2014 and you report all of it to owners, a board, or a council. LUCI gives you one view and control of the guest environment across a complex floor, fewer vendors and silos to coordinate, and a modern, competitive property you can steward with efficient, defensible capital.',
+        emphasis:
+          'Whole-property coherence and control \u00b7 defensible capital and compliance integrity for boards and councils \u00b7 a competitive, modern property.',
+      },
+      {
+        slug: 'hotels-resorts',
+        name: 'Hotels & resorts',
+        image: '/images/industries/hotels-resorts.jpg',
+        callout:
+          'You\u2019re the CEO of the property \u2014 and often several \u2014 accountable to owners for a cohesive premium brand across every outlet. LUCI gives you one consistent guest environment across every space and property, less coordination overhead for a lean team, and a coherent brand that protects rate and loyalty.',
+        emphasis:
+          'Cohesive brand across the property and portfolio \u00b7 coordination and consistency \u00b7 defensible capital to owners.',
+      },
+      {
+        slug: 'sports-venues',
+        name: 'Sports & venues',
+        image: '/images/industries/sports-venues.jpg',
+        callout:
+          'You answer for the business of a huge, complex building \u2014 to owners, leagues, and often the public. LUCI gives you coherent control of a massive guest environment, one standard across a portfolio if you operate many buildings, and efficient capital on the infrastructure your show depends on.',
+        emphasis:
+          'Whole-venue coherence at scale \u00b7 portfolio consistency for operators \u00b7 defensible capital and stakeholder reporting.',
+      },
+      {
+        slug: 'airports-transportation',
+        name: 'Airports & transportation',
+        image: '/images/industries/airports-transportation.jpg',
+        callout:
+          'You run a vast, multi-tenant facility under public accountability, balancing experience, revenue, and long-horizon capital. LUCI gives you one coherent view and control of a sprawling environment, consolidation that fits public governance, and defensible, consistent capital across terminals.',
+        emphasis:
+          'Coherence and oversight across a huge multi-tenant facility \u00b7 defensible public capital \u00b7 consistency across terminals.',
+      },
+      {
+        slug: 'conference-convention-centers',
+        name: 'Conference & convention centers',
+        image: '/images/industries/conference-convention-centers.jpg',
+        callout:
+          'Your business runs on client satisfaction and rebooking, often across a portfolio of venues. LUCI gives you one coherent, flexible environment that presents a modern venue to clients, one standard across every building you operate, and efficient capital on high-utilization infrastructure.',
+        emphasis:
+          'A modern, coherent venue that wins and keeps clients \u00b7 portfolio consistency \u00b7 defensible, efficient capital.',
+      },
+    ],
+    capabilitiesLockup: {
+      lockupName: 'What you <em>can do</em>',
+      lockupRole: 'Four ways LUCI helps the business run as one',
+    },
+    lead: '',
+    takeaway: '',
+    hubLabel: 'One Coherent Business',
+    hubSub: 'One property, one system of control \u2014 or a whole portfolio.',
+    capabilities: [
+      {
+        front: 'See and control the guest environment from one place.',
+        back:
+          'One platform over the property\u2019s screens, sound, and spaces \u2014 so the environment you\u2019re judged on isn\u2019t a patchwork you piece together.',
+      },
+      {
+        front: 'Coordinate less, because more simply works together.',
+        back:
+          'Fewer systems and vendors to align, so your team spends its energy on the business instead of being the glue between disconnected parts.',
+      },
+      {
+        front: 'Keep the property modern without tearing it apart.',
+        back:
+          'Software-driven, on-brand control on the infrastructure you already own \u2014 a current, competitive property without a disruptive overhaul.',
+      },
+      {
+        front: 'Run every property to one standard.',
+        back:
+          'One consistent platform across your portfolio, so consistency and oversight scale with you instead of breaking down building by building.',
+      },
+    ],
+    ctaTitle: 'Run it as <em>one business</em>.',
+    ctaDeck:
+      'Let us show you what it looks like to see and control the whole property\u2019s guest environment from one platform \u2014 in one building, or across every property you run.',
     chapters: [
       { id: 'persona-thesis', label: 'Overview' },
       { id: 'persona-narrative', label: 'What you manage' },

@@ -116,6 +116,20 @@ const climbTreads = [
   { x1: 500,  x2: 750,  y: 130, cx: 625, color: '#CEB06E', rise: '#e69054', marker: 'arrowr' },
   { x1: 750,  x2: 1000, y: 60,  cx: 875, color: '#DC3535', rise: null,    marker: null    },
 ];
+
+// Roll-up chart (General Management) — five functional streams converging on one executive
+const rollupApex = { x: 500, y: 72 };
+const rollupStreams = [
+  { cx: 100, color: '#68E3BE' },
+  { cx: 300, color: '#8ed3b5' },
+  { cx: 500, color: '#EDD086' },
+  { cx: 700, color: '#CEB06E' },
+  { cx: 900, color: '#bcae7a' },
+];
+const rollupPaths = rollupStreams.map((s) => {
+  if (s.cx === rollupApex.x) return `M ${s.cx} 400 L ${rollupApex.x} ${rollupApex.y}`;
+  return `M ${s.cx} 400 C ${s.cx} 280, ${rollupApex.x} 180, ${rollupApex.x} ${rollupApex.y}`;
+});
 ---
 
 <section class={`pnt pnt--${curve}`} id={uid}>
@@ -366,6 +380,57 @@ const climbTreads = [
       </div>
     )}
 
+    {curve === 'rollup' && (
+      <div class="pnt__chart pnt__chart--rollup">
+        <svg viewBox="0 0 1000 540" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Five functional streams — operations, marketing, finance, technology, and A/V and facilities — converging upward onto one accountable executive">
+          {rollupStreams.map((s, i) => (
+            <path class={`pnt__rollup-stream pnt__rollup-stream--${i+1}`}
+              d={rollupPaths[i]}
+              pathLength="100"
+              fill="none"
+              stroke={s.color}
+              stroke-width="2.5"
+              stroke-linecap="round" />
+          ))}
+
+          {rollupStreams.map((s, i) => (
+            <circle class={`pnt__rollup-origin pnt__rollup-origin--${i+1}`}
+              cx={s.cx} cy="400" r="6"
+              fill="var(--navy-deep)" stroke={s.color} stroke-width="2.5" />
+          ))}
+
+          <circle class="pnt__rollup-burden" cx={rollupApex.x} cy={rollupApex.y} r="20"
+            fill="none" stroke="#68E3BE" stroke-width="1.25" opacity="0.45" />
+          <circle class="pnt__rollup-apex" cx={rollupApex.x} cy={rollupApex.y} r="13"
+            fill="var(--navy-deep)" stroke="#68E3BE" stroke-width="2.75" />
+
+          <foreignObject x={rollupApex.x - 90} y="14" width="180" height="40">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="pnt__rollup-apex-label">
+              <span>One desk</span>
+            </div>
+          </foreignObject>
+
+          {rollupStreams.map((s, i) => (
+            <foreignObject x={s.cx - 90} y="418" width="180" height="120">
+              <div xmlns="http://www.w3.org/1999/xhtml" class={`pnt__label pnt__label--${i+1}`}>
+                <span class="pnt__stage">{n.moments[i].time}</span>
+                <span class="pnt__body">{n.moments[i].caption}</span>
+              </div>
+            </foreignObject>
+          ))}
+        </svg>
+
+        <div class="pnt__mobile-list" aria-hidden="true">
+          {n.moments.map((m, i) => (
+            <div class={`pnt__mobile-item pnt__mobile-item--${i+1}`}>
+              <span class="pnt__stage">{m.time}</span>
+              <span class="pnt__body">{m.caption}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
     {n.closing && (
       <div class="pnt__closing">
         <div class="pnt__rule"></div>
@@ -583,6 +648,76 @@ const climbTreads = [
 .pnt__chart--climb .pnt__mobile-item--4 .pnt__stage,
 .pnt__chart--climb .pnt__mobile-item--4 .pnt__body { color: #DC3535; opacity: 0.92; }
 
+/* Roll-up chart (General Management) — five streams converging on one executive */
+.pnt__chart--rollup svg { width: 100%; height: auto; display: block; overflow: visible; }
+.pnt__rollup-stream {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: pnt-rollup-draw 0.75s ease-out forwards;
+}
+.pnt__rollup-stream--1 { animation-delay: 0.10s; }
+.pnt__rollup-stream--2 { animation-delay: 0.25s; }
+.pnt__rollup-stream--3 { animation-delay: 0.40s; }
+.pnt__rollup-stream--4 { animation-delay: 0.55s; }
+.pnt__rollup-stream--5 { animation-delay: 0.70s; }
+@keyframes pnt-rollup-draw {
+  to { stroke-dashoffset: 0; }
+}
+.pnt__rollup-origin { opacity: 0; animation: pnt-pop 0.4s ease-out forwards; animation-delay: 0.05s; }
+.pnt__rollup-origin--2 { animation-delay: 0.20s; }
+.pnt__rollup-origin--3 { animation-delay: 0.35s; }
+.pnt__rollup-origin--4 { animation-delay: 0.50s; }
+.pnt__rollup-origin--5 { animation-delay: 0.65s; }
+.pnt__rollup-apex { opacity: 0; animation: pnt-pop 0.5s ease-out forwards; animation-delay: 1.05s; transform-origin: center; transform-box: fill-box; }
+.pnt__rollup-burden {
+  animation: pnt-rollup-pulse 2.6s ease-out infinite;
+  animation-delay: 1.4s;
+  transform-origin: center;
+  transform-box: fill-box;
+  opacity: 0;
+}
+@keyframes pnt-rollup-pulse {
+  0% { transform: scale(0.6); opacity: 0.5; }
+  70% { opacity: 0; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+.pnt__rollup-apex-label {
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mint);
+}
+/* Roll-up labels: each stream keeps its own color */
+.pnt__chart--rollup .pnt__label--1 .pnt__stage,
+.pnt__chart--rollup .pnt__label--1 .pnt__body { color: #68E3BE; }
+.pnt__chart--rollup .pnt__label--2 .pnt__stage,
+.pnt__chart--rollup .pnt__label--2 .pnt__body { color: #8ed3b5; }
+.pnt__chart--rollup .pnt__label--3 .pnt__stage,
+.pnt__chart--rollup .pnt__label--3 .pnt__body { color: #EDD086; }
+.pnt__chart--rollup .pnt__label--4 .pnt__stage,
+.pnt__chart--rollup .pnt__label--4 .pnt__body { color: #CEB06E; opacity: 0.92; }
+.pnt__chart--rollup .pnt__label--5 .pnt__stage,
+.pnt__chart--rollup .pnt__label--5 .pnt__body { color: #bcae7a; opacity: 0.85; }
+.pnt__chart--rollup .pnt__mobile-item--1 { border-color: #68E3BE; }
+.pnt__chart--rollup .pnt__mobile-item--1 .pnt__stage,
+.pnt__chart--rollup .pnt__mobile-item--1 .pnt__body { color: #68E3BE; }
+.pnt__chart--rollup .pnt__mobile-item--2 { border-color: #8ed3b5; }
+.pnt__chart--rollup .pnt__mobile-item--2 .pnt__stage,
+.pnt__chart--rollup .pnt__mobile-item--2 .pnt__body { color: #8ed3b5; }
+.pnt__chart--rollup .pnt__mobile-item--3 { border-color: #EDD086; }
+.pnt__chart--rollup .pnt__mobile-item--3 .pnt__stage,
+.pnt__chart--rollup .pnt__mobile-item--3 .pnt__body { color: #EDD086; }
+.pnt__chart--rollup .pnt__mobile-item--4 { border-color: #CEB06E; }
+.pnt__chart--rollup .pnt__mobile-item--4 .pnt__stage,
+.pnt__chart--rollup .pnt__mobile-item--4 .pnt__body { color: #CEB06E; opacity: 0.92; }
+.pnt__chart--rollup .pnt__mobile-item--5 { border-color: #bcae7a; }
+.pnt__chart--rollup .pnt__mobile-item--5 .pnt__stage,
+.pnt__chart--rollup .pnt__mobile-item--5 .pnt__body { color: #bcae7a; opacity: 0.85; }
+
 /* Closing / payoff line */
 .pnt__closing {
   margin-top: 40px;
@@ -671,15 +806,17 @@ const climbTreads = [
   .pnt__chart--rise svg,
   .pnt__chart--stack svg,
   .pnt__chart--converge svg,
-  .pnt__chart--climb svg { display: none; }
+  .pnt__chart--climb svg,
+  .pnt__chart--rollup svg { display: none; }
   .pnt__chart--fall .pnt__mobile-list,
   .pnt__chart--rise .pnt__mobile-list,
   .pnt__chart--stack .pnt__mobile-list,
   .pnt__chart--converge .pnt__mobile-list,
-  .pnt__chart--climb .pnt__mobile-list { display: flex; }
+  .pnt__chart--climb .pnt__mobile-list,
+  .pnt__chart--rollup .pnt__mobile-list { display: flex; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pnt__dot, .pnt__tread, .pnt__drop, .pnt__rise, .pnt__col, .pnt__stacknode, .pnt__netnode, .pnt__alert, .pnt__card, .pnt__climb-alert, .pnt__climb-wave { animation: none; opacity: 1; }
+  .pnt__dot, .pnt__tread, .pnt__drop, .pnt__rise, .pnt__col, .pnt__stacknode, .pnt__netnode, .pnt__alert, .pnt__card, .pnt__climb-alert, .pnt__climb-wave, .pnt__rollup-stream, .pnt__rollup-origin, .pnt__rollup-apex, .pnt__rollup-burden { animation: none; opacity: 1; stroke-dashoffset: 0; }
 }
 </style>
