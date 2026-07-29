@@ -132,7 +132,7 @@ const escalateLineColors = [
 ];
 const escalateAlertColor = '#FF3B3B';
 const escalateColXs = [165, 390, 615, 840];
-const escalateBaseYs = [320, 245, 170, 95];
+const escalateBaseYs = [308, 280, 280, 280];
 const escalateCols = escalateColXs.map((cx, colIdx) => {
   const dots: { x: number; y: number; r: number; color: string; opacity: number }[] = [];
   const lines: { x1: number; y1: number; x2: number; y2: number }[] = [];
@@ -381,7 +381,7 @@ const escalateCols = escalateColXs.map((cx, colIdx) => {
     )}
     {curve === 'escalate' && (
       <div class="pnt__chart pnt__chart--escalate">
-        <svg viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Endpoint complexity escalating from a manageable estate through sprawl, diagnostic chase, to a live failure">
+        <svg viewBox="0 265 1000 215" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Endpoint complexity escalating from a manageable estate through sprawl, diagnostic chase, to a live failure">
           {escalateCols.map((col, i) => (
             <g class={`pnt__esc-col pnt__esc-col--${i+1}`}>
               {col.lines.map((l) => (
@@ -400,7 +400,7 @@ const escalateCols = escalateColXs.map((cx, colIdx) => {
             </g>
           ))}
           {escalateCols.map((col, i) => (
-            <foreignObject x={col.cx - 115} y={col.connectY + 16} width="230" height="170">
+            <foreignObject x={col.cx - 115} y={col.connectY + 6} width="230" height="80">
               <div xmlns="http://www.w3.org/1999/xhtml" class={`pnt__label pnt__label--${i+1}`}>
                 <span class="pnt__stage">{n.moments[i].time}</span>
                 <span class="pnt__body">{n.moments[i].caption}</span>
