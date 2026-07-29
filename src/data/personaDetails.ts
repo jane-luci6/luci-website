@@ -470,7 +470,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     heroDeck:
       'You answer for what the property spends \u2014 and the technology that runs it is a tangle of vendors, contracts, and hidden costs.',
     narrativeLockup: {
-      lockupName: 'Every system and vendor <em>adds to the cost</em>',
+      lockupName: 'The total cost <em>is yours to control</em>',
       lockupRole: 'What finance is accountable for',
     },
     graphLockup: {
