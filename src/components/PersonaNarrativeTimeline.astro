@@ -52,12 +52,39 @@ const stackCols = [125, 375, 625, 875].map((cx, colIdx) => {
   }
   return { cx, layers };
 });
+
+/** Converge: A/V nodes loading onto a network line, accumulating weight/risk.
+ *  Stage 1 = 1 node (the island). Each stage adds more nodes + alert markers.
+ *  Network line runs horizontally; nodes sit on it; alert triangles appear above.
+ *  viewBox: 0 0 1000 460 — network in top portion, labels below (same as fall/stack). */
+const convergeLineY = 160;
+const convergeNodeR = 7;
+const convergeNodeSpacing = 36;
+const convergeAlertY = 122;
+const convergeNodeColors = ['#68E3BE', '#8ed3b5', '#bcae7a', '#EDD086'];
+const convergeCols = [125, 375, 625, 875].map((cx, colIdx) => {
+  const nodeCount = colIdx + 1;
+  const alertCount = colIdx; // stage 1 has 0 alerts, stage 4 has 3
+  const nodes = [];
+  for (let i = 0; i < nodeCount; i++) {
+    const offset = (i - (nodeCount - 1) / 2) * convergeNodeSpacing;
+    nodes.push({ cx: cx + offset, color: convergeNodeColors[i] });
+  }
+  const alerts = [];
+  for (let i = 0; i < alertCount; i++) {
+    const nodeIdx = i + 1; // alerts appear on nodes 2+
+    const offset = (nodeIdx - (nodeCount - 1) / 2) * convergeNodeSpacing;
+    const ax = cx + offset;
+    alerts.push({ d: `M ${ax - 5} ${convergeAlertY + 5} L ${ax + 5} ${convergeAlertY + 5} L ${ax} ${convergeAlertY - 5} Z` });
+  }
+  return { cx, nodes, alerts };
+});
 ---
 
 <section class={`pnt pnt--${curve}`} id={uid}>
   <div class="pnt__inner">
 
-    {curve === 'rise' ? (
+    {curve === 'rise' && (
       <div class="pnt__chart pnt__chart--rise">
         <svg viewBox="0 0 1000 380" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Energy curve rising to a peak">
           <defs>
@@ -91,7 +118,8 @@ const stackCols = [125, 375, 625, 875].map((cx, colIdx) => {
           ))}
         </div>
       </div>
-    ) : curve === 'fall' ? (
+    )}
+    {curve === 'fall' && (
       <div class="pnt__chart pnt__chart--fall">
         <svg viewBox="0 0 1000 460" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Marketing message losing energy at each handoff">
           <defs>
@@ -137,7 +165,8 @@ const stackCols = [125, 375, 625, 875].map((cx, colIdx) => {
           ))}
         </div>
       </div>
-    ) : (
+    )}
+    {curve === 'stack' && (
       <div class="pnt__chart pnt__chart--stack">
         <svg viewBox="0 0 1000 460" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Cost layers accumulating from one purchase into a heavy pile">
           {stackCols.map((col, i) => (
@@ -159,6 +188,42 @@ const stackCols = [125, 375, 625, 875].map((cx, colIdx) => {
           ))}
 
           {stackCols.map((col, i) => (
+            <foreignObject x={col.cx - 115} y={250} width="230" height="180">
+              <div xmlns="http://www.w3.org/1999/xhtml" class={`pnt__label pnt__label--${i+1}`}>
+                <span class="pnt__stage">{n.moments[i].time}</span>
+                <span class="pnt__body">{n.moments[i].caption}</span>
+              </div>
+            </foreignObject>
+          ))}
+        </svg>
+
+        <div class="pnt__mobile-list" aria-hidden="true">
+          {n.moments.map((m, i) => (
+            <div class={`pnt__mobile-item pnt__mobile-item--${i+1}`}>
+              <span class="pnt__stage">{m.time}</span>
+              <span class="pnt__body">{m.caption}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+    {curve === 'converge' && (
+      <div class="pnt__chart pnt__chart--converge">
+        <svg viewBox="0 0 1000 460" preserveAspectRatio="xMidYMid meet" role="img" aria-label="A/V devices converging onto the network, accumulating security and support load">
+          <line x1="40" y1={convergeLineY} x2="960" y2={convergeLineY} stroke="rgba(104,227,190,0.22)" stroke-width="2" stroke-linecap="round" />
+
+          {convergeCols.map((col, i) => (
+            <g class={`pnt__col pnt__col--${i+1}`}>
+              {col.alerts.map((a) => (
+                <path d={a.d} fill="#EDD086" fill-opacity="0.7" class="pnt__alert" />
+              ))}
+              {col.nodes.map((node, j) => (
+                <circle cx={node.cx} cy={convergeLineY} r={convergeNodeR} fill="var(--navy-deep)" stroke={node.color} stroke-width="2.5" class={`pnt__netnode pnt__netnode--${j+1}`} />
+              ))}
+            </g>
+          ))}
+
+          {convergeCols.map((col, i) => (
             <foreignObject x={col.cx - 115} y={250} width="230" height="180">
               <div xmlns="http://www.w3.org/1999/xhtml" class={`pnt__label pnt__label--${i+1}`}>
                 <span class="pnt__stage">{n.moments[i].time}</span>
@@ -239,6 +304,22 @@ const stackCols = [125, 375, 625, 875].map((cx, colIdx) => {
 .pnt__stacknode--2 { animation-delay: 0.6s; }
 .pnt__stacknode--3 { animation-delay: 0.9s; }
 .pnt__stacknode--4 { animation-delay: 1.2s; }
+
+/* Converge chart (IT) */
+.pnt__chart--converge svg { width: 100%; height: auto; display: block; overflow: visible; }
+.pnt__netnode {
+  opacity: 0;
+  animation: pnt-pop 0.5s ease-out forwards;
+}
+.pnt__netnode--1 { animation-delay: 0.2s; }
+.pnt__netnode--2 { animation-delay: 0.4s; }
+.pnt__netnode--3 { animation-delay: 0.6s; }
+.pnt__netnode--4 { animation-delay: 0.8s; }
+.pnt__alert {
+  opacity: 0;
+  animation: pnt-fadein 0.4s ease-out forwards;
+  animation-delay: 0.5s;
+}
 
 .pnt__label {
   width: 100%;
@@ -362,13 +443,15 @@ const stackCols = [125, 375, 625, 875].map((cx, colIdx) => {
 @media (max-width: 640px) {
   .pnt__chart--fall svg,
   .pnt__chart--rise svg,
-  .pnt__chart--stack svg { display: none; }
+  .pnt__chart--stack svg,
+  .pnt__chart--converge svg { display: none; }
   .pnt__chart--fall .pnt__mobile-list,
   .pnt__chart--rise .pnt__mobile-list,
-  .pnt__chart--stack .pnt__mobile-list { display: flex; }
+  .pnt__chart--stack .pnt__mobile-list,
+  .pnt__chart--converge .pnt__mobile-list { display: flex; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pnt__dot, .pnt__tread, .pnt__drop, .pnt__col, .pnt__stacknode { animation: none; opacity: 1; }
+  .pnt__dot, .pnt__tread, .pnt__drop, .pnt__col, .pnt__stacknode, .pnt__netnode, .pnt__alert { animation: none; opacity: 1; }
 }
 </style>

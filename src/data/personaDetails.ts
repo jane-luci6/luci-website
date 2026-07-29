@@ -30,9 +30,10 @@ export interface PersonaNarrative {
    * Shape of the four-point graphic.
    * - `rise` — Ops energy curve (builds to a peak)
    * - `fall` — Marketing message journey (idea → hand-off → wait → miss), then the payoff flips it
-   * - `stack` — Finance cost accumulation (purchase → vendors → upkeep → surprise), then the payoff resolves it
+   * - `stack` — Finance cost accumulation (purchase → vendors → upkeep → refresh), then the payoff resolves it
+   * - `converge` — IT network convergence (island → move → surface → page), scattered nodes loading onto a network line
    */
-  curve?: 'rise' | 'fall' | 'stack';
+  curve?: 'rise' | 'fall' | 'stack' | 'converge';
   /** Sub-lead that opens the arc. */
   subLead: string;
   /** The moments along the day-arc. */
@@ -626,6 +627,180 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     ctaTitle: 'One platform, <em>one predictable cost</em>.',
     ctaDeck:
       'Let us walk through the total cost of ownership with you \u2014 what you\u2019re spending across systems and vendors now, and what one platform on your existing hardware would change.',
+    chapters: [
+      { id: 'persona-thesis', label: 'Overview' },
+      { id: 'persona-narrative', label: 'What you manage' },
+      { id: 'persona-challenges', label: 'What gets in your way' },
+      { id: 'persona-capabilities', label: 'What you can do' },
+      { id: 'persona-industries', label: 'Wherever you operate' },
+      { id: 'persona-cta', label: 'Next step' },
+    ],
+  },
+  technology: {
+    id: 'technology',
+    heroImage: '/images/who-we-serve/it-hero.jpg?v=1',
+    heroAlt:
+      'An IT professional monitoring network topology and system health dashboards in a dimly lit network operations center',
+    heroKicker: '',
+    heroDeck:
+      'A/V used to be someone else\u2019s island. Now it\u2019s on your network \u2014 more endpoints to secure, more vendors to integrate, more that pages you when it breaks.',
+    narrativeLockup: {
+      lockupName: 'Make A/V <em>behave like the rest of your stack</em>',
+      lockupRole: 'What IT is accountable for',
+    },
+    graphLockup: {
+      lockupName: 'It all runs on your network now',
+      deck: 'Displays, players, processors, controllers, audio \u2014 the property\u2019s A/V used to live on its own island. Now it\u2019s on your network, and everything on your network is yours to secure, monitor, and keep alive.',
+    },
+    narrative: {
+      curve: 'converge',
+      subLead: '',
+      moments: [
+        {
+          time: 'The island',
+          caption:
+            'A/V used to run on its own \u2014 separate systems, separate vendors, not your problem.',
+        },
+        {
+          time: 'The move',
+          caption:
+            'It all moved onto the network. Now every screen and player is an endpoint you own.',
+        },
+        {
+          time: 'The surface',
+          caption:
+            'Each device is one more thing to secure, patch, and monitor \u2014 and one more way in.',
+        },
+        {
+          time: 'The page',
+          caption:
+            'When any of it fails, it\u2019s your phone that rings \u2014 with no single view to diagnose it.',
+        },
+      ],
+      support: '',
+      closing:
+        '<span class="pnt__luci">With LUCI</span>, all of it becomes <em>one</em> platform \u2014 standards-based, hardware-agnostic, monitored and secured on the network you already run.',
+    },
+    challengesLockup: {
+      lockupName: 'What gets in <em>your way</em>',
+      lockupRole: 'The cost of a fragmented network',
+    },
+    challenges: [
+      {
+        friction:
+          'A/V lands on your network as more endpoints to secure and support \u2014 that you didn\u2019t design.',
+        relief:
+          'LUCI consolidates A/V control into one software platform on your existing infrastructure, so it\u2019s managed to your standards, not bolted on as an island.',
+      },
+      {
+        friction:
+          'When something on the floor fails, it\u2019s your phone that rings \u2014 with no single view to diagnose it.',
+        relief:
+          'LUCI gives you one console to monitor and control every display and zone, so you see what\u2019s wrong and fix it fast instead of troubleshooting blind.',
+      },
+      {
+        friction: 'Every A/V vendor is a separate integration, contract, and support line.',
+        relief:
+          'LUCI is hardware-agnostic and standards-based, so many proprietary systems become one integration you actually control.',
+      },
+      {
+        friction:
+          'Every networked A/V device expands the attack surface you\u2019re accountable for.',
+        relief:
+          'LUCI consolidates the systems and management surfaces you have to secure, and runs within the controls you already operate \u2014 fewer ways in, inside your perimeter.',
+      },
+      {
+        friction:
+          'A/V is one more fragmented silo fighting the consolidation and control you\u2019re building toward.',
+        relief:
+          'LUCI unifies a scattered A/V estate into one controllable platform, so A/V joins your converged environment instead of pulling against it.',
+      },
+    ],
+    industryLockup: {
+      lockupName: 'LUCI lives <em>wherever you operate</em>',
+      lockupRole: 'The stakes change. The control doesn\u2019t',
+    },
+    industryKicker: 'What control unlocks here',
+    industryStakes: [
+      {
+        slug: 'casinos-gaming',
+        name: 'Casinos & gaming',
+        image: '/images/industries/casinos-gaming.jpg',
+        callout:
+          'Your network runs a regulated, 24/7 floor with zero tolerance for downtime and strict security regimes. LUCI brings floor A/V under the same secured, monitored umbrella as the rest of your gaming IT, cuts the number of unmanaged endpoints on a regulated network, and makes A/V one more system you control rather than one more risk you carry.',
+        emphasis:
+          'Compliance-grade security and control \u00b7 reliability on a regulated 24/7 network \u00b7 A/V consolidated into the gaming IT estate.',
+      },
+      {
+        slug: 'hotels-resorts',
+        name: 'Hotels & resorts',
+        image: '/images/industries/hotels-resorts.jpg',
+        callout:
+          'A lean team supports guest-facing systems across many spaces, often across multiple properties. LUCI gives you one platform to manage and monitor displays everywhere \u2014 lobby, F&B, meeting space, amenities \u2014 with fewer vendors and endpoints to support and full remote visibility.',
+        emphasis:
+          'Manage a large footprint with a lean team \u00b7 consolidation and remote visibility \u00b7 secure guest-facing systems.',
+      },
+      {
+        slug: 'sports-venues',
+        name: 'Sports & venues',
+        image: '/images/industries/sports-venues.jpg',
+        callout:
+          'You manage hundreds to thousands of endpoints across concourses, suites, and fascia \u2014 and all of it has to be live before doors open. LUCI centralizes monitoring and orchestration across that estate, so you diagnose fast during live events and keep A/V unified on your converged network.',
+        emphasis:
+          'Endpoint scale and centralized monitoring \u00b7 event-day reliability \u00b7 converged-network control.',
+      },
+      {
+        slug: 'airports-transportation',
+        name: 'Airports & transportation',
+        image: '/images/industries/airports-transportation.jpg',
+        callout:
+          'You run never-off systems across a huge, multi-tenant footprint under public-sector security and procurement standards \u2014 where some A/V doubles as passenger-information infrastructure. LUCI consolidates vendor and endpoint sprawl across terminals, fits standards-based and hardware-agnostic procurement, and keeps network-critical systems secure and monitored.',
+        emphasis:
+          'Security and standards for public-sector IT \u00b7 consolidation at scale \u00b7 reliability of network-critical systems.',
+      },
+      {
+        slug: 'conference-convention-centers',
+        name: 'Conference & convention centers',
+        image: '/images/industries/conference-convention-centers.jpg',
+        callout:
+          'You reconfigure many rooms constantly and support outside event and production vendors on your network. LUCI lets you reconfigure and monitor A/V across every space from one platform, keeps clean boundaries between house systems and visiting gear, and makes setup fast and reliable without per-room specialist work.',
+        emphasis:
+          'Multi-room control and fast reconfiguration \u00b7 secure separation of house vs. visiting systems \u00b7 reliability across simultaneous events.',
+      },
+    ],
+    capabilitiesLockup: {
+      lockupName: 'What you <em>can do</em>',
+      lockupRole: 'Four ways LUCI brings A/V under control',
+    },
+    lead: '',
+    takeaway: '',
+    hubLabel: 'One System Under Control',
+    hubSub: 'Monitored, secured, and running on your network.',
+    capabilities: [
+      {
+        front: 'See every A/V endpoint on the property from a single dashboard.',
+        back:
+          'Every connected display, audio component, and device appears in one interface with its current status and health \u2014 no trip to the server room, no call to a specialist.',
+      },
+      {
+        front: 'Know exactly what changed, and when.',
+        back:
+          'Every configuration change is logged with who made it, what changed, and when \u2014 a complete audit trail you can filter by date, user, or zone.',
+      },
+      {
+        front: 'Define who can change what \u2014 by role, by zone, by team.',
+        back:
+          'Set role-based permissions centrally so each team controls only its lane \u2014 enforced by the platform, managed from one administrative view.',
+      },
+      {
+        front: 'Schedule system maintenance to run automatically.',
+        back:
+          'Queue updates, reboots, and maintenance for overnight or low-traffic windows. The platform maintains itself on your schedule, with dashboard confirmation.',
+      },
+    ],
+    ctaTitle: 'Bring A/V <em>under control</em>.',
+    ctaDeck:
+      'Let us walk through how LUCI fits your network \u2014 one platform, standards-based and hardware-agnostic, monitored and secured within the controls you already run.',
     chapters: [
       { id: 'persona-thesis', label: 'Overview' },
       { id: 'persona-narrative', label: 'What you manage' },
