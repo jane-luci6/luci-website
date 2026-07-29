@@ -106,80 +106,16 @@ const defaultCardIcons = [
 ];
 const cardIcons = n.icons ?? defaultCardIcons;
 
-/** Escalate: A/V & Facilities — rising spine (Variant C).
- *  Four climbing treads, labels locked under each in HTML.
- *  Shared palette across all boxes: black / white / mint.
- *  Only Stage 4 gets an emergency-red alert so it pops.
- *  Density + tangle escalate left→right; no connector lines.
- *  viewBox: 0 0 1000 240 — graphic only; labels below in HTML. */
-const escalateBwMint = ['#0A161C', '#F5F8FA', '#68E3BE'];
-const escalateAlertColor = '#FF3B3B';
-const escalateLineStroke = 'rgba(104,227,190,0.45)';
-/** Centers align to four equal label columns (125 / 375 / 625 / 875). */
-const escalateTreads = [
-  { cx: 125, x: 50, y: 172, w: 150, h: 48 },
-  { cx: 375, x: 285, y: 132, w: 180, h: 88 },
-  { cx: 625, x: 535, y: 92, w: 180, h: 128 },
-  { cx: 875, x: 775, y: 52, w: 180, h: 168 },
-].map((tread, colIdx) => {
-  const dots: { x: number; y: number; r: number; color: string; opacity: number }[] = [];
-  const lines: { x1: number; y1: number; x2: number; y2: number }[] = [];
-  let alert: { x: number; y: number } | null = null;
-  const pad = 14;
-  const innerX = tread.x + pad;
-  const innerY = tread.y + pad;
-  const innerW = tread.w - pad * 2;
-  const innerH = tread.h - pad * 2;
-
-  if (colIdx === 0) {
-    const cols = 5, rows = 2, r = 3;
-    const spacingX = innerW / (cols - 1);
-    const spacingY = innerH / (rows - 1 || 1);
-    for (let row = 0; row < rows; row++) {
-      for (let col = 0; col < cols; col++) {
-        const idx = row * cols + col;
-        dots.push({
-          x: innerX + col * spacingX,
-          y: innerY + row * spacingY,
-          r,
-          color: escalateBwMint[idx % 3],
-          opacity: 0.9,
-        });
-      }
-    }
-  } else {
-    const cols = 8, rows = colIdx === 1 ? 4 : colIdx === 2 ? 5 : 6;
-    const r = 2;
-    const spacingX = innerW / (cols - 1);
-    const spacingY = innerH / (rows - 1);
-    for (let row = 0; row < rows; row++) {
-      for (let col = 0; col < cols; col++) {
-        const idx = row * cols + col;
-        const jX = ((idx * 7) % 5 - 2) * 0.7;
-        const jY = ((idx * 13) % 5 - 2) * 0.7;
-        dots.push({
-          x: innerX + col * spacingX + jX,
-          y: innerY + row * spacingY + jY,
-          r,
-          color: escalateBwMint[idx % 3],
-          opacity: 0.55 + ((idx * 3) % 5) * 0.08,
-        });
-      }
-    }
-    if (colIdx >= 2) {
-      for (let i = 0; i < (colIdx === 2 ? 10 : 14); i++) {
-        const a = (i * 37 + colIdx * 11) % dots.length;
-        let b = (i * 53 + colIdx * 19 + 7) % dots.length;
-        if (b === a) b = (b + 1) % dots.length;
-        lines.push({ x1: dots[a].x, y1: dots[a].y, x2: dots[b].x, y2: dots[b].y });
-      }
-    }
-    if (colIdx === 3) {
-      alert = { x: dots[Math.floor(dots.length / 2)].x, y: dots[Math.floor(dots.length / 2)].y };
-    }
-  }
-  return { ...tread, dots, lines, alert };
-});
+/** Climb: A/V & Facilities — ascending staircase (mirrors Marketing's fall, but rising).
+ *  Burden climbs left→right: a manageable estate → sprawl → diagnostic chase → live crisis.
+ *  Stage 4 (The Clock) is the peak: emergency-red node with a pulsing alert ring.
+ *  viewBox: 0 0 1000 460 — same chassis as fall; labels in foreignObject under each tread. */
+const climbTreads = [
+  { x1: 0,    x2: 250,  y: 264, cx: 125, color: '#68E3BE', rise: '#8ed3b5', marker: 'arrowg' },
+  { x1: 250,  x2: 500,  y: 200, cx: 375, color: '#EDD086', rise: '#dbbd7a', marker: 'arrow'  },
+  { x1: 500,  x2: 750,  y: 130, cx: 625, color: '#CEB06E', rise: '#e69054', marker: 'arrowr' },
+  { x1: 750,  x2: 1000, y: 60,  cx: 875, color: '#FF3B3B', rise: null,    marker: null    },
+];
 ---
 
 <section class={`pnt pnt--${curve}`} id={uid}>
@@ -370,44 +306,55 @@ const escalateTreads = [
         </div>
       </div>
     )}
-    {curve === 'escalate' && (
-      <div class="pnt__chart pnt__chart--escalate">
-        <svg viewBox="0 0 1000 240" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Endpoint complexity escalating from a manageable estate through sprawl, diagnostic chase, to a live failure">
-          <line x1="40" y1="220" x2="960" y2="220" stroke="rgba(245,248,250,0.08)" stroke-width="1" />
-          {escalateTreads.map((t, i) => (
-            <g class={`pnt__esc-col pnt__esc-col--${i+1}`}>
-              <rect
-                x={t.x} y={t.y} width={t.w} height={t.h}
-                fill="rgba(245,248,250,0.16)"
-                stroke="rgba(104,227,190,0.35)"
-                stroke-width="1"
-              />
-              {t.lines.map((l) => (
-                <line x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke={escalateLineStroke} stroke-width="1.15" />
-              ))}
-              {t.dots.map((d) => (
-                d.color === '#0A161C'
-                  ? <circle cx={d.x} cy={d.y} r={d.r} fill={d.color} fill-opacity={d.opacity} stroke="rgba(104,227,190,0.4)" stroke-width="0.6" />
-                  : <circle cx={d.x} cy={d.y} r={d.r} fill={d.color} fill-opacity={d.opacity} />
-              ))}
-              {t.alert && (
-                <g class="pnt__esc-alert">
-                  <circle cx={t.alert.x} cy={t.alert.y} r="5" fill={escalateAlertColor} />
-                  <circle cx={t.alert.x} cy={t.alert.y} r="11" fill="none" stroke={escalateAlertColor} stroke-width="1.5" opacity="0.5" class="pnt__esc-wave" />
-                  <circle cx={t.alert.x} cy={t.alert.y} r="17" fill="none" stroke={escalateAlertColor} stroke-width="1" opacity="0.22" class="pnt__esc-wave2" />
-                </g>
+    {curve === 'climb' && (
+      <div class="pnt__chart pnt__chart--climb">
+        <svg viewBox="0 0 1000 460" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Endpoint burden climbing from a manageable estate through sprawl and diagnostic chase to a live failure">
+          <defs>
+            <marker id="arrow" viewBox="0 0 12 12" refX="6" refY="6" markerWidth="9" markerHeight="9" orient="auto">
+              <path d="M 2 2 L 10 6 L 2 10 Z" fill="#EDD086" />
+            </marker>
+            <marker id="arrowg" viewBox="0 0 12 12" refX="6" refY="6" markerWidth="9" markerHeight="9" orient="auto">
+              <path d="M 2 2 L 10 6 L 2 10 Z" fill="#8ed3b5" />
+            </marker>
+            <marker id="arrowr" viewBox="0 0 12 12" refX="6" refY="6" markerWidth="9" markerHeight="9" orient="auto">
+              <path d="M 2 2 L 10 6 L 2 10 Z" fill="#FF3B3B" />
+            </marker>
+          </defs>
+
+          {climbTreads.map((t, i) => (
+            <g class={`pnt__tread pnt__tread--${i+1}`}>
+              {t.rise && (
+                <line x1={t.x2} y1={t.y} x2={t.x2} y2={climbTreads[i+1].y} stroke={t.rise} stroke-width="2"
+                  marker-end={`url(#${t.marker})`} class={`pnt__rise pnt__rise--${i+1}`} />
+              )}
+              <line x1={t.x1} y1={t.y} x2={t.x2} y2={t.y}
+                stroke={t.color}
+                stroke-width={i === 3 ? 2 : 3}
+                stroke-dasharray={i === 3 ? '6 6' : 'none'}
+                stroke-linecap="round" />
+              {i === 3 ? (
+                <>
+                  <circle cx="815" cy={t.y} r="4" fill={t.color} class="pnt__climb-alert" />
+                  <circle cx="875" cy={t.y} r="6" fill={t.color} class="pnt__climb-alert" />
+                  <circle cx="935" cy={t.y} r="4" fill={t.color} class="pnt__climb-alert" />
+                  <circle cx="875" cy={t.y} r="11" fill="none" stroke={t.color} stroke-width="1.25" opacity="0.5" class="pnt__climb-wave" />
+                </>
+              ) : (
+                <circle cx={t.cx} cy={t.y} r="6" fill="var(--navy-deep)" stroke={t.color} stroke-width="2.5" />
               )}
             </g>
           ))}
-        </svg>
-        <div class="pnt__esc-labels">
-          {n.moments.map((m, i) => (
-            <div class={`pnt__label pnt__label--${i+1}`}>
-              <span class="pnt__stage">{m.time}</span>
-              <span class="pnt__body">{m.caption}</span>
-            </div>
+
+          {climbTreads.map((t, i) => (
+            <foreignObject x={t.cx - 115} y={t.y + 22} width="230" height="180">
+              <div xmlns="http://www.w3.org/1999/xhtml" class={`pnt__label pnt__label--${i+1}`}>
+                <span class="pnt__stage">{n.moments[i].time}</span>
+                <span class="pnt__body">{n.moments[i].caption}</span>
+              </div>
+            </foreignObject>
           ))}
-        </div>
+        </svg>
+
         <div class="pnt__mobile-list" aria-hidden="true">
           {n.moments.map((m, i) => (
             <div class={`pnt__mobile-item pnt__mobile-item--${i+1}`}>
@@ -549,27 +496,14 @@ const escalateTreads = [
 .pnt__card--4 .pnt__card-icon,
 .pnt__card--4 .pnt__card-stage { color: #EDD086; }
 
-/* Escalate chart (A/V & Facilities) — rising spine */
-.pnt__chart--escalate svg { width: 100%; height: auto; display: block; overflow: visible; }
-.pnt__esc-labels {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-top: 4px;
-}
-.pnt__esc-labels .pnt__label {
-  text-align: center;
-  padding: 0 8px;
-  height: auto;
-}
-.pnt__esc-col { opacity: 0; animation: pnt-fadein 0.7s ease-out forwards; }
-.pnt__esc-col--1 { animation-delay: 0.15s; }
-.pnt__esc-col--2 { animation-delay: 0.45s; }
-.pnt__esc-col--3 { animation-delay: 0.75s; }
-.pnt__esc-col--4 { animation-delay: 1.05s; }
-.pnt__esc-wave { animation: pnt-esc-pulse 1.8s ease-out infinite; transform-origin: center; transform-box: fill-box; }
-.pnt__esc-wave2 { animation: pnt-esc-pulse 1.8s ease-out infinite; animation-delay: 0.4s; transform-origin: center; transform-box: fill-box; }
-@keyframes pnt-esc-pulse {
+/* Climb chart (A/V & Facilities) — ascending staircase, mirrors fall */
+.pnt__chart--climb svg { width: 100%; height: auto; display: block; overflow: visible; }
+.pnt__rise { opacity: 0; animation: pnt-fadein 0.4s ease-out forwards; animation-delay: 0.35s; }
+.pnt__rise--2 { animation-delay: 0.65s; }
+.pnt__rise--3 { animation-delay: 0.95s; }
+.pnt__climb-alert { animation: pnt-pop 0.5s ease-out forwards; animation-delay: 1.2s; opacity: 0; }
+.pnt__climb-wave { animation: pnt-climb-pulse 1.8s ease-out infinite; transform-origin: center; transform-box: fill-box; }
+@keyframes pnt-climb-pulse {
   0% { transform: scale(0.5); opacity: 0.6; }
   100% { transform: scale(2.2); opacity: 0; }
 }
@@ -627,9 +561,27 @@ const escalateTreads = [
 .pnt__label--3 .pnt__body { color: #bcae7a; opacity: 0.85; }
 .pnt__label--4 .pnt__stage,
 .pnt__label--4 .pnt__body { color: #EDD086; opacity: 0.7; }
-/* Escalate labels: brand-aligned — images carry the color story */
-.pnt__chart--escalate .pnt__label .pnt__stage { color: var(--mint); }
-.pnt__chart--escalate .pnt__label .pnt__body { color: rgba(245, 248, 250, 0.68); }
+/* Climb labels: match the ascending color story (mint → gold → gold-deep → red) */
+.pnt__chart--climb .pnt__label--1 .pnt__stage,
+.pnt__chart--climb .pnt__label--1 .pnt__body { color: #68E3BE; }
+.pnt__chart--climb .pnt__label--2 .pnt__stage,
+.pnt__chart--climb .pnt__label--2 .pnt__body { color: #EDD086; }
+.pnt__chart--climb .pnt__label--3 .pnt__stage,
+.pnt__chart--climb .pnt__label--3 .pnt__body { color: #CEB06E; opacity: 0.9; }
+.pnt__chart--climb .pnt__label--4 .pnt__stage,
+.pnt__chart--climb .pnt__label--4 .pnt__body { color: #FF3B3B; opacity: 0.92; }
+.pnt__chart--climb .pnt__mobile-item--1 { border-color: #68E3BE; }
+.pnt__chart--climb .pnt__mobile-item--1 .pnt__stage,
+.pnt__chart--climb .pnt__mobile-item--1 .pnt__body { color: #68E3BE; }
+.pnt__chart--climb .pnt__mobile-item--2 { border-color: #EDD086; }
+.pnt__chart--climb .pnt__mobile-item--2 .pnt__stage,
+.pnt__chart--climb .pnt__mobile-item--2 .pnt__body { color: #EDD086; }
+.pnt__chart--climb .pnt__mobile-item--3 { border-color: #CEB06E; }
+.pnt__chart--climb .pnt__mobile-item--3 .pnt__stage,
+.pnt__chart--climb .pnt__mobile-item--3 .pnt__body { color: #CEB06E; opacity: 0.9; }
+.pnt__chart--climb .pnt__mobile-item--4 { border-color: #FF3B3B; }
+.pnt__chart--climb .pnt__mobile-item--4 .pnt__stage,
+.pnt__chart--climb .pnt__mobile-item--4 .pnt__body { color: #FF3B3B; opacity: 0.92; }
 
 /* Closing / payoff line */
 .pnt__closing {
@@ -710,10 +662,6 @@ const escalateTreads = [
 .pnt__mobile-item--4 { border-color: #EDD086; }
 .pnt__mobile-item--4 .pnt__stage,
 .pnt__mobile-item--4 .pnt__body { color: #EDD086; opacity: 0.85; }
-/* Escalate mobile: brand-aligned */
-.pnt__chart--escalate .pnt__mobile-item { border-color: rgba(var(--mint-rgb), 0.3); }
-.pnt__chart--escalate .pnt__mobile-item .pnt__stage { color: var(--mint); }
-.pnt__chart--escalate .pnt__mobile-item .pnt__body { color: rgba(245, 248, 250, 0.68); }
 .pnt__mobile-item--rise { border-color: var(--mint); }
 .pnt__mobile-item--rise .pnt__stage,
 .pnt__mobile-item--rise .pnt__body { color: var(--mint); }
@@ -723,16 +671,15 @@ const escalateTreads = [
   .pnt__chart--rise svg,
   .pnt__chart--stack svg,
   .pnt__chart--converge svg,
-  .pnt__chart--escalate svg,
-  .pnt__chart--escalate .pnt__esc-labels { display: none; }
+  .pnt__chart--climb svg { display: none; }
   .pnt__chart--fall .pnt__mobile-list,
   .pnt__chart--rise .pnt__mobile-list,
   .pnt__chart--stack .pnt__mobile-list,
   .pnt__chart--converge .pnt__mobile-list,
-  .pnt__chart--escalate .pnt__mobile-list { display: flex; }
+  .pnt__chart--climb .pnt__mobile-list { display: flex; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pnt__dot, .pnt__tread, .pnt__drop, .pnt__col, .pnt__stacknode, .pnt__netnode, .pnt__alert, .pnt__card, .pnt__esc-col, .pnt__esc-wave, .pnt__esc-wave2 { animation: none; opacity: 1; }
+  .pnt__dot, .pnt__tread, .pnt__drop, .pnt__rise, .pnt__col, .pnt__stacknode, .pnt__netnode, .pnt__alert, .pnt__card, .pnt__climb-alert, .pnt__climb-wave { animation: none; opacity: 1; }
 }
 </style>

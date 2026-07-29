@@ -33,7 +33,7 @@ export interface PersonaNarrative {
    * - `stack` — Finance cost accumulation (purchase → vendors → upkeep → refresh), then the payoff resolves it
    * - `converge` — IT network convergence (island → move → surface → page), scattered nodes loading onto a network line
    */
-  curve?: 'rise' | 'fall' | 'stack' | 'converge' | 'iconcards' | 'escalate';
+  curve?: 'rise' | 'fall' | 'stack' | 'converge' | 'iconcards' | 'climb';
   /** Sub-lead that opens the arc. */
   subLead: string;
   /** The moments along the day-arc. */
@@ -827,7 +827,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       deck: 'Displays, audio, lighting, signage, the systems behind the walls \u2014 you install it, calibrate it, run it live, and keep it alive. When any of it fails, the fix is yours, right now.',
     },
     narrative: {
-      curve: 'escalate',
+      curve: 'climb',
       subLead: '',
       moments: [
         {
