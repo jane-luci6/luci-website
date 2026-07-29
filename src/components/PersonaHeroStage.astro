@@ -8,6 +8,7 @@ interface Props {
   lockupName: string;
   lockupRole: string;
   deck?: string;
+  deckHtml?: string;
   sectionId?: string;
 }
 
@@ -20,6 +21,7 @@ const {
   lockupName,
   lockupRole,
   deck = '',
+  deckHtml = '',
   sectionId = 'persona-thesis',
 } = Astro.props;
 ---
@@ -70,10 +72,12 @@ const {
     {kicker && <p class="persona-hero__kicker display-label">{kicker}</p>}
     <div class="header-lockup is-in" data-reveal>
       <h2 class="header-lockup__name" set:html={lockupName} />
-      <span class="header-lockup__rule" aria-hidden="true"></span>
-      <p class="header-lockup__role">{lockupRole}</p>
     </div>
-    {deck && <p class="persona-hero__deck">{deck}</p>}
+    {deckHtml ? (
+      <p class="persona-hero__deck persona-hero__deck--html" set:html={deckHtml} />
+    ) : (
+      deck && <p class="persona-hero__deck">{deck}</p>
+    )}
   </div>
 </section>
 
@@ -190,6 +194,19 @@ const {
     line-height: 1.6;
     color: rgba(245, 248, 250, 0.9);
     text-align: left;
+  }
+
+  .persona-hero__deck--html {
+    font-size: clamp(22px, 2.8vw, 30px);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+    max-width: 32ch;
+  }
+  .persona-hero__deck--html :global(em) {
+    font-style: normal;
+    color: var(--gold);
   }
 
   @media (max-width: 720px) {

@@ -42,13 +42,13 @@ if (!detail) return Astro.redirect('/who-we-serve');
     heroPoster={detail.heroPoster}
     lockupName={persona.label}
     lockupRole={persona.role}
-    deck={detail.heroDeck}
+    deckHtml={detail.narrativeLockup.lockupName}
   />
 
   <SectionBlock
     id="persona-narrative"
-    lockupName={detail.narrativeLockup.lockupName}
-    deck={detail.narrativeDeck}
+    lockupName={detail.graphLockup.lockupName}
+    deck={detail.graphLockup.deck}
     tone="deep"
     wide
     pattern="mintgold"
