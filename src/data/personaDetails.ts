@@ -649,8 +649,8 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       lockupRole: 'What IT is accountable for',
     },
     graphLockup: {
-      lockupName: 'It all runs on your network now',
-      deck: 'Displays, players, processors, controllers, audio \u2014 every A/V system on the property is an endpoint on your network. Each one is yours to secure, monitor, and keep alive.',
+      lockupName: 'The tangle on <em>your network</em>',
+      deck: 'Every A/V system on the property \u2014 displays, players, processors, controllers, audio \u2014 came from a different vendor. Now each one is an endpoint on your network, yours to secure, integrate, and keep alive.',
     },
     narrative: {
       curve: 'converge',
