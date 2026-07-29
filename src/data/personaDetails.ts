@@ -995,7 +995,6 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     heroImage: '/images/who-we-serve/who-we-serve-hero.jpg?v=1',
     heroAlt:
       'A senior property executive overlooking a wide property floor from a high vantage point',
-    heroKicker: 'Run one business',
     heroDeck:
       'The whole property is yours to answer for \u2014 every department, every result. But it runs on a patchwork of disconnected systems that never gives you one clear view. LUCI helps the property run like one business, not many parts.',
     narrativeLockup: {
