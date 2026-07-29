@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B — Transforming Fields</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@600;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy-deep: #0A161C;
+    --mint: #68E3BE;
+    --gold: #EDD086;
+    --gold-deep: #CEB06E;
+    --alert: #FF3B3B;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--navy-deep);
+    color: #F5F8FA;
+    font-family: 'Inter', system-ui, sans-serif;
+    padding: 48px 24px 64px;
+    background-image:
+      linear-gradient(135deg, transparent 48%, rgba(104,227,190,0.03) 49%, rgba(104,227,190,0.03) 51%, transparent 52%),
+      linear-gradient(45deg, transparent 48%, rgba(104,227,190,0.03) 49%, rgba(104,227,190,0.03) 51%, transparent 52%);
+    background-size: 120px 120px;
+  }
+  .chrome { text-align: center; margin-bottom: 40px; }
+  .chrome .tag {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.22em;
+    color: var(--mint); text-transform: uppercase; margin-bottom: 10px;
+  }
+  .chrome h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px;
+  }
+  .chrome p {
+    font-size: 14px; line-height: 1.55; color: rgba(245,248,250,0.62);
+    max-width: 560px; margin: 0 auto;
+  }
+  .nav { display: flex; gap: 10px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+  .nav a {
+    font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 600;
+    color: rgba(245,248,250,0.55); text-decoration: none;
+    padding: 8px 14px; border: 1px solid rgba(245,248,250,0.12);
+  }
+  .nav a.active { color: var(--mint); border-color: rgba(104,227,190,0.4); }
+  .nav a:hover { color: var(--mint); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    max-width: 1040px;
+    margin: 0 auto;
+  }
+  .col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .frame {
+    width: 100%;
+    aspect-ratio: 1;
+    max-width: 168px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .frame svg { width: 100%; height: 100%; display: block; }
+  .stage {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--mint);
+    margin-bottom: 10px;
+  }
+  .body {
+    font-size: 14px; line-height: 1.55;
+    color: rgba(245,248,250,0.68);
+    max-width: 210px;
+  }
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: 1fr; gap: 36px; }
+    .frame { max-width: 200px; margin: 0 auto 16px; }
+    .body { max-width: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="chrome">
+    <div class="tag">Variant B</div>
+    <h1>Transforming Fields</h1>
+    <p>Equal frames, same footprint. The silhouette itself changes — neat grid → crowded → tangled → alert — so the story is in the shape, not the height.</p>
+    <div class="nav">
+      <a href="/facilities-variant-a.html">A — Rising Columns</a>
+      <a class="active" href="/facilities-variant-b.html">B — Transforming Fields</a>
+      <a href="/facilities-variant-c.html">C — Rising Spine</a>
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- 1: neat mint grid -->
+    <div class="col">
+      <div class="frame">
+        <svg viewBox="0 0 100 100" role="img" aria-label="Neat manageable grid">
+          <g fill="#68E3BE">
+            <circle cx="22" cy="22" r="3.5" opacity="0.85"/><circle cx="40" cy="22" r="3.5" opacity="0.85"/><circle cx="58" cy="22" r="3.5" opacity="0.85"/><circle cx="76" cy="22" r="3.5" opacity="0.85"/>
+            <circle cx="22" cy="40" r="3.5" opacity="0.85"/><circle cx="40" cy="40" r="3.5" opacity="0.8"/><circle cx="58" cy="40" r="3.5" opacity="0.85"/><circle cx="76" cy="40" r="3.5" opacity="0.85"/>
+            <circle cx="22" cy="58" r="3.5" opacity="0.85"/><circle cx="40" cy="58" r="3.5" opacity="0.85"/><circle cx="58" cy="58" r="3.5" opacity="0.8"/><circle cx="76" cy="58" r="3.5" opacity="0.85"/>
+            <circle cx="22" cy="76" r="3.5" opacity="0.85"/><circle cx="40" cy="76" r="3.5" opacity="0.85"/><circle cx="58" cy="76" r="3.5" opacity="0.85"/><circle cx="76" cy="76" r="3.5" opacity="0.85"/>
+          </g>
+        </svg>
+      </div>
+      <span class="stage">The estate</span>
+      <span class="body">Screens, audio, lighting, signage, building systems — all of it is yours to keep running.</span>
+    </div>
+
+    <!-- 2: crowded gold, no neat rows -->
+    <div class="col">
+      <div class="frame">
+        <svg viewBox="0 0 100 100" role="img" aria-label="Crowded fragmented field">
+          <g fill="#EDD086">
+            <circle cx="14" cy="16" r="2.2" opacity="0.7"/><circle cx="28" cy="12" r="2.2" opacity="0.55"/><circle cx="42" cy="18" r="2.2" opacity="0.8"/><circle cx="55" cy="11" r="2.2" opacity="0.6"/><circle cx="68" cy="17" r="2.2" opacity="0.75"/><circle cx="82" cy="13" r="2.2" opacity="0.5"/><circle cx="90" cy="22" r="2.2" opacity="0.7"/>
+            <circle cx="12" cy="30" r="2.2" opacity="0.65"/><circle cx="25" cy="34" r="2.2" opacity="0.8"/><circle cx="38" cy="27" r="2.2" opacity="0.55"/><circle cx="52" cy="32" r="2.2" opacity="0.7"/><circle cx="65" cy="28" r="2.2" opacity="0.6"/><circle cx="78" cy="35" r="2.2" opacity="0.75"/><circle cx="91" cy="29" r="2.2" opacity="0.55"/>
+            <circle cx="16" cy="46" r="2.2" opacity="0.7"/><circle cx="29" cy="42" r="2.2" opacity="0.55"/><circle cx="43" cy="48" r="2.2" opacity="0.8"/><circle cx="56" cy="43" r="2.2" opacity="0.6"/><circle cx="70" cy="47" r="2.2" opacity="0.7"/><circle cx="83" cy="41" r="2.2" opacity="0.5"/><circle cx="92" cy="50" r="2.2" opacity="0.75"/>
+            <circle cx="11" cy="60" r="2.2" opacity="0.75"/><circle cx="26" cy="64" r="2.2" opacity="0.6"/><circle cx="39" cy="57" r="2.2" opacity="0.7"/><circle cx="53" cy="62" r="2.2" opacity="0.55"/><circle cx="67" cy="58" r="2.2" opacity="0.8"/><circle cx="80" cy="65" r="2.2" opacity="0.65"/><circle cx="90" cy="59" r="2.2" opacity="0.7"/>
+            <circle cx="15" cy="76" r="2.2" opacity="0.6"/><circle cx="30" cy="72" r="2.2" opacity="0.75"/><circle cx="44" cy="78" r="2.2" opacity="0.55"/><circle cx="57" cy="73" r="2.2" opacity="0.7"/><circle cx="71" cy="77" r="2.2" opacity="0.65"/><circle cx="84" cy="71" r="2.2" opacity="0.8"/><circle cx="93" cy="79" r="2.2" opacity="0.5"/>
+            <circle cx="18" cy="90" r="2.2" opacity="0.7"/><circle cx="33" cy="87" r="2.2" opacity="0.55"/><circle cx="47" cy="92" r="2.2" opacity="0.75"/><circle cx="61" cy="86" r="2.2" opacity="0.6"/><circle cx="75" cy="91" r="2.2" opacity="0.7"/><circle cx="88" cy="88" r="2.2" opacity="0.55"/>
+          </g>
+        </svg>
+      </div>
+      <span class="stage">The sprawl</span>
+      <span class="body">Each one has its own interface, its own vendor, its own quirks. No shared view.</span>
+    </div>
+
+    <!-- 3: tangled gold-deep web -->
+    <div class="col">
+      <div class="frame">
+        <svg viewBox="0 0 100 100" role="img" aria-label="Tangled diagnostic chase">
+          <g stroke="#CEB06E" stroke-width="1.15" fill="none">
+            <line x1="18" y1="20" x2="82" y2="48" opacity="0.7"/>
+            <line x1="85" y1="18" x2="25" y2="70" opacity="0.55"/>
+            <line x1="15" y1="45" x2="88" y2="78" opacity="0.65"/>
+            <line x1="60" y1="12" x2="32" y2="88" opacity="0.5"/>
+            <line x1="12" y1="72" x2="90" y2="35" opacity="0.6"/>
+            <line x1="42" y1="15" x2="78" y2="90" opacity="0.45"/>
+            <line x1="92" y1="55" x2="18" y2="88" opacity="0.65"/>
+            <line x1="28" y1="30" x2="88" y2="85" opacity="0.5"/>
+            <line x1="50" y1="10" x2="50" y2="90" opacity="0.35"/>
+            <line x1="10" y1="50" x2="90" y2="50" opacity="0.35"/>
+          </g>
+          <g fill="#CEB06E">
+            <circle cx="18" cy="20" r="2.3" opacity="0.85"/><circle cx="42" cy="15" r="2.3" opacity="0.7"/><circle cx="60" cy="12" r="2.3" opacity="0.8"/><circle cx="85" cy="18" r="2.3" opacity="0.75"/>
+            <circle cx="15" cy="45" r="2.3" opacity="0.7"/><circle cx="32" cy="38" r="2.3" opacity="0.85"/><circle cx="55" cy="42" r="2.3" opacity="0.65"/><circle cx="78" cy="35" r="2.3" opacity="0.8"/><circle cx="92" cy="55" r="2.3" opacity="0.7"/>
+            <circle cx="25" cy="70" r="2.3" opacity="0.8"/><circle cx="48" cy="62" r="2.3" opacity="0.65"/><circle cx="70" cy="68" r="2.3" opacity="0.85"/><circle cx="88" cy="78" r="2.3" opacity="0.7"/>
+            <circle cx="18" cy="88" r="2.3" opacity="0.75"/><circle cx="32" cy="88" r="2.3" opacity="0.6"/><circle cx="50" cy="90" r="2.3" opacity="0.8"/><circle cx="78" cy="90" r="2.3" opacity="0.7"/>
+          </g>
+        </svg>
+      </div>
+      <span class="stage">The legwork</span>
+      <span class="body">When something’s off, you’re tracing it by hand — rack to rack, room to room.</span>
+    </div>
+
+    <!-- 4: red tangle + alert -->
+    <div class="col">
+      <div class="frame">
+        <svg viewBox="0 0 100 100" role="img" aria-label="Live failure">
+          <g stroke="#FF3B3B" stroke-width="1.2" fill="none">
+            <line x1="16" y1="18" x2="84" y2="52" opacity="0.65"/>
+            <line x1="88" y1="16" x2="22" y2="72" opacity="0.5"/>
+            <line x1="12" y1="48" x2="90" y2="80" opacity="0.6"/>
+            <line x1="58" y1="10" x2="30" y2="90" opacity="0.45"/>
+            <line x1="10" y1="75" x2="92" y2="32" opacity="0.55"/>
+            <line x1="40" y1="12" x2="80" y2="92" opacity="0.4"/>
+            <line x1="94" y1="58" x2="16" y2="90" opacity="0.6"/>
+            <line x1="26" y1="28" x2="90" y2="86" opacity="0.5"/>
+            <line x1="70" y1="14" x2="20" y2="55" opacity="0.45"/>
+          </g>
+          <g fill="#FF3B3B">
+            <circle cx="16" cy="18" r="2.2" opacity="0.8"/><circle cx="40" cy="12" r="2.2" opacity="0.65"/><circle cx="58" cy="10" r="2.2" opacity="0.75"/><circle cx="88" cy="16" r="2.2" opacity="0.7"/>
+            <circle cx="12" cy="48" r="2.2" opacity="0.7"/><circle cx="30" cy="40" r="2.2" opacity="0.85"/><circle cx="52" cy="44" r="2.2" opacity="0.6"/><circle cx="74" cy="36" r="2.2" opacity="0.8"/><circle cx="94" cy="58" r="2.2" opacity="0.65"/>
+            <circle cx="22" cy="72" r="2.2" opacity="0.8"/><circle cx="48" cy="64" r="2.2" opacity="0.6"/><circle cx="68" cy="70" r="2.2" opacity="0.85"/><circle cx="90" cy="80" r="2.2" opacity="0.7"/>
+            <circle cx="16" cy="90" r="2.2" opacity="0.75"/><circle cx="30" cy="90" r="2.2" opacity="0.55"/><circle cx="50" cy="92" r="2.2" opacity="0.8"/><circle cx="80" cy="92" r="2.2" opacity="0.65"/>
+          </g>
+          <circle cx="52" cy="48" r="5.5" fill="#FF3B3B"/>
+          <circle cx="52" cy="48" r="11" fill="none" stroke="#FF3B3B" stroke-width="1.6" opacity="0.55"/>
+          <circle cx="52" cy="48" r="17" fill="none" stroke="#FF3B3B" stroke-width="1" opacity="0.25"/>
+        </svg>
+      </div>
+      <span class="stage">The clock</span>
+      <span class="body">And when it fails live, the fix is yours immediately, in front of the room.</span>
+    </div>
+  </div>
+</body>
+</html>
