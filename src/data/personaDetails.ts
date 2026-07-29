@@ -975,7 +975,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       {
         front: 'Configure a private event once, then activate it and let it revert on its own.',
         back:
-          'Build the full A/V setup for a banquet or private event as a named preset \u2014 custom audio mix, branded content, zone-specific settings \u2014 and set the minutes until it reverts. The preset runs the event and returns the property to baseline on its own.',
+          'Build the full A/V setup as a named preset \u2014 custom audio mix, branded content, zone settings \u2014 and set the minutes until it reverts. It runs the event and returns the property to baseline on its own.',
       },
     ],
     ctaTitle: 'The whole estate, finally <em>in one place</em>.',
