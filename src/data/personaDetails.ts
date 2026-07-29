@@ -605,7 +605,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       {
         front: 'Replan the capital you\u2019d reserved for the next A/V refresh.',
         back:
-          'Proprietary hardware that needed a full refresh every five to seven years becomes a software platform on a predictable annual line. Updates, not capital purchases.',
+          'Proprietary hardware that needed a full refresh every five to seven years becomes a software platform on a predictable annual line. Capability arrives through software updates, not capital purchases.',
       },
       {
         front: 'Cut or renegotiate the vendor and integration contracts LUCI replaces.',
