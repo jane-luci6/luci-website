@@ -470,11 +470,11 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     heroDeck:
       'You answer for what the property spends \u2014 and the technology that runs it is a tangle of vendors, contracts, and hidden costs.',
     narrativeLockup: {
-      lockupName: 'The real cost <em>isn\u2019t on the quote</em>',
+      lockupName: 'Every system and vendor <em>adds to the cost</em>',
       lockupRole: 'What finance is accountable for',
     },
     graphLockup: {
-      lockupName: 'The true cost of the property',
+      lockupName: 'The true cost of property-wide A/V',
       deck: 'Every screen, speaker, and control system came with its own vendor, its own contract, and its own service line. The sticker price was just the beginning.',
     },
     narrative: {
@@ -497,9 +497,9 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
             'Maintenance, integration, and licensing costs accumulate quietly across every system.',
         },
         {
-          time: 'The surprise',
+          time: 'The refresh',
           caption:
-            'Something ages out and fails \u2014 and now it\u2019s an emergency replacement at emergency prices.',
+            'Every 5\u201310 years, the proprietary hardware ages out \u2014 and the whole stack starts over. The biggest cost of all.',
         },
       ],
       support: '',
