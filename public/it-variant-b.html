@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Variant B — Connected vs. Disconnected</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root { --navy-deep: #0A161C; --mint: #68E3BE; --off-white: #F5F8FA; --amber: #EDD086; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--navy-deep); color: var(--off-white); font-family: 'Inter', sans-serif; padding: 40px 20px; }
+  .label { text-align: center; font-family: 'Syncopate', sans-serif; font-size: 11px; letter-spacing: 0.22em; color: var(--mint); margin-bottom: 16px; }
+  .desc { text-align: center; font-size: 14px; color: rgba(245,248,250,0.6); margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.5; }
+  svg { width: 100%; max-width: 900px; height: auto; display: block; margin: 0 auto; }
+  .s { font-family: 'Syncopate', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 6px; }
+  .b { font-size: 13px; line-height: 1.5; color: rgba(245,248,250,0.75); display: block; }
+  .s1, .s1 ~ .b { color: #68E3BE; } .s2, .s2 ~ .b { color: #8ed3b5; } .s3, .s3 ~ .b { color: #bcae7a; } .s4, .s4 ~ .b { color: #EDD086; }
+</style>
+</head>
+<body>
+<div class="label">B — Connected vs. Disconnected</div>
+<div class="desc">Your network shown as a connected cluster of nodes at the bottom (visible, organized, controlled). A/V vendor systems scattered above — not linked to the network. The visual contrast between "connected/controlled" and "disconnected/chaotic" tells the story.</div>
+<svg viewBox="0 0 1000 460" preserveAspectRatio="xMidYMid meet">
+  <!-- YOUR NETWORK — solid connected line with nodes ON it -->
+  <line x1="40" y1="210" x2="960" y2="210" stroke="rgba(104,227,190,0.4)" stroke-width="2.5"/>
+  <text x="500" y="232" text-anchor="middle" fill="rgba(104,227,190,0.5)" font-size="11" font-family="Inter" letter-spacing="0.15em">YOUR NETWORK</text>
+  <!-- Connected nodes ON the network -->
+  <circle cx="125" cy="210" r="6" fill="var(--navy-deep)" stroke="rgba(104,227,190,0.6)" stroke-width="2.5"/>
+  <circle cx="375" cy="210" r="6" fill="var(--navy-deep)" stroke="rgba(104,227,190,0.6)" stroke-width="2.5"/>
+  <circle cx="625" cy="210" r="6" fill="var(--navy-deep)" stroke="rgba(104,227,190,0.6)" stroke-width="2.5"/>
+  <circle cx="875" cy="210" r="6" fill="var(--navy-deep)" stroke="rgba(104,227,190,0.6)" stroke-width="2.5"/>
+  <!-- S1: 1 A/V system above, NOT connected -->
+  <circle cx="125" cy="125" r="9" fill="var(--navy-deep)" stroke="#68E3BE" stroke-width="2.5"/>
+  <foreignObject x="10" y="260" width="230" height="180"><div xmlns="http://www.w3.org/1999/xhtml"><span class="s s1">The Silos</span><span class="b">A/V runs on separate, proprietary systems — each one a black box you can't see into.</span></div></foreignObject>
+  <!-- S2: 2 A/V systems, different shapes, NOT connected -->
+  <rect x="316" y="116" width="18" height="18" rx="2" fill="var(--navy-deep)" stroke="#8ed3b5" stroke-width="2.5"/>
+  <path d="M 380 110 L 392 128 L 368 128 Z" fill="var(--navy-deep)" stroke="#8ed3b5" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M 362 92 L 368 102 L 356 102 Z" fill="#EDD086" fill-opacity="0.75"/>
+  <foreignObject x="260" y="260" width="230" height="180"><div xmlns="http://www.w3.org/1999/xhtml"><span class="s s2">The Blind Spot</span><span class="b">You can't monitor what's running, what's exposed, or what's failing — because it's not on your network.</span></div></foreignObject>
+  <!-- S3: 3 A/V systems, all different, NOT connected -->
+  <circle cx="575" cy="100" r="8" fill="var(--navy-deep)" stroke="#bcae7a" stroke-width="2.5"/>
+  <rect x="617" y="128" width="16" height="16" rx="2" fill="var(--navy-deep)" stroke="#bcae7a" stroke-width="2.5"/>
+  <path d="M 680 142 L 690 158 L 670 158 Z" fill="var(--navy-deep)" stroke="#bcae7a" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M 575 82 L 581 92 L 569 92 Z" fill="#EDD086" fill-opacity="0.75"/>
+  <path d="M 625 110 L 631 120 L 619 120 Z" fill="#EDD086" fill-opacity="0.75"/>
+  <foreignObject x="510" y="260" width="230" height="180"><div xmlns="http://www.w3.org/1999/xhtml"><span class="s s3">The Vendors</span><span class="b">Each system came with its own vendor, contract, and support line — and none of them talk to each other.</span></div></foreignObject>
+  <!-- S4: 4 A/V systems, all different, NOT connected, 3 alerts -->
+  <circle cx="825" cy="88" r="7" fill="var(--navy-deep)" stroke="#EDD086" stroke-width="2.5"/>
+  <rect x="860" y="112" width="14" height="14" rx="2" fill="var(--navy-deep)" stroke="#EDD086" stroke-width="2.5"/>
+  <path d="M 905 128 L 914 143 L 896 143 Z" fill="var(--navy-deep)" stroke="#EDD086" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M 870 168 L 876 156 L 882 168 Z" fill="var(--navy-deep)" stroke="#EDD086" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M 825 70 L 831 80 L 819 80 Z" fill="#EDD086" fill-opacity="0.75"/>
+  <path d="M 867 94 L 873 104 L 861 104 Z" fill="#EDD086" fill-opacity="0.75"/>
+  <path d="M 905 110 L 911 120 L 899 120 Z" fill="#EDD086" fill-opacity="0.75"/>
+  <foreignObject x="760" y="260" width="230" height="180"><div xmlns="http://www.w3.org/1999/xhtml"><span class="s s4">The Page</span><span class="b">When any of it fails, it's your phone that rings — and you have no way to diagnose it.</span></div></foreignObject>
+</svg>
+</body>
+</html>

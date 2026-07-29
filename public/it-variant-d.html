@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Variant D — The Blind Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root { --navy-deep: #0A161C; --mint: #68E3BE; --off-white: #F5F8FA; --amber: #EDD086; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--navy-deep); color: var(--off-white); font-family: 'Inter', sans-serif; padding: 40px 20px; }
+  .label { text-align: center; font-family: 'Syncopate', sans-serif; font-size: 11px; letter-spacing: 0.22em; color: var(--mint); margin-bottom: 16px; }
+  .desc { text-align: center; font-size: 14px; color: rgba(245,248,250,0.6); margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.5; }
+  svg { width: 100%; max-width: 900px; height: auto; display: block; margin: 0 auto; }
+  .s { font-family: 'Syncopate', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 6px; }
+  .b { font-size: 13px; line-height: 1.5; color: rgba(245,248,250,0.75); display: block; }
+  .s1, .s1 ~ .b { color: #68E3BE; } .s2, .s2 ~ .b { color: #8ed3b5; } .s3, .s3 ~ .b { color: #bcae7a; } .s4, .s4 ~ .b { color: #EDD086; }
+</style>
+</head>
+<body>
+<div class="label">D — The Blind Dashboard</div>
+<div class="desc">A monitoring dashboard at the bottom (your network's view) shows nothing — it's blind to the A/V systems. Above it, ghosted/faded A/V system icons with alert markers represent what's actually out there — failing, but invisible to your dashboard. The visual says: "there's a lot happening, and you can't see any of it."</div>
+<svg viewBox="0 0 1000 460" preserveAspectRatio="xMidYMid meet">
+  <!-- S1: 1 ghosted system, dashboard shows nothing -->
+  <circle cx="125" cy="120" r="10" fill="none" stroke="#68E3BE" stroke-width="2" stroke-dasharray="3 3" opacity="0.4"/>
+  <foreignObject x="10" y="260" width="230" height="180"><div xmlns="http://www.w3.org/1999/xhtml"><span class="s s1">The Silos</span><span class="b">A/V runs on separate, proprietary systems — each one a black box you can't see into.</span></div></foreignObject>
+  <!-- S2: 2 ghosted systems + 1 alert, dashboard still empty -->
+  <rect x="316" y="106" width="20" height="20" rx="3" fill="none" stroke="#8ed3b5" stroke-width="2" stroke-dasharray="3 3" opacity="0.4"/>
+  <path d="M 380 100 L 392 120 L 368 120 Z" fill="none" stroke="#8ed3b5" stroke-width="2" stroke-dasharray="3 3" opacity="0.4"/>
+  <path d="M 340 82 L 346 92 L 334 92 Z" fill="#EDD086" fill-opacity="0.6"/>
+  <foreignObject x="260" y="260" width="230" height="180"><div xmlns="http://www.w3.org/1999/xhtml"><span class="s s2">The Blind Spot</span><span class="b">You can't monitor what's running, what's exposed, or what's failing — because it's not on your network.</span></div></foreignObject>
+  <!-- S3: 3 ghosted systems + 2 alerts -->
+  <circle cx="570" cy="95" r="9" fill="none" stroke="#bcae7a" stroke-width="2" stroke-dasharray="3 3" opacity="0.4"/>
+  <rect x="617" y="120" width="18" height="18" rx="3" fill="none" stroke="#bcae7a" stroke-width="2" stroke-dasharray="3 3" opacity="0.4"/>
+  <path d="M 685 132 L 695 150 L 675 150 Z" fill="none" stroke="#bcae7a" stroke-width="2" stroke-dasharray="3 3" opacity="0.4"/>
+  <path d="M 570 77 L 576 87 L 564 87 Z" fill="#EDD086" fill-opacity="0.6"/>
+  <path d="M 626 102 L 632 112 L 620 112 Z" fill="#EDD086" fill-opacity="0.6"/>
+  <foreignObject x="510" y="260" width="230" height="180"><div xmlns="http://www.w3.org/1999/xhtml"><span class="s s3">The Vendors</span><span class="b">Each system came with its own vendor, contract, and support line — and none of them talk to each other.</span></div></foreignObject>
+  <!-- S4: 4 ghosted systems + 3 alerts -->
+  <circle cx="820" cy="82" r="8" fill="none" stroke="#EDD086" stroke-width="2" stroke-dasharray="3 3" opacity="0.4"/>
+  <rect x="858" y="108" width="16" height="16" rx="3" fill="none" stroke="#EDD086" stroke-width="2" stroke-dasharray="3 3" opacity="0.4"/>
+  <path d="M 905 126 L 915 144 L 895 144 Z" fill="none" stroke="#EDD086" stroke-width="2" stroke-dasharray="3 3" opacity="0.4"/>
+  <path d="M 875 162 L 883 176 L 867 176 Z" fill="none" stroke="#EDD086" stroke-width="2" stroke-dasharray="3 3" opacity="0.4"/>
+  <path d="M 820 64 L 826 74 L 814 74 Z" fill="#EDD086" fill-opacity="0.6"/>
+  <path d="M 866 90 L 872 100 L 860 100 Z" fill="#EDD086" fill-opacity="0.6"/>
+  <path d="M 905 108 L 911 118 L 899 118 Z" fill="#EDD086" fill-opacity="0.6"/>
+  <foreignObject x="760" y="260" width="230" height="180"><div xmlns="http://www.w3.org/1999/xhtml"><span class="s s4">The Page</span><span class="b">When any of it fails, it's your phone that rings — and you have no way to diagnose it.</span></div></foreignObject>
+  <!-- Dashboard at bottom — YOUR NETWORK's view (empty/blank) -->
+  <rect x="60" y="190" width="880" height="30" rx="4" fill="rgba(104,227,190,0.05)" stroke="rgba(104,227,190,0.2)" stroke-width="1"/>
+  <text x="500" y="209" text-anchor="middle" fill="rgba(104,227,190,0.25)" font-size="11" font-family="Inter" letter-spacing="0.15em">YOUR NETWORK — NOTHING TO SHOW</text>
+</svg>
+</body>
+</html>

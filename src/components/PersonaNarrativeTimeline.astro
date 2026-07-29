@@ -111,28 +111,34 @@ const cardIcons = n.icons ?? defaultCardIcons;
  *  Stage 2 (The Sprawl): ~3x dots, crowded, mixed colors, jittered — fragmented.
  *  Stage 3 (The Legwork): same dense field + tangled connection lines — the chase.
  *  Stage 4 (The Clock): same + one red alert node with radiating waves — the failure.
+ *  Each column's dot field sits progressively higher (rising baseline = escalating stress).
+ *  A rising trend arrow spans the top, reinforcing the upward climb.
+ *  A short accent bar connects each column's dots to its label below.
  *  viewBox: 0 0 1000 460 — dots in top portion, labels below. */
 const escalateColors = ['#68E3BE', '#8ed3b5', '#bcae7a', '#EDD086'];
+const escalateBaseYs = [72, 52, 36, 20];
+const escalateTrend = { x1: 40, y1: 232, x2: 960, y2: 18 };
 const escalateCols = [125, 375, 625, 875].map((cx, colIdx) => {
   const dots: { x: number; y: number; r: number; color: string; opacity: number }[] = [];
   const lines: { x1: number; y1: number; x2: number; y2: number }[] = [];
   let alert: { x: number; y: number } | null = null;
+  const startY = escalateBaseYs[colIdx];
+  let connectY = startY;
 
   if (colIdx === 0) {
     // Stage 1: ~40 dots, neat grid, all mint
     const cols = 8, rows = 5, spacing = 18, r = 2.5;
     const startX = cx - ((cols - 1) * spacing) / 2;
-    const startY = 55;
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
         dots.push({ x: startX + col * spacing, y: startY + row * spacing, r, color: '#68E3BE', opacity: 0.72 });
       }
     }
+    connectY = startY + (rows - 1) * spacing;
   } else {
     // Stages 2-4: ~176 dots, crowded, mixed colors, jittered
     const cols = 16, rows = 11, spacing = 10, r = 1.6;
     const startX = cx - ((cols - 1) * spacing) / 2;
-    const startY = 35;
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
         const idx = row * cols + col;
@@ -148,6 +154,7 @@ const escalateCols = [125, 375, 625, 875].map((cx, colIdx) => {
         });
       }
     }
+    connectY = startY + (rows - 1) * spacing;
     if (colIdx >= 2) {
       // Stages 3-4: tangled connection lines
       for (let i = 0; i < 28; i++) {
@@ -162,7 +169,7 @@ const escalateCols = [125, 375, 625, 875].map((cx, colIdx) => {
       alert = { x: dots[87].x, y: dots[87].y };
     }
   }
-  return { cx, dots, lines, alert };
+  return { cx, dots, lines, alert, connectY };
 });
 ---
 
@@ -357,6 +364,15 @@ const escalateCols = [125, 375, 625, 875].map((cx, colIdx) => {
     {curve === 'escalate' && (
       <div class="pnt__chart pnt__chart--escalate">
         <svg viewBox="0 0 1000 460" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Endpoint complexity escalating from a manageable estate through sprawl, diagnostic chase, to a live failure">
+          <defs>
+            <marker id="pnt-esc-arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto">
+              <path d="M 2 2 L 10 6 L 2 10 Z" fill="rgba(237,208,134,0.5)" />
+            </marker>
+          </defs>
+          {/* Rising trend arrow — complexity climbing upward */}
+          <line x1={escalateTrend.x1} y1={escalateTrend.y1} x2={escalateTrend.x2} y2={escalateTrend.y2}
+            stroke="rgba(237,208,134,0.28)" stroke-width="2" stroke-dasharray="6 8" stroke-linecap="round"
+            marker-end="url(#pnt-esc-arrow)" class="pnt__esc-trend" />
           {escalateCols.map((col, i) => (
             <g class={`pnt__esc-col pnt__esc-col--${i+1}`}>
               {col.lines.map((l) => (
@@ -372,10 +388,13 @@ const escalateCols = [125, 375, 625, 875].map((cx, colIdx) => {
                   <circle cx={col.alert.x} cy={col.alert.y} r="14" fill="none" stroke="#ED5555" stroke-width="1" opacity="0.25" class="pnt__esc-wave2" />
                 </g>
               )}
+              {/* Accent bar connecting dots to label below */}
+              <line x1={col.cx} y1={col.connectY + 8} x2={col.cx} y2={col.connectY + 28}
+                stroke={['#68E3BE', '#8ed3b5', '#bcae7a', '#EDD086'][i]} stroke-width="2.5" stroke-linecap="round" class="pnt__esc-connect" />
             </g>
           ))}
           {escalateCols.map((col, i) => (
-            <foreignObject x={col.cx - 115} y={250} width="230" height="180">
+            <foreignObject x={col.cx - 115} y={col.connectY + 34} width="230" height="180">
               <div xmlns="http://www.w3.org/1999/xhtml" class={`pnt__label pnt__label--${i+1}`}>
                 <span class="pnt__stage">{n.moments[i].time}</span>
                 <span class="pnt__body">{n.moments[i].caption}</span>
@@ -526,6 +545,9 @@ const escalateCols = [125, 375, 625, 875].map((cx, colIdx) => {
 
 /* Escalate chart (A/V & Facilities) */
 .pnt__chart--escalate svg { width: 100%; height: auto; display: block; overflow: visible; }
+.pnt__esc-trend { animation: pnt-esc-draw 1.2s ease-out forwards; stroke-dashoffset: 1000; }
+@keyframes pnt-esc-draw { to { stroke-dashoffset: 0; } }
+.pnt__esc-connect { opacity: 0; animation: pnt-fadein 0.5s ease-out forwards; animation-delay: 0.8s; }
 .pnt__esc-col { opacity: 0; animation: pnt-fadein 0.7s ease-out forwards; }
 .pnt__esc-col--1 { animation-delay: 0.15s; }
 .pnt__esc-col--2 { animation-delay: 0.45s; }
@@ -689,6 +711,6 @@ const escalateCols = [125, 375, 625, 875].map((cx, colIdx) => {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pnt__dot, .pnt__tread, .pnt__drop, .pnt__col, .pnt__stacknode, .pnt__netnode, .pnt__alert, .pnt__card, .pnt__esc-col, .pnt__esc-wave, .pnt__esc-wave2 { animation: none; opacity: 1; }
+  .pnt__dot, .pnt__tread, .pnt__drop, .pnt__col, .pnt__stacknode, .pnt__netnode, .pnt__alert, .pnt__card, .pnt__esc-col, .pnt__esc-wave, .pnt__esc-wave2, .pnt__esc-trend, .pnt__esc-connect { animation: none; opacity: 1; stroke-dashoffset: 0; }
 }
 </style>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Variant G — Radial</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@600;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root { --navy-deep: #0A161C; --mint: #68E3BE; --off-white: #F5F8FA; --amber: #EDD086; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--navy-deep); color: var(--off-white); font-family: 'Inter', sans-serif; padding: 40px 20px; }
+  .label { text-align: center; font-family: 'Syncopate', sans-serif; font-size: 11px; letter-spacing: 0.22em; color: var(--mint); margin-bottom: 12px; }
+  .desc { text-align: center; font-size: 14px; color: rgba(245,248,250,0.6); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.5; }
+  .radial { position: relative; width: 600px; height: 600px; margin: 0 auto; }
+  .radial svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+  .center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
+  .center .ring { font-family: 'Syncopate', sans-serif; font-size: 10px; letter-spacing: 0.2em; color: var(--amber); margin-bottom: 6px; }
+  .center .phone { font-size: 32px; }
+  .node { position: absolute; width: 200px; text-align: center; }
+  .node .icon { width: 56px; height: 56px; margin: 0 auto 12px; }
+  .node .stage { font-family: 'Syncopate', sans-serif; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 8px; }
+  .node .body { font-size: 12px; line-height: 1.5; color: rgba(245,248,250,0.65); display: block; }
+  .n1 { top: 0; left: 200px; } .n1 .stage { color: #68E3BE; } .n1 .icon svg { color: #68E3BE; }
+  .n2 { top: 200px; right: 0; } .n2 .stage { color: #8ed3b5; } .n2 .icon svg { color: #8ed3b5; }
+  .n3 { bottom: 0; left: 200px; } .n3 .stage { color: #bcae7a; } .n3 .icon svg { color: #bcae7a; }
+  .n4 { top: 200px; left: 0; } .n4 .stage { color: #EDD086; } .n4 .icon svg { color: #EDD086; }
+</style>
+</head>
+<body>
+<div class="label">G — Radial (The Call Comes to You)</div>
+<div class="desc">Four stages arranged in a circle around a central phone/alert — "the call comes to you." Each stage radiates from the center, suggesting the cyclical nature: silos create blind spots, vendors can't help, and it all comes back to your phone. Non-linear, experiential.</div>
+<div class="radial">
+  <svg viewBox="0 0 600 600" preserveAspectRatio="xMidYMid meet">
+    <!-- Spoke lines from center to each node -->
+    <line x1="300" y1="300" x2="300" y2="80" stroke="rgba(104,227,190,0.15)" stroke-width="1.5" stroke-dasharray="4 6"/>
+    <line x1="300" y1="300" x2="520" y2="300" stroke="rgba(141,211,181,0.15)" stroke-width="1.5" stroke-dasharray="4 6"/>
+    <line x1="300" y1="300" x2="300" y2="520" stroke="rgba(188,174,122,0.15)" stroke-width="1.5" stroke-dasharray="4 6"/>
+    <line x1="300" y1="300" x2="80" y2="300" stroke="rgba(237,208,134,0.15)" stroke-width="1.5" stroke-dasharray="4 6"/>
+    <!-- Center circle -->
+    <circle cx="300" cy="300" r="48" fill="rgba(237,208,134,0.08)" stroke="rgba(237,208,134,0.3)" stroke-width="2"/>
+    <!-- Phone icon in center -->
+    <g transform="translate(282, 278)" stroke="#EDD086" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="8" y="4" width="20" height="36" rx="4" fill="rgba(237,208,134,0.1)"/>
+      <line x1="14" y1="34" x2="22" y2="34" stroke-width="2"/>
+      <text x="18" y="26" text-anchor="middle" fill="#EDD086" stroke="none" font-size="14" font-family="Inter" font-weight="700">!</text>
+    </g>
+    <!-- Alert waves from center -->
+    <circle cx="300" cy="300" r="60" fill="none" stroke="rgba(237,208,134,0.15)" stroke-width="1.5" stroke-dasharray="2 6"/>
+    <circle cx="300" cy="300" r="72" fill="none" stroke="rgba(237,208,134,0.08)" stroke-width="1.5" stroke-dasharray="2 6"/>
+  </svg>
+  <!-- Node 1: Top — The Silos -->
+  <div class="node n1">
+    <div class="icon">
+      <svg width="56" height="56" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M 32 8 L 56 20 L 56 44 L 32 56 L 8 44 L 8 20 Z" fill="rgba(104,227,190,0.08)"/>
+        <path d="M 32 8 L 56 20 L 32 32 L 8 20 Z" fill="rgba(104,227,190,0.12)"/>
+        <path d="M 32 32 L 56 20 M 32 32 L 8 20 M 32 32 L 32 56" stroke-dasharray="3 3" opacity="0.5"/>
+        <text x="32" y="40" text-anchor="middle" fill="currentColor" stroke="none" font-size="14" font-family="Inter" opacity="0.5">?</text>
+      </svg>
+    </div>
+    <span class="stage">The Silos</span>
+    <span class="body">A/V runs on separate, proprietary systems — each one a black box you can't see into.</span>
+  </div>
+  <!-- Node 2: Right — The Blind Spot -->
+  <div class="node n2">
+    <div class="icon">
+      <svg width="56" height="56" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M 8 32 Q 32 14 56 32 Q 32 50 8 32 Z" fill="rgba(141,211,181,0.08)"/>
+        <circle cx="32" cy="32" r="8" fill="rgba(141,211,181,0.12)"/>
+        <line x1="14" y1="18" x2="50" y2="46" stroke-width="3"/>
+      </svg>
+    </div>
+    <span class="stage">The Blind Spot</span>
+    <span class="body">You can't monitor what's running, what's exposed, or what's failing.</span>
+  </div>
+  <!-- Node 3: Bottom — The Vendors -->
+  <div class="node n3">
+    <div class="icon">
+      <svg width="56" height="56" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+        <rect x="6" y="10" width="20" height="14" rx="3" fill="rgba(188,174,122,0.1)"/>
+        <rect x="38" y="10" width="20" height="14" rx="3" fill="rgba(188,174,122,0.1)"/>
+        <rect x="22" y="40" width="20" height="14" rx="3" fill="rgba(188,174,122,0.1)"/>
+        <line x1="26" y1="24" x2="28" y2="34" stroke-dasharray="2 4" opacity="0.4"/>
+        <line x1="38" y1="24" x2="36" y2="34" stroke-dasharray="2 4" opacity="0.4"/>
+        <line x1="48" y1="24" x2="42" y2="40" stroke-dasharray="2 4" opacity="0.4"/>
+      </svg>
+    </div>
+    <span class="stage">The Vendors</span>
+    <span class="body">Each system came with its own vendor — and none of them talk to each other.</span>
+  </div>
+  <!-- Node 4: Left — The Page -->
+  <div class="node n4">
+    <div class="icon">
+      <svg width="56" height="56" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+        <rect x="22" y="14" width="20" height="36" rx="4" fill="rgba(237,208,134,0.1)"/>
+        <line x1="28" y1="44" x2="36" y2="44" stroke-width="2"/>
+        <path d="M 14 22 Q 10 32 14 42" fill="none" opacity="0.6"/>
+        <path d="M 50 22 Q 54 32 50 42" fill="none" opacity="0.6"/>
+        <path d="M 10 16 Q 4 32 10 48" fill="none" opacity="0.3"/>
+        <path d="M 54 16 Q 60 32 54 48" fill="none" opacity="0.3"/>
+        <text x="32" y="36" text-anchor="middle" fill="currentColor" stroke="none" font-size="14" font-family="Inter" font-weight="700">!</text>
+      </svg>
+    </div>
+    <span class="stage">The Page</span>
+    <span class="body">When any of it fails, it's your phone that rings — and you have no way to diagnose it.</span>
+  </div>
+</div>
+</body>
+</html>

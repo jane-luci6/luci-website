@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Variant E — Icon Cards</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@600;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root { --navy-deep: #0A161C; --navy: #0F1E26; --mint: #68E3BE; --gold: #CEB06E; --off-white: #F5F8FA; --amber: #EDD086; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--navy-deep); color: var(--off-white); font-family: 'Inter', sans-serif; padding: 40px 20px; }
+  .label { text-align: center; font-family: 'Syncopate', sans-serif; font-size: 11px; letter-spacing: 0.22em; color: var(--mint); margin-bottom: 12px; }
+  .desc { text-align: center; font-size: 14px; color: rgba(245,248,250,0.6); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.5; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto; }
+  .card { text-align: center; padding: 32px 20px; }
+  .icon { width: 72px; height: 72px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; }
+  .stage { font-family: 'Syncopate', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 12px; }
+  .body { font-size: 14px; line-height: 1.55; color: rgba(245,248,250,0.72); display: block; }
+  .c1 .stage { color: #68E3BE; } .c2 .stage { color: #8ed3b5; } .c3 .stage { color: #bcae7a; } .c4 .stage { color: #EDD086; }
+  .c1 .icon svg { color: #68E3BE; } .c2 .icon svg { color: #8ed3b5; } .c3 .icon svg { color: #bcae7a; } .c4 .icon svg { color: #EDD086; }
+  .connector { width: 100%; height: 1px; background: linear-gradient(90deg, rgba(104,227,190,0.4), rgba(237,208,134,0.4)); margin: 0 0 40px; max-width: 1000px; margin-left: auto; margin-right: auto; }
+</style>
+</head>
+<body>
+<div class="label">E — Icon Cards (Horizontal)</div>
+<div class="desc">Four cards in a row, each with a custom icon that visually represents the concept. A fading connector line ties them together. Clean, modular, readable.</div>
+<div class="connector"></div>
+<div class="grid">
+  <!-- Card 1: The Silos — opaque box you can't see into -->
+  <div class="card c1">
+    <div class="icon">
+      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+        <!-- Isometric opaque cube -->
+        <path d="M 32 8 L 56 20 L 56 44 L 32 56 L 8 44 L 8 20 Z" fill="rgba(104,227,190,0.08)"/>
+        <path d="M 32 8 L 56 20 L 32 32 L 8 20 Z" fill="rgba(104,227,190,0.12)"/>
+        <path d="M 32 32 L 56 20 M 32 32 L 8 20 M 32 32 L 32 56" stroke-dasharray="3 3" opacity="0.5"/>
+        <text x="32" y="40" text-anchor="middle" fill="currentColor" stroke="none" font-size="14" font-family="Inter" opacity="0.5">?</text>
+      </svg>
+    </div>
+    <span class="stage">The Silos</span>
+    <span class="body">A/V runs on separate, proprietary systems — each one a black box you can't see into.</span>
+  </div>
+  <!-- Card 2: The Blind Spot — eye with slash -->
+  <div class="card c2">
+    <div class="icon">
+      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+        <!-- Eye shape -->
+        <path d="M 8 32 Q 32 14 56 32 Q 32 50 8 32 Z" fill="rgba(141,211,181,0.08)"/>
+        <circle cx="32" cy="32" r="8" fill="rgba(141,211,181,0.12)"/>
+        <!-- Slash through it -->
+        <line x1="14" y1="18" x2="50" y2="46" stroke-width="3"/>
+      </svg>
+    </div>
+    <span class="stage">The Blind Spot</span>
+    <span class="body">You can't monitor what's running, what's exposed, or what's failing — because it's not on your network.</span>
+  </div>
+  <!-- Card 3: The Vendors — disconnected nodes -->
+  <div class="card c3">
+    <div class="icon">
+      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+        <!-- Three disconnected vendor tags -->
+        <rect x="6" y="10" width="20" height="14" rx="3" fill="rgba(188,174,122,0.1)"/>
+        <rect x="38" y="10" width="20" height="14" rx="3" fill="rgba(188,174,122,0.1)"/>
+        <rect x="22" y="40" width="20" height="14" rx="3" fill="rgba(188,174,122,0.1)"/>
+        <!-- Broken connection lines -->
+        <line x1="26" y1="24" x2="28" y2="34" stroke-dasharray="2 4" opacity="0.4"/>
+        <line x1="38" y1="24" x2="36" y2="34" stroke-dasharray="2 4" opacity="0.4"/>
+        <line x1="48" y1="24" x2="42" y2="40" stroke-dasharray="2 4" opacity="0.4"/>
+      </svg>
+    </div>
+    <span class="stage">The Vendors</span>
+    <span class="body">Each system came with its own vendor, contract, and support line — and none of them talk to each other.</span>
+  </div>
+  <!-- Card 4: The Page — phone with alert -->
+  <div class="card c4">
+    <div class="icon">
+      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+        <!-- Phone -->
+        <rect x="22" y="14" width="20" height="36" rx="4" fill="rgba(237,208,134,0.1)"/>
+        <line x1="28" y1="44" x2="36" y2="44" stroke-width="2"/>
+        <!-- Alert waves -->
+        <path d="M 14 22 Q 10 32 14 42" fill="none" opacity="0.6"/>
+        <path d="M 50 22 Q 54 32 50 42" fill="none" opacity="0.6"/>
+        <path d="M 10 16 Q 4 32 10 48" fill="none" opacity="0.3"/>
+        <path d="M 54 16 Q 60 32 54 48" fill="none" opacity="0.3"/>
+        <!-- Exclamation -->
+        <text x="32" y="36" text-anchor="middle" fill="currentColor" stroke="none" font-size="14" font-family="Inter" font-weight="700">!</text>
+      </svg>
+    </div>
+    <span class="stage">The Page</span>
+    <span class="body">When any of it fails, it's your phone that rings — and you have no way to diagnose it.</span>
+  </div>
+</div>
+</body>
+</html>
