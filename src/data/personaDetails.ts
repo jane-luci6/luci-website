@@ -650,21 +650,21 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     },
     graphLockup: {
       lockupName: 'It all runs on your network now',
-      deck: 'Displays, players, processors, controllers, audio \u2014 the property\u2019s A/V used to live on its own island. Now it\u2019s on your network, and everything on your network is yours to secure, monitor, and keep alive.',
+      deck: 'Displays, players, processors, controllers, audio \u2014 every A/V system on the property is an endpoint on your network. Each one is yours to secure, monitor, and keep alive.',
     },
     narrative: {
       curve: 'converge',
       subLead: '',
       moments: [
         {
-          time: 'The island',
+          time: 'The endpoints',
           caption:
-            'A/V used to run on its own \u2014 separate systems, separate vendors, not your problem.',
+            'Every display, player, and controller is an endpoint on your network \u2014 one you didn\u2019t design.',
         },
         {
-          time: 'The move',
+          time: 'The vendors',
           caption:
-            'It all moved onto the network. Now every screen and player is an endpoint you own.',
+            'Each system came with its own vendor, contract, and support line \u2014 all on you to integrate.',
         },
         {
           time: 'The surface',
