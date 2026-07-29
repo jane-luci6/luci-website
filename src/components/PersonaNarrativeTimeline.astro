@@ -611,11 +611,14 @@ const escalateCols = escalateColXs.map((cx, colIdx) => {
 .pnt__label--1 .pnt__stage,
 .pnt__label--1 .pnt__body { color: #68E3BE; }
 .pnt__label--2 .pnt__stage,
-.pnt__label--2 .pnt__body { color: #EDD086; }
+.pnt__label--2 .pnt__body { color: #8ed3b5; }
 .pnt__label--3 .pnt__stage,
-.pnt__label--3 .pnt__body { color: #CEB06E; }
+.pnt__label--3 .pnt__body { color: #bcae7a; opacity: 0.85; }
 .pnt__label--4 .pnt__stage,
-.pnt__label--4 .pnt__body { color: #FF3B3B; }
+.pnt__label--4 .pnt__body { color: #EDD086; opacity: 0.7; }
+/* Escalate labels: brand-aligned — images carry the color story */
+.pnt__chart--escalate .pnt__label .pnt__stage { color: var(--mint); }
+.pnt__chart--escalate .pnt__label .pnt__body { color: rgba(245, 248, 250, 0.68); }
 
 /* Closing / payoff line */
 .pnt__closing {
@@ -687,15 +690,19 @@ const escalateCols = escalateColXs.map((cx, colIdx) => {
 .pnt__mobile-item--1 { border-color: #68E3BE; }
 .pnt__mobile-item--1 .pnt__stage,
 .pnt__mobile-item--1 .pnt__body { color: #68E3BE; }
-.pnt__mobile-item--2 { border-color: #EDD086; }
+.pnt__mobile-item--2 { border-color: #8ed3b5; }
 .pnt__mobile-item--2 .pnt__stage,
-.pnt__mobile-item--2 .pnt__body { color: #EDD086; }
-.pnt__mobile-item--3 { border-color: #CEB06E; }
+.pnt__mobile-item--2 .pnt__body { color: #8ed3b5; }
+.pnt__mobile-item--3 { border-color: #bcae7a; }
 .pnt__mobile-item--3 .pnt__stage,
-.pnt__mobile-item--3 .pnt__body { color: #CEB06E; }
-.pnt__mobile-item--4 { border-color: #FF3B3B; }
+.pnt__mobile-item--3 .pnt__body { color: #bcae7a; }
+.pnt__mobile-item--4 { border-color: #EDD086; }
 .pnt__mobile-item--4 .pnt__stage,
-.pnt__mobile-item--4 .pnt__body { color: #FF3B3B; }
+.pnt__mobile-item--4 .pnt__body { color: #EDD086; opacity: 0.85; }
+/* Escalate mobile: brand-aligned */
+.pnt__chart--escalate .pnt__mobile-item { border-color: rgba(var(--mint-rgb), 0.3); }
+.pnt__chart--escalate .pnt__mobile-item .pnt__stage { color: var(--mint); }
+.pnt__chart--escalate .pnt__mobile-item .pnt__body { color: rgba(245, 248, 250, 0.68); }
 .pnt__mobile-item--rise { border-color: var(--mint); }
 .pnt__mobile-item--rise .pnt__stage,
 .pnt__mobile-item--rise .pnt__body { color: var(--mint); }
