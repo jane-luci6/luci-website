@@ -649,37 +649,37 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       lockupRole: 'What IT is accountable for',
     },
     graphLockup: {
-      lockupName: 'The tangle on <em>your network</em>',
-      deck: 'Every A/V system on the property \u2014 displays, players, processors, controllers, audio \u2014 came from a different vendor. Now each one is an endpoint on your network, yours to secure, integrate, and keep alive.',
+      lockupName: 'What\u2019s sitting <em>off your network</em>',
+      deck: 'Every A/V system on the property \u2014 displays, players, processors, controllers, audio \u2014 runs on its own proprietary infrastructure. None of it is on your network. None of it is under your control. All of it is yours to answer for when it fails.',
     },
     narrative: {
       curve: 'converge',
       subLead: '',
       moments: [
         {
-          time: 'The endpoints',
+          time: 'The silos',
           caption:
-            'Every display, player, and controller is an endpoint on your network \u2014 one you didn\u2019t design.',
+            'A/V runs on separate, proprietary systems \u2014 each one a black box you can\u2019t see into.',
+        },
+        {
+          time: 'The blind spot',
+          caption:
+            'You can\u2019t monitor what\u2019s running, what\u2019s exposed, or what\u2019s failing \u2014 because it\u2019s not on your network.',
         },
         {
           time: 'The vendors',
           caption:
-            'Each system came with its own vendor, contract, and support line \u2014 all on you to integrate.',
-        },
-        {
-          time: 'The surface',
-          caption:
-            'Each device is one more thing to secure, patch, and monitor \u2014 and one more way in.',
+            'Each system came with its own vendor, contract, and support line \u2014 and none of them talk to each other.',
         },
         {
           time: 'The page',
           caption:
-            'When any of it fails, it\u2019s your phone that rings \u2014 with no single view to diagnose it.',
+            'When any of it fails, it\u2019s your phone that rings \u2014 and you have no way to diagnose it.',
         },
       ],
       support: '',
       closing:
-        '<span class="pnt__luci">With LUCI</span>, all of it becomes <em>one</em> platform \u2014 standards-based, hardware-agnostic, monitored and secured on the network you already run.',
+        '<span class="pnt__luci">With LUCI</span>, all of it comes <em>onto your network</em> \u2014 one platform, standards-based, hardware-agnostic, monitored and secured within the controls you already run.',
     },
     challengesLockup: {
       lockupName: 'What gets in <em>your way</em>',

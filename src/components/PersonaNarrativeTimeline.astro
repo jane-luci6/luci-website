@@ -53,52 +53,49 @@ const stackCols = [125, 375, 625, 875].map((cx, colIdx) => {
   return { cx, layers };
 });
 
-/** Converge: A/V systems piling onto the network, creating a tangled burden.
+/** Converge: A/V systems as isolated proprietary silos — OFF your network.
  *  Different node shapes = different vendor systems (not a unified platform).
- *  Connection lines cross between nodes = integration tangle.
- *  Network line gets progressively thicker = load increasing.
- *  Alert markers grow = more that can fail and page you.
- *  viewBox: 0 0 1000 460 — network in top portion, labels below. */
-const convergeLineY = 160;
+ *  No connection lines = they're silos that don't talk to each other.
+ *  Nodes scatter at different heights = unorganized, not on your network.
+ *  Faint dotted line at bottom = "your network" — the nodes are NOT on it.
+ *  Alert markers grow = more that can fail and page you with no way to diagnose.
+ *  viewBox: 0 0 1000 460 — scattered nodes in top portion, labels below. */
+const convergeNetY = 215; // faint "your network" line at the bottom
 const convergeNodeR = 8;
 const convergeNodeSpacing = 38;
-const convergeAlertY = 118;
 const convergeNodeColors = ['#68E3BE', '#8ed3b5', '#bcae7a', '#EDD086'];
 const convergeShapes = ['circle', 'square', 'triangle', 'hexagon'];
+// Scattered y-positions for nodes — different heights per stage, showing isolation
+const convergeNodeYs = [
+  [140],                    // stage 1: 1 node
+  [115, 155],              // stage 2: 2 nodes, different heights
+  [100, 140, 168],        // stage 3: 3 nodes, more scattered
+  [95, 125, 150, 172],   // stage 4: 4 nodes, very scattered
+];
+const convergeAlertY = 80; // alerts above the highest nodes
 const convergeCols = [125, 375, 625, 875].map((cx, colIdx) => {
   const nodeCount = colIdx + 1;
   const alertCount = colIdx;
+  const ys = convergeNodeYs[colIdx];
   const nodes = [];
   for (let i = 0; i < nodeCount; i++) {
     const offset = (i - (nodeCount - 1) / 2) * convergeNodeSpacing;
-    // Slight vertical scatter in later stages — things getting out of control
-    const scatter = colIdx > 0 ? (i % 2 === 0 ? -3 - colIdx * 2 : 3 + colIdx * 2) : 0;
     nodes.push({
       cx: cx + offset,
-      cy: convergeLineY + scatter,
+      cy: ys[i],
       color: convergeNodeColors[i],
       shape: convergeShapes[i],
     });
   }
-  // Connection lines between nodes (the integration tangle)
-  const connections = [];
-  for (let i = 0; i < nodeCount - 1; i++) {
-    for (let j = i + 1; j < nodeCount; j++) {
-      connections.push({ x1: nodes[i].cx, y1: nodes[i].cy, x2: nodes[j].cx, y2: nodes[j].cy });
-    }
-  }
-  // Alert markers (larger, with exclamation feel)
+  // Alert markers — failures you can't diagnose
   const alerts = [];
   for (let i = 0; i < alertCount; i++) {
     const nodeIdx = i + 1;
     const offset = (nodeIdx - (nodeCount - 1) / 2) * convergeNodeSpacing;
     const ax = cx + offset;
-    const ay = convergeAlertY - colIdx * 4; // alerts creep upward as burden grows
-    alerts.push({ d: `M ${ax - 6} ${ay + 6} L ${ax + 6} ${ay + 6} L ${ax} ${ay - 6} Z` });
+    alerts.push({ d: `M ${ax - 6} ${convergeAlertY + 6} L ${ax + 6} ${convergeAlertY + 6} L ${ax} ${convergeAlertY - 6} Z` });
   }
-  // Network line segment thickness — heavier with each stage
-  const lineWeight = 2 + colIdx * 1.5;
-  return { cx, nodes, connections, alerts, lineWeight };
+  return { cx, nodes, alerts };
 });
 ---
 
@@ -230,25 +227,18 @@ const convergeCols = [125, 375, 625, 875].map((cx, colIdx) => {
     )}
     {curve === 'converge' && (
       <div class="pnt__chart pnt__chart--converge">
-        <svg viewBox="0 0 1000 460" preserveAspectRatio="xMidYMid meet" role="img" aria-label="A/V systems from different vendors piling onto the network, creating a tangled burden of endpoints, integrations, and alerts">
-          {/* Network line — progressively heavier across stages */}
-          {convergeCols.map((col, i) => {
-            const x1 = i === 0 ? 40 : convergeCols[i - 1].cx + 60;
-            const x2 = i === convergeCols.length - 1 ? 960 : col.cx + 60;
-            return <line x1={x1} y1={convergeLineY} x2={x2} y2={convergeLineY} stroke="rgba(104,227,190,0.18)" stroke-width={col.lineWeight} stroke-linecap="round" />;
-          })}
+        <svg viewBox="0 0 1000 460" preserveAspectRatio="xMidYMid meet" role="img" aria-label="A/V systems from different vendors sitting as isolated silos off your network, accumulating failures you can't diagnose">
+          {/* Faint dotted line = "your network" — the nodes are NOT on it */}
+          <line x1="40" y1={convergeNetY} x2="960" y2={convergeNetY} stroke="rgba(104,227,190,0.15)" stroke-width="1.5" stroke-dasharray="4 8" />
+          <text x="500" y={convergeNetY + 22} text-anchor="middle" fill="rgba(104,227,190,0.35)" font-size="11" font-family="Inter, sans-serif" letter-spacing="0.15em" text-transform="uppercase">YOUR NETWORK</text>
 
           {convergeCols.map((col, i) => (
             <g class={`pnt__col pnt__col--${i+1}`}>
-              {/* Tangled connection lines between nodes */}
-              {col.connections.map((c) => (
-                <line x1={c.x1} y1={c.y1} x2={c.x2} y2={c.y2} stroke="rgba(237,208,134,0.25)" stroke-width="1" stroke-dasharray="3 3" class="pnt__netline" />
-              ))}
-              {/* Alert markers */}
+              {/* Alert markers — failures you can't diagnose */}
               {col.alerts.map((a) => (
                 <path d={a.d} fill="#EDD086" fill-opacity="0.75" class="pnt__alert" />
               ))}
-              {/* Nodes — different shapes for different vendor systems */}
+              {/* Nodes — different shapes for different vendor systems, scattered at different heights */}
               {col.nodes.map((node, j) => {
                 const r = convergeNodeR;
                 if (node.shape === 'circle') {
@@ -360,11 +350,6 @@ const convergeCols = [125, 375, 625, 875].map((cx, colIdx) => {
   opacity: 0;
   animation: pnt-fadein 0.4s ease-out forwards;
   animation-delay: 0.5s;
-}
-.pnt__netline {
-  opacity: 0;
-  animation: pnt-fadein 0.5s ease-out forwards;
-  animation-delay: 0.3s;
 }
 
 .pnt__label {
@@ -498,6 +483,6 @@ const convergeCols = [125, 375, 625, 875].map((cx, colIdx) => {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pnt__dot, .pnt__tread, .pnt__drop, .pnt__col, .pnt__stacknode, .pnt__netnode, .pnt__alert, .pnt__netline { animation: none; opacity: 1; }
+  .pnt__dot, .pnt__tread, .pnt__drop, .pnt__col, .pnt__stacknode, .pnt__netnode, .pnt__alert { animation: none; opacity: 1; }
 }
 </style>
