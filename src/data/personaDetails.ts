@@ -649,7 +649,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       lockupRole: 'What IT is accountable for',
     },
     graphLockup: {
-      lockupName: 'What\u2019s sitting <em>off your network</em>',
+      lockupName: 'The tangle on <em>your network</em>',
       deck: 'Every A/V system on the property \u2014 displays, players, processors, controllers, audio \u2014 runs on its own proprietary infrastructure. None of it is on your network. None of it is under your control. All of it is yours to answer for when it fails.',
     },
     narrative: {
