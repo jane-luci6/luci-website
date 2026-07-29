@@ -51,8 +51,8 @@ export const personas = [
   },
   {
     id: 'facilities' as const,
-    label: 'Facilities',
-    role: 'Keep the property running',
+    label: 'A/V & Facilities',
+    role: 'Run the room',
     line: 'See everything. Control anything. From any device. Without leaving the floor.',
     belief:
       "Property AV doesn't mean server-room runs — proactive command of one coherent system.",

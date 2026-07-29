@@ -44,6 +44,8 @@ export interface PersonaNarrative {
   closing: string;
   /** Optional supporting line under the closing "With LUCI" payoff. */
   closingSupport?: string;
+  /** Optional custom SVG markup per stage (for 'iconcards' curve). Falls back to default icons. */
+  icons?: string[];
 }
 
 /** "The two shifts" — the works-vs-broken contrast that names the friction. */
@@ -799,6 +801,186 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     ctaTitle: 'Bring A/V <em>under control</em>.',
     ctaDeck:
       'Let us walk through how LUCI fits your network \u2014 one platform, standards-based and hardware-agnostic, monitored and secured within the controls you already run.',
+    chapters: [
+      { id: 'persona-thesis', label: 'Overview' },
+      { id: 'persona-narrative', label: 'What you manage' },
+      { id: 'persona-challenges', label: 'What gets in your way' },
+      { id: 'persona-capabilities', label: 'What you can do' },
+      { id: 'persona-industries', label: 'Wherever you operate' },
+      { id: 'persona-cta', label: 'Next step' },
+    ],
+  },
+  facilities: {
+    id: 'facilities',
+    heroImage: '/images/who-we-serve/av-facilities-hero.jpg?v=1',
+    heroAlt:
+      'An A/V and facilities technician at a control desk monitoring displays and audio zones across a property',
+    heroKicker: '',
+    heroDeck:
+      'You keep it all running \u2014 the screens, the sound, the systems behind the building. LUCI puts the whole estate in one place, so your expertise goes where it matters instead of into the legwork.',
+    narrativeLockup: {
+      lockupName: 'Put the whole estate <em>in one place</em>',
+      lockupRole: 'What A/V & Facilities is accountable for',
+    },
+    graphLockup: {
+      lockupName: 'The estate you keep <em>running</em>',
+      deck: 'Displays, audio, lighting, signage, the systems behind the walls \u2014 you install it, calibrate it, run it live, and keep it alive. When any of it fails, the fix is yours, right now.',
+    },
+    narrative: {
+      curve: 'iconcards',
+      subLead: '',
+      moments: [
+        {
+          time: 'The estate',
+          caption:
+            'Screens, audio, lighting, signage, building systems \u2014 all of it is yours to keep running.',
+        },
+        {
+          time: 'The sprawl',
+          caption:
+            'Each one has its own interface, its own vendor, its own quirks. No shared view.',
+        },
+        {
+          time: 'The legwork',
+          caption:
+            'When something\u2019s off, you\u2019re tracing it by hand \u2014 rack to rack, room to room.',
+        },
+        {
+          time: 'The clock',
+          caption:
+            'And when it fails live, the fix is yours immediately, in front of the room.',
+        },
+      ],
+      support: '',
+      closing:
+        '<span class="pnt__luci">With LUCI</span>, the whole estate is in <em>one place</em> \u2014 so you see it, control it, and fix it from where you stand, and your expertise goes where it counts.',
+      icons: [
+        '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="14" y="12" width="36" height="44" rx="3" fill="rgba(104,227,190,0.06)"/><rect x="20" y="18" width="10" height="7" rx="1.5" fill="rgba(104,227,190,0.12)"/><rect x="34" y="18" width="10" height="7" rx="1.5" fill="rgba(104,227,190,0.12)"/><circle cx="25" cy="34" r="3" fill="rgba(104,227,190,0.12)"/><circle cx="39" cy="34" r="3" fill="rgba(104,227,190,0.12)"/><rect x="22" y="42" width="20" height="8" rx="1.5" fill="rgba(104,227,190,0.12)"/></svg>',
+        '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="6" y="10" width="18" height="13" rx="2" fill="rgba(141,211,181,0.1)"/><rect x="40" y="10" width="18" height="13" rx="2" fill="rgba(141,211,181,0.1)"/><rect x="23" y="38" width="18" height="13" rx="2" fill="rgba(141,211,181,0.1)"/><line x1="24" y1="23" x2="26" y2="32" stroke-dasharray="2 4" opacity="0.3"/><line x1="40" y1="23" x2="38" y2="32" stroke-dasharray="2 4" opacity="0.3"/></svg>',
+        '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M 10 50 Q 20 40 18 30 Q 16 20 28 18 Q 40 16 42 28 Q 44 40 54 36" stroke-dasharray="4 4" fill="none" opacity="0.6"/><rect x="4" y="46" width="14" height="12" rx="2" fill="rgba(188,174,122,0.1)"/><rect x="46" y="32" width="14" height="12" rx="2" fill="rgba(188,174,122,0.1)"/><ellipse cx="20" cy="38" rx="3" ry="2" fill="currentColor" opacity="0.4"/><ellipse cx="30" cy="22" rx="3" ry="2" fill="currentColor" opacity="0.4"/></svg>',
+        '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><circle cx="32" cy="32" r="20" fill="rgba(237,208,134,0.08)"/><line x1="32" y1="32" x2="32" y2="18" stroke-width="2.5"/><line x1="32" y1="32" x2="42" y2="36" stroke-width="2.5"/><path d="M 14 14 Q 8 32 14 50" fill="none" opacity="0.4"/><path d="M 50 14 Q 56 32 50 50" fill="none" opacity="0.4"/><text x="32" y="40" text-anchor="middle" fill="currentColor" stroke="none" font-size="13" font-family="Inter, sans-serif" font-weight="700">!</text></svg>',
+      ],
+    },
+    challengesLockup: {
+      lockupName: 'What gets in <em>your way</em>',
+      lockupRole: 'The work behind keeping it running',
+    },
+    challenges: [
+      {
+        friction:
+          'Finding a problem means chasing it by hand across disconnected systems.',
+        relief:
+          'LUCI shows every display, zone, and system in one place, so you find the issue without walking every rack and room.',
+      },
+      {
+        friction:
+          'When something fails live, you have to fix it now \u2014 often without a fast way to see what\u2019s wrong.',
+        relief:
+          'LUCI gives you real-time visibility and control from one place, so you spot it and fix it the moment it happens, even mid-event.',
+      },
+      {
+        friction:
+          'Every system speaks its own language, so you\u2019re the one making them work together by hand.',
+        relief:
+          'LUCI brings A/V, lighting, and signage into one platform, so the systems work together without you bridging them manually.',
+      },
+      {
+        friction:
+          'Getting ahead of equipment failures is hard when you can\u2019t see system health in one place.',
+        relief:
+          'LUCI puts equipment status in one view, so you can catch small issues early and protect the gear instead of chasing failures.',
+      },
+      {
+        friction:
+          'The estate keeps growing, but there are only so many hours and so many hands.',
+        relief:
+          'LUCI extends your reach across every space and system from one place, so your expertise covers more ground without the miles.',
+      },
+    ],
+    industryLockup: {
+      lockupName: 'LUCI lives <em>wherever you operate</em>',
+      lockupRole: 'The environment changes. The control doesn\u2019t',
+    },
+    industryKicker: 'What control unlocks here',
+    industryStakes: [
+      {
+        slug: 'casinos-gaming',
+        name: 'Casinos & gaming',
+        image: '/images/industries/casinos-gaming.jpg',
+        callout:
+          'You keep a dense, 24/7 floor of screens, signage, and audio zones running with no maintenance window and no room for a dark display. LUCI gives you one view of the whole floor, so you diagnose and fix without walking the property and stay ahead of failures on equipment that can never fully go dark.',
+        emphasis:
+          'Whole-floor visibility and reach \u00b7 fast fixes on a 24/7 floor \u00b7 proactive upkeep on always-on equipment.',
+      },
+      {
+        slug: 'hotels-resorts',
+        name: 'Hotels & resorts',
+        image: '/images/industries/hotels-resorts.jpg',
+        callout:
+          'You cover many distinct spaces \u2014 lobby, restaurants, meeting space, pool, amenities \u2014 often with a lean team across a large or multi-property footprint. LUCI puts all of it in one place, so you keep every space guest-ready and extend your team\u2019s reach without living in a golf cart.',
+        emphasis:
+          'Reach across a large footprint \u00b7 consistent guest-facing quality everywhere \u00b7 a lean team covering more ground.',
+      },
+      {
+        slug: 'sports-venues',
+        name: 'Sports & venues',
+        image: '/images/industries/sports-venues.jpg',
+        callout:
+          'You bring hundreds to thousands of displays and zones live before doors open, then troubleshoot under the clock during the event. LUCI lets you monitor and control the whole estate from one position, fix fast when seconds count, and recall the right setup per event without reconfiguring everything by hand.',
+        emphasis:
+          'Scale and central control \u00b7 event-day speed under pressure \u00b7 fast, reliable turnover.',
+      },
+      {
+        slug: 'airports-transportation',
+        name: 'Airports & transportation',
+        image: '/images/industries/airports-transportation.jpg',
+        callout:
+          'You keep never-off systems running across a vast footprint \u2014 some of it passenger-information and life-safety \u2014 in tough light and noise. LUCI gives you one view across terminals, faster response on systems that can\u2019t be down, and proactive maintenance across a huge, always-on estate.',
+        emphasis:
+          'Always-on reliability across a huge footprint \u00b7 fast response on critical systems \u00b7 proactive upkeep at scale.',
+      },
+      {
+        slug: 'conference-convention-centers',
+        name: 'Conference & convention centers',
+        image: '/images/industries/conference-convention-centers.jpg',
+        callout:
+          'You reconfigure rooms constantly, run simultaneous events, and support outside production teams \u2014 and every setup has to be right on schedule. LUCI lets you configure and verify many rooms from one place, recall setups instantly, and keep simultaneous spaces correct without running between them.',
+        emphasis:
+          'Fast multi-room setup and turnover \u00b7 instant configuration recall \u00b7 control across simultaneous events.',
+      },
+    ],
+    capabilitiesLockup: {
+      lockupName: 'What you <em>can do</em>',
+      lockupRole: 'Four ways LUCI keeps up with you',
+    },
+    lead: '',
+    takeaway: '',
+    hubLabel: 'The Whole Estate, In Hand',
+    capabilities: [
+      {
+        front: 'Build the whole property\u2019s schedule in one session, then let it run.',
+        back:
+          'Configure audio, displays, and zone behavior for every daypart from one place. Once it\u2019s built it runs itself \u2014 a locked baseline keeps the floor consistent, and you update any piece in real time without taking the rest offline.',
+      },
+      {
+        front: 'Resolve service requests from wherever you are \u2014 including after hours.',
+        back:
+          'Open the flagged zone from your phone, adjust the level, and confirm it\u2019s right \u2014 on property or off. Physical presence is reserved for genuinely physical problems, and every change logs itself.',
+      },
+      {
+        front: 'Swap any source without a truck roll.',
+        back:
+          'Edit the source on the map yourself when a channel changes or you want to repurpose a screen. One edit propagates to every display using that source \u2014 no integrator visit, no truck roll, no waiting on a vendor.',
+      },
+      {
+        front: 'Configure a private event once, then activate it and let it revert on its own.',
+        back:
+          'Build the full A/V setup for a banquet or private event as a named preset \u2014 custom audio mix, branded content, zone-specific settings \u2014 and set the minutes until it reverts. The preset runs the event and returns the property to baseline on its own.',
+      },
+    ],
+    ctaTitle: 'The whole estate, finally <em>in one place</em>.',
+    ctaDeck:
+      'Let us show you what it looks like to see, control, and maintain everything you\u2019re responsible for from one interface \u2014 on the systems you already run.',
     chapters: [
       { id: 'persona-thesis', label: 'Overview' },
       { id: 'persona-narrative', label: 'What you manage' },

@@ -87,7 +87,6 @@ const convergeCols = [125, 375, 625, 875].map((cx, colIdx) => {
       shape: convergeShapes[i],
     });
   }
-  // Alert markers — failures you can't diagnose
   const alerts = [];
   for (let i = 0; i < alertCount; i++) {
     const nodeIdx = i + 1;
@@ -97,6 +96,15 @@ const convergeCols = [125, 375, 625, 875].map((cx, colIdx) => {
   }
   return { cx, nodes, alerts };
 });
+
+/** Default icon set for 'iconcards' (IT persona). Overridable via narrative.icons. */
+const defaultCardIcons = [
+  `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M 32 8 L 56 20 L 56 44 L 32 56 L 8 44 L 8 20 Z" fill="rgba(104,227,190,0.08)"/><path d="M 32 8 L 56 20 L 32 32 L 8 20 Z" fill="rgba(104,227,190,0.12)"/><path d="M 32 32 L 56 20 M 32 32 L 8 20 M 32 32 L 32 56" stroke-dasharray="3 3" opacity="0.5"/><text x="32" y="40" text-anchor="middle" fill="currentColor" stroke="none" font-size="14" font-family="Inter, sans-serif" opacity="0.5">?</text></svg>`,
+  `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M 8 32 Q 32 14 56 32 Q 32 50 8 32 Z" fill="rgba(141,211,181,0.08)"/><circle cx="32" cy="32" r="8" fill="rgba(141,211,181,0.12)"/><line x1="14" y1="18" x2="50" y2="46" stroke-width="3"/></svg>`,
+  `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="6" y="10" width="20" height="14" rx="3" fill="rgba(188,174,122,0.1)"/><rect x="38" y="10" width="20" height="14" rx="3" fill="rgba(188,174,122,0.1)"/><rect x="22" y="40" width="20" height="14" rx="3" fill="rgba(188,174,122,0.1)"/><line x1="26" y1="24" x2="28" y2="34" stroke-dasharray="2 4" opacity="0.4"/><line x1="38" y1="24" x2="36" y2="34" stroke-dasharray="2 4" opacity="0.4"/><line x1="48" y1="24" x2="42" y2="40" stroke-dasharray="2 4" opacity="0.4"/></svg>`,
+  `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="22" y="14" width="20" height="36" rx="4" fill="rgba(237,208,134,0.1)"/><line x1="28" y1="44" x2="36" y2="44" stroke-width="2"/><path d="M 14 22 Q 10 32 14 42" fill="none" opacity="0.6"/><path d="M 50 22 Q 54 32 50 42" fill="none" opacity="0.6"/><path d="M 10 16 Q 4 32 10 48" fill="none" opacity="0.3"/><path d="M 54 16 Q 60 32 54 48" fill="none" opacity="0.3"/><text x="32" y="36" text-anchor="middle" fill="currentColor" stroke="none" font-size="14" font-family="Inter, sans-serif" font-weight="700">!</text></svg>`,
+];
+const cardIcons = n.icons ?? defaultCardIcons;
 ---
 
 <section class={`pnt pnt--${curve}`} id={uid}>
@@ -279,44 +287,7 @@ const convergeCols = [125, 375, 625, 875].map((cx, colIdx) => {
         <div class="pnt__cards">
           {n.moments.map((m, i) => (
             <div class={`pnt__card pnt__card--${i+1}`}>
-              <div class="pnt__card-icon">
-                {i === 0 && (
-                  <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
-                    <path d="M 32 8 L 56 20 L 56 44 L 32 56 L 8 44 L 8 20 Z" fill="rgba(104,227,190,0.08)"/>
-                    <path d="M 32 8 L 56 20 L 32 32 L 8 20 Z" fill="rgba(104,227,190,0.12)"/>
-                    <path d="M 32 32 L 56 20 M 32 32 L 8 20 M 32 32 L 32 56" stroke-dasharray="3 3" opacity="0.5"/>
-                    <text x="32" y="40" text-anchor="middle" fill="currentColor" stroke="none" font-size="14" font-family="Inter, sans-serif" opacity="0.5">?</text>
-                  </svg>
-                )}
-                {i === 1 && (
-                  <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
-                    <path d="M 8 32 Q 32 14 56 32 Q 32 50 8 32 Z" fill="rgba(141,211,181,0.08)"/>
-                    <circle cx="32" cy="32" r="8" fill="rgba(141,211,181,0.12)"/>
-                    <line x1="14" y1="18" x2="50" y2="46" stroke-width="3"/>
-                  </svg>
-                )}
-                {i === 2 && (
-                  <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
-                    <rect x="6" y="10" width="20" height="14" rx="3" fill="rgba(188,174,122,0.1)"/>
-                    <rect x="38" y="10" width="20" height="14" rx="3" fill="rgba(188,174,122,0.1)"/>
-                    <rect x="22" y="40" width="20" height="14" rx="3" fill="rgba(188,174,122,0.1)"/>
-                    <line x1="26" y1="24" x2="28" y2="34" stroke-dasharray="2 4" opacity="0.4"/>
-                    <line x1="38" y1="24" x2="36" y2="34" stroke-dasharray="2 4" opacity="0.4"/>
-                    <line x1="48" y1="24" x2="42" y2="40" stroke-dasharray="2 4" opacity="0.4"/>
-                  </svg>
-                )}
-                {i === 3 && (
-                  <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
-                    <rect x="22" y="14" width="20" height="36" rx="4" fill="rgba(237,208,134,0.1)"/>
-                    <line x1="28" y1="44" x2="36" y2="44" stroke-width="2"/>
-                    <path d="M 14 22 Q 10 32 14 42" fill="none" opacity="0.6"/>
-                    <path d="M 50 22 Q 54 32 50 42" fill="none" opacity="0.6"/>
-                    <path d="M 10 16 Q 4 32 10 48" fill="none" opacity="0.3"/>
-                    <path d="M 54 16 Q 60 32 54 48" fill="none" opacity="0.3"/>
-                    <text x="32" y="36" text-anchor="middle" fill="currentColor" stroke="none" font-size="14" font-family="Inter, sans-serif" font-weight="700">!</text>
-                  </svg>
-                )}
-              </div>
+              <div class="pnt__card-icon" set:html={cardIcons[i]} />
               <span class="pnt__card-stage">{m.time}</span>
               <span class="pnt__card-body">{m.caption}</span>
             </div>
