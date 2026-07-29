@@ -4,7 +4,7 @@
  */
 
 export const propertyMap = {
-  src: '/images/floorplan-property.png?v=8',
+  src: '/images/floorplan-property.png?v=9',
   alt: 'Property-wide floorplan showing lobby, porte cochere, dining, convention, pool, and guest spaces LUCI orchestrates across the site',
 } as const;
 
