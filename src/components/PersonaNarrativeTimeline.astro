@@ -105,6 +105,65 @@ const defaultCardIcons = [
   `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="22" y="14" width="20" height="36" rx="4" fill="rgba(237,208,134,0.1)"/><line x1="28" y1="44" x2="36" y2="44" stroke-width="2"/><path d="M 14 22 Q 10 32 14 42" fill="none" opacity="0.6"/><path d="M 50 22 Q 54 32 50 42" fill="none" opacity="0.6"/><path d="M 10 16 Q 4 32 10 48" fill="none" opacity="0.3"/><path d="M 54 16 Q 60 32 54 48" fill="none" opacity="0.3"/><text x="32" y="36" text-anchor="middle" fill="currentColor" stroke="none" font-size="14" font-family="Inter, sans-serif" font-weight="700">!</text></svg>`,
 ];
 const cardIcons = n.icons ?? defaultCardIcons;
+
+/** Escalate: A/V & Facilities — increasing complexity as a continuum.
+ *  Stage 1 (The Estate): ~40 dots, neat grid, all mint — manageable.
+ *  Stage 2 (The Sprawl): ~3x dots, crowded, mixed colors, jittered — fragmented.
+ *  Stage 3 (The Legwork): same dense field + tangled connection lines — the chase.
+ *  Stage 4 (The Clock): same + one red alert node with radiating waves — the failure.
+ *  viewBox: 0 0 1000 460 — dots in top portion, labels below. */
+const escalateColors = ['#68E3BE', '#8ed3b5', '#bcae7a', '#EDD086'];
+const escalateCols = [125, 375, 625, 875].map((cx, colIdx) => {
+  const dots: { x: number; y: number; r: number; color: string; opacity: number }[] = [];
+  const lines: { x1: number; y1: number; x2: number; y2: number }[] = [];
+  let alert: { x: number; y: number } | null = null;
+
+  if (colIdx === 0) {
+    // Stage 1: ~40 dots, neat grid, all mint
+    const cols = 8, rows = 5, spacing = 18, r = 2.5;
+    const startX = cx - ((cols - 1) * spacing) / 2;
+    const startY = 55;
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        dots.push({ x: startX + col * spacing, y: startY + row * spacing, r, color: '#68E3BE', opacity: 0.72 });
+      }
+    }
+  } else {
+    // Stages 2-4: ~176 dots, crowded, mixed colors, jittered
+    const cols = 16, rows = 11, spacing = 10, r = 1.6;
+    const startX = cx - ((cols - 1) * spacing) / 2;
+    const startY = 35;
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        const idx = row * cols + col;
+        const jX = ((idx * 7) % 5 - 2) * 0.6;
+        const jY = ((idx * 13) % 5 - 2) * 0.6;
+        const cIdx = (idx + colIdx * 3) % 4;
+        dots.push({
+          x: startX + col * spacing + jX,
+          y: startY + row * spacing + jY,
+          r,
+          color: escalateColors[cIdx],
+          opacity: 0.42 + ((idx * 3) % 5) * 0.08,
+        });
+      }
+    }
+    if (colIdx >= 2) {
+      // Stages 3-4: tangled connection lines
+      for (let i = 0; i < 28; i++) {
+        const a = (i * 37 + colIdx * 11) % dots.length;
+        let b = (i * 53 + colIdx * 19 + 7) % dots.length;
+        if (b === a) b = (b + 1) % dots.length;
+        lines.push({ x1: dots[a].x, y1: dots[a].y, x2: dots[b].x, y2: dots[b].y });
+      }
+    }
+    if (colIdx === 3) {
+      // Stage 4: alert node
+      alert = { x: dots[87].x, y: dots[87].y };
+    }
+  }
+  return { cx, dots, lines, alert };
+});
 ---
 
 <section class={`pnt pnt--${curve}`} id={uid}>
@@ -295,6 +354,45 @@ const cardIcons = n.icons ?? defaultCardIcons;
         </div>
       </div>
     )}
+    {curve === 'escalate' && (
+      <div class="pnt__chart pnt__chart--escalate">
+        <svg viewBox="0 0 1000 460" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Endpoint complexity escalating from a manageable estate through sprawl, diagnostic chase, to a live failure">
+          {escalateCols.map((col, i) => (
+            <g class={`pnt__esc-col pnt__esc-col--${i+1}`}>
+              {col.lines.map((l) => (
+                <line x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke="rgba(237,208,134,0.22)" stroke-width="0.6" />
+              ))}
+              {col.dots.map((d) => (
+                <circle cx={d.x} cy={d.y} r={d.r} fill={d.color} fill-opacity={d.opacity} />
+              ))}
+              {col.alert && (
+                <g class="pnt__esc-alert">
+                  <circle cx={col.alert.x} cy={col.alert.y} r="4" fill="#ED5555" />
+                  <circle cx={col.alert.x} cy={col.alert.y} r="9" fill="none" stroke="#ED5555" stroke-width="1.5" opacity="0.5" class="pnt__esc-wave" />
+                  <circle cx={col.alert.x} cy={col.alert.y} r="14" fill="none" stroke="#ED5555" stroke-width="1" opacity="0.25" class="pnt__esc-wave2" />
+                </g>
+              )}
+            </g>
+          ))}
+          {escalateCols.map((col, i) => (
+            <foreignObject x={col.cx - 115} y={250} width="230" height="180">
+              <div xmlns="http://www.w3.org/1999/xhtml" class={`pnt__label pnt__label--${i+1}`}>
+                <span class="pnt__stage">{n.moments[i].time}</span>
+                <span class="pnt__body">{n.moments[i].caption}</span>
+              </div>
+            </foreignObject>
+          ))}
+        </svg>
+        <div class="pnt__mobile-list" aria-hidden="true">
+          {n.moments.map((m, i) => (
+            <div class={`pnt__mobile-item pnt__mobile-item--${i+1}`}>
+              <span class="pnt__stage">{m.time}</span>
+              <span class="pnt__body">{m.caption}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
 
     {n.closing && (
       <div class="pnt__closing">
@@ -425,6 +523,21 @@ const cardIcons = n.icons ?? defaultCardIcons;
 .pnt__card--3 .pnt__card-stage { color: #bcae7a; }
 .pnt__card--4 .pnt__card-icon,
 .pnt__card--4 .pnt__card-stage { color: #EDD086; }
+
+/* Escalate chart (A/V & Facilities) */
+.pnt__chart--escalate svg { width: 100%; height: auto; display: block; overflow: visible; }
+.pnt__esc-col { opacity: 0; animation: pnt-fadein 0.7s ease-out forwards; }
+.pnt__esc-col--1 { animation-delay: 0.15s; }
+.pnt__esc-col--2 { animation-delay: 0.45s; }
+.pnt__esc-col--3 { animation-delay: 0.75s; }
+.pnt__esc-col--4 { animation-delay: 1.05s; }
+.pnt__esc-wave { animation: pnt-esc-pulse 1.8s ease-out infinite; transform-origin: center; transform-box: fill-box; }
+.pnt__esc-wave2 { animation: pnt-esc-pulse 1.8s ease-out infinite; animation-delay: 0.4s; transform-origin: center; transform-box: fill-box; }
+@keyframes pnt-esc-pulse {
+  0% { transform: scale(0.5); opacity: 0.6; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
 @media (max-width: 720px) {
   .pnt__chart--iconcards .pnt__cards {
     grid-template-columns: 1fr;
@@ -566,14 +679,16 @@ const cardIcons = n.icons ?? defaultCardIcons;
   .pnt__chart--fall svg,
   .pnt__chart--rise svg,
   .pnt__chart--stack svg,
-  .pnt__chart--converge svg { display: none; }
+  .pnt__chart--converge svg,
+  .pnt__chart--escalate svg { display: none; }
   .pnt__chart--fall .pnt__mobile-list,
   .pnt__chart--rise .pnt__mobile-list,
   .pnt__chart--stack .pnt__mobile-list,
-  .pnt__chart--converge .pnt__mobile-list { display: flex; }
+  .pnt__chart--converge .pnt__mobile-list,
+  .pnt__chart--escalate .pnt__mobile-list { display: flex; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pnt__dot, .pnt__tread, .pnt__drop, .pnt__col, .pnt__stacknode, .pnt__netnode, .pnt__alert, .pnt__card { animation: none; opacity: 1; }
+  .pnt__dot, .pnt__tread, .pnt__drop, .pnt__col, .pnt__stacknode, .pnt__netnode, .pnt__alert, .pnt__card, .pnt__esc-col, .pnt__esc-wave, .pnt__esc-wave2 { animation: none; opacity: 1; }
 }
 </style>
