@@ -107,26 +107,30 @@ const defaultCardIcons = [
 const cardIcons = n.icons ?? defaultCardIcons;
 
 /** Escalate: A/V & Facilities — increasing complexity as a continuum.
- *  Stage 1 (The Estate): ~40 dots, neat grid, all mint — manageable.
- *  Stage 2 (The Sprawl): ~3x dots, crowded, mixed colors, jittered — fragmented.
- *  Stage 3 (The Legwork): same dense field + tangled connection lines — the chase.
- *  Stage 4 (The Clock): same + one red alert node with radiating waves — the failure.
+ *  Stage 1 (The Estate): ~40 dots, neat grid, mint-dominant — manageable.
+ *  Stage 2 (The Sprawl): ~3x dots, crowded, gold-dominant mix — fragmented.
+ *  Stage 3 (The Legwork): same dense field + tangled lines, fading gold + muted — the chase.
+ *  Stage 4 (The Clock): same + one emergency-red alert node — the failure.
  *  Each column's dot field sits progressively higher (rising baseline = escalating stress).
- *  A rising trend arrow spans the top, reinforcing the upward climb.
- *  A short accent bar connects each column's dots to its label below.
- *  viewBox: 0 0 1000 460 — dots in top portion, labels below. */
+ *  Colors: LUCI-approved palette (mint, gold, gold-deep, navy-muted) + emergency red for Stage 4.
+ *  viewBox: 0 0 1000 500 — dots in top portion, labels below. */
 const escalateStageColors = [
-  ['#68E3BE'],                                    // Stage 1: green / safe
-  ['#EDD086', '#E0C878', '#EDD086', '#D4B262'],   // Stage 2: amber / caution
-  ['#E89B4E', '#D88A3C', '#F0AC6A', '#E89B4E'],   // Stage 3: orange / warning
-  ['#ED5555', '#D84545', '#F06868', '#ED5555'],  // Stage 4: red / danger
+  // Stage 1: mint-dominant, a few gold — healthy, varied estate
+  ['#68E3BE', '#68E3BE', '#68E3BE', '#EDD086', '#68E3BE', '#68E3BE', '#49616e', '#68E3BE'],
+  // Stage 2: gold-dominant, some mint and muted — caution, fragmentation
+  ['#EDD086', '#EDD086', '#68E3BE', '#49616e', '#EDD086', '#314955', '#EDD086', '#EDD086'],
+  // Stage 3: fading gold + muted navy — the draining chase (LUCI colors only)
+  ['#CEB06E', '#49616e', '#EDD086', '#49616e', '#CEB06E', '#314955', '#49616e', '#CEB06E'],
+  // Stage 4: emergency red + gold — crisis
+  ['#FF3B3B', '#FF3B3B', '#EDD086', '#FF3B3B', '#49616e', '#FF3B3B', '#EDD086', '#FF3B3B'],
 ];
 const escalateLineColors = [
   'rgba(104,227,190,0.3)',
   'rgba(237,208,134,0.4)',
-  'rgba(232,155,78,0.75)',
-  'rgba(237,85,85,0.5)',
+  'rgba(237,208,134,0.85)',
+  'rgba(255,59,59,0.5)',
 ];
+const escalateAlertColor = '#FF3B3B';
 const escalateColXs = [165, 390, 615, 840];
 const escalateBaseYs = [320, 245, 170, 95];
 const escalateCols = escalateColXs.map((cx, colIdx) => {
@@ -137,12 +141,14 @@ const escalateCols = escalateColXs.map((cx, colIdx) => {
   let connectY = startY;
 
   if (colIdx === 0) {
-    // Stage 1: ~40 dots, neat grid, all mint
+    // Stage 1: ~40 dots, neat grid, mint-dominant mix
     const cols = 8, rows = 5, spacing = 18, r = 2.5;
     const startX = cx - ((cols - 1) * spacing) / 2;
+    const palette = escalateStageColors[0];
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
-        dots.push({ x: startX + col * spacing, y: startY + row * spacing, r, color: '#68E3BE', opacity: 0.72 });
+        const idx = row * cols + col;
+        dots.push({ x: startX + col * spacing, y: startY + row * spacing, r, color: palette[idx % palette.length], opacity: 0.72 });
       }
     }
     connectY = startY + (rows - 1) * spacing;
@@ -379,16 +385,16 @@ const escalateCols = escalateColXs.map((cx, colIdx) => {
           {escalateCols.map((col, i) => (
             <g class={`pnt__esc-col pnt__esc-col--${i+1}`}>
               {col.lines.map((l) => (
-                <line x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke={escalateLineColors[i]} stroke-width="1" />
+                <line x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke={escalateLineColors[i]} stroke-width="1.2" />
               ))}
               {col.dots.map((d) => (
                 <circle cx={d.x} cy={d.y} r={d.r} fill={d.color} fill-opacity={d.opacity} />
               ))}
               {col.alert && (
                 <g class="pnt__esc-alert">
-                  <circle cx={col.alert.x} cy={col.alert.y} r="4" fill="#ED5555" />
-                  <circle cx={col.alert.x} cy={col.alert.y} r="9" fill="none" stroke="#ED5555" stroke-width="1.5" opacity="0.5" class="pnt__esc-wave" />
-                  <circle cx={col.alert.x} cy={col.alert.y} r="14" fill="none" stroke="#ED5555" stroke-width="1" opacity="0.25" class="pnt__esc-wave2" />
+                  <circle cx={col.alert.x} cy={col.alert.y} r="4" fill={escalateAlertColor} />
+                  <circle cx={col.alert.x} cy={col.alert.y} r="9" fill="none" stroke={escalateAlertColor} stroke-width="1.5" opacity="0.5" class="pnt__esc-wave" />
+                  <circle cx={col.alert.x} cy={col.alert.y} r="14" fill="none" stroke={escalateAlertColor} stroke-width="1" opacity="0.25" class="pnt__esc-wave2" />
                 </g>
               )}
             </g>
@@ -607,9 +613,9 @@ const escalateCols = escalateColXs.map((cx, colIdx) => {
 .pnt__label--2 .pnt__stage,
 .pnt__label--2 .pnt__body { color: #EDD086; }
 .pnt__label--3 .pnt__stage,
-.pnt__label--3 .pnt__body { color: #E89B4E; }
+.pnt__label--3 .pnt__body { color: #CEB06E; }
 .pnt__label--4 .pnt__stage,
-.pnt__label--4 .pnt__body { color: #ED5555; }
+.pnt__label--4 .pnt__body { color: #FF3B3B; }
 
 /* Closing / payoff line */
 .pnt__closing {
@@ -684,12 +690,12 @@ const escalateCols = escalateColXs.map((cx, colIdx) => {
 .pnt__mobile-item--2 { border-color: #EDD086; }
 .pnt__mobile-item--2 .pnt__stage,
 .pnt__mobile-item--2 .pnt__body { color: #EDD086; }
-.pnt__mobile-item--3 { border-color: #E89B4E; }
+.pnt__mobile-item--3 { border-color: #CEB06E; }
 .pnt__mobile-item--3 .pnt__stage,
-.pnt__mobile-item--3 .pnt__body { color: #E89B4E; }
-.pnt__mobile-item--4 { border-color: #ED5555; }
+.pnt__mobile-item--3 .pnt__body { color: #CEB06E; }
+.pnt__mobile-item--4 { border-color: #FF3B3B; }
 .pnt__mobile-item--4 .pnt__stage,
-.pnt__mobile-item--4 .pnt__body { color: #ED5555; }
+.pnt__mobile-item--4 .pnt__body { color: #FF3B3B; }
 .pnt__mobile-item--rise { border-color: var(--mint); }
 .pnt__mobile-item--rise .pnt__stage,
 .pnt__mobile-item--rise .pnt__body { color: var(--mint); }
