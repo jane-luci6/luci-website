@@ -85,9 +85,9 @@ const {
   .persona-hero {
     position: relative;
     width: 100%;
-    min-height: clamp(420px, 56vw, 660px);
-    aspect-ratio: 21 / 9;
-    max-height: 76vh;
+    min-height: clamp(320px, 40vw, 440px);
+    aspect-ratio: 3 / 1;
+    max-height: 60vh;
     display: flex;
     align-items: flex-end;
     overflow: hidden;
@@ -140,7 +140,7 @@ const {
     position: relative;
     z-index: 1;
     width: 100%;
-    padding-block: clamp(96px, 12vw, 140px) clamp(44px, 7vw, 84px);
+    padding-block: clamp(72px, 9vw, 104px) clamp(36px, 5vw, 60px);
   }
 
   .persona-hero__kicker {
@@ -197,22 +197,25 @@ const {
   }
 
   .persona-hero__deck--html {
-    font-size: clamp(22px, 2.8vw, 30px);
+    font-family: var(--font-display);
+    font-size: clamp(11px, 1.05vw, 13px);
     font-weight: 700;
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-    color: var(--off-white);
-    max-width: 32ch;
+    line-height: 1.5;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245, 248, 250, 0.82);
+    max-width: 44ch;
+    margin-top: 4px;
   }
   .persona-hero__deck--html :global(em) {
     font-style: normal;
-    color: var(--gold);
+    color: var(--mint);
   }
 
   @media (max-width: 720px) {
     .persona-hero {
       aspect-ratio: auto;
-      min-height: clamp(440px, 82vw, 540px);
+      min-height: clamp(360px, 70vw, 460px);
       max-height: none;
     }
 
