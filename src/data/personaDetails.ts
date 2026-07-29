@@ -505,8 +505,6 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       support: '',
       closing:
         '<span class="pnt__luci">With LUCI</span>, many systems and vendors become <em>one</em> platform on the hardware you already own \u2014 a total cost you can see, plan, and defend.',
-      closingSupport:
-        'You answer for what the property spends \u2014 and the technology that runs it is a tangle of vendors, contracts, and hidden costs.',
     },
     challengesLockup: {
       lockupName: 'What gets in <em>your way</em>',
@@ -538,7 +536,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       },
       {
         friction:
-          'Keeping the property modern looks like ripping out and replacing expensive hardware.',
+          'Keeping the property modern requires ripping out and replacing expensive hardware.',
         relief:
           'LUCI runs on the infrastructure you already have and scales in phases \u2014 no forklift replacement, no capital event.',
       },
@@ -607,22 +605,22 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       {
         front: 'Replan the capital you\u2019d reserved for the next A/V refresh.',
         back:
-          'The proprietary hardware that needed a full refresh every five to seven years is replaced by a software platform on a predictable annual line. Capability now arrives through updates rather than capital purchases.',
+          'Proprietary hardware that needed a full refresh every five to seven years becomes a software platform on a predictable annual line. Updates, not capital purchases.',
       },
       {
         front: 'Cut or renegotiate the vendor and integration contracts LUCI replaces.',
         back:
-          'A large share of A/V\u2019s old operating cost lived outside the property, in vendor and integration contracts that existed because the expertise didn\u2019t. That control is internal now, so the contracts written around the old limitations are yours to consolidate or end.',
+          'Much of A/V\u2019s old operating cost lived in vendor contracts that existed because the expertise didn\u2019t. That control is internal now \u2014 yours to consolidate or end.',
       },
       {
         front: 'Start measuring A/V as a revenue contributor, not just a cost.',
         back:
-          'When marketing runs dining dayparts, loyalty pushes, and event countdowns through LUCI, that activity becomes part of a traceable campaign. Pair it with your performance data and you can compare campaign windows against baseline periods instead of treating A/V as a flat facility cost.',
+          'Dining dayparts, loyalty pushes, and event countdowns through LUCI become traceable campaigns. Pair them with performance data to measure against baseline periods.',
       },
       {
         front: 'Document and defend your A/V spend with platform data.',
         back:
-          'For the first time there\u2019s an auditable record beneath the A/V investment \u2014 what\u2019s running, what it costs, and how it\u2019s used across teams. When ownership asks for justification, the utilization and performance data is already there.',
+          'For the first time there\u2019s an auditable record beneath the investment \u2014 what\u2019s running, what it costs, how it\u2019s used. When ownership asks, the data is there.',
       },
     ],
     ctaTitle: 'One platform, <em>one predictable cost</em>.',
