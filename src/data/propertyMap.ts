@@ -31,16 +31,3 @@ export const propertyMapZones = [
   { left: 12, top: 69, w: 16, h: 14, delay: 5 },
   { left: 41, top: 78, w: 16, h: 14, delay: 6 },
 ] as const;
-
-/** Foot caption — same idea as the live hero zones list. */
-export const propertyMapCaption = [
-  'Lobby',
-  'Porte Cochere',
-  'Sportsbar',
-  'Restaurant',
-  'Convention',
-  'Pool',
-  'Casino floor',
-  'Parking',
-  'Wayfinding',
-] as const;

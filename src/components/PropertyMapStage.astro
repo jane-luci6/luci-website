@@ -1,5 +1,5 @@
 ---
-import { propertyMap, propertyMapLabels, propertyMapZones, propertyMapCaption } from '../data/propertyMap';
+import { propertyMap, propertyMapLabels, propertyMapZones } from '../data/propertyMap';
 
 interface Props {
   fill?: boolean;
@@ -45,23 +45,6 @@ const CYCLE = +(propertyMapZones.length * SLOT).toFixed(2);
     ))}
 
     {!zones && <span class="pm-note">For illustrative purposes only.</span>}
-
-    {zones && (
-      <div class="pm-zones" aria-label="The whole property means every space, inside and out">
-        <p class="pm-zones__label">
-          The whole property means every space, inside and out
-          <span class="pm-zones__label-dash"> — </span>
-        </p>
-        <ul class="pm-zones__list">
-          {propertyMapCaption.map((z, i) => (
-            <Fragment>
-              <li class="pm-zones__item">{z}</li>
-              {i < propertyMapCaption.length - 1 && <span class="pm-zones__dot" aria-hidden="true">·</span>}
-            </Fragment>
-          ))}
-        </ul>
-      </div>
-    )}
   </div>
 </div>
 
@@ -203,67 +186,6 @@ const CYCLE = +(propertyMapZones.length * SLOT).toFixed(2);
     text-align: right;
     color: rgba(245, 248, 250, 0.55);
     pointer-events: none;
-  }
-
-  .pm-zones {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 7;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(4px, 0.6vw, 7px);
-    padding: clamp(16px, 2vw, 24px) clamp(12px, 1.6vw, 18px) clamp(8px, 1vw, 11px);
-    background: linear-gradient(
-      180deg,
-      rgba(10, 22, 28, 0) 0%,
-      rgba(10, 22, 28, 0.82) 42%,
-      rgba(10, 22, 28, 0.96) 100%
-    );
-    pointer-events: none;
-  }
-
-  .pm-zones__label {
-    margin: 0;
-    font-family: var(--font-body, 'Space Grotesk', sans-serif);
-    font-size: clamp(12px, 1.25vw, 15px);
-    font-weight: 700;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    color: var(--mint, #68e3be);
-  }
-
-  .pm-zones__label-dash {
-    color: rgba(104, 227, 190, 0.55);
-  }
-
-  .pm-zones__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    column-gap: clamp(6px, 0.8vw, 9px);
-    row-gap: clamp(2px, 0.4vw, 5px);
-    width: 100%;
-  }
-
-  .pm-zones__item {
-    font-family: var(--font-body, 'Space Grotesk', sans-serif);
-    font-size: clamp(11px, 1.15vw, 14px);
-    font-weight: 500;
-    line-height: 1.3;
-    letter-spacing: -0.005em;
-    color: rgba(245, 248, 250, 0.7);
-    white-space: nowrap;
-  }
-
-  .pm-zones__dot {
-    font-size: clamp(11px, 1.15vw, 14px);
-    line-height: 1.3;
-    color: rgba(104, 227, 190, 0.5);
   }
 
   @media (prefers-reduced-motion: reduce) {
