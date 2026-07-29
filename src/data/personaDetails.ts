@@ -601,7 +601,6 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     lead: '',
     takeaway: '',
     hubLabel: 'Total Cost of Ownership',
-    hubSub: 'Lower, predictable, and defensible.',
     capabilities: [
       {
         front: 'Replan the capital you\u2019d reserved for the next A/V refresh.',
@@ -775,27 +774,26 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     lead: '',
     takeaway: '',
     hubLabel: 'One System Under Control',
-    hubSub: 'Monitored, secured, and running on your network.',
     capabilities: [
       {
-        front: 'See every A/V endpoint on the property from a single dashboard.',
+        front: 'Add an endpoint to LUCI \u2014 video, audio, or lighting.',
         back:
-          'Every connected display, audio component, and device appears in one interface with its current status and health \u2014 no trip to the server room, no call to a specialist.',
+          'Bring new displays, speaker zones, or lighting onto LUCI yourself \u2014 no integrator truck roll. Enter the device\u2019s IP, name it, assign it to a venue, and it\u2019s on the map for every authorized user to reach.',
       },
       {
-        front: 'Know exactly what changed, and when.',
+        front: 'Keep every config, backup, and guide for your system in one place.',
         back:
-          'Every configuration change is logged with who made it, what changed, and when \u2014 a complete audit trail you can filter by date, user, or zone.',
+          'Config files, backups, user guides, and walkthrough videos live in one spot your team can reach any time \u2014 so you clear common issues yourself, without a call to your integrator or a ticket into a vendor queue.',
       },
       {
         front: 'Define who can change what \u2014 by role, by zone, by team.',
         back:
-          'Set role-based permissions centrally so each team controls only its lane \u2014 enforced by the platform, managed from one administrative view.',
+          'Set role-based permissions centrally so Marketing controls content, A/V controls schedules and levels, and no one reaches outside their lane \u2014 enforced by the platform, managed from one administrative view.',
       },
       {
-        front: 'Schedule system maintenance to run automatically.',
+        front: 'See device health across the property at a glance.',
         back:
-          'Queue updates, reboots, and maintenance for overnight or low-traffic windows. The platform maintains itself on your schedule, with dashboard confirmation.',
+          'Zoom out on the map and LUCI clusters every endpoint into one colored circle \u2014 green is all online, yellow means one offline, red means one powered off. Click a cluster to see exactly which device needs attention.',
       },
     ],
     ctaTitle: 'Bring A/V <em>under control</em>.',
