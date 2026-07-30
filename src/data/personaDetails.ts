@@ -1129,7 +1129,6 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     lead: '',
     takeaway: '',
     hubLabel: 'One Coherent Business',
-    hubSub: 'One property, one system of control \u2014 or a whole portfolio.',
     capabilities: [
       {
         front: 'See and control the guest environment from one place.',
