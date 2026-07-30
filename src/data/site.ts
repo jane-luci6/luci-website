@@ -67,12 +67,6 @@ export const leadership = [
     blurb:
       'Owns LUCI’s technology and information strategy — the platform architecture, security, and engineering standards behind every deployment.',
   },
-  {
-    name: 'Cory Egbert',
-    title: 'Director of Quality, Deployment & Delivery',
-    blurb:
-      'Owns deployment quality and delivery — your primary contact through implementation.',
-  },
 ] as const;
 
 export const portfolioLine =
