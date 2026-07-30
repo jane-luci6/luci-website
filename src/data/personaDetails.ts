@@ -998,7 +998,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     heroDeck:
       'The whole property is yours to answer for \u2014 every department, every result. But it runs on a patchwork of disconnected systems that never gives you one clear view. LUCI helps the property run like one business, not many parts.',
     narrativeLockup: {
-      lockupName: 'The whole property is <em>yours to answer for</em>',
+      lockupName: 'Build full property A/V around <em>one strategy and one team</em>',
       lockupRole: 'What general management is accountable for',
     },
     graphLockup: {
