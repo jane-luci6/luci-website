@@ -26,14 +26,53 @@ import { site } from '../data/site';
   <HomeTrustBar />
   <HomeResources />
 
-  <SectionBlock tone="deep">
-    <h2 class="h2">Ready to see LUCI on your property?</h2>
-    <p class="measure" style="margin-top: 1rem; color: rgba(245, 248, 250, 0.82)">
-      {site.tagline} — {site.subTagline}
-    </p>
-    <div class="btn-row">
-      <a class="btn btn--mint" href="/contact">{site.ctaPrimary}</a>
-      <a class="btn btn--ghost" href="/platform">{site.ctaSecondary}</a>
+  <SectionBlock id="home-cta" tone="deep">
+    <div class="home-cta">
+      <p class="display-label home-cta__kicker">Next step</p>
+      <h2 class="home-cta__title">See LUCI on <em>your floor</em>.</h2>
+      <p class="home-cta__deck">Let us show you what LUCI looks like on a property like yours.</p>
+      <a class="btn btn--mint home-cta__btn" href="/contact">Request a demo</a>
     </div>
   </SectionBlock>
 </BaseLayout>
+
+<style>
+  :global(#home-cta.section) {
+    border-top: 2px solid var(--mint);
+    padding-block: clamp(36px, 5vw, 48px);
+  }
+  .home-cta {
+    max-width: 760px;
+    margin-inline: auto;
+    text-align: center;
+    padding-block: 0;
+  }
+  .home-cta__kicker {
+    color: var(--mint);
+    margin-bottom: var(--space-3);
+  }
+  .home-cta__title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(24px, 3.4vw, 34px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+    margin-bottom: var(--space-3);
+  }
+  .home-cta__title :global(em) {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .home-cta__deck {
+    max-width: 52ch;
+    margin: 0 auto var(--space-2);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.78);
+  }
+  .home-cta__btn {
+    margin-top: 0;
+  }
+</style>
