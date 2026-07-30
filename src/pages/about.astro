@@ -11,6 +11,7 @@ import {
   leadership,
   site,
 } from '../data/site';
+import { industries } from '../data/industries';
 
 const accumulationParas = variableReduction.accumulation.split('\n\n');
 ---
@@ -60,9 +61,26 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
   <div class="about-story-industries">
     <div class="container">
       <span class="display-label about-story-industries__label">Industries we serve</span>
-      <ul class="about-story-industries__tags" role="list">
-        {aboutStory.industries.map((it) => (
-          <li class="about-story-industries__tag">{it}</li>
+      <ul class="ind-callout" role="list">
+        {industries.map((it) => (
+          <li class="ind-callout__cell">
+            <a class="ind-callout__card" href={`/industries/${it.slug}`}>
+              <img
+                class="ind-callout__img"
+                src={`/images/industries/${it.slug}.jpg`}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                width="1280"
+                height="853"
+              />
+              <span class="ind-callout__scrim" aria-hidden="true"></span>
+              <span class="ind-callout__body">
+                <span class="ind-callout__name">{it.name}</span>
+                <span class="ind-callout__cta">Explore <span aria-hidden="true">&#8594;</span></span>
+              </span>
+            </a>
+          </li>
         ))}
       </ul>
     </div>
@@ -76,14 +94,6 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
       ))}
       <p class="measure about-worldview__p">{variableReduction.subtraction}</p>
       <p class="about-worldview__signature">{variableReduction.headline}</p>
-      <figure class="about-worldview__ledger">
-        <img
-          src="/images/diagrams/luci-consolidation-ledger.svg"
-          alt="Consolidation ledger: today, four or more multimedia systems, five or more equipment racks, fifteen or more receivers, and one hundred plus hardware devices. With LUCI: one interface, one equipment rack, one consolidated network, and code that is yours."
-          loading="lazy"
-          decoding="async"
-        />
-      </figure>
     </div>
   </SectionBlock>
 
@@ -363,31 +373,120 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
   .about-story-industries__label {
     color: var(--accent-light);
     display: block;
-    margin-bottom: var(--space-2);
+    margin-bottom: var(--space-3);
   }
-  .about-story-industries__tags {
+
+  /* Industry callout — compact row of photo tiles, each linking to its industry page. */
+  .ind-callout {
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: clamp(10px, 1.2vw, 16px);
   }
-  .about-story-industries__tag {
+  .ind-callout__card {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background: var(--navy);
+    box-shadow: 0 14px 30px rgba(15, 35, 45, 0.18);
+  }
+  .ind-callout__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s ease-out;
+  }
+  .ind-callout__scrim {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      to top,
+      rgba(8, 17, 22, 0.92) 0%,
+      rgba(8, 17, 22, 0.5) 46%,
+      rgba(8, 17, 22, 0.08) 74%,
+      transparent 90%
+    );
+    transition: background 0.3s ease-out;
+  }
+  .ind-callout__card:hover .ind-callout__scrim,
+  .ind-callout__card:focus-visible .ind-callout__scrim {
+    background: linear-gradient(
+      to top,
+      rgba(8, 17, 22, 0.96) 0%,
+      rgba(8, 17, 22, 0.68) 52%,
+      rgba(8, 17, 22, 0.22) 80%,
+      transparent 96%
+    );
+  }
+  .ind-callout__card:hover .ind-callout__img,
+  .ind-callout__card:focus-visible .ind-callout__img {
+    transform: scale(1.06);
+  }
+  .ind-callout__body {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: clamp(14px, 1.6vw, 18px);
+    z-index: 1;
+  }
+  .ind-callout__name {
     font-family: var(--font-body);
+    font-size: clamp(15px, 1.4vw, 18px);
     font-weight: 700;
-    font-size: 13px;
-    letter-spacing: -0.005em;
-    color: var(--ink-strong);
-    padding: 8px 14px;
-    background: linear-gradient(155deg, #E6F5EF 0%, #F3FAF8 100%);
-    box-shadow: inset 0 0 0 1px rgba(43, 158, 128, 0.2);
-    border-radius: 8px;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    color: var(--off-white);
+  }
+  .ind-callout__cta {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mint);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+  }
+  .ind-callout__card:hover .ind-callout__cta,
+  .ind-callout__card:focus-visible .ind-callout__cta {
+    opacity: 1;
+    transform: none;
+  }
+  .ind-callout__card:focus-visible {
+    outline: 2px solid var(--mint);
+    outline-offset: 3px;
+  }
+  @media (max-width: 980px) {
+    .ind-callout { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  @media (max-width: 640px) {
+    .ind-callout { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .ind-callout__cta { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ind-callout__img,
+    .ind-callout__scrim,
+    .ind-callout__cta { transition: none; }
+    .ind-callout__cta { opacity: 1; transform: none; }
   }
 
   /* ---------- Worldview (deep, patterned manifesto band) ---------- */
-  /* Match the section bg to the ledger diagram's own navy so the diagram reads as
-     part of the section, not a pasted-on rectangle. */
+  /* Anchor the manifesto band on the deepest navy so the pattern + text read clean. */
   :global(#about-worldview.section--deep) {
     background: var(--navy-deep);
   }
@@ -404,23 +503,10 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
     line-height: 1.25;
     letter-spacing: -0.02em;
     color: var(--off-white);
-    margin: var(--space-4) 0 var(--space-5);
+    margin: var(--space-4) 0 0;
     padding-left: var(--space-4);
     border-left: 4px solid var(--mint);
     max-width: 26ch;
-  }
-  /* Consolidation ledger — the visual proof of "reducing variables." Its own navy
-     bg matches the section; a hairline + soft lift define it as an exhibit. */
-  .about-worldview__ledger {
-    margin: var(--space-4) 0 0;
-    max-width: 640px;
-  }
-  .about-worldview__ledger img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 16px;
-    box-shadow: inset 0 0 0 1px rgba(104, 227, 190, 0.18), 0 24px 56px rgba(0, 0, 0, 0.45);
   }
 
   /* ---------- Leadership ---------- */
