@@ -44,15 +44,17 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
     </div>
     <div class="about-story__scrim" aria-hidden="true"></div>
     <div class="container about-story__inner">
-      <div class="about-story__lockup">
-        <h2 id="about-story-title" class="about-story__name">Our story</h2>
-        <span class="about-story__rule" aria-hidden="true"></span>
-        <p class="about-story__role">From the casino floor to every property we run</p>
+      <div class="about-story__panel">
+        <div class="about-story__lockup">
+          <h2 id="about-story-title" class="about-story__name">Our story</h2>
+          <span class="about-story__rule" aria-hidden="true"></span>
+          <p class="about-story__role">From the casino floor to every property we run</p>
+        </div>
+        {aboutStory.paragraphs.map((p) => (
+          <p class="about-story__p">{p}</p>
+        ))}
+        <aside class="about-story__callout">{aboutStory.standardCallout}</aside>
       </div>
-      {aboutStory.paragraphs.map((p) => (
-        <p class="about-story__p">{p}</p>
-      ))}
-      <aside class="about-story__callout">{aboutStory.standardCallout}</aside>
     </div>
   </section>
   <div class="about-story-industries">
@@ -136,13 +138,16 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
 
 <style>
   /* ---------- Hero ---------- */
+  /* Title card: skyline as atmosphere, dissolves to solid navy at the bottom so it
+     doesn't collide with the story photo stage below. Mint rule marks the beat. */
   .about-hero {
     position: relative;
     background: var(--navy-deep);
-    min-height: clamp(360px, 52vh, 560px);
+    min-height: clamp(320px, 44vh, 480px);
     display: flex;
     align-items: flex-end;
     overflow: hidden;
+    border-bottom: 3px solid var(--mint);
   }
   .about-hero__media {
     position: absolute;
@@ -153,25 +158,34 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 35%;
   }
-  /* Navy gradient scrim — opaque on the left where the text sits, transparent right.
-     Guarantees WCAG contrast for the overlaid title/lead. */
+  /* Dual scrim — left for title contrast + bottom fade into solid navy (section break). */
   .about-hero__scrim {
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: linear-gradient(
-      90deg,
-      rgba(10, 22, 28, 0.92) 0%,
-      rgba(10, 22, 28, 0.78) 38%,
-      rgba(10, 22, 28, 0.30) 70%,
-      rgba(10, 22, 28, 0.10) 100%
-    );
+    background:
+      linear-gradient(
+        90deg,
+        rgba(10, 22, 28, 0.92) 0%,
+        rgba(10, 22, 28, 0.78) 38%,
+        rgba(10, 22, 28, 0.35) 70%,
+        rgba(10, 22, 28, 0.18) 100%
+      ),
+      linear-gradient(
+        to top,
+        rgba(10, 22, 28, 1) 0%,
+        rgba(10, 22, 28, 1) 12%,
+        rgba(10, 22, 28, 0.92) 28%,
+        rgba(10, 22, 28, 0.45) 55%,
+        transparent 78%
+      );
   }
   .about-hero__inner {
     position: relative;
     z-index: 2;
-    padding-block: clamp(56px, 9vw, 96px);
+    padding-block: clamp(48px, 7vw, 80px) clamp(40px, 6vw, 64px);
   }
   .about-hero__kicker {
     color: var(--mint);
@@ -192,12 +206,13 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
   }
   @media (max-width: 720px) {
     .about-hero__scrim {
-      background: linear-gradient(
-        180deg,
-        rgba(10, 22, 28, 0.35) 0%,
-        rgba(10, 22, 28, 0.82) 62%,
-        rgba(10, 22, 28, 0.92) 100%
-      );
+      background:
+        linear-gradient(
+          180deg,
+          rgba(10, 22, 28, 0.45) 0%,
+          rgba(10, 22, 28, 0.82) 50%,
+          rgba(10, 22, 28, 1) 100%
+        );
     }
   }
 
@@ -223,7 +238,7 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
     object-position: center 40%;
     display: block;
   }
-  /* Dual scrim — left dark for reading column, bottom-up so the lower edge stays calm. */
+  /* Dual scrim — deeper left veil for the reading column; photo still peeks right. */
   .about-story__scrim {
     position: absolute;
     inset: 0;
@@ -232,16 +247,21 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
     background:
       linear-gradient(
         105deg,
-        rgba(10, 22, 28, 0.94) 0%,
-        rgba(10, 22, 28, 0.82) 36%,
-        rgba(10, 22, 28, 0.42) 62%,
-        rgba(10, 22, 28, 0.18) 100%
+        rgba(10, 22, 28, 0.96) 0%,
+        rgba(10, 22, 28, 0.88) 32%,
+        rgba(10, 22, 28, 0.5) 58%,
+        rgba(10, 22, 28, 0.22) 100%
       ),
       linear-gradient(
         to top,
-        rgba(10, 22, 28, 0.88) 0%,
-        rgba(10, 22, 28, 0.35) 42%,
-        transparent 72%
+        rgba(10, 22, 28, 0.9) 0%,
+        rgba(10, 22, 28, 0.4) 40%,
+        transparent 70%
+      ),
+      linear-gradient(
+        to bottom,
+        rgba(10, 22, 28, 0.55) 0%,
+        transparent 18%
       );
   }
   .about-story__inner {
@@ -249,6 +269,18 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
     z-index: 2;
     width: 100%;
     padding-block: clamp(64px, 10vw, 112px) clamp(48px, 7vw, 80px);
+  }
+  /* Soft navy panel behind the reading block — readable without killing the photo. */
+  .about-story__panel {
+    max-width: 64ch;
+    padding: clamp(24px, 3vw, 36px) clamp(24px, 3vw, 40px);
+    background: linear-gradient(
+      160deg,
+      rgba(10, 22, 28, 0.78) 0%,
+      rgba(10, 22, 28, 0.62) 100%
+    );
+    box-shadow: inset 0 0 0 1px rgba(104, 227, 190, 0.12);
+    border-radius: 16px;
   }
   .about-story__lockup {
     margin-bottom: var(--space-4);
@@ -282,22 +314,23 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
   }
   .about-story__p {
     margin: 0 0 var(--space-3);
-    max-width: 62ch;
     font-family: 'Inter', system-ui, sans-serif;
     font-size: 17px;
     line-height: 1.65;
-    color: rgba(245, 248, 250, 0.9);
+    color: rgba(245, 248, 250, 0.92);
+  }
+  .about-story__p:last-of-type {
+    margin-bottom: 0;
   }
   .about-story__callout {
     margin: var(--space-4) 0 0;
-    max-width: 58ch;
     padding: var(--space-3) var(--space-4);
     font-family: 'Inter', system-ui, sans-serif;
     font-size: 16px;
     font-weight: 600;
     line-height: 1.55;
     color: var(--off-white);
-    background: rgba(10, 22, 28, 0.5);
+    background: rgba(10, 22, 28, 0.45);
     border-left: 4px solid var(--mint);
     box-shadow: inset 0 0 0 1px rgba(104, 227, 190, 0.16);
   }
@@ -310,10 +343,14 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
       background:
         linear-gradient(
           180deg,
-          rgba(10, 22, 28, 0.4) 0%,
-          rgba(10, 22, 28, 0.78) 38%,
-          rgba(10, 22, 28, 0.94) 100%
+          rgba(10, 22, 28, 0.55) 0%,
+          rgba(10, 22, 28, 0.82) 35%,
+          rgba(10, 22, 28, 0.95) 100%
         );
+    }
+    .about-story__panel {
+      padding: 20px;
+      background: rgba(10, 22, 28, 0.82);
     }
   }
 
