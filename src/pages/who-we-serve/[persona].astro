@@ -93,7 +93,8 @@ if (!detail) return Astro.redirect('/who-we-serve');
   <SectionBlock id="persona-cta" tone="deep">
     <div class="persona-cta">
       <p class="display-label persona-cta__kicker">Next step</p>
-      <p class="persona-cta__line">See LUCI <em>on your floor</em>.</p>
+      <h2 class="persona-cta__title" set:html={detail.ctaTitle} />
+      {detail.ctaDeck && <p class="persona-cta__deck">{detail.ctaDeck}</p>}
       <a class="persona-cta__link" href="/contact">Request a demo <span aria-hidden="true">→</span></a>
     </div>
   </SectionBlock>
@@ -142,18 +143,26 @@ if (!detail) return Astro.redirect('/who-we-serve');
     color: var(--mint);
     margin-bottom: var(--space-3);
   }
-  .persona-cta__line {
+  .persona-cta__title {
     font-family: var(--font-head);
     font-weight: 700;
     font-size: clamp(28px, 4vw, 40px);
     line-height: 1.15;
     letter-spacing: -0.02em;
     color: var(--off-white);
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-3);
   }
-  .persona-cta__line em {
+  .persona-cta__title :global(em) {
     font-style: normal;
     color: var(--gold);
+  }
+  .persona-cta__deck {
+    max-width: 52ch;
+    margin: 0 auto var(--space-4);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.78);
   }
   .persona-cta__link {
     display: inline-block;
