@@ -39,12 +39,13 @@ export const variableReduction = {
 
 export const aboutStory = {
   heroLead:
-    'Built in Las Vegas by integrators, operators, and owners who ran these floors before they built the software.',
+    'Every property we walked into had the same problem: too many systems, too many vendors, and no one accountable for the whole. We built LUCI to remove it.',
   paragraphs: [
-    'LUCI was built in Las Vegas, near the Strip, inside the casino industry — the most demanding multimedia environments in the world. Casinos run every system at once, around the clock, with no room for downtime. That is where the company learned what “non-negotiable” actually means.',
-    'The work that built this company was integration work — stitching together vendors, processors, and interfaces that each made sense on their own and failed together. The pattern was always the same: environments don’t break because of what they lack. They break because of what they accumulate.',
-    'That conviction became LUCI — one platform, one embedded team, one accountable owner. Today LUCI runs at casinos, hotels and resorts, sports venues, airports, and convention centers — anywhere a property runs many systems as one.',
+    'Twenty-five years as integrators, operators, and owners has put our team inside nearly every kind of commercial multimedia environment. As veterans of the casino industry, we saw a specific pattern repeated on every property: Custom systems, each one built to spec, each one slow to deploy, complex to maintain, and too rigid to scale or improve. Together they produced an environment where no one owned the outcome and every change created a question nobody had budgeted for.',
+    'LUCI is what we wanted as operators and never found: one platform that runs the property, and an embedded team that stays. Two forces, delivered as one system. We built it from our home base in Las Vegas, minutes from the Strip, close to the floors where we learned the problem, and where we now apply the same solution to problems in sports venues, conference centers, and resorts.',
   ],
+  standardCallout:
+    'Standard by design. Standardization is what makes the platform reliable — customization is what broke every environment we were called in to fix.',
   industries: [
     'Casinos & gaming',
     'Hotels & resorts',
@@ -54,12 +55,15 @@ export const aboutStory = {
   ],
 } as const;
 
+export const aboutProofLine =
+  'Deployed across complex, high-traffic properties and refined through years of operational engagement — tested against the demands of environments that never close.';
+
 export const leadership = [
   {
     name: 'Michael Epstein',
     title: 'CEO',
     blurb:
-      'Decades as an integrator, operator, and owner of multimedia environments. Leads LUCI’s product and field execution.',
+      'Twenty-five years as an integrator, operator, and owner of commercial multimedia environments. Sets LUCI’s product direction and stays close to the field.',
   },
   {
     name: 'Nickolas Jensen',

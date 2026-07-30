@@ -6,7 +6,7 @@ import {
   aboutStory,
   variableReduction,
   oneOffering,
-  portfolioLine,
+  aboutProofLine,
   ameristarCaseStudy,
   leadership,
   site,
@@ -36,6 +36,7 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
       {aboutStory.paragraphs.map((p) => (
         <p class="measure about-story__p">{p}</p>
       ))}
+      <aside class="callout about-story__callout">{aboutStory.standardCallout}</aside>
       <div class="about-story__industries">
         <span class="display-label about-story__industries-label">Industries we serve</span>
         <p class="about-story__industries-list">{aboutStory.industries.join(' · ')}</p>
@@ -45,11 +46,11 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
 
   <!-- Worldview: reducing variables -->
   <SectionBlock lockupName="Our worldview" lockupRole="Reducing variables" tone="sand">
-    <p class="measure about-worldview__signature">{variableReduction.headline}</p>
     {accumulationParas.map((p) => (
       <p class="measure about-worldview__p">{p}</p>
     ))}
     <p class="measure about-worldview__p">{variableReduction.subtraction}</p>
+    <p class="measure about-worldview__signature">{variableReduction.headline}</p>
   </SectionBlock>
 
   <!-- Commitments (values) — reuses the homepage commitments grid -->
@@ -79,7 +80,7 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
 
   <!-- Proof at scale -->
   <SectionBlock lockupName="Proof at scale" lockupRole="Running on live properties" tone="mid">
-    <p class="measure about-proof__line">{portfolioLine}</p>
+    <p class="measure about-proof__line">{aboutProofLine}</p>
     <a class="about-proof__card" href={`/resources/case-studies/${ameristarCaseStudy.slug}`}>
       <span class="display-label about-proof__card-kicker">Case study</span>
       <span class="about-proof__card-title">{ameristarCaseStudy.title}</span>
@@ -170,6 +171,14 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
   }
   .about-story__p:last-of-type {
     margin-bottom: var(--space-5);
+  }
+  .about-story__callout {
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-5);
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink-strong);
+    font-weight: 600;
   }
   .about-story__industries {
     border-top: 1px solid var(--rule-light);
