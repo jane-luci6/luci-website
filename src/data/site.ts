@@ -62,6 +62,12 @@ export const leadership = [
       'Decades as an integrator, operator, and owner of multimedia environments. Leads LUCI’s product and field execution.',
   },
   {
+    name: 'Nickolas Jensen',
+    title: 'CITO',
+    blurb:
+      'Owns LUCI’s technology and information strategy — the platform architecture, security, and engineering standards behind every deployment.',
+  },
+  {
     name: 'Cory Egbert',
     title: 'Director of Quality, Deployment & Delivery',
     blurb:
