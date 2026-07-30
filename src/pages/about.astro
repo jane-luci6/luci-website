@@ -24,7 +24,7 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
       <img src="/images/vegas-skyline-dusk.jpg" alt="Las Vegas Strip skyline at dusk" loading="eager" />
     </div>
     <div class="about-hero__scrim" aria-hidden="true"></div>
-    <div class="container about-hero__inner">
+    <div class="container container--wide about-hero__inner">
       <p class="display-label about-hero__kicker">Our company</p>
       <h1 class="about-hero__title">About LUCI</h1>
       <p class="lead about-hero__lead">{aboutStory.heroLead}</p>
@@ -44,7 +44,7 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
       />
     </div>
     <div class="about-story__scrim" aria-hidden="true"></div>
-    <div class="container about-story__inner">
+    <div class="container container--wide about-story__inner">
       <div class="about-story__panel">
         <div class="about-story__lockup">
           <h2 id="about-story-title" class="about-story__name">Our story</h2>
@@ -59,7 +59,7 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
     </div>
   </section>
   <div class="about-story-industries">
-    <div class="container">
+    <div class="container container--wide">
       <span class="display-label about-story-industries__label">Industries we serve</span>
       <ul class="ind-callout" role="list">
         {industries.map((it) => (
@@ -87,7 +87,7 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
   </div>
 
   <!-- Worldview: reducing variables — dark manifesto band + consolidation ledger -->
-  <SectionBlock id="about-worldview" lockupName="Our worldview" lockupRole="Reducing variables" tone="deep" pattern>
+  <SectionBlock id="about-worldview" lockupName="Our worldview" lockupRole="Reducing variables" tone="deep" pattern wide>
     <div class="about-worldview">
       {accumulationParas.map((p) => (
         <p class="measure about-worldview__p">{p}</p>
@@ -105,6 +105,7 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
     lockupName="Leadership"
     lockupRole="The team that builds and supports it"
     deck="Built and operated by the same people — for the life of the relationship."
+    wide
   >
     <ul class="about-leadership" role="list">
       {leadership.map((person) => (
@@ -125,7 +126,7 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
   </SectionBlock>
 
   <!-- Proof at scale -->
-  <SectionBlock lockupName="Proof at scale" lockupRole="Running on live properties" tone="mid" pattern>
+  <SectionBlock lockupName="Proof at scale" lockupRole="Running on live properties" tone="mid" pattern wide>
     <p class="measure about-proof__line">{aboutProofLine}</p>
     <a class="about-proof__card" href={`/resources/case-studies/${ameristarCaseStudy.slug}`}>
       <span class="display-label about-proof__card-kicker">Case study</span>
@@ -135,7 +136,7 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
   </SectionBlock>
 
   <!-- CTA -->
-  <SectionBlock id="about-cta" tone="deep" pattern>
+  <SectionBlock id="about-cta" tone="deep" pattern wide>
     <div class="about-cta">
       <p class="display-label about-cta__kicker">Next step</p>
       <h2 class="about-cta__title">Let&rsquo;s talk about <em>your property</em>.</h2>
