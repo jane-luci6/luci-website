@@ -1041,7 +1041,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     challenges: [
       {
         friction:
-          'You answer for the whole property, but no single view shows you what\u2019s happening across it in real time.',
+          'You answer for the whole property, but you don\u2019t have a comprehensive view of what\u2019s happening in real time.',
         relief:
           'LUCI gives you one view and one point of control over the property\u2019s guest environment, so you\u2019re leading with a clear picture instead of a patchwork.',
       },
