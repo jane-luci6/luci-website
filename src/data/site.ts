@@ -62,12 +62,14 @@ export const leadership = [
   {
     name: 'Michael Epstein',
     title: 'CEO',
+    photo: '/images/michael-epstein.png',
     blurb:
       'Twenty-five years as an integrator, operator, and owner of commercial multimedia environments. Sets LUCI’s product direction and stays close to the field.',
   },
   {
     name: 'Nickolas Jensen',
     title: 'CITO',
+    photo: '/images/nickolas-jensen.png',
     blurb:
       'Owns LUCI’s technology and information strategy — the platform architecture, security, and engineering standards behind every deployment.',
   },
