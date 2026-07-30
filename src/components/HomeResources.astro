@@ -1,7 +1,6 @@
 ---
 import { ameristarCaseStudy, tachiCaseStudy } from '../data/site';
 
-const heading = 'Go deeper';
 const lede = 'See LUCI on real floors — and what is coming next.';
 
 const cards = [
@@ -42,7 +41,7 @@ const cards = [
 <section class="home-resources" aria-labelledby="home-resources-title">
   <div class="home-resources__inner container container--wide">
     <header class="home-resources__head">
-      <h2 id="home-resources-title" class="home-resources__heading">{heading}</h2>
+      <h2 id="home-resources-title" class="home-resources__heading">Go <em>deeper</em></h2>
       <p class="home-resources__lede">{lede}</p>
     </header>
     <ul class="home-resources__grid" role="list">
@@ -75,8 +74,8 @@ const cards = [
 
 <style>
   .home-resources {
-    background: var(--off-white);
-    color: var(--ink);
+    background: #2f3f4b;
+    color: var(--off-white);
   }
 
   .home-resources__inner {
@@ -95,14 +94,19 @@ const cards = [
     font-weight: 700;
     line-height: 1.08;
     letter-spacing: -0.025em;
-    color: var(--ink-strong);
+    color: var(--off-white);
+  }
+
+  .home-resources__heading em {
+    font-style: normal;
+    color: var(--gold);
   }
 
   .home-resources__lede {
     margin: 14px 0 0;
     font-size: clamp(15px, 1.2vw, 17px);
     line-height: 1.6;
-    color: rgba(53, 79, 92, 0.78);
+    color: rgba(245, 248, 250, 0.72);
   }
 
   .home-resources__grid {
@@ -130,12 +134,12 @@ const cards = [
 
   .rsc-card--placeholder {
     border-style: dashed;
-    border-color: rgba(43, 158, 128, 0.4);
-    background: rgba(43, 158, 128, 0.05);
+    border-color: rgba(104, 227, 190, 0.45);
+    background: rgba(255, 255, 255, 0.5);
   }
 
   .rsc-card--placeholder:hover {
-    border-color: rgba(43, 158, 128, 0.6);
+    border-color: rgba(104, 227, 190, 0.65);
   }
 
   .rsc-card__link {
