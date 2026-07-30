@@ -9,7 +9,6 @@ import PersonaIndustrySwitcher from '../../components/PersonaIndustrySwitcher.as
 import PersonaCapabilitiesFlow from '../../components/PersonaCapabilitiesFlow.astro';
 import { personas } from '../../data/personas';
 import { getPersonaDetail, hasPersonaDetail } from '../../data/personaDetails';
-import { site } from '../../data/site';
 
 export function getStaticPaths() {
   return personas
@@ -94,12 +93,8 @@ if (!detail) return Astro.redirect('/who-we-serve');
   <SectionBlock id="persona-cta" tone="deep">
     <div class="persona-cta">
       <p class="display-label persona-cta__kicker">Next step</p>
-      <h2 class="h2 persona-cta__title" set:html={detail.ctaTitle} />
-      {detail.ctaDeck && <p class="persona-cta__deck">{detail.ctaDeck}</p>}
-      <div class="btn-row">
-        <a class="btn btn--primary" href="/contact">{site.ctaPrimary}</a>
-        <a class="btn btn--ghost" href="/platform">Explore the platform</a>
-      </div>
+      <p class="persona-cta__line">See LUCI <em>on your floor</em>.</p>
+      <a class="persona-cta__link" href="/contact">Request a demo <span aria-hidden="true">→</span></a>
     </div>
   </SectionBlock>
 </BaseLayout>
@@ -138,29 +133,49 @@ if (!detail) return Astro.redirect('/who-we-serve');
   }
 
   .persona-cta {
+    max-width: 760px;
+    margin-inline: auto;
     text-align: center;
-    padding-block: clamp(24px, 4vw, 40px);
+    padding-block: clamp(28px, 4vw, 44px);
   }
   .persona-cta__kicker {
-    color: var(--gold);
-    margin-bottom: var(--space-2);
-  }
-  .persona-cta__title {
-    color: var(--off-white);
-    margin-bottom: var(--space-3);
-    max-width: 22ch;
-    margin-inline: auto;
-  }
-  .persona-cta__title :global(em) {
-    font-style: normal;
     color: var(--mint);
+    margin-bottom: var(--space-3);
   }
-  .persona-cta__deck {
-    max-width: 52ch;
-    margin: 0 auto var(--space-4);
-    font-family: 'Inter', system-ui, sans-serif;
+  .persona-cta__line {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+    margin-bottom: var(--space-4);
+  }
+  .persona-cta__line em {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .persona-cta__link {
+    display: inline-block;
+    font-family: var(--font-head);
+    font-weight: 600;
     font-size: 17px;
-    line-height: 1.6;
-    color: rgba(245, 248, 250, 0.78);
+    letter-spacing: 0.01em;
+    color: var(--mint);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(104, 227, 190, 0.4);
+    padding-bottom: 3px;
+    transition: border-color 0.2s ease;
+  }
+  .persona-cta__link:hover {
+    border-color: var(--mint);
+  }
+  .persona-cta__link span {
+    margin-left: 6px;
+    transition: transform 0.2s ease;
+    display: inline-block;
+  }
+  .persona-cta__link:hover span {
+    transform: translateX(4px);
   }
 </style>
