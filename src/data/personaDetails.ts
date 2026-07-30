@@ -1067,7 +1067,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
         friction:
           'Running more than one property means every building works differently, with no consistent way to see or run them.',
         relief:
-          'LUCI deploys as one consistent platform across every property, so you can run them all to one standard with one way to see them.',
+          'LUCI deploys as one consistent platform across every property, so you can run them all to one standard catered to property-specific strategies.',
       },
     ],
     industryLockup: {
