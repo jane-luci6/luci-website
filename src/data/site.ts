@@ -84,7 +84,7 @@ export const tachiCaseStudy = {
 
 // Trust strip under the hero callout — real client logos, scrolling marquee.
 export const homeTrust = {
-  eyebrow: 'Trusted on live casino & hospitality floors',
+  eyebrow: 'Trusted on live properties',
   strips: [
     { src: '/images/logos/client-logos-1.png', alt: 'Caesars Entertainment, Boyd Gaming, Yaamava\u2019 Resort & Casino, Osage Casino' },
     { src: '/images/logos/client-logos-2.png', alt: 'Chinook Winds Casino Resort, Snoqualmie Casino, Stanly Ranch Auberge, Choctaw Casinos & Resorts' },

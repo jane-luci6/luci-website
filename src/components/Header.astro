@@ -14,13 +14,10 @@ const { dark = false } = Astro.props;
 /* Who We Serve dropdown — mirrors the hub's team order. Entries auto-enable
    (full opacity, clickable) once a persona's detail page exists. */
 const wssOrder: PersonaId[] = ['marketing', 'operations', 'technology', 'finance', 'facilities', 'leadership'];
-const whoWeServeChildren = [
-  { href: '/who-we-serve', label: 'Hub' },
-  ...wssOrder.map((id) => {
-    const p = personas.find((x) => x.id === id)!;
-    return { href: `/who-we-serve/${id}`, label: p.label, comingSoon: !hasPersonaDetail(id) };
-  }),
-];
+const whoWeServeChildren = wssOrder.map((id) => {
+  const p = personas.find((x) => x.id === id)!;
+  return { href: `/who-we-serve/${id}`, label: p.label, comingSoon: !hasPersonaDetail(id) };
+});
 
 const nav = [
   { href: '/platform', label: 'Platform' },
@@ -34,7 +31,6 @@ const nav = [
     href: '/resources',
     label: 'Resources',
     children: [
-      { href: '/resources', label: 'Hub' },
       { href: '/blog', label: 'Blog' },
       { href: '/resources/case-studies', label: 'Case studies' },
       { href: 'https://support.lucisystems.com', label: 'Support portal', external: true },

@@ -118,8 +118,6 @@ export interface PersonaDetail {
   capabilities: PersonaCapability[];
   /** Spotlight — "the bigger picture" (optional; omitted when the closer carries the frame) */
   spotlight?: { label: string; text: string; accent: string };
-  /** Industry switcher photo kicker. Defaults to "What a failure costs here". */
-  industryKicker?: string;
   /** CTA */
   ctaTitle: string;
   /** Optional CTA deck under the title. */
@@ -376,7 +374,6 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       lockupName: 'LUCI lives <em>wherever you operate</em>',
       lockupRole: 'The message changes. The control doesn\u2019t',
     },
-    industryKicker: 'What control unlocks here',
     industryStakes: [
       {
         slug: 'casinos-gaming',
@@ -548,7 +545,6 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       lockupName: 'LUCI lives <em>wherever you operate</em>',
       lockupRole: 'The budget changes. The discipline doesn\u2019t',
     },
-    industryKicker: 'What consolidation unlocks here',
     industryStakes: [
       {
         slug: 'casinos-gaming',
@@ -721,7 +717,6 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       lockupName: 'LUCI lives <em>wherever you operate</em>',
       lockupRole: 'The stakes change. The control doesn\u2019t',
     },
-    industryKicker: 'What control unlocks here',
     industryStakes: [
       {
         slug: 'casinos-gaming',
@@ -901,7 +896,6 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       lockupName: 'LUCI lives <em>wherever you operate</em>',
       lockupRole: 'The environment changes. The control doesn\u2019t',
     },
-    industryKicker: 'What control unlocks here',
     industryStakes: [
       {
         slug: 'casinos-gaming',
@@ -1074,7 +1068,6 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       lockupName: 'LUCI lives <em>wherever you operate</em>',
       lockupRole: 'The business changes. The accountability doesn\u2019t',
     },
-    industryKicker: 'What coherence unlocks here',
     industryStakes: [
       {
         slug: 'casinos-gaming',

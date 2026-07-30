@@ -118,7 +118,10 @@ const climbTreads = [
 ];
 
 // Roll-up chart (General Management) — five functional streams converging on one executive
-const rollupApex = { x: 500, y: 72 };
+// Compressed vertically: origins pulled up toward the apex so the lines (and the
+// whole graphic) take roughly half the vertical space they used to.
+const rollupOriginY = 190;
+const rollupApex = { x: 500, y: 66 };
 const rollupStreams = [
   { cx: 100, color: '#68E3BE' },
   { cx: 300, color: '#8ed3b5' },
@@ -127,8 +130,8 @@ const rollupStreams = [
   { cx: 900, color: '#bcae7a' },
 ];
 const rollupPaths = rollupStreams.map((s) => {
-  if (s.cx === rollupApex.x) return `M ${s.cx} 400 L ${rollupApex.x} ${rollupApex.y}`;
-  return `M ${s.cx} 400 C ${s.cx} 280, ${rollupApex.x} 180, ${rollupApex.x} ${rollupApex.y}`;
+  if (s.cx === rollupApex.x) return `M ${s.cx} ${rollupOriginY} L ${rollupApex.x} ${rollupApex.y}`;
+  return `M ${s.cx} ${rollupOriginY} C ${s.cx} 145, ${rollupApex.x} 107, ${rollupApex.x} ${rollupApex.y}`;
 });
 ---
 
@@ -382,7 +385,7 @@ const rollupPaths = rollupStreams.map((s) => {
 
     {curve === 'rollup' && (
       <div class="pnt__chart pnt__chart--rollup">
-        <svg viewBox="0 0 1000 540" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Five functional streams — operations, marketing, finance, technology, and A/V and facilities — converging upward onto one accountable executive">
+        <svg viewBox="0 0 1000 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Five functional streams — operations, marketing, finance, technology, and A/V and facilities — converging upward onto one accountable executive">
           {rollupStreams.map((s, i) => (
             <path class={`pnt__rollup-stream pnt__rollup-stream--${i+1}`}
               d={rollupPaths[i]}
@@ -395,7 +398,7 @@ const rollupPaths = rollupStreams.map((s) => {
 
           {rollupStreams.map((s, i) => (
             <circle class={`pnt__rollup-origin pnt__rollup-origin--${i+1}`}
-              cx={s.cx} cy="400" r="6"
+              cx={s.cx} cy={rollupOriginY} r="6"
               fill="var(--navy-deep)" stroke={s.color} stroke-width="2.5" />
           ))}
 
@@ -404,14 +407,14 @@ const rollupPaths = rollupStreams.map((s) => {
           <circle class="pnt__rollup-apex" cx={rollupApex.x} cy={rollupApex.y} r="13"
             fill="var(--navy-deep)" stroke="#68E3BE" stroke-width="2.75" />
 
-          <foreignObject x={rollupApex.x - 90} y="14" width="180" height="40">
+          <foreignObject x={rollupApex.x - 90} y="8" width="180" height="40">
             <div xmlns="http://www.w3.org/1999/xhtml" class="pnt__rollup-apex-label">
               <span>One desk</span>
             </div>
           </foreignObject>
 
           {rollupStreams.map((s, i) => (
-            <foreignObject x={s.cx - 90} y="418" width="180" height="120">
+            <foreignObject x={s.cx - 90} y="208" width="180" height="90">
               <div xmlns="http://www.w3.org/1999/xhtml" class={`pnt__label pnt__label--${i+1}`}>
                 <span class="pnt__stage">{n.moments[i].time}</span>
                 <span class="pnt__body">{n.moments[i].caption}</span>
