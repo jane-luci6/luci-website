@@ -64,6 +64,7 @@ const featureImages = [
     deck={oneOffering.summary}
     tone="deep"
     wide
+    pattern
   >
     <figure class="diagram-block diagram-block--parent diagram-reveal">
       <img
@@ -84,7 +85,6 @@ const featureImages = [
     deck="Every capability below lives inside one interface — standard across every property on the platform, regardless of the systems behind it."
     tone="deep"
     wide
-    pattern
   >
     <ul class="feature-grid" role="list">
       {features.map((f, i) => (
@@ -110,6 +110,7 @@ const featureImages = [
     deck="One accountable team gets you live, then stays — operating and refining LUCI for the life of the relationship."
     tone="mid"
     wide
+    pattern
   >
     <PlatformOrbit />
   </SectionBlock>
@@ -136,7 +137,7 @@ const featureImages = [
     </ul>
   </SectionBlock>
 
-  <SectionBlock id="platform-cta" tone="deep">
+  <SectionBlock id="platform-cta" tone="deep" pattern>
     <div class="platform-cta">
       <p class="display-label platform-cta__kicker">Next step</p>
       <h2 class="platform-cta__title">See LUCI on <em>your floor</em>.</h2>
