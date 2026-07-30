@@ -40,11 +40,6 @@ export interface IndustryDetail {
     lockupRole?: string;
   };
   challenges: IndustryChallenge[];
-  challengesCallout?: {
-    label: string;
-    quote: string;
-    attribution?: string;
-  };
   solutionsLockup: {
     lockupName: string;
     lockupRole: string;
@@ -171,12 +166,6 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         imagePosition: 'center 42%',
       },
     ],
-    challengesCallout: {
-      label: 'Sound familiar?',
-      quote:
-        'The pit boss flips a TV to the game before his shift ends. The game\u2019s over by eleven. Next morning, the GM walks through — and Judge Judy\u2019s on the television.',
-      attribution: 'We\u2019ve heard this one a thousand times.',
-    },
     automationLockup: {
       lockupName: '<em>Automation</em> & presets',
       lockupRole: 'Set it once — the floor runs itself',
@@ -283,12 +272,6 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         imagePosition: 'center 48%',
       },
     ],
-    challengesCallout: {
-      label: 'Sound familiar?',
-      quote:
-        'Corporate rolls out the new welcome loop at nine. By the VIP arrival at four, three properties are running three different versions of it.',
-      attribution: 'Multi-property brands live this every week.',
-    },
     solutionsLockup: {
       lockupName: 'What LUCI <em>changes</em>',
       lockupRole: '',
@@ -455,12 +438,6 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         imagePosition: 'center 45%',
       },
     ],
-    challengesCallout: {
-      label: 'Sound familiar?',
-      quote:
-        'Halftime is four minutes long. The replay board is a frame behind, a suite is on the pre-game playlist, and the person who could fix both took a job across town.',
-      attribution: 'Every venue team has lived a version of this.',
-    },
     solutionsLockup: {
       lockupName: 'What LUCI <em>changes</em>',
       lockupRole: '',
@@ -642,12 +619,6 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         featured: true,
       },
     ],
-    challengesCallout: {
-      label: 'Sound familiar?',
-      quote:
-        'A gate change comes over a speaker that’s still finishing the last announcement, the board still shows the old gate, and half the hold area couldn’t make out the words anyway.',
-      attribution: 'Every terminal and station team has lived a version of this.',
-    },
     solutionsLockup: {
       lockupName: 'What LUCI <em>changes</em>',
       lockupRole: '',
@@ -833,12 +804,6 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         imagePosition: 'center 50%',
       },
     ],
-    challengesCallout: {
-      label: 'Sound familiar?',
-      quote:
-        'I trust the GM who admits a forty-five-minute reset and then beats it — not the one who promises twenty and delivers fifty.',
-      attribution: 'Convention operators say this about every turnover.',
-    },
     solutionsLockup: {
       lockupName: 'What LUCI <em>changes</em>',
       lockupRole: '',
