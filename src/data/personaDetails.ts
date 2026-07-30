@@ -1131,24 +1131,24 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
     hubLabel: 'One Coherent Business',
     capabilities: [
       {
-        front: 'See and control the guest environment from one place.',
+        front: 'Walk the floor with an iPad and take the controls yourself.',
         back:
-          'One platform over the property\u2019s screens, sound, and spaces \u2014 so the environment you\u2019re judged on isn\u2019t a patchwork you piece together.',
+          'LUCI runs from any device. On your next walkthrough, open the dashboard and make a live change \u2014 flip a screen, adjust a zone\u2019s audio, switch a preset \u2014 from wherever you\u2019re standing.',
       },
       {
-        front: 'Coordinate less, because more simply works together.',
+        front: 'Schedule a morning reset so the floor always wakes up looking right.',
         back:
-          'Fewer systems and vendors to align, so your team spends its energy on the business instead of being the glue between disconnected parts.',
+          'A TV gets flipped, a screen left on the wrong input \u2014 it happens. A scheduled reset returns every display to its assigned content before the floor opens, with nothing left to chance.',
       },
       {
-        front: 'Keep the property modern without tearing it apart.',
+        front: 'Schedule a recurring guest-experience strategy meeting with the whole team.',
         back:
-          'Software-driven, on-brand control on the infrastructure you already own \u2014 a current, competitive property without a disruptive overhaul.',
+          'Put a standing session on the calendar where Marketing, Operations, A/V, and IT align on how the floor builds energy and responds \u2014 then execute against the shared plan.',
       },
       {
-        front: 'Run every property to one standard.',
+        front: 'Make sure every team is actually using what they can.',
         back:
-          'One consistent platform across your portfolio, so consistency and oversight scale with you instead of breaking down building by building.',
+          'A quick check across teams surfaces where LUCI sits idle \u2014 whether marketing routes through a vendor, IT isn\u2019t onboarded, or finance hasn\u2019t revisited the numbers.',
       },
     ],
     ctaTitle: 'Run it as <em>one business</em>.',
