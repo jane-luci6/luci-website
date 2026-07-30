@@ -30,34 +30,41 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
     </div>
   </section>
 
-  <!-- Story -->
-  <SectionBlock lockupName="Our story" lockupRole="From the casino floor to every property we run">
-    <div class="about-story">
-      <div class="about-story__col">
-        {aboutStory.paragraphs.map((p) => (
-          <p class="measure about-story__p">{p}</p>
-        ))}
-        <aside class="callout about-story__callout">{aboutStory.standardCallout}</aside>
-      </div>
-      <figure class="about-story__media">
-        <img
-          src="/images/industries/casino/hero-sportsbook-poster.jpg"
-          alt="Casino sportsbook floor — rows of screens and seating under low light"
-          loading="lazy"
-          decoding="async"
-        />
-        <figcaption>Where the pattern repeated on every property.</figcaption>
-      </figure>
-      <div class="about-story__industries">
-        <span class="display-label about-story__industries-label">Industries we serve</span>
-        <ul class="about-story__industries-tags" role="list">
-          {aboutStory.industries.map((it) => (
-            <li class="about-story__tag">{it}</li>
-          ))}
-        </ul>
-      </div>
+  <!-- Story: full-bleed casino floor + dual scrim + reading overlay -->
+  <section class="about-story" aria-labelledby="about-story-title">
+    <div class="about-story__media" aria-hidden="true">
+      <img
+        src="/images/industries/casino/solution-morning-floor.jpg"
+        alt=""
+        width="1536"
+        height="1024"
+        loading="lazy"
+        decoding="async"
+      />
     </div>
-  </SectionBlock>
+    <div class="about-story__scrim" aria-hidden="true"></div>
+    <div class="container about-story__inner">
+      <div class="about-story__lockup">
+        <h2 id="about-story-title" class="about-story__name">Our story</h2>
+        <span class="about-story__rule" aria-hidden="true"></span>
+        <p class="about-story__role">From the casino floor to every property we run</p>
+      </div>
+      {aboutStory.paragraphs.map((p) => (
+        <p class="about-story__p">{p}</p>
+      ))}
+      <aside class="about-story__callout">{aboutStory.standardCallout}</aside>
+    </div>
+  </section>
+  <div class="about-story-industries">
+    <div class="container">
+      <span class="display-label about-story-industries__label">Industries we serve</span>
+      <ul class="about-story-industries__tags" role="list">
+        {aboutStory.industries.map((it) => (
+          <li class="about-story-industries__tag">{it}</li>
+        ))}
+      </ul>
+    </div>
+  </div>
 
   <!-- Worldview: reducing variables — dark manifesto band + consolidation ledger -->
   <SectionBlock id="about-worldview" lockupName="Our worldview" lockupRole="Reducing variables" tone="deep" pattern>
@@ -194,57 +201,134 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
     }
   }
 
-  /* ---------- Story ---------- */
+  /* ---------- Story (full-bleed photo stage) ---------- */
   .about-story {
-    display: grid;
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-    gap: clamp(28px, 4vw, 56px);
-    align-items: start;
+    position: relative;
+    background: var(--navy-deep);
+    min-height: clamp(520px, 70vh, 760px);
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    color: var(--off-white);
   }
-  .about-story__col { min-width: 0; }
+  .about-story__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .about-story__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+    display: block;
+  }
+  /* Dual scrim — left dark for reading column, bottom-up so the lower edge stays calm. */
+  .about-story__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(
+        105deg,
+        rgba(10, 22, 28, 0.94) 0%,
+        rgba(10, 22, 28, 0.82) 36%,
+        rgba(10, 22, 28, 0.42) 62%,
+        rgba(10, 22, 28, 0.18) 100%
+      ),
+      linear-gradient(
+        to top,
+        rgba(10, 22, 28, 0.88) 0%,
+        rgba(10, 22, 28, 0.35) 42%,
+        transparent 72%
+      );
+  }
+  .about-story__inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding-block: clamp(64px, 10vw, 112px) clamp(48px, 7vw, 80px);
+  }
+  .about-story__lockup {
+    margin-bottom: var(--space-4);
+  }
+  .about-story__name {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: clamp(34px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+  }
+  .about-story__rule {
+    display: block;
+    width: 40px;
+    height: 3px;
+    margin: 14px 0 12px;
+    background: var(--mint);
+    border-radius: 2px;
+  }
+  .about-story__role {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    line-height: 1.35;
+    color: var(--mint);
+  }
   .about-story__p {
     margin: 0 0 var(--space-3);
+    max-width: 62ch;
+    font-family: 'Inter', system-ui, sans-serif;
     font-size: 17px;
     line-height: 1.65;
-    color: var(--ink);
+    color: rgba(245, 248, 250, 0.9);
   }
   .about-story__callout {
-    margin-top: var(--space-4);
-    font-size: 17px;
-    line-height: 1.55;
-    color: var(--ink-strong);
+    margin: var(--space-4) 0 0;
+    max-width: 58ch;
+    padding: var(--space-3) var(--space-4);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 16px;
     font-weight: 600;
+    line-height: 1.55;
+    color: var(--off-white);
+    background: rgba(10, 22, 28, 0.5);
+    border-left: 4px solid var(--mint);
+    box-shadow: inset 0 0 0 1px rgba(104, 227, 190, 0.16);
   }
-  /* Property photo — rounded, soft mint hairline, gentle lift (soft-icon tile family). */
-  .about-story__media { margin: 0; }
-  .about-story__media img {
-    display: block;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    border-radius: 16px;
-    box-shadow: inset 0 0 0 1px rgba(43, 158, 128, 0.18), 0 18px 40px rgba(10, 22, 28, 0.12);
+  @media (max-width: 720px) {
+    .about-story {
+      min-height: clamp(560px, 90vh, 720px);
+      align-items: flex-end;
+    }
+    .about-story__scrim {
+      background:
+        linear-gradient(
+          180deg,
+          rgba(10, 22, 28, 0.4) 0%,
+          rgba(10, 22, 28, 0.78) 38%,
+          rgba(10, 22, 28, 0.94) 100%
+        );
+    }
   }
-  .about-story__media figcaption {
-    margin-top: var(--space-2);
-    font-family: var(--font-body);
-    font-size: 13px;
-    line-height: 1.4;
-    color: rgba(53, 79, 92, 0.7);
+
+  /* Industries — light strip under the photo stage */
+  .about-story-industries {
+    background: var(--off-white);
+    border-bottom: 1px solid var(--rule-light);
+    padding-block: clamp(28px, 4vw, 40px);
   }
-  /* Industries — full-width row of sharp tags beneath the two columns. */
-  .about-story__industries {
-    grid-column: 1 / -1;
-    border-top: 1px solid var(--rule-light);
-    padding-top: var(--space-4);
-    margin-top: var(--space-2);
-  }
-  .about-story__industries-label {
+  .about-story-industries__label {
     color: var(--accent-light);
     display: block;
     margin-bottom: var(--space-2);
   }
-  .about-story__industries-tags {
+  .about-story-industries__tags {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -252,7 +336,7 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
     flex-wrap: wrap;
     gap: 10px;
   }
-  .about-story__tag {
+  .about-story-industries__tag {
     font-family: var(--font-body);
     font-weight: 700;
     font-size: 13px;
@@ -262,10 +346,6 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
     background: linear-gradient(155deg, #E6F5EF 0%, #F3FAF8 100%);
     box-shadow: inset 0 0 0 1px rgba(43, 158, 128, 0.2);
     border-radius: 8px;
-  }
-  @media (max-width: 860px) {
-    .about-story { grid-template-columns: 1fr; }
-    .about-story__media { order: -1; margin-bottom: var(--space-4); }
   }
 
   /* ---------- Worldview (deep, patterned manifesto band) ---------- */
