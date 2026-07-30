@@ -1,0 +1,222 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionBlock from '../../components/SectionBlock.astro';
+
+const variants = [
+  { id: 'a', name: 'A — Quiet sign-off', note: 'Left-aligned, text-link button, hairline rule. Whispers, doesn\'t sell.' },
+  { id: 'b', name: 'B — Inline follow-on', note: 'Reads as the closing line of the page. The link lives inside the sentence.' },
+  { id: 'c', name: 'C — Split lockup', note: 'Text left, mint pill right. Balanced band, obvious next step.' },
+  { id: 'd', name: 'D — Centered, refined', note: 'Current layout, stripped down: one mint pill, no secondary, more air.' },
+];
+---
+
+<BaseLayout title="CTA mock-ups — LUCI">
+  <section class="mock-intro">
+    <div class="mock-intro__inner">
+      <p class="display-label">Persona CTA · four directions</p>
+      <h1 class="h1">See LUCI on your floor</h1>
+      <p class="mock-intro__deck">
+        Four design directions for the closing CTA on every persona page. Same
+        verbiage across all four — eyebrow <strong>Next Step</strong>, headline
+        <strong>See LUCI on your floor</strong>, button
+        <strong>See LUCI on your floor</strong> — so you can judge the design,
+        not the words. Pick one and I'll apply it site-wide.
+      </p>
+    </div>
+  </section>
+
+  {/* A — Quiet sign-off */}
+  <SectionBlock id="cta-a" tone="deep">
+    <div class="cta cta--a">
+      <p class="display-label cta__kicker">Next step</p>
+      <h2 class="cta__title">See LUCI <em>on your floor</em></h2>
+      <a class="cta__link" href="/contact">See LUCI on your floor <span aria-hidden="true">→</span></a>
+    </div>
+  </SectionBlock>
+  <p class="mock-cap"><strong>A — Quiet sign-off.</strong> Left-aligned, a 40×3 mint rule under the kicker, a text-link button (not a pill). Generous whitespace. Reads as a calm closing line, not a pitch.</p>
+
+  {/* B — Inline follow-on */}
+  <SectionBlock id="cta-b" tone="deep">
+    <div class="cta cta--b">
+      <p class="cta__inline">
+        <span class="display-label cta__kicker">Next step</span>
+        <span class="cta__line">See LUCI <em>on your floor</em>.</span>
+        <a class="cta__arrowlink" href="/contact">See LUCI on your floor <span aria-hidden="true">→</span></a>
+      </p>
+    </div>
+  </SectionBlock>
+  <p class="mock-cap"><strong>B — Inline follow-on.</strong> The CTA reads as the final sentence of the page. No separate button block — the action is an arrow link inline with the line. Most integrated, least "CTA-shaped."</p>
+
+  {/* C — Split lockup */}
+  <SectionBlock id="cta-c" tone="deep">
+    <div class="cta cta--c">
+      <div class="cta--c__text">
+        <p class="display-label cta__kicker">Next step</p>
+        <h2 class="cta__title">See LUCI <em>on your floor</em></h2>
+      </div>
+      <a class="btn btn--mint cta--c__btn" href="/contact">See LUCI on your floor</a>
+    </div>
+  </SectionBlock>
+  <p class="mock-cap"><strong>C — Split lockup.</strong> Eyebrow + headline on the left, a single mint pill on the right, separated by a hairline. A balanced band that reads as an obvious next step without a hard sell.</p>
+
+  {/* D — Centered, refined */}
+  <SectionBlock id="cta-d" tone="deep">
+    <div class="cta cta--d">
+      <p class="display-label cta__kicker">Next step</p>
+      <h2 class="cta__title">See LUCI <em>on your floor</em></h2>
+      <a class="btn btn--mint cta--d__btn" href="/contact">See LUCI on your floor</a>
+    </div>
+  </SectionBlock>
+  <p class="mock-cap"><strong>D — Centered, refined.</strong> The current layout, stripped down: smaller headline, a single mint pill, no secondary "Explore" button, more breathing room. Familiar, but quieter.</p>
+</BaseLayout>
+
+<style>
+  .mock-intro {
+    background: var(--navy-deep);
+    padding-block: clamp(56px, 8vw, 96px) clamp(32px, 5vw, 56px);
+  }
+  .mock-intro__inner {
+    max-width: 760px;
+    margin-inline: auto;
+    padding-inline: clamp(28px, 6vw, 60px);
+    text-align: center;
+  }
+  .mock-intro .display-label { color: var(--mint); }
+  .mock-intro .h1 {
+    color: var(--off-white);
+    font-size: clamp(34px, 6vw, 52px);
+    margin-block: 14px 18px;
+  }
+  .mock-intro__deck {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.78);
+    max-width: 60ch;
+    margin-inline: auto;
+  }
+  .mock-intro__deck strong { color: var(--off-white); font-weight: 600; }
+
+  .mock-cap {
+    max-width: 760px;
+    margin: 0 auto clamp(56px, 8vw, 96px);
+    padding-inline: clamp(28px, 6vw, 60px);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.62);
+    text-align: center;
+  }
+  .mock-cap strong { color: var(--mint); font-weight: 600; }
+
+  /* Shared CTA bits */
+  .cta__kicker { color: var(--mint); }
+  .cta__title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    color: var(--off-white);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .cta__title em {
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  /* A — Quiet sign-off */
+  .cta--a {
+    text-align: left;
+    max-width: 680px;
+    padding-block: clamp(28px, 4vw, 44px);
+  }
+  .cta--a .cta__kicker { position: relative; padding-top: 14px; margin-bottom: 18px; }
+  .cta--a .cta__kicker::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--mint);
+  }
+  .cta--a .cta__title { font-size: clamp(30px, 4.4vw, 44px); max-width: 18ch; margin-bottom: 28px; }
+  .cta__link {
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    color: var(--mint);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(104, 227, 190, 0.4);
+    padding-bottom: 4px;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  .cta__link:hover { border-color: var(--mint); }
+  .cta__link span { margin-left: 6px; transition: transform 0.2s ease; display: inline-block; }
+  .cta__link:hover span { transform: translateX(4px); }
+
+  /* B — Inline follow-on */
+  .cta--b { padding-block: clamp(28px, 4vw, 44px); }
+  .cta--b .cta__inline {
+    max-width: 760px;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .cta--b .cta__kicker { display: block; margin-bottom: 18px; }
+  .cta--b .cta__line {
+    display: block;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+    margin-bottom: 22px;
+  }
+  .cta--b .cta__line em { font-style: normal; color: var(--gold); }
+  .cta--b .cta__arrowlink {
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--mint);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(104, 227, 190, 0.4);
+    padding-bottom: 3px;
+  }
+  .cta--b .cta__arrowlink span { margin-left: 6px; transition: transform 0.2s ease; display: inline-block; }
+  .cta--b .cta__arrowlink:hover span { transform: translateX(4px); }
+
+  /* C — Split lockup */
+  .cta--c {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(24px, 4vw, 56px);
+    flex-wrap: wrap;
+    padding-block: clamp(28px, 4vw, 44px);
+    border-top: 1px solid rgba(104, 227, 190, 0.18);
+  }
+  .cta--c__text { max-width: 24ch; }
+  .cta--c .cta__kicker { margin-bottom: 12px; }
+  .cta--c .cta__title { font-size: clamp(26px, 3.6vw, 36px); }
+  .cta--c__btn { flex-shrink: 0; }
+
+  /* D — Centered, refined */
+  .cta--d {
+    text-align: center;
+    padding-block: clamp(32px, 5vw, 52px);
+  }
+  .cta--d .cta__kicker { margin-bottom: 14px; }
+  .cta--d .cta__title {
+    font-size: clamp(28px, 4vw, 40px);
+    max-width: 20ch;
+    margin-inline: auto;
+    margin-bottom: 28px;
+  }
+  .cta--d__btn { margin-inline: auto; }
+
+  @media (max-width: 640px) {
+    .cta--c { flex-direction: column; align-items: flex-start; }
+    .cta--c__btn { align-self: stretch; }
+  }
+</style>
