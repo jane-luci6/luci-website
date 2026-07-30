@@ -95,7 +95,7 @@ if (!detail) return Astro.redirect('/who-we-serve');
       <p class="display-label persona-cta__kicker">Next step</p>
       <h2 class="persona-cta__title" set:html={detail.ctaTitle} />
       {detail.ctaDeck && <p class="persona-cta__deck">{detail.ctaDeck}</p>}
-      <a class="persona-cta__link" href="/contact">Request a demo <span aria-hidden="true">→</span></a>
+      <a class="btn btn--mint persona-cta__btn" href="/contact">Request a demo</a>
     </div>
   </SectionBlock>
 </BaseLayout>
@@ -133,15 +133,21 @@ if (!detail) return Astro.redirect('/who-we-serve');
     }
   }
 
+  :global(#persona-industries.section) {
+    padding-bottom: clamp(20px, 3vw, 32px);
+  }
+  :global(#persona-cta.section) {
+    padding-block: clamp(10px, 1.5vw, 20px);
+  }
   .persona-cta {
     max-width: 760px;
     margin-inline: auto;
     text-align: center;
-    padding-block: clamp(28px, 4vw, 44px);
+    padding-block: 0;
   }
   .persona-cta__kicker {
     color: var(--mint);
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--space-2);
   }
   .persona-cta__title {
     font-family: var(--font-head);
@@ -150,7 +156,7 @@ if (!detail) return Astro.redirect('/who-we-serve');
     line-height: 1.15;
     letter-spacing: -0.02em;
     color: var(--off-white);
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--space-2);
   }
   .persona-cta__title :global(em) {
     font-style: normal;
@@ -158,33 +164,13 @@ if (!detail) return Astro.redirect('/who-we-serve');
   }
   .persona-cta__deck {
     max-width: 52ch;
-    margin: 0 auto var(--space-4);
+    margin: 0 auto var(--space-2);
     font-family: 'Inter', system-ui, sans-serif;
     font-size: 17px;
     line-height: 1.6;
     color: rgba(245, 248, 250, 0.78);
   }
-  .persona-cta__link {
-    display: inline-block;
-    font-family: var(--font-head);
-    font-weight: 600;
-    font-size: 17px;
-    letter-spacing: 0.01em;
-    color: var(--mint);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(104, 227, 190, 0.4);
-    padding-bottom: 3px;
-    transition: border-color 0.2s ease;
-  }
-  .persona-cta__link:hover {
-    border-color: var(--mint);
-  }
-  .persona-cta__link span {
-    margin-left: 6px;
-    transition: transform 0.2s ease;
-    display: inline-block;
-  }
-  .persona-cta__link:hover span {
-    transform: translateX(4px);
+  .persona-cta__btn {
+    margin-top: 0;
   }
 </style>

@@ -265,6 +265,19 @@ h2,
   color: var(--navy-deep);
 }
 
+/* Keep button text legible inside deep/mid sections — the `.section--deep a`
+   link-color rule below would otherwise turn mint buttons mint-on-mint
+   (invisible) and primary buttons mint-on-navy. */
+.section--deep .btn--mint,
+.section--mid .btn--mint {
+  color: var(--navy-deep);
+}
+
+.section--deep .btn--primary,
+.section--mid .btn--primary {
+  color: var(--off-white);
+}
+
 .btn--ghost {
   background: transparent;
   color: var(--off-white);

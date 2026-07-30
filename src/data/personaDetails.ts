@@ -1151,9 +1151,9 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
           'A quick check across teams surfaces where LUCI sits idle \u2014 whether marketing routes through a vendor, IT isn\u2019t onboarded, or finance hasn\u2019t revisited the numbers.',
       },
     ],
-    ctaTitle: 'Run it as <em>one business</em>.',
+    ctaTitle: 'Run the whole property from <em>one interface</em>.',
     ctaDeck:
-      'Let us show you what it looks like to see and control the whole property\u2019s guest environment from one platform \u2014 in one building, or across every property you run.',
+      'Let us show you what it looks like to see and control the whole property\u2019s guest environment from one platform.',
     chapters: [
       { id: 'persona-thesis', label: 'Overview' },
       { id: 'persona-narrative', label: 'What you manage' },
