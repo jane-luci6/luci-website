@@ -1,0 +1,409 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const items = [
+  {
+    label: 'Case studies',
+    descriptor: 'How LUCI ships on real floors - Ameristar and what came next.',
+    href: '/resources/case-studies',
+  },
+  {
+    label: 'Blog',
+    descriptor: 'Variable reduction, capability deep dives, and the engagement cycle.',
+    href: '/blog',
+  },
+  {
+    label: 'Resource hub',
+    descriptor: 'Everything in one place - studies, articles, and the support portal.',
+    href: '/resources',
+  },
+];
+
+const lede = 'Longer reads, real floors, and the full hub - if you want to keep going.';
+---
+
+<BaseLayout title="Go deeper mock-ups - LUCI">
+  <section class="mock-intro">
+    <div class="mock-intro__inner">
+      <p class="display-label">Homepage . Go deeper . three directions</p>
+      <h1 class="mock-intro__title">Redesign the Go deeper section</h1>
+      <p class="mock-intro__deck">
+        Three directions for the closing resources section on the homepage.
+        Same content across all three - heading Go deeper and the three links
+        (Case studies, Blog, Resource hub) - so you can judge the design, not
+        the words. Pick one and I will apply it to the homepage.
+      </p>
+    </div>
+  </section>
+
+  {/* Variant A - Quiet editorial rows */}
+  <div class="mock-tag">A - Quiet editorial rows . off-white, de-boxed list, hairline separators</div>
+  <section class="gd gd-a" aria-labelledby="gd-a-title">
+    <div class="gd__inner container container--wide">
+      <header class="gd__head">
+        <h2 id="gd-a-title" class="gd__heading">Go <em>deeper</em></h2>
+        <p class="gd__lede">{lede}</p>
+      </header>
+      <ul class="gd-a__list" role="list">
+        {items.map((item) => (
+          <li class="gd-a__row">
+            <a class="gd-a__link" href={item.href}>
+              <span class="gd-a__label">{item.label}</span>
+              <span class="gd-a__desc">{item.descriptor}</span>
+              <span class="gd-a__arrow" aria-hidden="true">&#8594;</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  {/* Variant B - Soft cards */}
+  <div class="mock-tag">B - Soft cards . sand canvas (pattern stripped), icon-led, light gradient + mint hairline</div>
+  <section class="gd gd-b" aria-labelledby="gd-b-title">
+    <div class="gd__inner container container--wide">
+      <header class="gd__head">
+        <h2 id="gd-b-title" class="gd__heading">Go <em>deeper</em></h2>
+        <p class="gd__lede">{lede}</p>
+      </header>
+      <ul class="gd-b__grid" role="list">
+        {items.map((item, i) => (
+          <li class="gd-b__card">
+            <a class="gd-b__link" href={item.href}>
+              <span class="gd-b__icon" aria-hidden="true">
+                {i === 0 && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 3h7l5 5v13H7z" />
+                    <path d="M14 3v5h5" />
+                    <path d="M10 13h6M10 17h6" stroke="#1c2b33" />
+                  </svg>
+                )}
+                {i === 1 && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 20l4-1 9-9-3-3-9 9-1 4z" />
+                    <path d="M14 7l3 3" stroke="#1c2b33" />
+                  </svg>
+                )}
+                {i === 2 && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                    <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                    <rect x="3" y="14" width="7" height="7" rx="1.5" />
+                    <rect x="14" y="14" width="7" height="7" rx="1.5" stroke="#1c2b33" />
+                  </svg>
+                )}
+              </span>
+              <span class="gd-b__label">{item.label}</span>
+              <span class="gd-b__desc">{item.descriptor}</span>
+              <span class="gd-b__arrow" aria-hidden="true">&#8594;</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  {/* Variant C - Horizontal index strip */}
+  <div class="mock-tag">C - Horizontal index strip . off-white, numeral-led, compact single row</div>
+  <section class="gd gd-c" aria-labelledby="gd-c-title">
+    <div class="gd__inner container container--wide">
+      <header class="gd__head">
+        <h2 id="gd-c-title" class="gd__heading">Go <em>deeper</em></h2>
+      </header>
+      <ul class="gd-c__grid" role="list">
+        {items.map((item, i) => (
+          <li class="gd-c__cell">
+            <a class="gd-c__link" href={item.href}>
+              <span class="gd-c__num">0{i + 1}</span>
+              <span class="gd-c__label">{item.label}</span>
+              <span class="gd-c__desc">{item.descriptor}</span>
+              <span class="gd-c__arrow" aria-hidden="true">&#8594;</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .mock-intro {
+    background: var(--navy-deep);
+    color: var(--off-white);
+  }
+  .mock-intro__inner {
+    max-width: 760px;
+    margin-inline: auto;
+    padding: clamp(48px, 7vw, 80px) var(--page-pad);
+  }
+  .mock-intro__title {
+    font-family: var(--font-body);
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.08;
+    margin: 12px 0 16px;
+  }
+  .mock-intro__deck {
+    font-size: clamp(15px, 1.2vw, 17px);
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.78);
+    max-width: 60ch;
+  }
+  .mock-tag {
+    background: #0d1b24;
+    color: var(--mint);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-align: center;
+    padding: 10px var(--page-pad);
+    border-top: 1px solid rgba(104, 227, 190, 0.18);
+    border-bottom: 1px solid rgba(104, 227, 190, 0.18);
+  }
+
+  /* shared */
+  .gd__inner {
+    padding-block: clamp(56px, 7vw, 88px);
+  }
+  .gd__head {
+    margin-bottom: clamp(28px, 3vw, 40px);
+    max-width: 60ch;
+  }
+  .gd__heading {
+    font-family: var(--font-body);
+    font-size: clamp(28px, 3.4vw, 42px);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.08;
+    margin: 0;
+  }
+  .gd__heading em {
+    font-style: normal;
+    color: var(--accent-light);
+  }
+  .gd__lede {
+    margin: 14px 0 0;
+    font-size: clamp(15px, 1.2vw, 17px);
+    line-height: 1.6;
+    color: rgba(53, 79, 92, 0.78);
+  }
+
+  /* Variant A - Quiet editorial rows */
+  .gd-a {
+    background: var(--off-white);
+    color: var(--ink);
+  }
+  .gd-a__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--rule-light);
+  }
+  .gd-a__row {
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .gd-a__link {
+    display: flex;
+    align-items: baseline;
+    gap: clamp(16px, 3vw, 36px);
+    padding: clamp(20px, 2.4vw, 28px) 0;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.18s ease-out;
+  }
+  .gd-a__link:hover {
+    background: rgba(43, 158, 128, 0.06);
+  }
+  .gd-a__label {
+    flex: 0 0 auto;
+    min-width: 12ch;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(18px, 2vw, 22px);
+    letter-spacing: -0.015em;
+    color: var(--ink-strong);
+  }
+  .gd-a__desc {
+    flex: 1 1 auto;
+    font-size: clamp(14px, 1.3vw, 16px);
+    line-height: 1.5;
+    color: rgba(53, 79, 92, 0.78);
+  }
+  .gd-a__arrow {
+    margin-left: auto;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--accent-light);
+    transition: transform 0.18s ease-out;
+  }
+  .gd-a__link:hover .gd-a__arrow {
+    transform: translateX(4px);
+  }
+  @media (max-width: 760px) {
+    .gd-a__link {
+      flex-direction: column;
+      gap: 6px;
+    }
+    .gd-a__label {
+      min-width: 0;
+    }
+    .gd-a__arrow {
+      margin-left: 0;
+    }
+  }
+
+  /* Variant B - Soft cards */
+  .gd-b {
+    background: var(--sand);
+    color: var(--ink);
+  }
+  .gd-b__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(20px, 2.4vw, 32px);
+  }
+  .gd-b__card {
+    background: linear-gradient(155deg, #e6f5ef 0%, #f3faf8 100%);
+    border-radius: 16px;
+    box-shadow: inset 0 0 0 1px rgba(43, 158, 128, 0.14);
+    transition: transform 0.18s ease-out, box-shadow 0.18s ease-out;
+  }
+  .gd-b__card:hover {
+    transform: translateY(-3px);
+    box-shadow: inset 0 0 0 1px rgba(43, 158, 128, 0.22), 0 18px 36px rgba(28, 43, 51, 0.08);
+  }
+  .gd-b__link {
+    display: block;
+    height: 100%;
+    padding: clamp(24px, 2.6vw, 32px);
+    text-decoration: none;
+    color: inherit;
+  }
+  .gd-b__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.55);
+    box-shadow: inset 0 0 0 1px rgba(43, 158, 128, 0.12);
+    color: var(--accent-light);
+  }
+  .gd-b__icon svg {
+    width: 28px;
+    height: 28px;
+  }
+  .gd-b__label {
+    display: block;
+    margin: 16px 0 8px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(18px, 2vw, 22px);
+    letter-spacing: -0.015em;
+    color: var(--ink-strong);
+  }
+  .gd-b__desc {
+    display: block;
+    font-size: clamp(14px, 1.3vw, 16px);
+    line-height: 1.5;
+    color: rgba(53, 79, 92, 0.78);
+  }
+  .gd-b__arrow {
+    display: inline-block;
+    margin-top: 16px;
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--accent-light);
+    transition: transform 0.18s ease-out;
+  }
+  .gd-b__card:hover .gd-b__arrow {
+    transform: translateX(4px);
+  }
+  @media (max-width: 760px) {
+    .gd-b__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Variant C - Horizontal index strip */
+  .gd-c {
+    background: var(--off-white);
+    color: var(--ink);
+  }
+  .gd-c__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 1px solid var(--rule-light);
+  }
+  .gd-c__cell {
+    border-bottom: 1px solid var(--rule-light);
+    border-right: 1px solid var(--rule-light);
+  }
+  .gd-c__cell:last-child {
+    border-right: 0;
+  }
+  .gd-c__link {
+    display: block;
+    padding: clamp(24px, 2.8vw, 36px) clamp(20px, 2vw, 28px);
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.18s ease-out;
+  }
+  .gd-c__link:hover {
+    background: rgba(43, 158, 128, 0.06);
+  }
+  .gd-c__num {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(28px, 3vw, 40px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--accent-light);
+  }
+  .gd-c__label {
+    display: block;
+    margin-top: 16px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(17px, 1.8vw, 20px);
+    letter-spacing: -0.015em;
+    color: var(--ink-strong);
+  }
+  .gd-c__desc {
+    display: block;
+    margin-top: 8px;
+    font-size: clamp(13px, 1.2vw, 15px);
+    line-height: 1.5;
+    color: rgba(53, 79, 92, 0.78);
+  }
+  .gd-c__arrow {
+    display: inline-block;
+    margin-top: 14px;
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--accent-light);
+    transition: transform 0.18s ease-out;
+  }
+  .gd-c__link:hover .gd-c__arrow {
+    transform: translateX(4px);
+  }
+  @media (max-width: 760px) {
+    .gd-c__grid {
+      grid-template-columns: 1fr;
+    }
+    .gd-c__cell {
+      border-right: 0;
+    }
+  }
+</style>
