@@ -33,41 +33,72 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
   <!-- Story -->
   <SectionBlock lockupName="Our story" lockupRole="From the casino floor to every property we run">
     <div class="about-story">
-      {aboutStory.paragraphs.map((p) => (
-        <p class="measure about-story__p">{p}</p>
-      ))}
-      <aside class="callout about-story__callout">{aboutStory.standardCallout}</aside>
+      <div class="about-story__col">
+        {aboutStory.paragraphs.map((p) => (
+          <p class="measure about-story__p">{p}</p>
+        ))}
+        <aside class="callout about-story__callout">{aboutStory.standardCallout}</aside>
+      </div>
+      <figure class="about-story__media">
+        <img
+          src="/images/industries/casino/hero-sportsbook-poster.jpg"
+          alt="Casino sportsbook floor — rows of screens and seating under low light"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>Where the pattern repeated on every property.</figcaption>
+      </figure>
       <div class="about-story__industries">
         <span class="display-label about-story__industries-label">Industries we serve</span>
-        <p class="about-story__industries-list">{aboutStory.industries.join(' · ')}</p>
+        <ul class="about-story__industries-tags" role="list">
+          {aboutStory.industries.map((it) => (
+            <li class="about-story__tag">{it}</li>
+          ))}
+        </ul>
       </div>
     </div>
   </SectionBlock>
 
-  <!-- Worldview: reducing variables -->
-  <SectionBlock lockupName="Our worldview" lockupRole="Reducing variables" tone="sand">
-    {accumulationParas.map((p) => (
-      <p class="measure about-worldview__p">{p}</p>
-    ))}
-    <p class="measure about-worldview__p">{variableReduction.subtraction}</p>
-    <p class="measure about-worldview__signature">{variableReduction.headline}</p>
+  <!-- Worldview: reducing variables — dark manifesto band + consolidation ledger -->
+  <SectionBlock id="about-worldview" lockupName="Our worldview" lockupRole="Reducing variables" tone="deep" pattern>
+    <div class="about-worldview">
+      {accumulationParas.map((p) => (
+        <p class="measure about-worldview__p">{p}</p>
+      ))}
+      <p class="measure about-worldview__p">{variableReduction.subtraction}</p>
+      <p class="about-worldview__signature">{variableReduction.headline}</p>
+      <figure class="about-worldview__ledger">
+        <img
+          src="/images/diagrams/luci-consolidation-ledger.svg"
+          alt="Consolidation ledger: today, four or more multimedia systems, five or more equipment racks, fifteen or more receivers, and one hundred plus hardware devices. With LUCI: one interface, one equipment rack, one consolidated network, and code that is yours."
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+    </div>
   </SectionBlock>
 
   <!-- Commitments (values) — reuses the homepage commitments grid -->
   <HomeCommitments />
 
   <!-- Leadership -->
-  <SectionBlock lockupName="Leadership" lockupRole="The team that builds and supports it">
+  <SectionBlock
+    lockupName="Leadership"
+    lockupRole="The team that builds and supports it"
+    deck="Built and operated by the same people — for the life of the relationship."
+  >
     <ul class="about-leadership" role="list">
       {leadership.map((person) => (
         <li class="about-leader">
-          <div class="about-leader__photo">
-            <img src={person.photo} alt={person.name} loading="lazy" />
-          </div>
-          <div class="about-leader__copy">
-            <p class="about-leader__name">{person.name}</p>
-            <p class="about-leader__title">{person.title}</p>
-            <p class="about-leader__blurb">{person.blurb}</p>
+          <div class="about-leader__card">
+            <div class="about-leader__photo">
+              <img src={person.photo} alt={person.name} loading="lazy" />
+            </div>
+            <div class="about-leader__copy">
+              <p class="about-leader__name">{person.name}</p>
+              <p class="about-leader__title">{person.title}</p>
+              <p class="about-leader__blurb">{person.blurb}</p>
+            </div>
           </div>
         </li>
       ))}
@@ -75,7 +106,7 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
   </SectionBlock>
 
   <!-- Proof at scale -->
-  <SectionBlock lockupName="Proof at scale" lockupRole="Running on live properties" tone="mid">
+  <SectionBlock lockupName="Proof at scale" lockupRole="Running on live properties" tone="mid" pattern>
     <p class="measure about-proof__line">{aboutProofLine}</p>
     <a class="about-proof__card" href={`/resources/case-studies/${ameristarCaseStudy.slug}`}>
       <span class="display-label about-proof__card-kicker">Case study</span>
@@ -85,8 +116,13 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
   </SectionBlock>
 
   <!-- CTA -->
-  <SectionBlock tone="deep">
-    <a class="btn btn--primary" href="/contact">{site.ctaPrimary}</a>
+  <SectionBlock id="about-cta" tone="deep" pattern>
+    <div class="about-cta">
+      <p class="display-label about-cta__kicker">Next step</p>
+      <h2 class="about-cta__title">Let&rsquo;s talk about <em>your property</em>.</h2>
+      <p class="about-cta__deck">Tell us what you&rsquo;re running &mdash; and what you&rsquo;d like to stop managing.</p>
+      <a class="btn btn--primary" href="/contact">{site.ctaPrimary}</a>
+    </div>
   </SectionBlock>
 
 </BaseLayout>
@@ -159,59 +195,115 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
   }
 
   /* ---------- Story ---------- */
+  .about-story {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: clamp(28px, 4vw, 56px);
+    align-items: start;
+  }
+  .about-story__col { min-width: 0; }
   .about-story__p {
     margin: 0 0 var(--space-3);
     font-size: 17px;
     line-height: 1.65;
     color: var(--ink);
   }
-  .about-story__p:last-of-type {
-    margin-bottom: var(--space-5);
-  }
   .about-story__callout {
     margin-top: var(--space-4);
-    margin-bottom: var(--space-5);
     font-size: 17px;
     line-height: 1.55;
     color: var(--ink-strong);
     font-weight: 600;
   }
+  /* Property photo — rounded, soft mint hairline, gentle lift (soft-icon tile family). */
+  .about-story__media { margin: 0; }
+  .about-story__media img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: inset 0 0 0 1px rgba(43, 158, 128, 0.18), 0 18px 40px rgba(10, 22, 28, 0.12);
+  }
+  .about-story__media figcaption {
+    margin-top: var(--space-2);
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.4;
+    color: rgba(53, 79, 92, 0.7);
+  }
+  /* Industries — full-width row of sharp tags beneath the two columns. */
   .about-story__industries {
+    grid-column: 1 / -1;
     border-top: 1px solid var(--rule-light);
-    padding-top: var(--space-3);
+    padding-top: var(--space-4);
+    margin-top: var(--space-2);
   }
   .about-story__industries-label {
     color: var(--accent-light);
     display: block;
-    margin-bottom: var(--space-1);
+    margin-bottom: var(--space-2);
   }
-  .about-story__industries-list {
+  .about-story__industries-tags {
+    list-style: none;
     margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .about-story__tag {
     font-family: var(--font-body);
     font-weight: 700;
-    font-size: clamp(16px, 1.6vw, 19px);
-    letter-spacing: -0.01em;
+    font-size: 13px;
+    letter-spacing: -0.005em;
     color: var(--ink-strong);
-    line-height: 1.4;
+    padding: 8px 14px;
+    background: linear-gradient(155deg, #E6F5EF 0%, #F3FAF8 100%);
+    box-shadow: inset 0 0 0 1px rgba(43, 158, 128, 0.2);
+    border-radius: 8px;
+  }
+  @media (max-width: 860px) {
+    .about-story { grid-template-columns: 1fr; }
+    .about-story__media { order: -1; margin-bottom: var(--space-4); }
   }
 
-  /* ---------- Worldview ---------- */
-  .about-worldview__signature {
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: clamp(20px, 2.6vw, 26px);
-    line-height: 1.3;
-    letter-spacing: -0.015em;
-    color: var(--ink-strong);
-    margin: 0 0 var(--space-5);
-    padding-left: var(--space-4);
-    border-left: 4px solid var(--accent-light);
+  /* ---------- Worldview (deep, patterned manifesto band) ---------- */
+  /* Match the section bg to the ledger diagram's own navy so the diagram reads as
+     part of the section, not a pasted-on rectangle. */
+  :global(#about-worldview.section--deep) {
+    background: var(--navy-deep);
   }
   .about-worldview__p {
     margin: 0 0 var(--space-3);
     font-size: 17px;
     line-height: 1.65;
-    color: var(--ink);
+    color: rgba(245, 248, 250, 0.82);
+  }
+  .about-worldview__signature {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(22px, 3vw, 30px);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+    margin: var(--space-4) 0 var(--space-5);
+    padding-left: var(--space-4);
+    border-left: 4px solid var(--mint);
+    max-width: 26ch;
+  }
+  /* Consolidation ledger — the visual proof of "reducing variables." Its own navy
+     bg matches the section; a hairline + soft lift define it as an exhibit. */
+  .about-worldview__ledger {
+    margin: var(--space-4) 0 0;
+    max-width: 640px;
+  }
+  .about-worldview__ledger img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: inset 0 0 0 1px rgba(104, 227, 190, 0.18), 0 24px 56px rgba(0, 0, 0, 0.45);
   }
 
   /* ---------- Leadership ---------- */
@@ -223,11 +315,15 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
     grid-template-columns: repeat(2, 1fr);
     gap: clamp(28px, 4vw, 48px) clamp(32px, 5vw, 64px);
   }
-  .about-leader {
+  .about-leader__card {
     display: grid;
     grid-template-columns: 132px 1fr;
     gap: 20px;
     align-items: start;
+    padding: clamp(20px, 2.4vw, 28px);
+    background: linear-gradient(155deg, #E6F5EF 0%, #F3FAF8 100%);
+    box-shadow: inset 0 0 0 1px rgba(43, 158, 128, 0.16);
+    border-radius: 20px;
   }
   /* Photo — square frame, image covers it (headshot favors the face). */
   .about-leader__photo {
@@ -274,7 +370,7 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
     .about-leadership {
       grid-template-columns: 1fr;
     }
-    .about-leader {
+    .about-leader__card {
       grid-template-columns: 104px 1fr;
     }
     .about-leader__photo {
@@ -321,5 +417,41 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
     font-weight: 600;
     font-size: 14px;
     color: var(--mint);
+  }
+
+  /* ---------- CTA (deep, patterned) ---------- */
+  :global(#about-cta.section) {
+    border-top: 2px solid var(--mint);
+  }
+  .about-cta {
+    max-width: 760px;
+    margin-inline: auto;
+    text-align: center;
+    padding-block: clamp(24px, 4vw, 40px);
+  }
+  .about-cta__kicker {
+    color: var(--mint);
+    margin-bottom: var(--space-3);
+  }
+  .about-cta__title {
+    margin: 0 0 var(--space-3);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(26px, 3.6vw, 38px);
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    color: var(--off-white);
+  }
+  .about-cta__title :global(em) {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .about-cta__deck {
+    max-width: 52ch;
+    margin: 0 auto var(--space-4);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.78);
   }
 </style>
