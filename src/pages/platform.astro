@@ -2,12 +2,14 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionBlock from '../components/SectionBlock.astro';
 import PlatformChapterNav from '../components/PlatformChapterNav.astro';
+import PlatformHeroStage from '../components/PlatformHeroStage.astro';
 import PlatformArchitectureStage from '../components/PlatformArchitectureStage.astro';
 import PlatformOrbit from '../components/PlatformOrbit.astro';
 import { site, oneOffering } from '../data/site';
 import { features } from '../data/features';
 
 const chapters = [
+  { id: 'platform-thesis', label: 'Overview' },
   { id: 'what-luci-is', label: 'What LUCI is' },
   { id: 'features', label: 'Capabilities' },
   { id: 'embedded-operation', label: 'Systems' },
@@ -43,9 +45,17 @@ const featureImages = [
 ];
 ---
 
-<BaseLayout title="Platform" description={oneOffering.platform}>
+<BaseLayout title="Platform" description={oneOffering.platform} darkHeader>
   <h1 class="platform-sr-only">Platform — {site.tagline}</h1>
   <PlatformChapterNav chapters={chapters} />
+
+  <PlatformHeroStage
+    lockupName="Platform"
+    lockupRole="The Orchestration Engine"
+    deck={site.subTagline}
+    imageSrc="/images/hero-platform.png"
+    imageAlt="LUCI control interface: a live map of every display, audio zone, and system endpoint across the property, operated from one screen."
+  />
 
   <SectionBlock
     id="what-luci-is"
@@ -129,10 +139,9 @@ const featureImages = [
   <SectionBlock id="platform-cta" tone="deep">
     <div class="platform-cta">
       <p class="display-label platform-cta__kicker">Next step</p>
-      <h2 class="h2 platform-cta__title">See LUCI on your floor.</h2>
-      <div class="btn-row">
-        <a class="btn btn--primary" href="/contact">{site.ctaPrimary}</a>
-      </div>
+      <h2 class="platform-cta__title">See LUCI on <em>your floor</em>.</h2>
+      <p class="platform-cta__deck">Let us show you what LUCI looks like on a property like yours.</p>
+      <a class="btn btn--mint platform-cta__btn" href="/contact">Request a demo</a>
     </div>
   </SectionBlock>
 </BaseLayout>
@@ -150,6 +159,7 @@ const featureImages = [
     border: 0;
   }
 
+  #platform-thesis,
   #what-luci-is,
   #features,
   #embedded-operation,
@@ -159,6 +169,7 @@ const featureImages = [
   }
 
   @media (max-width: 640px) {
+    #platform-thesis,
     #what-luci-is,
     #features,
     #embedded-operation,
@@ -334,18 +345,43 @@ const featureImages = [
   }
 
   /* ---------- End CTA (deep) ---------- */
-  #platform-cta .platform-cta {
+  :global(#platform-cta.section) {
+    border-top: 2px solid var(--mint);
+    padding-block: clamp(36px, 5vw, 48px);
+  }
+  .platform-cta {
+    max-width: 760px;
+    margin-inline: auto;
     text-align: center;
-    padding-block: clamp(24px, 4vw, 40px);
+    padding-block: 0;
   }
   .platform-cta__kicker {
     color: var(--mint);
-    margin-bottom: var(--space-2);
+    margin-bottom: var(--space-3);
   }
   .platform-cta__title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(24px, 3.4vw, 34px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
     color: var(--off-white);
-    margin-bottom: var(--space-4);
-    max-width: none;
+    margin-bottom: var(--space-3);
+  }
+  .platform-cta__title :global(em) {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .platform-cta__deck {
+    max-width: 52ch;
+    margin: 0 auto var(--space-2);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.78);
+  }
+  .platform-cta__btn {
+    margin-top: 0;
   }
 
   @media (prefers-reduced-motion: reduce) {

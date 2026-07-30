@@ -1,0 +1,151 @@
+---
+interface Props {
+  lockupName: string;
+  lockupRole: string;
+  deck: string;
+  imageSrc: string;
+  imageAlt?: string;
+  sectionId?: string;
+}
+
+const {
+  lockupName,
+  lockupRole,
+  deck,
+  imageSrc,
+  imageAlt = '',
+  sectionId = 'platform-thesis',
+} = Astro.props;
+---
+
+<section id={sectionId} class="plat-hero">
+  <img
+    class="plat-hero__img"
+    src={imageSrc}
+    alt={imageAlt}
+    width="2400"
+    height="1725"
+    loading="eager"
+    decoding="async"
+    fetchpriority="high"
+    aria-hidden="true"
+  />
+  <span class="plat-hero__scrim" aria-hidden="true"></span>
+  <span class="plat-hero__grain" aria-hidden="true"></span>
+
+  <div class="plat-hero__inner container container--wide">
+    <div class="header-lockup is-in" data-reveal>
+      <h2 class="header-lockup__name" set:html={lockupName} />
+      <span class="header-lockup__rule" aria-hidden="true"></span>
+      <p class="header-lockup__role">{lockupRole}</p>
+    </div>
+    <p class="plat-hero__deck">{deck}</p>
+  </div>
+</section>
+
+<style>
+  .plat-hero {
+    position: relative;
+    width: 100%;
+    min-height: clamp(340px, 44vw, 560px);
+    aspect-ratio: 21 / 9;
+    max-height: 60vh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    color: var(--off-white);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .plat-hero__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+  }
+
+  .plat-hero__scrim {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(105deg, rgba(8, 17, 22, 0.92) 0%, rgba(8, 17, 22, 0.5) 44%, rgba(8, 17, 22, 0.22) 100%),
+      linear-gradient(to top, rgba(8, 17, 22, 0.94) 0%, rgba(8, 17, 22, 0.38) 50%, transparent 74%);
+  }
+
+  .plat-hero__grain {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.22;
+    background-image: url('/images/textures/texture-circuit-header-mintgold.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    mix-blend-mode: soft-light;
+  }
+
+  .plat-hero__inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding-block: clamp(80px, 10vw, 120px) clamp(36px, 5vw, 60px);
+  }
+
+  .plat-hero .header-lockup {
+    display: block;
+    margin-bottom: var(--space-3);
+  }
+
+  .plat-hero .header-lockup__name {
+    font-family: var(--font-display);
+    font-size: clamp(34px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--mint);
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .plat-hero .header-lockup__rule {
+    display: block;
+    width: 40px;
+    height: 3px;
+    margin: 14px 0 12px;
+    background: var(--mint);
+    border-radius: 2px;
+  }
+
+  .plat-hero .header-lockup__role {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    line-height: 1.35;
+    color: var(--mint);
+    margin: 0;
+  }
+
+  .plat-hero__deck {
+    max-width: var(--measure);
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.55;
+    color: rgba(245, 248, 250, 0.88);
+    text-align: left;
+  }
+
+  @media (max-width: 720px) {
+    .plat-hero {
+      aspect-ratio: auto;
+      min-height: clamp(380px, 74vw, 480px);
+      max-height: none;
+    }
+  }
+</style>
