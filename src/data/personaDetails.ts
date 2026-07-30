@@ -1033,7 +1033,6 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
       support: '',
       closing:
         '<span class="pnt__luci">With LUCI</span>, the guest environment across the whole property becomes <em>one system</em> you can see and control \u2014 one concrete step toward running it all as a single business.',
-      closingSupport: 'One business, in one property or across all of them.',
     },
     challengesLockup: {
       lockupName: 'What gets in <em>your way</em>',
