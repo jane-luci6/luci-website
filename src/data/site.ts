@@ -30,11 +30,12 @@ export const oneOffering = {
 } as const;
 
 export const variableReduction = {
-  headline: "Complexity isn't solved by a better interface. It's solved by a shorter list of things to manage.",
+  headline:
+    "Our objective isn\u2019t to give you MORE, it\u2019s to give you LESS \u2014 less hardware, fewer interfaces, and a shorter list of things to worry about.",
   accumulation:
-    "Complex environments don't fail because of what they lack. They fail because of what they accumulate.\n\nEvery property runs on a stack of vendors, processors, interfaces, and workarounds that each made sense at the time, but create downstream challenges.",
+    "Nobody sets out to make a property complicated. It happens one reasonable decision at a time: A renovation adds a signage platform. A sportsbook build brings its own video wall and processor. A ballroom gets a DSP and room-combine program that lives with the contractor who wrote it. Each one was the right call at the time. But together, they became a much bigger problem.\n\nMost properties today run on a series of collected software, hardware, and protocols that don\u2019t match up. Separate interfaces for displays, audio, and lighting. A change to one endpoint requires a phone call, a quote, and a two-week wait. Racks of equipment accumulate along with heavy and expensive refresh cycles. Everything technically \u201cworks\u201d but it\u2019s daunting to track and manage.",
   subtraction:
-    "LUCI doesn't address this with an additional tool; it addresses this with the principle of subtraction. By removing variables. Its success is evidenced by the number of things our clients no longer have to think about.",
+    "LUCI was built specifically to reduce this issue by simplifying audio, visual, and lighting. Instead of adding another tool to your stack, we remove the variables you have to manage: fewer vendors, interfaces, racks of equipment, and fewer steps to make a single change. Instead, you gain a single platform that ingests all of that complexity and gives you one platform to control the whole property and every endpoint in it.",
 } as const;
 
 export const aboutStory = {
