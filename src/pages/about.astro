@@ -150,12 +150,12 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
 
 <style>
   /* ---------- Hero ---------- */
-  /* Title card: skyline as atmosphere, dissolves to solid navy at the bottom so it
-     doesn't collide with the story photo stage below. Mint rule marks the beat. */
+  /* Skyline sits on the upper half as atmosphere; the lower half is solid navy
+     where the title/lead live. A gradient blends the photo into the navy. */
   .about-hero {
     position: relative;
     background: var(--navy-deep);
-    min-height: clamp(320px, 44vh, 480px);
+    min-height: clamp(360px, 50vh, 540px);
     display: flex;
     align-items: flex-end;
     overflow: hidden;
@@ -163,35 +163,36 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
   }
   .about-hero__media {
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 62%;
     z-index: 0;
   }
   .about-hero__media img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 35%;
+    object-position: center 30%;
+    display: block;
   }
-  /* Dual scrim — left for title contrast + bottom fade into solid navy (section break). */
+  /* Fade the bottom of the skyline into solid navy. A touch of left-darkening
+     keeps the skyline edge from competing with the text below. */
   .about-hero__scrim {
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 62%;
     z-index: 1;
+    pointer-events: none;
     background:
       linear-gradient(
-        90deg,
-        rgba(10, 22, 28, 0.92) 0%,
-        rgba(10, 22, 28, 0.78) 38%,
-        rgba(10, 22, 28, 0.35) 70%,
-        rgba(10, 22, 28, 0.18) 100%
-      ),
-      linear-gradient(
-        to top,
-        rgba(10, 22, 28, 1) 0%,
-        rgba(10, 22, 28, 1) 12%,
-        rgba(10, 22, 28, 0.92) 28%,
-        rgba(10, 22, 28, 0.45) 55%,
-        transparent 78%
+        to bottom,
+        rgba(10, 22, 28, 0.35) 0%,
+        rgba(10, 22, 28, 0.15) 40%,
+        rgba(10, 22, 28, 0.6) 75%,
+        rgba(10, 22, 28, 1) 100%
       );
   }
   .about-hero__inner {
@@ -217,12 +218,16 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
     max-width: 44ch;
   }
   @media (max-width: 720px) {
+    .about-hero__media {
+      height: 50%;
+    }
     .about-hero__scrim {
+      height: 50%;
       background:
         linear-gradient(
-          180deg,
-          rgba(10, 22, 28, 0.45) 0%,
-          rgba(10, 22, 28, 0.82) 50%,
+          to bottom,
+          rgba(10, 22, 28, 0.5) 0%,
+          rgba(10, 22, 28, 0.3) 50%,
           rgba(10, 22, 28, 1) 100%
         );
     }
