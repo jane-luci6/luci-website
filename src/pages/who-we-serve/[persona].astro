@@ -9,6 +9,7 @@ import PersonaIndustrySwitcher from '../../components/PersonaIndustrySwitcher.as
 import PersonaCapabilitiesFlow from '../../components/PersonaCapabilitiesFlow.astro';
 import { personas } from '../../data/personas';
 import { getPersonaDetail, hasPersonaDetail } from '../../data/personaDetails';
+import { site } from '../../data/site';
 
 export function getStaticPaths() {
   return personas
@@ -95,7 +96,7 @@ if (!detail) return Astro.redirect('/who-we-serve');
       <p class="display-label persona-cta__kicker">Next step</p>
       <h2 class="persona-cta__title" set:html={detail.ctaTitle} />
       {detail.ctaDeck && <p class="persona-cta__deck">{detail.ctaDeck}</p>}
-      <a class="btn btn--mint persona-cta__btn" href="/contact">Request a demo</a>
+      <a class="btn btn--primary persona-cta__btn" href="/contact">{site.ctaPrimary}</a>
     </div>
   </SectionBlock>
 </BaseLayout>
@@ -141,10 +142,8 @@ if (!detail) return Astro.redirect('/who-we-serve');
     padding-block: clamp(36px, 5vw, 48px);
   }
   .persona-cta {
-    max-width: 760px;
-    margin-inline: auto;
-    text-align: center;
-    padding-block: 0;
+    max-width: 64ch;
+    padding-block: clamp(24px, 4vw, 40px);
   }
   .persona-cta__kicker {
     color: var(--mint);
@@ -165,7 +164,7 @@ if (!detail) return Astro.redirect('/who-we-serve');
   }
   .persona-cta__deck {
     max-width: 52ch;
-    margin: 0 auto var(--space-2);
+    margin: 0 0 var(--space-4);
     font-family: 'Inter', system-ui, sans-serif;
     font-size: 17px;
     line-height: 1.6;
