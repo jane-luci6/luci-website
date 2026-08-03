@@ -79,7 +79,7 @@ const detail = getIndustryDetail(industry.slug);
         <div class="ind-page-cta">
           <p class="display-label ind-page-cta__kicker">Next step</p>
           <h2 class="ind-page-cta__title" set:html={detail.ctaTitle} />
-          <a class="btn btn--mint ind-page-cta__btn" href="/contact">{site.ctaPrimary}</a>
+          <a class="btn btn--mint-outline ind-page-cta__btn" href="/contact">{site.ctaPrimary}</a>
         </div>
       </SectionBlock>
     </>
@@ -105,7 +105,7 @@ const detail = getIndustryDetail(industry.slug);
       </SectionBlock>
 
       <SectionBlock tone="deep">
-        <a class="btn btn--mint" href="/contact">{site.ctaPrimary}</a>
+        <a class="btn btn--mint-outline" href="/contact">{site.ctaPrimary}</a>
       </SectionBlock>
     </>
   )}
