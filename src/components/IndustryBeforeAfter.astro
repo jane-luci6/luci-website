@@ -21,14 +21,13 @@ const pairs = challenges
     <li class="ba__row">
       <span class="ba__num" aria-hidden="true">{p.num}</span>
 
-      <div class="ba__side ba__side--before" role="button" tabindex="0" aria-pressed="false">
+      <div class="ba__side ba__side--before" tabindex="0">
         <div class="ba__inner">
           <div class="ba__face ba__face--front">
             <span class="ba__label">Before</span>
             <h3 class="ba__head">{p.before.head}</h3>
           </div>
           <div class="ba__face ba__face--back">
-            <span class="ba__label">Before</span>
             <p class="ba__body">{p.before.body}</p>
           </div>
         </div>
@@ -36,14 +35,13 @@ const pairs = challenges
 
       <span class="ba__seam" aria-hidden="true"></span>
 
-      <div class="ba__side ba__side--after" role="button" tabindex="0" aria-pressed="false">
+      <div class="ba__side ba__side--after" tabindex="0">
         <div class="ba__inner">
           <div class="ba__face ba__face--front">
             <span class="ba__label ba__label--after">After &middot; LUCI</span>
             <h3 class="ba__head">{p.after.headline}</h3>
           </div>
           <div class="ba__face ba__face--back">
-            <span class="ba__label ba__label--after">After &middot; LUCI</span>
             <p class="ba__body">{p.after.answer}</p>
           </div>
         </div>
@@ -58,19 +56,13 @@ const pairs = challenges
 </ol>
 
 <script>
-  document.querySelectorAll<HTMLElement>('.ba__side').forEach((el) => {
-    const toggle = () => {
-      el.classList.toggle('is-flipped');
-      el.setAttribute('aria-pressed', el.classList.contains('is-flipped') ? 'true' : 'false');
-    };
-    el.addEventListener('click', toggle);
-    el.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggle();
-      }
+  // Hover/focus flips the card (CSS). On touch (no hover), tap toggles.
+  const section = document.querySelector('.ba');
+  if (section && window.matchMedia('(hover: none)').matches) {
+    section.querySelectorAll('.ba__side').forEach((el) => {
+      el.addEventListener('click', () => el.classList.toggle('is-flipped'));
     });
-  });
+  }
 </script>
 
 <style>
@@ -143,6 +135,13 @@ const pairs = challenges
 
   .ba__side.is-flipped .ba__inner {
     transform: rotateY(180deg);
+  }
+
+  @media (hover: hover) {
+    .ba__side:hover .ba__inner,
+    .ba__side:focus-within .ba__inner {
+      transform: rotateY(180deg);
+    }
   }
 
   .ba__face {
