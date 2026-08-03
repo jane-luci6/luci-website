@@ -1,51 +1,19 @@
 ---
 // Casino resort floorplan — ChatGPT-generated architectural drawing,
-// transposed to dark (invert + screen blend = light lines on navy), with a
-// mint overlay marking the zones LUCI controls. Same pattern as the homepage
-// floorplan (B&W drawing + mint control layer).
+// transposed to dark (invert + screen blend = light lines on navy). The
+// drawing carries its own labels; the surrounding copy + pillar cards carry
+// the LUCI story.
 ---
 <div class="fp-cad">
   <img
     class="fp-cad__img"
     src="/images/industries/casino/casino-floorplan.png?v=1"
-    alt="Architectural floorplan of a resort and casino: casino floor, ballroom, convention center, hotel lobby, pool, theater and parking garage. The casino floor, theater, convention center and hotel lobby are highlighted as LUCI-controlled."
+    alt="Architectural floorplan of a resort and casino: casino floor, ballroom, convention center, hotel lobby, pool, theater and parking garage."
     loading="lazy"
     decoding="async"
     width="790"
     height="1024"
   />
-  <svg class="fp-cad__ov" viewBox="0 0 790 1024" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-    <!-- network: LUCI node → controlled zones -->
-    <g class="fp-net">
-      <line x1="395" y1="500" x2="235" y2="410"/>
-      <line x1="395" y1="500" x2="360" y2="880"/>
-      <line x1="395" y1="500" x2="640" y2="460"/>
-      <line x1="395" y1="500" x2="175" y2="780"/>
-      <circle cx="235" cy="410" r="4"/>
-      <circle cx="360" cy="880" r="4"/>
-      <circle cx="640" cy="460" r="4"/>
-      <circle cx="175" cy="780" r="4"/>
-    </g>
-    <!-- central LUCI node -->
-    <circle cx="395" cy="500" r="13" fill="#0A161C" stroke="#68E3BE" stroke-width="2"/>
-    <circle cx="395" cy="500" r="4.5" fill="#68E3BE"/>
-    <text x="395" y="478" class="fp-pill-tx">LUCI</text>
-
-    <!-- controlled-zone pills -->
-    <g class="fp-pills">
-      <rect x="160" y="362" width="150" height="26" rx="13" class="fp-pill"/>
-      <text x="235" y="379" class="fp-pill-tx">GAMING FLOOR</text>
-
-      <rect x="285" y="836" width="150" height="26" rx="13" class="fp-pill"/>
-      <text x="360" y="853" class="fp-pill-tx">VIDEO WALLS</text>
-
-      <rect x="565" y="412" width="150" height="26" rx="13" class="fp-pill"/>
-      <text x="640" y="429" class="fp-pill-tx">DIGITAL SIGNAGE</text>
-
-      <rect x="100" y="744" width="150" height="26" rx="13" class="fp-pill"/>
-      <text x="175" y="761" class="fp-pill-tx">AUDIO ZONES</text>
-    </g>
-  </svg>
 </div>
 
 <style>
@@ -65,22 +33,4 @@
     filter: invert(1);
     mix-blend-mode: screen;
   }
-  .fp-cad__ov {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-  }
-  .fp-net { stroke: #68E3BE; stroke-width: 1.4; fill: #68E3BE; opacity: 0.85; }
-  .fp-pill { fill: #0A161C; stroke: #68E3BE; stroke-width: 1.5; }
-  .fp-pill-tx {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    fill: #68E3BE;
-    text-anchor: middle;
-  }
-  @media (prefers-reduced-motion: reduce) { /* static */ }
 </style>
