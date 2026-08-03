@@ -66,7 +66,6 @@ const {
     />
   )}
   <span class="persona-hero__scrim" aria-hidden="true"></span>
-  <span class="persona-hero__grain" aria-hidden="true"></span>
 
   <div class="persona-hero__inner container container--wide">
     {kicker && <p class="persona-hero__kicker display-label">{kicker}</p>}
@@ -123,17 +122,6 @@ const {
     background:
       linear-gradient(105deg, rgba(8, 17, 22, 0.92) 0%, rgba(8, 17, 22, 0.5) 44%, rgba(8, 17, 22, 0.22) 100%),
       linear-gradient(to top, rgba(8, 17, 22, 0.94) 0%, rgba(8, 17, 22, 0.38) 50%, transparent 74%);
-  }
-
-  .persona-hero__grain {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0.26;
-    background-image: url('/images/textures/texture-circuit-header-mintgold.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    mix-blend-mode: soft-light;
   }
 
   .persona-hero__inner {
