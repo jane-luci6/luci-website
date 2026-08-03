@@ -83,7 +83,7 @@ const featureImages = [
     lockupName="LUCI"
     lockupRole="The Orchestration Platform"
     deck="Every capability below lives inside one interface — standard across every property on the platform, regardless of the systems behind it."
-    tone="deep"
+    tone="mid"
     wide
   >
     <ul class="feature-grid" role="list">
@@ -120,7 +120,7 @@ const featureImages = [
     lockupName="How LUCI connects"
     lockupRole="The System Architecture"
     deck="Sources in, the whole property out — orchestrated from one standardized rack, over the network you already run, operated from any browser."
-    tone="deep"
+    tone="white"
     wide
   >
     <PlatformArchitectureStage />
@@ -194,7 +194,7 @@ const featureImages = [
     height: auto;
   }
 
-  /* ---------- Architecture callouts (deep) ---------- */
+  /* ---------- Architecture callouts (white) ---------- */
   .callout-grid {
     list-style: none;
     display: grid;
@@ -214,8 +214,8 @@ const featureImages = [
     gap: 16px;
     align-items: start;
     padding: var(--space-3);
-    background: rgba(104, 227, 190, 0.06);
-    box-shadow: inset 0 0 0 1px rgba(104, 227, 190, 0.18);
+    background: linear-gradient(155deg, #E6F5EF 0%, #F3FAF8 100%);
+    box-shadow: inset 0 0 0 1px rgba(43, 158, 128, 0.14);
   }
   .callout__icon {
     display: flex;
@@ -227,13 +227,13 @@ const featureImages = [
   }
   .callout__title {
     font-weight: 700;
-    color: var(--off-white);
+    color: var(--ink-strong);
     font-size: 16px;
     line-height: 1.2;
     margin-bottom: 4px;
   }
   .callout__body {
-    color: rgba(245, 248, 250, 0.78);
+    color: var(--navy-muted);
     font-size: 14px;
     line-height: 1.5;
   }
