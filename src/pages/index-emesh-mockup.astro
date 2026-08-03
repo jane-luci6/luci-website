@@ -66,24 +66,40 @@ import { site } from '../data/site';
   }
 
   /* 2 · CTA BAND — the wide mesh as the section background.
-     The fade is baked into the background layer stack: a navy gradient
-     sits ON TOP of the mesh (gradients paint above images in the stack),
-     solid behind the entire copy bloc on the left, fading to transparent
-     on the right so the mesh reads "around" the text. Content always
-     paints above all backgrounds — no z-index dependency. */
+     Two pseudo-elements layer the effect: ::before carries the mesh SVG
+     with mix-blend-mode:screen so the mint lines pop against the dark
+     navy; ::after carries the gradient clear zone (solid behind the text,
+     transparent on both edges so the mesh reads left and right). Content
+     sits at z-index:1 above both. The mesh is scaled to 125% to crop the
+     SVG's empty margins so pattern reaches both edges. */
   #home-cta.section {
-    background:
-      linear-gradient(90deg, var(--navy-deep) 0%, var(--navy-deep) 60%, transparent 85%),
-      url('/images/mesh/luci-bg-wide-2560x800.svg') center / cover no-repeat !important;
-    background-color: var(--navy-deep);
+    background-color: var(--navy-deep) !important;
     border-top: 2px solid var(--mint);
   }
+  #home-cta.section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: url('/images/mesh/luci-bg-wide-2560x800.svg') center / 125% auto no-repeat;
+    mix-blend-mode: screen;
+  }
+  #home-cta.section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent 0%, transparent 5%, var(--navy-deep) 10%, var(--navy-deep) 52%, transparent 78%);
+  }
+  #home-cta .container {
+    position: relative;
+    z-index: 1;
+  }
   @media (max-width: 720px) {
-    #home-cta.section {
-      background:
-        linear-gradient(180deg, var(--navy-deep) 0%, var(--navy-deep) 40%, transparent 75%),
-        url('/images/mesh/luci-bg-wide-2560x800.svg') center / cover no-repeat !important;
-      background-color: var(--navy-deep);
+    #home-cta.section::after {
+      background: linear-gradient(180deg, transparent 0%, transparent 8%, var(--navy-deep) 16%, var(--navy-deep) 70%, transparent 100%);
     }
   }
 
