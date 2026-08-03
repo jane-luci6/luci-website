@@ -1,0 +1,102 @@
+---
+interface Pillar {
+  num: string;
+  title: string;
+  body: string;
+}
+
+interface Props {
+  pillars: Pillar[];
+}
+
+const { pillars } = Astro.props;
+---
+
+<div class="ind-fp">
+  <div class="ind-fp__plan">
+    <slot name="floorplan" />
+  </div>
+  <ol class="ind-fp__cards" role="list">
+    {pillars.map((p) => (
+      <li class="ind-fp__card">
+        <span class="ind-fp__num">{p.num}</span>
+        <div class="ind-fp__card-body">
+          <h3 class="ind-fp__title">{p.title}</h3>
+          <p class="ind-fp__text">{p.body}</p>
+        </div>
+      </li>
+    ))}
+  </ol>
+</div>
+
+<style>
+  .ind-fp {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: clamp(24px, 3vw, 48px);
+    align-items: center;
+    max-width: var(--content-wide);
+  }
+
+  .ind-fp__plan {
+    position: relative;
+    border-radius: 16px;
+    border: 1px solid rgba(104, 227, 190, 0.14);
+    background:
+      radial-gradient(120% 90% at 50% 18%, rgba(104, 227, 190, 0.08), transparent 70%),
+      var(--navy-deep);
+    padding: clamp(14px, 2vw, 22px);
+    overflow: hidden;
+  }
+
+  .ind-fp__cards {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .ind-fp__card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    padding: 18px 20px;
+    border-radius: 12px;
+    background: rgba(104, 227, 190, 0.05);
+    border: 1px solid rgba(104, 227, 190, 0.12);
+  }
+
+  .ind-fp__num {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    padding-top: 3px;
+  }
+
+  .ind-fp__title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 15.5px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--off-white);
+    margin: 0 0 6px;
+  }
+
+  .ind-fp__text {
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: rgba(245, 248, 250, 0.72);
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    .ind-fp {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

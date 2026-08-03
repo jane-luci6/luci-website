@@ -1,0 +1,83 @@
+---
+// Top-down casino resort floorplan — labeled zones, mint-highlight on what LUCI controls,
+// thin network overlay linking controlled zones to a central LUCI node.
+---
+<svg class="fp-casino" viewBox="0 0 1000 640" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Floorplan of a casino resort: hotel tower, pool, conference wings, sportsbook, restaurants, gaming floor, video walls, digital signage, audio zones, and ballroom, with the gaming floor, sportsbook, video walls, signage, and audio zones highlighted as LUCI-controlled.">
+  <defs>
+    <linearGradient id="fpHi" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#163040"/>
+      <stop offset="1" stop-color="#0c1c26"/>
+    </linearGradient>
+  </defs>
+
+  <!-- property boundary -->
+  <rect x="16" y="16" width="968" height="608" rx="18" fill="none" stroke="rgba(104,227,190,0.22)" stroke-width="1.5"/>
+
+  <!-- Hotel tower -->
+  <rect x="56" y="44" width="150" height="250" rx="10" fill="url(#fpHi)" stroke="rgba(104,227,190,0.18)"/>
+  <text x="131" y="170" class="fp-tx fp-tx--mute">Hotel tower</text>
+
+  <!-- Pool deck -->
+  <rect x="56" y="314" width="150" height="84" rx="10" fill="url(#fpHi)" stroke="rgba(104,227,190,0.18)"/>
+  <text x="131" y="360" class="fp-tx fp-tx--mute">Pool deck</text>
+
+  <!-- Conference wings -->
+  <rect x="226" y="44" width="190" height="120" rx="10" fill="url(#fpHi)" stroke="rgba(104,227,190,0.18)"/>
+  <text x="321" y="108" class="fp-tx fp-tx--mute">Conference wings</text>
+
+  <!-- Sportsbook (controlled) -->
+  <rect x="226" y="184" width="190" height="150" rx="10" fill="rgba(104,227,190,0.14)" stroke="#68E3BE" stroke-width="1.6"/>
+  <text x="321" y="262" class="fp-tx fp-tx--hi">Sportsbook</text>
+
+  <!-- Restaurants -->
+  <rect x="436" y="44" width="150" height="96" rx="10" fill="url(#fpHi)" stroke="rgba(104,227,190,0.18)"/>
+  <text x="511" y="96" class="fp-tx fp-tx--mute">Restaurants</text>
+
+  <!-- Gaming floor / pit (controlled, hero zone) -->
+  <rect x="436" y="160" width="330" height="290" rx="12" fill="rgba(104,227,190,0.16)" stroke="#68E3BE" stroke-width="1.8"/>
+  <text x="601" y="300" class="fp-tx fp-tx--hi fp-tx--lg">Gaming floor</text>
+  <text x="601" y="322" class="fp-tx fp-tx--hi">&amp; the pit</text>
+
+  <!-- Video walls & LED (controlled) -->
+  <rect x="436" y="466" width="330" height="70" rx="10" fill="rgba(104,227,190,0.14)" stroke="#68E3BE" stroke-width="1.6"/>
+  <text x="601" y="506" class="fp-tx fp-tx--hi">Video walls &amp; LED</text>
+
+  <!-- Digital signage (controlled) -->
+  <rect x="786" y="44" width="158" height="120" rx="10" fill="rgba(104,227,190,0.14)" stroke="#68E3BE" stroke-width="1.6"/>
+  <text x="865" y="108" class="fp-tx fp-tx--hi">Digital signage</text>
+
+  <!-- Audio zones (controlled) -->
+  <rect x="786" y="184" width="158" height="120" rx="10" fill="rgba(104,227,190,0.14)" stroke="#68E3BE" stroke-width="1.6"/>
+  <text x="865" y="248" class="fp-tx fp-tx--hi">Audio zones</text>
+
+  <!-- Ballroom / event -->
+  <rect x="786" y="324" width="158" height="150" rx="10" fill="url(#fpHi)" stroke="rgba(104,227,190,0.18)"/>
+  <text x="865" y="402" class="fp-tx fp-tx--mute">Ballroom / event</text>
+
+  <!-- network overlay: controlled zones -> central LUCI node -->
+  <g class="fp-net" stroke="rgba(104,227,190,0.5)" stroke-width="1" fill="#68E3BE">
+    <line x1="321" y1="259" x2="566" y2="300"/>
+    <line x1="601" y1="300" x2="566" y2="300"/>
+    <line x1="601" y1="501" x2="566" y2="300"/>
+    <line x1="865" y1="104" x2="566" y2="300"/>
+    <line x1="865" y1="244" x2="566" y2="300"/>
+    <circle cx="321" cy="259" r="3.5"/>
+    <circle cx="601" cy="300" r="3.5"/>
+    <circle cx="601" cy="501" r="3.5"/>
+    <circle cx="865" cy="104" r="3.5"/>
+    <circle cx="865" cy="244" r="3.5"/>
+  </g>
+  <!-- central LUCI node -->
+  <circle cx="566" cy="300" r="9" fill="#0A161C" stroke="#68E3BE" stroke-width="2"/>
+  <circle cx="566" cy="300" r="3" fill="#68E3BE"/>
+  <text x="566" y="282" class="fp-tx fp-tx--node">LUCI</text>
+</svg>
+
+<style>
+  .fp-casino { width: 100%; height: auto; display: block; max-height: 70vh; }
+  .fp-tx { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600; text-anchor: middle; fill: rgba(245,248,250,0.6); }
+  .fp-tx--mute { fill: rgba(245,248,250,0.5); }
+  .fp-tx--hi { fill: #68E3BE; }
+  .fp-tx--lg { font-size: 22px; font-weight: 700; }
+  .fp-tx--node { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; fill: #68E3BE; }
+</style>

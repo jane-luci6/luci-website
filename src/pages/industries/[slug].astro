@@ -7,6 +7,8 @@ import IndustryHeroStage from '../../components/IndustryHeroStage.astro';
 import IndustryChallenges from '../../components/IndustryChallenges.astro';
 import IndustryProblemSolution from '../../components/IndustryProblemSolution.astro';
 import IndustryBeforeAfter from '../../components/IndustryBeforeAfter.astro';
+import IndustryFloorplan from '../../components/IndustryFloorplan.astro';
+import CasinoFloorplan from '../../components/CasinoFloorplan.astro';
 import IndustryAutomationShowcase from '../../components/IndustryAutomationShowcase.astro';
 import HomeProof from '../../components/HomeProof.astro';
 import { industries } from '../../data/industries';
@@ -45,6 +47,25 @@ const detail = getIndustryDetail(industry.slug);
         posterSrc={detail.heroPoster}
         imageSrc={detail.heroImage}
       />
+
+      {industry.slug === 'casinos-gaming' && (
+        <SectionBlock
+          id="industry-floorplan"
+          lockupName="Your Entire Casino at Your <em>Fingertips</em>"
+          lockupRole="Every zone on one interface"
+          tone="deep"
+          wide
+        >
+          <IndustryFloorplan pillars={[
+            { num: '01', title: 'Complete visibility and control', body: 'Every screen on the floor — signage, sportsbook, the pit, restaurants — in one interface, with live status on every endpoint.' },
+            { num: '02', title: 'Align your teams by default', body: 'Marketing, gaming operations, A/V, and IT stop negotiating and start running one floor together.' },
+            { num: '03', title: 'Fully activate the guest experience', body: 'Turn fight night, holiday weekends, and the weekday floor into one-tap presets that change screens, audio, and signage together.' },
+            { num: '04', title: 'The only A/V that scales and improves', body: 'Add sister properties to the same standard. Year Five is more capable than Year One on the same line item.' },
+          ]}>
+            <CasinoFloorplan slot="floorplan" />
+          </IndustryFloorplan>
+        </SectionBlock>
+      )}
 
       {industry.slug === 'casinos-gaming' ? (
         <SectionBlock
