@@ -86,6 +86,7 @@ import { site } from '../data/site';
     pointer-events: none;
     background: url('/images/mesh/luci-bg-wide-2560x800.svg') center / 125% auto no-repeat;
     mix-blend-mode: screen;
+    opacity: 0.6;
   }
   #home-cta.section::after {
     content: '';
@@ -93,7 +94,7 @@ import { site } from '../data/site';
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background: linear-gradient(90deg, transparent 0%, transparent 5%, var(--navy-deep) 10%, var(--navy-deep) 52%, transparent 78%);
+    background: linear-gradient(90deg, transparent 0%, rgba(7,15,20,0.65) 30%, rgba(7,15,20,0.65) 44%, transparent 90%);
   }
   #home-cta .container {
     position: relative;
@@ -101,7 +102,7 @@ import { site } from '../data/site';
   }
   @media (max-width: 720px) {
     #home-cta.section::after {
-      background: linear-gradient(180deg, transparent 0%, transparent 8%, var(--navy-deep) 16%, var(--navy-deep) 70%, transparent 100%);
+      background: linear-gradient(180deg, transparent 0%, rgba(7,15,20,0.65) 34%, rgba(7,15,20,0.65) 60%, transparent 100%);
     }
   }
 
