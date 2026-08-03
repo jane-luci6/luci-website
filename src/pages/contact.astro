@@ -2,75 +2,447 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import SectionBlock from '../components/SectionBlock.astro';
+import { personas } from '../data/personas';
+
+const roleOptions = personas.map((p) => p.label);
+
+const journey = [
+  { step: '01', name: 'Demo', body: 'See LUCI running on a property like yours.' },
+  { step: '02', name: 'Discovery', body: 'We learn your systems, zones, and goals.' },
+  { step: '03', name: 'Scope', body: 'We map exactly what to orchestrate.' },
+  { step: '04', name: 'Proposal', body: 'A clear plan, timeline, and price.' },
+  { step: '05', name: 'Decision', body: 'You approve; we mobilize the team.' },
+];
+
+const reach = [
+  {
+    svg: `<svg viewBox="0 0 24 24" fill="none"><path d="M4 13a8 8 0 0 1 16 0" stroke="#2b9e80" stroke-width="1.8" stroke-linecap="round"/><rect x="3" y="13" width="4" height="6" rx="1.5" fill="#68E3BE" fill-opacity="0.22" stroke="#2b9e80" stroke-width="1.8"/><rect x="17" y="13" width="4" height="6" rx="1.5" fill="#68E3BE" fill-opacity="0.22" stroke="#2b9e80" stroke-width="1.8"/><path d="M19 19v1a3 3 0 0 1-3 3h-2" stroke="#CEB06E" stroke-width="1.8" stroke-linecap="round"/></svg>`,
+    head: 'Already a customer',
+    body: 'Sign in to the support portal, or email our support team directly for help with an active deployment.',
+    links: [
+      { label: 'support.lucisystems.com', href: 'https://support.lucisystems.com' },
+      { label: 'support@lucisystems.com', href: 'mailto:support@lucisystems.com' },
+    ],
+  },
+  {
+    svg: `<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" fill="#68E3BE" fill-opacity="0.18" stroke="#2b9e80" stroke-width="1.8"/><path d="M4 6.5l8 6 8-6" stroke="#2b9e80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="16" r="1.6" fill="#CEB06E"/></svg>`,
+    head: 'General, press & partnerships',
+    body: "For anything outside a demo request \u2014 media, partnerships, or general questions.",
+    links: [
+      { label: 'info@lucisystems.com', href: 'mailto:info@lucisystems.com' },
+      { label: '(833) 333-5868', href: 'tel:+18333335868' },
+    ],
+  },
+  {
+    svg: `<svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z" fill="#68E3BE" fill-opacity="0.2" stroke="#2b9e80" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.4" stroke="#CEB06E" stroke-width="1.8"/></svg>`,
+    head: 'Our office',
+    body: '6280 S. Valley View Blvd., Bldg. B / Ste. 208, Las Vegas, NV 89118',
+    links: [] as { label: string; href: string }[],
+  },
+];
 ---
 
-<BaseLayout title="Contact" description="Start a conversation with LUCI Systems.">
-  <PageHero title="Start a conversation" deep />
+<BaseLayout title="Contact" description="Request a demo of LUCI running on a property like yours.">
+  <PageHero
+    kicker="Contact"
+    title="See LUCI on your property."
+    lead="Request a demo, and we&rsquo;ll walk through what running your property as one platform actually looks like."
+    deep
+  />
 
-  <SectionBlock>
-    <form
-      class="contact-form"
-      name="contact"
-      method="POST"
-      action="/contact/thanks/"
-      netlify
-      netlify-honeypot="bot-field"
-    >
-      <input type="hidden" name="form-name" value="contact" />
-      <p class="hidden">
-        <label>Don’t fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
-      </p>
-      <label>
-        <span>Name</span>
-        <input type="text" name="name" required />
-      </label>
-      <label>
-        <span>Organization</span>
-        <input type="text" name="organization" required />
-      </label>
-      <label>
-        <span>Role</span>
-        <input type="text" name="role" />
-      </label>
-      <label>
-        <span>Message</span>
-        <textarea name="message" rows="5" required />
-      </label>
-      <button class="btn btn--primary" type="submit">Send message</button>
-    </form>
+  <SectionBlock
+    id="request-demo"
+    lockupName="Request a demo"
+    lockupRole="See it on a property like yours"
+    tone="light"
+    wide
+  >
+    <div class="contact-demo">
+      <div class="contact-demo__intro">
+        <p class="contact-demo__lede">Every demo is built around your property, not a generic script.</p>
+        <ul class="contact-demo__list" role="list">
+          <li>A live walkthrough of LUCI on a property like yours</li>
+          <li>An honest read on what your existing hardware can keep doing</li>
+          <li>A deployment path with phases, not a single big bang</li>
+        </ul>
+        <p class="contact-demo__note">No obligation, no rip-and-replace assumption.</p>
+      </div>
+
+      <div class="contact-demo__form-wrap">
+        <!--
+          PLACEHOLDER FORM — replace the markup inside .luci-acform with
+          ActiveCampaign's "Full Embed" code once the form is built in AC.
+          Keep AC's own field names / hidden fields intact; the CSS below
+          targets AC's standard classes (_form-content, _field-wrapper,
+          _button-wrapper, _submit, _error, _form-branding) so the real
+          embed inherits this styling with no further changes.
+
+          In AC: Edit Design > Options > On Submit > "Open URL" >
+          https://lucisystems.com/contact/thanks/
+        -->
+        <div class="luci-acform" data-luci-placeholder>
+          <form class="_form _form_1" novalidate>
+            <div class="_form-content">
+              <div class="_form_element _field-wrapper">
+                <label for="cf-first-name">First name<span class="_form-label-req"> *</span></label>
+                <input type="text" id="cf-first-name" name="firstname" autocomplete="given-name" required />
+              </div>
+              <div class="_form_element _field-wrapper">
+                <label for="cf-last-name">Last name<span class="_form-label-req"> *</span></label>
+                <input type="text" id="cf-last-name" name="lastname" autocomplete="family-name" required />
+              </div>
+              <div class="_form_element _field-wrapper">
+                <label for="cf-email">Work email<span class="_form-label-req"> *</span></label>
+                <input type="email" id="cf-email" name="email" autocomplete="email" required />
+              </div>
+              <div class="_form_element _field-wrapper">
+                <label for="cf-company">Property or company<span class="_form-label-req"> *</span></label>
+                <input type="text" id="cf-company" name="field[1]" autocomplete="organization" required />
+              </div>
+              <div class="_form_element _field-wrapper">
+                <label for="cf-role">Your role<span class="_form-label-req"> *</span></label>
+                <select id="cf-role" name="field[2]" required>
+                  <option value="">Select one</option>
+                  {roleOptions.map((r) => <option value={r}>{r}</option>)}
+                </select>
+              </div>
+              <div class="_form_element _field-wrapper">
+                <label for="cf-message">What are you trying to fix?</label>
+                <textarea id="cf-message" name="field[3]" rows="4"></textarea>
+              </div>
+              <div class="_button-wrapper">
+                <button id="_form_1_submit" class="_submit" type="submit">Request a demo</button>
+              </div>
+              <p class="_form-branding">Powered by ActiveCampaign</p>
+            </div>
+          </form>
+        </div>
+        <p class="scaffold-note">Form preview &mdash; connects to ActiveCampaign once the embed is added.</p>
+      </div>
+    </div>
   </SectionBlock>
 
-  <SectionBlock lockupName="What happens next" tone="sand">
-    <p class="measure scaffold-note">Post-submit flow copy — TBD</p>
+  <SectionBlock
+    id="what-happens-next"
+    lockupName="What happens next"
+    lockupRole="The path to the right scope"
+    tone="deep"
+    pattern
+    wide
+  >
+    <ol class="contact-journey" role="list">
+      {journey.map((j) => (
+        <li class="contact-journey__step">
+          <span class="contact-journey__num">{j.step}</span>
+          <p class="contact-journey__name">{j.name}</p>
+          <p class="contact-journey__body">{j.body}</p>
+        </li>
+      ))}
+    </ol>
+    <p class="contact-journey__cap">You see the full scope before any commitment.</p>
+  </SectionBlock>
+
+  <SectionBlock id="other-ways" lockupName="Other ways to reach us" tone="sand" wide>
+    <ul class="contact-reach" role="list">
+      {reach.map((r) => (
+        <li class="contact-reach__item">
+          <span class="contact-reach__icon" aria-hidden="true" set:html={r.svg} />
+          <div class="contact-reach__copy">
+            <p class="contact-reach__head">{r.head}</p>
+            <p class="contact-reach__body">{r.body}</p>
+            {r.links.length > 0 && (
+              <p class="contact-reach__links">
+                {r.links.map((l, i) => (
+                  <>
+                    {i > 0 && <span aria-hidden="true"> &middot; </span>}
+                    <a href={l.href}>{l.label}</a>
+                  </>
+                ))}
+              </p>
+            )}
+          </div>
+        </li>
+      ))}
+    </ul>
   </SectionBlock>
 </BaseLayout>
 
+<script>
+  // Placeholder-only: prevent the stand-in form from navigating away before
+  // the real ActiveCampaign embed is wired in. Remove once it is replaced.
+  const placeholder = document.querySelector('[data-luci-placeholder] form');
+  placeholder?.addEventListener('submit', (e) => e.preventDefault());
+</script>
+
 <style>
-  .contact-form {
+  /* ---------- Request a demo ---------- */
+  .contact-demo {
     display: grid;
-    gap: 1.25rem;
-    max-width: 480px;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: start;
   }
 
-  .contact-form label {
-    display: grid;
-    gap: 0.35rem;
-    font-size: 14px;
+  @media (min-width: 860px) {
+    .contact-demo {
+      grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+    }
+  }
+
+  .contact-demo__lede {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink-strong);
     font-weight: 600;
+    max-width: 40ch;
+  }
+
+  .contact-demo__list {
+    list-style: none;
+    margin: var(--space-3) 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .contact-demo__list li {
+    position: relative;
+    padding-left: 22px;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 36ch;
+  }
+
+  .contact-demo__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 10px;
+    height: 2px;
+    background: var(--accent-light);
+  }
+
+  .contact-demo__note {
+    margin-top: var(--space-3);
+    font-size: 13px;
+    color: var(--navy-muted);
+  }
+
+  .contact-demo__form-wrap {
+    max-width: 560px;
+  }
+
+  /* ActiveCampaign class hooks — see PLACEHOLDER comment above. */
+  .luci-acform ._form_element + ._form_element {
+    margin-top: var(--space-3);
+  }
+
+  .luci-acform label {
+    display: block;
+    margin-bottom: 6px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
     color: var(--ink-strong);
   }
 
-  .contact-form input,
-  .contact-form textarea {
-    font: inherit;
-    padding: 12px 14px;
-    border: 1px solid var(--rule-light);
-    background: #fff;
-    color: var(--ink);
+  .luci-acform ._form-label-req {
+    color: var(--accent-light);
   }
 
-  .hidden {
-    position: absolute;
-    left: -9999px;
+  .luci-acform input[type='text'],
+  .luci-acform input[type='email'],
+  .luci-acform input[type='tel'],
+  .luci-acform select,
+  .luci-acform textarea {
+    width: 100%;
+    min-height: 44px;
+    padding: 12px 14px;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 15px;
+    color: var(--ink-strong);
+    background: #fff;
+    border: 1px solid var(--rule-light);
+    border-radius: 0;
+  }
+
+  .luci-acform textarea {
+    min-height: 108px;
+    resize: vertical;
+  }
+
+  .luci-acform input:focus-visible,
+  .luci-acform select:focus-visible,
+  .luci-acform textarea:focus-visible {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 2px;
+    border-color: var(--accent-light);
+  }
+
+  .luci-acform ._button-wrapper {
+    margin-top: var(--space-4);
+  }
+
+  .luci-acform ._submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 12px 28px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--off-white);
+    background: var(--navy);
+    border: none;
+    cursor: pointer;
+  }
+
+  .luci-acform ._submit:hover {
+    background: var(--navy-deep);
+  }
+
+  .luci-acform ._error,
+  .luci-acform ._error-inner {
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #b3261e;
+  }
+
+  /* Keep the form fully on-brand — no third-party badge. */
+  .luci-acform ._form-branding {
+    margin-top: var(--space-2);
+    font-size: 11px;
+    color: var(--navy-muted);
+    display: none;
+  }
+
+  /* ---------- What happens next ---------- */
+  .contact-journey {
+    list-style: none;
+    margin: var(--space-2) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    max-width: var(--content-wide);
+  }
+
+  @media (min-width: 860px) {
+    .contact-journey {
+      grid-template-columns: repeat(5, 1fr);
+      gap: var(--space-3);
+    }
+  }
+
+  .contact-journey__step {
+    padding-top: var(--space-3);
+    border-top: 2px solid rgba(104, 227, 190, 0.3);
+  }
+
+  .contact-journey__num {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    color: var(--mint);
+    margin-bottom: 10px;
+  }
+
+  .contact-journey__name {
+    margin: 0 0 6px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--off-white);
+  }
+
+  .contact-journey__body {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(245, 248, 250, 0.78);
+  }
+
+  .contact-journey__cap {
+    margin: var(--space-5) 0 0;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(18px, 2vw, 22px);
+    color: var(--off-white);
+    max-width: 40ch;
+  }
+
+  /* ---------- Other ways to reach us ---------- */
+  .contact-reach {
+    list-style: none;
+    margin: var(--space-2) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(28px, 4vw, 40px);
+    max-width: var(--content-wide);
+  }
+
+  @media (min-width: 760px) {
+    .contact-reach {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .contact-reach__item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .contact-reach__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: linear-gradient(155deg, #e6f5ef 0%, #f3faf8 100%);
+    box-shadow: inset 0 0 0 1px rgba(43, 158, 128, 0.14);
+    flex: none;
+  }
+
+  .contact-reach__icon :global(svg) {
+    width: 28px;
+    height: 28px;
+    display: block;
+  }
+
+  .contact-reach__head {
+    margin: 0;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--ink-strong);
+  }
+
+  .contact-reach__body {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 34ch;
+  }
+
+  .contact-reach__links {
+    margin: 4px 0 0;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .contact-reach__links a {
+    color: var(--accent-light);
   }
 </style>

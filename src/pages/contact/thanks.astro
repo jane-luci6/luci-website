@@ -4,11 +4,27 @@ import PageHero from '../../components/PageHero.astro';
 import SectionBlock from '../../components/SectionBlock.astro';
 ---
 
-<BaseLayout title="Message sent" description="Thanks for contacting LUCI Systems.">
-  <PageHero title="Message received" lead="We'll be in touch soon." deep />
+<BaseLayout title="Message received" description="Thanks for reaching out to LUCI Systems.">
+  <PageHero
+    kicker="Contact"
+    title="Message received."
+    lead="Someone from the LUCI team will follow up shortly to schedule your demo."
+    deep
+  />
 
-  <SectionBlock>
-    <p class="measure">Thank you for reaching out. Someone from LUCI will respond shortly.</p>
-    <p style="margin-top: 1.5rem"><a href="/">Back to home →</a></p>
+  <SectionBlock tone="light">
+    <p class="measure contact-thanks__body">
+      In the meantime, here&rsquo;s more on how LUCI runs a property end to end.
+    </p>
+    <div class="btn-row">
+      <a class="btn btn--primary" href="/platform">Explore the platform</a>
+      <a class="btn btn--outline" href="/resources/case-studies">See it in action</a>
+    </div>
   </SectionBlock>
 </BaseLayout>
+
+<style>
+  .contact-thanks__body {
+    color: var(--ink);
+  }
+</style>
