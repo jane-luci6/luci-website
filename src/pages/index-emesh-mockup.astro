@@ -74,6 +74,11 @@ import { site } from '../data/site';
     background: var(--navy-deep) url('/images/mesh/luci-bg-wide-2560x800.svg') center / cover no-repeat !important;
     border-top: 2px solid var(--mint);
   }
+  /* Lift the content container above the fade veil so text stays readable */
+  #home-cta .container {
+    position: relative;
+    z-index: 1;
+  }
   #home-cta.section::after {
     /* fade the mesh behind the copy column so text stays readable */
     content: '';
@@ -83,18 +88,18 @@ import { site } from '../data/site';
     pointer-events: none;
     background: linear-gradient(
       90deg,
-      rgba(7, 15, 20, 0.82) 0%,
-      rgba(7, 15, 20, 0.82) 42%,
-      transparent 72%
+      rgba(7, 15, 20, 0.94) 0%,
+      rgba(7, 15, 20, 0.94) 48%,
+      transparent 74%
     );
   }
   @media (max-width: 720px) {
     #home-cta.section::after {
       background: linear-gradient(
         180deg,
-        rgba(7, 15, 20, 0.55) 0%,
-        rgba(7, 15, 20, 0.88) 30%,
-        rgba(7, 15, 20, 0.88) 100%
+        rgba(7, 15, 20, 0.7) 0%,
+        rgba(7, 15, 20, 0.94) 26%,
+        rgba(7, 15, 20, 0.94) 100%
       );
     }
   }
