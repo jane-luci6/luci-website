@@ -1,0 +1,189 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HomeHero from '../components/HomeHero.astro';
+import HomeDifferentiator from '../components/HomeDifferentiator.astro';
+import HomeLedger from '../components/HomeLedger.astro';
+import HomeIndustries from '../components/HomeIndustries.astro';
+import HomeIntro from '../components/HomeIntro.astro';
+import HomeTrustBar from '../components/HomeTrustBar.astro';
+import HomeProof from '../components/HomeProof.astro';
+import HomePersonas from '../components/HomePersonas.astro';
+import HomeResources from '../components/HomeResources.astro';
+import HomeWhyItMatters from '../components/HomeWhyItMatters.astro';
+import SectionBlock from '../components/SectionBlock.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="Home — E-mesh Mockup" description={site.subTagline} darkHeader>
+  <div class="mockup-banner">
+    <span class="mockup-banner__dot"></span>
+    <span>E-mesh mockup — evaluation copy. The live homepage is not modified.</span>
+  </div>
+
+  <HomeHero variant="none" zones />
+
+  <HomeDifferentiator />
+  <HomeIntro />
+  <HomeLedger />
+  <HomeWhyItMatters />
+  <HomeIndustries />
+  <HomeProof />
+  <HomePersonas />
+  <HomeTrustBar />
+  <HomeResources />
+
+  <SectionBlock id="home-cta" tone="deep">
+    <div class="home-cta">
+      <p class="display-label home-cta__kicker">Next step</p>
+      <h2 class="home-cta__title">See LUCI on <em>your floor</em>.</h2>
+      <p class="home-cta__deck">Let us show you what LUCI looks like on a property like yours.</p>
+      <a class="btn btn--mint-outline home-cta__btn" href="/contact">{site.ctaPrimary}</a>
+    </div>
+  </SectionBlock>
+</BaseLayout>
+
+<style is:global>
+  /* ============================================================
+     E-MESH MOCKUP — backgrounds layered via CSS overrides only.
+     No shared components are modified. Three placements:
+       1. Hero — mesh-only at low opacity as atmosphere
+       2. CTA band — wide mesh as the section background
+       3. Footer — shallow low-opacity mesh crop
+     ============================================================ */
+
+  /* 1 · HERO — mesh-only at low opacity behind the floorplan stage.
+     The hero already carries the animated floorplan, so this stays
+     very subtle: 12% opacity, positioned right-top so it sits behind
+     the stage without competing with the copy on the left. */
+  .home-entry {
+    background: var(--navy-deep) url('/images/mesh/luci-bg-hero-mesh-only-1920x1080.svg') right top / cover no-repeat !important;
+    background-blend-mode: lighten;
+  }
+  .home-entry__glow {
+    /* keep the existing glow but lift it above the mesh */
+    z-index: 0;
+    opacity: 0.7;
+  }
+
+  /* 2 · CTA BAND — the wide mesh as the section background.
+     This is the strongest fit: the CTA is a short, dark band that
+     reads as a moment of brand atmosphere. The wide variant is
+     cropped for the shallow aspect. Copy sits in the clear lower-left
+     where the composition leaves room. */
+  #home-cta.section {
+    background: var(--navy-deep) url('/images/mesh/luci-bg-wide-2560x800.svg') center / cover no-repeat !important;
+    border-top: 2px solid var(--mint);
+  }
+  #home-cta.section::after {
+    /* fade the mesh behind the copy column so text stays readable */
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      rgba(7, 15, 20, 0.82) 0%,
+      rgba(7, 15, 20, 0.82) 42%,
+      transparent 72%
+    );
+  }
+  @media (max-width: 720px) {
+    #home-cta.section::after {
+      background: linear-gradient(
+        180deg,
+        rgba(7, 15, 20, 0.55) 0%,
+        rgba(7, 15, 20, 0.88) 30%,
+        rgba(7, 15, 20, 0.88) 100%
+      );
+    }
+  }
+
+  /* 3 · FOOTER — shallow low-opacity mesh crop.
+     The footer is a thin strip; a full mesh would overwhelm it.
+     A low-opacity wide mesh, faded behind the nav, adds just
+     enough brand atmosphere to bookend the page. */
+  .site-footer {
+    background: var(--navy-deep) url('/images/mesh/luci-bg-wide-2560x800.svg') center top / cover no-repeat !important;
+    position: relative;
+    isolation: isolate;
+  }
+  .site-footer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgba(7, 15, 20, 0.78) 0%,
+      rgba(7, 15, 20, 0.92) 100%
+    );
+  }
+  .site-footer > .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ---- Mockup banner ---- */
+  .mockup-banner {
+    position: relative;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px var(--page-pad);
+    background: var(--navy);
+    border-bottom: 1px solid rgba(104, 227, 190, 0.3);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--mint);
+  }
+  .mockup-banner__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--mint);
+    box-shadow: 0 0 8px rgba(var(--mint-rgb), 0.5);
+    flex-shrink: 0;
+  }
+
+  /* ---- CTA band styles (copied from index.astro) ---- */
+  :global(#home-cta.section) {
+    padding-block: clamp(36px, 5vw, 48px);
+  }
+  .home-cta {
+    max-width: 64ch;
+    padding-block: clamp(24px, 4vw, 40px);
+  }
+  .home-cta__kicker {
+    color: var(--mint);
+    margin-bottom: var(--space-3);
+  }
+  .home-cta__title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(24px, 3.4vw, 34px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+    margin-bottom: var(--space-3);
+  }
+  .home-cta__title :global(em) {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .home-cta__deck {
+    max-width: 52ch;
+    margin: 0 0 var(--space-4);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.78);
+  }
+  .home-cta__btn {
+    margin-top: 0;
+  }
+</style>
