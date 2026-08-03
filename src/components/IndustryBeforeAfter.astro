@@ -89,7 +89,6 @@ const pairs = challenges
     display: grid;
     grid-template-columns: 1fr 1fr;
     border-radius: 14px;
-    overflow: hidden;
     border: 1px solid rgba(104, 227, 190, 0.12);
     background: var(--navy-deep);
   }
@@ -149,6 +148,7 @@ const pairs = challenges
   .ba__face {
     position: absolute;
     inset: 0;
+    overflow: hidden;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     padding: 20px 24px 22px;
@@ -163,10 +163,12 @@ const pairs = challenges
 
   .ba__side--before .ba__face {
     background: linear-gradient(180deg, #2b323a, #1b2229);
+    border-radius: 14px 0 0 14px;
   }
 
   .ba__side--after .ba__face {
     background: linear-gradient(135deg, #103a2c 0%, #1d4031 50%, #3e3618 100%);
+    border-radius: 0 14px 14px 0;
   }
 
   .ba__side--before::before {
@@ -275,6 +277,12 @@ const pairs = challenges
     }
     .ba__inner {
       min-height: 68px;
+    }
+    .ba__side--before .ba__face {
+      border-radius: 14px 14px 0 0;
+    }
+    .ba__side--after .ba__face {
+      border-radius: 0 0 14px 14px;
     }
   }
 
