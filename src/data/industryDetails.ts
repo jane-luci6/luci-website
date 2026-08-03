@@ -131,9 +131,9 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         headline: 'One partner owns diagnosis to resolution.',
         answer:
           'When a screen goes dark at peak, there is no vendor chain to trace. LUCI owns the whole outcome end to end.',
-        image: '/images/industries/casino/solution-one-owner.jpg?v=2',
-        imageAlt: 'LUCI engineer shaking hands with a casino manager in a back-of-house corridor',
-        imagePosition: 'center 42%',
+        image: '/images/industries/casino/solution-one-owner.jpg?v=3',
+        imageAlt: 'LUCI field engineer deep in diagnosis inside a back-of-house equipment rack, single work-light',
+        imagePosition: 'center 38%',
       },
       {
         index: '03',
