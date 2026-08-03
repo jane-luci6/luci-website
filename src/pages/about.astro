@@ -14,6 +14,10 @@ import {
 import { industries } from '../data/industries';
 
 const accumulationParas = variableReduction.accumulation.split('\n\n');
+const headlineHtml = variableReduction.headline.replace(
+  'and a shorter list of things to worry about.',
+  '<span class="about-worldview__hl">and a shorter list of things to worry about.</span>'
+);
 ---
 
 <BaseLayout title="About LUCI" description={oneOffering.offering}>
@@ -93,7 +97,7 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
         <p class="measure about-worldview__p">{p}</p>
       ))}
       <p class="measure about-worldview__p">{variableReduction.subtraction}</p>
-      <p class="about-worldview__signature">{variableReduction.headline}</p>
+      <p class="about-worldview__signature" set:html={headlineHtml} />
     </div>
   </SectionBlock>
 
@@ -514,6 +518,9 @@ const accumulationParas = variableReduction.accumulation.split('\n\n');
     padding-left: var(--space-4);
     border-left: 4px solid var(--mint);
     max-width: none;
+  }
+  .about-worldview__hl {
+    color: var(--mint);
   }
 
   /* ---------- Leadership (deep) ---------- */
