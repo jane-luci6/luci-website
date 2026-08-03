@@ -105,7 +105,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         head: 'Every event mode becomes a manual scramble.',
         body:
           'Fight night, holiday weekend, VIP gala — each one means juggling touch panels, remotes, audio zones, signage, and a run sheet. One missed step and the floor is wrong for the whole event.',
-        image: '/images/industries/casino/challenge-event-mode-scramble.jpg?v=1',
+        image: '/images/industries/casino/challenge-event-mode-scramble.jpg?v=2',
         imageAlt: 'Casino AV desk with tablets, remotes, radios, and preview monitors for a special event',
         imagePosition: 'center 42%',
       },
