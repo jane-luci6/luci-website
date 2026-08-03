@@ -73,6 +73,8 @@ import { site } from '../data/site';
      sits at z-index:1 above both. The mesh is scaled to 125% to crop the
      SVG's empty margins so pattern reaches both edges. */
   #home-cta.section {
+    position: relative;
+    isolation: isolate;
     background-color: var(--navy-deep) !important;
     border-top: 2px solid var(--mint);
   }
