@@ -21,10 +21,10 @@ const { lockupName, lockupRole, deck, videoSrc, posterSrc, imageSrc, imageAlt = 
         poster={posterSrc}
         autoplay
         muted
-        loop
         playsinline
         preload="auto"
         aria-hidden="true"
+        data-skip-open="0.5"
       >
         <source src={videoSrc} type="video/mp4" />
       </video>
@@ -94,6 +94,11 @@ const { lockupName, lockupRole, deck, videoSrc, posterSrc, imageSrc, imageAlt = 
   .ind-hero__video {
     transform: scale(1.08);
     transform-origin: center center;
+    opacity: 0;
+    transition: opacity 0.7s ease;
+  }
+  .ind-hero__video.is-live {
+    opacity: 1;
   }
 
   .ind-hero__scrim {
@@ -187,3 +192,38 @@ const { lockupName, lockupRole, deck, videoSrc, posterSrc, imageSrc, imageAlt = 
     }
   }
 </style>
+
+<script>
+  // Skip the opening glitch on industry hero videos and loop cleanly.
+  // The source videos have a brief hold/jump in the first ~0.5s before
+  // the smooth pan begins. We seek past it on load and on each loop.
+  const videos = document.querySelectorAll<HTMLVideoElement>('video[data-skip-open]');
+  if (videos.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    videos.forEach((video) => {
+      const skip = parseFloat(video.dataset.skipOpen || '0') || 0;
+      let primed = false;
+
+      // Seek past the opening glitch before playback becomes visible.
+      video.addEventListener('loadeddata', () => {
+        if (!primed && skip > 0 && video.currentTime < skip) {
+          video.currentTime = skip;
+        }
+      });
+
+      // Fade in once playback is actually rolling.
+      video.addEventListener('playing', () => {
+        if (!primed) {
+          primed = true;
+          video.classList.add('is-live');
+        }
+      });
+
+      // Manual loop — jump back to the skip point instead of 0:00
+      // so the opening glitch doesn't replay on each loop.
+      video.addEventListener('ended', () => {
+        video.currentTime = skip;
+        video.play().catch(() => {});
+      });
+    });
+  }
+</script>
