@@ -1,274 +1,86 @@
 ---
-// Top-down architectural floorplan of a generic resort & casino podium —
-// clean black-line technical drawing on white (Aria-style linework), modules
-// rearranged so it isn't recognizable as any specific property. Mint overlay
-// marks the zones LUCI controls (same pattern as the homepage floorplan).
+// Casino resort floorplan — ChatGPT-generated architectural drawing,
+// transposed to dark (invert + screen blend = light lines on navy), with a
+// mint overlay marking the zones LUCI controls. Same pattern as the homepage
+// floorplan (B&W drawing + mint control layer).
 ---
-<svg class="fp-cad" viewBox="0 0 1200 860" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Architectural floorplan of a resort and casino podium: convention center, theater, porte-cochere drop-off, casino floor, sportsbook, restaurants, retail, parking garage, hotel lobby and back-of-house. The casino floor, sportsbook, video walls, digital signage and audio zones are highlighted as LUCI-controlled.">
-  <defs>
-    <pattern id="stalls" width="30" height="44" patternUnits="userSpaceOnUse">
-      <line x1="4" y1="6" x2="26" y2="6" stroke="#1a1a1a" stroke-width="1"/>
-      <line x1="4" y1="40" x2="26" y2="40" stroke="#1a1a1a" stroke-width="1"/>
-    </pattern>
-    <pattern id="convrooms" width="34" height="30" patternUnits="userSpaceOnUse">
-      <rect x="2" y="2" width="30" height="26" rx="1.5" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-    </pattern>
-    <pattern id="hotelrooms" width="40" height="34" patternUnits="userSpaceOnUse">
-      <rect x="2" y="2" width="36" height="30" rx="1.5" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-    </pattern>
-    <symbol id="col" viewBox="0 0 8 8"><circle cx="4" cy="4" r="2.4" fill="#1a1a1a"/></symbol>
-    <symbol id="door" viewBox="0 0 22 22">
-      <path d="M2 20 A 18 18 0 0 1 20 2" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-      <line x1="2" y1="20" x2="2" y2="2" stroke="#1a1a1a" stroke-width="1"/>
-    </symbol>
-    <symbol id="tbl" viewBox="0 0 26 26">
-      <circle cx="13" cy="13" r="6" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-      <circle cx="13" cy="2.5" r="1.3" fill="#1a1a1a"/>
-      <circle cx="13" cy="23.5" r="1.3" fill="#1a1a1a"/>
-      <circle cx="2.5" cy="13" r="1.3" fill="#1a1a1a"/>
-      <circle cx="23.5" cy="13" r="1.3" fill="#1a1a1a"/>
-    </symbol>
-    <symbol id="wc" viewBox="0 0 44 34">
-      <rect x="2" y="2" width="10" height="10" rx="1" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-      <rect x="16" y="2" width="10" height="10" rx="1" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-      <rect x="30" y="2" width="10" height="10" rx="1" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-      <circle cx="7" cy="22" r="2.6" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-      <circle cx="21" cy="22" r="2.6" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-    </symbol>
-  </defs>
-
-  <rect width="1200" height="860" fill="#ffffff"/>
-
-  <!-- property footprint (double-line wall) -->
-  <rect x="50" y="50" width="1100" height="700" rx="12" fill="none" stroke="#1a1a1a" stroke-width="3"/>
-  <rect x="55" y="55" width="1090" height="690" rx="9" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-
-  <!-- CENTER: porte-cochere drop-off (curved driveway, top center) -->
-  <g transform="translate(600 150)">
-    <path d="M -120 -90 A 120 120 0 0 1 120 -90" fill="none" stroke="#1a1a1a" stroke-width="2"/>
-    <path d="M -90 -90 A 90 90 0 0 1 90 -90" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-    <line x1="0" y1="-150" x2="0" y2="-90" stroke="#1a1a1a" stroke-width="1"/>
-    <text x="0" y="-30" class="fp-tx fp-tx--sm">(7) PORTE COCHERE</text>
-  </g>
-  <line x1="600" y1="50" x2="600" y2="60" stroke="#1a1a1a" stroke-width="1"/>
-  <use href="#door" x="566" y="46" width="18" height="18"/>
-  <use href="#door" x="616" y="46" width="18" height="18"/>
-
-  <!-- LEFT column: Convention Center (top) + Theater (bottom) -->
-  <!-- Convention Center -->
-  <g transform="translate(70 70)">
-    <rect x="0" y="0" width="270" height="300" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
-    <!-- three big halls -->
-    <rect x="14" y="40" width="80" height="220" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-    <rect x="100" y="40" width="70" height="220" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-    <rect x="176" y="40" width="80" height="220" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-    <!-- perimeter breakout rooms -->
-    <rect x="14" y="6" width="242" height="26" fill="url(#convrooms)"/>
-    <use href="#door" x="48" y="34" width="14" height="14"/>
-    <use href="#door" x="120" y="34" width="14" height="14"/>
-    <use href="#door" x="196" y="34" width="14" height="14"/>
-    <use href="#col" x="50" y="120" width="8" height="8"/>
-    <use href="#col" x="120" y="120" width="8" height="8"/>
-    <use href="#col" x="200" y="120" width="8" height="8"/>
-    <text x="135" y="290" class="fp-tx fp-tx--sm">(3) CONVENTION CENTER</text>
-  </g>
-
-  <!-- Theater: semi-circular seating + stage -->
-  <g transform="translate(70 390)">
-    <rect x="0" y="0" width="270" height="340" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
-    <!-- stage -->
-    <rect x="20" y="30" width="90" height="120" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-    <text x="65" y="95" class="fp-tx fp-tx--sm">STAGE</text>
-    <!-- tiered seating arcs -->
-    <g transform="translate(110 250)">
-      <path d="M -90 0 A 90 90 0 0 1 90 0" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-      <path d="M -78 0 A 78 78 0 0 1 78 0" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-      <path d="M -66 0 A 66 66 0 0 1 66 0" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-      <path d="M -54 0 A 54 54 0 0 1 54 0" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-      <path d="M -42 0 A 42 42 0 0 1 42 0" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-      <path d="M -30 0 A 30 30 0 0 1 30 0" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-      <line x1="-90" y1="0" x2="90" y2="0" stroke="#1a1a1a" stroke-width="1"/>
+<div class="fp-cad">
+  <img
+    class="fp-cad__img"
+    src="/images/industries/casino/casino-floorplan.png?v=1"
+    alt="Architectural floorplan of a resort and casino: casino floor, ballroom, convention center, hotel lobby, pool, theater and parking garage. The casino floor, theater, convention center and hotel lobby are highlighted as LUCI-controlled."
+    loading="lazy"
+    decoding="async"
+    width="790"
+    height="1024"
+  />
+  <svg class="fp-cad__ov" viewBox="0 0 790 1024" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+    <!-- network: LUCI node → controlled zones -->
+    <g class="fp-net">
+      <line x1="395" y1="500" x2="235" y2="410"/>
+      <line x1="395" y1="500" x2="360" y2="880"/>
+      <line x1="395" y1="500" x2="640" y2="460"/>
+      <line x1="395" y1="500" x2="175" y2="780"/>
+      <circle cx="235" cy="410" r="4"/>
+      <circle cx="360" cy="880" r="4"/>
+      <circle cx="640" cy="460" r="4"/>
+      <circle cx="175" cy="780" r="4"/>
     </g>
-    <use href="#door" x="120" y="2" width="14" height="14"/>
-    <text x="135" y="330" class="fp-tx fp-tx--sm">(5) THEATER</text>
-  </g>
+    <!-- central LUCI node -->
+    <circle cx="395" cy="500" r="13" fill="#0A161C" stroke="#68E3BE" stroke-width="2"/>
+    <circle cx="395" cy="500" r="4.5" fill="#68E3BE"/>
+    <text x="395" y="478" class="fp-pill-tx">LUCI</text>
 
-  <!-- RIGHT column: Parking Garage (top) + Hotel Lobby (bottom) -->
-  <!-- Parking Garage -->
-  <g transform="translate(860 70)">
-    <rect x="0" y="0" width="270" height="300" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
-    <rect x="10" y="14" width="250" height="272" fill="url(#stalls)"/>
-    <!-- drive lanes -->
-    <line x1="10" y1="80" x2="260" y2="80" stroke="#1a1a1a" stroke-width="1.5"/>
-    <line x1="10" y1="150" x2="260" y2="150" stroke="#1a1a1a" stroke-width="1.5"/>
-    <line x1="10" y1="220" x2="260" y2="220" stroke="#1a1a1a" stroke-width="1.5"/>
-    <use href="#door" x="120" y="284" width="14" height="14"/>
-    <text x="135" y="298" class="fp-tx fp-tx--sm">(6) PARKING GARAGE</text>
-  </g>
+    <!-- controlled-zone pills -->
+    <g class="fp-pills">
+      <rect x="160" y="362" width="150" height="26" rx="13" class="fp-pill"/>
+      <text x="235" y="379" class="fp-pill-tx">GAMING FLOOR</text>
 
-  <!-- Hotel Lobby: curved exterior + small rooms -->
-  <g transform="translate(860 390)">
-    <path d="M 0 0 L 270 0 L 270 300 L 40 300 A 40 40 0 0 1 0 260 Z" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
-    <rect x="20" y="20" width="230" height="60" fill="url(#hotelrooms)"/>
-    <rect x="20" y="200" width="230" height="80" fill="url(#hotelrooms)"/>
-    <!-- lobby open area -->
-    <use href="#tbl" x="120" y="120" width="24" height="24"/>
-    <use href="#tbl" x="170" y="120" width="24" height="24"/>
-    <use href="#tbl" x="120" y="160" width="24" height="24"/>
-    <use href="#tbl" x="170" y="160" width="24" height="24"/>
-    <use href="#col" x="60" y="120" width="8" height="8"/>
-    <use href="#col" x="220" y="120" width="8" height="8"/>
-    <use href="#door" x="120" y="2" width="14" height="14"/>
-    <text x="135" y="330" class="fp-tx fp-tx--sm">(4) HOTEL LOBBY</text>
-  </g>
+      <rect x="285" y="836" width="150" height="26" rx="13" class="fp-pill"/>
+      <text x="360" y="853" class="fp-pill-tx">VIDEO WALLS</text>
 
-  <!-- CENTER: Casino floor (organic, hero) -->
-  <g transform="translate(360 240)">
-    <!-- organic boundary: curved south edge -->
-    <path d="M 0 0 L 480 0 L 480 380 Q 360 460 240 460 Q 120 460 0 380 Z" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
-    <!-- internal curved dividers -->
-    <path d="M 0 170 Q 120 150 240 170 L 480 170" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-    <line x1="190" y1="0" x2="190" y2="170" stroke="#1a1a1a" stroke-width="1"/>
-    <line x1="300" y1="170" x2="300" y2="380" stroke="#1a1a1a" stroke-width="1"/>
+      <rect x="565" y="412" width="150" height="26" rx="13" class="fp-pill"/>
+      <text x="640" y="429" class="fp-pill-tx">DIGITAL SIGNAGE</text>
 
-    <!-- Sportsbook (controlled, top-left) -->
-    <g>
-      <rect x="10" y="10" width="170" height="150" class="fp-hi"/>
-      <use href="#tbl" x="22" y="24" width="22" height="22"/>
-      <use href="#tbl" x="62" y="24" width="22" height="22"/>
-      <use href="#tbl" x="102" y="24" width="22" height="22"/>
-      <use href="#tbl" x="142" y="24" width="22" height="22"/>
-      <use href="#tbl" x="22" y="74" width="22" height="22"/>
-      <use href="#tbl" x="62" y="74" width="22" height="22"/>
-      <use href="#tbl" x="102" y="74" width="22" height="22"/>
-      <use href="#tbl" x="142" y="74" width="22" height="22"/>
-      <!-- video wall -->
-      <rect x="20" y="128" width="150" height="8" fill="#2b9e80" stroke="#2b9e80" stroke-width="1"/>
-      <text x="95" y="120" class="fp-tx fp-tx--sm" fill="#2b9e80">(2) SPORTSBOOK</text>
+      <rect x="100" y="744" width="150" height="26" rx="13" class="fp-pill"/>
+      <text x="175" y="761" class="fp-pill-tx">AUDIO ZONES</text>
     </g>
-
-    <!-- Gaming pit (controlled, hero, top-right) -->
-    <g>
-      <rect x="200" y="10" width="270" height="150" class="fp-hi"/>
-      <!-- slot grid -->
-      <g stroke="#1a1a1a" stroke-width="1" fill="none">
-        <rect x="212" y="22" width="14" height="10"/><rect x="232" y="22" width="14" height="10"/><rect x="252" y="22" width="14" height="10"/><rect x="272" y="22" width="14" height="10"/><rect x="292" y="22" width="14" height="10"/>
-        <rect x="212" y="38" width="14" height="10"/><rect x="232" y="38" width="14" height="10"/><rect x="252" y="38" width="14" height="10"/><rect x="272" y="38" width="14" height="10"/><rect x="292" y="38" width="14" height="10"/>
-        <rect x="212" y="54" width="14" height="10"/><rect x="232" y="54" width="14" height="10"/><rect x="252" y="54" width="14" height="10"/><rect x="272" y="54" width="14" height="10"/><rect x="292" y="54" width="14" height="10"/>
-      </g>
-      <!-- table games cluster -->
-      <use href="#tbl" x="330" y="30" width="26" height="26"/>
-      <use href="#tbl" x="380" y="30" width="26" height="26"/>
-      <use href="#tbl" x="430" y="30" width="26" height="26"/>
-      <use href="#tbl" x="330" y="80" width="26" height="26"/>
-      <use href="#tbl" x="380" y="80" width="26" height="26"/>
-      <use href="#tbl" x="430" y="80" width="26" height="26"/>
-      <use href="#col" x="250" y="120" width="8" height="8"/>
-      <use href="#col" x="400" y="120" width="8" height="8"/>
-      <text x="335" y="120" class="fp-tx fp-tx--sm" fill="#2b9e80">(1) CASINO</text>
-    </g>
-
-    <!-- Restaurants (bottom-left) -->
-    <g>
-      <use href="#tbl" x="22" y="190" width="24" height="24"/>
-      <use href="#tbl" x="62" y="190" width="24" height="24"/>
-      <use href="#tbl" x="102" y="190" width="24" height="24"/>
-      <use href="#tbl" x="142" y="190" width="24" height="24"/>
-      <use href="#tbl" x="22" y="230" width="24" height="24"/>
-      <use href="#tbl" x="62" y="230" width="24" height="24"/>
-      <use href="#tbl" x="102" y="230" width="24" height="24"/>
-      <use href="#tbl" x="142" y="230" width="24" height="24"/>
-      <use href="#wc" x="50" y="280" width="80" height="34"/>
-      <text x="95" y="350" class="fp-tx fp-tx--sm">(8) RESTAURANTS</text>
-    </g>
-
-    <!-- Retail (bottom-center) -->
-    <g>
-      <rect x="200" y="190" width="90" height="120" fill="url(#convrooms)"/>
-      <use href="#door" x="232" y="310" width="14" height="14"/>
-      <text x="245" y="350" class="fp-tx fp-tx--sm">(9) RETAIL</text>
-    </g>
-
-    <!-- Back of House (bottom-right) -->
-    <g>
-      <rect x="310" y="190" width="160" height="120" fill="url(#convrooms)"/>
-      <use href="#door" x="380" y="310" width="14" height="14"/>
-      <text x="390" y="350" class="fp-tx fp-tx--sm">(10) BACK OF HOUSE</text>
-    </g>
-  </g>
-
-  <!-- LUCI overlay: central node + network to controlled zones -->
-  <g class="fp-net">
-    <line x1="600" y1="200" x2="455" y2="325"/>
-    <line x1="600" y1="200" x2="695" y2="325"/>
-    <line x1="600" y1="200" x2="940" y2="460"/>
-    <line x1="600" y1="200" x2="200" y2="540"/>
-    <circle cx="455" cy="325" r="3.5"/>
-    <circle cx="695" cy="325" r="3.5"/>
-    <circle cx="455" cy="372" r="3.5"/>
-    <circle cx="940" cy="460" r="3.5"/>
-    <circle cx="200" cy="540" r="3.5"/>
-  </g>
-  <circle cx="600" cy="200" r="12" fill="#0A161C" stroke="#2b9e80" stroke-width="2"/>
-  <circle cx="600" cy="200" r="4" fill="#2b9e80"/>
-  <text x="600" y="178" class="fp-pill-tx">LUCI</text>
-
-  <!-- title (bottom-left) -->
-  <text x="60" y="800" class="fp-tx" text-anchor="start" style="font-size:13px;font-weight:700;letter-spacing:0.08em">RESORT &amp; CASINO — PODIUM LEVEL</text>
-
-  <!-- scale bar (bottom-center) -->
-  <g transform="translate(520 790)">
-    <line x1="0" y1="0" x2="160" y2="0" stroke="#1a1a1a" stroke-width="1.5"/>
-    <line x1="0" y1="-5" x2="0" y2="5" stroke="#1a1a1a" stroke-width="1.5"/>
-    <line x1="80" y1="-4" x2="80" y2="4" stroke="#1a1a1a" stroke-width="1"/>
-    <line x1="160" y1="-5" x2="160" y2="5" stroke="#1a1a1a" stroke-width="1.5"/>
-    <text x="0" y="20" class="fp-tx--sm" text-anchor="middle">0</text>
-    <text x="80" y="20" class="fp-tx--sm" text-anchor="middle">100</text>
-    <text x="160" y="20" class="fp-tx--sm" text-anchor="middle">200</text>
-  </g>
-
-  <!-- north arrow (next to scale) -->
-  <g transform="translate(700 790)">
-    <circle cx="0" cy="0" r="14" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-    <path d="M 0 -10 L 5 6 L 0 2 L -5 6 Z" fill="#1a1a1a"/>
-    <text x="0" y="-18" class="fp-tx--sm" text-anchor="middle">N</text>
-  </g>
-
-  <!-- KEY box (bottom-right) -->
-  <g transform="translate(900 760)">
-    <rect x="0" y="0" width="240" height="90" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
-    <text x="10" y="16" class="fp-key-tx" style="font-weight:700;letter-spacing:0.1em">KEY</text>
-    <g class="fp-key-tx">
-      <text x="10" y="34">1 Casino</text>
-      <text x="90" y="34">2 Sportsbook</text>
-      <text x="170" y="34">3 Convention</text>
-      <text x="10" y="50">4 Hotel Lobby</text>
-      <text x="90" y="50">5 Theater</text>
-      <text x="170" y="50">6 Parking</text>
-      <text x="10" y="66">7 Porte Cochere</text>
-      <text x="90" y="66">8 Restaurants</text>
-      <text x="170" y="66">9 Retail</text>
-      <text x="10" y="82">10 Back of House</text>
-    </g>
-  </g>
-
-  <!-- LUCI-controlled legend note -->
-  <g transform="translate(900 855)">
-    <circle cx="6" cy="0" r="3.5" fill="#2b9e80"/>
-    <text x="16" y="4" class="fp-key-tx" fill="#2b9e80" style="font-weight:700">LUCI-controlled zone</text>
-  </g>
-
-  <!--MODULES-->
-</svg>
+  </svg>
+</div>
 
 <style>
-  .fp-cad { width: 100%; height: auto; display: block; }
-  .fp-tx { font-family: 'Space Grotesk', sans-serif; font-weight: 600; text-anchor: middle; fill: #1a1a1a; }
-  .fp-tx--sm { font-size: 11px; }
-  .fp-tx--num { font-size: 12px; font-weight: 700; }
-  .fp-key-tx { font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 600; fill: #1a1a1a; }
-  .fp-pill { fill: #0A161C; stroke: #2b9e80; stroke-width: 1.4; }
-  .fp-pill-tx { font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; fill: #2b9e80; text-anchor: middle; }
-  .fp-net { stroke: #2b9e80; stroke-width: 1; fill: #2b9e80; }
-  .fp-hi { fill: rgba(43,158,128,0.06); stroke: #2b9e80; stroke-width: 1.5; }
+  .fp-cad {
+    position: relative;
+    isolation: isolate; /* keep the screen blend inside this box */
+    background: var(--navy-deep);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .fp-cad__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    /* black-on-white → white-on-navy: invert the drawing, then screen-blend
+       so the white background drops out and the navy mat shows through. */
+    filter: invert(1);
+    mix-blend-mode: screen;
+  }
+  .fp-cad__ov {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .fp-net { stroke: #68E3BE; stroke-width: 1.4; fill: #68E3BE; opacity: 0.85; }
+  .fp-pill { fill: #0A161C; stroke: #68E3BE; stroke-width: 1.5; }
+  .fp-pill-tx {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    fill: #68E3BE;
+    text-anchor: middle;
+  }
+  @media (prefers-reduced-motion: reduce) { /* static */ }
 </style>

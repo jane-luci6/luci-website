@@ -41,11 +41,12 @@ const { pillars } = Astro.props;
   .ind-fp__plan {
     position: relative;
     border-radius: 16px;
-    border: 1px solid #D4D9DC;
-    background: #ffffff;
+    border: 1px solid rgba(104, 227, 190, 0.16);
+    background:
+      radial-gradient(120% 90% at 50% 18%, rgba(104, 227, 190, 0.08), transparent 70%),
+      var(--navy-deep);
     padding: clamp(10px, 1.4vw, 16px);
     overflow: hidden;
-    box-shadow: 0 24px 48px rgba(10, 22, 28, 0.18);
   }
 
   .ind-fp__cards {
