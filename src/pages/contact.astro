@@ -66,8 +66,8 @@ const reach = [
 
   <PersonaHeroStage
     sectionId="contact-thesis"
-    heroImage="/images/industries/casino/solution-partnership.jpg"
-    heroAlt="A LUCI field engineer walking a property manager through a deployment"
+    heroImage="/images/contact-hero-venue.jpg"
+    heroAlt="A modern sportsbook and venue lounge at dusk with a curved video wall, mint and gold accent lighting"
     kicker="Contact"
     lockupName="Let&rsquo;s Talk"
     lockupRole="See LUCI on your property"
@@ -309,7 +309,7 @@ const reach = [
     max-width: var(--content-wide);
   }
 
-  /* Horizontal connector line behind the nodes — mint gradient, Phase-2 style. */
+  /* Horizontal connector line behind the nodes — mint→gold gradient. */
   .contact-journey::before {
     content: '';
     position: absolute;
@@ -317,7 +317,7 @@ const reach = [
     left: 10%;
     right: 10%;
     height: 2px;
-    background: linear-gradient(90deg, rgba(var(--mint-rgb), 0.3), rgba(var(--mint-rgb), 0.65));
+    background: linear-gradient(90deg, rgba(var(--mint-rgb), 0.3), rgba(var(--gold-rgb), 0.65));
   }
 
   .contact-journey__step {
@@ -326,8 +326,9 @@ const reach = [
     position: relative;
   }
 
-  /* Mint node circle with a navy knockout ring so the connector line reads
-     as passing behind each node, not through it. Matches sales-deck Phase 2. */
+  /* Mint→gold gradient node circle with a navy knockout ring so the
+     connector line reads as passing behind each node. Matches the
+     sales-deck journey's green/gold accent on a single phase. */
   .contact-journey__node {
     width: 56px;
     height: 56px;
@@ -338,7 +339,7 @@ const reach = [
     position: relative;
     z-index: 1;
     color: var(--navy-deep);
-    background: var(--mint);
+    background: linear-gradient(135deg, var(--mint) 0%, var(--gold) 100%);
     box-shadow: 0 0 0 6px var(--navy-deep);
   }
 
