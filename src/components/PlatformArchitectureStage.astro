@@ -3,17 +3,13 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 
 const archRaw = readFileSync(
-  path.join(process.cwd(), 'public/images/diagrams/luci-system-architecture.dark.svg'),
+  path.join(process.cwd(), 'public/images/diagrams/luci-system-architecture.svg'),
   'utf-8',
 );
 ---
 
 <div class="arch-stage" data-arch-stage>
-  <div class="arch-stage__inset">
-    <div class="arch-stage__frame">
-      <div class="arch-stage__svg" set:html={archRaw} />
-    </div>
-  </div>
+  <div class="arch-stage__svg" set:html={archRaw} />
 </div>
 
 <script>
@@ -43,19 +39,6 @@ const archRaw = readFileSync(
 <style>
   .arch-stage {
     max-width: var(--content-wide);
-  }
-
-  .arch-stage__inset {
-    background: var(--navy);
-    border: 1px solid rgba(104, 227, 190, 0.16);
-    border-radius: 16px;
-    padding: clamp(16px, 2.5vw, 24px);
-    box-shadow: 0 24px 48px rgba(15, 30, 38, 0.18);
-  }
-
-  .arch-stage__frame {
-    position: relative;
-    width: 100%;
   }
 
   .arch-stage__svg :global(svg) {
