@@ -1,0 +1,300 @@
+---
+import type { IndustryChallenge, IndustrySolution } from '../data/industryDetails';
+
+interface Props {
+  challenges: IndustryChallenge[];
+  solutions: IndustrySolution[];
+}
+
+const { challenges, solutions } = Astro.props;
+const pairs = challenges
+  .map((c, i) => ({
+    num: String(i + 1).padStart(2, '0'),
+    before: c,
+    after: solutions[i],
+  }))
+  .filter((p) => p.before && p.after);
+---
+
+<ol class="ba" role="list">
+  {pairs.map((p) => (
+    <li class="ba__row">
+      <span class="ba__num" aria-hidden="true">{p.num}</span>
+
+      <div class="ba__side ba__side--before" role="button" tabindex="0" aria-pressed="false">
+        <div class="ba__inner">
+          <div class="ba__face ba__face--front">
+            <span class="ba__label">Before</span>
+            <h3 class="ba__head">{p.before.head}</h3>
+          </div>
+          <div class="ba__face ba__face--back">
+            <span class="ba__label">Before</span>
+            <p class="ba__body">{p.before.body}</p>
+          </div>
+        </div>
+      </div>
+
+      <span class="ba__seam" aria-hidden="true"></span>
+
+      <div class="ba__side ba__side--after" role="button" tabindex="0" aria-pressed="false">
+        <div class="ba__inner">
+          <div class="ba__face ba__face--front">
+            <span class="ba__label ba__label--after">After &middot; LUCI</span>
+            <h3 class="ba__head">{p.after.headline}</h3>
+          </div>
+          <div class="ba__face ba__face--back">
+            <span class="ba__label ba__label--after">After &middot; LUCI</span>
+            <p class="ba__body">{p.after.answer}</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="ba__sr">
+        <span>Before: {p.before.head}. {p.before.body}</span>
+        <span>After: {p.after.headline}. {p.after.answer}</span>
+      </p>
+    </li>
+  ))}
+</ol>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.ba__side').forEach((el) => {
+    const toggle = () => {
+      el.classList.toggle('is-flipped');
+      el.setAttribute('aria-pressed', el.classList.contains('is-flipped') ? 'true' : 'false');
+    };
+    el.addEventListener('click', toggle);
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle();
+      }
+    });
+  });
+</script>
+
+<style>
+  .ba {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: var(--content-wide);
+  }
+
+  .ba__row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(104, 227, 190, 0.12);
+    background: var(--navy-deep);
+  }
+
+  .ba__seam {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    transform: translateX(-0.5px);
+    z-index: 3;
+    background: linear-gradient(180deg, transparent, rgba(206, 176, 110, 0.45), rgba(104, 227, 190, 0.45), transparent);
+  }
+
+  .ba__num {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    font-family: var(--font-display);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    background: var(--navy-deep);
+    border: 1px solid rgba(104, 227, 190, 0.12);
+    padding: 3px 8px;
+    border-radius: 9999px;
+  }
+
+  .ba__side {
+    position: relative;
+    perspective: 1200px;
+    cursor: pointer;
+    min-height: 84px;
+  }
+
+  .ba__side:focus-visible {
+    outline: 2px solid var(--mint);
+    outline-offset: -2px;
+  }
+
+  .ba__inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 84px;
+    transform-style: preserve-3d;
+    transition: transform 0.45s ease;
+  }
+
+  .ba__side.is-flipped .ba__inner {
+    transform: rotateY(180deg);
+  }
+
+  .ba__face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    padding: 20px 24px 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .ba__face--back {
+    transform: rotateY(180deg);
+  }
+
+  .ba__side--before .ba__face {
+    background: linear-gradient(180deg, #2b323a, #1b2229);
+  }
+
+  .ba__side--after .ba__face {
+    background: linear-gradient(135deg, #103a2c 0%, #1d4031 50%, #3e3618 100%);
+  }
+
+  .ba__side--before::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #6b7480;
+    z-index: 2;
+  }
+
+  .ba__side--after::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--gold), var(--mint));
+    z-index: 2;
+  }
+
+  .ba__label {
+    font-family: var(--font-display);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    color: rgba(245, 248, 250, 0.45);
+  }
+
+  .ba__label::before {
+    content: '';
+    width: 18px;
+    height: 2px;
+    background: #6b7480;
+  }
+
+  .ba__label--after {
+    color: var(--mint);
+  }
+
+  .ba__label--after::before {
+    background: linear-gradient(90deg, var(--gold), var(--mint));
+  }
+
+  .ba__head {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 15.5px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .ba__side--before .ba__head {
+    color: rgba(245, 248, 250, 0.82);
+  }
+
+  .ba__side--after .ba__head {
+    color: #fff;
+  }
+
+  .ba__body {
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .ba__side--before .ba__body {
+    color: rgba(245, 248, 250, 0.55);
+  }
+
+  .ba__side--after .ba__body {
+    color: rgba(245, 248, 250, 0.85);
+  }
+
+  .ba__sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 680px) {
+    .ba__row {
+      grid-template-columns: 1fr;
+    }
+    .ba__seam,
+    .ba__num {
+      display: none;
+    }
+    .ba__side {
+      min-height: 68px;
+    }
+    .ba__inner {
+      min-height: 68px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ba__inner {
+      transition: none;
+      transform: none !important;
+    }
+    .ba__face {
+      position: relative;
+      inset: auto;
+      transform: none !important;
+      backface-visibility: visible;
+      -webkit-backface-visibility: visible;
+    }
+    .ba__face--back {
+      margin-top: 8px;
+    }
+    .ba__side {
+      cursor: default;
+    }
+  }
+</style>

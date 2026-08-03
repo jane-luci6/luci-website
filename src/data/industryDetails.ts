@@ -210,8 +210,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     ctaTitle: 'See LUCI on <em>your floor</em>.',
     chapters: [
       { id: 'industry-thesis', label: 'Overview' },
-      { id: 'industry-challenges', label: 'Challenges' },
-      { id: 'industry-solutions', label: 'The fix' },
+      { id: 'industry-before-after', label: 'Before & after' },
       { id: 'industry-automation', label: 'Automation' },
       { id: 'industry-cta', label: 'Next step' },
     ],

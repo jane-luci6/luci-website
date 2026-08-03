@@ -6,6 +6,7 @@ import PlatformChapterNav from '../../components/PlatformChapterNav.astro';
 import IndustryHeroStage from '../../components/IndustryHeroStage.astro';
 import IndustryChallenges from '../../components/IndustryChallenges.astro';
 import IndustryProblemSolution from '../../components/IndustryProblemSolution.astro';
+import IndustryBeforeAfter from '../../components/IndustryBeforeAfter.astro';
 import IndustryAutomationShowcase from '../../components/IndustryAutomationShowcase.astro';
 import HomeProof from '../../components/HomeProof.astro';
 import { industries } from '../../data/industries';
@@ -45,24 +46,39 @@ const detail = getIndustryDetail(industry.slug);
         imageSrc={detail.heroImage}
       />
 
-      <SectionBlock
-        id="industry-challenges"
-        lockupName={detail.challengesLockup.lockupName}
-        tone="deep"
-        wide
-        pattern
-      >
-        <IndustryChallenges challenges={detail.challenges} />
-      </SectionBlock>
+      {industry.slug === 'casinos-gaming' ? (
+        <SectionBlock
+          id="industry-before-after"
+          lockupName="What LUCI <em>changes</em>"
+          lockupRole="Each problem, paired with its fix"
+          tone="deep"
+          wide
+          pattern
+        >
+          <IndustryBeforeAfter challenges={detail.challenges} solutions={detail.solutions} />
+        </SectionBlock>
+      ) : (
+        <>
+          <SectionBlock
+            id="industry-challenges"
+            lockupName={detail.challengesLockup.lockupName}
+            tone="deep"
+            wide
+            pattern
+          >
+            <IndustryChallenges challenges={detail.challenges} />
+          </SectionBlock>
 
-      <SectionBlock
-        id="industry-solutions"
-        lockupName={detail.solutionsLockup.lockupName}
-        tone="deep"
-        wide
-      >
-        <IndustryProblemSolution solutions={detail.solutions} />
-      </SectionBlock>
+          <SectionBlock
+            id="industry-solutions"
+            lockupName={detail.solutionsLockup.lockupName}
+            tone="deep"
+            wide
+          >
+            <IndustryProblemSolution solutions={detail.solutions} />
+          </SectionBlock>
+        </>
+      )}
 
       <HomeProof />
 
