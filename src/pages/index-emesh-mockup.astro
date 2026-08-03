@@ -66,41 +66,24 @@ import { site } from '../data/site';
   }
 
   /* 2 · CTA BAND — the wide mesh as the section background.
-     This is the strongest fit: the CTA is a short, dark band that
-     reads as a moment of brand atmosphere. The wide variant is
-     cropped for the shallow aspect. Copy sits in the clear lower-left
-     where the composition leaves room. */
+     The fade is baked into the background layer stack: a navy gradient
+     sits ON TOP of the mesh (gradients paint above images in the stack),
+     solid behind the entire copy bloc on the left, fading to transparent
+     on the right so the mesh reads "around" the text. Content always
+     paints above all backgrounds — no z-index dependency. */
   #home-cta.section {
-    background: var(--navy-deep) url('/images/mesh/luci-bg-wide-2560x800.svg') center / cover no-repeat !important;
+    background:
+      linear-gradient(90deg, var(--navy-deep) 0%, var(--navy-deep) 60%, transparent 85%),
+      url('/images/mesh/luci-bg-wide-2560x800.svg') center / cover no-repeat !important;
+    background-color: var(--navy-deep);
     border-top: 2px solid var(--mint);
   }
-  /* Lift the content container above the fade veil so text stays readable */
-  #home-cta .container {
-    position: relative;
-    z-index: 1;
-  }
-  #home-cta.section::after {
-    /* fade the mesh behind the copy column so text stays readable */
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background: linear-gradient(
-      90deg,
-      rgba(7, 15, 20, 0.94) 0%,
-      rgba(7, 15, 20, 0.94) 48%,
-      transparent 74%
-    );
-  }
   @media (max-width: 720px) {
-    #home-cta.section::after {
-      background: linear-gradient(
-        180deg,
-        rgba(7, 15, 20, 0.7) 0%,
-        rgba(7, 15, 20, 0.94) 26%,
-        rgba(7, 15, 20, 0.94) 100%
-      );
+    #home-cta.section {
+      background:
+        linear-gradient(180deg, var(--navy-deep) 0%, var(--navy-deep) 40%, transparent 75%),
+        url('/images/mesh/luci-bg-wide-2560x800.svg') center / cover no-repeat !important;
+      background-color: var(--navy-deep);
     }
   }
 
