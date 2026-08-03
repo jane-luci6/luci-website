@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHero from '../components/PageHero.astro';
+import PersonaHeroStage from '../components/PersonaHeroStage.astro';
 import SectionBlock from '../components/SectionBlock.astro';
 import { personas } from '../data/personas';
 
@@ -43,11 +43,16 @@ const reach = [
 ---
 
 <BaseLayout title="Contact" description="Request a demo of LUCI running on a property like yours.">
-  <PageHero
+  <h1 class="contact-sr-only">Contact &mdash; See LUCI on your property</h1>
+
+  <PersonaHeroStage
+    sectionId="contact-thesis"
+    heroImage="/images/industries/casino/solution-partnership.jpg"
+    heroAlt="A LUCI field engineer walking a property manager through a deployment"
     kicker="Contact"
-    title="See LUCI on your property."
-    lead="Request a demo, and we&rsquo;ll walk through what running your property as one platform actually looks like."
-    deep
+    lockupName="Let&rsquo;s Talk"
+    lockupRole="See LUCI on your property"
+    deck="Request a demo, and we&rsquo;ll walk through what running your property as one platform actually looks like."
   />
 
   <SectionBlock
@@ -59,6 +64,17 @@ const reach = [
   >
     <div class="contact-demo">
       <div class="contact-demo__intro">
+        <figure class="contact-demo__photo">
+          <img
+            src="/images/industries/casino/solution-interface-training.jpg"
+            alt="A LUCI team member walking a property manager through the floor-map interface on a tablet"
+            width="1024"
+            height="683"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>The interface you&rsquo;ll see in your demo</figcaption>
+        </figure>
         <p class="contact-demo__lede">Every demo is built around your property, not a generic script.</p>
         <ul class="contact-demo__list" role="list">
           <li>A live walkthrough of LUCI on a property like yours</li>
@@ -175,6 +191,18 @@ const reach = [
 </script>
 
 <style>
+  .contact-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   /* ---------- Request a demo ---------- */
   .contact-demo {
     display: grid;
@@ -184,8 +212,34 @@ const reach = [
 
   @media (min-width: 860px) {
     .contact-demo {
-      grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
     }
+  }
+
+  .contact-demo__photo {
+    margin: 0 0 var(--space-4);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px rgba(43, 158, 128, 0.16);
+  }
+
+  .contact-demo__photo img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    object-position: center 25%;
+    display: block;
+  }
+
+  .contact-demo__photo figcaption {
+    padding: 12px 16px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    background: #fff;
   }
 
   .contact-demo__lede {
