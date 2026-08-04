@@ -1,10 +1,10 @@
 ---
 // Casino resort floorplan — generated architectural drawing transposed to
-// dark (invert + screen blend = light lines on navy), with four callouts
-// pointing to the zones LUCI orchestrates. The drawing carries its own
-// zone labels; these callouts name what LUCI does in each space.
+// dark (invert + screen blend = light lines on navy), with four animated
+// callouts pointing to the zones LUCI orchestrates. Descriptors are
+// pulled from the Casinos & Gaming industry strategy (guest-experience block).
 ---
-<div class="fp-cad">
+<div class="fp-cad" data-fp-animate>
   <img
     class="fp-cad__img"
     src="/images/industries/casino/casino-floorplan.png?v=2"
@@ -15,47 +15,73 @@
     height="1024"
   />
   <svg class="fp-cad__ov" viewBox="0 0 790 1024" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-    <!-- leader lines: pill → zone dot -->
-    <g class="fp-lead">
-      <!-- 1 Set the tone on arrival → Hotel Lobby -->
-      <line x1="660" y1="300" x2="700" y2="410"/>
-      <!-- 2 Drive energy on the floor → Casino -->
-      <line x1="560" y1="640" x2="560" y2="555"/>
-      <!-- 3 Move guests toward amenities → Pool, Restaurants, Theater -->
-      <line x1="370" y1="316" x2="135" y2="180"/>
-      <line x1="370" y1="316" x2="145" y2="400"/>
-      <line x1="370" y1="316" x2="145" y2="690"/>
-      <!-- 4 Extend loyalty across every space → Ballroom, Casino -->
-      <line x1="380" y1="70" x2="400" y2="150"/>
-      <line x1="380" y1="70" x2="560" y2="540"/>
+    <!-- 1 Set the tone on arrival → Hotel Lobby -->
+    <g class="fp-c" style="--d:0s">
+      <line class="fp-lead" x1="660" y1="300" x2="700" y2="410" pathLength="1"/>
+      <circle class="fp-dot" cx="700" cy="410" r="4"/>
+      <g class="fp-plate">
+        <rect x="470" y="286" width="200" height="30" rx="14"/>
+        <text class="fp-plate__label" x="570" y="306">Set the tone on arrival</text>
+      </g>
+      <text class="fp-desc" x="570" y="332">Every screen, speaker, and light at the door sets the tone for the visit.</text>
     </g>
-    <!-- zone dots -->
-    <g class="fp-dot">
-      <circle cx="700" cy="410" r="4"/>
-      <circle cx="560" cy="555" r="4"/>
-      <circle cx="135" cy="180" r="4"/>
-      <circle cx="145" cy="400" r="4"/>
-      <circle cx="145" cy="690" r="4"/>
-      <circle cx="400" cy="150" r="4"/>
-      <circle cx="560" cy="540" r="4"/>
+
+    <!-- 2 Drive energy on the floor → Casino -->
+    <g class="fp-c" style="--d:0.25s">
+      <line class="fp-lead" x1="560" y1="640" x2="560" y2="555" pathLength="1"/>
+      <circle class="fp-dot" cx="560" cy="555" r="4"/>
+      <g class="fp-plate">
+        <rect x="455" y="640" width="210" height="30" rx="14"/>
+        <text class="fp-plate__label" x="560" y="660">Drive energy on the floor</text>
+      </g>
+      <text class="fp-desc" x="560" y="686">The gaming floor should feel like something — energy, momentum, the right game on the right screen.</text>
     </g>
-    <!-- callout pills -->
-    <g class="fp-pill">
-      <rect x="470" y="286" width="200" height="28" rx="14"/>
-      <text x="570" y="305">Set the tone on arrival</text>
 
-      <rect x="455" y="640" width="210" height="28" rx="14"/>
-      <text x="560" y="659">Drive energy on the floor</text>
+    <!-- 3 Move guests toward amenities → Pool, Restaurants, Theater -->
+    <g class="fp-c" style="--d:0.5s">
+      <line class="fp-lead" x1="370" y1="316" x2="135" y2="180" pathLength="1"/>
+      <line class="fp-lead" x1="370" y1="316" x2="145" y2="400" pathLength="1"/>
+      <line class="fp-lead" x1="370" y1="316" x2="145" y2="690" pathLength="1"/>
+      <circle class="fp-dot" cx="135" cy="180" r="4"/>
+      <circle class="fp-dot" cx="145" cy="400" r="4"/>
+      <circle class="fp-dot" cx="145" cy="690" r="4"/>
+      <g class="fp-plate">
+        <rect x="250" y="302" width="240" height="30" rx="14"/>
+        <text class="fp-plate__label" x="370" y="322">Move guests toward amenities</text>
+      </g>
+      <text class="fp-desc" x="370" y="348">Dining, entertainment, the pool — the spaces that now pay the bills, on cue.</text>
+    </g>
 
-      <rect x="250" y="302" width="240" height="28" rx="14"/>
-      <text x="370" y="321">Move guests toward amenities</text>
-
-      <rect x="250" y="56" width="260" height="28" rx="14"/>
-      <text x="380" y="75">Extend loyalty across every space</text>
+    <!-- 4 Extend loyalty across every space → Ballroom, Casino -->
+    <g class="fp-c" style="--d:0.75s">
+      <line class="fp-lead" x1="380" y1="70" x2="400" y2="150" pathLength="1"/>
+      <line class="fp-lead" x1="380" y1="70" x2="560" y2="540" pathLength="1"/>
+      <circle class="fp-dot" cx="400" cy="150" r="4"/>
+      <circle class="fp-dot" cx="560" cy="540" r="4"/>
+      <g class="fp-plate">
+        <rect x="250" y="56" width="260" height="30" rx="14"/>
+        <text class="fp-plate__label" x="380" y="76">Extend loyalty across every space</text>
+      </g>
+      <text class="fp-desc" x="380" y="102">The right moment, in the right place, at the right time — everywhere.</text>
     </g>
   </svg>
 </div>
-
+<script>
+  const els = document.querySelectorAll('[data-fp-animate]');
+  if (els.length && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          io.unobserve(e.target);
+        }
+      }
+    }, { threshold: 0.25 });
+    els.forEach((el) => io.observe(el));
+  } else {
+    els.forEach((el) => el.classList.add('is-visible'));
+  }
+</script>
 <style>
   .fp-cad {
     position: relative;
@@ -78,15 +104,75 @@
     height: 100%;
     pointer-events: none;
   }
-  .fp-lead { stroke: rgba(104, 227, 190, 0.6); stroke-width: 1.4; fill: none; }
-  .fp-dot { fill: #68E3BE; }
-  .fp-pill rect { fill: #0A161C; stroke: #68E3BE; stroke-width: 1.5; }
-  .fp-pill text {
+
+  .fp-lead {
+    stroke: rgba(104, 227, 190, 0.6);
+    stroke-width: 1.4;
+    fill: none;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 0.6s ease-out;
+    transition-delay: var(--d, 0s);
+  }
+  .fp-dot {
+    fill: #68e3be;
+    transform-box: fill-box;
+    transform-origin: center;
+    transform: scale(0);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.2, 1.4, 0.4, 1), opacity 0.3s ease;
+    transition-delay: calc(var(--d, 0s) + 0.35s);
+  }
+  .fp-plate rect {
+    fill: #0a161c;
+    stroke: #68e3be;
+    stroke-width: 1.5;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    transition-delay: var(--d, 0s);
+  }
+  .fp-plate__label {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.02em;
-    fill: #68E3BE;
+    fill: #68e3be;
     text-anchor: middle;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    transition-delay: var(--d, 0s);
+  }
+  .fp-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    fill: rgba(245, 248, 250, 0.62);
+    text-anchor: middle;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    transition-delay: calc(var(--d, 0s) + 0.2s);
+  }
+
+  /* Reveal when the floorplan scrolls into view */
+  .fp-cad.is-visible .fp-lead { stroke-dashoffset: 0; }
+  .fp-cad.is-visible .fp-dot {
+    transform: scale(1);
+    opacity: 1;
+    animation: fp-pulse 2.8s ease-in-out infinite;
+    animation-delay: calc(var(--d, 0s) + 0.6s);
+  }
+  .fp-cad.is-visible .fp-plate rect,
+  .fp-cad.is-visible .fp-plate__label { opacity: 1; }
+  .fp-cad.is-visible .fp-desc { opacity: 1; }
+
+  @keyframes fp-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.35); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fp-lead { stroke-dashoffset: 0; transition: none; }
+    .fp-dot { transform: scale(1); opacity: 1; transition: none; animation: none; }
+    .fp-plate rect, .fp-plate__label, .fp-desc { opacity: 1; transition: none; }
   }
 </style>
