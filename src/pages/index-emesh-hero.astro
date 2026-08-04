@@ -17,7 +17,7 @@ import { site } from '../data/site';
 <BaseLayout title="Home — E-mesh Mockup" description={site.subTagline} darkHeader>
   <div class="mockup-banner">
     <span class="mockup-banner__dot"></span>
-    <span>E-mesh page mockup — mesh lines only (static per section). Split composition on request. Fade tweaks next.</span>
+    <span>E-mesh page mockup — Why section: split floorplan middle-left + fade behind arrow &amp; cards.</span>
   </div>
 
   <HomeHero variant="none" zones />
@@ -150,10 +150,14 @@ import { site } from '../data/site';
      Interest bands get denser opacity. Fade behind text comes later.
      ============================================================ */
 
-  /* Kill Differentiator + Why content veils for now — pattern first */
+  /* Differentiator + Intro — no mesh / no line continuations */
+  .home-diff::before,
   .home-diff::after,
-  .home-why::after {
+  .home-intro::before {
+    content: none !important;
+    background: none !important;
     opacity: 0 !important;
+    display: none !important;
   }
 
   /* Kill circuit fill on resource card panels */
@@ -162,10 +166,8 @@ import { site } from '../data/site';
     background-image: none !important;
   }
 
-  /* Static line-work underlay — mesh lines only (transparent, no wash).
-     Split composition added later only where you ask for it. */
-  .home-diff,
-  .home-intro,
+  /* Static line-work underlay — mesh lines only by default.
+     Split composition on Consolidation + Why (and wherever asked). */
   .home-ledger,
   .home-why,
   .home-industries,
@@ -175,10 +177,6 @@ import { site } from '../data/site';
     position: relative;
     isolation: isolate;
   }
-  .home-diff::before,
-  .home-intro::before,
-  .home-ledger::before,
-  .home-why::before,
   .home-industries::before,
   .home-proof-band::before,
   .home-personas::before,
@@ -193,34 +191,187 @@ import { site } from '../data/site';
     opacity: 0.4 !important;
   }
 
-  /* Interest bands — denser line-work */
-  .home-diff::before,
-  .home-why::before,
-  .home-personas::before {
-    opacity: 0.7 !important;
+  /* Consolidation — same technique as hero-c: one soft mask on the mesh
+     layer + soft navy ::after + tight pockets on rail/fig.
+     Center of the mask is fully clear (not just dimmed) so the pattern
+     actually drops out behind the words and the ledger graphic. */
+  .home-ledger {
+    background: var(--navy-deep) !important;
+    overflow: hidden;
   }
-
-  /* Differentiator — mesh in a feathered outer frame (all four corners
-     visible); clear through the middle. farthest-corner so the gradient
-     reaches the rectangle corners (a % ellipse left them masked out). */
-  .home-diff::before {
-    opacity: 0.8 !important;
+  .home-ledger::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: url('/images/mesh/luci-bg-hero-split-1920x1080.svg') center / cover no-repeat !important;
+    mix-blend-mode: screen !important;
+    opacity: 1 !important;
+    /* Soft clear behind the content band — same idea as hero-c, but
+       the core goes fully clear so bright screen-blend lines actually
+       drop out (hero's 0.28 floor was too visible on this denser crop). */
     -webkit-mask-image: radial-gradient(
-      ellipse farthest-corner at 50% 48%,
+      ellipse 72% 70% at 45% 44%,
       transparent 0%,
-      transparent 52%,
-      rgba(0, 0, 0, 0.25) 72%,
-      rgba(0, 0, 0, 0.7) 88%,
-      #000 100%
+      rgba(0, 0, 0, 0.18) 30%,
+      rgba(0, 0, 0, 0.55) 55%,
+      #000 78%
     );
     mask-image: radial-gradient(
-      ellipse farthest-corner at 50% 48%,
+      ellipse 72% 70% at 45% 44%,
       transparent 0%,
-      transparent 52%,
-      rgba(0, 0, 0, 0.25) 72%,
-      rgba(0, 0, 0, 0.7) 88%,
-      #000 100%
+      rgba(0, 0, 0, 0.18) 30%,
+      rgba(0, 0, 0, 0.55) 55%,
+      #000 78%
     );
+  }
+  .home-ledger::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    /* Soft navy pocket — same color stops as hero-c::after */
+    background: radial-gradient(
+      ellipse 78% 72% at 48% 46%,
+      rgba(7, 15, 20, 0.78) 0%,
+      rgba(7, 15, 20, 0.55) 32%,
+      rgba(7, 15, 20, 0.25) 55%,
+      transparent 78%
+    );
+  }
+
+  .home-ledger .container {
+    position: relative;
+    z-index: 1 !important;
+  }
+
+  .home-ledger__rail,
+  .home-ledger__fig {
+    position: relative;
+    isolation: isolate;
+  }
+  .home-ledger__rail::before,
+  .home-ledger__fig::before {
+    content: '';
+    position: absolute;
+    inset: -56px -72px -48px -48px;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse 72% 68% at 38% 42%,
+      rgba(7, 15, 20, 0.72) 0%,
+      rgba(7, 15, 20, 0.5) 35%,
+      rgba(7, 15, 20, 0.2) 58%,
+      transparent 82%
+    );
+  }
+  .home-ledger__fig::before {
+    background: radial-gradient(
+      ellipse 72% 68% at 50% 50%,
+      rgba(7, 15, 20, 0.72) 0%,
+      rgba(7, 15, 20, 0.5) 35%,
+      rgba(7, 15, 20, 0.2) 58%,
+      transparent 82%
+    );
+  }
+  .home-ledger__rail > *,
+  .home-ledger__fig > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Why it matters — split floorplan middle-left + mesh, same soft-clear
+     fade behind the arrow and the flip cards. */
+  .home-why {
+    background: var(--navy-deep) !important;
+    overflow: hidden;
+  }
+  .home-why::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    /* Split SVG: floorplan on left half. Shift so the plan sits middle-left. */
+    background: url('/images/mesh/luci-bg-hero-split-1920x1080.svg') 38% center / cover no-repeat !important;
+    mix-blend-mode: screen !important;
+    opacity: 1 !important;
+    /* Soft clear behind arrow (top) + card grid — pattern returns at edges */
+    -webkit-mask-image: radial-gradient(
+      ellipse 78% 82% at 50% 48%,
+      transparent 0%,
+      rgba(0, 0, 0, 0.16) 28%,
+      rgba(0, 0, 0, 0.52) 55%,
+      #000 78%
+    );
+    mask-image: radial-gradient(
+      ellipse 78% 82% at 50% 48%,
+      transparent 0%,
+      rgba(0, 0, 0, 0.16) 28%,
+      rgba(0, 0, 0, 0.52) 55%,
+      #000 78%
+    );
+  }
+  .home-why::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 1 !important;
+    background:
+      /* Arrow zone */
+      radial-gradient(
+        ellipse 72% 32% at 50% 10%,
+        rgba(7, 15, 20, 0.78) 0%,
+        rgba(7, 15, 20, 0.5) 35%,
+        rgba(7, 15, 20, 0.2) 58%,
+        transparent 82%
+      ),
+      /* Flip-card grid */
+      radial-gradient(
+        ellipse 82% 72% at 50% 58%,
+        rgba(7, 15, 20, 0.78) 0%,
+        rgba(7, 15, 20, 0.55) 32%,
+        rgba(7, 15, 20, 0.25) 55%,
+        transparent 78%
+      );
+  }
+
+  .home-why__inner {
+    position: relative;
+    z-index: 1 !important;
+  }
+
+  /* Tight pockets on each flip card (arrow is covered by section ::after) */
+  .home-why__item {
+    position: relative;
+    isolation: isolate;
+  }
+  .home-why__item::before {
+    content: '';
+    position: absolute;
+    inset: -28px -24px -32px;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse 72% 68% at 50% 45%,
+      rgba(7, 15, 20, 0.72) 0%,
+      rgba(7, 15, 20, 0.5) 35%,
+      rgba(7, 15, 20, 0.2) 58%,
+      transparent 82%
+    );
+  }
+  .home-why__card {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Interest bands — denser line-work (Why uses split at full strength above) */
+  .home-personas::before {
+    opacity: 0.7 !important;
   }
 
   /* Keep section content above the underlay */
