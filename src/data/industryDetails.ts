@@ -201,7 +201,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '01',
         title: 'Morning Reset',
         trigger: 'Every morning, automatically.',
-        image: '/images/industries/casino/capability-morning-reset.png?v=2',
+        image: '/images/industries/casino/capability-morning-reset.png?v=3',
         imageAlt: 'Empty casino gaming floor at dawn, every screen and ribbon board on a clean coordinated baseline, a single staffer walking the far aisle',
         detail:
           'One scheduled preset returns every screen and zone to its intended state before doors open — so the GM\u2019s walkthrough never starts with Judge Judy.',
