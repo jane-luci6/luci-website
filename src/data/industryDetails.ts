@@ -110,39 +110,14 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         imagePosition: 'center 42%',
       },
       {
-        head: 'Siloed workflows between AV, IT, Marketing, and Ops.',
+        head: 'Three teams, three stacks, and no way to scale across properties.',
         body:
-          'Each team runs its own gear and its own schedule — so the sportsbook, the signage, and the pit move to three different beats, and nothing lands together.',
+          'AV, IT, Marketing, and Ops each run their own gear and their own schedule. Every new build means another proprietary system, another integrator, another lead time. And each property runs its own stack, presets, and vendor list — so the brand looks different on every floor and nobody can see all of it at once.',
       },
       {
-        head: "Can't scale to a new build or a new property.",
+        head: 'High costs, no visibility, and a brand that doesn\u2019t carry.',
         body:
-          'Every addition means another proprietary system, another integrator, another lead time — so the floor plan you opened with isn\u2019t the floor plan you can grow into.',
-      },
-      {
-        head: 'Hard to manage across multiple properties.',
-        body:
-          'Each property runs its own stack, its own presets, its own vendor list — so the brand you promised looks different on every floor and nobody can see all of it at once.',
-      },
-      {
-        head: 'High operational costs from fragmented systems.',
-        body:
-          'Redundant boxes, redundant vendors, redundant service calls — the floor costs more to run every year, and the experience doesn\u2019t get better.',
-      },
-      {
-        head: 'No visibility into performance or guest engagement.',
-        body:
-          'When a screen goes dark or a zone goes quiet, you find out from a guest — not from the system. There\u2019s no data, just anecdotes.',
-      },
-      {
-        head: 'Vulnerable to security threats and downtime.',
-        body:
-          'Fragmented systems on aging hardware are a target and a single point of failure — and a casino can\u2019t afford either.',
-      },
-      {
-        head: 'Inconsistent brand experience across touchpoints.',
-        body:
-          'The lobby, the floor, the bar, the ballroom — each looks like a different property because each is run by a different system. The brand doesn\u2019t carry.',
+          'Redundant boxes and service calls cost more every year, and the experience doesn\u2019t get better. When a screen goes dark you find out from a guest, not the system. Fragmented systems on aging hardware are a target and a single point of failure. And the lobby, the floor, the bar, and the ballroom each look like a different property because each is run by a different system.',
       },
     ],
     solutionsLockup: {
@@ -202,52 +177,17 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       },
       {
         index: '06',
-        problem: 'Siloed workflows between AV, IT, Marketing, and Ops.',
-        headline: 'One platform for every team.',
+        problem: 'Three teams, three stacks, and no way to scale across properties.',
+        headline: 'One platform, one standard, across every property.',
         answer:
-          'A single unified platform that streamlines cross-departmental collaboration and execution — every team works from the same picture.',
+          'A single unified, modular, cloud-native platform that streamlines cross-departmental work and grows with you — add a room, a wing, or a property without a rip-and-replace, and run every property to one standard.',
       },
       {
         index: '07',
-        problem: "Can't scale to a new build or a new property.",
-        headline: 'A modular, cloud-native architecture.',
+        problem: 'High costs, no visibility, and a brand that doesn\u2019t carry.',
+        headline: 'Real-time monitoring, automated workflows, one brand, enterprise-grade security.',
         answer:
-          'A modular, cloud-native architecture that grows with your business and allows rapid deployment of new features — add a room, a wing, or a property without a rip-and-replace.',
-      },
-      {
-        index: '08',
-        problem: 'Hard to manage across multiple properties.',
-        headline: 'Centralized management across the enterprise.',
-        answer:
-          'Centralized management and control of all AV assets and content across your entire enterprise — one view, one standard, every property.',
-      },
-      {
-        index: '09',
-        problem: 'High operational costs from fragmented systems.',
-        headline: 'Automated workflows and intelligent insights.',
-        answer:
-          'Automated workflows and intelligent insights that optimize operational efficiency and reduce costs — the floor runs itself for the routine, and your people handle the exceptions.',
-      },
-      {
-        index: '10',
-        problem: 'No visibility into performance or guest engagement.',
-        headline: 'Real-time monitoring and analytics.',
-        answer:
-          'Real-time monitoring and analytics that provide actionable data to improve performance and drive business outcomes — you see the floor, not just hear about it.',
-      },
-      {
-        index: '11',
-        problem: 'Vulnerable to security threats and downtime.',
-        headline: 'Enterprise-grade security and reliability.',
-        answer:
-          'Enterprise-grade security and reliability with redundant systems and proactive monitoring — the floor stays up because the platform is built to.',
-      },
-      {
-        index: '12',
-        problem: 'Inconsistent brand experience across touchpoints.',
-        headline: 'Centralized content and brand controls.',
-        answer:
-          'Centralized content management and brand controls ensure a consistent, engaging experience across all digital surfaces — one brand, every screen.',
+          'Real-time monitoring and analytics, automated workflows that cut operational cost, centralized content and brand controls across every surface, and enterprise-grade security with redundant systems and proactive monitoring — you see the floor, the floor stays up, the brand carries, and it costs less to run.',
       },
     ],
     automationLockup: {

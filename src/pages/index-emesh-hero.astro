@@ -17,7 +17,7 @@ import { site } from '../data/site';
 <BaseLayout title="Home — E-mesh Mockup" description={site.subTagline} darkHeader>
   <div class="mockup-banner">
     <span class="mockup-banner__dot"></span>
-    <span>Hero variants — append <strong>#a</strong>, <strong>#b</strong>, or <strong>#c</strong> to the URL to compare. CTA + footer unchanged.</span>
+    <span>E-mesh page mockup — hero locked (C). Circuit patterns removed; mesh line-work underlaid down the page. Fade tweaks next.</span>
   </div>
 
   <HomeHero variant="none" zones />
@@ -143,13 +143,79 @@ import { site } from '../data/site';
   .home-entry__glow { z-index: 0; opacity: 0.6; }
   .home-entry__layout { z-index: 1; }
 
-  /* 2 · CTA BAND — the wide mesh as the section background.
-     Two pseudo-elements layer the effect: ::before carries the mesh SVG
-     with mix-blend-mode:screen so the mint lines pop against the dark
-     navy; ::after carries the gradient clear zone (solid behind the text,
-     transparent on both edges so the mesh reads left and right). Content
-     sits at z-index:1 above both. The mesh is scaled to 125% to crop the
-     SVG's empty margins so pattern reaches both edges. */
+  /* ============================================================
+     PAGE SHEATH — remove circuit textures, underlay mesh line-work
+     so dark sections feel connected. Dense mesh on interest bands.
+     No text fades yet (except hero + approved CTA/footer).
+     ============================================================ */
+
+  /* Kill the old mint/gold circuit on Differentiator + Why It Matters
+     by replacing their ::before with the mesh sheath below (same ruleset). */
+  /* Kill their content veils for now — pattern first, fade later */
+  .home-diff::after,
+  .home-why::after {
+    opacity: 0 !important;
+  }
+
+  /* Kill circuit fill on resource card panels */
+  .rsc-card__logo-panel,
+  .rsc-card__soon {
+    background-image: none !important;
+  }
+
+  /* Continuous line-work sheath — same mesh-only asset + fixed attachment
+     so the lines read as one sheet scrolling through dark sections. */
+  .home-diff,
+  .home-intro,
+  .home-ledger,
+  .home-why,
+  .home-industries,
+  .home-proof-band,
+  .home-personas,
+  .home-resources {
+    position: relative;
+    isolation: isolate;
+  }
+  .home-diff::before,
+  .home-intro::before,
+  .home-ledger::before,
+  .home-why::before,
+  .home-industries::before,
+  .home-proof-band::before,
+  .home-personas::before,
+  .home-resources::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: url('/images/mesh/luci-bg-hero-mesh-only-1920x1080.svg') center top / cover no-repeat !important;
+    background-attachment: fixed !important;
+    mix-blend-mode: screen !important;
+    opacity: 0.4 !important;
+  }
+
+  /* Interest bands — denser line-work (same sheath, brought forward) */
+  .home-diff::before,
+  .home-why::before,
+  .home-personas::before {
+    opacity: 0.7 !important;
+  }
+
+  /* Keep section content above the underlay */
+  .home-diff__inner,
+  .home-intro__inner,
+  .home-ledger .container,
+  .home-why__inner,
+  .home-industries__inner,
+  .home-proof-band__inner,
+  .home-personas__inner,
+  .home-resources__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* 2 · CTA BAND — denser wide mesh (approved). Fade kept for readability. */
   #home-cta.section {
     position: relative;
     isolation: isolate;
@@ -278,10 +344,7 @@ import { site } from '../data/site';
     var hero = document.querySelector('.home-entry');
     if (!hero) return;
     var v = (location.hash || '#c').slice(1);
-    if (!['a','b','c'].includes(v)) v = 'a';
+    if (!['a','b','c'].includes(v)) v = 'c';
     hero.classList.add('hero-' + v);
-    document.querySelector('.mockup-banner span:last-child').innerHTML =
-      'Hero variant <strong>' + v.toUpperCase() + '</strong> — append <strong>#a</strong>, <strong>#b</strong>, or <strong>#c</strong> to compare. CTA + footer unchanged.';
-    window.addEventListener('hashchange', function () { location.reload(); });
   })();
 </script>
