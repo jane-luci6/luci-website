@@ -170,9 +170,11 @@ const detail = getIndustryDetail(industry.slug);
     scroll-margin-top: 156px;
   }
 
-  /* Constrain the portrait floorplan + callouts inside the wide section. */
+  /* Constrain the portrait floorplan + callouts inside the wide section.
+     Wide enough that the 16%-width callout plates sit in the side gutters
+     (outside the floorplan drawing) without overlapping it. */
   .ind-fp-wrap {
-    max-width: 720px;
+    max-width: 1280px;
     margin-inline: auto;
   }
 

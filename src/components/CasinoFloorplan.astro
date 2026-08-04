@@ -1,8 +1,8 @@
 ---
 // Casino resort floorplan — generated architectural drawing transposed to
-// dark (invert + screen blend = light lines on navy), with four animated
-// callouts pointing to the zones LUCI orchestrates. Descriptors are
-// pulled from the Casinos & Gaming industry strategy (guest-experience block).
+// dark, with four callouts that pop up one-by-one. Labels live outside the
+// floorplan in the side margins; arrows point in to the relevant zones.
+// Descriptors are pulled from the Casinos & Gaming industry strategy.
 ---
 <div class="fp-cad" data-fp-animate>
   <img
@@ -14,57 +14,59 @@
     width="790"
     height="1024"
   />
-  <svg class="fp-cad__ov" viewBox="0 0 790 1024" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+
+  <svg class="fp-cad__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <marker id="fparrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+        <path d="M0 0 L10 5 L0 10 Z" fill="#68e3be"/>
+      </marker>
+    </defs>
     <!-- 1 Set the tone on arrival → Hotel Lobby -->
-    <g class="fp-c" style="--d:0s">
-      <line class="fp-lead" x1="660" y1="300" x2="700" y2="410" pathLength="1"/>
-      <circle class="fp-dot" cx="700" cy="410" r="4"/>
-      <g class="fp-plate">
-        <rect x="470" y="286" width="200" height="30" rx="14"/>
-        <text class="fp-plate__label" x="570" y="306">Set the tone on arrival</text>
-      </g>
-      <text class="fp-desc" x="570" y="332">Every screen, speaker, and light at the door sets the tone for the visit.</text>
+    <g class="fp-grp" style="--d:0s">
+      <line class="fp-lead" x1="82" y1="29" x2="75.4" y2="40" vector-effect="non-scaling-stroke" pathLength="1" marker-end="url(#fparrow)"/>
+      <circle class="fp-dot" cx="75.4" cy="40" r="0.6"/>
     </g>
-
     <!-- 2 Drive energy on the floor → Casino -->
-    <g class="fp-c" style="--d:0.25s">
-      <line class="fp-lead" x1="560" y1="640" x2="560" y2="555" pathLength="1"/>
-      <circle class="fp-dot" cx="560" cy="555" r="4"/>
-      <g class="fp-plate">
-        <rect x="455" y="640" width="210" height="30" rx="14"/>
-        <text class="fp-plate__label" x="560" y="660">Drive energy on the floor</text>
-      </g>
-      <text class="fp-desc" x="560" y="686">The gaming floor should feel like something — energy, momentum, the right game on the right screen.</text>
+    <g class="fp-grp" style="--d:3.5s">
+      <line class="fp-lead" x1="82" y1="62.5" x2="63.75" y2="54.2" vector-effect="non-scaling-stroke" pathLength="1" marker-end="url(#fparrow)"/>
+      <circle class="fp-dot" cx="63.75" cy="54.2" r="0.6"/>
     </g>
-
     <!-- 3 Move guests toward amenities → Pool, Restaurants, Theater -->
-    <g class="fp-c" style="--d:0.5s">
-      <line class="fp-lead" x1="370" y1="316" x2="135" y2="180" pathLength="1"/>
-      <line class="fp-lead" x1="370" y1="316" x2="145" y2="400" pathLength="1"/>
-      <line class="fp-lead" x1="370" y1="316" x2="145" y2="690" pathLength="1"/>
-      <circle class="fp-dot" cx="135" cy="180" r="4"/>
-      <circle class="fp-dot" cx="145" cy="400" r="4"/>
-      <circle class="fp-dot" cx="145" cy="690" r="4"/>
-      <g class="fp-plate">
-        <rect x="250" y="302" width="240" height="30" rx="14"/>
-        <text class="fp-plate__label" x="370" y="322">Move guests toward amenities</text>
-      </g>
-      <text class="fp-desc" x="370" y="348">Dining, entertainment, the pool — the spaces that now pay the bills, on cue.</text>
+    <g class="fp-grp" style="--d:7s">
+      <line class="fp-lead" x1="18" y1="38" x2="28.3" y2="17.6" vector-effect="non-scaling-stroke" pathLength="1" marker-end="url(#fparrow)"/>
+      <line class="fp-lead" x1="18" y1="38" x2="29.2" y2="39.1" vector-effect="non-scaling-stroke" pathLength="1" marker-end="url(#fparrow)"/>
+      <line class="fp-lead" x1="18" y1="38" x2="29.2" y2="67.4" vector-effect="non-scaling-stroke" pathLength="1" marker-end="url(#fparrow)"/>
+      <circle class="fp-dot" cx="28.3" cy="17.6" r="0.6"/>
+      <circle class="fp-dot" cx="29.2" cy="39.1" r="0.6"/>
+      <circle class="fp-dot" cx="29.2" cy="67.4" r="0.6"/>
     </g>
-
     <!-- 4 Extend loyalty across every space → Ballroom, Casino -->
-    <g class="fp-c" style="--d:0.75s">
-      <line class="fp-lead" x1="380" y1="70" x2="400" y2="150" pathLength="1"/>
-      <line class="fp-lead" x1="380" y1="70" x2="560" y2="540" pathLength="1"/>
-      <circle class="fp-dot" cx="400" cy="150" r="4"/>
-      <circle class="fp-dot" cx="560" cy="540" r="4"/>
-      <g class="fp-plate">
-        <rect x="250" y="56" width="260" height="30" rx="14"/>
-        <text class="fp-plate__label" x="380" y="76">Extend loyalty across every space</text>
-      </g>
-      <text class="fp-desc" x="380" y="102">The right moment, in the right place, at the right time — everywhere.</text>
+    <g class="fp-grp" style="--d:10.5s">
+      <line class="fp-lead" x1="18" y1="9" x2="50.4" y2="14.6" vector-effect="non-scaling-stroke" pathLength="1" marker-end="url(#fparrow)"/>
+      <line class="fp-lead" x1="18" y1="9" x2="63.75" y2="52.7" vector-effect="non-scaling-stroke" pathLength="1" marker-end="url(#fparrow)"/>
+      <circle class="fp-dot" cx="50.4" cy="14.6" r="0.6"/>
+      <circle class="fp-dot" cx="63.75" cy="52.7" r="0.6"/>
     </g>
   </svg>
+
+  <div class="fp-cad__plates">
+    <div class="fp-plate fp-plate--r" style="--d:0s; --right:2%; --top:29%;">
+      <span class="fp-plate__label">Set the tone on arrival</span>
+      <span class="fp-plate__desc">Every screen, speaker, and light at the door sets the tone for the visit.</span>
+    </div>
+    <div class="fp-plate fp-plate--r" style="--d:3.5s; --right:2%; --top:62.5%;">
+      <span class="fp-plate__label">Drive energy on the floor</span>
+      <span class="fp-plate__desc">The gaming floor should feel like something — energy, momentum, the right game on the right screen.</span>
+    </div>
+    <div class="fp-plate fp-plate--l" style="--d:7s; --left:2%; --top:38%;">
+      <span class="fp-plate__label">Move guests toward amenities</span>
+      <span class="fp-plate__desc">Dining, entertainment, the pool — the spaces that now pay the bills, on cue.</span>
+    </div>
+    <div class="fp-plate fp-plate--l" style="--d:10.5s; --left:2%; --top:9%;">
+      <span class="fp-plate__label">Extend loyalty across every space</span>
+      <span class="fp-plate__desc">The right moment, in the right place, at the right time — everywhere.</span>
+    </div>
+  </div>
 </div>
 <script>
   const els = document.querySelectorAll('[data-fp-animate]');
@@ -76,7 +78,7 @@
           io.unobserve(e.target);
         }
       }
-    }, { threshold: 0.25 });
+    }, { threshold: 0.2 });
     els.forEach((el) => io.observe(el));
   } else {
     els.forEach((el) => el.classList.add('is-visible'));
@@ -89,29 +91,40 @@
     background: var(--navy-deep);
     border-radius: 12px;
     overflow: hidden;
+    /* matches the overlay viewBox so % coords line up */
+    aspect-ratio: 1200 / 1024;
   }
   .fp-cad__img {
-    display: block;
-    width: 100%;
-    height: auto;
+    position: absolute;
+    top: 0;
+    left: 17.08%;       /* 205/1200 — centers the 790px drawing in the frame */
+    width: 65.83%;       /* 790/1200 */
+    height: 100%;
+    object-fit: cover;
     filter: invert(1);
     mix-blend-mode: screen;
   }
-  .fp-cad__ov {
+  .fp-cad__lines {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
   }
+  .fp-cad__plates {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
 
+  /* arrows + dots — hidden until reveal */
   .fp-lead {
-    stroke: rgba(104, 227, 190, 0.6);
+    stroke: rgba(104, 227, 190, 0.65);
     stroke-width: 1.4;
     fill: none;
     stroke-dasharray: 1;
     stroke-dashoffset: 1;
-    transition: stroke-dashoffset 0.6s ease-out;
+    transition: stroke-dashoffset 0.7s ease-out;
     transition-delay: var(--d, 0s);
   }
   .fp-dot {
@@ -121,58 +134,107 @@
     transform: scale(0);
     opacity: 0;
     transition: transform 0.4s cubic-bezier(0.2, 1.4, 0.4, 1), opacity 0.3s ease;
-    transition-delay: calc(var(--d, 0s) + 0.35s);
-  }
-  .fp-plate rect {
-    fill: #0a161c;
-    stroke: #68e3be;
-    stroke-width: 1.5;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    transition-delay: var(--d, 0s);
-  }
-  .fp-plate__label {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    fill: #68e3be;
-    text-anchor: middle;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    transition-delay: var(--d, 0s);
-  }
-  .fp-desc {
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    font-weight: 400;
-    fill: rgba(245, 248, 250, 0.62);
-    text-anchor: middle;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    transition-delay: calc(var(--d, 0s) + 0.2s);
+    transition-delay: calc(var(--d, 0s) + 0.45s);
   }
 
-  /* Reveal when the floorplan scrolls into view */
+  /* callout plates (HTML) — hidden, then pop in */
+  .fp-plate {
+    position: absolute;
+    left: var(--left, auto);
+    right: var(--right, auto);
+    top: var(--top);
+    transform: translateY(-50%) translateY(8px);
+    width: 16%;
+    min-width: 168px;
+    padding: 12px 16px 13px;
+    background: rgba(10, 22, 28, 0.94);
+    border: 1px solid rgba(104, 227, 190, 0.55);
+    border-left: 3px solid var(--mint);
+    border-radius: 12px;
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+    transition-delay: var(--d, 0s);
+  }
+  /* mint accent bar sits on the edge facing the floorplan */
+  .fp-plate--l { border-left: none; border-right: 3px solid var(--mint); }
+  .fp-plate__label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: clamp(14px, 1.5vw, 17px);
+    font-weight: 700;
+    letter-spacing: -0.005em;
+    line-height: 1.15;
+    color: var(--mint);
+  }
+  .fp-plate__desc {
+    display: block;
+    margin-top: 6px;
+    font-family: var(--font-body);
+    font-size: clamp(11.5px, 1.2vw, 13px);
+    font-weight: 400;
+    line-height: 1.4;
+    color: rgba(245, 248, 250, 0.72);
+  }
+
+  /* reveal: one-by-one, each held long enough to read before the next */
   .fp-cad.is-visible .fp-lead { stroke-dashoffset: 0; }
   .fp-cad.is-visible .fp-dot {
     transform: scale(1);
     opacity: 1;
     animation: fp-pulse 2.8s ease-in-out infinite;
-    animation-delay: calc(var(--d, 0s) + 0.6s);
+    animation-delay: calc(var(--d, 0s) + 0.7s);
   }
-  .fp-cad.is-visible .fp-plate rect,
-  .fp-cad.is-visible .fp-plate__label { opacity: 1; }
-  .fp-cad.is-visible .fp-desc { opacity: 1; }
+  .fp-cad.is-visible .fp-plate {
+    opacity: 1;
+    transform: translateY(-50%) translateY(0);
+  }
 
   @keyframes fp-pulse {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.35); }
+    50% { transform: scale(1.4); }
+  }
+
+  /* narrow screens: gutters can't hold the plates, so stack them below */
+  @media (max-width: 900px) {
+    .fp-cad {
+      aspect-ratio: auto;
+      display: flex;
+      flex-direction: column;
+      padding: 14px;
+    }
+    .fp-cad__img {
+      position: static;
+      left: auto;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .fp-cad__lines { display: none; }
+    .fp-cad__plates {
+      position: static;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .fp-plate {
+      position: static;
+      left: auto;
+      right: auto;
+      top: auto;
+      transform: none;
+      width: auto;
+      min-width: 0;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+    .fp-cad.is-visible .fp-plate { transform: none; }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .fp-lead { stroke-dashoffset: 0; transition: none; }
     .fp-dot { transform: scale(1); opacity: 1; transition: none; animation: none; }
-    .fp-plate rect, .fp-plate__label, .fp-desc { opacity: 1; transition: none; }
+    .fp-plate { opacity: 1; transform: translateY(-50%); transition: none; }
   }
 </style>
