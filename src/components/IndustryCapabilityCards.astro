@@ -22,15 +22,11 @@ const count = automations.length;
             decoding="async"
           />
         ) : (
-          <div class="cap__placeholder" aria-hidden="true">
-            <span class="cap__placeholder-index">{item.index}</span>
-          </div>
+          <div class="cap__placeholder" aria-hidden="true"></div>
         )}
       </div>
-      <span class="cap__index" aria-hidden="true">{item.index}</span>
       <div class="cap__scrim" aria-hidden="true"></div>
       <figcaption class="cap__copy">
-        <p class="cap__trigger">{item.trigger}</p>
         <h3 class="cap__title">{item.title}</h3>
         <p class="cap__detail">{item.detail}</p>
       </figcaption>
@@ -129,31 +125,6 @@ const count = automations.length;
       linear-gradient(155deg, rgba(104, 227, 190, 0.06) 0%, rgba(206, 176, 110, 0.04) 100%);
   }
 
-  .cap__placeholder-index {
-    position: absolute;
-    right: clamp(10px, 1.4vw, 20px);
-    bottom: -0.16em;
-    font-family: var(--font-display);
-    font-size: clamp(96px, 10vw, 168px);
-    font-weight: 700;
-    line-height: 1;
-    color: rgba(104, 227, 190, 0.12);
-    pointer-events: none;
-  }
-
-  .cap__index {
-    position: absolute;
-    top: clamp(12px, 1.4vw, 18px);
-    left: clamp(14px, 1.6vw, 20px);
-    z-index: 3;
-    font-family: var(--font-display);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    color: var(--mint);
-    text-shadow: 0 1px 2px rgba(10, 22, 28, 0.6);
-  }
-
   .cap__scrim {
     position: absolute;
     inset: 0;
@@ -178,19 +149,9 @@ const count = automations.length;
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
     transform: translateY(0);
     transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .cap__trigger {
-    margin: 0;
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--mint);
   }
 
   .cap__title {

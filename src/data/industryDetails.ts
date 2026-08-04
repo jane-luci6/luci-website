@@ -193,7 +193,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       },
     ],
     automationLockup: {
-      lockupName: 'What you can do with LUCI',
+      lockupName: 'What you can <em>do with LUCI</em>',
       lockupRole: 'Set it once — the floor runs itself',
     },
     automations: [

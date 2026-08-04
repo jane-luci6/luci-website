@@ -200,6 +200,29 @@ import { site } from '../data/site';
     opacity: 0.7 !important;
   }
 
+  /* Differentiator — mesh in a feathered outer frame (all four corners
+     visible); clear through the middle. farthest-corner so the gradient
+     reaches the rectangle corners (a % ellipse left them masked out). */
+  .home-diff::before {
+    opacity: 0.8 !important;
+    -webkit-mask-image: radial-gradient(
+      ellipse farthest-corner at 50% 48%,
+      transparent 0%,
+      transparent 52%,
+      rgba(0, 0, 0, 0.25) 72%,
+      rgba(0, 0, 0, 0.7) 88%,
+      #000 100%
+    );
+    mask-image: radial-gradient(
+      ellipse farthest-corner at 50% 48%,
+      transparent 0%,
+      transparent 52%,
+      rgba(0, 0, 0, 0.25) 72%,
+      rgba(0, 0, 0, 0.7) 88%,
+      #000 100%
+    );
+  }
+
   /* Keep section content above the underlay */
   .home-diff__inner,
   .home-intro__inner,
