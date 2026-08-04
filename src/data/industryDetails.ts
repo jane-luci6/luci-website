@@ -662,7 +662,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       'Centerhung Board',
       'Ribbon Boards',
       'Dasher Boards',
-      'Fascia Boards',
+      'Concourse Displays',
       'Suite Displays',
       'Club Lounge',
       'Bowl Audio',
