@@ -237,7 +237,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '05',
         title: 'Revert-After-Timer',
         trigger: 'A temporary takeover.',
-        image: '/images/industries/casino/capability-revert-after-timer.png?v=1',
+        image: '/images/industries/casino/capability-revert-after-timer.png?v=2',
         imageAlt: 'Guests pausing at a casino bar as the zone screens take over with a temporary promotional drawing moment',
         detail:
           'Trigger a preset for a drawing or announcement, set it to revert after a set time, and the floor snaps back to baseline automatically.',

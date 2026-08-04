@@ -17,7 +17,7 @@ import { site } from '../data/site';
 <BaseLayout title="Home — E-mesh Mockup" description={site.subTagline} darkHeader>
   <div class="mockup-banner">
     <span class="mockup-banner__dot"></span>
-    <span>E-mesh page mockup — Why section: split floorplan middle-left + fade behind arrow &amp; cards.</span>
+    <span>E-mesh page mockup — mesh cleared on Industries / Personas / Go Deeper; flip cards fully opaque underlay; Ameristar faded.</span>
   </div>
 
   <HomeHero variant="none" zones />
@@ -167,20 +167,15 @@ import { site } from '../data/site';
   }
 
   /* Static line-work underlay — mesh lines only by default.
-     Split composition on Consolidation + Why (and wherever asked). */
+     Split on Consolidation + Why. Proof keeps mesh with copy fade.
+     Industries / Personas / Go Deeper — no mesh. */
   .home-ledger,
   .home-why,
-  .home-industries,
-  .home-proof-band,
-  .home-personas,
-  .home-resources {
+  .home-proof-band {
     position: relative;
     isolation: isolate;
   }
-  .home-industries::before,
-  .home-proof-band::before,
-  .home-personas::before,
-  .home-resources::before {
+  .home-proof-band::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -189,6 +184,19 @@ import { site } from '../data/site';
     background: url('/images/mesh/luci-bg-hero-mesh-lines-1920x1080.svg') center / cover no-repeat !important;
     mix-blend-mode: screen !important;
     opacity: 0.4 !important;
+  }
+
+  /* Industries, Personas, Go Deeper — no mesh */
+  .home-industries::before,
+  .home-industries::after,
+  .home-personas::before,
+  .home-personas::after,
+  .home-resources::before,
+  .home-resources::after {
+    content: none !important;
+    background: none !important;
+    opacity: 0 !important;
+    display: none !important;
   }
 
   /* Consolidation — same technique as hero-c: one soft mask on the mesh
@@ -283,7 +291,7 @@ import { site } from '../data/site';
   }
 
   /* Why it matters — split floorplan middle-left + mesh, same soft-clear
-     fade behind the arrow and the flip cards. */
+     fade behind the arrow; mesh fully erased behind the flip cards. */
   .home-why {
     background: var(--navy-deep) !important;
     overflow: hidden;
@@ -332,11 +340,11 @@ import { site } from '../data/site';
       ),
       /* Flip-card grid */
       radial-gradient(
-        ellipse 82% 72% at 50% 58%,
-        rgba(7, 15, 20, 0.78) 0%,
-        rgba(7, 15, 20, 0.55) 32%,
-        rgba(7, 15, 20, 0.25) 55%,
-        transparent 78%
+        ellipse 88% 78% at 50% 58%,
+        rgba(7, 15, 20, 0.88) 0%,
+        rgba(7, 15, 20, 0.62) 36%,
+        rgba(7, 15, 20, 0.28) 58%,
+        transparent 80%
       );
   }
 
@@ -345,7 +353,8 @@ import { site } from '../data/site';
     z-index: 1 !important;
   }
 
-  /* Tight pockets on each flip card (arrow is covered by section ::after) */
+  /* Solid navy plate behind each flip card — mesh fully gone under them
+     (card faces are translucent, so a soft pocket alone isn't enough). */
   .home-why__item {
     position: relative;
     isolation: isolate;
@@ -353,25 +362,83 @@ import { site } from '../data/site';
   .home-why__item::before {
     content: '';
     position: absolute;
-    inset: -28px -24px -32px;
+    inset: 0;
     z-index: 0;
     pointer-events: none;
-    background: radial-gradient(
-      ellipse 72% 68% at 50% 45%,
-      rgba(7, 15, 20, 0.72) 0%,
-      rgba(7, 15, 20, 0.5) 35%,
-      rgba(7, 15, 20, 0.2) 58%,
-      transparent 82%
-    );
+    border-radius: 14px;
+    background: var(--navy-deep);
   }
   .home-why__card {
     position: relative;
     z-index: 1;
   }
+  .home-why__face--front {
+    background:
+      radial-gradient(circle at 78% 88%, rgba(104, 227, 190, 0.22) 0%, rgba(104, 227, 190, 0) 55%),
+      linear-gradient(155deg, rgba(104, 227, 190, 0.08) 0%, rgba(104, 227, 190, 0.02) 100%),
+      var(--navy) !important;
+  }
+  .home-why__face--back {
+    background: var(--navy-deep) !important;
+  }
 
-  /* Interest bands — denser line-work (Why uses split at full strength above) */
-  .home-personas::before {
-    opacity: 0.7 !important;
+  /* Ameristar callout — keep mesh, fade behind headers + body copy */
+  .home-proof-band {
+    overflow: hidden;
+  }
+  .home-proof-band::before {
+    opacity: 0.45 !important;
+    -webkit-mask-image: radial-gradient(
+      ellipse 70% 90% at 48% 50%,
+      transparent 0%,
+      rgba(0, 0, 0, 0.2) 35%,
+      rgba(0, 0, 0, 0.65) 62%,
+      #000 85%
+    );
+    mask-image: radial-gradient(
+      ellipse 70% 90% at 48% 50%,
+      transparent 0%,
+      rgba(0, 0, 0, 0.2) 35%,
+      rgba(0, 0, 0, 0.65) 62%,
+      #000 85%
+    );
+  }
+  .home-proof-band::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse 72% 95% at 48% 50%,
+      rgba(7, 15, 20, 0.72) 0%,
+      rgba(7, 15, 20, 0.45) 40%,
+      rgba(7, 15, 20, 0.18) 65%,
+      transparent 85%
+    );
+  }
+  .home-proof-band__copy {
+    position: relative;
+    isolation: isolate;
+    z-index: 1;
+  }
+  .home-proof-band__copy::before {
+    content: '';
+    position: absolute;
+    inset: -40px -56px -36px -48px;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse 72% 68% at 40% 45%,
+      rgba(7, 15, 20, 0.78) 0%,
+      rgba(7, 15, 20, 0.5) 35%,
+      rgba(7, 15, 20, 0.2) 58%,
+      transparent 82%
+    );
+  }
+  .home-proof-band__copy > * {
+    position: relative;
+    z-index: 1;
   }
 
   /* Keep section content above the underlay */
