@@ -41,6 +41,11 @@ export interface IndustryDetail {
     lockupName: string;
     lockupRole?: string;
   };
+  floorplanLockup?: {
+    lockupName: string;
+    lockupRole?: string;
+    deck?: string;
+  };
   challenges: IndustryChallenge[];
   solutionsLockup: {
     lockupName: string;
@@ -52,6 +57,22 @@ export interface IndustryDetail {
     lockupRole: string;
   };
   automations: IndustryAutomation[];
+  tickerLocations?: string[];
+  floorplan?: {
+    image: string;
+    imageAlt: string;
+    imageWidth?: number;
+    imageHeight?: number;
+    imageWidthPct?: number;
+    ariaLabel?: string;
+    zones: {
+      label: string;
+      desc: string;
+      plate: { side: 'left' | 'right'; left?: string; right?: string; top: string };
+      delay: number;
+      lines: { x1: number; y1: number; x2: number; y2: number }[];
+    }[];
+  };
   ctaTitle: string;
   chapters: { id: string; label: string }[];
 }
@@ -243,6 +264,77 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
           'Trigger a preset for a drawing or announcement, set it to revert after a set time, and the floor snaps back to baseline automatically.',
       },
     ],
+    tickerLocations: [
+      'Ribbon Boards',
+      'Gaming Floor',
+      'Sportsbook',
+      'Poker Room',
+      'VIP Lounges',
+      'Lobby',
+      'Ballrooms',
+      'Nightclub',
+      'Restaurants & Bars',
+      'Meeting Rooms',
+      'Pre-Function',
+      'Conference Center',
+      'Exhibit Hall',
+      'Retail Shops',
+      'Pool Area',
+      'Spa & Fitness',
+      'Parking',
+    ],
+    floorplanLockup: {
+      lockupName: 'Create purposeful moments that <em>drive spend</em>',
+      lockupRole: 'The business beyond the floor',
+      deck:
+        'Gaming isn\u2019t the whole business anymore — non-gaming amenities drive the revenue, and your multimedia is what moves guests toward them. Set the tone at arrival, drive the floor, and celebrate the jackpot the instant it hits.',
+    },
+    floorplan: {
+      image: '/images/industries/casino/casino-floorplan.png?v=2',
+      imageAlt:
+        'Architectural floorplan of a resort and casino: casino floor, ballroom, pool, restaurants and bars, theater, hotel lobby and parking.',
+      imageWidth: 790,
+      imageHeight: 1024,
+      imageWidthPct: 65.83,
+      ariaLabel: 'Casino zones LUCI orchestrates',
+      zones: [
+        {
+          label: 'Set the tone on arrival',
+          desc: 'Every screen, speaker, and light at the door sets the tone for the visit.',
+          plate: { side: 'right', right: '1%', top: '29%' },
+          delay: 0,
+          lines: [{ x1: 79, y1: 29, x2: 72, y2: 36 }],
+        },
+        {
+          label: 'Drive energy on the floor',
+          desc: 'The gaming floor should feel like something — energy, momentum, the right game on the right screen.',
+          plate: { side: 'right', right: '1%', top: '62.5%' },
+          delay: 3.5,
+          lines: [{ x1: 79, y1: 62.5, x2: 63.75, y2: 54.2 }],
+        },
+        {
+          label: 'Move guests toward amenities',
+          desc: 'Dining, entertainment, the pool — the spaces that now pay the bills, on cue.',
+          plate: { side: 'left', left: '1%', top: '52%' },
+          delay: 7,
+          lines: [
+            { x1: 21, y1: 52, x2: 28.3, y2: 17.6 },
+            { x1: 21, y1: 52, x2: 29.2, y2: 39.1 },
+            { x1: 21, y1: 52, x2: 29.2, y2: 67.4 },
+          ],
+        },
+        {
+          label: 'Extend loyalty across every space',
+          desc: 'The right moment, in the right place, at the right time — everywhere.',
+          plate: { side: 'left', left: '1%', top: '14%' },
+          delay: 10.5,
+          lines: [
+            { x1: 21, y1: 14, x2: 50.4, y2: 14.6 },
+            { x1: 21, y1: 14, x2: 63.75, y2: 52.7 },
+          ],
+        },
+      ],
+    },
     ctaTitle: 'See LUCI on <em>your floor</em>.',
     chapters: [
       { id: 'industry-thesis', label: 'Overview' },
@@ -420,58 +512,48 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     heroImage: '/images/industries/sports-venues.jpg?v=3',
     thesis: {
       lockupName: 'Sports & Venues',
-      lockupRole: 'One platform for the hardest A/V environment there is',
+      lockupRole: 'One platform for the whole building',
       deck:
-        'A venue is the hardest A/V environment there is — tens of thousands of seats, boards that read from three hundred feet, and three straight hours with no restart at halftime. LUCI puts every system behind one interface your team can run.',
+        'The building already has the screens. LUCI makes them act as one. Your video boards, sound, and lighting run as separate silos. LUCI orchestrates all of it from a single interface — so the whole venue reacts to the moment, live, as one coordinated environment.',
     },
     challengesLockup: {
       lockupName: 'What venues actually <em>deal with</em>',
     },
     challenges: [
       {
-        head: 'Too many systems, thousands of endpoints, no single view.',
+        head: 'LED, audio, lighting, and the control room run as separate silos.',
         body:
-          'Audio, video, lighting, controls, and signage each live in their own app. A stadium runs thousands of endpoints across concourses, suites, and control rooms — with no single view of uptime.',
-        image: '/images/industries/sports-venues/challenge-fragmentation-scale.jpg?v=1',
-        imageAlt:
-          'Dense venue back-of-house rack room with rows of LED processors, signage players, encoders, and IPTV distribution gear',
-        imagePosition: 'center 45%',
+          'Each works in isolation. Making them act as one falls to manual handoffs and good timing — and the unspoken second half of that sentence is what keeps operators up at night.',
       },
       {
-        head: 'Latency and sync are visible to the audience.',
+        head: 'At home they get 4K, instant replay, and real-time stats.',
         body:
-          'A lag between the live action and the replay board breaks the moment. Boards, audio, lighting, and effects have to fire in sync, at low latency, to land it.',
-        image: '/images/industries/sports-venues/challenge-sync-latency.jpg?v=1',
-        imageAlt:
-          'Arena bowl during a big in-game moment with the centerhung board, ribbon boards, and spotlights all lit together as the crowd reacts',
-        imagePosition: 'center 42%',
+          'The at-home product sets fan expectations the venue has to beat. More screens haven\u2019t closed the gap — coordinated, immersive moments are what does.',
       },
       {
-        head: 'The interfaces are built for technicians. The operators are not.',
+        head: 'Sponsors don\u2019t want placements anymore. They want moments.',
         body:
-          'Day-to-day operation falls to game-day staff, part-timers, and volunteers — not engineers. But the controls were built for a technician, labeled Source 1 and DSP Preset, so the operator hesitates rather than touch it.',
-        image: '/images/industries/sports-venues/challenge-operator-interface.jpg?v=1',
-        imageAlt:
-          'Game-day staff member hesitating at a complex AV control surface covered in technical labels in an arena control room',
-        imagePosition: 'center 45%',
+          'Every screen is a revenue asset, but fragmented production can\u2019t deliver synchronized, real-time activations on demand — so the inventory you already have sits untapped.',
       },
       {
-        head: 'The people who ran it last season are not here.',
+        head: 'Basketball tonight. A concert tomorrow. A corporate event the day after.',
         body:
-          'Talent is thin and turnover runs high, so the system runs on a rotating cast with minimal training. When the one person who knew it moves on, the knowledge leaves with them.',
-        image: '/images/industries/sports-venues/challenge-staffing-turnover.jpg?v=1',
-        imageAlt:
-          'A lone remaining technician in an arena control room with an empty operator chair and a thick training binder',
-        imagePosition: 'center 50%',
+          'Converting the building and its A/V between events is slow, costly, and labor-intensive — and the configuration logic usually lives with the integrator who built it.',
       },
       {
-        head: 'One building, a hundred different shows.',
+        head: 'A record falls or a game turns in the final seconds.',
         body:
-          'One venue hosts basketball Friday, a concert Saturday, a graduation Sunday — each a different setup, turned around in hours. The configuration logic usually lives with the integrator who built it.',
-        image: '/images/industries/sports-venues/challenge-conversion.jpg?v=1',
-        imageAlt:
-          'Arena floor mid-conversion from a basketball game to a concert stage with crew and a rolling AV cart',
-        imagePosition: 'center 45%',
+          'The production team has to react instantly across replay, graphics, lighting, and audio. Manual handoffs between platforms can\u2019t keep up.',
+      },
+      {
+        head: 'The people who ran it last season aren\u2019t here — and game day has no restart.',
+        body:
+          'Seasoned broadcast engineers are retiring faster than they\u2019re replaced; venues run on younger IT staff, students, and volunteers. And for marquee events the standard is nothing fails, period.',
+      },
+      {
+        head: 'Your video boards depreciate the day they\u2019re installed.',
+        body:
+          'Venue A/V is a massive capital asset on a forced replacement clock, and for multi-venue operators every building reinvents the wheel — a depreciating capital pit, with no standard that carries.',
       },
     ],
     solutionsLockup: {
@@ -481,62 +563,56 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     solutions: [
       {
         index: '01',
-        problem: 'Too many systems, thousands of endpoints, no single view.',
-        headline: 'One interface for every system and every endpoint.',
+        problem: 'LED, audio, lighting, and the control room run as separate silos.',
+        headline: 'One coordinated production environment.',
         answer:
-          'Bring audio, video, lighting, controls, and signage behind one layer — one pane to see thousands of endpoints, so problems get caught before the building notices.',
-        image: '/images/industries/sports-venues/solution-one-platform.jpg?v=2',
-        imageAlt:
-          'Unified LUCI operations dashboard on a monitor showing every system and endpoint health in one pane, arena visible through the window',
-        imagePosition: 'center 50%',
+          'LUCI orchestrates your video boards, sound, and lighting from one platform over the infrastructure you already have — so they act as one.',
       },
       {
         index: '02',
-        problem: 'Latency and sync are visible to the audience.',
-        headline: 'Every system triggers in sync.',
+        problem: 'At home they get 4K, instant replay, and real-time stats.',
+        headline: 'Deliver the one thing the couch can\u2019t.',
         answer:
-          'Orchestrate boards, audio, lighting, and effects on one timed layer — one tap fires the whole sequence in sync and at low latency, so the moment lands.',
-        image: '/images/industries/sports-venues/solution-sync.jpg?v=1',
-        imageAlt:
-          'Venue operator tapping a LUCI moment preset on a tablet as the arena boards, audio, and lighting fire together in sync',
-        imagePosition: 'center 45%',
+          'Synchronized, immersive moments across the whole bowl in real time — the whole building reacting as one, live.',
       },
       {
         index: '03',
-        problem: 'The interfaces are built for technicians. The operators are not.',
-        headline: 'An interface your whole team can run.',
+        problem: 'Sponsors don\u2019t want placements anymore. They want moments.',
+        headline: 'Turn every screen into a sponsor moment.',
         answer:
-          'Replace technician-level controls with role-based, plain-language presets — game-day staff tap Tipoff or Halftime, not DSP Preset 4, and the building does the right thing.',
-        image: '/images/industries/sports-venues/solution-team-interface.jpg?v=1',
-        imageAlt:
-          'Game-day staff member confidently tapping a plain-language LUCI preset on a tablet in an arena control room',
-        imagePosition: 'center 45%',
+          'Trigger coordinated, on-demand activations across every screen and zone — synchronized, on cue, on demand.',
       },
       {
         index: '04',
-        problem: 'The people who ran it last season are not here.',
-        headline: 'An embedded team that knows your building.',
+        problem: 'Basketball tonight. A concert tomorrow. A corporate event the day after.',
+        headline: 'The building\u2019s environment changes in a tap, not a shift.',
         answer:
-          'LUCI comes with an embedded team that knows your building — backstopping a rotating staff with people who do not turn over, so the knowledge does not walk out the door.',
-        image: '/images/industries/sports-venues/solution-embedded-team.jpg?v=1',
-        imageAlt:
-          'A LUCI operations team member working alongside venue staff in an arena control room',
-        imagePosition: 'center 45%',
+          'Recall the full A/V environment for any event configuration instantly — edited in-house, no programming ticket.',
       },
       {
         index: '05',
-        problem: 'One building, a hundred different shows.',
-        headline: 'Every event type becomes a saved configuration.',
+        problem: 'A record falls or a game turns in the final seconds.',
+        headline: 'When the moment happens, the whole venue responds at once.',
         answer:
-          'Basketball, concert, graduation, and corporate each become a saved configuration — audio zones, displays, and lighting recall together in one tap, edited in-house, no programming ticket.',
-        image: '/images/industries/sports-venues/solution-conversions.jpg?v=2',
-        imageAlt:
-          'Arena floor converting from a basketball court to a concert stage with a LUCI conversion preset selected on a tablet',
-        imagePosition: 'center 48%',
+          'One interface to trigger replay, graphics, lighting, and audio together — no manual handoffs.',
+      },
+      {
+        index: '06',
+        problem: 'The people who ran it last season aren\u2019t here — and game day has no restart.',
+        headline: 'A team-sized operation any trained operator can run.',
+        answer:
+          'One consistent interface any trained operator can run, with consolidated monitored control across the estate — and The Systems, our embedded operation, standing behind it when there\u2019s no room to fail.',
+      },
+      {
+        index: '07',
+        problem: 'Your video boards depreciate the day they\u2019re installed.',
+        headline: 'The only part of your venue worth more in Year Five than Year One.',
+        answer:
+          'LUCI improves on a predictable annual line item — and every venue you add inherits everything the last one learned. One standard that gets stronger with every property.',
       },
     ],
     automationLockup: {
-      lockupName: '<em>Automation</em> & presets',
+      lockupName: 'What you can <em>do with LUCI</em>',
       lockupRole: 'Set it once — the building runs itself',
     },
     automations: [
@@ -576,12 +652,76 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
           'Trigger a sponsor takeover or in-game promotion, set it to revert after a set time, and the building snaps back to baseline automatically.',
       },
     ],
+    floorplanLockup: {
+      lockupName: 'One coordinated environment for every <em>moment</em>',
+      lockupRole: 'The building reacts as one',
+      deck:
+        'Your video boards, sound, and lighting already exist — they just don\u2019t act together. LUCI orchestrates every display, zone, and light from one interface, so the whole venue reacts to the moment as one — the big play, the sponsor activation, the turnover between events, all on cue.',
+    },
+    tickerLocations: [
+      'Centerhung Board',
+      'Ribbon Boards',
+      'Dasher Boards',
+      'Concourse Displays',
+      'Suite Displays',
+      'Club Lounge',
+      'Bowl Audio',
+      'Concourse Audio',
+      'Show Lighting',
+      'Control Room',
+      'Press Box',
+      'Broadcast Booth',
+      'Locker Rooms',
+      'VIP Lobby',
+      'Main Concourse',
+      'Loading Dock',
+      'Back of House',
+    ],
+    floorplan: {
+      image: '/images/industries/sports/floorplan.png?v=1',
+      imageAlt:
+        'Architectural floorplan of a multi-purpose sports arena configured for basketball: court and bowl, main concourse, suites and club, locker rooms, media area, VIP lobby, back of house, and loading dock.',
+      imageWidth: 1024,
+      imageHeight: 768,
+      imageWidthPct: 78,
+      ariaLabel: 'Sports venue zones LUCI orchestrates',
+      zones: [
+        {
+          label: 'Bring the bowl to life',
+          desc: 'A big play, and the whole bowl reacts as one — boards, audio, and lighting fire together, in sync, the instant the moment happens.',
+          plate: { side: 'right', right: '1%', top: '32%' },
+          delay: 0,
+          lines: [{ x1: 80, y1: 32, x2: 52, y2: 50 }],
+        },
+        {
+          label: 'Turn every screen into a moment',
+          desc: 'Sponsors don\u2019t want placements — they want moments. Trigger synchronized activations across every screen and zone, on cue.',
+          plate: { side: 'right', right: '1%', top: '66%' },
+          delay: 3.5,
+          lines: [{ x1: 80, y1: 66, x2: 54, y2: 30 }],
+        },
+        {
+          label: 'Reset the building between events',
+          desc: 'Basketball tonight, a concert tomorrow — the building\u2019s full A/V environment recalls for any event in a tap, not a shift.',
+          plate: { side: 'left', left: '1%', top: '60%' },
+          delay: 7,
+          lines: [{ x1: 20, y1: 60, x2: 78, y2: 58 }],
+        },
+        {
+          label: 'Run the whole show from one place',
+          desc: 'Every display, zone, and light in the building behind one interface — your team runs the whole production from one place.',
+          plate: { side: 'left', left: '1%', top: '22%' },
+          delay: 10.5,
+          lines: [{ x1: 20, y1: 22, x2: 48, y2: 70 }],
+        },
+      ],
+    },
     ctaTitle: 'See LUCI in <em>your building</em>.',
     chapters: [
       { id: 'industry-thesis', label: 'Overview' },
-      { id: 'industry-challenges', label: 'Challenges' },
-      { id: 'industry-solutions', label: 'The fix' },
-      { id: 'industry-automation', label: 'Automation' },
+      { id: 'industry-floorplan', label: 'The building' },
+      { id: 'industry-before-after', label: 'Before & after' },
+      { id: 'industry-automation', label: 'Capabilities' },
       { id: 'industry-cta', label: 'Next step' },
     ],
   },

@@ -7,8 +7,8 @@ import IndustryHeroStage from '../../components/IndustryHeroStage.astro';
 import IndustryChallenges from '../../components/IndustryChallenges.astro';
 import IndustryProblemSolution from '../../components/IndustryProblemSolution.astro';
 import IndustryBeforeAfter from '../../components/IndustryBeforeAfter.astro';
-import CasinoFloorplan from '../../components/CasinoFloorplan.astro';
-import CasinoTicker from '../../components/CasinoTicker.astro';
+import IndustryFloorplan from '../../components/IndustryFloorplan.astro';
+import IndustryTicker from '../../components/IndustryTicker.astro';
 import IndustryAutomationShowcase from '../../components/IndustryAutomationShowcase.astro';
 import IndustryCapabilityCards from '../../components/IndustryCapabilityCards.astro';
 import HomeProof from '../../components/HomeProof.astro';
@@ -28,6 +28,7 @@ const { industry } = Astro.props;
 if (!industry) return Astro.redirect('/404');
 
 const detail = getIndustryDetail(industry.slug);
+const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
 ---
 
 <BaseLayout
@@ -49,24 +50,34 @@ const detail = getIndustryDetail(industry.slug);
         imageSrc={detail.heroImage}
       />
 
-      {industry.slug === 'casinos-gaming' && <CasinoTicker />}
+      {hasFloorplan && detail!.tickerLocations && (
+        <IndustryTicker locations={detail!.tickerLocations} ariaLabel={`${industry.name} zones LUCI orchestrates`} />
+      )}
 
-      {industry.slug === 'casinos-gaming' && (
+      {hasFloorplan && (
         <SectionBlock
           id="industry-floorplan"
-          lockupName="Create purposeful moments that <em>drive spend</em>"
-          lockupRole="The business beyond the floor"
-          deck="Gaming isn't the whole business anymore — non-gaming amenities drive the revenue, and your multimedia is what moves guests toward them. Set the tone at arrival, drive the floor, and celebrate the jackpot the instant it hits."
+          lockupName={detail!.floorplanLockup!.lockupName}
+          lockupRole={detail!.floorplanLockup!.lockupRole}
+          deck={detail!.floorplanLockup!.deck}
           tone="deep"
           wide
         >
           <div class="ind-fp-wrap">
-            <CasinoFloorplan />
+            <IndustryFloorplan
+              image={detail!.floorplan!.image}
+              imageAlt={detail!.floorplan!.imageAlt}
+              imageWidth={detail!.floorplan!.imageWidth}
+              imageHeight={detail!.floorplan!.imageHeight}
+              imageWidthPct={detail!.floorplan!.imageWidthPct}
+              zones={detail!.floorplan!.zones}
+              ariaLabel={detail!.floorplan!.ariaLabel}
+            />
           </div>
         </SectionBlock>
       )}
 
-      {industry.slug === 'casinos-gaming' ? (
+      {hasFloorplan ? (
         <SectionBlock
           id="industry-before-after"
           lockupName="What LUCI <em>changes</em>"
@@ -109,7 +120,7 @@ const detail = getIndustryDetail(industry.slug);
         tone="deep"
         wide
       >
-        {industry.slug === 'casinos-gaming' ? (
+        {hasFloorplan ? (
           <IndustryCapabilityCards automations={detail.automations} />
         ) : (
           <IndustryAutomationShowcase automations={detail.automations} />
@@ -234,20 +245,20 @@ const detail = getIndustryDetail(industry.slug);
 
 <style is:global>
   /* ============================================================
-     Casino page — mesh line-work underlay on two sections (case study callout + CTA).
+     Industry pages — mesh line-work underlay on two sections (case study callout + CTA).
      Transparent mesh SVGs screen-blended onto each section's own
      navy background, with a soft mask + navy pocket so the line
      work reads at the edges and drops out behind text. Scoped to
-     the casino page via [data-page="casinos-gaming"].
+     every industry detail page via [data-page].
      ============================================================ */
 
   /* Case study callout (HomeProof) — mesh lines, faded behind the copy */
-  [data-page="casinos-gaming"] .home-proof-band {
+  [data-page] .home-proof-band {
     position: relative;
     isolation: isolate;
     overflow: hidden;
   }
-  [data-page="casinos-gaming"] .home-proof-band::before {
+  [data-page] .home-proof-band::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -271,7 +282,7 @@ const detail = getIndustryDetail(industry.slug);
       #000 85%
     );
   }
-  [data-page="casinos-gaming"] .home-proof-band::after {
+  [data-page] .home-proof-band::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -285,17 +296,17 @@ const detail = getIndustryDetail(industry.slug);
       transparent 85%
     );
   }
-  [data-page="casinos-gaming"] .home-proof-band__inner {
+  [data-page] .home-proof-band__inner {
     position: relative;
     z-index: 1;
   }
 
   /* CTA — wide mesh band, faded behind the centered content */
-  [data-page="casinos-gaming"] #industry-cta.section {
+  [data-page] #industry-cta.section {
     position: relative;
     isolation: isolate;
   }
-  [data-page="casinos-gaming"] #industry-cta.section::before {
+  [data-page] #industry-cta.section::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -305,7 +316,7 @@ const detail = getIndustryDetail(industry.slug);
     mix-blend-mode: screen;
     opacity: 0.6;
   }
-  [data-page="casinos-gaming"] #industry-cta.section::after {
+  [data-page] #industry-cta.section::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -313,12 +324,12 @@ const detail = getIndustryDetail(industry.slug);
     pointer-events: none;
     background: linear-gradient(90deg, transparent 0%, rgba(7, 15, 20, 0.65) 30%, rgba(7, 15, 20, 0.65) 44%, transparent 90%);
   }
-  [data-page="casinos-gaming"] #industry-cta > .container {
+  [data-page] #industry-cta > .container {
     position: relative;
     z-index: 1;
   }
   @media (max-width: 720px) {
-    [data-page="casinos-gaming"] #industry-cta.section::after {
+    [data-page] #industry-cta.section::after {
       background: linear-gradient(180deg, transparent 0%, rgba(7, 15, 20, 0.65) 34%, rgba(7, 15, 20, 0.65) 60%, transparent 100%);
     }
   }

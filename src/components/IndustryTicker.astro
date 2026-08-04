@@ -1,44 +1,30 @@
 ---
-// Slow, lightened text marquee of the zones a casino resort runs — every
-// space LUCI orchestrates. Larger than the homepage logo ticker, but the
-// color/opacity is pulled back so it reads as a quiet band, not a shout,
-// and the drift is slower so it never competes with the hero video.
-const locations = [
-  'Ribbon Boards',
-  'Gaming Floor',
-  'Sportsbook',
-  'Poker Room',
-  'VIP Lounges',
-  'Lobby',
-  'Ballrooms',
-  'Nightclub',
-  'Restaurants & Bars',
-  'Meeting Rooms',
-  'Pre-Function',
-  'Conference Center',
-  'Exhibit Hall',
-  'Retail Shops',
-  'Pool Area',
-  'Spa & Fitness',
-  'Parking',
-];
+// Slow, lightened text marquee of the zones a property runs — every space
+// LUCI orchestrates. Larger than the homepage logo ticker, but the color/
+// opacity is pulled back so it reads as a quiet band, not a shout, and the
+// drift is slower so it never competes with the hero video.
+interface Props {
+  locations: string[];
+  ariaLabel?: string;
+}
+const { locations, ariaLabel = 'Spaces across the property that LUCI orchestrates' } = Astro.props;
 // Duplicate the set so the marquee can loop seamlessly.
 const track = [...locations, ...locations];
 ---
 
-<div class="cas-ticker" aria-label="Spaces across a casino resort that LUCI orchestrates">
-  <ul class="cas-ticker__track" role="list">
-    {track.map((label, i) => (
-      <li class="cas-ticker__item">
-        <span class="cas-ticker__dot" aria-hidden="true"></span>
-        <span class="cas-ticker__label">{label}</span>
+<div class="ind-ticker" aria-label={ariaLabel}>
+  <ul class="ind-ticker__track" role="list">
+    {track.map((label) => (
+      <li class="ind-ticker__item">
+        <span class="ind-ticker__dot" aria-hidden="true"></span>
+        <span class="ind-ticker__label">{label}</span>
       </li>
     ))}
   </ul>
 </div>
 
 <style>
-  .cas-ticker {
+  .ind-ticker {
     overflow: hidden;
     background: var(--navy-deep);
     border-top: 1px solid rgba(104, 227, 190, 0.12);
@@ -47,7 +33,7 @@ const track = [...locations, ...locations];
     mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
   }
 
-  .cas-ticker__track {
+  .ind-ticker__track {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -56,19 +42,17 @@ const track = [...locations, ...locations];
     width: max-content;
     gap: clamp(20px, 2.4vw, 34px);
     padding-block: clamp(14px, 1.8vw, 22px);
-    /* Slow, gentle drift — slower than the homepage ticker so it never
-       competes with the hero video. */
-    animation: cas-ticker-scroll 140s linear infinite;
+    animation: ind-ticker-scroll 140s linear infinite;
   }
 
-  .cas-ticker__item {
+  .ind-ticker__item {
     flex: 0 0 auto;
     display: inline-flex;
     align-items: center;
     gap: clamp(20px, 2.4vw, 34px);
   }
 
-  .cas-ticker__dot {
+  .ind-ticker__dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
@@ -76,34 +60,33 @@ const track = [...locations, ...locations];
     flex: none;
   }
 
-  .cas-ticker__label {
+  .ind-ticker__label {
     font-family: var(--font-body);
     font-size: clamp(18px, 2.1vw, 26px);
     font-weight: 600;
     letter-spacing: 0.01em;
-    /* Lightened so the band reads as a quiet list, not a shout. */
     color: rgba(245, 248, 250, 0.5);
     white-space: nowrap;
   }
 
-  @keyframes cas-ticker-scroll {
+  @keyframes ind-ticker-scroll {
     from { transform: translateX(0); }
     to { transform: translateX(calc(-50% - clamp(10px, 1.2vw, 17px))); }
   }
 
-  .cas-ticker:hover .cas-ticker__track {
+  .ind-ticker:hover .ind-ticker__track {
     animation-play-state: paused;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .cas-ticker__track {
+    .ind-ticker__track {
       animation: none;
       flex-wrap: wrap;
       justify-content: center;
       width: 100%;
       row-gap: 10px;
     }
-    .cas-ticker {
+    .ind-ticker {
       -webkit-mask-image: none;
       mask-image: none;
     }
