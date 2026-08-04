@@ -1,0 +1,287 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HomeHero from '../components/HomeHero.astro';
+import HomeDifferentiator from '../components/HomeDifferentiator.astro';
+import HomeLedger from '../components/HomeLedger.astro';
+import HomeIndustries from '../components/HomeIndustries.astro';
+import HomeIntro from '../components/HomeIntro.astro';
+import HomeTrustBar from '../components/HomeTrustBar.astro';
+import HomeProof from '../components/HomeProof.astro';
+import HomePersonas from '../components/HomePersonas.astro';
+import HomeResources from '../components/HomeResources.astro';
+import HomeWhyItMatters from '../components/HomeWhyItMatters.astro';
+import SectionBlock from '../components/SectionBlock.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="Home — E-mesh Mockup" description={site.subTagline} darkHeader>
+  <div class="mockup-banner">
+    <span class="mockup-banner__dot"></span>
+    <span>Hero variants — append <strong>#a</strong>, <strong>#b</strong>, or <strong>#c</strong> to the URL to compare. CTA + footer unchanged.</span>
+  </div>
+
+  <HomeHero variant="none" zones />
+
+  <HomeDifferentiator />
+  <HomeIntro />
+  <HomeLedger />
+  <HomeWhyItMatters />
+  <HomeIndustries />
+  <HomeProof />
+  <HomePersonas />
+  <HomeTrustBar />
+  <HomeResources />
+
+  <SectionBlock id="home-cta" tone="deep">
+    <div class="home-cta">
+      <p class="display-label home-cta__kicker">Next step</p>
+      <h2 class="home-cta__title">See LUCI on <em>your floor</em>.</h2>
+      <p class="home-cta__deck">Let us show you what LUCI looks like on a property like yours.</p>
+      <a class="btn btn--mint-outline home-cta__btn" href="/contact">{site.ctaPrimary}</a>
+    </div>
+  </SectionBlock>
+</BaseLayout>
+
+<style is:global>
+  /* ============================================================
+     HERO VARIANTS — 3 directions, toggleable via URL hash.
+     #a = Subtle network: mesh-only lines/nodes, flipped so the
+          dense part sits behind the text, faded. No floorplan.
+     #b = Floorplan forward: mesh behind text + floorplan
+          texture brought into the lower-right blank area.
+     #c = Full flow: full hero SVG (mesh+floorplan) full-bleed,
+          composition flows across the whole hero, faded behind text.
+     CTA + footer are unchanged from the approved mockup.
+     ============================================================ */
+
+  /* Shared hero base — kill the component's mesh bg, use pseudo-elements */
+  .home-entry { background: var(--navy-deep) !important; }
+
+  /* All variants: mesh on ::before (screen-blended), fade on ::after */
+  .home-entry::before, .home-entry::after {
+    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  }
+  .home-entry::after {
+    background: linear-gradient(90deg, transparent 0%, rgba(7,15,20,0.65) 30%, rgba(7,15,20,0.65) 44%, transparent 80%);
+  }
+
+  /* Variant A — Subtle network (mesh-only, flipped, no floorplan) */
+  .home-entry.hero-a::before {
+    background: url('/images/mesh/luci-bg-hero-mesh-only-1920x1080.svg') right center / cover no-repeat;
+    transform: scaleX(-1);
+    mix-blend-mode: screen; opacity: 0.45;
+  }
+
+  /* Variant B — Floorplan forward (mesh behind text + floorplan in blank area) */
+  .home-entry.hero-b::before {
+    background:
+      url('/images/mesh/luci-bg-hero-mesh-only-1920x1080.svg') right center / cover no-repeat,
+      url('/images/mesh/luci-plan-texture-1920x1080.png') right bottom / 55% auto no-repeat;
+    transform: scaleX(-1);
+    mix-blend-mode: screen; opacity: 0.5;
+  }
+
+  /* Variant C — floorplan texture LEFT only (clipped in SVG); mesh lines
+     everywhere. Screen-blend so dark navy stays dark and only the mint
+     lines/plan texture lift. Opacity is the single visibility dial —
+     raised so we can see the composition with the words; dial back next. */
+  .home-entry.hero-c {
+    background: var(--navy-deep) !important;
+  }
+  .home-entry.hero-c::before {
+    background: url('/images/mesh/luci-bg-hero-split-1920x1080.svg') center / cover no-repeat;
+    mix-blend-mode: screen;
+    opacity: 1;
+    /* Soften pattern behind the words only — left side keeps texture +
+       line work; core is reduced (not erased) so bright strokes ease off. */
+    -webkit-mask-image: radial-gradient(
+      ellipse 52% 68% at 20% 42%,
+      rgba(0,0,0,0.28) 0%,
+      rgba(0,0,0,0.45) 35%,
+      rgba(0,0,0,0.75) 58%,
+      #000 80%
+    );
+    mask-image: radial-gradient(
+      ellipse 52% 68% at 20% 42%,
+      rgba(0,0,0,0.28) 0%,
+      rgba(0,0,0,0.45) 35%,
+      rgba(0,0,0,0.75) 58%,
+      #000 80%
+    );
+  }
+  .home-entry.hero-c::after {
+    /* Soft navy pocket — readable text, pattern still around the words */
+    background: radial-gradient(
+      ellipse 55% 70% at 20% 42%,
+      rgba(7,15,20,0.78) 0%,
+      rgba(7,15,20,0.55) 32%,
+      rgba(7,15,20,0.25) 55%,
+      transparent 78%
+    );
+  }
+
+  /* Extra feathered pocket tight to the words */
+  .home-entry.hero-c .home-entry__copy {
+    isolation: isolate;
+  }
+  .home-entry.hero-c .home-entry__copy::before {
+    content: '';
+    position: absolute;
+    inset: -56px -72px -48px -48px;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse 72% 68% at 38% 42%,
+      rgba(7,15,20,0.72) 0%,
+      rgba(7,15,20,0.5) 35%,
+      rgba(7,15,20,0.2) 58%,
+      transparent 82%
+    );
+  }
+
+  /* Keep glow above mesh, below content */
+  .home-entry__glow { z-index: 0; opacity: 0.6; }
+  .home-entry__layout { z-index: 1; }
+
+  /* 2 · CTA BAND — the wide mesh as the section background.
+     Two pseudo-elements layer the effect: ::before carries the mesh SVG
+     with mix-blend-mode:screen so the mint lines pop against the dark
+     navy; ::after carries the gradient clear zone (solid behind the text,
+     transparent on both edges so the mesh reads left and right). Content
+     sits at z-index:1 above both. The mesh is scaled to 125% to crop the
+     SVG's empty margins so pattern reaches both edges. */
+  #home-cta.section {
+    position: relative;
+    isolation: isolate;
+    background-color: var(--navy-deep) !important;
+    border-top: 2px solid var(--mint);
+  }
+  #home-cta.section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: url('/images/mesh/luci-bg-wide-2560x800.svg') center / 125% auto no-repeat;
+    mix-blend-mode: screen;
+    opacity: 0.6;
+  }
+  #home-cta.section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent 0%, rgba(7,15,20,0.65) 30%, rgba(7,15,20,0.65) 44%, transparent 90%);
+  }
+  #home-cta .container {
+    position: relative;
+    z-index: 1;
+  }
+  @media (max-width: 720px) {
+    #home-cta.section::after {
+      background: linear-gradient(180deg, transparent 0%, rgba(7,15,20,0.65) 34%, rgba(7,15,20,0.65) 60%, transparent 100%);
+    }
+  }
+
+  /* 3 · FOOTER — shallow low-opacity mesh crop.
+     The footer is a thin strip; a full mesh would overwhelm it.
+     A low-opacity wide mesh, faded behind the nav, adds just
+     enough brand atmosphere to bookend the page. */
+  .site-footer {
+    background: var(--navy-deep) url('/images/mesh/luci-bg-wide-2560x800.svg') center top / cover no-repeat !important;
+    position: relative;
+    isolation: isolate;
+  }
+  .site-footer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgba(7, 15, 20, 0.78) 0%,
+      rgba(7, 15, 20, 0.92) 100%
+    );
+  }
+  .site-footer > .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ---- Mockup banner ---- */
+  .mockup-banner {
+    position: relative;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px var(--page-pad);
+    background: var(--navy);
+    border-bottom: 1px solid rgba(104, 227, 190, 0.3);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--mint);
+  }
+  .mockup-banner__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--mint);
+    box-shadow: 0 0 8px rgba(var(--mint-rgb), 0.5);
+    flex-shrink: 0;
+  }
+
+  /* ---- CTA band styles (copied from index.astro) ---- */
+  :global(#home-cta.section) {
+    padding-block: clamp(36px, 5vw, 48px);
+  }
+  .home-cta {
+    max-width: 64ch;
+    padding-block: clamp(24px, 4vw, 40px);
+  }
+  .home-cta__kicker {
+    color: var(--mint);
+    margin-bottom: var(--space-3);
+  }
+  .home-cta__title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(24px, 3.4vw, 34px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+    margin-bottom: var(--space-3);
+  }
+  .home-cta__title em {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .home-cta__deck {
+    max-width: 52ch;
+    margin: 0 0 var(--space-4);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.78);
+  }
+  .home-cta__btn {
+    margin-top: 0;
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var hero = document.querySelector('.home-entry');
+    if (!hero) return;
+    var v = (location.hash || '#c').slice(1);
+    if (!['a','b','c'].includes(v)) v = 'a';
+    hero.classList.add('hero-' + v);
+    document.querySelector('.mockup-banner span:last-child').innerHTML =
+      'Hero variant <strong>' + v.toUpperCase() + '</strong> — append <strong>#a</strong>, <strong>#b</strong>, or <strong>#c</strong> to compare. CTA + footer unchanged.';
+    window.addEventListener('hashchange', function () { location.reload(); });
+  })();
+</script>

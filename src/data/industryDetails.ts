@@ -62,7 +62,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       lockupName: 'Casinos & Gaming',
       lockupRole: 'One platform for the whole floor',
       deck:
-        'Every screen, zone, and channel on your floor — signage, sportsbook, restaurants, the pit — moves through the same platform. Marketing, gaming operations, A/V, and IT stop working separate equipment that happens to share a building, and start running one floor together.',
+        'Casinos are one of the most complex A/V environments in the world. They run 24/7/365 with zero tolerance for downtime. LUCI orchestrates all of it as one coordinated environment, the connective tissue of your experience-and-loyalty business.',
     },
     challengesLockup: {
       lockupName: 'Why casino floors <em>get complicated</em>',
@@ -108,6 +108,41 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         image: '/images/industries/casino/challenge-event-mode-scramble.jpg?v=2',
         imageAlt: 'Casino AV desk with tablets, remotes, radios, and preview monitors for a special event',
         imagePosition: 'center 42%',
+      },
+      {
+        head: 'Siloed workflows between AV, IT, Marketing, and Ops.',
+        body:
+          'Each team runs its own gear and its own schedule — so the sportsbook, the signage, and the pit move to three different beats, and nothing lands together.',
+      },
+      {
+        head: "Can't scale to a new build or a new property.",
+        body:
+          'Every addition means another proprietary system, another integrator, another lead time — so the floor plan you opened with isn\u2019t the floor plan you can grow into.',
+      },
+      {
+        head: 'Hard to manage across multiple properties.',
+        body:
+          'Each property runs its own stack, its own presets, its own vendor list — so the brand you promised looks different on every floor and nobody can see all of it at once.',
+      },
+      {
+        head: 'High operational costs from fragmented systems.',
+        body:
+          'Redundant boxes, redundant vendors, redundant service calls — the floor costs more to run every year, and the experience doesn\u2019t get better.',
+      },
+      {
+        head: 'No visibility into performance or guest engagement.',
+        body:
+          'When a screen goes dark or a zone goes quiet, you find out from a guest — not from the system. There\u2019s no data, just anecdotes.',
+      },
+      {
+        head: 'Vulnerable to security threats and downtime.',
+        body:
+          'Fragmented systems on aging hardware are a target and a single point of failure — and a casino can\u2019t afford either.',
+      },
+      {
+        head: 'Inconsistent brand experience across touchpoints.',
+        body:
+          'The lobby, the floor, the bar, the ballroom — each looks like a different property because each is run by a different system. The brand doesn\u2019t carry.',
       },
     ],
     solutionsLockup: {
@@ -164,6 +199,55 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         image: '/images/industries/casino/solution-one-tap-modes.jpg?v=2',
         imageAlt: 'Casino operator tapping a single property-mode preset on a clean tablet interface',
         imagePosition: 'center 42%',
+      },
+      {
+        index: '06',
+        problem: 'Siloed workflows between AV, IT, Marketing, and Ops.',
+        headline: 'One platform for every team.',
+        answer:
+          'A single unified platform that streamlines cross-departmental collaboration and execution — every team works from the same picture.',
+      },
+      {
+        index: '07',
+        problem: "Can't scale to a new build or a new property.",
+        headline: 'A modular, cloud-native architecture.',
+        answer:
+          'A modular, cloud-native architecture that grows with your business and allows rapid deployment of new features — add a room, a wing, or a property without a rip-and-replace.',
+      },
+      {
+        index: '08',
+        problem: 'Hard to manage across multiple properties.',
+        headline: 'Centralized management across the enterprise.',
+        answer:
+          'Centralized management and control of all AV assets and content across your entire enterprise — one view, one standard, every property.',
+      },
+      {
+        index: '09',
+        problem: 'High operational costs from fragmented systems.',
+        headline: 'Automated workflows and intelligent insights.',
+        answer:
+          'Automated workflows and intelligent insights that optimize operational efficiency and reduce costs — the floor runs itself for the routine, and your people handle the exceptions.',
+      },
+      {
+        index: '10',
+        problem: 'No visibility into performance or guest engagement.',
+        headline: 'Real-time monitoring and analytics.',
+        answer:
+          'Real-time monitoring and analytics that provide actionable data to improve performance and drive business outcomes — you see the floor, not just hear about it.',
+      },
+      {
+        index: '11',
+        problem: 'Vulnerable to security threats and downtime.',
+        headline: 'Enterprise-grade security and reliability.',
+        answer:
+          'Enterprise-grade security and reliability with redundant systems and proactive monitoring — the floor stays up because the platform is built to.',
+      },
+      {
+        index: '12',
+        problem: 'Inconsistent brand experience across touchpoints.',
+        headline: 'Centralized content and brand controls.',
+        answer:
+          'Centralized content management and brand controls ensure a consistent, engaging experience across all digital surfaces — one brand, every screen.',
       },
     ],
     automationLockup: {
