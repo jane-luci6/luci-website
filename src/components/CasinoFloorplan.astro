@@ -261,8 +261,9 @@ const zones = [
   /* ---------- Image mount ---------- */
   .fp-mount {
     position: relative;
-    z-index: 1;
-    isolation: isolate;
+    /* No z-index / isolation: we WANT the inverted image to screen-blend
+       with the stage's aurora background (so its black bg drops out and the
+       floorplan dissolves into the same glow as the surrounding box). */
   }
   .fp-mount__img {
     position: relative;
@@ -270,9 +271,18 @@ const zones = [
     margin-inline: auto;
     width: 65.83%;
     height: auto;
-    border-radius: 12px;
     filter: invert(1);
     mix-blend-mode: screen;
+    /* No hard rectangle edge + soft feather so the floorplan melts into the
+       aurora stage instead of reading as a pasted-on slab. */
+    -webkit-mask-image:
+      linear-gradient(to right, transparent, #000 7%, #000 93%, transparent),
+      linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(to right, transparent, #000 7%, #000 93%, transparent),
+      linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent);
+    mask-composite: intersect;
   }
 
   /* One-shot light sweep down the floorplan on reveal */
@@ -392,9 +402,9 @@ const zones = [
     right: var(--right, auto);
     top: var(--top);
     transform: translateY(-50%);
-    width: 17%;
-    min-width: 176px;
-    padding: 16px 16px 14px;
+    width: 20%;
+    min-width: 208px;
+    padding: 18px 20px 16px;
     background: rgba(16, 35, 45, 0.55);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
@@ -415,10 +425,10 @@ const zones = [
   }
   .fp-plate__num {
     position: absolute;
-    right: 10px;
-    bottom: -10px;
+    right: 12px;
+    bottom: -12px;
     font-family: var(--font-display);
-    font-size: 46px;
+    font-size: 58px;
     font-weight: 700;
     line-height: 1;
     color: rgba(var(--mint-rgb), 0.14);
@@ -428,7 +438,7 @@ const zones = [
     position: relative;
     display: block;
     font-family: var(--font-body);
-    font-size: clamp(14px, 1.5vw, 17px);
+    font-size: clamp(16px, 1.7vw, 20px);
     font-weight: 700;
     letter-spacing: -0.005em;
     line-height: 1.15;
@@ -437,12 +447,12 @@ const zones = [
   .fp-plate__desc {
     position: relative;
     display: block;
-    margin-top: 6px;
+    margin-top: 8px;
     font-family: var(--font-body);
-    font-size: clamp(11.5px, 1.2vw, 13px);
+    font-size: clamp(13px, 1.35vw, 15px);
     font-weight: 400;
-    line-height: 1.4;
-    color: rgba(245, 248, 250, 0.72);
+    line-height: 1.45;
+    color: rgba(245, 248, 250, 0.78);
   }
   .fp-stage.is-visible .fp-plate {
     animation: fp-plate-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
