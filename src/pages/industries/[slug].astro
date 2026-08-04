@@ -10,6 +10,7 @@ import IndustryBeforeAfter from '../../components/IndustryBeforeAfter.astro';
 import CasinoFloorplan from '../../components/CasinoFloorplan.astro';
 import CasinoTicker from '../../components/CasinoTicker.astro';
 import IndustryAutomationShowcase from '../../components/IndustryAutomationShowcase.astro';
+import IndustryCapabilityCards from '../../components/IndustryCapabilityCards.astro';
 import HomeProof from '../../components/HomeProof.astro';
 import { industries } from '../../data/industries';
 import { getIndustryDetail } from '../../data/industryDetails';
@@ -104,10 +105,15 @@ const detail = getIndustryDetail(industry.slug);
       <SectionBlock
         id="industry-automation"
         lockupName={detail.automationLockup.lockupName}
+        lockupRole={detail.automationLockup.lockupRole}
         tone="deep"
         wide
       >
-        <IndustryAutomationShowcase automations={detail.automations} />
+        {industry.slug === 'casinos-gaming' ? (
+          <IndustryCapabilityCards automations={detail.automations} />
+        ) : (
+          <IndustryAutomationShowcase automations={detail.automations} />
+        )}
       </SectionBlock>
 
       <SectionBlock id="industry-cta" tone="deep">

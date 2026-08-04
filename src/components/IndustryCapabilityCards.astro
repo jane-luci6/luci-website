@@ -1,0 +1,252 @@
+---
+import type { IndustryAutomation } from '../data/industryDetails';
+
+interface Props {
+  automations: IndustryAutomation[];
+}
+
+const { automations } = Astro.props;
+const count = automations.length;
+---
+
+<ul class:list={['cap-list', `cap-list--${count}`]} role="list">
+  {automations.map((item) => (
+    <li class="cap">
+      <div class="cap__media">
+        {item.image ? (
+          <img
+            class="cap__img"
+            src={item.image}
+            alt={item.imageAlt ?? item.title}
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <div class="cap__placeholder" aria-hidden="true">
+            <span class="cap__placeholder-index">{item.index}</span>
+          </div>
+        )}
+      </div>
+      <span class="cap__index" aria-hidden="true">{item.index}</span>
+      <div class="cap__scrim" aria-hidden="true"></div>
+      <figcaption class="cap__copy">
+        <p class="cap__trigger">{item.trigger}</p>
+        <h3 class="cap__title">{item.title}</h3>
+        <p class="cap__detail">{item.detail}</p>
+      </figcaption>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .cap-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: clamp(16px, 2vw, 24px);
+    max-width: var(--content-wide);
+  }
+
+  /* 1 column on mobile */
+  .cap-list {
+    grid-template-columns: 1fr;
+  }
+
+  /* 2 columns at 640 */
+  @media (min-width: 640px) {
+    .cap-list {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .cap {
+      grid-column: span 2;
+    }
+    /* Center the lone trailing card in a 2-col layout (odd counts) */
+    .cap-list--3 .cap:nth-child(3),
+    .cap-list--5 .cap:nth-child(5) {
+      grid-column: 2 / span 2;
+    }
+  }
+
+  /* 3 columns at 1024 — centered 3+2 for 5 items, 3+1 for 4 */
+  @media (min-width: 1024px) {
+    .cap-list {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+    .cap {
+      grid-column: span 2;
+    }
+    /* 5 items: 3 across, then 2 centered */
+    .cap-list--5 .cap:nth-child(4) {
+      grid-column: 2 / span 2;
+    }
+    .cap-list--5 .cap:nth-child(5) {
+      grid-column: 4 / span 2;
+    }
+    /* 4 items: 3 across, then 1 centered */
+    .cap-list--4 .cap:nth-child(4) {
+      grid-column: 3 / span 2;
+    }
+  }
+
+  .cap {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: 16px;
+    overflow: hidden;
+    background: linear-gradient(160deg, #0c1a22 0%, #08131a 100%);
+    box-shadow: 0 16px 32px rgba(10, 22, 28, 0.32);
+    isolation: isolate;
+  }
+
+  .cap:focus-within {
+    outline: 2px solid var(--mint);
+    outline-offset: 3px;
+  }
+
+  .cap__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .cap__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.02);
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  .cap__placeholder {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 78% 88%, rgba(104, 227, 190, 0.18) 0%, rgba(104, 227, 190, 0) 55%),
+      linear-gradient(155deg, rgba(104, 227, 190, 0.06) 0%, rgba(206, 176, 110, 0.04) 100%);
+  }
+
+  .cap__placeholder-index {
+    position: absolute;
+    right: clamp(10px, 1.4vw, 20px);
+    bottom: -0.16em;
+    font-family: var(--font-display);
+    font-size: clamp(96px, 10vw, 168px);
+    font-weight: 700;
+    line-height: 1;
+    color: rgba(104, 227, 190, 0.12);
+    pointer-events: none;
+  }
+
+  .cap__index {
+    position: absolute;
+    top: clamp(12px, 1.4vw, 18px);
+    left: clamp(14px, 1.6vw, 20px);
+    z-index: 3;
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--mint);
+    text-shadow: 0 1px 2px rgba(10, 22, 28, 0.6);
+  }
+
+  .cap__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgba(10, 22, 28, 0) 38%,
+      rgba(10, 22, 28, 0.55) 62%,
+      rgba(10, 22, 28, 0.94) 100%
+    );
+    transition: background 0.4s ease;
+  }
+
+  .cap__copy {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    padding: clamp(18px, 2vw, 26px);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transform: translateY(0);
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .cap__trigger {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mint);
+  }
+
+  .cap__title {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: clamp(20px, 2vw, 26px);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+  }
+
+  .cap__detail {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1.2vw, 15px);
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgba(245, 248, 250, 0.82);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Hover: lift the photo + deepen the scrim (desktop only) */
+  @media (hover: hover) {
+    .cap:hover .cap__img,
+    .cap:focus-within .cap__img {
+      transform: scale(1.08);
+    }
+    .cap:hover .cap__scrim,
+    .cap:focus-within .cap__scrim {
+      background: linear-gradient(
+        180deg,
+        rgba(10, 22, 28, 0) 28%,
+        rgba(10, 22, 28, 0.68) 58%,
+        rgba(10, 22, 28, 0.97) 100%
+      );
+    }
+    .cap:hover .cap__copy,
+    .cap:focus-within .cap__copy {
+      transform: translateY(-3px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cap__img,
+    .cap__copy,
+    .cap__scrim {
+      transition: none;
+    }
+    .cap:hover .cap__img,
+    .cap:focus-within .cap__img {
+      transform: none;
+    }
+  }
+</style>

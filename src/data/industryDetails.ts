@@ -24,6 +24,8 @@ export interface IndustryAutomation {
   title: string;
   trigger: string;
   detail: string;
+  image?: string;
+  imageAlt?: string;
 }
 
 export interface IndustryDetail {
@@ -191,7 +193,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       },
     ],
     automationLockup: {
-      lockupName: '<em>Automation</em> & presets',
+      lockupName: 'What you can do with LUCI',
       lockupRole: 'Set it once — the floor runs itself',
     },
     automations: [
@@ -199,6 +201,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '01',
         title: 'Morning Reset',
         trigger: 'Every morning, automatically.',
+        imageAlt: 'Empty casino gaming floor at dawn, every screen and ribbon board on a clean coordinated baseline, a single staffer walking the far aisle',
         detail:
           'One scheduled preset returns every screen and zone to its intended state before doors open — so the GM\u2019s walkthrough never starts with Judge Judy.',
       },
@@ -206,6 +209,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '02',
         title: 'Jackpot Celebration',
         trigger: 'The moment a jackpot hits.',
+        imageAlt: 'A guest celebrating a slot jackpot win as the surrounding zone lights up in a coordinated gold celebration',
         detail:
           'A coordinated preset fires in that zone — lighting pulses, audio swells, nearby screens celebrate — then reverts on its own, calibrated per zone.',
       },
@@ -213,6 +217,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '03',
         title: 'Property Mode Switching',
         trigger: 'Weekday floor. Fight night. Holiday.',
+        imageAlt: 'A casino sportsbook floor switching into fight-night event mode, crowd gathering in front of a massive LED wall',
         detail:
           'Every mode your property runs becomes one full configuration of audio, screens, and lighting — switch the whole floor in a single tap.',
       },
@@ -220,6 +225,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '04',
         title: 'Energy That Matches the Room',
         trigger: 'Quiet morning. Peak Saturday night.',
+        imageAlt: 'A packed casino bar at peak Saturday night, overhead lighting and screens matched to the crowd energy',
         detail:
           'An audio schedule moves the way your floor does, each zone on its own curve, with transitions handled automatically.',
       },
@@ -227,6 +233,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '05',
         title: 'Revert-After-Timer',
         trigger: 'A temporary takeover.',
+        imageAlt: 'Guests pausing at a casino bar as the zone screens take over with a temporary promotional drawing moment',
         detail:
           'Trigger a preset for a drawing or announcement, set it to revert after a set time, and the floor snaps back to baseline automatically.',
       },
@@ -236,7 +243,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       { id: 'industry-thesis', label: 'Overview' },
       { id: 'industry-floorplan', label: 'The floor' },
       { id: 'industry-before-after', label: 'Before & after' },
-      { id: 'industry-automation', label: 'Automation' },
+      { id: 'industry-automation', label: 'Capabilities' },
       { id: 'industry-cta', label: 'Next step' },
     ],
   },

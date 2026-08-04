@@ -17,7 +17,7 @@ import { site } from '../data/site';
 <BaseLayout title="Home — E-mesh Mockup" description={site.subTagline} darkHeader>
   <div class="mockup-banner">
     <span class="mockup-banner__dot"></span>
-    <span>E-mesh page mockup — hero locked (C). Circuit patterns removed; mesh line-work underlaid down the page. Fade tweaks next.</span>
+    <span>E-mesh page mockup — mesh lines only (static per section). Split composition on request. Fade tweaks next.</span>
   </div>
 
   <HomeHero variant="none" zones />
@@ -144,14 +144,13 @@ import { site } from '../data/site';
   .home-entry__layout { z-index: 1; }
 
   /* ============================================================
-     PAGE SHEATH — remove circuit textures, underlay mesh line-work
-     so dark sections feel connected. Dense mesh on interest bands.
-     No text fades yet (except hero + approved CTA/footer).
+     PAGE MESH — static per-section underlays (not fixed/scrolling).
+     Uses mesh-LINES only (transparent SVG — no navy wash baked in),
+     so we layer just the line work on each section's own background.
+     Interest bands get denser opacity. Fade behind text comes later.
      ============================================================ */
 
-  /* Kill the old mint/gold circuit on Differentiator + Why It Matters
-     by replacing their ::before with the mesh sheath below (same ruleset). */
-  /* Kill their content veils for now — pattern first, fade later */
+  /* Kill Differentiator + Why content veils for now — pattern first */
   .home-diff::after,
   .home-why::after {
     opacity: 0 !important;
@@ -163,8 +162,8 @@ import { site } from '../data/site';
     background-image: none !important;
   }
 
-  /* Continuous line-work sheath — same mesh-only asset + fixed attachment
-     so the lines read as one sheet scrolling through dark sections. */
+  /* Static line-work underlay — mesh lines only (transparent, no wash).
+     Split composition added later only where you ask for it. */
   .home-diff,
   .home-intro,
   .home-ledger,
@@ -189,13 +188,12 @@ import { site } from '../data/site';
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background: url('/images/mesh/luci-bg-hero-mesh-only-1920x1080.svg') center top / cover no-repeat !important;
-    background-attachment: fixed !important;
+    background: url('/images/mesh/luci-bg-hero-mesh-lines-1920x1080.svg') center / cover no-repeat !important;
     mix-blend-mode: screen !important;
     opacity: 0.4 !important;
   }
 
-  /* Interest bands — denser line-work (same sheath, brought forward) */
+  /* Interest bands — denser line-work */
   .home-diff::before,
   .home-why::before,
   .home-personas::before {
