@@ -1,164 +1,429 @@
 ---
-// Casino resort floorplan — generated architectural drawing transposed to
-// dark, with four callouts that pop up one-by-one. Labels live outside the
-// floorplan in the side margins; arrows point in to the relevant zones.
-// Descriptors are pulled from the Casinos & Gaming industry strategy.
+// Casino resort floorplan — modernized: aurora-glow glass stage, gradient
+// signal-trace leader lines with a traveling pulse, radar-ping zone nodes,
+// glass callout cards with numbered badges, and a clickable 01-04 tab rail.
+// Reveal is a one-shot sequence (settles once all 4 are visible); tabs let
+// a visitor re-highlight any zone afterward. Descriptors are pulled from
+// the Casinos & Gaming industry strategy.
+const zones = [
+  {
+    label: 'Set the tone on arrival',
+    desc: 'Every screen, speaker, and light at the door sets the tone for the visit.',
+    plate: { side: 'right', right: '2%', top: '29%' },
+    delay: 0,
+    lines: [{ x1: 82, y1: 29, x2: 75.4, y2: 40 }],
+  },
+  {
+    label: 'Drive energy on the floor',
+    desc: 'The gaming floor should feel like something — energy, momentum, the right game on the right screen.',
+    plate: { side: 'right', right: '2%', top: '62.5%' },
+    delay: 3.5,
+    lines: [{ x1: 82, y1: 62.5, x2: 63.75, y2: 54.2 }],
+  },
+  {
+    label: 'Move guests toward amenities',
+    desc: 'Dining, entertainment, the pool — the spaces that now pay the bills, on cue.',
+    plate: { side: 'left', left: '2%', top: '38%' },
+    delay: 7,
+    lines: [
+      { x1: 18, y1: 38, x2: 28.3, y2: 17.6 },
+      { x1: 18, y1: 38, x2: 29.2, y2: 39.1 },
+      { x1: 18, y1: 38, x2: 29.2, y2: 67.4 },
+    ],
+  },
+  {
+    label: 'Extend loyalty across every space',
+    desc: 'The right moment, in the right place, at the right time — everywhere.',
+    plate: { side: 'left', left: '2%', top: '9%' },
+    delay: 10.5,
+    lines: [
+      { x1: 18, y1: 9, x2: 50.4, y2: 14.6 },
+      { x1: 18, y1: 9, x2: 63.75, y2: 52.7 },
+    ],
+  },
+];
 ---
-<div class="fp-cad" data-fp-animate>
-  <img
-    class="fp-cad__img"
-    src="/images/industries/casino/casino-floorplan.png?v=2"
-    alt="Architectural floorplan of a resort and casino: casino floor, ballroom, pool, restaurants and bars, theater, hotel lobby and parking."
-    loading="lazy"
-    decoding="async"
-    width="790"
-    height="1024"
-  />
+<div class="fp-stage" data-fp-animate>
+  <div class="fp-tabs" role="tablist" aria-label="Casino zones LUCI orchestrates">
+    <div class="fp-tabs__track"><div class="fp-tabs__fill" data-fp-fill></div></div>
+    {zones.map((z, i) => (
+      <button type="button" class="fp-tab" data-fp-tab={i} aria-label={z.label}>
+        <span aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+      </button>
+    ))}
+  </div>
 
-  <svg class="fp-cad__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-    <defs>
-      <marker id="fparrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-        <path d="M0 0 L10 5 L0 10 Z" fill="#68e3be"/>
-      </marker>
-    </defs>
-    <!-- 1 Set the tone on arrival → Hotel Lobby -->
-    <g class="fp-grp" style="--d:0s">
-      <line class="fp-lead" x1="82" y1="29" x2="75.4" y2="40" vector-effect="non-scaling-stroke" pathLength="1" marker-end="url(#fparrow)"/>
-      <circle class="fp-dot" cx="75.4" cy="40" r="0.6"/>
-    </g>
-    <!-- 2 Drive energy on the floor → Casino -->
-    <g class="fp-grp" style="--d:3.5s">
-      <line class="fp-lead" x1="82" y1="62.5" x2="63.75" y2="54.2" vector-effect="non-scaling-stroke" pathLength="1" marker-end="url(#fparrow)"/>
-      <circle class="fp-dot" cx="63.75" cy="54.2" r="0.6"/>
-    </g>
-    <!-- 3 Move guests toward amenities → Pool, Restaurants, Theater -->
-    <g class="fp-grp" style="--d:7s">
-      <line class="fp-lead" x1="18" y1="38" x2="28.3" y2="17.6" vector-effect="non-scaling-stroke" pathLength="1" marker-end="url(#fparrow)"/>
-      <line class="fp-lead" x1="18" y1="38" x2="29.2" y2="39.1" vector-effect="non-scaling-stroke" pathLength="1" marker-end="url(#fparrow)"/>
-      <line class="fp-lead" x1="18" y1="38" x2="29.2" y2="67.4" vector-effect="non-scaling-stroke" pathLength="1" marker-end="url(#fparrow)"/>
-      <circle class="fp-dot" cx="28.3" cy="17.6" r="0.6"/>
-      <circle class="fp-dot" cx="29.2" cy="39.1" r="0.6"/>
-      <circle class="fp-dot" cx="29.2" cy="67.4" r="0.6"/>
-    </g>
-    <!-- 4 Extend loyalty across every space → Ballroom, Casino -->
-    <g class="fp-grp" style="--d:10.5s">
-      <line class="fp-lead" x1="18" y1="9" x2="50.4" y2="14.6" vector-effect="non-scaling-stroke" pathLength="1" marker-end="url(#fparrow)"/>
-      <line class="fp-lead" x1="18" y1="9" x2="63.75" y2="52.7" vector-effect="non-scaling-stroke" pathLength="1" marker-end="url(#fparrow)"/>
-      <circle class="fp-dot" cx="50.4" cy="14.6" r="0.6"/>
-      <circle class="fp-dot" cx="63.75" cy="52.7" r="0.6"/>
-    </g>
-  </svg>
+  <div class="fp-mount">
+    <img
+      class="fp-mount__img"
+      src="/images/industries/casino/casino-floorplan.png?v=2"
+      alt="Architectural floorplan of a resort and casino: casino floor, ballroom, pool, restaurants and bars, theater, hotel lobby and parking."
+      loading="lazy"
+      decoding="async"
+      width="790"
+      height="1024"
+    />
+    <div class="fp-scan" aria-hidden="true"></div>
 
-  <div class="fp-cad__plates">
-    <div class="fp-plate fp-plate--r" style="--d:0s; --right:2%; --top:29%;">
-      <span class="fp-plate__label">Set the tone on arrival</span>
-      <span class="fp-plate__desc">Every screen, speaker, and light at the door sets the tone for the visit.</span>
-    </div>
-    <div class="fp-plate fp-plate--r" style="--d:3.5s; --right:2%; --top:62.5%;">
-      <span class="fp-plate__label">Drive energy on the floor</span>
-      <span class="fp-plate__desc">The gaming floor should feel like something — energy, momentum, the right game on the right screen.</span>
-    </div>
-    <div class="fp-plate fp-plate--l" style="--d:7s; --left:2%; --top:38%;">
-      <span class="fp-plate__label">Move guests toward amenities</span>
-      <span class="fp-plate__desc">Dining, entertainment, the pool — the spaces that now pay the bills, on cue.</span>
-    </div>
-    <div class="fp-plate fp-plate--l" style="--d:10.5s; --left:2%; --top:9%;">
-      <span class="fp-plate__label">Extend loyalty across every space</span>
-      <span class="fp-plate__desc">The right moment, in the right place, at the right time — everywhere.</span>
+    <svg class="fp-overlay" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="fp-leadgrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#edd086" />
+          <stop offset="100%" stop-color="#68e3be" />
+        </linearGradient>
+        <radialGradient id="fp-dotgrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#eafff6" />
+          <stop offset="100%" stop-color="#68e3be" />
+        </radialGradient>
+      </defs>
+
+      {zones.map((z, i) => (
+        <g class="fp-callout" data-zone={i} style={`--d:${z.delay}s`}>
+          {z.lines.map((ln) => (
+            <g>
+              <path
+                class="fp-lead"
+                d={`M ${ln.x1} ${ln.y1} L ${ln.x2} ${ln.y2}`}
+                vector-effect="non-scaling-stroke"
+                pathLength="1"
+              />
+              <circle
+                class="fp-pulse"
+                r="0.9"
+                cx={ln.x1}
+                cy={ln.y1}
+                style={`offset-path: path('M ${ln.x1} ${ln.y1} L ${ln.x2} ${ln.y2}')`}
+              />
+              <circle class="fp-ring" cx={ln.x2} cy={ln.y2} r="1" />
+              <circle class="fp-ring fp-ring--b" cx={ln.x2} cy={ln.y2} r="1" />
+              <circle class="fp-dot" cx={ln.x2} cy={ln.y2} r="0.6" />
+            </g>
+          ))}
+        </g>
+      ))}
+    </svg>
+
+    <div class="fp-plates">
+      {zones.map((z, i) => (
+        <div
+          class={`fp-plate fp-plate--${z.plate.side}`}
+          data-zone={i}
+          style={`--d:${z.delay}s; --left:${z.plate.left ?? 'auto'}; --right:${z.plate.right ?? 'auto'}; --top:${z.plate.top};`}
+        >
+          <span class="fp-plate__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <span class="fp-plate__label">{z.label}</span>
+          <span class="fp-plate__desc">{z.desc}</span>
+        </div>
+      ))}
     </div>
   </div>
 </div>
 <script>
-  const els = document.querySelectorAll('[data-fp-animate]');
-  if (els.length && 'IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      for (const e of entries) {
-        if (e.isIntersecting) {
-          e.target.classList.add('is-visible');
-          io.unobserve(e.target);
-        }
-      }
-    }, { threshold: 0.2 });
-    els.forEach((el) => io.observe(el));
-  } else {
-    els.forEach((el) => el.classList.add('is-visible'));
+  const stage = document.querySelector<HTMLElement>('[data-fp-animate]');
+  if (stage) {
+    const tabs = Array.from(stage.querySelectorAll<HTMLButtonElement>('[data-fp-tab]'));
+    const fill = stage.querySelector<HTMLElement>('[data-fp-fill]');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function pulseZone(i: number) {
+      stage!.querySelectorAll(`[data-zone="${i}"]`).forEach((el) => {
+        el.classList.remove('is-pulsing');
+        // restart the animation even if it's already been triggered
+        void (el as HTMLElement).offsetWidth;
+        el.classList.add('is-pulsing');
+      });
+      tabs.forEach((t, ti) => t.classList.toggle('is-current', ti === i));
+    }
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => pulseZone(i));
+    });
+
+    function reveal() {
+      stage!.classList.add('is-visible');
+      const delaysMs = [0, 3500, 7000, 10500];
+      delaysMs.forEach((ms, i) => {
+        window.setTimeout(() => {
+          tabs[i]?.classList.add('is-done');
+          if (fill) fill.style.width = `${(i + 1) * 25}%`;
+        }, reduce ? 0 : ms);
+      });
+    }
+
+    if (reduce || !('IntersectionObserver' in window)) {
+      reveal();
+    } else {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              reveal();
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+      io.observe(stage);
+    }
   }
 </script>
 <style>
-  .fp-cad {
+  /* ---------- Outer stage: aurora glass card (matches PlatformOrbit) ---------- */
+  .fp-stage {
     position: relative;
-    isolation: isolate;
-    background: var(--navy-deep);
-    border-radius: 12px;
+    border-radius: 20px;
+    padding: clamp(16px, 2.4vw, 32px);
+    background: radial-gradient(120% 90% at 50% 0%, #123040 0%, var(--navy) 42%, var(--navy-deep) 100%);
+    border: 1px solid rgba(var(--mint-rgb), 0.16);
+    box-shadow: 0 32px 64px rgba(0, 0, 0, 0.55);
     overflow: hidden;
-    /* matches the overlay viewBox so % coords line up */
-    aspect-ratio: 1200 / 1024;
   }
-  .fp-cad__img {
+  .fp-stage::before {
+    content: '';
     position: absolute;
-    top: 0;
-    left: 17.08%;       /* 205/1200 — centers the 790px drawing in the frame */
-    width: 65.83%;       /* 790/1200 */
+    inset: -30% -10%;
+    background:
+      radial-gradient(40% 50% at 18% 22%, rgba(var(--mint-rgb), 0.14), transparent 70%),
+      radial-gradient(38% 46% at 88% 84%, rgba(var(--gold-rgb), 0.1), transparent 70%);
+    filter: blur(40px);
+    animation: fp-aurora 22s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+  }
+  @keyframes fp-aurora {
+    0% { transform: translate3d(-4%, -2%, 0) scale(1); }
+    100% { transform: translate3d(5%, 3%, 0) scale(1.08); }
+  }
+
+  /* ---------- Tabs / progress rail ---------- */
+  .fp-tabs {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(16px, 2.4vw, 28px);
+    margin-bottom: clamp(16px, 2.4vw, 28px);
+  }
+  .fp-tabs__track {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    top: 50%;
+    height: 1px;
+    background: rgba(var(--mint-rgb), 0.16);
+    z-index: -1;
+  }
+  .fp-tabs__fill {
     height: 100%;
-    object-fit: cover;
+    width: 0%;
+    background: linear-gradient(90deg, var(--gold), var(--mint));
+    transition: width 0.5s ease-out;
+  }
+  .fp-tab {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    border-radius: 9999px;
+    display: grid;
+    place-items: center;
+    background: rgba(16, 35, 45, 0.7);
+    border: 1px solid rgba(var(--mint-rgb), 0.3);
+    color: rgba(245, 248, 250, 0.55);
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: transform 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .fp-tab:hover,
+  .fp-tab:focus-visible {
+    transform: translateY(-2px);
+    color: var(--mint);
+    border-color: var(--mint);
+  }
+  .fp-tab.is-done {
+    color: var(--mint);
+    border-color: rgba(var(--mint-rgb), 0.55);
+  }
+  .fp-tab.is-current {
+    color: var(--navy-deep);
+    background: linear-gradient(135deg, var(--gold), var(--mint));
+    border-color: transparent;
+    box-shadow: 0 0 18px rgba(var(--mint-rgb), 0.5);
+  }
+  .fp-tab:focus-visible {
+    outline: 2px solid var(--mint);
+    outline-offset: 3px;
+  }
+  /* ---------- Image mount ---------- */
+  .fp-mount {
+    position: relative;
+    z-index: 1;
+    isolation: isolate;
+  }
+  .fp-mount__img {
+    position: relative;
+    display: block;
+    margin-inline: auto;
+    width: 65.83%;
+    height: auto;
+    border-radius: 12px;
     filter: invert(1);
     mix-blend-mode: screen;
   }
-  .fp-cad__lines {
+
+  /* One-shot light sweep down the floorplan on reveal */
+  .fp-scan {
+    position: absolute;
+    left: 17.08%;
+    right: 17.08%;
+    top: 0;
+    height: 40%;
+    background: linear-gradient(180deg, rgba(104, 227, 190, 0.5), transparent);
+    opacity: 0;
+    transform: translateY(-100%);
+    pointer-events: none;
+    mix-blend-mode: screen;
+  }
+  .fp-stage.is-visible .fp-scan {
+    animation: fp-scan-sweep 1.1s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+  @keyframes fp-scan-sweep {
+    0% { opacity: 0; transform: translateY(-20%); }
+    15% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(220%); }
+  }
+
+  /* ---------- SVG overlay: signal-trace lines + radar nodes ---------- */
+  .fp-overlay {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
   }
-  .fp-cad__plates {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-  }
-
-  /* arrows + dots — hidden until reveal */
   .fp-lead {
-    stroke: rgba(104, 227, 190, 0.65);
-    stroke-width: 1.4;
     fill: none;
+    stroke: url(#fp-leadgrad);
+    stroke-width: 1.6;
+    stroke-linecap: round;
     stroke-dasharray: 1;
     stroke-dashoffset: 1;
-    transition: stroke-dashoffset 0.7s ease-out;
+    transition: stroke-dashoffset 0.7s cubic-bezier(0.4, 0, 0.2, 1);
     transition-delay: var(--d, 0s);
   }
+  .fp-stage.is-visible .fp-callout .fp-lead { stroke-dashoffset: 0; }
+
+  .fp-pulse {
+    fill: #eafff6;
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .fp-stage.is-visible .fp-callout .fp-pulse {
+    animation: fp-pulse-travel 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+    animation-delay: var(--d, 0s);
+  }
+  @keyframes fp-pulse-travel {
+    0% { offset-distance: 0%; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { offset-distance: 100%; opacity: 0; }
+  }
+
   .fp-dot {
-    fill: #68e3be;
+    fill: url(#fp-dotgrad);
     transform-box: fill-box;
     transform-origin: center;
     transform: scale(0);
     opacity: 0;
-    transition: transform 0.4s cubic-bezier(0.2, 1.4, 0.4, 1), opacity 0.3s ease;
-    transition-delay: calc(var(--d, 0s) + 0.45s);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+    transition-delay: calc(var(--d, 0s) + 0.55s);
+  }
+  .fp-stage.is-visible .fp-callout .fp-dot { transform: scale(1); opacity: 1; }
+
+  /* Radar-ping rings around each node, staggered */
+  .fp-ring {
+    fill: none;
+    stroke: var(--mint);
+    stroke-width: 0.5;
+    transform-box: fill-box;
+    transform-origin: center;
+    opacity: 0;
+  }
+  .fp-stage.is-visible .fp-callout .fp-ring {
+    animation: fp-ring-ping 2.6s ease-out infinite;
+    animation-delay: calc(var(--d, 0s) + 0.75s);
+  }
+  .fp-stage.is-visible .fp-callout .fp-ring--b {
+    animation-delay: calc(var(--d, 0s) + 2.05s);
+  }
+  @keyframes fp-ring-ping {
+    0% { transform: scale(0.6); opacity: 0.5; }
+    100% { transform: scale(3.4); opacity: 0; }
   }
 
-  /* callout plates (HTML) — hidden, then pop in */
+  /* Click-to-replay pulse flash on a zone's line/dot/rings */
+  .fp-callout.is-pulsing .fp-dot {
+    animation: fp-dot-flash 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .fp-callout.is-pulsing .fp-ring {
+    animation: fp-ring-ping 0.9s ease-out;
+  }
+  @keyframes fp-dot-flash {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.8); }
+    100% { transform: scale(1); }
+  }
+  /* ---------- Callout plates: frosted glass cards ---------- */
+  .fp-plates {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
   .fp-plate {
     position: absolute;
     left: var(--left, auto);
     right: var(--right, auto);
     top: var(--top);
-    transform: translateY(-50%) translateY(8px);
-    width: 16%;
-    min-width: 168px;
-    padding: 12px 16px 13px;
-    background: rgba(10, 22, 28, 0.94);
-    border: 1px solid rgba(104, 227, 190, 0.55);
-    border-left: 3px solid var(--mint);
-    border-radius: 12px;
-    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.45);
+    transform: translateY(-50%);
+    width: 17%;
+    min-width: 176px;
+    padding: 16px 16px 14px;
+    background: rgba(16, 35, 45, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(var(--mint-rgb), 0.28);
+    border-radius: 14px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 20px rgba(var(--mint-rgb), 0.12);
+    overflow: hidden;
     opacity: 0;
-    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
-    transition-delay: var(--d, 0s);
   }
-  /* mint accent bar sits on the edge facing the floorplan */
-  .fp-plate--l { border-left: none; border-right: 3px solid var(--mint); }
+  .fp-plate::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 16px;
+    right: 16px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--mint));
+  }
+  .fp-plate__num {
+    position: absolute;
+    right: 10px;
+    bottom: -10px;
+    font-family: var(--font-display);
+    font-size: 46px;
+    font-weight: 700;
+    line-height: 1;
+    color: rgba(var(--mint-rgb), 0.14);
+    pointer-events: none;
+  }
   .fp-plate__label {
+    position: relative;
     display: block;
     font-family: var(--font-body);
     font-size: clamp(14px, 1.5vw, 17px);
@@ -168,6 +433,7 @@
     color: var(--mint);
   }
   .fp-plate__desc {
+    position: relative;
     display: block;
     margin-top: 6px;
     font-family: var(--font-body);
@@ -176,42 +442,32 @@
     line-height: 1.4;
     color: rgba(245, 248, 250, 0.72);
   }
-
-  /* reveal: one-by-one, each held long enough to read before the next */
-  .fp-cad.is-visible .fp-lead { stroke-dashoffset: 0; }
-  .fp-cad.is-visible .fp-dot {
-    transform: scale(1);
-    opacity: 1;
-    animation: fp-pulse 2.8s ease-in-out infinite;
-    animation-delay: calc(var(--d, 0s) + 0.7s);
+  .fp-stage.is-visible .fp-plate {
+    animation: fp-plate-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    animation-delay: calc(var(--d, 0s) + 0.5s);
   }
-  .fp-cad.is-visible .fp-plate {
-    opacity: 1;
-    transform: translateY(-50%) translateY(0);
+  @keyframes fp-plate-in {
+    0% { opacity: 0; transform: translateY(-50%) translateY(10px) scale(0.94); }
+    60% { opacity: 1; transform: translateY(-50%) translateY(-2px) scale(1.02); }
+    100% { opacity: 1; transform: translateY(-50%) translateY(0) scale(1); }
+  }
+  .fp-plate.is-pulsing {
+    animation: fp-plate-flash 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes fp-plate-flash {
+    0% { box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 20px rgba(var(--mint-rgb), 0.12); }
+    40% { box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 36px rgba(var(--mint-rgb), 0.55); transform: translateY(-50%) scale(1.03); }
+    100% { box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 20px rgba(var(--mint-rgb), 0.12); transform: translateY(-50%) scale(1); }
   }
 
-  @keyframes fp-pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.4); }
-  }
-
-  /* narrow screens: gutters can't hold the plates, so stack them below */
+  /* ---------- Narrow screens: stack, drop absolute overlay ---------- */
   @media (max-width: 900px) {
-    .fp-cad {
-      aspect-ratio: auto;
-      display: flex;
-      flex-direction: column;
-      padding: 14px;
-    }
-    .fp-cad__img {
-      position: static;
-      left: auto;
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-    }
-    .fp-cad__lines { display: none; }
-    .fp-cad__plates {
+    .fp-stage { padding: clamp(14px, 3vw, 20px); }
+    .fp-mount { display: flex; flex-direction: column; }
+    .fp-mount__img { width: 100%; }
+    .fp-scan { left: 0; right: 0; }
+    .fp-overlay { display: none; }
+    .fp-plates {
       position: static;
       display: grid;
       grid-template-columns: 1fr;
@@ -227,14 +483,18 @@
       width: auto;
       min-width: 0;
       opacity: 1;
-      transition: opacity 0.5s ease;
+      animation: none !important;
     }
-    .fp-cad.is-visible .fp-plate { transform: none; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .fp-lead { stroke-dashoffset: 0; transition: none; }
-    .fp-dot { transform: scale(1); opacity: 1; transition: none; animation: none; }
-    .fp-plate { opacity: 1; transform: translateY(-50%); transition: none; }
+    .fp-stage::before { animation: none; }
+    .fp-scan { display: none; }
+    .fp-lead { transition: none; stroke-dashoffset: 0; }
+    .fp-pulse { display: none; }
+    .fp-dot { transition: none; transform: scale(1); opacity: 1; }
+    .fp-ring { animation: none !important; opacity: 0; }
+    .fp-plate { animation: none !important; opacity: 1; }
+    .fp-plate.is-pulsing { animation: none; }
   }
 </style>
