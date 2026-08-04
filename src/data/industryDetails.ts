@@ -514,7 +514,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       lockupName: 'Sports & Venues',
       lockupRole: 'One platform for the whole building',
       deck:
-        'The at-home experience keeps getting better, and a growing majority of fans would rather watch on TV than attend. Bigger boards and more screens haven\u2019t closed the gap \u2014 the problem isn\u2019t hardware, it\u2019s coordination. LUCI orchestrates every display, zone, and light as one coordinated environment, so the whole venue reacts to the moment, live.',
+        'Most venues don\u2019t have a hardware problem. They have a coordination problem. LED, audio, lighting, and the control room run as separate silos \u2014 held together by manual handoffs and good timing, and that works until it doesn\u2019t. LUCI orchestrates all of it as one coordinated environment, so the whole venue reacts to the moment, live.',
     },
     challengesLockup: {
       lockupName: 'What venues actually <em>deal with</em>',
@@ -656,7 +656,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       lockupName: 'Turn every moment into <em>revenue</em>',
       lockupRole: 'The business beyond the ticket',
       deck:
-        'The couch keeps getting better, and fans won\u2019t pay for a seat that doesn\u2019t beat it. Your screens, sound, and lighting are what turn a play into a moment the whole bowl feels \u2014 and a moment sponsors pay for. Bring the bowl to life on a big play, fire a sponsor activation on cue, and switch the whole building between events in a tap.',
+        'Every screen in the building is a revenue asset \u2014 but only if it moves with the moment. LUCI turns your boards, sound, and lighting into coordinated moments the whole bowl feels: bring the bowl to life on a big play, fire a sponsor activation on cue, and switch the whole building between events in a tap.',
     },
     tickerLocations: [
       'Centerhung Board',
