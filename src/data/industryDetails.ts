@@ -514,7 +514,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       lockupName: 'Sports & Venues',
       lockupRole: 'One platform for the whole building',
       deck:
-        'The building already has the screens. LUCI makes them act as one. Your video boards, sound, and lighting run as separate silos. LUCI orchestrates all of it from a single interface — so the whole venue reacts to the moment, live, as one coordinated environment.',
+        'The at-home experience keeps getting better, and a growing majority of fans would rather watch on TV than attend. Bigger boards and more screens haven\u2019t closed the gap \u2014 the problem isn\u2019t hardware, it\u2019s coordination. LUCI orchestrates every display, zone, and light as one coordinated environment, so the whole venue reacts to the moment, live.',
     },
     challengesLockup: {
       lockupName: 'What venues actually <em>deal with</em>',
@@ -653,10 +653,10 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       },
     ],
     floorplanLockup: {
-      lockupName: 'One coordinated environment for every <em>moment</em>',
-      lockupRole: 'The building reacts as one',
+      lockupName: 'Turn every moment into <em>revenue</em>',
+      lockupRole: 'The business beyond the ticket',
       deck:
-        'Your video boards, sound, and lighting already exist — they just don\u2019t act together. LUCI orchestrates every display, zone, and light from one interface, so the whole venue reacts to the moment as one — the big play, the sponsor activation, the turnover between events, all on cue.',
+        'The couch keeps getting better, and fans won\u2019t pay for a seat that doesn\u2019t beat it. Your screens, sound, and lighting are what turn a play into a moment the whole bowl feels \u2014 and a moment sponsors pay for. Bring the bowl to life on a big play, fire a sponsor activation on cue, and switch the whole building between events in a tap.',
     },
     tickerLocations: [
       'Centerhung Board',
@@ -688,31 +688,35 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       zones: [
         {
           label: 'Bring the bowl to life',
-          desc: 'A big play, and the whole bowl reacts as one — boards, audio, and lighting fire together, in sync, the instant the moment happens.',
-          plate: { side: 'right', right: '1%', top: '32%' },
+          desc: 'A big play, and the whole bowl reacts as one \u2014 boards, audio, and lighting fire together in sync.',
+          plate: { side: 'right', right: '-4%', top: '26%' },
           delay: 0,
-          lines: [{ x1: 80, y1: 32, x2: 52, y2: 50 }],
+          lines: [{ x1: 84, y1: 26, x2: 52, y2: 50 }],
         },
         {
           label: 'Turn every screen into a moment',
-          desc: 'Sponsors don\u2019t want placements — they want moments. Trigger synchronized activations across every screen and zone, on cue.',
-          plate: { side: 'right', right: '1%', top: '66%' },
+          desc: 'Sponsors don\u2019t want placements \u2014 they want moments. Turn every screen into a sponsor activation, on demand.',
+          plate: { side: 'right', right: '-4%', top: '72%' },
           delay: 3.5,
-          lines: [{ x1: 80, y1: 66, x2: 54, y2: 30 }],
+          lines: [{ x1: 84, y1: 72, x2: 54, y2: 28 }],
         },
         {
           label: 'Reset the building between events',
-          desc: 'Basketball tonight, a concert tomorrow — the building\u2019s full A/V environment recalls for any event in a tap, not a shift.',
-          plate: { side: 'left', left: '1%', top: '60%' },
+          desc: 'Basketball tonight, a concert tomorrow \u2014 the building\u2019s full A/V environment switches for any event, in moments.',
+          plate: { side: 'left', left: '-4%', top: '64%' },
           delay: 7,
-          lines: [{ x1: 20, y1: 60, x2: 78, y2: 58 }],
+          lines: [
+            { x1: 16, y1: 64, x2: 50, y2: 48 },
+            { x1: 16, y1: 64, x2: 50, y2: 24 },
+            { x1: 16, y1: 64, x2: 52, y2: 76 },
+          ],
         },
         {
           label: 'Run the whole show from one place',
-          desc: 'Every display, zone, and light in the building behind one interface — your team runs the whole production from one place.',
-          plate: { side: 'left', left: '1%', top: '22%' },
+          desc: 'Every display, zone, and light in the building can be controlled from one interface.',
+          plate: { side: 'left', left: '-4%', top: '20%' },
           delay: 10.5,
-          lines: [{ x1: 20, y1: 22, x2: 48, y2: 70 }],
+          lines: [{ x1: 16, y1: 20, x2: 50, y2: 70 }],
         },
       ],
     },

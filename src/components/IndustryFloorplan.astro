@@ -37,22 +37,24 @@ const delaysMs = zones.map((z) => z.delay * 1000);
     <div class="fp-tabs__track"><div class="fp-tabs__fill" data-fp-fill></div></div>
     {zones.map((z, i) => (
       <button type="button" class="fp-tab" data-fp-tab={i} aria-label={z.label}>
-        <span aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+        <span aria-hidden="true" class="fp-tab__dot"></span>
       </button>
     ))}
   </div>
 
   <div class="fp-mount">
-    <img
-      class="fp-mount__img"
-      src={image}
-      alt={imageAlt}
-      loading="lazy"
-      decoding="async"
-      width={imageWidth}
-      height={imageHeight}
-    />
-    <div class="fp-scan" aria-hidden="true"></div>
+    <div class="fp-mount__clip">
+      <img
+        class="fp-mount__img"
+        src={image}
+        alt={imageAlt}
+        loading="lazy"
+        decoding="async"
+        width={imageWidth}
+        height={imageHeight}
+      />
+      <div class="fp-scan" aria-hidden="true"></div>
+    </div>
 
     <svg class="fp-overlay" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
       <defs>
@@ -99,7 +101,6 @@ const delaysMs = zones.map((z) => z.delay * 1000);
           data-zone={i}
           style={`--d:${z.delay}s; --left:${z.plate.left ?? 'auto'}; --right:${z.plate.right ?? 'auto'}; --top:${z.plate.top};`}
         >
-          <span class="fp-plate__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
           <span class="fp-plate__label">{z.label}</span>
           <span class="fp-plate__desc">{z.desc}</span>
         </div>
@@ -170,12 +171,13 @@ const delaysMs = zones.map((z) => z.delay * 1000);
     background: radial-gradient(120% 90% at 50% 0%, #123040 0%, var(--navy) 42%, var(--navy-deep) 100%);
     border: 1px solid rgba(var(--mint-rgb), 0.16);
     box-shadow: 0 32px 64px rgba(0, 0, 0, 0.55);
-    overflow: hidden;
+    overflow: visible;
   }
   .fp-stage::before {
     content: '';
     position: absolute;
-    inset: -30% -10%;
+    inset: 0;
+    border-radius: 20px;
     background:
       radial-gradient(40% 50% at 18% 22%, rgba(var(--mint-rgb), 0.14), transparent 70%),
       radial-gradient(38% 46% at 88% 84%, rgba(var(--gold-rgb), 0.1), transparent 70%);
@@ -224,13 +226,21 @@ const delaysMs = zones.map((z) => z.delay * 1000);
     background: rgba(16, 35, 45, 0.7);
     border: 1px solid rgba(var(--mint-rgb), 0.3);
     color: rgba(245, 248, 250, 0.55);
-    font-family: var(--font-display);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
     cursor: pointer;
     transition: transform 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
   }
+  .fp-tab__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: currentColor;
+    opacity: 0.6;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .fp-tab:hover .fp-tab__dot,
+  .fp-tab:focus-visible .fp-tab__dot { opacity: 1; transform: scale(1.15); }
+  .fp-tab.is-done .fp-tab__dot { opacity: 1; }
+  .fp-tab.is-current .fp-tab__dot { transform: scale(1.25); }
   .fp-tab:hover,
   .fp-tab:focus-visible {
     transform: translateY(-2px);
@@ -257,6 +267,11 @@ const delaysMs = zones.map((z) => z.delay * 1000);
     /* No z-index / isolation: we WANT the inverted image to screen-blend
        with the stage's aurora background (so its black bg drops out and the
        floorplan dissolves into the same glow as the surrounding box). */
+  }
+  .fp-mount__clip {
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
   }
   .fp-mount__img {
     position: relative;
@@ -415,17 +430,6 @@ const delaysMs = zones.map((z) => z.delay * 1000);
     right: 16px;
     height: 2px;
     background: linear-gradient(90deg, var(--gold), var(--mint));
-  }
-  .fp-plate__num {
-    position: absolute;
-    right: 12px;
-    bottom: -12px;
-    font-family: var(--font-display);
-    font-size: 58px;
-    font-weight: 700;
-    line-height: 1;
-    color: rgba(var(--mint-rgb), 0.14);
-    pointer-events: none;
   }
   .fp-plate__label {
     position: relative;
