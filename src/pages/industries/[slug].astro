@@ -234,47 +234,12 @@ const detail = getIndustryDetail(industry.slug);
 
 <style is:global>
   /* ============================================================
-     Casino page — mesh line-work underlay on three sections.
+     Casino page — mesh line-work underlay on two sections (case study callout + CTA).
      Transparent mesh SVGs screen-blended onto each section's own
      navy background, with a soft mask + navy pocket so the line
      work reads at the edges and drops out behind text. Scoped to
      the casino page via [data-page="casinos-gaming"].
      ============================================================ */
-
-  /* Floorplan section — extend the mesh beyond the aurora box */
-  [data-page="casinos-gaming"] #industry-floorplan.section {
-    position: relative;
-    isolation: isolate;
-  }
-  [data-page="casinos-gaming"] #industry-floorplan.section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background: url('/images/mesh/luci-bg-hero-split-1920x1080.svg') center / cover no-repeat;
-    mix-blend-mode: screen;
-    opacity: 0.55;
-    /* Clear behind the header lockup (upper-center); line work reads in the side gutters + below the box */
-    -webkit-mask-image: radial-gradient(
-      ellipse 62% 46% at 50% 26%,
-      transparent 0%,
-      rgba(0, 0, 0, 0.22) 34%,
-      rgba(0, 0, 0, 0.6) 58%,
-      #000 80%
-    );
-    mask-image: radial-gradient(
-      ellipse 62% 46% at 50% 26%,
-      transparent 0%,
-      rgba(0, 0, 0, 0.22) 34%,
-      rgba(0, 0, 0, 0.6) 58%,
-      #000 80%
-    );
-  }
-  [data-page="casinos-gaming"] #industry-floorplan > .container {
-    position: relative;
-    z-index: 1;
-  }
 
   /* Case study callout (HomeProof) — mesh lines, faded behind the copy */
   [data-page="casinos-gaming"] .home-proof-band {
