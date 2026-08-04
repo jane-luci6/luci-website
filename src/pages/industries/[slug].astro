@@ -7,8 +7,8 @@ import IndustryHeroStage from '../../components/IndustryHeroStage.astro';
 import IndustryChallenges from '../../components/IndustryChallenges.astro';
 import IndustryProblemSolution from '../../components/IndustryProblemSolution.astro';
 import IndustryBeforeAfter from '../../components/IndustryBeforeAfter.astro';
-import IndustryFloorplan from '../../components/IndustryFloorplan.astro';
 import CasinoFloorplan from '../../components/CasinoFloorplan.astro';
+import CasinoTicker from '../../components/CasinoTicker.astro';
 import IndustryAutomationShowcase from '../../components/IndustryAutomationShowcase.astro';
 import HomeProof from '../../components/HomeProof.astro';
 import { industries } from '../../data/industries';
@@ -48,22 +48,19 @@ const detail = getIndustryDetail(industry.slug);
         imageSrc={detail.heroImage}
       />
 
+      {industry.slug === 'casinos-gaming' && <CasinoTicker />}
+
       {industry.slug === 'casinos-gaming' && (
         <SectionBlock
           id="industry-floorplan"
-          lockupName="Your Entire Casino at Your <em>Fingertips</em>"
-          lockupRole="Every zone on one interface"
+          lockupName="One orchestration platform for the most complex A/V environment in the world"
+          lockupRole="Every space on the floor, on one interface"
           tone="deep"
           wide
         >
-          <IndustryFloorplan pillars={[
-            { num: '01', title: 'Every screen on the floor, in one view', body: 'Signage, the sportsbook, the pit, restaurants, and back-of-house — every endpoint live in one interface, with real-time status on every screen and zone across the property.' },
-            { num: '02', title: 'Marketing, gaming ops, and A/V on the same floor', body: 'LUCI connects every team to one system, so the groups that used to fight over whose feed wins stop negotiating and start running one floor together.' },
-            { num: '03', title: 'Fight night to the weekday floor, one tap', body: 'Turn fight night, holiday weekends, and the daily floor into presets that change video walls, audio zones, and signage together — no truck roll, no manual scramble.' },
-            { num: '04', title: 'Every sister property, one standard', body: 'Add properties to the same platform and the same standard. Year Five is more capable than Year One on the same line item — no refresh cycle, no rip-and-replace.' },
-          ]}>
-            <CasinoFloorplan slot="floorplan" />
-          </IndustryFloorplan>
+          <div class="ind-fp-wrap">
+            <CasinoFloorplan />
+          </div>
         </SectionBlock>
       )}
 
@@ -167,6 +164,16 @@ const detail = getIndustryDetail(industry.slug);
   #industry-automation,
   #industry-cta {
     scroll-margin-top: 156px;
+  }
+
+  #industry-floorplan {
+    scroll-margin-top: 156px;
+  }
+
+  /* Constrain the portrait floorplan + callouts inside the wide section. */
+  .ind-fp-wrap {
+    max-width: 720px;
+    margin-inline: auto;
   }
 
   @media (max-width: 640px) {

@@ -1,8 +1,8 @@
 ---
-// Casino resort floorplan — ChatGPT-generated architectural drawing,
-// transposed to dark (invert + screen blend = light lines on navy). The
-// drawing carries its own labels; the surrounding copy + pillar cards carry
-// the LUCI story.
+// Casino resort floorplan — generated architectural drawing transposed to
+// dark (invert + screen blend = light lines on navy), with four callouts
+// pointing to the zones LUCI orchestrates. The drawing carries its own
+// zone labels; these callouts name what LUCI does in each space.
 ---
 <div class="fp-cad">
   <img
@@ -14,12 +14,52 @@
     width="790"
     height="1024"
   />
+  <svg class="fp-cad__ov" viewBox="0 0 790 1024" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+    <!-- leader lines: pill → zone dot -->
+    <g class="fp-lead">
+      <!-- 1 Set the tone on arrival → Hotel Lobby -->
+      <line x1="660" y1="300" x2="700" y2="410"/>
+      <!-- 2 Drive energy on the floor → Casino -->
+      <line x1="560" y1="640" x2="560" y2="555"/>
+      <!-- 3 Move guests toward amenities → Pool, Restaurants, Theater -->
+      <line x1="370" y1="316" x2="135" y2="180"/>
+      <line x1="370" y1="316" x2="145" y2="400"/>
+      <line x1="370" y1="316" x2="145" y2="690"/>
+      <!-- 4 Extend loyalty across every space → Ballroom, Casino -->
+      <line x1="380" y1="70" x2="400" y2="150"/>
+      <line x1="380" y1="70" x2="560" y2="540"/>
+    </g>
+    <!-- zone dots -->
+    <g class="fp-dot">
+      <circle cx="700" cy="410" r="4"/>
+      <circle cx="560" cy="555" r="4"/>
+      <circle cx="135" cy="180" r="4"/>
+      <circle cx="145" cy="400" r="4"/>
+      <circle cx="145" cy="690" r="4"/>
+      <circle cx="400" cy="150" r="4"/>
+      <circle cx="560" cy="540" r="4"/>
+    </g>
+    <!-- callout pills -->
+    <g class="fp-pill">
+      <rect x="470" y="286" width="200" height="28" rx="14"/>
+      <text x="570" y="305">Set the tone on arrival</text>
+
+      <rect x="455" y="640" width="210" height="28" rx="14"/>
+      <text x="560" y="659">Drive energy on the floor</text>
+
+      <rect x="250" y="302" width="240" height="28" rx="14"/>
+      <text x="370" y="321">Move guests toward amenities</text>
+
+      <rect x="250" y="56" width="260" height="28" rx="14"/>
+      <text x="380" y="75">Extend loyalty across every space</text>
+    </g>
+  </svg>
 </div>
 
 <style>
   .fp-cad {
     position: relative;
-    isolation: isolate; /* keep the screen blend inside this box */
+    isolation: isolate;
     background: var(--navy-deep);
     border-radius: 12px;
     overflow: hidden;
@@ -28,9 +68,25 @@
     display: block;
     width: 100%;
     height: auto;
-    /* black-on-white → white-on-navy: invert the drawing, then screen-blend
-       so the white background drops out and the navy mat shows through. */
     filter: invert(1);
     mix-blend-mode: screen;
+  }
+  .fp-cad__ov {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .fp-lead { stroke: rgba(104, 227, 190, 0.6); stroke-width: 1.4; fill: none; }
+  .fp-dot { fill: #68E3BE; }
+  .fp-pill rect { fill: #0A161C; stroke: #68E3BE; stroke-width: 1.5; }
+  .fp-pill text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    fill: #68E3BE;
+    text-anchor: middle;
   }
 </style>
