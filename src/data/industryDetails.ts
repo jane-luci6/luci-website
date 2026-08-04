@@ -201,7 +201,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '01',
         title: 'Morning Reset',
         trigger: 'Every morning, automatically.',
-        image: '/images/industries/casino/capability-morning-reset.png?v=1',
+        image: '/images/industries/casino/capability-morning-reset.png?v=2',
         imageAlt: 'Empty casino gaming floor at dawn, every screen and ribbon board on a clean coordinated baseline, a single staffer walking the far aisle',
         detail:
           'One scheduled preset returns every screen and zone to its intended state before doors open — so the GM\u2019s walkthrough never starts with Judge Judy.',
@@ -210,7 +210,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '02',
         title: 'Jackpot Celebration',
         trigger: 'The moment a jackpot hits.',
-        image: '/images/industries/casino/capability-jackpot-celebration.png?v=1',
+        image: '/images/industries/casino/capability-jackpot-celebration.png?v=2',
         imageAlt: 'A guest celebrating a slot jackpot win as the surrounding zone lights up in a coordinated gold celebration',
         detail:
           'A coordinated preset fires in that zone — lighting pulses, audio swells, nearby screens celebrate — then reverts on its own, calibrated per zone.',
