@@ -36,7 +36,7 @@ const detail = getIndustryDetail(industry.slug);
   darkHeader={!!detail}
 >
   {detail ? (
-    <>
+    <div data-page={industry.slug}>
       <h1 class="ind-page-sr-only">{industry.name} — {detail.thesis.lockupRole}</h1>
       <PlatformChapterNav chapters={detail.chapters} contextLabel={industry.name} />
 
@@ -123,7 +123,7 @@ const detail = getIndustryDetail(industry.slug);
           <a class="btn btn--mint-outline ind-page-cta__btn" href="/contact">{site.ctaPrimary}</a>
         </div>
       </SectionBlock>
-    </>
+    </div>
   ) : (
     <>
       <PageHero title={industry.name} lead={industry.teaser} deep />
@@ -229,5 +229,132 @@ const detail = getIndustryDetail(industry.slug);
   }
   .ind-page-cta__btn {
     margin-top: 0;
+  }
+</style>
+
+<style is:global>
+  /* ============================================================
+     Casino page — mesh line-work underlay on three sections.
+     Transparent mesh SVGs screen-blended onto each section's own
+     navy background, with a soft mask + navy pocket so the line
+     work reads at the edges and drops out behind text. Scoped to
+     the casino page via [data-page="casinos-gaming"].
+     ============================================================ */
+
+  /* Floorplan section — extend the mesh beyond the aurora box */
+  [data-page="casinos-gaming"] #industry-floorplan.section {
+    position: relative;
+    isolation: isolate;
+  }
+  [data-page="casinos-gaming"] #industry-floorplan.section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: url('/images/mesh/luci-bg-hero-mesh-lines-1920x1080.svg') center / cover no-repeat;
+    mix-blend-mode: screen;
+    opacity: 0.42;
+    /* Clear behind the header lockup (upper-center); line work reads in the side gutters + below the box */
+    -webkit-mask-image: radial-gradient(
+      ellipse 62% 46% at 50% 26%,
+      transparent 0%,
+      rgba(0, 0, 0, 0.22) 34%,
+      rgba(0, 0, 0, 0.6) 58%,
+      #000 80%
+    );
+    mask-image: radial-gradient(
+      ellipse 62% 46% at 50% 26%,
+      transparent 0%,
+      rgba(0, 0, 0, 0.22) 34%,
+      rgba(0, 0, 0, 0.6) 58%,
+      #000 80%
+    );
+  }
+  [data-page="casinos-gaming"] #industry-floorplan > .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Case study callout (HomeProof) — mesh lines, faded behind the copy */
+  [data-page="casinos-gaming"] .home-proof-band {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  [data-page="casinos-gaming"] .home-proof-band::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: url('/images/mesh/luci-bg-hero-mesh-lines-1920x1080.svg') center / cover no-repeat;
+    mix-blend-mode: screen;
+    opacity: 0.4;
+    -webkit-mask-image: radial-gradient(
+      ellipse 70% 90% at 48% 50%,
+      transparent 0%,
+      rgba(0, 0, 0, 0.2) 35%,
+      rgba(0, 0, 0, 0.65) 62%,
+      #000 85%
+    );
+    mask-image: radial-gradient(
+      ellipse 70% 90% at 48% 50%,
+      transparent 0%,
+      rgba(0, 0, 0, 0.2) 35%,
+      rgba(0, 0, 0, 0.65) 62%,
+      #000 85%
+    );
+  }
+  [data-page="casinos-gaming"] .home-proof-band::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse 72% 95% at 48% 50%,
+      rgba(7, 15, 20, 0.72) 0%,
+      rgba(7, 15, 20, 0.45) 40%,
+      rgba(7, 15, 20, 0.18) 65%,
+      transparent 85%
+    );
+  }
+  [data-page="casinos-gaming"] .home-proof-band__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* CTA — wide mesh band, faded behind the centered content */
+  [data-page="casinos-gaming"] #industry-cta.section {
+    position: relative;
+    isolation: isolate;
+  }
+  [data-page="casinos-gaming"] #industry-cta.section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: url('/images/mesh/luci-bg-wide-2560x800.svg') center / cover no-repeat;
+    mix-blend-mode: screen;
+    opacity: 0.6;
+  }
+  [data-page="casinos-gaming"] #industry-cta.section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent 0%, rgba(7, 15, 20, 0.65) 30%, rgba(7, 15, 20, 0.65) 44%, transparent 90%);
+  }
+  [data-page="casinos-gaming"] #industry-cta > .container {
+    position: relative;
+    z-index: 1;
+  }
+  @media (max-width: 720px) {
+    [data-page="casinos-gaming"] #industry-cta.section::after {
+      background: linear-gradient(180deg, transparent 0%, rgba(7, 15, 20, 0.65) 34%, rgba(7, 15, 20, 0.65) 60%, transparent 100%);
+    }
   }
 </style>

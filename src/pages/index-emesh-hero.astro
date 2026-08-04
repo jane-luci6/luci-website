@@ -577,6 +577,44 @@ import { site } from '../data/site';
   .home-cta__btn {
     margin-top: 0;
   }
+
+  /* Go Deeper — keep 3-up horizontal cards, compress vertical footprint */
+  .home-resources__inner {
+    padding-block: clamp(40px, 5vw, 56px) !important;
+  }
+  .home-resources__head {
+    margin-bottom: clamp(20px, 2.4vw, 28px) !important;
+  }
+  .home-resources__heading {
+    font-size: clamp(22px, 2.6vw, 30px) !important;
+  }
+  .home-resources__lede {
+    margin-top: 10px !important;
+    font-size: 15px !important;
+  }
+  .home-resources__grid {
+    gap: clamp(16px, 2vw, 24px) !important;
+  }
+  .home-resources .rsc-card__media {
+    aspect-ratio: 2 / 1 !important;
+  }
+  .home-resources .rsc-card__body {
+    gap: 6px !important;
+    padding: clamp(14px, 1.6vw, 18px) !important;
+  }
+  .home-resources .rsc-card__title {
+    font-size: clamp(16px, 1.5vw, 18px) !important;
+  }
+  .home-resources .rsc-card__meta {
+    font-size: 12px !important;
+  }
+  .home-resources .rsc-card__cta {
+    padding-top: 10px !important;
+    font-size: 13px !important;
+  }
+  .home-resources .rsc-card {
+    border-radius: 12px !important;
+  }
 </style>
 
 <script is:inline>
