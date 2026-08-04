@@ -523,37 +523,27 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       {
         head: 'LED, audio, lighting, and the control room run as separate silos.',
         body:
-          'Each works in isolation. Making them act as one falls to manual handoffs and good timing — and the unspoken second half of that sentence is what keeps operators up at night.',
+          'Each works in isolation. Making them act as one falls to manual handoffs and good timing \u2014 and the unspoken second half of that sentence is what keeps operators up at night.',
       },
       {
         head: 'At home they get 4K, instant replay, and real-time stats.',
         body:
-          'The at-home product sets fan expectations the venue has to beat. More screens haven\u2019t closed the gap — coordinated, immersive moments are what does.',
+          'The at-home product sets fan expectations the venue has to beat. More screens haven\u2019t closed the gap \u2014 coordinated, immersive moments are what does.',
       },
       {
-        head: 'Sponsors don\u2019t want placements anymore. They want moments.',
+        head: 'Sponsor moments are stuck behind manual production.',
         body:
-          'Every screen is a revenue asset, but fragmented production can\u2019t deliver synchronized, real-time activations on demand — so the inventory you already have sits untapped.',
+          'Every screen is a revenue asset, and sponsors now pay for moments \u2014 the emotional peaks of the game. But with LED, audio, and signage on separate platforms, a coordinated activation across the whole bowl means a stack of manual handoffs that can\u2019t fire on cue. So the inventory sits untapped.',
       },
       {
-        head: 'Basketball tonight. A concert tomorrow. A corporate event the day after.',
+        head: 'The A/V lives in a sprawl of racks and headends.',
         body:
-          'Converting the building and its A/V between events is slow, costly, and labor-intensive — and the configuration logic usually lives with the integrator who built it.',
+          'Running the building takes a stack of separate systems, racks, and headends \u2014 each its own silo, its own maintenance contract, its own refresh clock. The hardware is insane, and the rack room keeps growing.',
       },
       {
-        head: 'A record falls or a game turns in the final seconds.',
+        head: 'The people who ran it last season aren\u2019t here.',
         body:
-          'The production team has to react instantly across replay, graphics, lighting, and audio. Manual handoffs between platforms can\u2019t keep up.',
-      },
-      {
-        head: 'The people who ran it last season aren\u2019t here — and game day has no restart.',
-        body:
-          'Seasoned broadcast engineers are retiring faster than they\u2019re replaced; venues run on younger IT staff, students, and volunteers. And for marquee events the standard is nothing fails, period.',
-      },
-      {
-        head: 'Your video boards depreciate the day they\u2019re installed.',
-        body:
-          'Venue A/V is a massive capital asset on a forced replacement clock, and for multi-venue operators every building reinvents the wheel — a depreciating capital pit, with no standard that carries.',
+          'Seasoned broadcast engineers are retiring faster than they\u2019re replaced, and venues now run on younger IT staff, students, and volunteers. Each platform demands its own deep specialist \u2014 and on game day there\u2019s no rehearsal and no do-over.',
       },
     ],
     solutionsLockup: {
@@ -566,49 +556,35 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         problem: 'LED, audio, lighting, and the control room run as separate silos.',
         headline: 'One coordinated production environment.',
         answer:
-          'LUCI orchestrates your video boards, sound, and lighting from one platform over the infrastructure you already have — so they act as one.',
+          'LUCI orchestrates your video boards, sound, and lighting from one platform over the infrastructure you already have \u2014 so they act as one.',
       },
       {
         index: '02',
         problem: 'At home they get 4K, instant replay, and real-time stats.',
         headline: 'Deliver the one thing the couch can\u2019t.',
         answer:
-          'Synchronized, immersive moments across the whole bowl in real time — the whole building reacting as one, live.',
+          'Synchronized, immersive moments across the whole bowl in real time \u2014 the whole building reacting as one, live.',
       },
       {
         index: '03',
-        problem: 'Sponsors don\u2019t want placements anymore. They want moments.',
+        problem: 'Sponsor moments are stuck behind manual production.',
         headline: 'Turn every screen into a sponsor moment.',
         answer:
-          'Trigger coordinated, on-demand activations across every screen and zone — synchronized, on cue, on demand.',
+          'LUCI fires one synchronized activation across every screen and zone from a single interface \u2014 on cue, on demand, no handoffs. The moments sponsors pay for, delivered every time.',
       },
       {
         index: '04',
-        problem: 'Basketball tonight. A concert tomorrow. A corporate event the day after.',
-        headline: 'The building\u2019s environment changes in a tap, not a shift.',
+        problem: 'The A/V lives in a sprawl of racks and headends.',
+        headline: 'One rack. One interface.',
         answer:
-          'Recall the full A/V environment for any event configuration instantly — edited in-house, no programming ticket.',
+          'LUCI brings what ran on 4+ systems, 5+ racks, and 100+ devices into one interface and one rack \u2014 the same production from a fraction of the footprint.',
       },
       {
         index: '05',
-        problem: 'A record falls or a game turns in the final seconds.',
-        headline: 'When the moment happens, the whole venue responds at once.',
+        problem: 'The people who ran it last season aren\u2019t here.',
+        headline: 'One interface any trained operator can run.',
         answer:
-          'One interface to trigger replay, graphics, lighting, and audio together — no manual handoffs.',
-      },
-      {
-        index: '06',
-        problem: 'The people who ran it last season aren\u2019t here — and game day has no restart.',
-        headline: 'A team-sized operation any trained operator can run.',
-        answer:
-          'One consistent interface any trained operator can run, with consolidated monitored control across the estate — and The Systems, our embedded operation, standing behind it when there\u2019s no room to fail.',
-      },
-      {
-        index: '07',
-        problem: 'Your video boards depreciate the day they\u2019re installed.',
-        headline: 'The only part of your venue worth more in Year Five than Year One.',
-        answer:
-          'LUCI improves on a predictable annual line item — and every venue you add inherits everything the last one learned. One standard that gets stronger with every property.',
+          'LUCI gives every team one consistent interface over the whole production, so a trained operator \u2014 not a specialist per system \u2014 runs the show. The Systems, our embedded operation, stands behind it when there\u2019s no room to fail.',
       },
     ],
     automationLockup: {
