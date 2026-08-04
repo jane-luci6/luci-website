@@ -291,88 +291,25 @@ import { site } from '../data/site';
     z-index: 1;
   }
 
-  /* Why it matters — split floorplan middle-left + mesh, same soft-clear
-     fade behind the arrow; mesh fully erased behind the flip cards. */
+  /* Why it matters — no mesh (Consolidation keeps the split; this band
+     looked odd with the underlay). Plain navy behind the arrow + flip cards. */
   .home-why {
     background: var(--navy-deep) !important;
-    overflow: hidden;
   }
-  .home-why::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    /* Split SVG: floorplan on left half. Shift so the plan sits middle-left. */
-    background: url('/images/mesh/luci-bg-hero-split-1920x1080.svg') 38% center / cover no-repeat !important;
-    mix-blend-mode: screen !important;
-    opacity: 1 !important;
-    /* Soft clear behind arrow (top) + card grid — pattern returns at edges */
-    -webkit-mask-image: radial-gradient(
-      ellipse 78% 82% at 50% 48%,
-      transparent 0%,
-      rgba(0, 0, 0, 0.16) 28%,
-      rgba(0, 0, 0, 0.52) 55%,
-      #000 78%
-    );
-    mask-image: radial-gradient(
-      ellipse 78% 82% at 50% 48%,
-      transparent 0%,
-      rgba(0, 0, 0, 0.16) 28%,
-      rgba(0, 0, 0, 0.52) 55%,
-      #000 78%
-    );
-  }
+  .home-why::before,
   .home-why::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    opacity: 1 !important;
-    background:
-      /* Arrow zone */
-      radial-gradient(
-        ellipse 72% 32% at 50% 10%,
-        rgba(7, 15, 20, 0.78) 0%,
-        rgba(7, 15, 20, 0.5) 35%,
-        rgba(7, 15, 20, 0.2) 58%,
-        transparent 82%
-      ),
-      /* Flip-card grid */
-      radial-gradient(
-        ellipse 88% 78% at 50% 58%,
-        rgba(7, 15, 20, 0.88) 0%,
-        rgba(7, 15, 20, 0.62) 36%,
-        rgba(7, 15, 20, 0.28) 58%,
-        transparent 80%
-      );
-  }
-
-  .home-why__inner {
-    position: relative;
-    z-index: 1 !important;
-  }
-
-  /* Solid navy plate behind each flip card — mesh fully gone under them
-     (card faces are translucent, so a soft pocket alone isn't enough). */
-  .home-why__item {
-    position: relative;
-    isolation: isolate;
+    content: none !important;
+    background: none !important;
+    opacity: 0 !important;
+    display: none !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
   }
   .home-why__item::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    border-radius: 14px;
-    background: var(--navy-deep);
+    content: none !important;
+    display: none !important;
   }
-  .home-why__card {
-    position: relative;
-    z-index: 1;
-  }
+  /* Keep opaque card faces so they don't depend on a mesh underlay */
   .home-why__face--front {
     background:
       radial-gradient(circle at 78% 88%, rgba(104, 227, 190, 0.22) 0%, rgba(104, 227, 190, 0) 55%),
