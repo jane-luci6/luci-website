@@ -310,12 +310,14 @@ const zones = [
     stroke: url(#fp-leadgrad);
     stroke-width: 1.6;
     stroke-linecap: round;
-    stroke-dasharray: 1;
-    stroke-dashoffset: 1;
-    transition: stroke-dashoffset 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Hide with opacity (not dasharray) — dasharray + pathLength +
+       non-scaling-stroke is inconsistent across browsers and can leave a
+       stub of the line visible from load. Opacity is bulletproof. */
+    opacity: 0;
+    transition: opacity 0.5s ease;
     transition-delay: var(--d, 0s);
   }
-  .fp-stage.is-visible .fp-callout .fp-lead { stroke-dashoffset: 0; }
+  .fp-stage.is-visible .fp-callout .fp-lead { opacity: 1; }
 
   .fp-pulse {
     fill: #eafff6;
@@ -490,7 +492,7 @@ const zones = [
   @media (prefers-reduced-motion: reduce) {
     .fp-stage::before { animation: none; }
     .fp-scan { display: none; }
-    .fp-lead { transition: none; stroke-dashoffset: 0; }
+    .fp-lead { transition: none; opacity: 1; }
     .fp-pulse { display: none; }
     .fp-dot { transition: none; transform: scale(1); opacity: 1; }
     .fp-ring { animation: none !important; opacity: 0; }
