@@ -559,6 +559,9 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '01',
         title: 'Pre-Game Sequence',
         trigger: 'On a timed countdown to tipoff.',
+        image: '/images/industries/sports/capability-pre-game-sequence.png?v=1',
+        imageAlt:
+          'Empty arena bowl during the pre-game build-up, the centerhung board showing a player intro graphic as house lights dim to a dramatic show-lighting look',
         detail:
           'A scheduled chain of presets walks the building from house-up through player intros — lights, music, board takeovers, and signage move in sequence with no manual cues.',
       },
@@ -566,6 +569,9 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '02',
         title: 'Game-Day Mode Switching',
         trigger: 'Tipoff. Halftime. Final buzzer.',
+        image: '/images/industries/sports/capability-game-day-mode-switching.png?v=1',
+        imageAlt:
+          'Packed arena at a peak game moment, the crowd on its feet with arms raised as the centerhung board shows the live score and clock',
         detail:
           'Every game segment becomes one full configuration of boards, audio, lights, and signage — switch the whole building in a single tap, on cue.',
       },
@@ -573,6 +579,9 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '03',
         title: 'Building Conversion',
         trigger: 'Hockey. Basketball. Concert.',
+        image: '/images/industries/sports/capability-building-conversion.png?v=1',
+        imageAlt:
+          'Arena floor mid-conversion from basketball to concert, a stage being assembled as the centerhung board switches to a concert content graphic',
         detail:
           'Each event type becomes a saved configuration — audio zones, coverage, routing, and board layouts recall together when the floor changes.',
       },
@@ -580,6 +589,9 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '04',
         title: 'Pre-Doors Health Check',
         trigger: 'Every morning, before doors.',
+        image: '/images/industries/sports/capability-pre-doors-health-check.png?v=1',
+        imageAlt:
+          'An AV technician on the empty concourse before doors, reviewing an endpoint health-check dashboard on a tablet with one player flagged',
         detail:
           'An automated check exercises every display, player, and audio zone and flags anything off — so a dead endpoint shows up on the dashboard, not on a fan’s phone.',
       },
@@ -587,6 +599,9 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '05',
         title: 'Revert-After-Timer',
         trigger: 'A temporary takeover.',
+        image: '/images/industries/sports/capability-revert-after-timer.png?v=1',
+        imageAlt:
+          'Packed arena during a temporary 50/50 raffle drawing announcement on the centerhung board with a countdown timer, fans holding up phones',
         detail:
           'Trigger a sponsor takeover or in-game promotion, set it to revert after a set time, and the building snaps back to baseline automatically.',
       },
