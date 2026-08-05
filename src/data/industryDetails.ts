@@ -577,23 +577,23 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       },
       {
         index: '03',
-        title: 'Building Conversion',
-        trigger: 'Hockey. Basketball. Concert.',
-        image: '/images/industries/sports/capability-building-conversion.png?v=1',
+        title: 'Control From Anywhere',
+        trigger: 'On the floor, in the concourse — anywhere on property.',
+        image: '/images/industries/sports/capability-control-from-anywhere.png?v=1',
         imageAlt:
-          'Arena floor mid-conversion from basketball to concert, a stage being assembled as the centerhung board switches to a concert content graphic',
+          'An operator walking the arena concourse with a tablet showing the full venue floorplan and every A/V zone ready to control',
         detail:
-          'Each event type becomes a saved configuration — audio zones, coverage, routing, and board layouts recall together when the floor changes.',
+          'The entire floorplan sits on a tablet — every zone, board, and audio path at your fingertips, so you can walk the floor to handle something in person and still run the whole building.',
       },
       {
         index: '04',
-        title: 'Pre-Doors Health Check',
+        title: 'Endpoint Status at a Glance',
         trigger: 'Every morning, before doors.',
-        image: '/images/industries/sports/capability-pre-doors-health-check.png?v=1',
+        image: '/images/industries/sports/capability-pre-doors-health-check.png?v=2',
         imageAlt:
-          'An AV technician on the empty concourse before doors, reviewing an endpoint health-check dashboard on a tablet with one player flagged',
+          'An AV technician on the empty concourse before doors, reviewing the live status of every display, player, and audio zone on a tablet',
         detail:
-          'An automated check exercises every display, player, and audio zone and flags anything off — so a dead endpoint shows up on the dashboard, not on a fan’s phone.',
+          'The status of every display, player, and audio zone is available at a glance — so the moment something stops working, it shows up on your dashboard, not on a fan’s phone.',
       },
       {
         index: '05',
