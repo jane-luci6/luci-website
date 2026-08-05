@@ -324,27 +324,27 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       {
         head: 'Every space runs its own stack.',
         body:
-          'Lobby, ballroom, meeting rooms, restaurants, and pool — each space brought its own vendor and protocol until one property runs a dozen systems that don’t talk.',
+          'A hotel’s lobby, ballroom, meeting rooms, restaurants, and pool each came with their own vendor and their own protocol, until one property is running a dozen systems that don’t talk to each other.',
       },
       {
         head: 'A stale screen in a premium lobby is brand damage.',
         body:
-          'Dozens of screens across many zones need coordinated, scheduled, rule-based content management — and the properties that skip it end up with last month’s promotions or error messages in the lobby.',
+          'Dozens of screens across many zones need coordinated, scheduled, rule-based content management, and the properties that skip it end up with last month’s promotions or error messages in the lobby.',
       },
       {
-        head: 'Brand standards drift property to property.',
+        head: 'Brand standards drift across spaces.',
         body:
-          'Corporate sets the playbook — welcome loops, music beds, signage templates — but local teams improvise when the systems will not comply, and a five-property brand ends up looking like five different hotels.',
-      },
-      {
-        head: 'Static screens miss the upsell moment.',
-        body:
-          'Growth is in F&B, spa, wellness, and events — driven by in-the-moment, contextual promotion that disconnected, manually-updated screens can’t deliver.',
+          'Corporate sets the playbook — welcome loops, music beds, signage templates — but when each space runs its own system, the lobby, the restaurant, and the ballroom end up looking like three different brands inside one property.',
       },
       {
         head: 'A sprawling footprint on a dozen systems.',
         body:
-          'A resort spans multiple buildings, outdoor spaces, and event floors — each zone its own silo — and it all has to feel like one property while a lean team runs it.',
+          'A resort spans multiple buildings, outdoor spaces, pools, and event floors — each zone its own silo with its own conditions — and it all has to feel like one property while a lean team runs it.',
+      },
+      {
+        head: 'Static screens can’t respond to an upsell opportunity.',
+        body:
+          'Growth is in F&B, spa, wellness, and events, driven by in-the-moment, contextual promotion — and disconnected, manually-updated screens can’t surface the right offer at the right time.',
       },
     ],
     solutionsLockup: {
@@ -355,37 +355,37 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       {
         index: '01',
         problem: 'Every space runs its own stack.',
-        headline: 'One seamless stay, end to end.',
+        headline: 'One coordinated environment across the whole property.',
         answer:
-          'LUCI orchestrates every display, audio zone, and light across the whole property from one interface — so the lobby, the restaurant, the spa, and the ballroom all speak with one brand voice.',
+          'LUCI orchestrates every display, audio zone, and light across the whole property from one interface, so one team runs every space from one place instead of a dozen disconnected systems.',
       },
       {
         index: '02',
         problem: 'A stale screen in a premium lobby is brand damage.',
-        headline: 'Every screen current and on brand — without a content coordinator per property.',
+        headline: 'Every screen current and on brand, run by the team you already have.',
         answer:
-          'LUCI puts scheduled, rule-based content control across every screen in one interface — so every touchpoint stays current and on brand, no content coordinator per property.',
+          'LUCI puts scheduled, rule-based content control across every screen in one interface, so the team you already have keeps every touchpoint current and on brand without adding a full-time content coordinator.',
       },
       {
         index: '03',
-        problem: 'Brand standards drift property to property.',
-        headline: 'One brand standard, every space, every property — by default.',
+        problem: 'Brand standards drift across spaces.',
+        headline: 'One brand standard across every space.',
         answer:
-          'LUCI holds one standard across every space and every property from one corporate source — so consistency is built in, not audited back in.',
+          'LUCI holds one standard across every space from one source, so every touchpoint speaks with one brand voice by default.',
       },
       {
         index: '04',
-        problem: 'Static screens miss the upsell moment.',
-        headline: 'The right offer, in the right space, at the right moment.',
-        answer:
-          'LUCI programs and triggers the right content by space, time, and guest context — promote the spa at dusk and breakfast at dawn, and surface the right upsell where it matters.',
-      },
-      {
-        index: '05',
         problem: 'A sprawling footprint on a dozen systems.',
         headline: 'One interface, one rack — for the whole footprint.',
         answer:
-          'LUCI brings what ran on 4+ systems, 5+ racks, and 100+ devices into one interface and one rack — the whole footprint, indoor and out, from one place.',
+          'LUCI brings what ran on 4+ systems, 5+ racks, and 100+ devices into one interface and one rack, so the whole footprint — indoor and out, every building — runs from one place.',
+      },
+      {
+        index: '05',
+        problem: 'Static screens can’t respond to an upsell opportunity.',
+        headline: 'The right offer, in the right space, at the right moment.',
+        answer:
+          'LUCI programs and triggers the right content by space, time, and guest context, so you can promote the spa at dusk and breakfast at dawn and surface the right upsell where it matters.',
       },
     ],
     automationLockup: {
