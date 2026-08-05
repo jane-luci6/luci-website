@@ -110,7 +110,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       {
         head: 'The one person who understood it leaves.',
         body:
-          'Custom programming lives in one contractor\u2019s head. When they move on, so does the ability to change anything without a service call.',
+          'Custom programming lives in one contractor\u2019s head. When they move on, so does the ability to change anything without a service call \u2014 and the people left to run it aren\u2019t programmers.',
         image: '/images/industries/casino/challenge-integrator-leaves.jpg?v=2',
         imageAlt: 'AV integrator walking away from a casino equipment room while staff look on',
         imagePosition: 'center 48%',
@@ -154,9 +154,9 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       {
         index: '03',
         problem: 'The one person who understood it leaves.',
-        headline: 'Your team runs presets without a programming call.',
+        headline: 'No coding. No extensive training. No service call.',
         answer:
-          'Schedules and permissions live in the platform — built and edited in-house, not waiting on the one integrator who still has the file.',
+          'Schedules and permissions live in one interface any non-technical operator can run \u2014 built and edited in-house, no programming, no specialist on call. The team you already have runs it.',
         image: '/images/industries/casino/solution-self-service.jpg?v=2',
         imageAlt: 'Casino operations team collaborating on a tablet in the hallway without outside help',
         imagePosition: 'center 48%',
