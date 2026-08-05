@@ -49,6 +49,15 @@ const targets = {
         />
         <div class="bleed-intro__scrim" aria-hidden="true"></div>
 
+        <!-- Side rails: thin mint rules at the content-column edges + rotated label on the left -->
+        <div class="bleed-intro__rail bleed-intro__rail--left" aria-hidden="true">
+          <span class="bleed-intro__rail-rule"></span>
+          <span class="bleed-intro__rail-label">Property-wide A/V</span>
+        </div>
+        <div class="bleed-intro__rail bleed-intro__rail--right" aria-hidden="true">
+          <span class="bleed-intro__rail-rule"></span>
+        </div>
+
         <!-- Header overlaid top-left of the photo -->
         <div class="bleed-intro__overlay-header">
           <h2 class="bleed-intro__headline">
@@ -174,7 +183,8 @@ const targets = {
     left: 0;
     right: 0;
     z-index: 3;
-    padding: clamp(20px, 3vw, 36px) var(--bleed-inset);
+    /* Clear the left rail rule + label gutter */
+    padding: clamp(20px, 3vw, 36px) var(--bleed-inset) clamp(20px, 3vw, 36px) calc(var(--bleed-inset) + 18px);
     pointer-events: none;
   }
   .bleed-intro__headline {
@@ -191,6 +201,51 @@ const targets = {
   .bleed-intro__headline-accent {
     font-style: normal;
     color: var(--mint);
+  }
+
+  /* Side rails — thin mint rules at the content-column edges + rotated label on the left.
+     Bridges the rhythm to the contained sections below without losing full-bleed impact. */
+  .bleed-intro__rail {
+    --bleed-inset: max(var(--page-pad), calc((100% - var(--content-wide)) / 2));
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+  }
+  .bleed-intro__rail--left {
+    left: var(--bleed-inset);
+  }
+  .bleed-intro__rail--right {
+    right: var(--bleed-inset);
+  }
+  .bleed-intro__rail-rule {
+    width: 2px;
+    height: 100%;
+    background: var(--mint);
+    opacity: 0.5;
+    box-shadow: 0 0 12px rgba(var(--mint-rgb), 0.25);
+  }
+  .bleed-intro__rail--right .bleed-intro__rail-rule {
+    opacity: 0.28;
+  }
+  .bleed-intro__rail-label {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mint);
+    padding: 0 14px;
+    text-shadow: 0 1px 6px rgba(8, 17, 22, 0.7);
+    white-space: nowrap;
+  }
+  @media (max-width: 760px) {
+    .bleed-intro__rail { display: none; }
   }
 
   .bleed-intro__stage {
