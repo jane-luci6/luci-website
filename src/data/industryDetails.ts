@@ -121,9 +121,9 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
           'Each property runs its own stack, presets, and vendor list \u2014 so the brand looks different on every floor and nobody can see all of it at once. Add a room, a wing, or a property and it\u2019s another rip-and-replace.',
       },
       {
-        head: 'A dark screen is found by a guest, not the system.',
+        head: 'Technical issues disrupt the guest experience.',
         body:
-          'Fragmented systems on aging hardware are a single point of failure \u2014 and when a screen goes dark at peak, the floor finds out from a guest, not the system. There\u2019s no rehearsal and no do-over on a Saturday night.',
+          'A dark screen, a dead zone, a frozen board \u2014 fragmented systems don\u2019t surface it until a guest flags it. The floor finds out from the guest, not the system, and by then the experience is already broken.',
       },
     ],
     solutionsLockup: {
@@ -170,10 +170,10 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       },
       {
         index: '05',
-        problem: 'A dark screen is found by a guest, not the system.',
-        headline: 'One monitored environment that stays up.',
+        problem: 'Technical issues disrupt the guest experience.',
+        headline: 'Fix it before the guest notices.',
         answer:
-          'Consolidated, monitored control across the estate with redundant systems and proactive monitoring \u2014 you see the floor, the floor stays up, and you find out before the guest does.',
+          'LUCI surfaces performance issues across the estate the moment they happen \u2014 so the team can fix them before they reach a guest, not after.',
       },
     ],
     automationLockup: {
