@@ -152,7 +152,7 @@
     background: url('/images/mesh/luci-bg-hero-mesh-lines-1920x1080.svg') center / cover no-repeat !important;
     mix-blend-mode: screen !important; opacity: 0.4 !important;
   }
-  .home-industries::before, .home-industries::after, .home-personas::before, .home-personas::after, .home-resources::before, .home-resources::after {
+  .home-industries::before, .home-industries::after, .home-resources::before, .home-resources::after {
     content: none !important; background: none !important; opacity: 0 !important; display: none !important;
   }
 
@@ -209,6 +209,20 @@
     background: radial-gradient(ellipse 72% 68% at 40% 45%, rgba(7, 15, 20, 0.78) 0%, rgba(7, 15, 20, 0.5) 35%, rgba(7, 15, 20, 0.2) 58%, transparent 82%);
   }
   .home-proof-band__copy > * { position: relative; z-index: 1; }
+
+  /* "How will LUCI support you?" — mesh with a fade behind the header/subheader
+     so the heading + lede read cleanly. The opaque card covers the mesh in
+     its own area, so the mesh reads through the top and side margins only. */
+  .home-personas { position: relative; isolation: isolate; overflow: hidden; }
+  .home-personas::before {
+    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: url('/images/mesh/luci-bg-hero-mesh-lines-1920x1080.svg') center / cover no-repeat;
+    mix-blend-mode: screen; opacity: 0.4;
+  }
+  .home-personas::after {
+    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: linear-gradient(180deg, rgba(7,15,20,0.82) 0%, rgba(7,15,20,0.6) 16%, rgba(7,15,20,0.26) 34%, rgba(7,15,20,0.08) 56%, rgba(7,15,20,0.28) 100%);
+  }
 
   .home-diff__inner, .home-intro__inner, .home-ledger .container, .home-why__inner, .home-industries__inner, .home-proof-band__inner, .home-personas__inner, .home-resources__inner {
     position: relative; z-index: 1;
