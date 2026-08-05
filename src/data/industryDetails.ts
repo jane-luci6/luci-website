@@ -313,9 +313,9 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     heroImage: '/images/industries/hotels-resorts.jpg?v=1',
     thesis: {
       lockupName: 'Hotels & Resorts',
-      lockupRole: 'One platform for every property.',
+      lockupRole: 'One seamless stay, end to end',
       deck:
-        'Lobby signage, ballrooms, meeting rooms, restaurants, and pool decks — every guest-facing display and zone runs through one platform. Your team runs one property from a single interface, and your brand runs the same way across every property in the portfolio.',
+        'One property. One seamless stay. From the lobby to the restaurant to the spa to the ballroom, your guests experience one continuous journey \u2014 but it runs on a dozen disconnected systems. LUCI orchestrates every screen, speaker, and light across the whole property from one interface, so the stay feels as seamless and on-brand as you promised.',
     },
     challengesLockup: {
       lockupName: 'Why hotel A/V <em>gets complicated</em>',
@@ -324,43 +324,27 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       {
         head: 'Every space runs its own stack.',
         body:
-          'Lobby signage, ballroom DSP, meeting-room AV, restaurant systems, and pool audio — each space brought its own vendor, interface, and protocol until one property runs five systems that do not talk.',
-        image: '/images/industries/hotel/challenge-separate-stacks.jpg?v=5',
-        imageAlt: 'Standard hotel A/V rack room with freestanding racks sticky-note-labeled for lobby, ballroom, meeting, restaurant, and pool zones',
-        imagePosition: 'center 45%',
+          'Lobby signage, ballroom DSP, meeting-room AV, restaurant systems, and pool audio — each space brought its own vendor, interface, and protocol until one property runs a dozen systems that do not talk, and the guest experiences a disjointed journey.',
+      },
+      {
+        head: 'A stale screen in a premium lobby is brand damage.',
+        body:
+          'Dozens of screens across many zones need coordinated, scheduled, rule-based content management — and the properties that skip it end up with last month’s promotions or error messages in the lobby. A stale screen in a premium property doesn’t read as neutral; it actively damages the brand.',
       },
       {
         head: 'Brand standards drift property to property.',
         body:
           'Corporate sets the playbook — welcome loops, music beds, signage templates — but local teams improvise when the systems will not comply, and a five-property brand ends up looking like five different hotels.',
-        image: '/images/industries/hotel/challenge-brand-drift.jpg?v=2',
-        imageAlt: 'Hotel lobby displays showing inconsistent branding and off-template content across properties',
-        imagePosition: 'center 40%',
       },
       {
-        head: 'Ballroom turnover is still a service call.',
+        head: 'Static screens miss the upsell moment.',
         body:
-          'A ballroom combine or new scene means reprogramming the DSP routing, EQ, and control logic — and that file lives with one outside programmer. Every new configuration is a service ticket.',
-        image: '/images/industries/hotel/challenge-ballroom-turnover.jpg?v=4',
-        imageAlt: 'Hotel ballroom mid-turnover between events with overhead AV infrastructure and a technician in a lift adjusting a speaker',
-        imagePosition: 'center 45%',
+          'Growth is in F&B, spa, wellness, and events — driven by in-the-moment, contextual promotion. Disconnected, manually-updated screens can’t surface the right offer at the right time, so the revenue sits untapped.',
       },
       {
-        head: 'Meeting boards and wayfinding aren’t responsive.',
+        head: 'A sprawling footprint on a dozen systems.',
         body:
-          'Hotel signage is a patchwork — door tablets tied to the calendar, lobby boards and wayfinding on separate systems, only some connected to the booking platform. A last-minute room move reaches some screens automatically; the rest have to be updated in each separate system, and under day-of pressure guests arrive to the wrong room on the board.',
-        image: '/images/industries/hotel/challenge-event-boards.jpg?v=4',
-        imageAlt: 'Hotel pre-function corridor with a digital wayfinding kiosk and pillar screen showing legible event directions, a woman reading the kiosk with her phone',
-        imagePosition: 'center 45%',
-        featured: true,
-      },
-      {
-        head: 'The integrator who built it is not there anymore.',
-        body:
-          'Presets, schedules, and room-combine logic live in one contractor\u2019s laptop. When they move on, every change — even a volume tweak — waits on a programming ticket.',
-        image: '/images/industries/hotel/challenge-integrator-leaves.jpg?v=2',
-        imageAlt: 'Hotel engineering staff waiting on an outside AV integrator for a simple preset change',
-        imagePosition: 'center 48%',
+          'A resort spans multiple buildings, outdoor spaces, pools, and event floors — each zone its own silo — and it all has to feel like one coherent property while a lean team runs it without a full-time specialist per property.',
       },
     ],
     solutionsLockup: {
@@ -371,56 +355,41 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       {
         index: '01',
         problem: 'Every space runs its own stack.',
-        headline: 'One platform spans every zone.',
+        headline: 'One seamless stay, end to end.',
         answer:
-          'Lobby, ballroom, meeting rooms, restaurants, and pool decks map to the same orchestration layer — one head end, one interface, every zone.',
-        image: '/images/industries/hotel/solution-one-platform.jpg?v=4',
-        imageAlt: 'Hotel property map in LUCI showing lobby, ballroom, meeting rooms, and pool zones unified',
-        imagePosition: 'center 50%',
+          'LUCI orchestrates every display, audio zone, and light across the whole property from one interface — so the lobby, the restaurant, the spa, and the ballroom all speak with one brand voice.',
       },
       {
         index: '02',
-        problem: 'Brand standards drift property to property.',
-        headline: 'Brand standards hold across every property.',
+        problem: 'A stale screen in a premium lobby is brand damage.',
+        headline: 'Every screen current and on brand — without a content coordinator per property.',
         answer:
-          'Push welcome loops, music beds, and signage templates from one corporate source — permissions let local teams set the atmosphere without improvising off-brand.',
-        image: '/images/industries/hotel/solution-brand-standards.jpg?v=6',
-        imageAlt: 'Consistent branded welcome content across multiple hotel lobby displays',
-        imagePosition: 'center 42%',
+          'LUCI puts scheduled, rule-based content control across every screen in one interface, so every touchpoint stays current and on brand without a full-time content coordinator at every property.',
       },
       {
         index: '03',
-        problem: 'Ballroom turnover is still a service call.',
-        headline: 'Divisible rooms switch in one tap.',
+        problem: 'Brand standards drift property to property.',
+        headline: 'One brand standard, every space, every property — by default.',
         answer:
-          'Wedding, banquet, and corporate configurations — including room combines — become saved presets. Audio, lighting, and displays switch together between events, no programming call.',
-        image: '/images/industries/hotel/solution-ballroom-presets.jpg?v=2',
-        imageAlt: 'Hotel events manager selecting a ballroom room-combine preset on a tablet',
-        imagePosition: 'center 45%',
+          'LUCI holds one standard across every space and every property from one corporate source — so consistency is built in, not audited back in.',
       },
       {
         index: '04',
-        problem: 'Meeting boards and wayfinding aren’t responsive.',
-        headline: 'Boards and wayfinding stay in sync.',
+        problem: 'Static screens miss the upsell moment.',
+        headline: 'The right offer, in the right space, at the right moment.',
         answer:
-          'Event boards, room signs, and wayfinding pull from your booking and property systems — so the right room is on the right screen before the first guest arrives.',
-        image: '/images/industries/hotel/solution-event-boards.jpg?v=2',
-        imageAlt: 'Hotel lobby event board and wayfinding screens showing correct, in-sync room assignments',
-        imagePosition: 'center 38%',
+          'LUCI programs and triggers the right content by space, time, and guest context — promote the spa at dusk and breakfast at dawn, and surface the right upsell where it matters.',
       },
       {
         index: '05',
-        problem: 'The integrator who built it is not there anymore.',
-        headline: 'Your team edits schedules in-house.',
+        problem: 'A sprawling footprint on a dozen systems.',
+        headline: 'One interface, one rack — for the whole footprint.',
         answer:
-          'Presets and permissions live in the platform — built and maintained by your staff, not a ticket to the contractor who still has the file.',
-        image: '/images/industries/hotel/solution-self-service.jpg?v=4',
-        imageAlt: 'Hotel operations team updating AV schedules and presets without outside integrator support',
-        imagePosition: 'center 48%',
+          'LUCI brings what ran on 4+ systems, 5+ racks, and 100+ devices — each zone its own silo — into one interface and one rack, so a lean team controls the entire property, indoor and out, from one place.',
       },
     ],
     automationLockup: {
-      lockupName: '<em>Automation</em> & presets',
+      lockupName: 'What you can <em>do with LUCI</em>',
       lockupRole: 'Set it once — the property runs itself',
     },
     automations: [
@@ -460,12 +429,72 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
           'Trigger a preset for an announcement or promotion, set it to revert after a set time, and the property snaps back to baseline automatically.',
       },
     ],
+    tickerLocations: [
+      'Hotel Lobby',
+      'Arrival Court',
+      'Guest Elevators',
+      'Corridor Signage',
+      'Wayfinding',
+      'Restaurants & Bars',
+      'Pool Deck',
+      'Spa & Fitness',
+      'Ballroom',
+      'Meeting Rooms',
+      'Retail',
+      'Outdoor Audio',
+      'Background Music',
+    ],
+    floorplanLockup: {
+      lockupName: 'Your entire <em>property</em> at your fingertips',
+      lockupRole: 'One seamless stay, end to end',
+      deck:
+        'From the lobby to the restaurant to the spa to the ballroom, your guests experience one continuous journey. LUCI orchestrates every display, speaker, and light across the whole property \u2014 every building, every outdoor space \u2014 so the stay feels as seamless as you promised.',
+    },
+    floorplan: {
+      image: '/images/industries/hotel/floorplan.png?v=1',
+      imageAlt:
+        'Architectural floorplan of a hotel and resort podium: arrival court, lobby, retail, restaurants and bars, pool deck, spa and fitness, guest tower core, ballroom, meeting rooms, service and back of house, loading, and parking.',
+      imageWidth: 1024,
+      imageHeight: 768,
+      imageWidthPct: 78,
+      ariaLabel: 'Hotel and resort zones LUCI orchestrates',
+      zones: [
+        {
+          label: 'Set the tone on arrival',
+          desc: 'Welcome and orient the guest the moment they step out of the car \u2014 lobby signage, wayfinding, and music set the tone before the front desk.',
+          plate: { side: 'right', right: '-4%', top: '70%' },
+          delay: 0,
+          lines: [{ x1: 84, y1: 70, x2: 50, y2: 88 }],
+        },
+        {
+          label: 'Move guests toward amenities',
+          desc: 'Promote the spa at dusk and breakfast at dawn \u2014 the right offer in the right space at the right time moves guests toward the revenue.',
+          plate: { side: 'left', left: '-4%', top: '46%' },
+          delay: 3.5,
+          lines: [{ x1: 16, y1: 46, x2: 22, y2: 55 }],
+        },
+        {
+          label: 'Switch the event floor in one tap',
+          desc: 'Wedding, banquet, and corporate configurations \u2014 including room combines \u2014 become saved presets. Audio, lighting, and displays switch together, no service call.',
+          plate: { side: 'right', right: '-4%', top: '24%' },
+          delay: 7,
+          lines: [{ x1: 84, y1: 24, x2: 80, y2: 18 }],
+        },
+        {
+          label: 'Hold one brand across the property',
+          desc: 'Every display, speaker, and light across the whole footprint \u2014 every building, every outdoor space \u2014 on one standard, so the stay feels like one property.',
+          plate: { side: 'left', left: '-4%', top: '20%' },
+          delay: 10.5,
+          lines: [{ x1: 16, y1: 20, x2: 50, y2: 15 }],
+        },
+      ],
+    },
     ctaTitle: 'See LUCI on <em>your property</em>.',
     chapters: [
       { id: 'industry-thesis', label: 'Overview' },
-      { id: 'industry-challenges', label: 'Challenges' },
-      { id: 'industry-solutions', label: 'The fix' },
-      { id: 'industry-automation', label: 'Automation' },
+      { id: 'industry-floorplan', label: 'The property' },
+      { id: 'industry-before-after', label: 'Before & after' },
+      { id: 'industry-automation', label: 'Capabilities' },
       { id: 'industry-cta', label: 'Next step' },
     ],
   },
