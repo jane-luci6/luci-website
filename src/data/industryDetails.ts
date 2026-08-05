@@ -154,7 +154,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       {
         index: '03',
         problem: 'The one person who understood it leaves.',
-        headline: 'No coding. No extensive training. No service call.',
+        headline: 'LUCI is simple to operate, no technical skill required.',
         answer:
           'Schedules and permissions live in one interface any non-technical operator can run \u2014 built and edited in-house, no programming, no specialist on call. The team you already have runs it.',
         image: '/images/industries/casino/solution-self-service.jpg?v=2',
