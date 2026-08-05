@@ -199,11 +199,31 @@ import { site } from '../data/site';
     white-space: nowrap;
     border: 0;
   }
-  .home-intro.intro-d .home-intro__inner {
-    padding-block: clamp(8px, 1.5vw, 16px) clamp(40px, 6vw, 64px) !important;
+  /* Full-bleed photo — break out of the content container */
+  .home-intro.intro-d .home-intro__inner.container {
+    max-width: none !important;
+    width: 100% !important;
+    padding-inline: 0 !important;
+    padding-block: 0 clamp(40px, 6vw, 64px) !important;
   }
   .home-intro.intro-d .home-intro__stage {
     margin-top: 0 !important;
+    width: 100%;
+  }
+  .home-intro.intro-d .home-intro__frame {
+    border-radius: 0 !important;
+    aspect-ratio: 21 / 11 !important; /* slightly wider cinematic crop */
+  }
+  .home-intro.intro-d .home-intro__actions {
+    padding-inline: var(--page-pad);
+  }
+  .home-intro.intro-d .home-intro__steps {
+    padding-inline: var(--page-pad);
+  }
+  @media (max-width: 760px) {
+    .home-intro.intro-d .home-intro__frame {
+      aspect-ratio: 16 / 10 !important;
+    }
   }
 
   /* --- A · Punch + deep navy --- */
