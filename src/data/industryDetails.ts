@@ -474,7 +474,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
           lines: [{ x1: 16, y1: 64, x2: 25, y2: 48 }],
         },
         {
-          label: 'Switch the event floor in one tap',
+          label: 'Switch the event floor in a few taps',
           desc: 'Wedding, banquet, and corporate room A/V can combine or split in a matter of minutes.',
           plate: { side: 'right', right: '-4%', top: '30%' },
           delay: 7,
