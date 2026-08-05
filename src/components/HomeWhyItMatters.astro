@@ -1,38 +1,39 @@
 ---
 // "Why it matters" — the four outcomes delivered by the consolidation above.
 // Sits directly below HomeLedger ("Consolidation you can see") on the same navy
-// canvas. A wide downward triangle bridges the two. Each pillar is a card that
-// shares the ledger card's shape language (14px radius, same shadow family).
+// canvas. A wide downward triangle bridges the two.
 //
-// The card is a 3D flip. The FRONT face is a poster: just the message, set
-// large, with an oversized ghost index numeral as a watermark and a small mint
-// flip badge in the corner. On hover/focus the whole card rotates 180° and the
-// BACK face shows the detail (index kicker + the message + the fuller
-// explanation) on a darker "info" side. Touch devices (hover: none) get a
-// tap-to-flip toggle via a tiny script; keyboard users flip via focus. No-JS
-// keeps the front (the message still reads). Source: capabilities-document.html p03.
-const flipGlyph = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg>`;
+// De-boxed, icon-led stack: four hairline-separated rows, each a duotone line
+// icon (mint primary, gold accent) + bold head + the detail, all visible at
+// once. No flip, no index numerals, no empty poster space. Two columns on wide
+// viewports (two independent stacks, one horizontal hairline between the rows,
+// no vertical divider so it reads as lists — not a spreadsheet), one column on
+// mobile. Icons are distinct per pillar. Voice: operational, declarative.
 
 const pillars = [
   {
-    index: '01',
     head: 'Complete visibility and control across your property',
-    detail: 'No more chasing status across disconnected dashboards. LUCI rolls every endpoint, zone, and system into one live view of the property — see it all at a glance and act on any of it without switching tools.',
+    detail:
+      'No more chasing status across disconnected dashboards. LUCI rolls every endpoint, zone, and system into one live view of the property — see it all at a glance and act on any of it without switching tools.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" stroke="#68e3be"/><circle cx="12" cy="12" r="3" stroke="#68e3be"/><circle cx="12" cy="12" r="1.1" fill="#edd086" stroke="none"/></svg>`,
   },
   {
-    index: '02',
     head: 'Align your teams by default',
-    detail: 'IT, operations, and guest services work from the same source of truth. Change something once and every team sees it — no forwarded screenshots, no version drift, no finger-pointing.',
+    detail:
+      'IT, operations, and guest services work from the same source of truth. Change something once and every team sees it — no forwarded screenshots, no version drift, no finger-pointing.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="7" r="2.4" stroke="#68e3be"/><circle cx="18" cy="7" r="2.4" stroke="#68e3be"/><circle cx="12" cy="17" r="2.4" fill="#edd086" stroke="#edd086"/><path d="M7.7 8.5 10.5 15.3" stroke="#68e3be"/><path d="M16.3 8.5 13.5 15.3" stroke="#68e3be"/><path d="M8.4 7 15.6 7" stroke="#68e3be"/></svg>`,
   },
   {
-    index: '03',
     head: 'Fully activate the guest experience',
-    detail: 'Every screen becomes a live, on-brand moment — wayfinding, promotions, event info, entertainment — scheduled and controlled from one place, so the experience is intentional instead of accidental.',
+    detail:
+      'Every screen becomes a live, on-brand moment — wayfinding, promotions, event info, entertainment — scheduled and controlled from one place, so the experience is intentional instead of accidental.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2" stroke="#68e3be"/><path d="M9 20h6" stroke="#68e3be"/><path d="M12 17v3" stroke="#68e3be"/><path d="M12 7.4l1.1 2.7 2.7 1.1-2.7 1.1L12 15l-1.1-2.7-2.7-1.1 2.7-1.1z" fill="#edd086" stroke="none"/></svg>`,
   },
   {
-    index: '04',
     head: 'Invest in the only A/V that scales and improves',
-    detail: 'One platform that grows with you instead of fragmenting as you grow. Add endpoints, rooms, or properties without rip-and-replace — and software updates mean the system you own keeps getting better, not older.',
+    detail:
+      'One platform that grows with you instead of fragmenting as you grow. Add endpoints, rooms, or properties without rip-and-replace — and software updates mean the system you own keeps getting better, not older.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 20V13" stroke="#68e3be"/><path d="M12 20V9" stroke="#68e3be"/><path d="M17 20V5" stroke="#edd086"/><path d="M4 8l5-4 5 3 6-5" stroke="#68e3be"/></svg>`,
   },
 ];
 ---
@@ -52,41 +53,19 @@ const pillars = [
       <path d="M100,0 L1100,0 L600,96 Z" fill="url(#why-apply-grad)" />
     </svg>
 
-    <ul class="home-why__grid" role="list">
+    <ul class="home-why__list" role="list">
       {pillars.map((p) => (
-        <li class="home-why__item" tabindex="0">
-          <div class="home-why__card">
-            <!-- FRONT — poster: watermark index + the message + flip badge. -->
-            <div class="home-why__face home-why__face--front">
-              <span class="home-why__watermark" aria-hidden="true">{p.index}</span>
-              <p class="home-why__item-head">{p.head}</p>
-              <span class="home-why__flip" aria-hidden="true" set:html={flipGlyph} />
-            </div>
-            <!-- BACK — info side: index kicker + message + the detail. -->
-            <div class="home-why__face home-why__face--back">
-              <span class="home-why__back-index">{p.index}</span>
-              <p class="home-why__back-head">{p.head}</p>
-              <p class="home-why__detail-text">{p.detail}</p>
-              <span class="home-why__flip home-why__flip--back" aria-hidden="true" set:html={flipGlyph} />
-            </div>
+        <li class="home-why__row">
+          <span class="home-why__icon" aria-hidden="true" set:html={p.icon} />
+          <div class="home-why__copy">
+            <p class="home-why__head">{p.head}</p>
+            <p class="home-why__detail">{p.detail}</p>
           </div>
         </li>
       ))}
     </ul>
   </div>
 </section>
-
-<script>
-  // Touch devices have no hover, so the CSS hover-flip can't fire. Tap to flip
-  // (and tap again to flip back) via a toggled class. Gated to (hover: none) so
-  // pointer devices keep the pure-CSS hover flip and the two never collide.
-  const section = document.querySelector('.home-why');
-  if (section && window.matchMedia('(hover: none)').matches) {
-    section.querySelectorAll('.home-why__item').forEach((item) => {
-      item.addEventListener('click', () => item.classList.toggle('is-flipped'));
-    });
-  }
-</script>
 
 <style>
   .home-why {
@@ -133,189 +112,95 @@ const pillars = [
     display: block;
     width: 100%;
     height: clamp(56px, 6.5vw, 84px);
-    margin: 0 0 clamp(48px, 6vw, 72px);
+    margin: 0 0 clamp(40px, 5vw, 64px);
     filter: drop-shadow(0 10px 20px rgba(var(--mint-rgb), 0.34));
   }
 
-  .home-why__grid {
+  .home-why__list {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: clamp(20px, 2.6vw, 32px);
+    column-gap: clamp(40px, 5vw, 72px);
+    row-gap: 0;
+    align-items: start;
   }
 
-  /* The flip container. Fixed height so the two absolute faces have a box to
-     fill; perspective gives the rotation real depth. */
-  .home-why__item {
-    position: relative;
-    height: clamp(244px, 26vw, 296px);
-    perspective: 1400px;
-  }
-  .home-why__item:focus-visible {
-    outline: 2px solid var(--mint);
-    outline-offset: 4px;
-    border-radius: 18px;
-  }
-
-  .home-why__card {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: transform;
-  }
-  /* Hover-capable pointer: flip on hover/focus. Touch flips via .is-flipped below. */
-  @media (hover: hover) {
-    .home-why__item:hover .home-why__card,
-    .home-why__item:focus-within .home-why__card {
-      transform: rotateY(180deg);
-    }
-  }
-  .home-why__item.is-flipped .home-why__card {
-    transform: rotateY(180deg);
-  }
-
-  /* Both faces fill the card and hide their own back so only the facing side
-     shows during the rotation. */
-  .home-why__face {
-    position: absolute;
-    inset: 0;
+  /* Each row: icon tile + copy, hairline-separated. Two columns read as two
+     independent stacks; the row-2 top border is the single divider between the
+     two rows (no vertical line, so it never reads as a spreadsheet grid). */
+  .home-why__row {
     display: flex;
-    flex-direction: column;
-    padding: clamp(24px, 2.6vw, 32px);
-    border-radius: 14px;
-    overflow: hidden;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    box-shadow: 0 16px 32px rgba(10, 22, 28, 0.3);
+    gap: 20px;
+    align-items: flex-start;
+    padding: clamp(24px, 3vw, 36px) 0;
+  }
+  .home-why__row:nth-child(3),
+  .home-why__row:nth-child(4) {
+    border-top: 1px solid rgba(var(--mint-rgb), 0.14);
   }
 
-  /* FRONT — mint-tinted poster. */
-  .home-why__face--front {
-    justify-content: space-between;
-    background:
-      radial-gradient(circle at 78% 88%, rgba(104, 227, 190, 0.22) 0%, rgba(104, 227, 190, 0) 55%),
-      linear-gradient(155deg, rgba(104, 227, 190, 0.08) 0%, rgba(104, 227, 190, 0.02) 100%);
-    box-shadow: 0 16px 32px rgba(10, 22, 28, 0.3), inset 0 0 0 1px rgba(104, 227, 190, 0.22);
-  }
-
-  .home-why__watermark {
-    position: absolute;
-    right: clamp(10px, 1.4vw, 20px);
-    bottom: -0.16em;
-    font-family: var(--font-display);
-    font-size: clamp(104px, 11vw, 168px);
-    font-weight: 700;
-    line-height: 1;
-    color: rgba(104, 227, 190, 0.14);
-    pointer-events: none;
-    z-index: 0;
-    transition: color 0.3s ease;
-  }
-
-  .home-why__item-head {
-    position: relative;
-    z-index: 1;
-    margin: 0;
-    max-width: 14ch;
-    font-family: var(--font-body);
-    font-size: clamp(22px, 2.4vw, 32px);
-    font-weight: 700;
-    line-height: 1.12;
-    letter-spacing: -0.02em;
-    color: var(--off-white);
-  }
-
-  /* Flip affordance — a small mint badge that spins 180° as the card flips,
-     so the cue and the motion read together. */
-  .home-why__flip {
-    position: relative;
-    z-index: 1;
-    align-self: flex-start;
-    width: 38px;
-    height: 38px;
+  /* Soft duotone icon tile — house style adapted to dark: mint-tinted gradient,
+     inset mint hairline, no drop shadow. Icon is line work with one gold accent. */
+  .home-why__icon {
+    flex: 0 0 auto;
+    width: 54px;
+    height: 54px;
     display: grid;
     place-items: center;
-    border-radius: 9999px;
-    color: var(--mint);
-    background: rgba(104, 227, 190, 0.14);
-    box-shadow: inset 0 0 0 1px rgba(104, 227, 190, 0.42);
-    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), background 0.25s ease;
+    border-radius: 16px;
+    background: linear-gradient(155deg, rgba(104, 227, 190, 0.14) 0%, rgba(104, 227, 190, 0.04) 100%);
+    box-shadow: inset 0 0 0 1px rgba(var(--mint-rgb), 0.22);
   }
-  .home-why__flip :global(svg) {
-    width: 18px;
-    height: 18px;
+  .home-why__icon :global(svg) {
+    width: 28px;
+    height: 28px;
     display: block;
   }
-  @media (hover: hover) {
-    .home-why__item:hover .home-why__flip,
-    .home-why__item:focus-within .home-why__flip {
-      transform: rotate(180deg);
-      background: rgba(104, 227, 190, 0.24);
-    }
-    .home-why__item:hover .home-why__watermark {
-      color: rgba(104, 227, 190, 0.22);
-    }
+
+  .home-why__copy {
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
-  /* BACK — darker info side, rotated to face away until the card flips. */
-  .home-why__face--back {
-    transform: rotateY(180deg);
-    justify-content: flex-start;
-    gap: 10px;
-    background: linear-gradient(160deg, #0c1a22 0%, #08131a 100%);
-    box-shadow: 0 16px 32px rgba(10, 22, 28, 0.3), inset 0 0 0 1px rgba(104, 227, 190, 0.28);
-    border-top: 3px solid var(--mint);
-  }
-  .home-why__back-index {
-    font-family: var(--font-display);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    color: var(--mint);
-  }
-  .home-why__back-head {
-    margin: 0;
-    max-width: 26ch;
+  .home-why__head {
+    margin: 0 0 8px;
+    max-width: 22ch;
     font-family: var(--font-body);
-    font-size: clamp(15px, 1.4vw, 18px);
+    font-size: clamp(17px, 1.5vw, 20px);
     font-weight: 700;
     line-height: 1.2;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.015em;
     color: var(--off-white);
   }
-  .home-why__detail-text {
+
+  .home-why__detail {
     margin: 0;
+    max-width: 46ch;
     font-family: var(--font-body);
-    font-size: clamp(14px, 1.25vw, 16px);
+    font-size: clamp(14px, 1.15vw, 16px);
     font-weight: 400;
-    line-height: 1.55;
-    color: rgba(245, 248, 250, 0.84);
-  }
-  .home-why__flip--back {
-    margin-top: auto;
-    align-self: flex-start;
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.72);
   }
 
   @media (max-width: 760px) {
-    .home-why__grid {
+    .home-why__list {
       grid-template-columns: 1fr;
+      column-gap: 0;
     }
-  }
-
-  @media (max-width: 480px) {
-    .home-why__item {
-      height: clamp(264px, 34vw, 300px);
+    .home-why__row {
+      border-top: 1px solid rgba(var(--mint-rgb), 0.14);
+    }
+    .home-why__row:first-child {
+      border-top: none;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .home-why__card,
-    .home-why__flip {
-      transition: none;
+    .home-why__apply {
+      filter: none;
     }
   }
 </style>
