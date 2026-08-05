@@ -569,9 +569,9 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '02',
         title: 'Game-Day Mode Switching',
         trigger: 'Tipoff. Halftime. Final buzzer.',
-        image: '/images/industries/sports/capability-game-day-mode-switching.png?v=1',
+        image: '/images/industries/sports/capability-game-day-mode-switching.png?v=2',
         imageAlt:
-          'Packed arena at a peak game moment, the crowd on its feet with arms raised as the centerhung board shows the live score and clock',
+          'LED ribbon and dasher boards lit in coordinated game-day mode — score, stats, and team graphics firing together across the bowl as the crowd rises behind',
         detail:
           'Every game segment becomes one full configuration of boards, audio, lights, and signage — switch the whole building in a single tap, on cue.',
       },
