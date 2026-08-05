@@ -265,6 +265,11 @@
 </style>
 <script is:inline>
   (function () {
+    /* Defer until the DOM is parsed — HomeMesh renders near the top of
+       the body, so an inline script here would run before .home-intro
+       exists. Wait for DOMContentLoaded before applying the intro variant. */
+    function _r(fn){ if (document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', fn); } else { fn(); } }
+    _r(function () {
     /* Hero locked to C (approved). Intro variants via ?intro=a|b|c|d (default 'd').
        On the live homepage there's no mockup banner, so the banner-toggle
        loop below is a harmless no-op (no matching links). */
@@ -409,6 +414,6 @@
         window.addEventListener('resize', draw);
       }
     }
+    });
   })();
 </script>
-</style>
