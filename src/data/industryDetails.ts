@@ -579,7 +579,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '03',
         title: 'Control From Anywhere',
         trigger: 'On the floor, in the concourse — anywhere on property.',
-        image: '/images/industries/sports/capability-control-from-anywhere.png?v=1',
+        image: '/images/industries/sports/capability-control-from-anywhere.png?v=2',
         imageAlt:
           'An operator walking the arena concourse with a tablet showing the full venue floorplan and every A/V zone ready to control',
         detail:
@@ -589,7 +589,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '04',
         title: 'Endpoint Status at a Glance',
         trigger: 'Every morning, before doors.',
-        image: '/images/industries/sports/capability-pre-doors-health-check.png?v=2',
+        image: '/images/industries/sports/capability-pre-doors-health-check.png?v=3',
         imageAlt:
           'An AV technician on the empty concourse before doors, reviewing the live status of every display, player, and audio zone on a tablet',
         detail:
