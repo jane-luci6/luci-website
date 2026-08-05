@@ -19,6 +19,7 @@ import { site } from '../data/site';
     <span class="mockup-banner__dot"></span>
     <span>Intro energy — compare directions:</span>
     <nav class="mockup-banner__variants" aria-label="Intro variants">
+      <a href="?intro=d#home-intro" data-intro="d">D · No header</a>
       <a href="?intro=a#home-intro" data-intro="a">A · Punch + deep navy</a>
       <a href="?intro=b#home-intro" data-intro="b">B · Image-led</a>
       <a href="?intro=c#home-intro" data-intro="c">C · Atmosphere</a>
@@ -166,7 +167,8 @@ import { site } from '../data/site';
   }
 
   /* ============================================================
-     INTRO ENERGY VARIANTS — toggle via ?intro=a|b|c
+     INTRO ENERGY VARIANTS — toggle via ?intro=a|b|c|d
+     D = No header — photo continues from “run them all”
      A = Punchy short head + deep navy (stay in the dark ribbon)
      B = Image-led: tiny lockup, photo owns the section
      C = Tightened copy + whisper mesh atmosphere
@@ -176,6 +178,32 @@ import { site } from '../data/site';
   .home-intro::before {
     content: none;
     display: none;
+  }
+
+  /* --- D · No header — flows from differentiator --- */
+  .home-intro.intro-d {
+    background: var(--navy) !important; /* match .home-diff */
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+  }
+  body:has(.home-intro.intro-d) .home-diff {
+    border-bottom: none !important;
+  }
+  .home-intro.intro-d .home-intro__header {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .home-intro.intro-d .home-intro__inner {
+    padding-block: clamp(8px, 1.5vw, 16px) clamp(40px, 6vw, 64px) !important;
+  }
+  .home-intro.intro-d .home-intro__stage {
+    margin-top: 0 !important;
   }
 
   /* --- A · Punch + deep navy --- */
@@ -730,17 +758,17 @@ import { site } from '../data/site';
 
 <script is:inline>
   (function () {
-    /* Hero locked to C (approved). Intro variants via ?intro=a|b|c */
+    /* Hero locked to C (approved). Intro variants via ?intro=a|b|c|d */
     var hero = document.querySelector('.home-entry');
     if (hero) hero.classList.add('hero-c');
 
     var params = new URLSearchParams(location.search);
-    var intro = (params.get('intro') || 'a').toLowerCase();
-    if (!['a', 'b', 'c'].includes(intro)) intro = 'a';
+    var intro = (params.get('intro') || 'd').toLowerCase();
+    if (!['a', 'b', 'c', 'd'].includes(intro)) intro = 'd';
 
     var section = document.querySelector('.home-intro');
     if (section) {
-      section.classList.remove('intro-a', 'intro-b', 'intro-c');
+      section.classList.remove('intro-a', 'intro-b', 'intro-c', 'intro-d');
       section.classList.add('intro-' + intro);
 
       var copy = {
@@ -757,6 +785,11 @@ import { site } from '../data/site';
         c: {
           lead: 'One interface for the ',
           accent: 'guest experience',
+          tail: '.'
+        },
+        d: {
+          lead: 'One interface to control, automate, and execute the ',
+          accent: 'entire guest experience',
           tail: '.'
         }
       };
