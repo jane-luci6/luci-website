@@ -37,17 +37,13 @@
   .home-entry.hero-c::before {
     background: url('/images/mesh/luci-bg-hero-split-1920x1080.svg') center / cover no-repeat;
     mix-blend-mode: screen; opacity: 1;
-    -webkit-mask-image:
-      radial-gradient(ellipse 52% 68% at 20% 42%, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0.45) 35%, rgba(0,0,0,0.75) 58%, #000 80%),
-      linear-gradient(to right, #000 38%, rgba(0,0,0,0.5) 52%, transparent 70%);
-    mask-image:
-      radial-gradient(ellipse 52% 68% at 20% 42%, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0.45) 35%, rgba(0,0,0,0.75) 58%, #000 80%),
-      linear-gradient(to right, #000 38%, rgba(0,0,0,0.5) 52%, transparent 70%);
-    -webkit-mask-composite: source-over, source-in;
-    mask-composite: add, intersect;
+    -webkit-mask-image: radial-gradient(ellipse 52% 68% at 20% 42%, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0.45) 35%, rgba(0,0,0,0.75) 58%, #000 80%);
+    mask-image: radial-gradient(ellipse 52% 68% at 20% 42%, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0.45) 35%, rgba(0,0,0,0.75) 58%, #000 80%);
   }
   .home-entry.hero-c::after {
-    background: radial-gradient(ellipse 55% 70% at 20% 42%, rgba(7,15,20,0.78) 0%, rgba(7,15,20,0.55) 32%, rgba(7,15,20,0.25) 55%, transparent 78%);
+    background:
+      linear-gradient(to right, transparent 42%, rgba(7,15,20,0.6) 52%, rgba(7,15,20,0.95) 64%),
+      radial-gradient(ellipse 55% 70% at 20% 42%, rgba(7,15,20,0.78) 0%, rgba(7,15,20,0.55) 32%, rgba(7,15,20,0.25) 55%, transparent 78%);
   }
   .home-entry.hero-c .home-entry__copy { isolation: isolate; }
   .home-entry.hero-c .home-entry__copy::before {
