@@ -180,31 +180,42 @@ import { site } from '../data/site';
     display: none;
   }
 
-  /* --- D · No header — flows from differentiator --- */
+  /* --- D · Full-bleed photo, overlaid header, scattered cards within margins --- */
   .home-intro.intro-d {
-    background: var(--navy) !important; /* match .home-diff */
+    position: relative;
+    isolation: isolate;
+    background: var(--navy) !important;
     border-bottom-color: rgba(255, 255, 255, 0.06);
+    overflow: hidden;
   }
   body:has(.home-intro.intro-d) .home-diff {
     border-bottom: none !important;
   }
+  .home-intro.intro-d::before {
+    content: none !important;
+    display: none !important;
+  }
+  /* Header removed from view — kept in DOM for screen readers */
   .home-intro.intro-d .home-intro__header {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+    pointer-events: none !important;
   }
   /* Full-bleed photo — break out of the content container */
   .home-intro.intro-d .home-intro__inner.container {
+    position: relative;
+    z-index: 1;
     max-width: none !important;
     width: 100% !important;
     padding-inline: 0 !important;
-    padding-block: 0 clamp(40px, 6vw, 64px) !important;
+    padding-block: 0 clamp(32px, 5vw, 52px) !important;
   }
   .home-intro.intro-d .home-intro__stage {
     margin-top: 0 !important;
@@ -212,7 +223,84 @@ import { site } from '../data/site';
   }
   .home-intro.intro-d .home-intro__frame {
     border-radius: 0 !important;
-    aspect-ratio: 21 / 11 !important; /* slightly wider cinematic crop */
+    aspect-ratio: 21 / 9 !important;
+    width: 100% !important;
+    max-height: 64vh;
+  }
+  .home-intro.intro-d .home-intro__frame img {
+    object-position: center 15% !important;
+  }
+  /* Side gradients on the photo — fade edges into the section bg, guide eye to center */
+  .home-intro.intro-d .home-intro__scrim {
+    background:
+      linear-gradient(90deg, rgba(10, 22, 28, 0.72) 0%, rgba(10, 22, 28, 0.18) 14%, rgba(10, 22, 28, 0) 26%, rgba(10, 22, 28, 0) 74%, rgba(10, 22, 28, 0.18) 86%, rgba(10, 22, 28, 0.72) 100%) !important,
+      linear-gradient(to bottom, rgba(8, 17, 22, 0.55) 0%, rgba(8, 17, 22, 0) 18%, rgba(8, 17, 22, 0) 70%, rgba(8, 17, 22, 0.5) 100%) !important;
+  }
+  /* Scattered cards within content-wide margins (not at the 2.5% edges).
+     Control = top-left, Automate = top-right, Execute = bottom-left (diagonal scatter). */
+  .home-intro.intro-d .home-intro__card {
+    --bleed-inset: max(var(--page-pad), calc((100% - var(--content-wide)) / 2));
+    width: clamp(244px, 26vw, 320px) !important;
+    max-width: min(46%, 340px) !important;
+    z-index: 3;
+  }
+  /* Control (top-left) — inline style has "top" */
+  .home-intro.intro-d .home-intro__card--left[style*="top"] {
+    left: var(--bleed-inset) !important;
+    top: 10% !important;
+  }
+  /* Automate (top-right) */
+  .home-intro.intro-d .home-intro__card--right[style*="top"] {
+    right: var(--bleed-inset) !important;
+    top: 10% !important;
+  }
+  /* Execute (bottom-left) — inline style has "bottom" */
+  .home-intro.intro-d .home-intro__card--left[style*="bottom"] {
+    left: var(--bleed-inset) !important;
+    top: auto !important;
+    bottom: 7% !important;
+  }
+  /* Hide the server-rendered arrows (calibrated for the 16:11 crop) —
+     JS draws a fresh overlay calibrated for the 21:9 crop + scattered cards. */
+  .home-intro.intro-d .home-intro__arrows {
+    display: none !important;
+  }
+  .home-intro.intro-d .home-intro__arrows-d {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    filter: drop-shadow(0 0 2px rgba(8, 17, 22, 0.9));
+  }
+  .home-intro.intro-d .home-intro__arrows-d line {
+    stroke: var(--mint);
+    stroke-width: 1.4;
+    vector-effect: non-scaling-stroke;
+    opacity: 0.92;
+  }
+  .home-intro.intro-d .home-intro__arrows-d circle.origin {
+    fill: var(--mint);
+    stroke: rgba(8, 17, 22, 0.7);
+    stroke-width: 0.5;
+  }
+  .home-intro.intro-d .home-intro__arrows-d circle.target {
+    fill: var(--mint);
+    stroke: rgba(8, 17, 22, 0.6);
+    stroke-width: 0.6;
+  }
+  .home-intro.intro-d .home-intro__arrows-d .room path {
+    fill: none;
+    stroke: var(--mint);
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+    opacity: 0.75;
+  }
+  .home-intro.intro-d .home-intro__arrows-d .room .room-leader {
+    stroke-width: 1.6;
+    stroke-dasharray: 4 4;
+    opacity: 0.9;
   }
   .home-intro.intro-d .home-intro__actions {
     padding-inline: var(--page-pad);
@@ -223,6 +311,7 @@ import { site } from '../data/site';
   @media (max-width: 760px) {
     .home-intro.intro-d .home-intro__frame {
       aspect-ratio: 16 / 10 !important;
+      max-height: none;
     }
   }
 
@@ -808,9 +897,9 @@ import { site } from '../data/site';
           tail: '.'
         },
         d: {
-          lead: 'One interface to control, automate, and execute the ',
-          accent: 'entire guest experience',
-          tail: '.'
+          lead: 'One interface for ',
+          accent: 'property-wide A/V',
+          tail: ''
         }
       };
       var h = document.getElementById('home-intro-title');
@@ -828,5 +917,113 @@ import { site } from '../data/site';
     document.querySelectorAll('.mockup-banner__variants a').forEach(function (a) {
       a.classList.toggle('is-active', a.getAttribute('data-intro') === intro);
     });
+
+    /* --- Variant D: fresh leader-line overlay calibrated for the 21:9 crop + scattered cards --- */
+    if (intro === 'd') {
+      var frame = document.querySelector('.home-intro.intro-d .home-intro__frame');
+      if (frame) {
+        var NS = 'http://www.w3.org/2000/svg';
+        var svg = document.createElementNS(NS, 'svg');
+        svg.setAttribute('class', 'home-intro__arrows-d');
+        svg.setAttribute('viewBox', '0 0 100 100');
+        svg.setAttribute('preserveAspectRatio', 'none');
+        svg.setAttribute('aria-hidden', 'true');
+        var defs = document.createElementNS(NS, 'defs');
+        var mk = document.createElementNS(NS, 'marker');
+        mk.setAttribute('id', 'hi-arrow-d');
+        mk.setAttribute('markerWidth', '7');
+        mk.setAttribute('markerHeight', '7');
+        mk.setAttribute('refX', '5.2');
+        mk.setAttribute('refY', '3');
+        mk.setAttribute('orient', 'auto');
+        var p = document.createElementNS(NS, 'path');
+        p.setAttribute('d', 'M0 0L6 3L0 6Z');
+        p.setAttribute('fill', 'var(--mint)');
+        mk.appendChild(p);
+        defs.appendChild(mk);
+        svg.appendChild(defs);
+        var gC = document.createElementNS(NS, 'g');
+        var gA = document.createElementNS(NS, 'g');
+        var gE = document.createElementNS(NS, 'g');
+        svg.appendChild(gC); svg.appendChild(gA); svg.appendChild(gE);
+        frame.appendChild(svg);
+
+        /* Targets as % of the 21:9 frame, tuned to point to the same image elements as the
+           original (TV bank, ceiling lights, speakers, signage pillar, video wall). */
+        var targets = {
+          control: [
+            { x: 15, y: 50 }, { x: 44, y: 6 }, { x: 60, y: 10 }
+          ],
+          automate: [
+            { x: 40, y: 44 }, { x: 70, y: 48 }
+          ]
+        };
+
+        function clear(g) { while (g.firstChild) g.removeChild(g.firstChild); }
+
+        function edgeOrigin(card, target) {
+          var fr = frame.getBoundingClientRect();
+          var cr = card.getBoundingClientRect();
+          var left = (cr.left - fr.left) / fr.width * 100;
+          var right = (cr.right - fr.left) / fr.width * 100;
+          var top = (cr.top - fr.top) / fr.height * 100;
+          var bottom = (cr.bottom - fr.top) / fr.height * 100;
+          var cx = (left + right) / 2;
+          var cy = (top + bottom) / 2;
+          var tpx = fr.left + target.x / 100 * fr.width;
+          var tpy = fr.top + target.y / 100 * fr.height;
+          var dL = Math.hypot(tpx - cr.left, tpy - (cr.top + cr.bottom) / 2);
+          var dR = Math.hypot(tpx - cr.right, tpy - (cr.top + cr.bottom) / 2);
+          var dT = Math.hypot(tpx - (cr.left + cr.right) / 2, tpy - cr.top);
+          var dB = Math.hypot(tpx - (cr.left + cr.right) / 2, tpy - cr.bottom);
+          var minD = Math.min(dL, dR, dT, dB);
+          var ox, oy;
+          if (minD === dT) { ox = Math.max(left + 1, Math.min(right - 1, cx + (target.x - cx) * 0.35)); oy = top; }
+          else if (minD === dB) { ox = Math.max(left + 1, Math.min(right - 1, cx + (target.x - cx) * 0.35)); oy = bottom; }
+          else if (minD === dL) { oy = Math.max(top + 1, Math.min(bottom - 1, cy + (target.y - cy) * 0.35)); ox = left; }
+          else { oy = Math.max(top + 1, Math.min(bottom - 1, cy + (target.y - cy) * 0.35)); ox = right; }
+          return { x: ox, y: oy };
+        }
+
+        function line(g, ox, oy, tx, ty) {
+          var l = document.createElementNS(NS, 'line');
+          l.setAttribute('x1', String(ox)); l.setAttribute('y1', String(oy));
+          l.setAttribute('x2', String(tx)); l.setAttribute('y2', String(ty));
+          l.setAttribute('marker-end', 'url(#hi-arrow-d)');
+          g.appendChild(l);
+          var t = document.createElementNS(NS, 'circle');
+          t.setAttribute('class', 'target');
+          t.setAttribute('cx', String(tx)); t.setAttribute('cy', String(ty)); t.setAttribute('r', '0.95');
+          g.appendChild(t);
+        }
+
+        function draw() {
+          if (window.matchMedia('(max-width: 760px)').matches) { svg.style.display = 'none'; return; }
+          svg.style.display = '';
+          var cards = frame.querySelectorAll('.home-intro__card');
+          if (cards.length < 3) return;
+          var control = cards[0], automate = cards[1], execute = cards[2];
+          clear(gC); clear(gA); clear(gE);
+        targets.control.forEach(function (t) { var o = edgeOrigin(control, t); line(gC, o.x, o.y, t.x, t.y); });
+        targets.automate.forEach(function (t) { var o = edgeOrigin(automate, t); line(gA, o.x, o.y, t.x, t.y); });
+
+          /* Execute: straight dotted leader from card 3 tracing the lower
+             portion to the right side. No bracket, no origin dot. */
+          var oE = edgeOrigin(execute, { x: 96, y: 92 });
+          var room = document.createElementNS(NS, 'g');
+          room.setAttribute('class', 'room');
+          var leader = document.createElementNS(NS, 'path');
+          leader.setAttribute('class', 'room-leader');
+          leader.setAttribute('d', 'M' + oE.x + ' ' + oE.y + ' H96');
+          room.appendChild(leader);
+          gE.appendChild(room);
+        }
+
+        /* Wait for layout + image so card rects are real */
+        if (document.readyState === 'complete') draw();
+        else window.addEventListener('load', draw);
+        window.addEventListener('resize', draw);
+      }
+    }
   })();
 </script>
