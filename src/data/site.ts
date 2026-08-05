@@ -140,7 +140,7 @@ export const homeLedger = {
   headingLead: 'Less hardware. Fewer vendors. ',
   headingAccent: 'Your team in control.',
   lede:
-    'LUCI collapses four or more multimedia systems, five or more racks, and one hundred plus devices into one interface and one equipment rack — then carries that same consolidation through your network, service model, and code.',
+    'LUCI collapses your technology maze and simplifies your network, service model, and code.',
   ctaLabel: 'See it on your floor',
   ctaHref: '/contact',
 } as const;
