@@ -206,7 +206,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         image: '/images/industries/casino/capability-property-mode-switching.png?v=1',
         imageAlt: 'A casino sportsbook floor switching into fight-night event mode, crowd gathering in front of a massive LED wall',
         detail:
-          'Every mode your property runs becomes one full configuration of audio, screens, and lighting — switch the whole floor in a single tap.',
+          'Every mode your property runs becomes one full configuration of audio, screens, and lighting — switch the whole floor in a few taps.',
       },
       {
         index: '04',
@@ -412,7 +412,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         title: 'Ballroom Event Switching',
         trigger: 'Wedding. Banquet. Corporate.',
         detail:
-          'Every event type — and every room combine — becomes one full configuration of audio, displays, and lighting. Switch the room in a single tap.',
+          'Every event type — and every room combine — becomes one full configuration of audio, displays, and lighting. Switch the room in a few taps.',
       },
       {
         index: '04',
@@ -602,7 +602,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         imageAlt:
           'LED ribbon and dasher boards lit in coordinated game-day mode — score, stats, and team graphics firing together across the bowl as the crowd rises behind',
         detail:
-          'Every game segment becomes one full configuration of boards, audio, lights, and signage — switch the whole building in a single tap, on cue.',
+          'Every game segment becomes one full configuration of boards, audio, lights, and signage — switch the whole building in a few taps, on cue.',
       },
       {
         index: '03',
@@ -639,7 +639,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       lockupName: 'Turn every moment into <em>revenue</em>',
       lockupRole: 'The business beyond the ticket',
       deck:
-        'Every screen in the building is a revenue asset \u2014 but only if it moves with the moment. LUCI turns your boards, sound, and lighting into coordinated moments the whole bowl feels: bring the bowl to life on a big play, fire a sponsor activation on cue, and switch the whole building between events in a tap.',
+        'Every screen in the building is a revenue asset \u2014 but only if it moves with the moment. LUCI turns your boards, sound, and lighting into coordinated moments the whole bowl feels: bring the bowl to life on a big play, fire a sponsor activation on cue, and switch the whole building between events in a few taps.',
     },
     tickerLocations: [
       'Centerhung Board',
@@ -878,7 +878,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         title: 'Operations Mode Switching',
         trigger: 'Normal. Irregular. Emergency.',
         detail:
-          'Each operational state becomes one configuration of displays, paging, and wayfinding — switch the terminal between routine, irregular-operations, and emergency voice-alarm in one tap, paging taking priority.',
+          'Each operational state becomes one configuration of displays, paging, and wayfinding — switch the terminal between routine, irregular-operations, and emergency voice-alarm in a few taps, paging taking priority.',
       },
       {
         index: '04',
@@ -912,7 +912,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       lockupName: 'Conferences & Convention Centers',
       lockupRole: 'One platform for a building that reconfigures every few hours',
       deck:
-        'A convention center is not running one show — it is running many, back to back and side by side, and the same hall becomes a different technical environment every few hours. LUCI puts every room — main stage, breakouts, divisible halls, and the hybrid broadcast — behind one interface your team runs from one tap.',
+        'A convention center is not running one show — it is running many, back to back and side by side, and the same hall becomes a different technical environment every few hours. LUCI puts every room — main stage, breakouts, divisible halls, and the hybrid broadcast — behind one interface your team runs with ease.',
     },
     challengesLockup: {
       lockupName: 'What convention centers actually <em>deal with</em>',
@@ -995,7 +995,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       {
         index: '03',
         problem: 'Air walls move, and the A/V does not follow.',
-        headline: 'Air-wall splits switch in one tap.',
+        headline: 'Air-wall splits switch in a few taps.',
         answer:
           'Divided and open modes become saved presets; DSP-tuned audio zones recalibrate for the partition, so two simultaneous sessions stay independent without cross-room bleed — and the A/V follows the wall, not the other way around.',
         image: '/images/industries/conference-convention-centers/solution-divisible-bleed.jpg?v=1',
@@ -1050,7 +1050,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         title: 'Room Turnover',
         trigger: 'A new event format.',
         detail:
-          'A new layout, combine, or divide recalls the right audio zones, displays, and control for the next event in one tap.',
+          'A new layout, combine, or divide recalls the right audio zones, displays, and control for the next event in a few taps.',
       },
       {
         index: '03',

@@ -270,9 +270,9 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
           'Weekday, Saturday peak, marquee event, holiday \u2014 each becomes one configuration of audio, screens, and lighting. Some run on a tap; premium spaces keep a standing identity.',
       },
       {
-        front: 'Reconfigure a video wall for a tournament, tip-off, or keynote \u2014 with a tap.',
+        front: 'Reconfigure a video wall for a tournament, tip-off, or keynote \u2014 with a few taps.',
         back:
-          'Presets switch the wall between a full layout and zoned views with a tap or on a schedule. When the event ends, one tap restores the everyday layout.',
+          'Presets switch the wall between a full layout and zoned views with a few taps or on a schedule. When the event ends, a few taps restore the everyday layout.',
       },
     ],
     ctaTitle: 'A/V should <em>support your job</em>, not block it.',
@@ -416,7 +416,7 @@ export const personaDetails: Partial<Record<PersonaId, PersonaDetail>> = {
         name: 'Conference & convention centers',
         image: '/images/industries/conference-convention-centers.jpg',
         callout:
-          'Every client and event needs the space to look like theirs, and every day the schedule changes. LUCI rebrands spaces per event in a tap, keeps wayfinding and promo content correct across simultaneous events, and shows planners a venue that\u2019s modern and in control.',
+          'Every client and event needs the space to look like theirs, and every day the schedule changes. LUCI rebrands spaces per event in a few taps, keeps wayfinding and promo content correct across simultaneous events, and shows planners a venue that\u2019s modern and in control.',
         emphasis:
           'Instant per-event branding \u00b7 correct content across concurrent events \u00b7 a venue brand that sells itself.',
       },

@@ -107,7 +107,7 @@ export const whoWeServe = {
       name: 'Hotels & resorts',
       image: '/images/industries/hotels-resorts.jpg',
       line:
-        'Banquet, A/V, and front-of-house flip a ballroom on one tap — and reset it on their own.',
+        'Banquet, A/V, and front-of-house flip a ballroom in a few taps — and reset it on their own.',
     },
     {
       slug: 'sports-venues',
