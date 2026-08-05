@@ -387,6 +387,13 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         answer:
           'LUCI programs and triggers the right content by space, time, and guest context, so you can promote the spa at dusk and breakfast at dawn and surface the right upsell where it matters.',
       },
+      {
+        index: '06',
+        problem: 'Disorientation hits the moment guests enter the parking garage.',
+        headline: 'Media orients them from arrival to their room.',
+        answer:
+          'LUCI drives wayfinding content from the parking garage through the lobby to the guest floor, so media orients guests the moment they arrive and carries them to their room without a wrong turn.',
+      },
     ],
     automationLockup: {
       lockupName: 'What you can <em>do with LUCI</em>',
@@ -395,38 +402,38 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     automations: [
       {
         index: '01',
-        title: 'Morning Lobby Reset',
-        trigger: 'Every morning, automatically.',
-        detail:
-          'One scheduled preset returns lobby screens, music, and wayfinding to brand baseline before the first guest walks in.',
-      },
-      {
-        index: '02',
         title: 'VIP Arrival Mode',
         trigger: 'The moment a flagged guest checks in.',
         detail:
           'Lobby signage, elevator screens, and welcome audio shift to the arrival preset — then revert when the window closes.',
       },
       {
-        index: '03',
-        title: 'Ballroom Event Switching',
-        trigger: 'Wedding. Banquet. Corporate.',
-        detail:
-          'Every event type — and every room combine — becomes one full configuration of audio, displays, and lighting. Switch the room in a few taps.',
-      },
-      {
-        index: '04',
+        index: '02',
         title: 'Pool & Amenity Schedules',
         trigger: 'Quiet morning. Peak afternoon.',
         detail:
           'Outdoor and amenity zones follow their own curves — music, messaging, and display brightness move automatically through the day.',
       },
       {
-        index: '05',
-        title: 'Revert-After-Timer',
-        trigger: 'A temporary takeover.',
+        index: '03',
+        title: 'Weather Alert Broadcast',
+        trigger: 'The moment a warning is issued.',
         detail:
-          'Trigger a preset for an announcement or promotion, set it to revert after a set time, and the property snaps back to baseline automatically.',
+          'Broadcast weather warnings, pool closures, and lightning alerts across every screen, speaker, and zone at once — then auto-revert when the all-clear hits.',
+      },
+      {
+        index: '04',
+        title: 'Wayfinding Sync on Room Change',
+        trigger: 'When a room reconfigures for an event.',
+        detail:
+          'Update every wayfinding screen across the property the moment a room combines or splits, so guests never walk up to the wrong door.',
+      },
+      {
+        index: '05',
+        title: 'Immersive Experience Mode',
+        trigger: 'A themed evening across the property.',
+        detail:
+          'Coordinate audio, lighting, and video across the lobby, restaurants, and pool into one immersive, themed experience that drives guest spend.',
       },
     ],
     tickerLocations: [
