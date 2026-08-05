@@ -461,28 +461,28 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       zones: [
         {
           label: 'Set the tone on arrival',
-          desc: 'Welcome and orient the guest at arrival \u2014 signage, wayfinding, and music.',
+          desc: 'Welcome and orient the guest with signage, wayfinding, and music.',
           plate: { side: 'right', right: '-4%', top: '80%' },
           delay: 0,
           lines: [{ x1: 84, y1: 80, x2: 50, y2: 87 }],
         },
         {
           label: 'Move guests toward amenities',
-          desc: 'Promote the spa at dusk and breakfast at dawn \u2014 the right moment.',
+          desc: 'Promote the spa at dusk and breakfast at dawn at the right moment.',
           plate: { side: 'left', left: '-4%', top: '60%' },
           delay: 3.5,
           lines: [{ x1: 16, y1: 60, x2: 25, y2: 48 }],
         },
         {
           label: 'Switch the event floor in one tap',
-          desc: 'Wedding, banquet, and corporate \u2014 room combines, one tap.',
+          desc: 'Wedding, banquet, and corporate room combines switch in one tap.',
           plate: { side: 'right', right: '-4%', top: '30%' },
           delay: 7,
           lines: [{ x1: 84, y1: 30, x2: 73, y2: 18 }],
         },
         {
           label: 'Hold one brand across the property',
-          desc: 'Every display, speaker, and light across the footprint \u2014 one standard.',
+          desc: 'Every display, speaker, and light runs on one standard.',
           plate: { side: 'left', left: '-4%', top: '14%' },
           delay: 10.5,
           lines: [{ x1: 16, y1: 14, x2: 50, y2: 12 }],
