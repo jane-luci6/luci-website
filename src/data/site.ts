@@ -140,7 +140,7 @@ export const homeLedger = {
   headingLead: 'Less hardware. Fewer vendors. ',
   headingAccent: 'Your team in control.',
   lede:
-    'LUCI collapses your technology maze and simplifies your network, service model, and code.',
+    'LUCI collapses the technology maze and simplifies your network, service model, and code.',
   ctaLabel: 'See it on your floor',
   ctaHref: '/contact',
 } as const;
