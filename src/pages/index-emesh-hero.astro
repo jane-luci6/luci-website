@@ -244,10 +244,10 @@ import { site } from '../data/site';
     max-width: min(46%, 340px) !important;
     z-index: 3;
   }
-  /* Control (top-left) — inline style has "top" */
+  /* Control (top-left) — sits over the ticker to cover the real team names */
   .home-intro.intro-d .home-intro__card--left[style*="top"] {
-    left: var(--bleed-inset) !important;
-    top: 10% !important;
+    left: 2% !important;
+    top: 0 !important;
   }
   /* Automate (top-right) */
   .home-intro.intro-d .home-intro__card--right[style*="top"] {
