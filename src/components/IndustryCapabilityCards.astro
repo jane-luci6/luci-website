@@ -10,7 +10,7 @@ const count = automations.length;
 ---
 
 <ul class:list={['cap-list', `cap-list--${count}`]} role="list">
-  {automations.map((item) => (
+  {automations.map((item, i) => (
     <li class="cap">
       <div class="cap__media">
         {item.image ? (
@@ -28,12 +28,40 @@ const count = automations.length;
       <div class="cap__scrim" aria-hidden="true"></div>
       <figcaption class="cap__copy">
         <h3 class="cap__title">{item.title}</h3>
-        <p class="cap__detail">{item.detail}</p>
+        <p class="cap__detail" id={`cap-detail-${i}`}>{item.detail}</p>
+        <button
+          type="button"
+          class="cap__more"
+          aria-expanded="false"
+          aria-controls={`cap-detail-${i}`}
+          aria-label={`Read more about ${item.title}`}
+        >
+          <span class="cap__more-label">Read more</span>
+          <svg class="cap__more-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </figcaption>
     </li>
   ))}
 </ul>
 
+<script>
+  document.querySelectorAll<HTMLElement>('.cap').forEach((card) => {
+    const detail = card.querySelector<HTMLElement>('.cap__detail');
+    const toggle = card.querySelector<HTMLButtonElement>('.cap__more');
+    const label = card.querySelector<HTMLElement>('.cap__more-label');
+    if (!detail || !toggle || !label) return;
+    // Only show the toggle when the copy is actually clamped
+    if (detail.scrollHeight <= detail.clientHeight + 1) {
+      toggle.hidden = true;
+      return;
+    }
+    toggle.addEventListener('click', () => {
+      const open = card.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', String(open));
+      label.textContent = open ? 'Read less' : 'Read more';
+    });
+  });
+</script>
 <style>
   .cap-list {
     list-style: none;
@@ -177,6 +205,46 @@ const count = automations.length;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+
+  /* Read-more toggle */
+  .cap__more {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+    padding: 6px 12px;
+    border: 1px solid rgba(var(--mint-rgb), 0.4);
+    border-radius: 9999px;
+    background: rgba(var(--mint-rgb), 0.08);
+    color: var(--mint);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: background 0.25s ease, border-color 0.25s ease;
+  }
+  .cap__more:hover { background: rgba(var(--mint-rgb), 0.16); border-color: var(--mint); }
+  .cap__more-icon { width: 14px; height: 14px; transition: transform 0.3s ease; }
+
+  /* Open state: scrim covers the card, copy fills it and scrolls, detail unclamps */
+  .cap.is-open .cap__scrim {
+    background: linear-gradient(180deg, rgba(10, 22, 28, 0.86) 0%, rgba(10, 22, 28, 0.97) 100%);
+  }
+  .cap.is-open .cap__copy {
+    top: 0;
+    bottom: 0;
+    overflow-y: auto;
+    padding-top: clamp(18px, 2vw, 26px);
+  }
+  .cap.is-open .cap__detail {
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    overflow: visible;
+  }
+  .cap.is-open .cap__more-icon { transform: rotate(180deg); }
+  .cap.is-open .cap__more { margin-top: auto; }
 
   /* Hover: lift the photo + deepen the scrim (desktop only) */
   @media (hover: hover) {
