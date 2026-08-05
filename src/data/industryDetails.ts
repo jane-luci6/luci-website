@@ -404,6 +404,8 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '01',
         title: 'VIP Arrival Mode',
         trigger: 'The moment a flagged guest checks in.',
+        image: '/images/industries/hotel/capability-vip-arrival.png?v=1',
+        imageAlt: 'A hotel host welcoming a guest into a warm luxury lobby, elevator bank glowing ahead',
         detail:
           'Lobby signage, elevator screens, and welcome audio shift to the arrival preset — then revert when the window closes.',
       },
@@ -411,6 +413,8 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '02',
         title: 'Pool & Amenity Schedules',
         trigger: 'Quiet morning. Peak afternoon.',
+        image: '/images/industries/hotel/capability-pool-amenity.png?v=1',
+        imageAlt: 'A luxury resort pool deck at golden hour, cabanas and an outdoor LED screen showing ambient content',
         detail:
           'Outdoor and amenity zones follow their own curves — music, messaging, and display brightness move automatically through the day.',
       },
@@ -418,6 +422,8 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '03',
         title: 'Weather Alert Broadcast',
         trigger: 'The moment a warning is issued.',
+        image: '/images/industries/hotel/capability-weather-alert.png?v=1',
+        imageAlt: 'A resort pool deck as a storm approaches, an outdoor screen broadcasting a weather alert, guests heading for shelter',
         detail:
           'Broadcast weather warnings, pool closures, and lightning alerts across every screen, speaker, and zone at once — then auto-revert when the all-clear hits.',
       },
@@ -425,6 +431,8 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '04',
         title: 'Wayfinding Sync on Room Change',
         trigger: 'When a room reconfigures for an event.',
+        image: '/images/industries/hotel/capability-wayfinding-sync.png?v=1',
+        imageAlt: 'A guest glancing at a backlit wayfinding sign showing room floorplans and arrows in a hotel conference corridor',
         detail:
           'Update every wayfinding screen across the property the moment a room combines or splits, so guests never walk up to the wrong door.',
       },
@@ -432,6 +440,8 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '05',
         title: 'Immersive Experience Mode',
         trigger: 'A themed evening across the property.',
+        image: '/images/industries/hotel/capability-immersive-experience.png?v=1',
+        imageAlt: 'A couple at a candlelit terrace at dusk, a video wall mirroring the sunset across the resort',
         detail:
           'Coordinate audio, lighting, and video across the lobby, restaurants, and pool into one immersive, themed experience that drives guest spend.',
       },
