@@ -17,7 +17,12 @@ import { site } from '../data/site';
 <BaseLayout title="Home — E-mesh Mockup" description={site.subTagline} darkHeader>
   <div class="mockup-banner">
     <span class="mockup-banner__dot"></span>
-    <span>E-mesh page mockup — mesh cleared on Industries / Personas / Go Deeper; flip cards fully opaque underlay; Ameristar faded.</span>
+    <span>Intro energy — compare directions:</span>
+    <nav class="mockup-banner__variants" aria-label="Intro variants">
+      <a href="?intro=a#home-intro" data-intro="a">A · Punch + deep navy</a>
+      <a href="?intro=b#home-intro" data-intro="b">B · Image-led</a>
+      <a href="?intro=c#home-intro" data-intro="c">C · Atmosphere</a>
+    </nav>
   </div>
 
   <HomeHero variant="none" zones />
@@ -151,14 +156,139 @@ import { site } from '../data/site';
      Interest bands get denser opacity. Fade behind text comes later.
      ============================================================ */
 
-  /* Differentiator + Intro — no mesh / no line continuations */
+  /* Differentiator — no mesh / no line continuations */
   .home-diff::before,
-  .home-diff::after,
-  .home-intro::before {
+  .home-diff::after {
     content: none !important;
     background: none !important;
     opacity: 0 !important;
     display: none !important;
+  }
+
+  /* ============================================================
+     INTRO ENERGY VARIANTS — toggle via ?intro=a|b|c
+     A = Punchy short head + deep navy (stay in the dark ribbon)
+     B = Image-led: tiny lockup, photo owns the section
+     C = Tightened copy + whisper mesh atmosphere
+     ============================================================ */
+
+  /* Default kill flat mid-slate circuit leftovers; variants set surface */
+  .home-intro::before {
+    content: none;
+    display: none;
+  }
+
+  /* --- A · Punch + deep navy --- */
+  .home-intro.intro-a {
+    background: var(--navy-deep) !important;
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+  }
+  .home-intro.intro-a .home-intro__inner {
+    padding-block: clamp(40px, 6vw, 64px) !important;
+  }
+  .home-intro.intro-a .home-intro__headline {
+    max-width: 18ch !important;
+    font-size: clamp(30px, 4.6vw, 48px) !important;
+    letter-spacing: -0.03em !important;
+  }
+  .home-intro.intro-a .home-intro__stage {
+    margin-top: clamp(24px, 3vw, 36px) !important;
+  }
+
+  /* --- B · Image-led --- */
+  .home-intro.intro-b {
+    background: var(--navy-deep) !important;
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+  }
+  .home-intro.intro-b .home-intro__inner {
+    padding-block: clamp(32px, 4vw, 48px) !important;
+  }
+  .home-intro.intro-b .home-intro__header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 0;
+  }
+  .home-intro.intro-b .home-intro__header::before {
+    content: 'One interface';
+    display: block;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mint);
+  }
+  .home-intro.intro-b .home-intro__headline {
+    max-width: 22ch !important;
+    font-size: clamp(22px, 2.8vw, 30px) !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.02em !important;
+    color: rgba(245, 248, 250, 0.88) !important;
+  }
+  .home-intro.intro-b .home-intro__headline-accent {
+    color: var(--gold) !important;
+  }
+  .home-intro.intro-b .home-intro__stage {
+    margin-top: clamp(16px, 2vw, 24px) !important;
+  }
+
+  /* --- C · Atmosphere + tightened copy --- */
+  .home-intro.intro-c {
+    position: relative;
+    isolation: isolate;
+    background: var(--navy) !important;
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+  }
+  .home-intro.intro-c::before {
+    content: '' !important;
+    display: block !important;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: url('/images/mesh/luci-bg-hero-mesh-lines-1920x1080.svg') center / cover no-repeat !important;
+    mix-blend-mode: screen !important;
+    opacity: 0.32 !important;
+    -webkit-mask-image: radial-gradient(
+      ellipse 68% 72% at 42% 38%,
+      transparent 0%,
+      rgba(0, 0, 0, 0.2) 34%,
+      rgba(0, 0, 0, 0.6) 58%,
+      #000 82%
+    );
+    mask-image: radial-gradient(
+      ellipse 68% 72% at 42% 38%,
+      transparent 0%,
+      rgba(0, 0, 0, 0.2) 34%,
+      rgba(0, 0, 0, 0.6) 58%,
+      #000 82%
+    );
+  }
+  .home-intro.intro-c::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse 70% 75% at 40% 36%,
+      rgba(7, 15, 20, 0.72) 0%,
+      rgba(7, 15, 20, 0.45) 40%,
+      rgba(7, 15, 20, 0.15) 65%,
+      transparent 85%
+    );
+  }
+  .home-intro.intro-c .home-intro__inner {
+    padding-block: clamp(40px, 6vw, 64px) !important;
+  }
+  .home-intro.intro-c .home-intro__headline {
+    max-width: 20ch !important;
+    font-size: clamp(28px, 4vw, 42px) !important;
+  }
+  .home-intro.intro-c .home-intro__stage {
+    margin-top: clamp(24px, 3vw, 36px) !important;
   }
 
   /* Kill circuit fill on resource card panels */
@@ -459,7 +589,8 @@ import { site } from '../data/site';
     z-index: 9999;
     display: flex;
     align-items: center;
-    gap: 10px;
+    flex-wrap: wrap;
+    gap: 10px 16px;
     padding: 8px var(--page-pad);
     background: var(--navy);
     border-bottom: 1px solid rgba(104, 227, 190, 0.3);
@@ -476,6 +607,31 @@ import { site } from '../data/site';
     background: var(--mint);
     box-shadow: 0 0 8px rgba(var(--mint-rgb), 0.5);
     flex-shrink: 0;
+  }
+  .mockup-banner__variants {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-left: auto;
+  }
+  .mockup-banner__variants a {
+    padding: 4px 10px;
+    border: 1px solid rgba(104, 227, 190, 0.35);
+    color: rgba(245, 248, 250, 0.75);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  }
+  .mockup-banner__variants a:hover {
+    color: var(--off-white);
+    border-color: rgba(104, 227, 190, 0.7);
+  }
+  .mockup-banner__variants a.is-active {
+    color: var(--navy-deep);
+    background: var(--mint);
+    border-color: var(--mint);
   }
 
   /* ---- CTA band styles (copied from index.astro) ---- */
@@ -574,10 +730,50 @@ import { site } from '../data/site';
 
 <script is:inline>
   (function () {
+    /* Hero locked to C (approved). Intro variants via ?intro=a|b|c */
     var hero = document.querySelector('.home-entry');
-    if (!hero) return;
-    var v = (location.hash || '#c').slice(1);
-    if (!['a','b','c'].includes(v)) v = 'c';
-    hero.classList.add('hero-' + v);
+    if (hero) hero.classList.add('hero-c');
+
+    var params = new URLSearchParams(location.search);
+    var intro = (params.get('intro') || 'a').toLowerCase();
+    if (!['a', 'b', 'c'].includes(intro)) intro = 'a';
+
+    var section = document.querySelector('.home-intro');
+    if (section) {
+      section.classList.remove('intro-a', 'intro-b', 'intro-c');
+      section.classList.add('intro-' + intro);
+
+      var copy = {
+        a: {
+          lead: 'One interface. ',
+          accent: 'The whole floor.',
+          tail: ''
+        },
+        b: {
+          lead: 'Control · Automate · ',
+          accent: 'Execute',
+          tail: '.'
+        },
+        c: {
+          lead: 'One interface for the ',
+          accent: 'guest experience',
+          tail: '.'
+        }
+      };
+      var h = document.getElementById('home-intro-title');
+      var c = copy[intro];
+      if (h && c) {
+        h.innerHTML =
+          c.lead +
+          '<em class="home-intro__headline-accent">' +
+          c.accent +
+          '</em>' +
+          c.tail;
+      }
+    }
+
+    document.querySelectorAll('.mockup-banner__variants a').forEach(function (a) {
+      a.classList.toggle('is-active', a.getAttribute('data-intro') === intro);
+    });
   })();
 </script>
