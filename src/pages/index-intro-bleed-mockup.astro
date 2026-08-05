@@ -11,16 +11,18 @@ import { site } from '../data/site';
 
 const { photoSrc, photoAlt, steps } = homeIntroCopy;
 
-/** Targets as % of the full-bleed 21:9 frame (re-aimed for the shorter cinematic crop). */
+/** Targets as % of the full-bleed 21:9 frame (re-aimed for the shorter cinematic crop).
+ *  Origins are computed per-line in JS based on which edge of the card faces the target,
+ *  so leaders always emanate from the box, never cross through it. */
 const targets = {
   control: [
-    { x: 12, y: 42 }, // TV bank
-    { x: 44, y: 12 }, // ceiling lights
-    { x: 61, y: 18 }, // speakers
+    { x: 30, y: 60, from: 'bottom' }, // TV bank (below card)
+    { x: 50, y: 14, from: 'right' },  // ceiling lights (right of card)
+    { x: 68, y: 22, from: 'right' },  // speakers (right of card)
   ],
   automate: [
-    { x: 40, y: 44 }, // signage pillar
-    { x: 73, y: 50 }, // LED wall
+    { x: 44, y: 52, from: 'left' },   // signage pillar (left of card)
+    { x: 58, y: 60, from: 'bottom' }, // LED wall (below card)
   ],
 } as const;
 ---
@@ -377,11 +379,17 @@ const targets = {
     var frame = document.querySelector('.bleed-intro__frame');
     if (!frame) return;
 
-    function pct(el, corner) {
+    function pct(el, edge) {
       var fr = frame.getBoundingClientRect();
       var r = el.getBoundingClientRect();
-      var x = corner === 'right' ? r.right : corner === 'left' ? r.left : (r.left + r.right) / 2;
-      var y = corner === 'bottom' ? r.bottom : corner === 'top' ? r.top : (r.top + r.bottom) / 2;
+      var x, y;
+      switch (edge) {
+        case 'left':   x = r.left;             y = (r.top + r.bottom) / 2; break;
+        case 'right':  x = r.right;            y = (r.top + r.bottom) / 2; break;
+        case 'top':    x = (r.left + r.right) / 2; y = r.top;    break;
+        case 'bottom': x = (r.left + r.right) / 2; y = r.bottom; break;
+        default:      x = (r.left + r.right) / 2; y = (r.top + r.bottom) / 2;
+      }
       return {
         x: ((x - fr.left) / fr.width) * 100,
         y: ((y - fr.top) / fr.height) * 100,
@@ -430,16 +438,14 @@ const targets = {
       clear(gA);
       clear(gE);
 
-      var oC = pct(control, 'right');
-      oC.y = pct(control, 'mid').y;
       targets.control.forEach(function (t) {
-        line(gC, oC.x, oC.y, t.x, t.y);
+        var o = pct(control, t.from || 'right');
+        line(gC, o.x, o.y, t.x, t.y);
       });
 
-      var oA = pct(automate, 'left');
-      oA.y = pct(automate, 'mid').y;
       targets.automate.forEach(function (t) {
-        line(gA, oA.x, oA.y, t.x, t.y);
+        var o = pct(automate, t.from || 'left');
+        line(gA, o.x, o.y, t.x, t.y);
       });
 
       var NS = 'http://www.w3.org/2000/svg';
