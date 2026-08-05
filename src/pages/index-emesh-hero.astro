@@ -515,42 +515,60 @@ import { site } from '../data/site';
     margin-top: 0;
   }
 
-  /* Go Deeper — keep 3-up horizontal cards, compress vertical footprint */
+  /* Go Deeper — keep 3-up horizontal cards, much smaller vertical footprint */
   .home-resources__inner {
-    padding-block: clamp(40px, 5vw, 56px) !important;
+    padding-block: clamp(28px, 3.5vw, 40px) !important;
   }
   .home-resources__head {
-    margin-bottom: clamp(20px, 2.4vw, 28px) !important;
+    margin-bottom: 16px !important;
   }
   .home-resources__heading {
-    font-size: clamp(22px, 2.6vw, 30px) !important;
+    font-size: clamp(18px, 2vw, 22px) !important;
   }
   .home-resources__lede {
-    margin-top: 10px !important;
-    font-size: 15px !important;
+    margin-top: 6px !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
   }
   .home-resources__grid {
-    gap: clamp(16px, 2vw, 24px) !important;
-  }
-  .home-resources .rsc-card__media {
-    aspect-ratio: 2 / 1 !important;
-  }
-  .home-resources .rsc-card__body {
-    gap: 6px !important;
-    padding: clamp(14px, 1.6vw, 18px) !important;
-  }
-  .home-resources .rsc-card__title {
-    font-size: clamp(16px, 1.5vw, 18px) !important;
-  }
-  .home-resources .rsc-card__meta {
-    font-size: 12px !important;
-  }
-  .home-resources .rsc-card__cta {
-    padding-top: 10px !important;
-    font-size: 13px !important;
+    gap: 12px !important;
   }
   .home-resources .rsc-card {
-    border-radius: 12px !important;
+    border-radius: 10px !important;
+  }
+  .home-resources .rsc-card__media {
+    aspect-ratio: auto !important;
+    height: 72px !important;
+  }
+  .home-resources .rsc-card__logo-panel img {
+    width: 42% !important;
+    max-width: 140px !important;
+  }
+  .home-resources .rsc-card__soon {
+    font-size: 11px !important;
+    letter-spacing: 0.14em !important;
+  }
+  .home-resources .rsc-card__body {
+    gap: 4px !important;
+    padding: 12px 14px 14px !important;
+  }
+  .home-resources .rsc-card__kicker {
+    margin: 0 !important;
+    gap: 8px !important;
+  }
+  .home-resources .rsc-card__kicker::before {
+    width: 16px !important;
+  }
+  .home-resources .rsc-card__title {
+    font-size: 15px !important;
+    line-height: 1.25 !important;
+  }
+  .home-resources .rsc-card__meta {
+    font-size: 11px !important;
+  }
+  .home-resources .rsc-card__cta {
+    padding-top: 8px !important;
+    font-size: 12px !important;
   }
 </style>
 
