@@ -2,12 +2,12 @@
 
 export const homeIntroCopy = {
   headline:
-    'One interface to control, automate, and execute the entire guest experience.',
+    'One interface for property-wide A/V.',
   // Brochure-style headline: bold line with a key phrase in a gold accent span
-  headlineLead: 'One interface to control, automate, and execute the ',
-  headlineAccent: 'entire guest experience',
-  headlineTail: '.',
-  photoSrc: '/images/venue-guest-experience-casual.jpg?v=4',
+  headlineLead: 'One interface for ',
+  headlineAccent: 'property-wide A/V',
+  headlineTail: '',
+  photoSrc: '/images/venue-guest-experience-casual-v2.jpg?v=1',
   photoAlt:
     'Premium sportsbook lounge — lighting, a digital signage pillar running a steakhouse ad, an LED ribbon odds board, an LED video wall, and the bar, all controlled by LUCI from one interface',
   /**
