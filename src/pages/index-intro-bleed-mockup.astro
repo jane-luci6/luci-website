@@ -11,18 +11,17 @@ import { site } from '../data/site';
 
 const { photoSrc, photoAlt, steps } = homeIntroCopy;
 
-/** Targets as % of the full-bleed 21:9 frame (re-aimed for the shorter cinematic crop).
- *  Origins are computed per-line in JS based on which edge of the card faces the target,
- *  so leaders always emanate from the box, never cross through it. */
+/** Targets as % of the full-bleed 21:9 frame. Cards sit in a centered row across the
+ *  lower portion; leaders go UP from each card's top edge to its target. */
 const targets = {
   control: [
-    { x: 30, y: 60, from: 'bottom' }, // TV bank (below card)
-    { x: 50, y: 14, from: 'right' },  // ceiling lights (right of card)
-    { x: 68, y: 22, from: 'right' },  // speakers (right of card)
+    { x: 16, y: 30 }, // TV bank (upper-left)
+    { x: 44, y: 12 }, // ceiling lights (upper-center)
+    { x: 60, y: 16 }, // speakers (upper-right of center)
   ],
   automate: [
-    { x: 44, y: 52, from: 'left' },   // signage pillar (left of card)
-    { x: 58, y: 60, from: 'bottom' }, // LED wall (below card)
+    { x: 38, y: 38 }, // signage pillar (mid-center)
+    { x: 70, y: 42 }, // LED wall (mid-right)
   ],
 } as const;
 ---
@@ -38,12 +37,6 @@ const targets = {
   <HomeDifferentiator />
 
   <section class="bleed-intro" aria-label="One interface — annotated venue">
-    <header class="bleed-intro__header">
-      <h2 class="bleed-intro__headline">
-        One interface for all property <em class="bleed-intro__headline-accent">A/V</em>
-      </h2>
-    </header>
-
     <figure class="bleed-intro__stage">
       <div class="bleed-intro__frame">
         <img
@@ -55,6 +48,13 @@ const targets = {
           height="1080"
         />
         <div class="bleed-intro__scrim" aria-hidden="true"></div>
+
+        <!-- Header overlaid top-left of the photo -->
+        <div class="bleed-intro__overlay-header">
+          <h2 class="bleed-intro__headline">
+            One interface for <em class="bleed-intro__headline-accent">property-wide A/V</em>
+          </h2>
+        </div>
 
         <!-- Leaders: JS pins origins to card edges so insets stay accurate at any width -->
         <svg class="bleed-intro__arrows" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
@@ -71,7 +71,7 @@ const targets = {
         <div class="bleed-intro__cards">
           {steps.map((step) => (
             <div
-              class:list={['bleed-intro__card', `bleed-intro__card--${step.align}`, `bleed-intro__card--${step.verb.toLowerCase()}`]}
+              class:list={['bleed-intro__card', `bleed-intro__card--${step.verb.toLowerCase()}`]}
               data-card={step.verb.toLowerCase()}
             >
               <span class="bleed-intro__card-head">
@@ -166,23 +166,28 @@ const targets = {
     border: 0;
   }
 
-  .bleed-intro__header {
-    max-width: var(--content-wide);
-    margin-inline: auto;
-    padding: clamp(32px, 5vw, 56px) var(--page-pad) clamp(20px, 3vw, 32px);
+  /* Header overlaid top-left of the photo, within content margins */
+  .bleed-intro__overlay-header {
+    --bleed-inset: max(var(--page-pad), calc((100% - var(--content-wide)) / 2));
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    padding: clamp(20px, 3vw, 36px) var(--bleed-inset);
+    pointer-events: none;
   }
-
   .bleed-intro__headline {
     margin: 0;
-    max-width: 22ch;
+    max-width: 20ch;
     font-family: var(--font-body);
-    font-size: clamp(28px, 4.2vw, 44px);
+    font-size: clamp(26px, 3.6vw, 40px);
     font-weight: 700;
-    line-height: 1.1;
+    line-height: 1.08;
     letter-spacing: -0.025em;
     color: var(--off-white);
+    text-shadow: 0 2px 12px rgba(8, 17, 22, 0.6);
   }
-
   .bleed-intro__headline-accent {
     font-style: normal;
     color: var(--mint);
@@ -217,9 +222,10 @@ const targets = {
     inset: 0;
     pointer-events: none;
     background:
-      linear-gradient(to bottom, rgba(8, 17, 22, 0.48) 0%, rgba(8, 17, 22, 0) 24%),
-      radial-gradient(55% 50% at 18% 88%, rgba(8, 17, 22, 0.55) 0%, rgba(8, 17, 22, 0) 100%),
-      radial-gradient(50% 48% at 84% 14%, rgba(8, 17, 22, 0.5) 0%, rgba(8, 17, 22, 0) 100%);
+      /* Stronger top-left scrim behind the overlaid header */
+      linear-gradient(135deg, rgba(8, 17, 22, 0.72) 0%, rgba(8, 17, 22, 0.18) 38%, rgba(8, 17, 22, 0) 60%),
+      /* Bottom scrim behind the centered card row */
+      linear-gradient(to top, rgba(8, 17, 22, 0.62) 0%, rgba(8, 17, 22, 0. 12) 30%, rgba(8, 17, 22, 0) 55%);
   }
 
   .bleed-intro__arrows {
@@ -260,51 +266,43 @@ const targets = {
   }
 
   /*
-    Cards sit on the old content-wide column — inset from the bleed edges —
-    so they stay readable and match the margins we had before full-bleed.
+    Cards sit in a centered horizontal row across the lower portion of the bleed,
+    inset within the content-wide margins so they read as a group.
   */
   .bleed-intro__cards {
     --bleed-inset: max(var(--page-pad), calc((100% - var(--content-wide)) / 2));
     position: absolute;
-    inset: 0;
-    pointer-events: none;
+    left: var(--bleed-inset);
+    right: var(--bleed-inset);
+    bottom: clamp(12px, 2.2vw, 22px);
     z-index: 2;
+    display: flex;
+    justify-content: center;
+    gap: clamp(12px, 1.8vw, 24px);
+    pointer-events: none;
   }
   .bleed-intro__card {
-    position: absolute;
+    position: relative;
     pointer-events: auto;
-    width: clamp(244px, 28vw, 320px);
-    max-width: min(52%, 340px);
-    padding: clamp(15px, 1.8vw, 22px) clamp(17px, 2vw, 24px);
-    background: rgba(10, 22, 28, 0.84);
+    flex: 0 1 clamp(220px, 24vw, 300px);
+    max-width: 360px;
+    padding: clamp(13px, 1.5vw, 18px) clamp(15px, 1.8vw, 22px);
+    background: rgba(10, 22, 28, 0.86);
     backdrop-filter: blur(8px) saturate(1.1);
     -webkit-backdrop-filter: blur(8px) saturate(1.1);
-    border-left: 4px solid var(--mint);
+    border-top: 4px solid var(--mint);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
   }
-  .bleed-intro__card--control {
-    left: var(--bleed-inset);
-    top: 6%;
-  }
-  .bleed-intro__card--automate {
-    right: var(--bleed-inset);
-    top: 6%;
-    border-left: none;
-    border-right: 4px solid var(--mint);
-    text-align: right;
-  }
+  .bleed-intro__card--control,
+  .bleed-intro__card--automate,
   .bleed-intro__card--execute {
-    left: var(--bleed-inset);
-    bottom: 7%;
+    /* All three cards share the same row treatment now */
   }
-  .bleed-intro__card--right .bleed-intro__card-head {
-    flex-direction: row-reverse;
-  }
-
   .bleed-intro__card-head {
     display: flex;
     align-items: baseline;
     gap: 11px;
+    flex-direction: row;
   }
   .bleed-intro__card-num {
     font-family: var(--font-body);
@@ -464,26 +462,41 @@ const targets = {
       clear(gA);
       clear(gE);
 
+      /* All cards sit in a row at the bottom; leaders go UP from each card's top edge,
+         horizontally biased toward the target so lines fan out, not stack. */
+      function topOrigin(card, target) {
+        var fr = frame.getBoundingClientRect();
+        var cr = card.getBoundingClientRect();
+        var cx = ((cr.left + cr.right) / 2 - fr.left) / fr.width * 100;
+        var ty = cr.top - fr.top;  /* px */
+        var oy = (ty / fr.height) * 100;
+        /* Bias the origin x toward the target x, clamped to the card's horizontal span */
+        var leftEdge = (cr.left - fr.left) / fr.width * 100;
+        var rightEdge = (cr.right - fr.left) / fr.width * 100;
+        var ox = Math.max(leftEdge + 1, Math.min(rightEdge - 1, cx + (target.x - cx) * 0.35));
+        return { x: ox, y: oy };
+      }
+
       targets.control.forEach(function (t) {
-        var o = pct(control, t.from || 'right');
+        var o = topOrigin(control, t);
         line(gC, o.x, o.y, t.x, t.y);
       });
 
       targets.automate.forEach(function (t) {
-        var o = pct(automate, t.from || 'left');
+        var o = topOrigin(automate, t);
         line(gA, o.x, o.y, t.x, t.y);
       });
 
+      /* Execute: dashed room-leader from its top edge up to the upper-right corner bracket */
       var NS = 'http://www.w3.org/2000/svg';
-      var oE = pct(execute, 'right');
-      oE.y = pct(execute, 'mid').y;
+      var oE = topOrigin(execute, { x: 96, y: 8 });
       var room = document.createElementNS(NS, 'g');
       room.setAttribute('class', 'room');
       var leader = document.createElementNS(NS, 'path');
       leader.setAttribute('class', 'room-leader');
-      leader.setAttribute('d', 'M' + oE.x + ' ' + oE.y + ' H96 V80');
+      leader.setAttribute('d', 'M' + oE.x + ' ' + oE.y + ' L96 ' + Math.max(oE.y - 4, 6) + ' V14');
       room.appendChild(leader);
-      [['4 28 L4 4 L16 4'], ['86 4 L96 4 L96 16'], ['4 80 L4 96 L16 96']].forEach(function (d) {
+      [['4 22 L4 4 L16 4'], ['86 4 L96 4 L96 16']].forEach(function (d) {
         var p = document.createElementNS(NS, 'path');
         p.setAttribute('d', 'M' + d);
         room.appendChild(p);
