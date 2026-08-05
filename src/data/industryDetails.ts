@@ -116,31 +116,14 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         imagePosition: 'center 48%',
       },
       {
-        head: 'The floor drifts overnight.',
+        head: 'Every property reinvents the wheel.',
         body:
-          'A pit boss flips a TV to the ballgame before his shift ends. Game\u2019s over by eleven. Next morning the GM walks the floor — and Judge Judy is still on the screen. Every property has lived some version of this.',
-        image: '/images/industries/casino/challenge-courtroom-tvs.jpg?v=2',
-        imageAlt: 'Casino bar TVs showing mismatched content including a generic daytime courtroom show',
-        imagePosition: 'center 38%',
-        featured: true,
+          'Each property runs its own stack, presets, and vendor list \u2014 so the brand looks different on every floor and nobody can see all of it at once. Add a room, a wing, or a property and it\u2019s another rip-and-replace.',
       },
       {
-        head: 'Every event mode becomes a manual scramble.',
+        head: 'A dark screen is found by a guest, not the system.',
         body:
-          'Fight night, holiday weekend, VIP gala — each one means juggling touch panels, remotes, audio zones, signage, and a run sheet. One missed step and the floor is wrong for the whole event.',
-        image: '/images/industries/casino/challenge-event-mode-scramble.jpg?v=2',
-        imageAlt: 'Casino AV desk with tablets, remotes, radios, and preview monitors for a special event',
-        imagePosition: 'center 42%',
-      },
-      {
-        head: 'Three teams, three stacks, and no way to scale across properties.',
-        body:
-          'AV, IT, Marketing, and Ops each run their own gear and their own schedule. Every new build means another proprietary system, another integrator, another lead time. And each property runs its own stack, presets, and vendor list — so the brand looks different on every floor and nobody can see all of it at once.',
-      },
-      {
-        head: 'High costs, no visibility, and a brand that doesn\u2019t carry.',
-        body:
-          'Redundant boxes and service calls cost more every year, and the experience doesn\u2019t get better. When a screen goes dark you find out from a guest, not the system. Fragmented systems on aging hardware are a target and a single point of failure. And the lobby, the floor, the bar, and the ballroom each look like a different property because each is run by a different system.',
+          'Fragmented systems on aging hardware are a single point of failure \u2014 and when a screen goes dark at peak, the floor finds out from a guest, not the system. There\u2019s no rehearsal and no do-over on a Saturday night.',
       },
     ],
     solutionsLockup: {
@@ -180,37 +163,17 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       },
       {
         index: '04',
-        problem: 'The floor drifts overnight.',
-        headline: 'Every screen resets before doors open.',
+        problem: 'Every property reinvents the wheel.',
+        headline: 'One platform, one standard, across every property.',
         answer:
-          'Schedule a morning baseline for every zone. Judge Judy does not make it to the executive walkthrough.',
-        image: '/images/industries/casino/solution-coordinated-floor.jpg?v=2',
-        imageAlt: 'Pristine casino sportsbook with every display showing coordinated on-brand content',
-        imagePosition: 'center 38%',
+          'A single unified platform you grow with \u2014 add a room, a wing, or a property without a rip-and-replace, and run every property to one standard.',
       },
       {
         index: '05',
-        problem: 'Every event mode becomes a manual scramble.',
-        headline: 'Property modes become one-tap presets.',
+        problem: 'A dark screen is found by a guest, not the system.',
+        headline: 'One monitored environment that stays up.',
         answer:
-          'Fight night, holiday gala, weekday floor — audio, screens, and zones switch together. No juggling tablets, remotes, and run sheets.',
-        image: '/images/industries/casino/solution-one-tap-modes.jpg?v=2',
-        imageAlt: 'Casino operator tapping a single property-mode preset on a clean tablet interface',
-        imagePosition: 'center 42%',
-      },
-      {
-        index: '06',
-        problem: 'Three teams, three stacks, and no way to scale across properties.',
-        headline: 'One platform, one standard, across every property.',
-        answer:
-          'A single unified, modular, cloud-native platform that streamlines cross-departmental work and grows with you — add a room, a wing, or a property without a rip-and-replace, and run every property to one standard.',
-      },
-      {
-        index: '07',
-        problem: 'High costs, no visibility, and a brand that doesn\u2019t carry.',
-        headline: 'Real-time monitoring, automated workflows, one brand, enterprise-grade security.',
-        answer:
-          'Real-time monitoring and analytics, automated workflows that cut operational cost, centralized content and brand controls across every surface, and enterprise-grade security with redundant systems and proactive monitoring — you see the floor, the floor stays up, the brand carries, and it costs less to run.',
+          'Consolidated, monitored control across the estate with redundant systems and proactive monitoring \u2014 you see the floor, the floor stays up, and you find out before the guest does.',
       },
     ],
     automationLockup: {
