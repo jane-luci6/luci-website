@@ -1,0 +1,464 @@
+---
+/**
+ * Isolated mockup: full-bleed 16:9 intro (no header) with Control/Automate/Execute
+ * cards pulled back into the content-wide margins — before baking into the emesh homepage.
+ * Live: /index-intro-bleed-mockup/
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HomeDifferentiator from '../components/HomeDifferentiator.astro';
+import { homeIntroCopy } from '../data/homeIntro';
+import { site } from '../data/site';
+
+const { photoSrc, photoAlt, steps } = homeIntroCopy;
+
+/** Targets as % of the full-bleed 16:9 frame (re-aimed for the shorter crop). */
+const targets = {
+  control: [
+    { x: 12, y: 38 }, // TV bank
+    { x: 44, y: 7 },  // ceiling lights
+    { x: 61, y: 11 }, // speakers
+  ],
+  automate: [
+    { x: 40, y: 36 }, // signage pillar
+    { x: 73, y: 40 }, // LED wall
+  ],
+} as const;
+---
+
+<BaseLayout title="Intro Bleed Mockup — 16:9" description={site.subTagline} darkHeader>
+  <div class="mockup-banner">
+    <span class="mockup-banner__dot"></span>
+    <span>Intro bleed mockup — full-bleed 16:9, no header, cards in content margins. Not on the emesh page yet.</span>
+    <a class="mockup-banner__back" href="/index-emesh-hero/?intro=d#home-intro">← E-mesh mockup</a>
+  </div>
+
+  <!-- Context only: the climax this photo should continue from -->
+  <HomeDifferentiator />
+
+  <section class="bleed-intro" aria-label="One interface — annotated venue">
+    <h2 class="bleed-intro__sr">One interface to control, automate, and execute the entire guest experience</h2>
+
+    <figure class="bleed-intro__stage">
+      <div class="bleed-intro__frame">
+        <img
+          src={photoSrc}
+          alt={photoAlt}
+          loading="eager"
+          decoding="async"
+          width="1920"
+          height="1080"
+        />
+        <div class="bleed-intro__scrim" aria-hidden="true"></div>
+
+        <!-- Leaders: JS pins origins to card edges so insets stay accurate at any width -->
+        <svg class="bleed-intro__arrows" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <marker id="bleed-arrow" markerWidth="7" markerHeight="7" refX="5.2" refY="3" orient="auto">
+              <path d="M0 0L6 3L0 6Z" fill="var(--mint)" />
+            </marker>
+          </defs>
+          <g data-leaders="control"></g>
+          <g data-leaders="automate"></g>
+          <g data-leaders="execute"></g>
+        </svg>
+
+        <div class="bleed-intro__cards">
+          {steps.map((step) => (
+            <div
+              class:list={['bleed-intro__card', `bleed-intro__card--${step.align}`, `bleed-intro__card--${step.verb.toLowerCase()}`]}
+              data-card={step.verb.toLowerCase()}
+            >
+              <span class="bleed-intro__card-head">
+                <span class="bleed-intro__card-num">{step.num}</span>
+                <span class="bleed-intro__card-verb">{step.verb}</span>
+              </span>
+              <p class="bleed-intro__card-body">{step.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="bleed-intro__steps">
+        {steps.map((step) => (
+          <div class="bleed-intro__step">
+            <span class="bleed-intro__step-num">{step.num}</span>
+            <span class="bleed-intro__step-verb">{step.verb}</span>
+            <p class="bleed-intro__step-body">{step.body}</p>
+          </div>
+        ))}
+      </div>
+    </figure>
+
+    <div class="bleed-intro__actions">
+      <a class="btn btn--mint" href="/contact">Request a demo</a>
+      <a class="btn btn--ghost" href="/platform">See LUCI in action</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:global>
+  .mockup-banner {
+    position: relative;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    padding: 8px var(--page-pad);
+    background: var(--navy);
+    border-bottom: 1px solid rgba(104, 227, 190, 0.3);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--mint);
+  }
+  .mockup-banner__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--mint);
+    box-shadow: 0 0 8px rgba(var(--mint-rgb), 0.5);
+    flex-shrink: 0;
+  }
+  .mockup-banner__back {
+    margin-left: auto;
+    color: rgba(245, 248, 250, 0.75);
+    text-decoration: none;
+    border: 1px solid rgba(104, 227, 190, 0.35);
+    padding: 4px 10px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .mockup-banner__back:hover {
+    color: var(--off-white);
+    border-color: rgba(104, 227, 190, 0.7);
+  }
+
+  /* Match navy so “run them all” → photo reads as one beat */
+  .home-diff {
+    border-bottom: none !important;
+  }
+
+  .bleed-intro {
+    background: var(--navy);
+    color: var(--off-white);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: clamp(40px, 6vw, 64px);
+  }
+
+  .bleed-intro__sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .bleed-intro__stage {
+    margin: 0;
+  }
+
+  .bleed-intro__frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--navy-deep);
+  }
+
+  .bleed-intro__frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Bias slightly up so ceiling fixtures survive the shorter crop */
+    object-position: center 38%;
+    display: block;
+  }
+
+  .bleed-intro__scrim {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(to bottom, rgba(8, 17, 22, 0.48) 0%, rgba(8, 17, 22, 0) 24%),
+      radial-gradient(55% 50% at 18% 88%, rgba(8, 17, 22, 0.55) 0%, rgba(8, 17, 22, 0) 100%),
+      radial-gradient(50% 48% at 84% 14%, rgba(8, 17, 22, 0.5) 0%, rgba(8, 17, 22, 0) 100%);
+  }
+
+  .bleed-intro__arrows {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    filter: drop-shadow(0 0 2px rgba(8, 17, 22, 0.9));
+  }
+  .bleed-intro__arrows line {
+    stroke: var(--mint);
+    stroke-width: 1.4;
+    vector-effect: non-scaling-stroke;
+    opacity: 0.92;
+  }
+  .bleed-intro__arrows circle.origin {
+    fill: var(--mint);
+    stroke: rgba(8, 17, 22, 0.7);
+    stroke-width: 0.5;
+  }
+  .bleed-intro__arrows circle.target {
+    fill: var(--mint);
+    stroke: rgba(8, 17, 22, 0.6);
+    stroke-width: 0.6;
+  }
+  .bleed-intro__arrows .room path {
+    fill: none;
+    stroke: var(--mint);
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+    opacity: 0.75;
+  }
+  .bleed-intro__arrows .room .room-leader {
+    stroke-width: 1.6;
+    stroke-dasharray: 4 4;
+    opacity: 0.9;
+  }
+
+  /*
+    Cards sit on the old content-wide column — inset from the bleed edges —
+    so they stay readable and match the margins we had before full-bleed.
+  */
+  .bleed-intro__cards {
+    --bleed-inset: max(var(--page-pad), calc((100% - var(--content-wide)) / 2));
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .bleed-intro__card {
+    position: absolute;
+    pointer-events: auto;
+    width: clamp(244px, 28vw, 320px);
+    max-width: min(52%, 340px);
+    padding: clamp(15px, 1.8vw, 22px) clamp(17px, 2vw, 24px);
+    background: rgba(10, 22, 28, 0.84);
+    backdrop-filter: blur(8px) saturate(1.1);
+    -webkit-backdrop-filter: blur(8px) saturate(1.1);
+    border-left: 4px solid var(--mint);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  }
+  .bleed-intro__card--control {
+    left: var(--bleed-inset);
+    top: 4%;
+  }
+  .bleed-intro__card--automate {
+    right: var(--bleed-inset);
+    top: 4.5%;
+    border-left: none;
+    border-right: 4px solid var(--mint);
+    text-align: right;
+  }
+  .bleed-intro__card--execute {
+    left: var(--bleed-inset);
+    bottom: 5%;
+  }
+  .bleed-intro__card--right .bleed-intro__card-head {
+    flex-direction: row-reverse;
+  }
+
+  .bleed-intro__card-head {
+    display: flex;
+    align-items: baseline;
+    gap: 11px;
+  }
+  .bleed-intro__card-num {
+    font-family: var(--font-body);
+    font-size: clamp(27px, 3vw, 35px);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: var(--mint);
+  }
+  .bleed-intro__card-verb {
+    font-family: var(--font-body);
+    font-size: clamp(20px, 2.3vw, 25px);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--off-white);
+  }
+  .bleed-intro__card-body {
+    margin: 9px 0 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: clamp(14px, 1.55vw, 16.5px);
+    line-height: 1.5;
+    color: rgba(245, 248, 250, 0.86);
+  }
+
+  .bleed-intro__steps {
+    display: none;
+  }
+
+  .bleed-intro__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+    padding-inline: var(--page-pad);
+  }
+  .bleed-intro__actions .btn {
+    min-height: 56px;
+    padding: 16px 32px;
+    font-size: clamp(15px, 1.5vw, 17px);
+    font-weight: 700;
+  }
+
+  @media (max-width: 760px) {
+    .bleed-intro__arrows,
+    .bleed-intro__cards,
+    .bleed-intro__scrim {
+      display: none;
+    }
+    .bleed-intro__steps {
+      display: grid;
+      padding: clamp(24px, 6vw, 32px) var(--page-pad) 0;
+    }
+    .bleed-intro__step {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto auto;
+      column-gap: 10px;
+      padding: var(--space-3) 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .bleed-intro__step:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+    .bleed-intro__step-num {
+      grid-row: 1 / 3;
+      font-family: var(--font-body);
+      font-size: clamp(24px, 2.6vw, 34px);
+      font-weight: 700;
+      line-height: 0.9;
+      color: rgba(245, 248, 250, 0.22);
+    }
+    .bleed-intro__step-verb {
+      font-family: var(--font-body);
+      font-size: clamp(15px, 1.7vw, 18px);
+      font-weight: 700;
+      color: var(--off-white);
+      align-self: end;
+    }
+    .bleed-intro__step-body {
+      grid-column: 2;
+      margin: 4px 0 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      color: rgba(245, 248, 250, 0.8);
+    }
+  }
+</style>
+
+<script define:vars={{ targets }}>
+  (function () {
+    var frame = document.querySelector('.bleed-intro__frame');
+    if (!frame) return;
+
+    function pct(el, corner) {
+      var fr = frame.getBoundingClientRect();
+      var r = el.getBoundingClientRect();
+      var x = corner === 'right' ? r.right : corner === 'left' ? r.left : (r.left + r.right) / 2;
+      var y = corner === 'bottom' ? r.bottom : corner === 'top' ? r.top : (r.top + r.bottom) / 2;
+      return {
+        x: ((x - fr.left) / fr.width) * 100,
+        y: ((y - fr.top) / fr.height) * 100,
+      };
+    }
+
+    function clear(g) {
+      while (g.firstChild) g.removeChild(g.firstChild);
+    }
+
+    function line(g, ox, oy, tx, ty) {
+      var NS = 'http://www.w3.org/2000/svg';
+      var l = document.createElementNS(NS, 'line');
+      l.setAttribute('x1', String(ox));
+      l.setAttribute('y1', String(oy));
+      l.setAttribute('x2', String(tx));
+      l.setAttribute('y2', String(ty));
+      l.setAttribute('marker-end', 'url(#bleed-arrow)');
+      g.appendChild(l);
+      var o = document.createElementNS(NS, 'circle');
+      o.setAttribute('class', 'origin');
+      o.setAttribute('cx', String(ox));
+      o.setAttribute('cy', String(oy));
+      o.setAttribute('r', '0.7');
+      g.appendChild(o);
+      var t = document.createElementNS(NS, 'circle');
+      t.setAttribute('class', 'target');
+      t.setAttribute('cx', String(tx));
+      t.setAttribute('cy', String(ty));
+      t.setAttribute('r', '0.95');
+      g.appendChild(t);
+    }
+
+    function draw() {
+      if (window.matchMedia('(max-width: 760px)').matches) return;
+
+      var control = frame.querySelector('[data-card="control"]');
+      var automate = frame.querySelector('[data-card="automate"]');
+      var execute = frame.querySelector('[data-card="execute"]');
+      var gC = frame.querySelector('[data-leaders="control"]');
+      var gA = frame.querySelector('[data-leaders="automate"]');
+      var gE = frame.querySelector('[data-leaders="execute"]');
+      if (!control || !automate || !execute || !gC || !gA || !gE) return;
+
+      clear(gC);
+      clear(gA);
+      clear(gE);
+
+      var oC = pct(control, 'right');
+      oC.y = pct(control, 'mid').y;
+      targets.control.forEach(function (t) {
+        line(gC, oC.x, oC.y, t.x, t.y);
+      });
+
+      var oA = pct(automate, 'left');
+      oA.y = pct(automate, 'mid').y;
+      targets.automate.forEach(function (t) {
+        line(gA, oA.x, oA.y, t.x, t.y);
+      });
+
+      var NS = 'http://www.w3.org/2000/svg';
+      var oE = pct(execute, 'right');
+      oE.y = pct(execute, 'mid').y;
+      var room = document.createElementNS(NS, 'g');
+      room.setAttribute('class', 'room');
+      var leader = document.createElementNS(NS, 'path');
+      leader.setAttribute('class', 'room-leader');
+      leader.setAttribute('d', 'M' + oE.x + ' ' + oE.y + ' H96 V82');
+      room.appendChild(leader);
+      [['4 22 L4 4 L16 4'], ['86 4 L96 4 L96 16'], ['4 82 L4 96 L16 96']].forEach(function (d) {
+        var p = document.createElementNS(NS, 'path');
+        p.setAttribute('d', 'M' + d);
+        room.appendChild(p);
+      });
+      gE.appendChild(room);
+      var o = document.createElementNS(NS, 'circle');
+      o.setAttribute('class', 'origin');
+      o.setAttribute('cx', String(oE.x));
+      o.setAttribute('cy', String(oE.y));
+      o.setAttribute('r', '0.7');
+      gE.appendChild(o);
+    }
+
+    draw();
+    window.addEventListener('resize', draw);
+  })();
+</script>
