@@ -252,7 +252,7 @@ import { site } from '../data/site';
   /* Automate (top-right) */
   .home-intro.intro-d .home-intro__card--right[style*="top"] {
     right: var(--bleed-inset) !important;
-    top: 10% !important;
+    top: 18% !important;
   }
   /* Execute (bottom-left) — inline style has "bottom" */
   .home-intro.intro-d .home-intro__card--left[style*="bottom"] {
@@ -948,14 +948,15 @@ import { site } from '../data/site';
         svg.appendChild(gC); svg.appendChild(gA); svg.appendChild(gE);
         frame.appendChild(svg);
 
-        /* Targets as % of the 21:9 frame, tuned to point to the same image elements as the
-           original (TV bank, ceiling lights, speakers, signage pillar, video wall). */
+        /* Targets as % of the 21:9 frame, re-calibrated for the regenerated photo:
+           control  -> TV bank (left), warm pendant lights, ceiling speaker fixture;
+           automate -> PRIME CUTS signage pillar, LED video wall. */
         var targets = {
           control: [
-            { x: 15, y: 50 }, { x: 44, y: 6 }, { x: 60, y: 10 }
+            { x: 12, y: 33 }, { x: 28, y: 20 }, { x: 58, y: 17 }
           ],
           automate: [
-            { x: 40, y: 44 }, { x: 70, y: 62 }
+            { x: 42, y: 55 }, { x: 84, y: 54 }
           ]
         };
 
