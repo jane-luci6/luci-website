@@ -486,9 +486,9 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         {
           label: 'Move guests toward amenities',
           desc: 'Promote the spa at dusk and breakfast at dawn \u2014 the right offer at the right moment.',
-          plate: { side: 'left', left: '-4%', top: '64%' },
+          plate: { side: 'left', left: '-4%', top: '74%' },
           delay: 3.5,
-          lines: [{ x1: 16, y1: 64, x2: 25, y2: 48 }],
+          lines: [{ x1: 16, y1: 74, x2: 25, y2: 48 }],
         },
         {
           label: 'Switch the event floor in a few taps',
@@ -500,9 +500,9 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         {
           label: 'Hold one brand across the property',
           desc: 'Every media interaction reinforces your marketing messages without drift.',
-          plate: { side: 'left', left: '-4%', top: '12%' },
+          plate: { side: 'left', left: '-4%', top: '22%' },
           delay: 10.5,
-          lines: [{ x1: 16, y1: 12, x2: 50, y2: 22 }],
+          lines: [{ x1: 16, y1: 22, x2: 50, y2: 26 }],
         },
       ],
     },
