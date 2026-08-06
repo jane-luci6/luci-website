@@ -1,0 +1,151 @@
+---
+// "See LUCI run" — a short, real screen recording of the LUCI platform running
+// on a live floor. Sits between "What that consolidation delivers" (HomeWhyItMatters)
+// and "Running on floors like yours" (HomeIndustries). The band dips to navy-deep
+// so the bright platform UI reads as the focal point, then the page returns to
+// navy-mid. Voice: operational, declarative — describe what the operator does,
+// not how the software "feels." No "layer" for LUCI, no hype verbs.
+//
+// Video: /videos/luci-platform-run.mp4 (1920x1080, 30fps, ~2MB, 31s, no audio).
+// Poster: /videos/luci-platform-run-poster.jpg (the TV-27 moment).
+
+import SectionBlock from './SectionBlock.astro';
+---
+
+<SectionBlock
+  id="home-platform-run"
+  tone="deep"
+  wide
+  lockupName="See LUCI run"
+  lockupRole="One interface, every endpoint"
+  deck="A real session on a live floor — select a zone, swap a source, nudge the volume, all from one interface."
+>
+  <figure class="home-run" data-reveal>
+    <div class="home-run__frame">
+      <video
+        class="home-run__video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="/videos/luci-platform-run-poster.jpg"
+        aria-label="Screen recording of the LUCI platform: an operator selects a zone, drills into one screen, changes its source, and adjusts the volume."
+      >
+        <source src="/videos/luci-platform-run.mp4" type="video/mp4" />
+      </video>
+      <span class="home-run__live" aria-hidden="true">
+        <span class="home-run__live-dot"></span>
+        Live session
+      </span>
+    </div>
+  </figure>
+</SectionBlock>
+
+<style>
+  .home-run {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* The frame holds the 16:9 video, a thin mint-tinted hairline, a soft shadow,
+     and a tiny radius to match the homepage's icon-tile language (16px). The
+     frame is capped so the video never overpowers the reading column above it. */
+  .home-run__frame {
+    position: relative;
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #050b0f;
+    box-shadow:
+      0 30px 60px rgba(0, 0, 0, 0.55),
+      0 0 0 1px rgba(var(--mint-rgb), 0.18);
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .home-run.is-in .home-run__frame {
+    opacity: 1;
+    transform: none;
+  }
+
+  .home-run__video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Small "Live session" tag — reads as a screen-recording cue, not a status
+     indicator on the product itself. Mint dot + tracked uppercase, top-left. */
+  .home-run__live {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(5, 11, 15, 0.72);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: inset 0 0 0 1px rgba(var(--mint-rgb), 0.28);
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mint);
+    pointer-events: none;
+  }
+  .home-run__live-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--mint);
+    box-shadow: 0 0 8px rgba(var(--mint-rgb), 0.7);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-run__frame {
+      transition: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
+
+<noscript>
+  <style>
+    .home-run__frame {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  </style>
+</noscript>
+
+<script>
+  const targets = document.querySelectorAll<HTMLElement>('.home-run[data-reveal]');
+  if (targets.length) {
+    const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduce || !('IntersectionObserver' in window)) {
+      targets.forEach((el) => el.classList.add('is-in'));
+    } else {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-in');
+            io.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.2, rootMargin: '0px 0px -8% 0px' }
+      );
+      targets.forEach((el) => io.observe(el));
+    }
+  }
+</script>
