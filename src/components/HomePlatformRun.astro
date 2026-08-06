@@ -16,7 +16,7 @@ import SectionBlock from './SectionBlock.astro';
   id="home-platform-run"
   tone="deep"
   wide
-  lockupName="See LUCI run"
+  lockupName="See LUCI in action"
   lockupRole="One interface, every endpoint"
   deck="A real session on a live floor — select a zone, swap a source, nudge the volume, all from one interface."
 >
@@ -40,6 +40,9 @@ import SectionBlock from './SectionBlock.astro';
       </span>
     </div>
   </figure>
+  <div class="home-run__cta-wrap">
+    <a class="btn btn--mint-outline" href="/platform">See the full platform</a>
+  </div>
 </SectionBlock>
 
 <style>
@@ -108,6 +111,12 @@ import SectionBlock from './SectionBlock.astro';
     border-radius: 999px;
     background: var(--mint);
     box-shadow: 0 0 8px rgba(var(--mint-rgb), 0.7);
+  }
+
+  .home-run__cta-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: clamp(20px, 3vw, 32px);
   }
 
   @media (prefers-reduced-motion: reduce) {
