@@ -430,11 +430,11 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       {
         index: '04',
         title: 'Wayfinding Sync on Room Change',
-        trigger: 'When a room reconfigures for an event.',
+        trigger: 'When a room or location changes.',
         image: '/images/industries/hotel/capability-wayfinding-sync.png?v=1',
         imageAlt: 'A guest glancing at a backlit wayfinding sign showing room floorplans and arrows in a hotel conference corridor',
         detail:
-          'Update every wayfinding screen across the property the moment a room combines or splits, so guests never walk up to the wrong door.',
+          'Update every wayfinding screen across the property the moment an event moves rooms or a session relocates, so guests never walk up to the wrong door.',
       },
       {
         index: '05',
