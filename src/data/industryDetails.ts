@@ -737,7 +737,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       lockupName: 'Airports & Transportation',
       lockupRole: 'One change. The whole terminal in sync',
       deck:
-        'Airports and transit hubs are the most operationally demanding environment LUCI serves — a facility that never closes, where the multimedia is life-safety, not decoration. Paging is the fire alarm, understood over jet engines and departing trains. LUCI orchestrates the whole passenger-communication environment from one interface, so one update lands everywhere at once — around the clock.',
+        'In most terminals the flight displays, paging, and wayfinding run as separate systems — so when a gate changes, the screens and the announcements don’t agree. LUCI orchestrates them as one, so a single update reaches every passenger touchpoint at once, around the clock.',
     },
     challengesLockup: {
       lockupName: 'What terminals and stations actually <em>deal with</em>',
@@ -874,7 +874,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       lockupName: 'Your entire <em>terminal</em> at your fingertips',
       lockupRole: 'Every touchpoint, one message',
       deck:
-        'The passenger journey is a chain of touchpoints — curb, check-in, security, gates, concourses, retail — and at each one, displays, paging, and wayfinding shape the experience and carry the message. LUCI orchestrates them all as one, so the right message lands at the right place at the right time.',
+        'A passenger moves through the terminal in stages — arrival, security, the walk to the gate, the wait, the shops in between — and at every stage, the screens and speakers around them are doing two jobs at once: guiding and reassuring them, and carrying the operational and safety messaging the airport runs on. LUCI orchestrates all of it as one, so every point in the journey works together — the right message, in the right place, at the right moment.',
     },
     floorplan: {
       image: '/images/industries/airports-transportation/floorplan.png?v=1',
