@@ -235,7 +235,7 @@
   #home-cta.section { position: relative; isolation: isolate; background-color: var(--navy-deep) !important; border-top: 2px solid var(--mint); }
   #home-cta.section::before {
     content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-    background: url('/images/mesh/luci-bg-wide-2560x800.svg') center / 125% auto no-repeat;
+    background: url('/images/mesh/luci-bg-wide-2560x800.svg') center / cover no-repeat;
     mix-blend-mode: screen; opacity: 0.6;
   }
   #home-cta.section::after {
@@ -247,16 +247,6 @@
     #home-cta.section::after { background: linear-gradient(180deg, transparent 0%, rgba(7, 15, 20, 0.65) 34%, rgba(7, 15, 20, 0.65) 60%, transparent 100%); }
   }
 
-  .site-footer {
-    background: var(--navy-deep) url('/images/mesh/luci-bg-wide-2560x800.svg') center top / cover no-repeat !important;
-    position: relative; isolation: isolate;
-  }
-  .site-footer::before {
-    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-    background: linear-gradient(180deg, rgba(7, 15, 20, 0.78) 0%, rgba(7, 15, 20, 0.92) 100%);
-  }
-  .site-footer > .container { position: relative; z-index: 1; }
-
   :global(#home-cta.section) { padding-block: clamp(36px, 5vw, 48px); }
   .home-cta { max-width: 64ch; padding-block: clamp(24px, 4vw, 40px); }
   .home-cta__kicker { color: var(--mint); margin-bottom: var(--space-3); }
@@ -265,10 +255,6 @@
     line-height: 1.15; letter-spacing: -0.02em; color: var(--off-white); margin-bottom: var(--space-3);
   }
   .home-cta__title :global(em) { font-style: normal; color: var(--gold); }
-  .home-cta__deck {
-    max-width: 52ch; margin: 0 0 var(--space-4); font-family: 'Inter', system-ui, sans-serif;
-    font-size: 17px; line-height: 1.6; color: rgba(245, 248, 250, 0.78);
-  }
   .home-cta__btn { margin-top: 0; }
 
   .home-resources__inner { padding-block: clamp(28px, 3.5vw, 40px) !important; }
