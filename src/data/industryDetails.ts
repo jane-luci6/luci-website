@@ -735,9 +735,9 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     heroImage: '/images/industries/airports-transportation.jpg?v=2',
     thesis: {
       lockupName: 'Airports & Transportation',
-      lockupRole: 'A/V as life-safety, not decoration',
+      lockupRole: 'One change. The whole terminal in sync',
       deck:
-        'A terminal or station never closes — a 4 a.m. red-eye is as live as a 6 p.m. rush. The A/V is life-safety: paging is the fire alarm, understood over jet engines and departing trains. LUCI puts every board and speaker behind one interface your team can run.',
+        'Airports and transit hubs are the most operationally demanding environment LUCI serves — a facility that never closes, where the multimedia is life-safety, not decoration. Paging is the fire alarm, understood over jet engines and departing trains. LUCI orchestrates the whole passenger-communication environment from one interface, so one update lands everywhere at once — around the clock.',
     },
     challengesLockup: {
       lockupName: 'What terminals and stations actually <em>deal with</em>',
@@ -747,56 +747,26 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         head: 'Every screen on its own thread, and no single view.',
         body:
           'A terminal runs on a dozen back-ends — flight data, signage, paging, emergency. When one drifts, a board shows a gate that already closed, and nobody notices until a passenger’s at the wrong one.',
-        image: '/images/industries/airports-transportation/challenge-fragmentation.jpg?v=1',
-        imageAlt:
-          'Dense airport terminal back-of-house communications room with rows of network gear, IPTV distribution, and flight-information system controllers',
-        imagePosition: 'center 45%',
-      },
-      {
-        head: 'New gear, in a building that wasn’t built for it.',
-        body:
-          'Terminals and stations are rarely greenfield. New displays and paging live alongside old PA gear, in conduits never sized for today’s loads — and the new gear talks to the old rather than replacing it.',
-        image: '/images/industries/airports-transportation/challenge-legacy.jpg?v=1',
-        imageAlt:
-          'Older transit station communications room mixing legacy PA amplifiers and patch panels with newer IP-based gear',
-        imagePosition: 'center 50%',
-      },
-      {
-        head: 'The PA isn’t background noise. It’s the fire alarm.',
-        body:
-          'In a terminal, the paging system is the voice-alarm system. It has to cut in over everything, take priority across hundreds of zones, and meet life-safety and accessibility code — or it doesn’t pass inspection.',
-        image: '/images/industries/airports-transportation/challenge-life-safety.jpg?v=1',
-        imageAlt:
-          'Emergency voice-alarm paging zone controller integrated with a fire panel in a terminal back-of-house room',
-        imagePosition: 'center 50%',
-      },
-      {
-        head: 'Two announcements, talking over each other.',
-        body:
-          'A terminal is carved into zones — gates, hold areas, concourses — and the edges bleed. A page for one gate spills into the next hold area; without a lock-out, the operator just waits.',
-        image: '/images/industries/airports-transportation/challenge-zoning.jpg?v=1',
-        imageAlt:
-          'Two adjacent airport gate hold areas with overhead paging loudspeakers at the zone boundary where announcements overlap',
-        imagePosition: 'center 45%',
       },
       {
         head: 'The building never closes, and nothing can go dark.',
         body:
           'A terminal runs 24/7/365 — a 4 a.m. red-eye is as live as a 6 p.m. rush — and one dead board or silent speaker is what people remember. A failure at rush cascades into missed connections.',
-        image: '/images/industries/airports-transportation/challenge-uptime.jpg?v=1',
-        imageAlt:
-          'Redundant airport operations communications rack with dual power feeds, dual network paths, and green status indicators',
-        imagePosition: 'center 50%',
       },
       {
-        head: 'You can hear the page. You just can’t understand it.',
+        head: 'The PA isn’t background noise. It’s the fire alarm.',
         body:
-          'Terminals and stations are huge, hard-surfaced, and loud — engines, beepers, doors, trains — and the room bounces sound until the words smear together. A page can be loud and still unintelligible, especially for a traveler who doesn’t speak the language well. Turning it up doesn’t help. It’s a design problem — speakers, zones, tuning, the room — solved together.',
-        image: '/images/industries/airports-transportation/challenge-intelligibility.jpg?v=1',
-        imageAlt:
-          'Cavernous hard-surface airport terminal concourse with overhead paging loudspeakers where reverberant acoustics blur announcements',
-        imagePosition: 'center 50%',
-        featured: true,
+          'In a terminal, the paging system is the voice-alarm system. It has to cut in over everything, take priority across hundreds of zones, and meet life-safety and accessibility code — or it doesn’t pass inspection.',
+      },
+      {
+        head: 'Two announcements, talking over each other.',
+        body:
+          'A terminal is carved into zones — gates, hold areas, concourses — and the edges bleed. A page for one gate spills into the next hold area; without a lock-out, the operator just waits.',
+      },
+      {
+        head: 'A sprawling footprint, upgraded in phases.',
+        body:
+          'A vast terminal runs on decades of gear, upgraded in phases aligned to budget and contract cycles rather than all at once — and a lean, understaffed team holds it together across a sprawling footprint.',
       },
     ],
     solutionsLockup: {
@@ -809,33 +779,21 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         problem: 'Every screen on its own thread, and no single view.',
         headline: 'One interface for every board, screen, and speaker.',
         answer:
-          'Bring flight data, signage, paging, and emergency messaging behind one layer — one pane — so a drifted board shows up before a passenger is at the wrong gate.',
-        image: '/images/industries/airports-transportation/solution-orchestration.jpg?v=1',
-        imageAlt:
-          'Unified LUCI operations dashboard showing flight and transit data flowing in sync to every display, gate, and platform screen in a terminal',
-        imagePosition: 'center 50%',
+          'LUCI brings flight data, signage, paging, and emergency messaging behind one interface, so a drifted board shows up before a passenger is at the wrong gate.',
       },
       {
         index: '02',
-        problem: 'New gear, in a building that wasn’t built for it.',
-        headline: 'Modernize on top of what’s already there.',
+        problem: 'The building never closes, and nothing can go dark.',
+        headline: 'Catch failures before the terminal notices.',
         answer:
-          'LUCI runs on standard IP and talks to the gear you already have — older PA, displays from last round — so you add capability without gutting the building.',
-        image: '/images/industries/airports-transportation/solution-legacy-integration.jpg?v=1',
-        imageAlt:
-          'Sleek LUCI controller mounted alongside legacy PA and control-room gear in a transit station communications room, integrating existing equipment',
-        imagePosition: 'center 45%',
+          'An automated health check exercises every display, player, and speaker — a dead board shows up on the dashboard, not on a passenger’s phone — backed by an embedded team.',
       },
       {
         index: '03',
         problem: 'The PA isn’t background noise. It’s the fire alarm.',
         headline: 'Paging and emergency on one layer, built to pass.',
         answer:
-          'Bring paging and voice-alarm behind one layer that ties straight into the fire alarm — taking priority across hundreds of zones — and meets life-safety code from the start.',
-        image: '/images/industries/airports-transportation/solution-life-safety.jpg?v=1',
-        imageAlt:
-          'LUCI paging and voice-alarm management screen showing fire-alarm prioritization across zones in a terminal operations center',
-        imagePosition: 'center 50%',
+          'LUCI brings paging and voice-alarm behind one interface that ties straight into the fire alarm — taking priority across hundreds of zones — and meets life-safety code from the start.',
       },
       {
         index: '04',
@@ -843,37 +801,18 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         headline: 'The right message to the right zone, every time.',
         answer:
           'Manage zones, lock-outs, and priorities from one interface — a gate-change page hits its own zone, no collision with the concourse next door, no waiting on the adjacent page.',
-        image: '/images/industries/airports-transportation/solution-zoning.jpg?v=1',
-        imageAlt:
-          'LUCI zone management interface on a tablet showing paging lock-outs between adjacent airport gate hold areas',
-        imagePosition: 'center 45%',
       },
       {
         index: '05',
-        problem: 'The building never closes, and nothing can go dark.',
-        headline: 'Catch failures before the terminal notices.',
+        problem: 'A sprawling footprint, upgraded in phases.',
+        headline: 'One interface and one rack that runs the whole terminal.',
         answer:
-          'An automated health check exercises every display, player, and speaker — a dead board shows up on the dashboard, not on a passenger’s phone — backed by an embedded team.',
-        image: '/images/industries/airports-transportation/solution-uptime.jpg?v=1',
-        imageAlt:
-          'LUCI endpoint health dashboard flagging a failed display in a 24/7 terminal, with an operations team monitoring in the background',
-        imagePosition: 'center 50%',
-      },
-      {
-        index: '06',
-        problem: 'You can hear the page. You just can’t understand it.',
-        headline: 'Pages that land clear, not just loud.',
-        answer:
-          'LUCI treats intelligibility as a design problem, not a volume knob — speakers, zones, DSP, and routing on one audio layer, tuned so the words come through.',
-        image: '/images/industries/airports-transportation/solution-intelligibility.jpg?v=1',
-        imageAlt:
-          'LUCI audio DSP and zoning tuning interface for a reverberant terminal, with overhead loudspeakers delivering clear paging',
-        imagePosition: 'center 50%',
+          'LUCI brings what ran on 4+ systems, 5+ racks, and 100+ devices into one interface and one rack, so you have one interface and one rack that runs the whole terminal — and it improves on a predictable annual line item.',
       },
     ],
     automationLockup: {
-      lockupName: '<em>Automation</em> & presets',
-      lockupRole: 'Set it once — the building runs itself',
+      lockupName: 'What you can <em>do with LUCI</em>',
+      lockupRole: 'Set it once — the terminal runs itself',
     },
     automations: [
       {
@@ -912,12 +851,76 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
           'The system keeps every board, gate, and platform display in sync with the live data — and the moment one drifts, points it back before a passenger reads the wrong gate.',
       },
     ],
+    tickerLocations: [
+      'Departures Hall',
+      'Arrivals Hall',
+      'Concourse A',
+      'Concourse B',
+      'Concourse C',
+      'Gate Screens',
+      'Boarding Displays',
+      'Wayfinding',
+      'Paging & PA',
+      'Voice-Alarm',
+      'FIDS Displays',
+      'Retail & Duty-Free',
+      'Advertising',
+      'Curbside',
+      'Ground Transportation',
+      'Hearing Loop',
+      'Background Music',
+    ],
+    floorplanLockup: {
+      lockupName: 'Your entire <em>terminal</em> at your fingertips',
+      lockupRole: 'Every touchpoint, one message',
+      deck:
+        'The passenger journey is a chain of touchpoints — curb, check-in, security, gates, concourses, retail — and at each one, displays, paging, and wayfinding shape the experience and carry the message. LUCI orchestrates them all as one, so the right message lands at the right place at the right time.',
+    },
+    floorplan: {
+      image: '/images/industries/airports-transportation/floorplan.png?v=1',
+      imageAlt:
+        'Architectural floorplan of an airport terminal: departures hall, arrivals hall, concourses A/B/C, airline lounges, administration, parking, hotel and conference center, departure curbside, and ground transportation.',
+      imageWidth: 1024,
+      imageHeight: 682,
+      imageWidthPct: 78,
+      ariaLabel: 'Airport terminal zones LUCI orchestrates',
+      zones: [
+        {
+          label: 'Set the tone at arrival',
+          desc: 'Welcome and orient passengers with flight displays, wayfinding, and paging from the curb to the gate.',
+          plate: { side: 'right', right: '-4%', top: '80%' },
+          delay: 0,
+          lines: [{ x1: 84, y1: 80, x2: 50, y2: 62 }],
+        },
+        {
+          label: 'Monetize every dwell moment',
+          desc: 'Turn display dwell time into destination-targeted retail and advertising revenue.',
+          plate: { side: 'left', left: '-4%', top: '76%' },
+          delay: 3.5,
+          lines: [{ x1: 16, y1: 76, x2: 22, y2: 78 }],
+        },
+        {
+          label: 'Guide passengers to their gate',
+          desc: 'Real-time wayfinding and gate information across every concourse.',
+          plate: { side: 'right', right: '-4%', top: '30%' },
+          delay: 7,
+          lines: [{ x1: 84, y1: 30, x2: 50, y2: 18 }],
+        },
+        {
+          label: 'Speak with one voice across the terminal',
+          desc: 'One change lands everywhere at once — screen and voice together, even during irregular operations.',
+          plate: { side: 'left', left: '-4%', top: '24%' },
+          delay: 10.5,
+          lines: [{ x1: 16, y1: 24, x2: 50, y2: 45 }],
+        },
+      ],
+    },
     ctaTitle: 'See LUCI in <em>your terminal or station</em>.',
     chapters: [
       { id: 'industry-thesis', label: 'Overview' },
-      { id: 'industry-challenges', label: 'Challenges' },
-      { id: 'industry-solutions', label: 'The fix' },
-      { id: 'industry-automation', label: 'Automation' },
+      { id: 'industry-floorplan', label: 'The terminal' },
+      { id: 'industry-before-after', label: 'Before & after' },
+      { id: 'industry-automation', label: 'Capabilities' },
       { id: 'industry-cta', label: 'Next step' },
     ],
   },
