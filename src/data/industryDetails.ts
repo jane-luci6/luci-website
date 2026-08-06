@@ -502,7 +502,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
           desc: 'Every media interaction reinforces your marketing messages without drift.',
           plate: { side: 'left', left: '-4%', top: '12%' },
           delay: 10.5,
-          lines: [{ x1: 16, y1: 12, x2: 50, y2: 12 }],
+          lines: [{ x1: 16, y1: 12, x2: 50, y2: 22 }],
         },
       ],
     },
