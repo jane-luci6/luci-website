@@ -874,7 +874,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       lockupName: 'Your entire <em>terminal</em> at your fingertips',
       lockupRole: 'Every touchpoint, one message',
       deck:
-        'From curb to gate, LUCI orchestrates every screen, speaker, and light in the passenger journey — so each one guides travelers and carries the airport’s most important messages at once.',
+        'In a terminal, information is everything — and your screens, speakers, and signage are how passengers get it. That makes multimedia the layer that guides the journey, drives revenue, and carries the messages that matter most. Keep passengers informed, turn dwell into revenue, and keep the terminal in sync.',
     },
     floorplan: {
       image: '/images/industries/airports-transportation/floorplan.png?v=1',
