@@ -224,18 +224,22 @@
     background: linear-gradient(180deg, rgba(7,15,20,0.82) 0%, rgba(7,15,20,0.6) 16%, rgba(7,15,20,0.26) 34%, rgba(7,15,20,0.08) 56%, rgba(7,15,20,0.28) 100%);
   }
 
-  /* "See LUCI run" — same mesh+fade treatment as personas. The opaque video
-     frame covers the mesh where it sits, so the mesh reads through the top and
-     side margins only; the fade keeps the lockup/deck legible. */
+  /* "See LUCI run" — the full split mesh (floorplan on the left half +
+     mesh lines on the right), the same file the hero/ledger use. The mask
+     keeps the mesh visible across the whole section and only fades the top
+     (behind the lockup) and the extreme corners, so the floorplan reads
+     in the left margin and the lines read on the right — the opaque
+     video covers the center. The ::after veil is a top-down fade
+     for lockup/deck legibility. */
   #home-platform-run.section { position: relative; isolation: isolate; overflow: hidden; background-color: var(--navy-deep) !important; }
   #home-platform-run.section::before {
     content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-    background: url('/images/mesh/luci-bg-hero-mesh-lines-1920x1080.svg') center / cover no-repeat;
-    mix-blend-mode: screen; opacity: 0.4;
+    background: url('/images/mesh/luci-bg-hero-split-1920x1080.svg') center / cover no-repeat;
+    mix-blend-mode: screen; opacity: 1;
   }
   #home-platform-run.section::after {
     content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-    background: linear-gradient(180deg, rgba(7,15,20,0.82) 0%, rgba(7,15,20,0.6) 16%, rgba(7,15,20,0.26) 34%, rgba(7,15,20,0.08) 56%, rgba(7,15,20,0.28) 100%);
+    background: linear-gradient(180deg, rgba(7,15,20,0.86) 0%, rgba(7,15,20,0.55) 12%, rgba(7,15,20,0.18) 26%, rgba(7,15,20,0) 40%, rgba(7,15,20,0) 100%);
   }
   #home-platform-run .container { position: relative; z-index: 1; }
 
