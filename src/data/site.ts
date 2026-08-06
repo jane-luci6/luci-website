@@ -63,7 +63,7 @@ export const leadership = [
   {
     name: 'Michael Epstein',
     title: 'CEO',
-    photo: '/images/michael-epstein.png',
+    photo: '/images/michael-epstein.png?v=2',
     blurb:
       'Twenty-five years as an integrator, operator, and owner of commercial multimedia environments. Sets LUCI’s product direction and stays close to the field.',
   },
