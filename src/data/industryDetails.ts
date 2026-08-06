@@ -874,7 +874,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       lockupName: 'Your entire <em>terminal</em> at your fingertips',
       lockupRole: 'Every touchpoint, one message',
       deck:
-        'A passenger moves through the terminal in stages — arrival, security, the walk to the gate, the wait, the shops in between — and at every stage, the screens and speakers around them are doing two jobs at once: guiding and reassuring them, and carrying the operational and safety messaging the airport runs on. LUCI orchestrates all of it as one, so every point in the journey works together — the right message, in the right place, at the right moment.',
+        'From curb to gate, LUCI orchestrates every screen, speaker, and light in the passenger journey — so each one guides travelers and carries the airport’s most important messages at once.',
     },
     floorplan: {
       image: '/images/industries/airports-transportation/floorplan.png?v=1',
