@@ -224,25 +224,8 @@
     background: linear-gradient(180deg, rgba(7,15,20,0.82) 0%, rgba(7,15,20,0.6) 16%, rgba(7,15,20,0.26) 34%, rgba(7,15,20,0.08) 56%, rgba(7,15,20,0.28) 100%);
   }
 
-  /* "See LUCI run" — the full split mesh (floorplan on the left half +
-     mesh lines on the right), the same file the hero/ledger use. The mask
-     keeps the mesh visible across the whole section and only fades the top
-     (behind the lockup) and the extreme corners, so the floorplan reads
-     in the left margin and the lines read on the right — the opaque
-     video covers the center. The ::after veil is a top-down fade
-     for lockup/deck legibility. */
-  #home-platform-run.section { position: relative; isolation: isolate; overflow: hidden; background-color: var(--navy-deep) !important; }
-  #home-platform-run.section::before {
-    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-    background: url('/images/mesh/luci-bg-hero-split-1920x1080.svg') center / cover no-repeat;
-    mix-blend-mode: screen; opacity: 1;
-  }
-  #home-platform-run.section::after {
-    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-    background:
-      linear-gradient(180deg, rgba(7,15,20,0.94) 0%, rgba(7,15,20,0.7) 10%, rgba(7,15,20,0.25) 22%, rgba(7,15,20,0) 30%),
-      linear-gradient(0deg, rgba(7,15,20,0.97) 0%, rgba(7,15,20,0.88) 10%, rgba(7,15,20,0.6) 25%, rgba(7,15,20,0.25) 38%, rgba(7,15,20,0.05) 45%, rgba(7,15,20,0) 50%);
-  }
+  /* "See LUCI run" — plain navy-deep canvas, no mesh (mesh removed per
+     direction; the video carries the section visually). */
   #home-platform-run .container { position: relative; z-index: 1; }
 
   .home-diff__inner, .home-intro__inner, .home-ledger .container, .home-why__inner, .home-industries__inner, .home-proof-band__inner, .home-personas__inner, .home-resources__inner {
