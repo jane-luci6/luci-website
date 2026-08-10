@@ -744,29 +744,29 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     },
     challenges: [
       {
-        head: 'Every screen on its own thread, and no single view.',
+        head: 'A screen shows the wrong gate, and no one catches it.',
         body:
-          'A terminal runs on a dozen back-ends — flight data, signage, paging, emergency. When one drifts, a board shows a gate that already closed, and nobody notices until a passenger’s at the wrong one.',
+          'Flight data, signage, and the boards all update on their own — so when one falls behind, a display keeps showing a gate that already changed, and no one notices until a passenger’s standing at the wrong one.',
       },
       {
-        head: 'The building never closes, and nothing can go dark.',
+        head: 'Every 5–7 years, you rebuy the whole rack room.',
         body:
-          'A terminal runs 24/7/365 — a 4 a.m. red-eye is as live as a 6 p.m. rush — and one dead board or silent speaker is what people remember. A failure at rush cascades into missed connections.',
+          'Racks of matrix switchers, encoders, and processors age out on a fixed clock — and replacing them means a major capital hit and ripping out live gear in a building that can’t go dark.',
       },
       {
-        head: 'The PA isn’t background noise. It’s the fire alarm.',
+        head: 'Pages, music, and announcements all competing to be heard.',
         body:
-          'In a terminal, the paging system is the voice-alarm system. It has to cut in over everything, take priority across hundreds of zones, and meet life-safety and accessibility code — or it doesn’t pass inspection.',
+          'A gate call goes out while the music’s still playing and an ad is mid-loop — so the one message a passenger actually needs gets buried under everything else in the zone.',
       },
       {
-        head: 'Two announcements, talking over each other.',
+        head: 'When something breaks, every vendor points at the other guy.',
         body:
-          'A terminal is carved into zones — gates, hold areas, concourses — and the edges bleed. A page for one gate spills into the next hold area; without a lock-out, the operator just waits.',
+          'Signage from one vendor, paging from another, flight data from a third — so when something fails, you’re the one chasing four support lines while the problem sits unsolved.',
       },
       {
-        head: 'A sprawling footprint, upgraded in phases.',
+        head: 'A sprawling terminal, a small team, decades of mismatched gear.',
         body:
-          'A vast terminal runs on decades of gear, upgraded in phases aligned to budget and contract cycles rather than all at once — and a lean, understaffed team holds it together across a sprawling footprint.',
+          'Terminals span millions of square feet and generations of equipment, upgraded piece by piece as budgets allow — and a lean team is left holding it all together across the whole footprint.',
       },
     ],
     solutionsLockup: {
@@ -776,38 +776,38 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     solutions: [
       {
         index: '01',
-        problem: 'Every screen on its own thread, and no single view.',
-        headline: 'One interface for every board, screen, and speaker.',
+        problem: 'A screen shows the wrong gate, and no one catches it.',
+        headline: 'Every screen stays current, automatically.',
         answer:
-          'LUCI brings flight data, signage, paging, and emergency messaging behind one interface, so a drifted board shows up before a passenger is at the wrong gate.',
+          'LUCI keeps every board and screen synced to the same live source, so a change reaches all of them at once — and a display that drifts out of step surfaces on your dashboard, not on a passenger’s phone.',
       },
       {
         index: '02',
-        problem: 'The building never closes, and nothing can go dark.',
-        headline: 'Catch failures before the terminal notices.',
+        problem: 'Every 5–7 years, you rebuy the whole rack room.',
+        headline: 'The hardware refresh cycle, essentially gone.',
         answer:
-          'An automated health check exercises every display, player, and speaker — a dead board shows up on the dashboard, not on a passenger’s phone — backed by an embedded team.',
+          'LUCI runs on a fraction of the hardware, so there’s little left to age out — no rebuying racks of gear every few years, and what does get replaced swaps in with minimal downtime.',
       },
       {
         index: '03',
-        problem: 'The PA isn’t background noise. It’s the fire alarm.',
-        headline: 'Paging and emergency on one layer, built to pass.',
+        problem: 'Pages, music, and announcements all competing to be heard.',
+        headline: 'One layer decides what plays, where, and what takes priority.',
         answer:
-          'LUCI brings paging and voice-alarm behind one interface that ties straight into the fire alarm — taking priority across hundreds of zones — and meets life-safety code from the start.',
+          'LUCI controls the audio across every zone — when a page needs to be heard, the music ducks, the page takes priority, and it plays only in the zones you choose, so the message that matters comes through clearly.',
       },
       {
         index: '04',
-        problem: 'Two announcements, talking over each other.',
-        headline: 'The right message to the right zone, every time.',
+        problem: 'When something breaks, every vendor points at the other guy.',
+        headline: 'One partner owns it, from diagnosis to resolution.',
         answer:
-          'Manage zones, lock-outs, and priorities from one interface — a gate-change page hits its own zone, no collision with the concourse next door, no waiting on the adjacent page.',
+          'With LUCI, it’s one platform and one accountable team that owns the whole environment end to end, so when something needs attention, there’s no finger-pointing and no chasing. It gets handled.',
       },
       {
         index: '05',
-        problem: 'A sprawling footprint, upgraded in phases.',
-        headline: 'One interface and one rack that runs the whole terminal.',
+        problem: 'A sprawling terminal, a small team, decades of mismatched gear.',
+        headline: 'One platform to run it all — expandable in phases.',
         answer:
-          'LUCI brings what ran on 4+ systems, 5+ racks, and 100+ devices into one interface and one rack, so you have one interface and one rack that runs the whole terminal — and it improves on a predictable annual line item.',
+          'LUCI brings the whole environment under one interface a small team can actually run, and it expands terminal by terminal on your budget and timeline — so modernizing doesn’t mean replacing everything at once.',
       },
     ],
     automationLockup: {
