@@ -904,7 +904,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
           desc: 'Keep wayfinding and gate information clear, current, and consistent.',
           plate: { side: 'right', right: '-4%', top: '30%' },
           delay: 7,
-          lines: [{ x1: 84, y1: 30, x2: 50, y2: 18 }],
+          lines: [{ x1: 84, y1: 30, x2: 50, y2: 56 }],
         },
         {
           label: 'Keep the whole terminal in sync',
