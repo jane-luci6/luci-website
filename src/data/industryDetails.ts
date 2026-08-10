@@ -938,9 +938,9 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     heroImage: '/images/industries/conference-convention-centers.jpg?v=2',
     thesis: {
       lockupName: 'Conferences & Convention Centers',
-      lockupRole: 'One change. The whole building in sync',
+      lockupRole: 'A/V that adapts to any event',
       deck:
-        'A convention center’s defining trait is flexibility — the same square footage becomes a trade show this week, a corporate keynote next week, and three concurrent meetings the week after. But the room signs, wayfinding, and LED run as separate systems, so rebranding the building for each client is a manual scramble. LUCI orchestrates the whole campus as one, so any space becomes any client’s brand in a tap — and every simultaneous event stays correct.',
+        'Every few days, your building has to become someone else’s event. LUCI orchestrates the whole campus as one, so any space becomes any client’s brand in a tap.',
     },
     tickerLocations: [
       'Grand Ballroom',
@@ -960,8 +960,8 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       'Paging & PA',
     ],
     floorplanLockup: {
-      lockupName: 'Your entire <em>venue</em> at your fingertips',
-      lockupRole: 'Every space, any event',
+      lockupName: 'Turn the space into every client’s <em>brand</em>',
+      lockupRole: 'The business beyond the booking',
       deck:
         'In a convention center, flexibility is everything — and your screens, signs, and LED are how the building becomes each client’s event. That makes multimedia the layer that brands the space per client, guides attendees in real time, and turns circulation into revenue.',
     },
@@ -975,31 +975,31 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       zones: [
         {
           label: 'Brand any space for any client',
-          desc: 'Every event wants its own look on the room signs, wayfinding, and LED — and on any given day you’re hosting several. LUCI brands each client’s spaces from one interface, instantly.',
+          desc: 'Every event wants its own look on the room signs, wayfinding, and LED. LUCI puts each client’s branding across their spaces from one interface, in a tap.',
           plate: { side: 'left', left: '-4%', top: '24%' },
           delay: 0.5,
           lines: [{ x1: 16, y1: 24, x2: 22, y2: 18 }],
         },
         {
-          label: 'Run every event correct, all at once',
-          desc: 'Several clients on the same day, each needing consistent branding in their own zones plus correct shared wayfinding. LUCI keeps every concurrent event correct in its own space.',
+          label: 'Keep every event correct at once',
+          desc: 'On a day with several events in the building, each needs its own branding in its own zones — plus shared wayfinding that’s right for everyone. LUCI keeps every concurrent event’s screens correct, side by side.',
           plate: { side: 'right', right: '-4%', top: '30%' },
           delay: 3.5,
           lines: [{ x1: 84, y1: 30, x2: 80, y2: 18 }],
         },
         {
-          label: 'Reconfigure in a tap, not a scramble',
-          desc: 'Today’s general session is tomorrow’s five breakouts. When the room reconfigures, the signage, sound, and branding reconfigure with it — in a tap, on a tight turnover window.',
+          label: 'Guide every attendee',
+          desc: 'Sessions move, rooms change, schedules shift by the hour. LUCI keeps wayfinding and signage current across the campus, so attendees always find their way.',
           plate: { side: 'right', right: '-4%', top: '76%' },
           delay: 7,
-          lines: [{ x1: 84, y1: 76, x2: 80, y2: 45 }],
+          lines: [{ x1: 84, y1: 76, x2: 50, y2: 45 }],
         },
         {
-          label: 'Guide every attendee in real time',
-          desc: 'Sessions move, rooms change, schedules shift by the hour. LUCI keeps wayfinding and signage current across the whole campus in real time, so attendees always find their way.',
+          label: 'Turn circulation into revenue',
+          desc: 'Lobbies and concourses aren’t just for passing through. LUCI turns them into branded, sponsorable screen space — another way to impress clients and earn from the room you already have.',
           plate: { side: 'left', left: '-4%', top: '80%' },
           delay: 10.5,
-          lines: [{ x1: 16, y1: 80, x2: 50, y2: 80 }],
+          lines: [{ x1: 16, y1: 80, x2: 20, y2: 75 }],
         },
       ],
     },
