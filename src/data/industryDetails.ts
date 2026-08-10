@@ -819,7 +819,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '01',
         title: 'Terminal Day/Night Schedule',
         trigger: 'When the concourse closes for the night.',
-        image: '/images/industries/airports-transportation/capability-day-night-schedule.png?v=1',
+        image: '/images/industries/airports-transportation/capability-day-night-schedule.png?v=2',
         imageAlt: 'An airport concourse at night after the last departure, gate screens dark, ambient lighting dimmed, the concourse standing down for the night',
         detail:
           'Schedule each concourse to stand down after its last departure — displays dark, audio and ad loops off — and come back up before the first morning bank, so screens run on operating hours instead of around the clock.',
@@ -828,7 +828,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '02',
         title: 'Manual Message Push',
         trigger: 'When something needs saying that isn’t in the flight feed.',
-        image: '/images/industries/airports-transportation/capability-manual-message.png?v=1',
+        image: '/images/industries/airports-transportation/capability-manual-message.png?v=2',
         imageAlt: 'An airport gate screen displaying a manual boarding note pushed by an operator, passengers reading the update',
         detail:
           'A boarding note, a delay explanation, a security reminder — push it to the exact screens and zones you choose, set it to clear on its own or drop it with one tap.',
@@ -846,7 +846,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '04',
         title: 'Priority Paging',
         trigger: 'When a page needs to be heard.',
-        image: '/images/industries/airports-transportation/capability-priority-paging.png?v=1',
+        image: '/images/industries/airports-transportation/capability-priority-paging.png?v=2',
         imageAlt: 'An airport gate area as a priority page plays over the speakers, background music ducked, passengers listening to the announcement',
         detail:
           'Page from any device and the audio makes room for it — music and ad spots duck for the announcement, it plays only in the zones you choose, and the regular audio returns on its own.',
@@ -855,7 +855,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '05',
         title: 'Flight Info + Ad Panel',
         trigger: 'By tap or on a schedule.',
-        image: '/images/industries/airports-transportation/capability-flight-info-ad.png?v=1',
+        image: '/images/industries/airports-transportation/capability-flight-info-ad.png?v=2',
         imageAlt: 'An airport display split between full-screen flight information and a carved-out advertising panel, a passenger glancing at departure info',
         detail:
           'Build a display multiple ways — full-screen flight information, or flight info with a panel carved out for advertising or branding — and switch between them with a tap or on a schedule, so revenue content never overruns the flights.',
