@@ -226,7 +226,7 @@ const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
   }
 
   .ind-page-cta__title {
-    font-family: var(--font-head);
+    font-family: var(--font-body);
     font-weight: 700;
     font-size: clamp(24px, 3.4vw, 34px);
     line-height: 1.15;
@@ -301,36 +301,5 @@ const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
     z-index: 1;
   }
 
-  /* CTA — wide mesh band, faded behind the centered content */
-  [data-page] #industry-cta.section {
-    position: relative;
-    isolation: isolate;
-  }
-  [data-page] #industry-cta.section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background: url('/images/mesh/luci-bg-wide-2560x800.svg') center / cover no-repeat;
-    mix-blend-mode: screen;
-    opacity: 0.6;
-  }
-  [data-page] #industry-cta.section::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background: linear-gradient(90deg, transparent 0%, rgba(7, 15, 20, 0.65) 30%, rgba(7, 15, 20, 0.65) 44%, transparent 90%);
-  }
-  [data-page] #industry-cta > .container {
-    position: relative;
-    z-index: 1;
-  }
-  @media (max-width: 720px) {
-    [data-page] #industry-cta.section::after {
-      background: linear-gradient(180deg, transparent 0%, rgba(7, 15, 20, 0.65) 34%, rgba(7, 15, 20, 0.65) 60%, transparent 100%);
-    }
-  }
+  /* CTA mesh band now lives in global.css (shared across all closing CTAs). */
 </style>

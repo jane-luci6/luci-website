@@ -156,5 +156,5 @@ export const whoWeServe = {
       },
     ],
   },
-  ctaTitle: 'See what your team can do.',
+  ctaTitle: 'See what <em>your team</em> can do.',
 } as const;

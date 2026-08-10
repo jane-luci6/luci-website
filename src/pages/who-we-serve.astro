@@ -41,13 +41,14 @@ const h = whoWeServe.hero;
     <TeamsFilmstrip variant="cinema" />
   </SectionBlock>
 
-  <SectionBlock id="wss-cta" tone="sand">
+  <SectionBlock id="wss-cta" tone="deep">
     <div class="wss-cta">
-      <h2 class="h2 wss-cta__title">{whoWeServe.ctaTitle}</h2>
-      <p class="measure wss-cta__sub">Your teams are already on the floor. LUCI puts them on the same platform.</p>
+      <p class="display-label wss-cta__kicker">Next step</p>
+      <h2 class="wss-cta__title" set:html={whoWeServe.ctaTitle} />
+      <p class="wss-cta__sub">Your teams are already on the floor. LUCI puts them on the same platform.</p>
       <div class="btn-row">
-        <a class="btn btn--primary" href="/contact">{site.ctaPrimary}</a>
-        <a class="btn btn--outline" href="/platform">Explore the platform</a>
+        <a class="btn btn--mint-outline" href="/contact">{site.ctaPrimary}</a>
+        <a class="btn btn--ghost" href="/platform">Explore the platform</a>
       </div>
     </div>
   </SectionBlock>
@@ -72,18 +73,35 @@ const h = whoWeServe.hero;
     scroll-margin-top: 120px;
   }
 
-  /* ---------- CTA ---------- */
+  /* ---------- CTA — content styles (mesh band + sizing live in global.css) ---------- */
   .wss-cta {
     max-width: 64ch;
-    padding-block: clamp(16px, 3vw, 28px);
+    padding-block: clamp(24px, 4vw, 40px);
+  }
+  .wss-cta__kicker {
+    color: var(--mint);
+    margin-bottom: var(--space-3);
   }
   .wss-cta__title {
-    color: var(--ink-strong);
-    margin-bottom: var(--space-2);
-    max-width: 22ch;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(24px, 3.4vw, 34px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+    margin-bottom: var(--space-3);
+    max-width: none;
+  }
+  .wss-cta__title :global(em) {
+    font-style: normal;
+    color: var(--gold);
   }
   .wss-cta__sub {
+    max-width: 52ch;
     margin: 0 0 var(--space-4);
-    color: var(--navy-muted);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.78);
   }
 </style>

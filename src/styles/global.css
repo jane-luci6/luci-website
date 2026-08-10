@@ -527,3 +527,77 @@ h2,
 [data-theme='light'] .zone-card .cap-strip__body {
   color: var(--ink);
 }
+
+/* ============================================================
+   Shared closing-CTA mesh band — every page's closing CTA matches
+   the homepage (#home-cta) treatment: navy-deep base, the wide
+   mesh screen-blended at 0.6, a horizontal scrim for legibility,
+   2px mint border-top, and the homepage's section padding. Each
+   page keeps its own kicker / title / deck / button verbiage and
+   the gold <em> header highlight (styled per-page below). This is
+   the single source of truth for the CTA background + sizing.
+   ============================================================ */
+#home-cta.section,
+#about-cta.section,
+#platform-cta.section,
+#persona-cta.section,
+#industry-cta.section,
+#industries-cta.section,
+#wss-cta.section {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--navy-deep) !important;
+  border-top: 2px solid var(--mint);
+  padding-block: clamp(36px, 5vw, 48px);
+}
+#home-cta.section::before,
+#about-cta.section::before,
+#platform-cta.section::before,
+#persona-cta.section::before,
+#industry-cta.section::before,
+#industries-cta.section::before,
+#wss-cta.section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: url('/images/mesh/luci-bg-wide-2560x800.svg') center / cover no-repeat;
+  mix-blend-mode: screen;
+  opacity: 0.6;
+}
+#home-cta.section::after,
+#about-cta.section::after,
+#platform-cta.section::after,
+#persona-cta.section::after,
+#industry-cta.section::after,
+#industries-cta.section::after,
+#wss-cta.section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent 0%, rgba(7, 15, 20, 0.65) 30%, rgba(7, 15, 20, 0.65) 44%, transparent 90%);
+}
+#home-cta.section > .container,
+#about-cta.section > .container,
+#platform-cta.section > .container,
+#persona-cta.section > .container,
+#industry-cta.section > .container,
+#industries-cta.section > .container,
+#wss-cta.section > .container {
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 720px) {
+  #home-cta.section::after,
+  #about-cta.section::after,
+  #platform-cta.section::after,
+  #persona-cta.section::after,
+  #industry-cta.section::after,
+  #industries-cta.section::after,
+  #wss-cta.section::after {
+    background: linear-gradient(180deg, transparent 0%, rgba(7, 15, 20, 0.65) 34%, rgba(7, 15, 20, 0.65) 60%, transparent 100%);
+  }
+}

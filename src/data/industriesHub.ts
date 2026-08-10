@@ -29,7 +29,7 @@ export const industriesHub = {
         'The embedded operation that deploys LUCI in gaming is the same team that stays in airports and resorts — no handoff by industry.',
     },
   ],
-  ctaTitle: 'See LUCI on your floor.',
+  ctaTitle: 'See LUCI on <em>your floor</em>.',
 } as const;
 
 /** Bento grid placement per industry slug. */

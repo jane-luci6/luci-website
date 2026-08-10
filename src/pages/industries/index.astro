@@ -41,7 +41,7 @@ import { site } from '../../data/site';
   <SectionBlock id="industries-cta" tone="deep">
     <div class="ind-hub-cta">
       <p class="display-label ind-hub-cta__kicker">Next step</p>
-      <h2 class="h2 ind-hub-cta__title">{industriesHub.ctaTitle}</h2>
+      <h2 class="ind-hub-cta__title" set:html={industriesHub.ctaTitle} />
       <div class="btn-row">
         <a class="btn btn--mint-outline" href="/contact">{site.ctaPrimary}</a>
         <a class="btn btn--ghost" href="/platform">Explore the platform</a>
@@ -125,12 +125,21 @@ import { site } from '../../data/site';
 
   .ind-hub-cta__kicker {
     color: var(--mint);
-    margin-bottom: var(--space-2);
+    margin-bottom: var(--space-3);
   }
 
   .ind-hub-cta__title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(24px, 3.4vw, 34px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
     color: var(--off-white);
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-3);
     max-width: none;
+  }
+  .ind-hub-cta__title :global(em) {
+    font-style: normal;
+    color: var(--gold);
   }
 </style>
