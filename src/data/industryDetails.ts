@@ -897,7 +897,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
           desc: 'The time between security and boarding is your best commercial inventory — the right offer, at the right gate, at the right moment.',
           plate: { side: 'left', left: '-4%', top: '76%' },
           delay: 3.5,
-          lines: [{ x1: 16, y1: 76, x2: 22, y2: 78 }],
+          lines: [{ x1: 16, y1: 76, x2: 15, y2: 48 }],
         },
         {
           label: 'Give passengers the right info at the right time',
