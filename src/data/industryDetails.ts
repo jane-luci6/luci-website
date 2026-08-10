@@ -817,38 +817,48 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     automations: [
       {
         index: '01',
-        title: 'Pre-Operations Health Check',
-        trigger: 'Every morning, before the first departure.',
+        title: 'Terminal Day/Night Schedule',
+        trigger: 'When the concourse closes for the night.',
+        image: '/images/industries/airports-transportation/capability-day-night-schedule.png?v=1',
+        imageAlt: 'An airport concourse at night after the last departure, gate screens dark, ambient lighting dimmed, the concourse standing down for the night',
         detail:
-          'An automated check exercises every display, player, speaker, and paging path — so a dead board or a silent speaker shows up on the dashboard, not on the concourse.',
+          'Schedule each concourse to stand down after its last departure — displays dark, audio and ad loops off — and come back up before the first morning bank, so screens run on operating hours instead of around the clock.',
       },
       {
         index: '02',
-        title: 'Gate-Change Page',
-        trigger: 'A gate change or boarding call.',
+        title: 'Manual Message Push',
+        trigger: 'When something needs saying that isn’t in the flight feed.',
+        image: '/images/industries/airports-transportation/capability-manual-message.png?v=1',
+        imageAlt: 'An airport gate screen displaying a manual boarding note pushed by an operator, passengers reading the update',
         detail:
-          'One preset updates the gate screen, departure board, and wayfinding, fires the page to the right zone with a lock-out, and reverts when boarding closes.',
+          'A boarding note, a delay explanation, a security reminder — push it to the exact screens and zones you choose, set it to clear on its own or drop it with one tap.',
       },
       {
         index: '03',
-        title: 'Operations Mode Switching',
-        trigger: 'Normal. Irregular. Emergency.',
+        title: 'Disruption Mode',
+        trigger: 'Everyday versus disruption.',
+        image: '/images/industries/airports-transportation/capability-disruption-mode.png?v=1',
+        imageAlt: 'An airport terminal in disruption mode, screens showing flight status and rebooking information instead of advertising, passengers rebooking at a kiosk',
         detail:
-          'Each operational state becomes one configuration of displays, paging, and wayfinding — switch the terminal between routine, irregular-operations, and emergency voice-alarm in a few taps, paging taking priority.',
+          'Save your everyday look — flight information alongside advertising and branding — and a disruption look where ads drop and screens give over to flight status and rebooking. Switch the whole terminal between them in a few taps.',
       },
       {
         index: '04',
-        title: 'Emergency Voice-Alarm Override',
-        trigger: 'A fire or evacuation event.',
+        title: 'Priority Paging',
+        trigger: 'When a page needs to be heard.',
+        image: '/images/industries/airports-transportation/capability-priority-paging.png?v=1',
+        imageAlt: 'An airport gate area as a priority page plays over the speakers, background music ducked, passengers listening to the announcement',
         detail:
-          'An emergency preset seizes paging on fire-alarm input, mutes routine channels, and broadcasts the coded or live voice-alarm to the affected zones — prioritized, zoned, logged.',
+          'Page from any device and the audio makes room for it — music and ad spots duck for the announcement, it plays only in the zones you choose, and the regular audio returns on its own.',
       },
       {
         index: '05',
-        title: 'Data-Sync Monitor',
-        trigger: 'Continuous, in the background.',
+        title: 'Flight Info + Ad Panel',
+        trigger: 'By tap or on a schedule.',
+        image: '/images/industries/airports-transportation/capability-flight-info-ad.png?v=1',
+        imageAlt: 'An airport display split between full-screen flight information and a carved-out advertising panel, a passenger glancing at departure info',
         detail:
-          'The system keeps every board, gate, and platform display in sync with the live data — and the moment one drifts, points it back before a passenger reads the wrong gate.',
+          'Build a display multiple ways — full-screen flight information, or flight info with a panel carved out for advertising or branding — and switch between them with a tap or on a schedule, so revenue content never overruns the flights.',
       },
     ],
     tickerLocations: [
