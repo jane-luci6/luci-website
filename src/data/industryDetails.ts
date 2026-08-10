@@ -819,7 +819,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '01',
         title: 'Terminal Day/Night Schedule',
         trigger: 'When the concourse closes for the night.',
-        image: '/images/industries/airports-transportation/capability-day-night-schedule.png?v=2',
+        image: '/images/industries/airports-transportation/capability-day-night-schedule.png?v=3',
         imageAlt: 'An airport concourse at night after the last departure, gate screens dark, ambient lighting dimmed, the concourse standing down for the night',
         detail:
           'Schedule each concourse to stand down after its last departure — displays dark, audio and ad loops off — and come back up before the first morning bank, so screens run on operating hours instead of around the clock.',
@@ -828,7 +828,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '02',
         title: 'Manual Message Push',
         trigger: 'When something needs saying that isn’t in the flight feed.',
-        image: '/images/industries/airports-transportation/capability-manual-message.png?v=2',
+        image: '/images/industries/airports-transportation/capability-manual-message.png?v=3',
         imageAlt: 'An airport gate screen displaying a manual boarding note pushed by an operator, passengers reading the update',
         detail:
           'A boarding note, a delay explanation, a security reminder — push it to the exact screens and zones you choose, set it to clear on its own or drop it with one tap.',
