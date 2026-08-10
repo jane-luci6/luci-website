@@ -37,11 +37,12 @@
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
   gap: clamp(32px, 5vw, 72px);
-  align-items: center;
-  min-height: calc(100vh - 76px);
-  padding-block: clamp(40px, 7vw, 80px);
+  align-items: start;
+  min-height: auto;
+  padding-top: clamp(32px, 4.5vw, 56px);
+  padding-bottom: clamp(48px, 7vw, 84px);
 }
-.contact-hero__copy { max-width: 30ch; }
+.contact-hero__copy { max-width: 34ch; }
 .contact-hero__eyebrow {
   display: flex;
   align-items: center;
@@ -100,6 +101,78 @@
   box-shadow: inset 0 0 0 1px var(--mint);
 }
 .contact-hero__watch svg { width: 16px; height: 16px; fill: var(--mint); stroke: none; }
+
+/* ---------- What you'll see — diagram-style points (no boxes) ---------- */
+.contact-hero__points {
+  margin-top: clamp(36px, 4.5vw, 52px);
+  padding-top: clamp(20px, 2.5vw, 28px);
+  border-top: 1px solid rgba(var(--mint-rgb), 0.14);
+}
+.contact-hero__points-label {
+  margin: 0 0 clamp(20px, 2.4vw, 28px);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mint);
+}
+.contact-points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 2.6vw, 28px);
+}
+.contact-point {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: baseline;
+  column-gap: 14px;
+}
+.contact-point__num {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--mint);
+  line-height: 1;
+}
+.contact-point__node {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--mint);
+  box-shadow: 0 0 0 3px rgba(var(--mint-rgb), 0.18);
+  align-self: center;
+}
+.contact-point__rule {
+  height: 2px;
+  width: clamp(28px, 3vw, 44px);
+  align-self: center;
+  background: linear-gradient(90deg, rgba(var(--mint-rgb), 0.55), rgba(var(--mint-rgb), 0.18));
+  border-radius: 2px;
+}
+.contact-point__head {
+  grid-column: 3 / 4;
+  margin: 0 0 6px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(16px, 1.7vw, 19px);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--off-white);
+}
+.contact-point__body {
+  grid-column: 3 / 4;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(245, 248, 250, 0.6);
+  max-width: 38ch;
+}
 
 /* ---------- Demo form card ---------- */
 .contact-form-card {
