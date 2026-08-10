@@ -835,12 +835,12 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       },
       {
         index: '03',
-        title: 'Disruption Mode',
-        trigger: 'Everyday versus disruption.',
-        image: '/images/industries/airports-transportation/capability-disruption-mode.png?v=1',
-        imageAlt: 'An airport terminal in disruption mode, screens showing flight status and rebooking information instead of advertising, passengers rebooking at a kiosk',
+        title: 'Flight Info + Ad Panel',
+        trigger: 'By tap or on a schedule.',
+        image: '/images/industries/airports-transportation/capability-flight-info-ad.png?v=2',
+        imageAlt: 'An airport display split between full-screen flight information and a carved-out advertising panel, a passenger glancing at departure info',
         detail:
-          'Save your everyday look — flight information alongside advertising and branding — and a disruption look where ads drop and screens give over to flight status and rebooking. Switch the whole terminal between them in a few taps.',
+          'Build a display multiple ways — full-screen flight information, or flight info with a panel carved out for advertising or branding — and switch between them with a tap or on a schedule, so revenue content never overruns the flights.',
       },
       {
         index: '04',
@@ -853,12 +853,12 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       },
       {
         index: '05',
-        title: 'Flight Info + Ad Panel',
-        trigger: 'By tap or on a schedule.',
-        image: '/images/industries/airports-transportation/capability-flight-info-ad.png?v=2',
-        imageAlt: 'An airport display split between full-screen flight information and a carved-out advertising panel, a passenger glancing at departure info',
+        title: 'Disruption Mode',
+        trigger: 'Everyday versus disruption.',
+        image: '/images/industries/airports-transportation/capability-disruption-mode.png?v=1',
+        imageAlt: 'An airport terminal in disruption mode, screens showing flight status and rebooking information instead of advertising, passengers rebooking at a kiosk',
         detail:
-          'Build a display multiple ways — full-screen flight information, or flight info with a panel carved out for advertising or branding — and switch between them with a tap or on a schedule, so revenue content never overruns the flights.',
+          'Save your everyday look — flight information alongside advertising and branding — and a disruption look where ads drop and screens give over to flight status and rebooking. Switch the whole terminal between them in a few taps.',
       },
     ],
     tickerLocations: [
