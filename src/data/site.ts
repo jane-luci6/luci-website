@@ -13,7 +13,7 @@ export const site = {
     tail: ' for Enterprise Multimedia',
   },
   heroVisualDescriptor: 'Map-based control for every display, source, and zone — with a team that stays.',
-  ctaPrimary: 'Request a conversation',
+  ctaPrimary: 'Book a live demo',
   ctaSecondary: 'See LUCI in action',
 } as const;
 
