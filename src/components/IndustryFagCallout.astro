@@ -1,0 +1,139 @@
+---
+// Field Activation Guide download callout.
+// Sits in the slot where a case study callout (HomeProof) would go,
+// for industries that don't have a published case study yet.
+// Plain navy band — no mesh (matches the plain case study callout).
+
+const pdf = '/resources/field-activation-guide-prospect.pdf';
+---
+
+<section class="fag-band" aria-labelledby="fag-band-title">
+  <div class="fag-band__inner container container--wide">
+    <div class="fag-band__brand">
+      <img
+        class="fag-band__logo"
+        src="/images/logos/luci-full-mintmark-white.png"
+        alt="LUCI"
+        width="180"
+        height="36"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <div class="fag-band__copy">
+      <p class="fag-band__kicker">Field Guide</p>
+      <h2 id="fag-band-title" class="fag-band__headline">
+        How LUCI <span>rolls out</span> on your floor.
+      </h2>
+      <p class="fag-band__dek">
+        The Field Activation Guide walks through how LUCI deploys onto your
+        existing environment — in phases, on your budget and timeline.
+      </p>
+    </div>
+
+    <a class="btn btn--mint fag-band__cta" href={pdf} target="_blank" rel="noopener" download>
+      Download the guide
+      <span class="fag-band__cta-arrow" aria-hidden="true">→</span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .fag-band {
+    background: linear-gradient(
+      90deg,
+      rgba(104, 227, 190, 0.1) 0%,
+      rgba(104, 227, 190, 0.04) 42%,
+      rgba(16, 35, 45, 0.98) 100%
+    );
+    border-top: 1px solid rgba(104, 227, 190, 0.18);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--off-white);
+  }
+
+  .fag-band__inner {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: clamp(20px, 3vw, 32px);
+    padding-block: clamp(28px, 3.5vw, 40px);
+  }
+
+  .fag-band__logo {
+    display: block;
+    height: clamp(28px, 3vw, 36px);
+    width: auto;
+  }
+
+  .fag-band__kicker {
+    margin: 0 0 6px;
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mint);
+  }
+
+  .fag-band__headline {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: clamp(20px, 2.2vw, 26px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+    max-width: 28ch;
+  }
+
+  .fag-band__headline span {
+    color: var(--gold);
+  }
+
+  .fag-band__dek {
+    margin: 8px 0 0;
+    font-size: 14px;
+    line-height: 1.45;
+    color: rgba(245, 248, 250, 0.68);
+    max-width: 48ch;
+  }
+
+  .fag-band__cta {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+  }
+
+  .fag-band__cta-arrow {
+    font-size: 18px;
+    line-height: 1;
+    transition: transform 0.18s ease-out;
+  }
+
+  .fag-band__cta:hover .fag-band__cta-arrow {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 860px) {
+    .fag-band__inner {
+      grid-template-columns: 1fr;
+      text-align: left;
+    }
+
+    .fag-band__brand {
+      display: none;
+    }
+
+    .fag-band__cta {
+      justify-self: start;
+    }
+  }
+</style>

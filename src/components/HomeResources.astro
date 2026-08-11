@@ -25,15 +25,15 @@ const cards = [
     cta: 'Read the story',
   },
   {
-    href: '/resources/case-studies',
-    placeholder: true,
+    href: '/resources/field-activation-guide-prospect.pdf',
     poster: null,
-    logo: null,
-    logoAlt: '',
-    kicker: 'Coming soon',
-    title: 'More case studies on the way',
-    meta: 'New stories in production',
-    cta: 'See all case studies',
+    logo: '/images/logos/luci-full-mintmark-white.png',
+    logoAlt: 'LUCI logo',
+    kicker: 'Field Guide',
+    title: 'The Field Activation Guide',
+    meta: 'How LUCI rolls out on your floor',
+    cta: 'Download the guide',
+    download: true,
   },
 ];
 ---
@@ -47,7 +47,7 @@ const cards = [
     <ul class="home-resources__grid" role="list">
       {cards.map((card) => (
         <li class={`rsc-card${card.placeholder ? ' rsc-card--placeholder' : ''}`}>
-          <a class="rsc-card__link" href={card.href}>
+          <a class="rsc-card__link" href={card.href} target={card.download ? '_blank' : undefined} rel={card.download ? 'noopener' : undefined} download={card.download ? '' : undefined}>
             <span class="rsc-card__media">
               {card.poster ? (
                 <img src={card.poster} alt="" loading="lazy" decoding="async" />

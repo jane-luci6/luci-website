@@ -12,6 +12,7 @@ import IndustryTicker from '../../components/IndustryTicker.astro';
 import IndustryAutomationShowcase from '../../components/IndustryAutomationShowcase.astro';
 import IndustryCapabilityCards from '../../components/IndustryCapabilityCards.astro';
 import HomeProof from '../../components/HomeProof.astro';
+import IndustryFagCallout from '../../components/IndustryFagCallout.astro';
 import { industries } from '../../data/industries';
 import { getIndustryDetail } from '../../data/industryDetails';
 import { pillars } from '../../data/pillars';
@@ -111,6 +112,8 @@ const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
       )}
 
       {(industry.slug === 'casinos-gaming' || industry.slug === 'hotels-resorts') && <HomeProof />}
+
+      {!(industry.slug === 'casinos-gaming' || industry.slug === 'hotels-resorts') && hasFloorplan && <IndustryFagCallout />}
 
       <SectionBlock
         id="industry-automation"
