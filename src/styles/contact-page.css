@@ -140,7 +140,7 @@
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.14em;
-  color: var(--mint);
+  color: var(--gold);
   line-height: 1;
 }
 .contact-point__head {
@@ -318,44 +318,6 @@
   color: #ff8a80;
 }
 .luci-acform ._form-branding { display: none; }
-
-/* ============ 2. TRUSTED BY ============ */
-.contact-trust {
-  background: var(--off-white);
-  border-bottom: 1px solid rgba(10, 22, 28, 0.08);
-}
-.contact-trust .container { padding-block: clamp(40px, 5vw, 64px); }
-.contact-trust__label {
-  margin: 0 0 clamp(24px, 3vw, 36px);
-  font-family: var(--font-display);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--navy-muted);
-  text-align: center;
-}
-.contact-trust__grid {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: clamp(20px, 2.4vw, 32px);
-  align-items: center;
-  justify-items: center;
-}
-.contact-trust__cell { display: flex; align-items: center; justify-content: center; }
-.contact-trust__strip {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-height: clamp(48px, 5vw, 72px);
-  width: auto;
-  opacity: 0.86;
-  transition: opacity 0.3s ease;
-}
-.contact-trust__strip:hover { opacity: 1; }
 
 /* ============ 3. SECONDARY CONTACT PATHS ============ */
 .contact-paths {
@@ -537,10 +499,6 @@
   .contact-hero__form-col { order: 2; }
 }
 @media (max-width: 760px) {
-  .contact-trust__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(20px, 4vw, 28px);
-  }
   .contact-paths { grid-template-columns: 1fr; }
   .contact-closing { flex-direction: column; align-items: flex-start; }
 }

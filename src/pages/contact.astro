@@ -1,10 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionBlock from '../components/SectionBlock.astro';
-import { homeTrust } from '../data/site';
+import HomeTrustBar from '../components/HomeTrustBar.astro';
 import '../styles/contact-page.css';
 
-const { strips } = homeTrust;
 const SUPPORT_HREF = 'https://support.lucisystems.com';
 const GENERAL_HREF = 'mailto:info@lucisystems.com';
 // 2-minute overview video — stand-in until a dedicated 2-min cut is produced.
@@ -66,18 +65,7 @@ const OVERVIEW_POSTER = '/videos/luci-platform-run-poster.jpg';
   </section>
 
   <!-- 2. TRUSTED BY -->
-  <section id="trusted-by" class="contact-trust" aria-label="Operators running LUCI">
-    <div class="container container--wide">
-      <p class="contact-trust__label">Trusted by</p>
-      <ul class="contact-trust__grid" role="list">
-        {strips.map((strip) => (
-          <li class="contact-trust__cell">
-            <img class="contact-trust__strip" src={strip.src} alt={strip.alt} loading="lazy" />
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
+  <HomeTrustBar />
 
   <!-- 3. SECONDARY CONTACT PATHS -->
   <SectionBlock id="other-inquiries" tone="deep" wide>
