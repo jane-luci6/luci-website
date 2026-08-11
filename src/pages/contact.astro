@@ -119,6 +119,25 @@ const OVERVIEW_POSTER = '/videos/luci-platform-run-poster.jpg';
   </div>
 </div>
 
+<!-- DEMO REQUEST — SUCCESS MODAL (shown when ActiveCampaign renders its thank-you state) -->
+<div id="demo-success-modal" class="demo-success" role="dialog" aria-modal="true" aria-labelledby="demo-success-title" aria-describedby="demo-success-deck" hidden>
+  <div class="demo-success__backdrop" data-close-success></div>
+  <div class="demo-success__panel" role="document" tabindex="-1">
+    <button class="demo-success__close" type="button" data-close-success aria-label="Close confirmation">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="demo-success__check" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2 id="demo-success-title" class="demo-success__title">Thanks &mdash; we&rsquo;ll be in touch.</h2>
+    <p id="demo-success-deck" class="demo-success__deck">A member of the LUCI team will reach out shortly to confirm your live demo.</p>
+    <div class="demo-success__actions">
+      <a class="btn btn--mint demo-success__primary" href="/">Back to home</a>
+      <button class="demo-success__secondary" type="button" data-close-success>Stay on this page</button>
+    </div>
+  </div>
+</div>
+
 <script>
   const modal = document.getElementById('overview-modal');
   const video = modal?.querySelector('video');
@@ -141,4 +160,37 @@ const OVERVIEW_POSTER = '/videos/luci-platform-run-poster.jpg';
   function onKeydown(e) { if (e.key === 'Escape') closeModal(); }
   openers.forEach((btn) => btn.addEventListener('click', openModal));
   closers.forEach((el) => el.addEventListener('click', closeModal));
+</script>
+
+<script>
+  // Demo request success — watch the ActiveCampaign embed for its inline thank-you
+  // state and surface it in a clean modal instead of the bare inline message.
+  const acForm = document.querySelector('.luci-acform');
+  const successModal = document.getElementById('demo-success-modal');
+  if (acForm && successModal) {
+    let fired = false;
+    const openSuccess = () => {
+      if (fired) return;
+      fired = true;
+      successModal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', onKeydown);
+      requestAnimationFrame(() => successModal.querySelector('.demo-success__close')?.focus?.());
+    };
+    const closeSuccess = () => {
+      successModal.hidden = true;
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', onKeydown);
+    };
+    function onKeydown(e) { if (e.key === 'Escape') closeSuccess(); }
+    document.querySelectorAll('[data-close-success]').forEach((el) => el.addEventListener('click', closeSuccess));
+    const detect = () => acForm.querySelector('._form-thank-you');
+    if (typeof MutationObserver !== 'undefined') {
+      const obs = new MutationObserver(() => { if (detect()) openSuccess(); });
+      obs.observe(acForm, { childList: true, subtree: true });
+    }
+    // Fallback poll — covers AC replacing innerHTML in a way the observer misses.
+    const poll = setInterval(() => { if (detect()) { openSuccess(); clearInterval(poll); } }, 400);
+    setTimeout(() => clearInterval(poll), 30000);
+  }
 </script>
