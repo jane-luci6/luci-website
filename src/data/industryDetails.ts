@@ -1081,15 +1081,6 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     automations: [
       {
         index: '01',
-        title: 'Morning Reset',
-        trigger: 'Every morning, before doors.',
-        image: '/images/industries/conference-convention-centers/capability-morning-reset.png?v=1',
-        imageAlt: 'An empty convention hall at dawn, displays and wayfinding resetting to a clean baseline before the first session',
-        detail:
-          'A scheduled preset returns every hall’s displays, audio, and wayfinding to baseline before the first session.',
-      },
-      {
-        index: '02',
         title: 'Room Turnover',
         trigger: 'A new event format.',
         image: '/images/industries/conference-convention-centers/capability-room-turnover.png?v=1',
@@ -1098,7 +1089,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
           'A new layout, combine, or divide recalls the right audio zones, displays, and control for the next event in a few taps.',
       },
       {
-        index: '03',
+        index: '02',
         title: 'Divisible-Room Split',
         trigger: 'Air walls open or close.',
         image: '/images/industries/conference-convention-centers/capability-divisible-split.png?v=1',
@@ -1107,13 +1098,22 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
           'Divided and open modes switch audio zones and DSP calibration together, so two sessions stay independent without bleed.',
       },
       {
-        index: '04',
-        title: 'Hybrid Pre-Stream Check',
-        trigger: 'Before every streamed session.',
-        image: '/images/industries/conference-convention-centers/capability-hybrid-check.png?v=1',
-        imageAlt: 'A convention general session stage with a streaming encoder and ISO recording rig being checked before a hybrid session',
+        index: '03',
+        title: 'Client Branding Push',
+        trigger: 'A new client’s branding.',
+        image: '/images/industries/conference-convention-centers/capability-client-branding.png?v=1',
+        imageAlt: 'A convention hall with a client’s logos, colors, and wayfinding pushed across every screen in their footprint from one interface',
         detail:
-          'An automated check exercises encoders, uplink, and ISO recording, and flags a failing path before the remote audience sees it.',
+          'Build a client’s look once — logos, colors, wayfinding — and push it across every screen in their footprint in a few taps.',
+      },
+      {
+        index: '04',
+        title: 'Live Device Status',
+        trigger: 'Before doors, and throughout the event.',
+        image: '/images/industries/conference-convention-centers/capability-live-status.png?v=1',
+        imageAlt: 'A LUCI map view of a convention campus with every display, player, and speaker reporting in, status icons turning yellow or red the moment something is off',
+        detail:
+          'Every display, player, and speaker reports in on one map — an icon turns yellow or red the moment something’s off, so you catch it before an attendee or a client does.',
       },
       {
         index: '05',
