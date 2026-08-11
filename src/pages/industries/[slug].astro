@@ -244,73 +244,28 @@ const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
 
 <style is:global>
   /* ============================================================
-     Industry pages — mesh line-work underlay on two sections (case study callout + CTA).
-     Transparent mesh SVGs screen-blended onto each section's own
-     navy background, with a soft mask + navy pocket so the line
-     work reads at the edges and drops out behind text. Scoped to
-     every industry detail page via [data-page].
+     Industry pages — mesh line-work underlay on sections 2 + 4
+     (Before/After + Capabilities). Transparent mesh
+     screen-blended onto each section's navy background,
+     faded behind the content and crisp in the open margins.
+     The floorplan (under the video hero) and the case study
+     callout stay plain so the mesh never competes with the hero
+     or reads busy. Scoped to every industry detail page via [data-page].
      ============================================================ */
 
-  /* Case study callout (HomeProof) — mesh lines, faded behind the copy */
-  [data-page] .home-proof-band {
+  /* Case study callout (HomeProof) — plain navy, no mesh. */
+  [data-page] .home-proof-band { position: relative; isolation: isolate; }
+
+  /* Sections 2 + 4 (Before/After + Capabilities) — mesh lines,
+     faded behind the content and crisp in the open margins. */
+  [data-page] #industry-before-after.section,
+  [data-page] #industry-automation.section {
     position: relative;
     isolation: isolate;
     overflow: hidden;
   }
-  [data-page] .home-proof-band::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background: url('/images/mesh/luci-bg-hero-split-1920x1080.svg') center / cover no-repeat;
-    mix-blend-mode: screen;
-    opacity: 0.45;
-    -webkit-mask-image: radial-gradient(
-      ellipse 70% 90% at 48% 50%,
-      transparent 0%,
-      rgba(0, 0, 0, 0.2) 35%,
-      rgba(0, 0, 0, 0.65) 62%,
-      #000 85%
-    );
-    mask-image: radial-gradient(
-      ellipse 70% 90% at 48% 50%,
-      transparent 0%,
-      rgba(0, 0, 0, 0.2) 35%,
-      rgba(0, 0, 0, 0.65) 62%,
-      #000 85%
-    );
-  }
-  [data-page] .home-proof-band::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background: radial-gradient(
-      ellipse 72% 95% at 48% 50%,
-      rgba(7, 15, 20, 0.72) 0%,
-      rgba(7, 15, 20, 0.45) 40%,
-      rgba(7, 15, 20, 0.18) 65%,
-      transparent 85%
-    );
-  }
-  [data-page] .home-proof-band__inner {
-    position: relative;
-    z-index: 1;
-  }
-
-  /* CTA mesh band now lives in global.css (shared across all closing CTAs). */
-
-  /* First section (floorplan) — mesh lines underlay behind the aurora stage.
-     Same split-mesh treatment, screen-blended onto the
-     section's navy background so the line work reads at the
-     edges and drops out behind the glass stage box. */
-  [data-page] #industry-floorplan.section {
-    position: relative;
-    isolation: isolate;
-  }
-  [data-page] #industry-floorplan.section::before {
+  [data-page] #industry-before-after.section::before,
+  [data-page] #industry-automation.section::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -319,8 +274,6 @@ const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
     background: url('/images/mesh/luci-bg-hero-1920x1080.png') center / cover no-repeat;
     mix-blend-mode: screen;
     opacity: 1;
-    /* Fade the mesh more sharply around the stage box (hidden across the box
-       + a margin) and let it read crisp in the open space beyond. */
     -webkit-mask-image: radial-gradient(
       ellipse 76% 94% at 50% 48%,
       transparent 0%,
@@ -336,13 +289,13 @@ const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
       #000 62%
     );
   }
-  [data-page] #industry-floorplan.section::after {
+  [data-page] #industry-before-after.section::after,
+  [data-page] #industry-automation.section::after {
     content: '';
     position: absolute;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    /* Veil sits behind the box only, so the open margins stay clear. */
     background: radial-gradient(
       ellipse 72% 88% at 50% 48%,
       rgba(7, 15, 20, 0.74) 0%,
@@ -351,8 +304,13 @@ const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
       transparent 72%
     );
   }
-  [data-page] #industry-floorplan > .container {
+  [data-page] #industry-before-after > .container,
+  [data-page] #industry-automation > .container {
     position: relative;
     z-index: 1;
   }
+
+  /* Industry CTA — keep it plain (override the global closing-CTA mesh). */
+  [data-page] #industry-cta.section::before,
+  [data-page] #industry-cta.section::after { content: none; }
 </style>
