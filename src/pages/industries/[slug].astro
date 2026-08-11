@@ -37,7 +37,7 @@ const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
   darkHeader={!!detail}
 >
   {detail ? (
-    <div data-page={industry.slug} style={hasFloorplan ? `--ba-floorplan:url("${detail!.floorplan!.image}")` : undefined}>
+    <div data-page={industry.slug}>
       <h1 class="ind-page-sr-only">{industry.name} — {detail.thesis.lockupRole}</h1>
       <PlatformChapterNav chapters={detail.chapters} contextLabel={industry.name} />
 
@@ -316,9 +316,9 @@ const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background: url('/images/mesh/luci-bg-hero-split-1920x1080.svg') center / cover no-repeat;
+    background: url('/images/mesh/luci-bg-hero-split-right-1920x1080.svg') center / cover no-repeat;
     mix-blend-mode: screen;
-    opacity: 0.42;
+    opacity: 0.5;
     -webkit-mask-image: radial-gradient(
       ellipse 72% 92% at 50% 48%,
       transparent 0%,
@@ -334,23 +334,19 @@ const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
       #000 86%
     );
   }
-  /* Faint floorplan line-work laid into the right side of the mesh —
-     the same architectural drawing from the floorplan section above,
-     inverted (white lines on dark) and screen-blended so the lines
-     read on navy and the field drops out. Masked to the right so the
-     left stays clean mesh and the floorplan only emerges on the right. */
   [data-page] #industry-before-after.section::after {
     content: '';
     position: absolute;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background: var(--ba-floorplan) right center / auto 90% no-repeat;
-    filter: invert(1);
-    mix-blend-mode: screen;
-    opacity: 0.5;
-    -webkit-mask-image: linear-gradient(90deg, transparent 0%, transparent 36%, rgba(0,0,0,0.5) 52%, #000 70%);
-    mask-image: linear-gradient(90deg, transparent 0%, transparent 36%, rgba(0,0,0,0.5) 52%, #000 70%);
+    background: radial-gradient(
+      ellipse 74% 96% at 50% 50%,
+      rgba(7, 15, 20, 0.7) 0%,
+      rgba(7, 15, 20, 0.42) 40%,
+      rgba(7, 15, 20, 0.16) 66%,
+      transparent 86%
+    );
   }
   [data-page] #industry-before-after > .container {
     position: relative;
