@@ -177,10 +177,10 @@
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.015) 100%);
   border: 1px solid rgba(var(--mint-rgb), 0.22);
   border-radius: 16px;
-  padding: clamp(24px, 3vw, 36px);
+  padding: clamp(32px, 4vw, 48px);
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
 }
-.contact-form-card__head { margin-bottom: 24px; }
+.contact-form-card__head { margin-bottom: 28px; }
 .contact-form-card__title {
   margin: 0 0 10px;
   font-family: var(--font-body);
@@ -227,7 +227,7 @@
 .luci-acform ._form-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 20px;
 }
 .luci-acform ._form_element._field_email,
 .luci-acform ._form_element._field_phone,
@@ -240,7 +240,7 @@
 .luci-acform label,
 .luci-acform ._form-label {
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 600;
@@ -270,8 +270,8 @@
 .luci-acform select,
 .luci-acform textarea {
   width: 100%;
-  min-height: 44px;
-  padding: 12px 14px;
+  min-height: 46px;
+  padding: 13px 16px;
   font-family: var(--font-body);
   font-size: 15px;
   color: var(--ink-strong);
