@@ -42,7 +42,7 @@
   padding-top: clamp(32px, 4.5vw, 56px);
   padding-bottom: clamp(48px, 7vw, 84px);
 }
-.contact-hero__copy { max-width: 34ch; }
+.contact-hero__copy { max-width: 58ch; min-width: 0; }
 .contact-hero__eyebrow {
   display: flex;
   align-items: center;
@@ -70,7 +70,7 @@
   line-height: 1.04;
   letter-spacing: -0.025em;
   color: var(--off-white);
-  max-width: 14ch;
+  max-width: 18ch;
 }
 .contact-hero__deck {
   margin: 0 0 32px;
@@ -78,7 +78,7 @@
   font-size: clamp(17px, 1.6vw, 20px);
   line-height: 1.55;
   color: rgba(245, 248, 250, 0.82);
-  max-width: 34ch;
+  max-width: 50ch;
 }
 .contact-hero__watch {
   display: inline-flex;
@@ -171,10 +171,11 @@
   font-size: 14px;
   line-height: 1.5;
   color: rgba(245, 248, 250, 0.6);
-  max-width: 38ch;
+  max-width: 52ch;
 }
 
 /* ---------- Demo form card ---------- */
+.contact-hero__form-col { min-width: 0; }
 .contact-form-card {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.015) 100%);
   border: 1px solid rgba(var(--mint-rgb), 0.22);
@@ -207,14 +208,40 @@
   color: rgba(245, 248, 250, 0.58);
 }
 
-/* ActiveCampaign class hooks — keep so the real embed inherits styling. */
-.luci-acform ._form_element + ._form_element { margin-top: 16px; }
-.luci-acform ._form-grid {
+/* ActiveCampaign embed — override injected AC chrome; card header/deck live outside the embed. */
+.luci-acform form[id^='_form_'] {
+  font-size: inherit;
+  line-height: inherit;
+  font-family: inherit;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+.luci-acform ._field_header,
+.luci-acform ._field_html,
+.luci-acform ._form-title {
+  display: none !important;
+}
+.luci-acform ._form-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
-.luci-acform label {
+.luci-acform ._form_element._field_email,
+.luci-acform ._form_element._field_phone,
+.luci-acform ._button-wrapper,
+.luci-acform ._form-thank-you,
+.luci-acform ._form-branding {
+  grid-column: 1 / -1;
+}
+.luci-acform ._form_element + ._form_element { margin-top: 0; }
+.luci-acform label,
+.luci-acform ._form-label {
   display: block;
   margin-bottom: 6px;
   font-family: var(--font-body);
@@ -223,7 +250,8 @@
   letter-spacing: 0.01em;
   color: rgba(245, 248, 250, 0.88);
 }
-.luci-acform ._form-label-req { color: var(--mint); }
+.luci-acform ._form-label-req,
+.luci-acform .field-required { color: var(--mint); }
 .luci-acform ._field-optional { display: inline-flex; align-items: baseline; }
 .luci-acform ._field-optional-tag {
   margin-left: 6px;
@@ -232,6 +260,12 @@
   letter-spacing: 0.04em;
   text-transform: lowercase;
   color: rgba(245, 248, 250, 0.5);
+}
+.luci-acform ._form-thank-you {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(245, 248, 250, 0.88);
 }
 .luci-acform input[type='text'],
 .luci-acform input[type='email'],
@@ -510,7 +544,13 @@
   .contact-closing { flex-direction: column; align-items: flex-start; }
 }
 @media (max-width: 560px) {
-  .luci-acform ._form-grid { grid-template-columns: 1fr; }
+  .luci-acform ._form-content { grid-template-columns: 1fr; }
+  .luci-acform ._form_element._field_firstname,
+  .luci-acform ._form_element._field_lastname,
+  .luci-acform ._form_element._field1,
+  .luci-acform ._form_element._field5 {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
