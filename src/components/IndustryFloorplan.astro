@@ -104,43 +104,18 @@ const delaysMs = zones.map((z) => z.delay * 1000);
   if (stage) {
     const plates = Array.from(stage.querySelectorAll<HTMLElement>('.fp-plate'));
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const count = plates.length;
     const delaysAttr = stage.getAttribute('data-delays');
     const delaysMs: number[] = delaysAttr ? JSON.parse(delaysAttr) : plates.map((_, i) => i * 3500);
 
-    function setCurrent(i: number) {
-      plates.forEach((p, pi) => {
-        p.classList.toggle('is-current', pi === i);
-        p.classList.toggle('is-dim', pi !== i);
-      });
-      // re-trigger the pulse on the chosen zone's lines/dots
-      stage!.querySelectorAll(`[data-zone="${i}"]`).forEach((el) => {
-        el.classList.remove('is-pulsing');
-        void (el as HTMLElement).offsetWidth;
-        el.classList.add('is-pulsing');
-      });
-    }
-
-    // Hover (and click/tap) any card to make it the highlighted one; the rest dim.
-    plates.forEach((plate, i) => {
-      const focus = () => setCurrent(i);
-      plate.addEventListener('mouseenter', focus);
-      plate.addEventListener('focus', focus);
-      plate.addEventListener('click', focus);
-      plate.setAttribute('tabindex', '0');
-      plate.setAttribute('role', 'button');
-    });
-
+    // Before reveal the cards read as greyed-out placeholders (CSS default).
+    // The reveal flips each one to full, one-by-one on its delay; after the
+    // sequence they all stay fully viewable. Hover/focus any not-yet-revealed
+    // card to preview it at full strength.
     function reveal() {
       stage!.classList.add('is-visible');
-      // Cards fade in one-by-one on their delays; after the sequence the
-      // last one is highlighted and the rest dim, so the viewer sees all
-      // four are there and can hover any to skip ahead.
       delaysMs.forEach((ms, i) => {
         window.setTimeout(() => plates[i]?.classList.add('is-shown'), reduce ? 0 : ms);
       });
-      const last = delaysMs[delaysMs.length - 1] ?? 0;
-      window.setTimeout(() => setCurrent(count - 1), reduce ? 0 : last + 600);
     }
 
     if (reduce || !('IntersectionObserver' in window)) {
@@ -338,7 +313,7 @@ const delaysMs = zones.map((z) => z.delay * 1000);
     left: var(--left, auto);
     right: var(--right, auto);
     top: var(--top);
-    transform: translateY(-50%) translateY(10px) scale(0.94);
+    transform: translateY(-50%) scale(0.97);
     width: 20%;
     min-width: 208px;
     padding: 18px 20px 16px;
@@ -349,7 +324,9 @@ const delaysMs = zones.map((z) => z.delay * 1000);
     border-radius: 14px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 20px rgba(var(--mint-rgb), 0.12);
     overflow: hidden;
-    opacity: 0;
+    /* Default = greyed-out placeholder, visible before the reveal. */
+    opacity: 0.4;
+    filter: saturate(0.5) brightness(0.82);
     pointer-events: auto;
     cursor: pointer;
     transition:
@@ -392,20 +369,18 @@ const delaysMs = zones.map((z) => z.delay * 1000);
     line-height: 1.45;
     color: rgba(245, 248, 250, 0.78);
   }
-  /* One-by-one reveal: JS adds .is-shown per plate on its delay (transition,
-     not keyframe, so the dim/current states can take over opacity afterward). */
+  /* Reveal flips each card from greyed placeholder to full, one-by-one on its
+     delay (JS adds .is-shown). After the sequence they all stay full. */
   .fp-plate.is-shown {
     opacity: 1;
-    transform: translateY(-50%);
+    transform: translateY(-50%) scale(1);
+    filter: none;
   }
-  /* After the sequence, one card is highlighted (.is-current) and the rest
-     dim (.is-dim) — hover/focus/click any dim card to make it current. */
-  .fp-plate.is-dim {
-    opacity: 0.4;
-    filter: saturate(0.5) brightness(0.82);
-  }
-  .fp-plate.is-current {
+  /* Before a card is revealed, hover/focus previews it at full strength. */
+  .fp-plate:not(.is-shown):hover,
+  .fp-plate:not(.is-shown):focus {
     opacity: 1;
+    transform: translateY(-50%) scale(1);
     filter: none;
     border-color: rgba(var(--mint-rgb), 0.5);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 30px rgba(var(--mint-rgb), 0.38);
