@@ -319,19 +319,21 @@ const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
     background: url('/images/mesh/luci-bg-hero-1920x1080.png') center / cover no-repeat;
     mix-blend-mode: screen;
     opacity: 1;
+    /* Fade the mesh more sharply around the stage box (hidden across the box
+       + a margin) and let it read crisp in the open space beyond. */
     -webkit-mask-image: radial-gradient(
-      ellipse 72% 92% at 50% 48%,
+      ellipse 76% 94% at 50% 48%,
       transparent 0%,
-      rgba(0, 0, 0, 0.22) 36%,
-      rgba(0, 0, 0, 0.62) 64%,
-      #000 86%
+      rgba(0, 0, 0, 0.5) 30%,
+      rgba(0, 0, 0, 0.88) 48%,
+      #000 62%
     );
     mask-image: radial-gradient(
-      ellipse 72% 92% at 50% 48%,
+      ellipse 76% 94% at 50% 48%,
       transparent 0%,
-      rgba(0, 0, 0, 0.22) 36%,
-      rgba(0, 0, 0, 0.62) 64%,
-      #000 86%
+      rgba(0, 0, 0, 0.5) 30%,
+      rgba(0, 0, 0, 0.88) 48%,
+      #000 62%
     );
   }
   [data-page] #industry-floorplan.section::after {
@@ -340,12 +342,13 @@ const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
     inset: 0;
     z-index: 0;
     pointer-events: none;
+    /* Veil sits behind the box only, so the open margins stay clear. */
     background: radial-gradient(
-      ellipse 74% 96% at 50% 50%,
-      rgba(7, 15, 20, 0.7) 0%,
-      rgba(7, 15, 20, 0.42) 40%,
-      rgba(7, 15, 20, 0.16) 66%,
-      transparent 86%
+      ellipse 72% 88% at 50% 48%,
+      rgba(7, 15, 20, 0.74) 0%,
+      rgba(7, 15, 20, 0.42) 36%,
+      rgba(7, 15, 20, 0.12) 58%,
+      transparent 72%
     );
   }
   [data-page] #industry-floorplan > .container {
