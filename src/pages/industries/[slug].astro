@@ -302,15 +302,15 @@ const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
 
   /* CTA mesh band now lives in global.css (shared across all closing CTAs). */
 
-  /* Second section (Before/After) — mesh lines instead of the circuit pattern.
-     Same split-mesh treatment as the case study callout, so the two
-     content bands share one quiet line-work language. */
-  [data-page] #industry-before-after.section {
+  /* First section (floorplan) — mesh lines underlay behind the aurora stage.
+     Same split-mesh treatment, screen-blended onto the
+     section's navy background so the line work reads at the
+     edges and drops out behind the glass stage box. */
+  [data-page] #industry-floorplan.section {
     position: relative;
     isolation: isolate;
-    overflow: hidden;
   }
-  [data-page] #industry-before-after.section::before {
+  [data-page] #industry-floorplan.section::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -334,7 +334,7 @@ const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
       #000 86%
     );
   }
-  [data-page] #industry-before-after.section::after {
+  [data-page] #industry-floorplan.section::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -348,7 +348,7 @@ const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
       transparent 86%
     );
   }
-  [data-page] #industry-before-after > .container {
+  [data-page] #industry-floorplan > .container {
     position: relative;
     z-index: 1;
   }

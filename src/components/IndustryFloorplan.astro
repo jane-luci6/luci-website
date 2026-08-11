@@ -33,15 +33,6 @@ const {
 const delaysMs = zones.map((z) => z.delay * 1000);
 ---
 <div class="fp-stage" data-fp-animate data-delays={JSON.stringify(delaysMs)} style={`--img-w:${imageWidthPct}%`}>
-  <div class="fp-tabs" role="tablist" aria-label={ariaLabel}>
-    <div class="fp-tabs__track"><div class="fp-tabs__fill" data-fp-fill></div></div>
-    {zones.map((z, i) => (
-      <button type="button" class="fp-tab" data-fp-tab={i} aria-label={z.label}>
-        <span aria-hidden="true" class="fp-tab__dot"></span>
-      </button>
-    ))}
-  </div>
-
   <div class="fp-mount">
     <div class="fp-mount__clip">
       <img
@@ -111,37 +102,45 @@ const delaysMs = zones.map((z) => z.delay * 1000);
 <script>
   const stage = document.querySelector<HTMLElement>('[data-fp-animate]');
   if (stage) {
-    const tabs = Array.from(stage.querySelectorAll<HTMLButtonElement>('[data-fp-tab]'));
-    const fill = stage.querySelector<HTMLElement>('[data-fp-fill]');
+    const plates = Array.from(stage.querySelectorAll<HTMLElement>('.fp-plate'));
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const count = tabs.length;
+    const count = plates.length;
+    const delaysAttr = stage.getAttribute('data-delays');
+    const delaysMs: number[] = delaysAttr ? JSON.parse(delaysAttr) : plates.map((_, i) => i * 3500);
 
-    function pulseZone(i: number) {
+    function setCurrent(i: number) {
+      plates.forEach((p, pi) => {
+        p.classList.toggle('is-current', pi === i);
+        p.classList.toggle('is-dim', pi !== i);
+      });
+      // re-trigger the pulse on the chosen zone's lines/dots
       stage!.querySelectorAll(`[data-zone="${i}"]`).forEach((el) => {
         el.classList.remove('is-pulsing');
-        // restart the animation even if it's already been triggered
         void (el as HTMLElement).offsetWidth;
         el.classList.add('is-pulsing');
       });
-      tabs.forEach((t, ti) => t.classList.toggle('is-current', ti === i));
     }
 
-    tabs.forEach((tab, i) => {
-      tab.addEventListener('click', () => pulseZone(i));
+    // Hover (and click/tap) any card to make it the highlighted one; the rest dim.
+    plates.forEach((plate, i) => {
+      const focus = () => setCurrent(i);
+      plate.addEventListener('mouseenter', focus);
+      plate.addEventListener('focus', focus);
+      plate.addEventListener('click', focus);
+      plate.setAttribute('tabindex', '0');
+      plate.setAttribute('role', 'button');
     });
-
-    const delaysAttr = stage.getAttribute('data-delays');
-    const delaysMs: number[] = delaysAttr ? JSON.parse(delaysAttr) : tabs.map((_, i) => i * 3500);
 
     function reveal() {
       stage!.classList.add('is-visible');
-      const step = 100 / count;
+      // Cards fade in one-by-one on their delays; after the sequence the
+      // last one is highlighted and the rest dim, so the viewer sees all
+      // four are there and can hover any to skip ahead.
       delaysMs.forEach((ms, i) => {
-        window.setTimeout(() => {
-          tabs[i]?.classList.add('is-done');
-          if (fill) fill.style.width = `${(i + 1) * step}%`;
-        }, reduce ? 0 : ms);
+        window.setTimeout(() => plates[i]?.classList.add('is-shown'), reduce ? 0 : ms);
       });
+      const last = delaysMs[delaysMs.length - 1] ?? 0;
+      window.setTimeout(() => setCurrent(count - 1), reduce ? 0 : last + 600);
     }
 
     if (reduce || !('IntersectionObserver' in window)) {
@@ -191,76 +190,6 @@ const delaysMs = zones.map((z) => z.delay * 1000);
     100% { transform: translate3d(5%, 3%, 0) scale(1.08); }
   }
 
-  /* ---------- Tabs / progress rail ---------- */
-  .fp-tabs {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(16px, 2.4vw, 28px);
-    margin-bottom: clamp(16px, 2.4vw, 28px);
-  }
-  .fp-tabs__track {
-    position: absolute;
-    left: 10%;
-    right: 10%;
-    top: 50%;
-    height: 1px;
-    background: rgba(var(--mint-rgb), 0.16);
-    z-index: -1;
-  }
-  .fp-tabs__fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, var(--gold), var(--mint));
-    transition: width 0.5s ease-out;
-  }
-  .fp-tab {
-    position: relative;
-    width: 36px;
-    height: 36px;
-    border-radius: 9999px;
-    display: grid;
-    place-items: center;
-    background: rgba(16, 35, 45, 0.7);
-    border: 1px solid rgba(var(--mint-rgb), 0.3);
-    color: rgba(245, 248, 250, 0.55);
-    cursor: pointer;
-    transition: transform 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-  }
-  .fp-tab__dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 9999px;
-    background: currentColor;
-    opacity: 0.6;
-    transition: opacity 0.25s ease, transform 0.25s ease;
-  }
-  .fp-tab:hover .fp-tab__dot,
-  .fp-tab:focus-visible .fp-tab__dot { opacity: 1; transform: scale(1.15); }
-  .fp-tab.is-done .fp-tab__dot { opacity: 1; }
-  .fp-tab.is-current .fp-tab__dot { transform: scale(1.25); }
-  .fp-tab:hover,
-  .fp-tab:focus-visible {
-    transform: translateY(-2px);
-    color: var(--mint);
-    border-color: var(--mint);
-  }
-  .fp-tab.is-done {
-    color: var(--mint);
-    border-color: rgba(var(--mint-rgb), 0.55);
-  }
-  .fp-tab.is-current {
-    color: var(--navy-deep);
-    background: linear-gradient(135deg, var(--gold), var(--mint));
-    border-color: transparent;
-    box-shadow: 0 0 18px rgba(var(--mint-rgb), 0.5);
-  }
-  .fp-tab:focus-visible {
-    outline: 2px solid var(--mint);
-    outline-offset: 3px;
-  }
   /* ---------- Image mount ---------- */
   .fp-mount {
     position: relative;
@@ -409,7 +338,7 @@ const delaysMs = zones.map((z) => z.delay * 1000);
     left: var(--left, auto);
     right: var(--right, auto);
     top: var(--top);
-    transform: translateY(-50%);
+    transform: translateY(-50%) translateY(10px) scale(0.94);
     width: 20%;
     min-width: 208px;
     padding: 18px 20px 16px;
@@ -421,6 +350,18 @@ const delaysMs = zones.map((z) => z.delay * 1000);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 20px rgba(var(--mint-rgb), 0.12);
     overflow: hidden;
     opacity: 0;
+    pointer-events: auto;
+    cursor: pointer;
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+      filter 0.4s ease,
+      box-shadow 0.4s ease,
+      border-color 0.4s ease;
+  }
+  .fp-plate:focus-visible {
+    outline: 2px solid var(--mint);
+    outline-offset: 3px;
   }
   .fp-plate::before {
     content: '';
@@ -451,14 +392,23 @@ const delaysMs = zones.map((z) => z.delay * 1000);
     line-height: 1.45;
     color: rgba(245, 248, 250, 0.78);
   }
-  .fp-stage.is-visible .fp-plate {
-    animation: fp-plate-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-    animation-delay: calc(var(--d, 0s) + 0.5s);
+  /* One-by-one reveal: JS adds .is-shown per plate on its delay (transition,
+     not keyframe, so the dim/current states can take over opacity afterward). */
+  .fp-plate.is-shown {
+    opacity: 1;
+    transform: translateY(-50%);
   }
-  @keyframes fp-plate-in {
-    0% { opacity: 0; transform: translateY(-50%) translateY(10px) scale(0.94); }
-    60% { opacity: 1; transform: translateY(-50%) translateY(-2px) scale(1.02); }
-    100% { opacity: 1; transform: translateY(-50%) translateY(0) scale(1); }
+  /* After the sequence, one card is highlighted (.is-current) and the rest
+     dim (.is-dim) — hover/focus/click any dim card to make it current. */
+  .fp-plate.is-dim {
+    opacity: 0.4;
+    filter: saturate(0.5) brightness(0.82);
+  }
+  .fp-plate.is-current {
+    opacity: 1;
+    filter: none;
+    border-color: rgba(var(--mint-rgb), 0.5);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 30px rgba(var(--mint-rgb), 0.38);
   }
   .fp-plate.is-pulsing {
     animation: fp-plate-flash 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -492,8 +442,12 @@ const delaysMs = zones.map((z) => z.delay * 1000);
       width: auto;
       min-width: 0;
       opacity: 1;
+      filter: none;
       animation: none !important;
+      transition: none !important;
     }
+    /* On mobile all four cards read at full strength — no dim/current. */
+    .fp-plate.is-dim { opacity: 1; filter: none; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -503,7 +457,7 @@ const delaysMs = zones.map((z) => z.delay * 1000);
     .fp-pulse { display: none; }
     .fp-dot { transition: none; transform: scale(1); opacity: 1; }
     .fp-ring { animation: none !important; opacity: 0; }
-    .fp-plate { animation: none !important; opacity: 1; }
+    .fp-plate { transition: none !important; opacity: 1; transform: translateY(-50%); }
     .fp-plate.is-pulsing { animation: none; }
   }
 </style>
