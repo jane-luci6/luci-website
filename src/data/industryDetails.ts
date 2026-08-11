@@ -203,7 +203,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '03',
         title: 'Property Mode Switching',
         trigger: 'Weekday floor. Fight night. Holiday.',
-        image: '/images/industries/casino/capability-property-mode-switching.png?v=1',
+        image: '/images/industries/casino/capability-property-mode-switching.png?v=2',
         imageAlt: 'A casino sportsbook floor switching into fight-night event mode, crowd gathering in front of a massive LED wall',
         detail:
           'Every mode your property runs becomes one full configuration of audio, screens, and lighting — switch the whole floor in a few taps.',
@@ -212,7 +212,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '04',
         title: 'Energy That Matches the Room',
         trigger: 'Quiet morning. Peak Saturday night.',
-        image: '/images/industries/casino/capability-energy-matches-room.png?v=1',
+        image: '/images/industries/casino/capability-energy-matches-room.png?v=2',
         imageAlt: 'A packed casino bar at peak Saturday night, overhead lighting and screens matched to the crowd energy',
         detail:
           'An audio schedule moves the way your floor does, each zone on its own curve, with transitions handled automatically.',
@@ -404,7 +404,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '01',
         title: 'VIP Arrival Mode',
         trigger: 'The moment a flagged guest checks in.',
-        image: '/images/industries/hotel/capability-vip-arrival.png?v=1',
+        image: '/images/industries/hotel/capability-vip-arrival.png?v=2',
         imageAlt: 'A hotel host welcoming a guest into a warm luxury lobby, elevator bank glowing ahead',
         detail:
           'Lobby signage, elevator screens, and welcome audio shift to the arrival preset — then revert when the window closes.',
@@ -413,7 +413,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '02',
         title: 'Pool & Amenity Schedules',
         trigger: 'Quiet morning. Peak afternoon.',
-        image: '/images/industries/hotel/capability-pool-amenity.png?v=1',
+        image: '/images/industries/hotel/capability-pool-amenity.png?v=2',
         imageAlt: 'A luxury resort pool deck at golden hour, cabanas and an outdoor LED screen showing ambient content',
         detail:
           'Outdoor and amenity zones follow their own curves — music, messaging, and display brightness move automatically through the day.',
@@ -422,7 +422,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '03',
         title: 'Weather Alert Broadcast',
         trigger: 'The moment a warning is issued.',
-        image: '/images/industries/hotel/capability-weather-alert.png?v=1',
+        image: '/images/industries/hotel/capability-weather-alert.png?v=2',
         imageAlt: 'A resort pool deck as a storm approaches, an outdoor screen broadcasting a weather alert, guests heading for shelter',
         detail:
           'Broadcast weather warnings, pool closures, and lightning alerts across every screen, speaker, and zone at once — then auto-revert when the all-clear hits.',
@@ -431,7 +431,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '04',
         title: 'Wayfinding Sync on Room Change',
         trigger: 'When a room or location changes.',
-        image: '/images/industries/hotel/capability-wayfinding-sync.png?v=1',
+        image: '/images/industries/hotel/capability-wayfinding-sync.png?v=2',
         imageAlt: 'A guest glancing at a backlit wayfinding sign showing room floorplans and arrows in a hotel conference corridor',
         detail:
           'Update every wayfinding screen across the property the moment an event moves rooms or a session relocates, so guests never walk up to the wrong door.',
@@ -440,7 +440,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '05',
         title: 'Immersive Experience Mode',
         trigger: 'A themed evening across the property.',
-        image: '/images/industries/hotel/capability-immersive-experience.png?v=1',
+        image: '/images/industries/hotel/capability-immersive-experience.png?v=2',
         imageAlt: 'A couple at a candlelit terrace at dusk, a video wall mirroring the sunset across the resort',
         detail:
           'Coordinate audio, lighting, and video across the lobby, restaurants, and pool into one immersive, themed experience that drives guest spend.',
@@ -605,7 +605,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '01',
         title: 'Pre-Game Sequence',
         trigger: 'On a timed countdown to tipoff.',
-        image: '/images/industries/sports/capability-pre-game-sequence.png?v=1',
+        image: '/images/industries/sports/capability-pre-game-sequence.png?v=2',
         imageAlt:
           'Empty arena bowl during the pre-game build-up, the centerhung board showing a player intro graphic as house lights dim to a dramatic show-lighting look',
         detail:
@@ -645,7 +645,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '05',
         title: 'Revert-After-Timer',
         trigger: 'A temporary takeover.',
-        image: '/images/industries/sports/capability-revert-after-timer.png?v=1',
+        image: '/images/industries/sports/capability-revert-after-timer.png?v=2',
         imageAlt:
           'Packed arena during a temporary 50/50 raffle drawing announcement on the centerhung board with a countdown timer, fans holding up phones',
         detail:
@@ -855,7 +855,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '05',
         title: 'Disruption Mode',
         trigger: 'Everyday versus disruption.',
-        image: '/images/industries/airports-transportation/capability-disruption-mode.png?v=1',
+        image: '/images/industries/airports-transportation/capability-disruption-mode.png?v=2',
         imageAlt: 'An airport terminal in disruption mode, screens showing flight status and rebooking information instead of advertising, passengers rebooking at a kiosk',
         detail:
           'Save your everyday look — flight information alongside advertising and branding — and a disruption look where ads drop and screens give over to flight status and rebooking. Switch the whole terminal between them in a few taps.',
