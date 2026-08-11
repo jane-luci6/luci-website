@@ -1,7 +1,7 @@
 ---
 import { homeTrust } from '../data/site';
 
-const { eyebrow, strips, fullBleed = false } = Astro.props;
+const { eyebrow = homeTrust.eyebrow, strips = homeTrust.strips, fullBleed = false } = Astro.props;
 // Duplicate the set so the marquee can loop seamlessly.
 const track = [...strips, ...strips];
 ---
