@@ -1008,29 +1008,29 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     },
     challenges: [
       {
-        head: 'Every client wants the building to look like their event.',
+        head: 'Turnaround is tight, and the A/V is the hardest part.',
         body:
-          'Room signs, wayfinding, LED, and session boards run as separate systems — so rebranding the building for each client means a manual scramble, room by room, event by event, and on any given day several clients are hosting at once.',
+          'The room flips from a keynote to a banquet overnight, and while the crew resets the space, someone’s still reprogramming screens, re-aiming sound, and rebuilding the look by hand against the clock.',
       },
       {
-        head: 'The reset is never the time the brochure promised.',
+        head: 'Rebranding the building for each client eats hours, room by room.',
         body:
-          'Rooms combine and divide; today’s general assembly is tomorrow’s five breakouts. Load-in, setup, and teardown run on tight, unforgiving windows where underestimated turnover time and last-minute changes erase profit.',
+          'Every client wants the space to feel like theirs — their logo on the room signs, their look on the LED, their branding on the wayfinding — and today that means updating screen after screen, space after space, by hand.',
       },
       {
-        head: 'Static signs can’t keep up with a moving schedule.',
+        head: 'Five events at once, and one wrong screen is the client’s problem — and yours.',
         body:
-          'Sessions move, rooms change, schedules shift by the hour across millions of square feet. Printed or manually-updated signage goes stale the moment it’s posted, and lost attendees are a client-experience failure.',
+          'With several events running side by side, the signage has to keep each one straight — the right session on the right room, the right brand in the right zone — and a single screen showing the wrong event is the kind of thing a client remembers.',
       },
       {
-        head: 'Who touches the A/V is a minefield.',
+        head: 'Between your crew, the union, and the client’s production team, who touches what is a minefield.',
         body:
-          'Cameras, switchers, encoders, and streaming come from different vendors while the venue owns network, power, and rigging — and a rotating cast of outside production teams bring their own gear onto the house infrastructure. Get the boundaries wrong and load-in stalls.',
+          'A big event brings outside production teams and their own gear onto your house infrastructure, alongside your staff and union labor — and without clear boundaries, everyone’s reaching into the same system and coordination eats the load-in.',
       },
       {
-        head: 'A sprawling digital estate, upgraded piece by piece.',
+        head: 'Decades of mismatched hardware, spread across a campus, held together by a small team.',
         body:
-          'A convention campus runs hundreds of screens, room signs, wayfinding surfaces, and LED walls across millions of square feet — invested in heavily and upgraded in phases, and keeping that estate coordinated, on-brand per event, and current is a growing operational and capital challenge.',
+          'The estate spans halls, meeting rooms, lobbies, and wayfinding — added to over years as budgets allowed — so the back-of-house is a patchwork of racks, processors, and boxes from different eras and vendors that a lean team somehow has to keep running.',
       },
     ],
     solutionsLockup: {
@@ -1040,38 +1040,38 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
     solutions: [
       {
         index: '01',
-        problem: 'Every client wants the building to look like their event.',
-        headline: 'Any space becomes any client’s brand, in a tap.',
+        problem: 'Turnaround is tight, and the A/V is the hardest part.',
+        headline: 'The room resets; the branding, signage, and sound reset with it — in a few taps, not a scramble.',
         answer:
-          'LUCI orchestrates every screen and zone from one interface, so any space becomes any client’s brand instantly — and every concurrent event stays correct in its own zones.',
+          'Save each event’s A/V as a configuration, and when the room turns over, recall it — screens, zones, and branding all come up correct together, so the A/V is ready as fast as the room is.',
       },
       {
         index: '02',
-        problem: 'The reset is never the time the brochure promised.',
-        headline: 'The room reconfigures. The signage, sound, and branding reconfigure with it — in a tap.',
+        problem: 'Rebranding the building for each client eats hours, room by room.',
+        headline: 'Push a client’s whole look across their spaces from one interface — no room-by-room labor.',
         answer:
-          'LUCI recalls the full A/V setup for any room configuration instantly, so the building keeps pace with the calendar — not a per-room manual pass.',
+          'Build the client’s branding once and apply it across every screen in their footprint from one place, so a full rebrand takes minutes instead of a walk through the building.',
       },
       {
         index: '03',
-        problem: 'Static signs can’t keep up with a moving schedule.',
-        headline: 'Every screen keeps up, in real time.',
+        problem: 'Five events at once, and one wrong screen is the client’s problem — and yours.',
+        headline: 'Each event’s content stays correct in its own zones, so nothing shows up on the wrong screen.',
         answer:
-          'LUCI updates wayfinding and signage across the whole campus instantly as rooms and sessions change, so attendees always find their way — and your staff aren’t updating screens by hand all day.',
+          'Every event is scoped to its own zones, so each client’s content stays contained to their spaces while shared wayfinding stays right for everyone — many events, one interface, none of them crossing wires.',
       },
       {
         index: '04',
-        problem: 'Who touches the A/V is a minefield.',
-        headline: 'Run the house environment from one place — and give visiting teams a clean handoff.',
+        problem: 'Between your crew, the union, and the client’s production team, who touches what is a minefield.',
+        headline: 'Give everyone control of their zones — and nothing else.',
         answer:
-          'LUCI is the house platform that coordinates cleanly with union labor and outside production vendors, with clear house-vs-visiting boundaries — so everyone works in sync and the house stays in control.',
+          'LUCI supports unlimited users with permissions you set, so control divides by area: a client’s team runs the screens in their rooms, each staff lead runs the areas they own, and the house decides who can touch what — all from the same platform, no one stepping on anyone else.',
       },
       {
         index: '05',
-        problem: 'A sprawling digital estate, upgraded piece by piece.',
-        headline: 'One interface over the whole campus estate.',
+        problem: 'Decades of mismatched hardware, spread across a campus, held together by a small team.',
+        headline: 'One platform over the whole campus — and far less hardware to run it.',
         answer:
-          'LUCI brings what ran on 4+ systems, 5+ racks, and 100+ devices into one interface and one rack — so every screen across the campus, hundreds of them, is orchestrated from one place.',
+          'LUCI consolidates that patchwork onto far less hardware and brings the whole campus under one interface a small team can actually manage — and it expands hall by hall on your budget, so modernizing never means ripping out everything at once.',
       },
     ],
     automationLockup: {
