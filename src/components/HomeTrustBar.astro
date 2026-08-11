@@ -1,13 +1,13 @@
 ---
 import { homeTrust } from '../data/site';
 
-const { eyebrow, strips } = homeTrust;
+const { eyebrow, strips, fullBleed = false } = Astro.props;
 // Duplicate the set so the marquee can loop seamlessly.
 const track = [...strips, ...strips];
 ---
 
 <section class="home-trust" aria-label="Casino and hospitality operators running LUCI">
-  <div class="home-trust__inner container container--wide">
+  <div class={`home-trust__inner ${fullBleed ? 'home-trust__inner--full' : 'container container--wide'}`}>
     <p class="home-trust__eyebrow">{eyebrow}</p>
     <div class="home-trust__marquee">
       <ul class="home-trust__track" role="list">
@@ -35,6 +35,15 @@ const track = [...strips, ...strips];
 
   .home-trust__inner {
     padding-block: clamp(40px, 5vw, 64px);
+  }
+
+  /* Full-bleed variant — edge-to-edge carousel (e.g. contact page) */
+  .home-trust__inner--full {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    padding-block: clamp(40px, 5vw, 64px);
+    padding-inline: 0;
   }
 
   .home-trust__eyebrow {

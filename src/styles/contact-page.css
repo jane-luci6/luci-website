@@ -35,7 +35,7 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
+  grid-template-columns: 1fr 1fr;
   gap: clamp(32px, 5vw, 72px);
   align-items: start;
   min-height: auto;
@@ -232,11 +232,9 @@
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
-.luci-acform ._form_element._field_email,
-.luci-acform ._form_element._field_phone,
-.luci-acform ._button-wrapper,
-.luci-acform ._form-thank-you,
-.luci-acform ._form-branding {
+#contact-thesis .luci-acform ._button-wrapper,
+#contact-thesis .luci-acform ._form-thank-you,
+#contact-thesis .luci-acform ._form-branding {
   grid-column: 1 / -1;
 }
 .luci-acform ._form_element + ._form_element { margin-top: 0; }
