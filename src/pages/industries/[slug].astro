@@ -111,7 +111,7 @@ const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
         </>
       )}
 
-      <HomeProof />
+      {(industry.slug === 'casinos-gaming' || industry.slug === 'hotels-resorts') && <HomeProof />}
 
       <SectionBlock
         id="industry-automation"
