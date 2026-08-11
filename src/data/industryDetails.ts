@@ -996,7 +996,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         },
         {
           label: 'Turn circulation into revenue',
-          desc: 'Turn lobbies and concourses into branded, sponsorable space.',
+          desc: 'Turn lobbies and concourses into branded, sponsorable space that can be switched with a tap.',
           plate: { side: 'left', left: '-4%', top: '80%' },
           delay: 10.5,
           lines: [{ x1: 16, y1: 80, x2: 20, y2: 75 }],
