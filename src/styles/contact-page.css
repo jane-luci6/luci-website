@@ -72,6 +72,10 @@
   color: var(--off-white);
   max-width: 18ch;
 }
+.contact-hero__headline em {
+  font-style: normal;
+  color: var(--mint);
+}
 .contact-hero__deck {
   margin: 0 0 32px;
   font-family: var(--font-body);
@@ -140,19 +144,12 @@
   line-height: 1;
 }
 .contact-point__node {
-  width: 7px;
-  height: 7px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
-  background: var(--mint);
+  background: linear-gradient(135deg, var(--mint) 0%, var(--gold) 100%);
   box-shadow: 0 0 0 3px rgba(var(--mint-rgb), 0.18);
   align-self: center;
-}
-.contact-point__rule {
-  height: 2px;
-  width: clamp(28px, 3vw, 44px);
-  align-self: center;
-  background: linear-gradient(90deg, rgba(var(--mint-rgb), 0.55), rgba(var(--mint-rgb), 0.18));
-  border-radius: 2px;
 }
 .contact-point__head {
   grid-column: 3 / 4;

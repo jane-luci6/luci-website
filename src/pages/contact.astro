@@ -21,7 +21,7 @@ const OVERVIEW_POSTER = '/videos/luci-platform-run-poster.jpg';
     <div class="contact-hero__inner container container--wide">
       <div class="contact-hero__copy">
         <p class="contact-hero__eyebrow">Contact LUCI</p>
-        <h2 class="contact-hero__headline">See what simpler A/V looks like.</h2>
+        <h2 class="contact-hero__headline">See what <em>simpler A/V looks like.</em></h2>
         <p class="contact-hero__deck">See how LUCI brings screens, audio, signage, and A/V systems across an entire property into one place.</p>
         <button class="contact-hero__watch" type="button" data-open-overview aria-haspopup="dialog" aria-controls="overview-modal">
           Watch 2-minute overview
@@ -34,21 +34,18 @@ const OVERVIEW_POSTER = '/videos/luci-platform-run-poster.jpg';
             <li class="contact-point">
               <span class="contact-point__num">01</span>
               <span class="contact-point__node" aria-hidden="true"></span>
-              <span class="contact-point__rule" aria-hidden="true"></span>
               <p class="contact-point__head">See your property from one interface.</p>
               <p class="contact-point__body">Manage every endpoint across a complex environment from one place.</p>
             </li>
             <li class="contact-point">
               <span class="contact-point__num">02</span>
               <span class="contact-point__node" aria-hidden="true"></span>
-              <span class="contact-point__rule" aria-hidden="true"></span>
               <p class="contact-point__head">See what goes away.</p>
               <p class="contact-point__body">Replace proprietary control hardware, specialist programming, and fragmented systems.</p>
             </li>
             <li class="contact-point">
               <span class="contact-point__num">03</span>
               <span class="contact-point__node" aria-hidden="true"></span>
-              <span class="contact-point__rule" aria-hidden="true"></span>
               <p class="contact-point__head">Bring us your environment.</p>
               <p class="contact-point__body">See what LUCI could look like on your existing network.</p>
             </li>
@@ -62,46 +59,11 @@ const OVERVIEW_POSTER = '/videos/luci-platform-run-poster.jpg';
             <h3 class="contact-form-card__title">Book a live demo</h3>
             <p class="contact-form-card__deck">Tell us a little about yourself. We&rsquo;ll show you LUCI in action, answer your questions, and focus the conversation on what matters most to your environment.</p>
           </div>
-          <!-- PLACEHOLDER FORM — replace markup inside .luci-acform with ActiveCampaign's "Full Embed" once built in AC. Keep AC field names intact; CSS below targets AC's standard classes (_form-content, _field-wrapper, _button-wrapper, _submit, _error, _form-branding). In AC: On Submit > "Open URL" > https://lucisystems.com/contact/thanks/ -->
-          <div class="luci-acform" data-luci-placeholder>
-            <form class="_form _form_1" novalidate>
-              <div class="_form-content">
-                <div class="_form-grid">
-                  <div class="_form_element _field-wrapper">
-                    <label for="cf-first-name">First name<span class="_form-label-req"> *</span></label>
-                    <input type="text" id="cf-first-name" name="firstname" autocomplete="given-name" required />
-                  </div>
-                  <div class="_form_element _field-wrapper">
-                    <label for="cf-last-name">Last name<span class="_form-label-req"> *</span></label>
-                    <input type="text" id="cf-last-name" name="lastname" autocomplete="family-name" required />
-                  </div>
-                </div>
-                <div class="_form_element _field-wrapper">
-                  <label for="cf-email">Work email<span class="_form-label-req"> *</span></label>
-                  <input type="email" id="cf-email" name="email" autocomplete="email" required />
-                </div>
-                <div class="_form-grid">
-                  <div class="_form_element _field-wrapper">
-                    <label for="cf-company">Company<span class="_form-label-req"> *</span></label>
-                    <input type="text" id="cf-company" name="field[1]" autocomplete="organization" required />
-                  </div>
-                  <div class="_form_element _field-wrapper">
-                    <label for="cf-title">Job title<span class="_form-label-req"> *</span></label>
-                    <input type="text" id="cf-title" name="field[2]" autocomplete="organization-title" required />
-                  </div>
-                </div>
-                <div class="_form_element _field-wrapper _field-optional">
-                  <label for="cf-phone">Phone <span class="_field-optional-tag">optional</span></label>
-                  <input type="tel" id="cf-phone" name="phone" autocomplete="tel" />
-                </div>
-                <div class="_button-wrapper">
-                  <button id="_form_1_submit" class="_submit" type="submit">Book my demo</button>
-                </div>
-                <p class="contact-form-card__micro">See LUCI in action and talk through your environment with our team.</p>
-                <p class="_form-branding">Powered by ActiveCampaign</p>
-              </div>
-            </form>
+          <div class="luci-acform">
+            <div class="_form_7"></div>
           </div>
+          <script is:inline src="https://lucisystems.activehosted.com/f/embed.php?id=7" charset="utf-8"></script>
+          <p class="contact-form-card__micro">See LUCI in action and talk through your environment with our team.</p>
         </div>
       </div>
     </div>
@@ -173,8 +135,6 @@ const OVERVIEW_POSTER = '/videos/luci-platform-run-poster.jpg';
 </div>
 
 <script>
-  const placeholder = document.querySelector('[data-luci-placeholder] form');
-  placeholder?.addEventListener('submit', (e) => e.preventDefault());
   const modal = document.getElementById('overview-modal');
   const video = modal?.querySelector('video');
   const openers = document.querySelectorAll('[data-open-overview]');
