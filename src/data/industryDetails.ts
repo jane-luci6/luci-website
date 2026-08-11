@@ -272,14 +272,14 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
           label: 'Drive energy on the floor',
           desc: 'The gaming floor should feel like something — energy, momentum, the right game on the right screen.',
           plate: { side: 'right', right: '-6%', top: '73.03%' },
-          delay: 3.5,
+          delay: 1,
           lines: [{ x1: 89.98, y1: 73.03, x2: 64.7, y2: 61.68 }],
         },
         {
           label: 'Move guests toward amenities',
           desc: 'Dining, entertainment, the pool — the spaces that now pay the bills, on cue.',
           plate: { side: 'left', left: '-6%', top: '58.68%' },
-          delay: 7,
+          delay: 2,
           lines: [
             { x1: 6.7, y1: 58.68, x2: 22.53, y2: 11.65 },
             { x1: 6.7, y1: 58.68, x2: 23.6, y2: 41.04 },
@@ -290,7 +290,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
           label: 'Extend loyalty across every space',
           desc: 'The right moment, in the right place, at the right time — everywhere.',
           plate: { side: 'left', left: '-6%', top: '6.72%' },
-          delay: 10.5,
+          delay: 3,
           lines: [
             { x1: 6.7, y1: 6.72, x2: 48.82, y2: 7.54 },
             { x1: 6.7, y1: 6.72, x2: 64.7, y2: 59.63 },
