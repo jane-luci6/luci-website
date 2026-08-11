@@ -179,7 +179,10 @@
   border-radius: 16px;
   padding: clamp(32px, 4vw, 48px);
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+  min-width: 0;
+  overflow: hidden;
 }
+.luci-acform { min-width: 0; }
 .contact-form-card__head { margin-bottom: 28px; }
 .contact-form-card__title {
   margin: 0 0 10px;
@@ -206,18 +209,24 @@
 }
 
 /* ActiveCampaign embed — override injected AC chrome; card header/deck live outside the embed. */
+.luci-acform ._form_7,
+.luci-acform form[id^='_form_'],
+.luci-acform ._form-content,
+.luci-acform ._form-inner {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
 .luci-acform form[id^='_form_'] {
   font-size: inherit;
   line-height: inherit;
   font-family: inherit;
-  margin: 0 !important;
-  padding: 0 !important;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
 }
 .luci-acform ._field_header,
 .luci-acform ._field_html,
