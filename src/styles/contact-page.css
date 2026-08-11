@@ -131,9 +131,9 @@
 }
 .contact-point {
   display: grid;
-  grid-template-columns: auto auto 1fr;
+  grid-template-columns: auto 1fr;
   align-items: baseline;
-  column-gap: 14px;
+  column-gap: 16px;
 }
 .contact-point__num {
   font-family: var(--font-display);
@@ -143,16 +143,8 @@
   color: var(--mint);
   line-height: 1;
 }
-.contact-point__node {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--mint) 0%, var(--gold) 100%);
-  box-shadow: 0 0 0 3px rgba(var(--mint-rgb), 0.18);
-  align-self: center;
-}
 .contact-point__head {
-  grid-column: 3 / 4;
+  grid-column: 2 / 3;
   margin: 0 0 6px;
   font-family: var(--font-body);
   font-weight: 700;
@@ -162,7 +154,7 @@
   color: var(--off-white);
 }
 .contact-point__body {
-  grid-column: 3 / 4;
+  grid-column: 2 / 3;
   margin: 0;
   font-family: var(--font-body);
   font-size: 14px;
@@ -208,11 +200,13 @@
   color: rgba(245, 248, 250, 0.58);
 }
 
-/* ActiveCampaign embed — override injected AC chrome; card header/deck live outside the embed. */
-.luci-acform ._form_7,
-.luci-acform form[id^='_form_'],
-.luci-acform ._form-content,
-.luci-acform ._form-inner {
+/* ActiveCampaign embed — override injected AC chrome; card header/deck live outside the embed.
+   Prefixed with #contact-thesis so our !important rules beat AC's #_form_<hash> ID-based rules. */
+#contact-thesis .luci-acform,
+#contact-thesis .luci-acform ._form_7,
+#contact-thesis .luci-acform form[id^='_form_'],
+#contact-thesis .luci-acform ._form-content,
+#contact-thesis .luci-acform ._form-inner {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
@@ -223,7 +217,7 @@
   max-width: 100% !important;
   min-width: 0 !important;
 }
-.luci-acform form[id^='_form_'] {
+#contact-thesis .luci-acform form[id^='_form_'] {
   font-size: inherit;
   line-height: inherit;
   font-family: inherit;
@@ -246,8 +240,8 @@
   grid-column: 1 / -1;
 }
 .luci-acform ._form_element + ._form_element { margin-top: 0; }
-.luci-acform label,
-.luci-acform ._form-label {
+#contact-thesis .luci-acform label,
+#contact-thesis .luci-acform ._form-label {
   display: block;
   margin-bottom: 8px;
   font-family: var(--font-body);
@@ -273,11 +267,11 @@
   line-height: 1.5;
   color: rgba(245, 248, 250, 0.88);
 }
-.luci-acform input[type='text'],
-.luci-acform input[type='email'],
-.luci-acform input[type='tel'],
-.luci-acform select,
-.luci-acform textarea {
+#contact-thesis .luci-acform input[type='text'],
+#contact-thesis .luci-acform input[type='email'],
+#contact-thesis .luci-acform input[type='tel'],
+#contact-thesis .luci-acform select,
+#contact-thesis .luci-acform textarea {
   width: 100%;
   min-height: 46px;
   padding: 13px 16px;
@@ -287,17 +281,18 @@
   background: #fff;
   border: 1px solid var(--rule-light);
   border-radius: 8px;
+  box-sizing: border-box;
 }
-.luci-acform input::placeholder { color: #8a9aa3; }
-.luci-acform input:focus-visible,
-.luci-acform select:focus-visible,
-.luci-acform textarea:focus-visible {
+#contact-thesis .luci-acform input::placeholder { color: #8a9aa3; }
+#contact-thesis .luci-acform input:focus-visible,
+#contact-thesis .luci-acform select:focus-visible,
+#contact-thesis .luci-acform textarea:focus-visible {
   outline: 2px solid var(--accent-light);
   outline-offset: 2px;
   border-color: var(--accent-light);
 }
 .luci-acform ._button-wrapper { margin-top: 24px; }
-.luci-acform ._submit {
+#contact-thesis .luci-acform ._submit {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -315,7 +310,7 @@
   cursor: pointer;
   transition: background 0.2s ease;
 }
-.luci-acform ._submit:hover { background: #7aebc8; }
+#contact-thesis .luci-acform ._submit:hover { background: #7aebc8; }
 .luci-acform ._error, .luci-acform ._error-inner {
   margin-top: 6px;
   font-size: 13px;
