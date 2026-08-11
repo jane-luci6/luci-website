@@ -1083,7 +1083,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '01',
         title: 'Room Turnover',
         trigger: 'A new event format.',
-        image: '/images/industries/conference-convention-centers/capability-room-turnover.png?v=1',
+        image: '/images/industries/conference-convention-centers/capability-room-turnover.png?v=2',
         imageAlt: 'A convention operations team recalling a room-turnover preset on a tablet as displays and audio reconfigure for the next event',
         detail:
           'A new layout, combine, or divide recalls the right audio zones, displays, and control for the next event in a few taps.',
@@ -1092,7 +1092,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '02',
         title: 'Divisible-Room Split',
         trigger: 'Air walls open or close.',
-        image: '/images/industries/conference-convention-centers/capability-divisible-split.png?v=1',
+        image: '/images/industries/conference-convention-centers/capability-divisible-split.png?v=2',
         imageAlt: 'A convention operations team tapping a divisible-room preset on a tablet as an air wall splits audio zones cleanly',
         detail:
           'Divided and open modes switch audio zones and DSP calibration together, so two sessions stay independent without bleed.',
@@ -1101,7 +1101,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '03',
         title: 'Client Branding Push',
         trigger: 'A new client’s branding.',
-        image: '/images/industries/conference-convention-centers/capability-client-branding.png?v=1',
+        image: '/images/industries/conference-convention-centers/capability-client-branding.png?v=2',
         imageAlt: 'A convention hall with a client’s logos, colors, and wayfinding pushed across every screen in their footprint from one interface',
         detail:
           'Build a client’s look once — logos, colors, wayfinding — and push it across every screen in their footprint in a few taps.',
@@ -1119,7 +1119,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         index: '05',
         title: 'Revert-After-Timer',
         trigger: 'A temporary takeover.',
-        image: '/images/industries/conference-convention-centers/capability-revert-timer.png?v=1',
+        image: '/images/industries/conference-convention-centers/capability-revert-timer.png?v=2',
         imageAlt: 'A convention general session mid-award cue, a preset triggered and set to revert to baseline after a set time',
         detail:
           'Trigger a preset for an award cue or announcement, set it to revert after a set time, and the room snaps back to baseline automatically.',
