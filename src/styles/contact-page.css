@@ -380,35 +380,71 @@
 .contact-path__cta:hover { gap: 12px; color: var(--mint); }
 .contact-path__cta svg { width: 16px; height: 16px; }
 
-/* ============ 4. CLOSING CTA ============ */
-.contact-closing {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: clamp(24px, 3vw, 40px);
+/* ============ 4. OFFICE ============ */
+.contact-office {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 4vw, 64px);
   max-width: var(--content-wide);
+  align-items: start;
 }
-.contact-closing__copy { max-width: 40ch; }
-.contact-closing__title {
-  margin: 0 0 12px;
-  font-family: var(--font-body);
+.contact-office__col { display: flex; flex-direction: column; gap: 10px; }
+.contact-office__label {
+  margin: 0 0 6px;
+  font-family: var(--font-display);
+  font-size: 11px;
   font-weight: 700;
-  font-size: clamp(28px, 4vw, 40px);
-  line-height: 1.08;
-  letter-spacing: -0.025em;
-  color: var(--off-white);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mint);
 }
-.contact-closing__title em { font-style: normal; color: var(--gold); }
-.contact-closing__deck {
+.contact-office__label::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 2px;
+  margin-right: 10px;
+  vertical-align: middle;
+  background: var(--mint);
+  border-radius: 9999px;
+}
+.contact-office__name {
   margin: 0;
   font-family: var(--font-body);
-  font-size: clamp(16px, 1.5vw, 19px);
-  line-height: 1.55;
+  font-weight: 700;
+  font-size: clamp(20px, 2.2vw, 24px);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--off-white);
+}
+.contact-office__addr {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: clamp(16px, 1.5vw, 18px);
+  line-height: 1.6;
+  font-style: normal;
   color: rgba(245, 248, 250, 0.78);
 }
-.contact-closing__actions { display: flex; flex-wrap: wrap; gap: 16px; }
-.contact-closing__btn { min-width: 200px; }
+.contact-office__phone {
+  display: inline-block;
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(20px, 2.2vw, 24px);
+  letter-spacing: -0.01em;
+  color: var(--off-white);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.contact-office__phone:hover { color: var(--mint); }
+.contact-office__note {
+  margin: 4px 0 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(245, 248, 250, 0.6);
+  max-width: 38ch;
+}
 
 /* ============ 2-MINUTE OVERVIEW MODAL ============ */
 .overview-modal {
@@ -500,7 +536,7 @@
 }
 @media (max-width: 760px) {
   .contact-paths { grid-template-columns: 1fr; }
-  .contact-closing { flex-direction: column; align-items: flex-start; }
+  .contact-office { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
   .luci-acform ._form-content { grid-template-columns: 1fr; }
