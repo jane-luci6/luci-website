@@ -275,8 +275,10 @@
   box-sizing: border-box;
 }
 #contact-thesis .luci-acform input::placeholder { color: #8a9aa3; }
-#contact-thesis .luci-acform textarea {
+#contact-thesis .luci-acform ._form_element:has(textarea) {
   grid-column: 1 / -1;
+}
+#contact-thesis .luci-acform textarea {
   min-height: 80px;
   height: 80px;
   resize: vertical;
