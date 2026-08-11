@@ -248,12 +248,12 @@ const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
 <style is:global>
   /* ============================================================
      Industry pages — mesh line-work underlay on sections 2 + 4
-     (Before/After + Capabilities). Transparent mesh
-     screen-blended onto each section's navy background,
-     faded behind the content and crisp in the open margins.
-     The floorplan (under the video hero) and the case study
-     callout stay plain so the mesh never competes with the hero
-     or reads busy. Scoped to every industry detail page via [data-page].
+     (Before/After + Capabilities) and the closing CTA (global).
+     Transparent mesh screen-blended onto each section's navy
+     background, faded behind the content and crisp in the open
+     margins. The floorplan (under the video hero) and the case
+     study callout stay plain so the mesh never competes with the
+     hero or reads busy. Scoped to every industry detail page via [data-page].
      ============================================================ */
 
   /* Case study callout (HomeProof) — plain navy, no mesh. */
@@ -312,8 +312,4 @@ const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
     position: relative;
     z-index: 1;
   }
-
-  /* Industry CTA — keep it plain (override the global closing-CTA mesh). */
-  [data-page] #industry-cta.section::before,
-  [data-page] #industry-cta.section::after { content: none; }
 </style>
