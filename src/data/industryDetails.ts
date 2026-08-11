@@ -975,28 +975,28 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       zones: [
         {
           label: 'Brand any space for any client',
-          desc: 'Every event wants its own look on the room signs, wayfinding, and LED. LUCI puts each client’s branding across their spaces from one interface, in a tap.',
+          desc: 'Give each event its own branding across room signs, wayfinding, and LED.',
           plate: { side: 'left', left: '-4%', top: '24%' },
           delay: 0.5,
           lines: [{ x1: 16, y1: 24, x2: 22, y2: 18 }],
         },
         {
-          label: 'Keep every event correct at once',
-          desc: 'On a day with several events in the building, each needs its own branding in its own zones — plus shared wayfinding that’s right for everyone. LUCI keeps every concurrent event’s screens correct, side by side.',
+          label: 'Manage concurrent events with precision',
+          desc: 'On a day with several events in the building, easily control A/V in each zone from one interface.',
           plate: { side: 'right', right: '-4%', top: '30%' },
           delay: 3.5,
           lines: [{ x1: 84, y1: 30, x2: 80, y2: 18 }],
         },
         {
           label: 'Guide every attendee',
-          desc: 'Sessions move, rooms change, schedules shift by the hour. LUCI keeps wayfinding and signage current across the campus, so attendees always find their way.',
+          desc: 'Sessions move, rooms change, schedules shift by the hour — keep everyone on track and on time.',
           plate: { side: 'right', right: '-4%', top: '76%' },
           delay: 7,
           lines: [{ x1: 84, y1: 76, x2: 50, y2: 45 }],
         },
         {
           label: 'Turn circulation into revenue',
-          desc: 'Lobbies and concourses aren’t just for passing through. LUCI turns them into branded, sponsorable screen space — another way to impress clients and earn from the room you already have.',
+          desc: 'Turn lobbies and concourses into branded, sponsorable space.',
           plate: { side: 'left', left: '-4%', top: '80%' },
           delay: 10.5,
           lines: [{ x1: 16, y1: 80, x2: 20, y2: 75 }],
