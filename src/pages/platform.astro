@@ -105,7 +105,7 @@ const featureImages = [
     lockupName="Systems"
     lockupRole="The Embedded Operation"
     deck="One accountable team gets you live, then stays — operating and refining LUCI for the life of the relationship."
-    tone="mid"
+    tone="deep"
     wide
   >
     <PlatformOrbit />
@@ -394,9 +394,10 @@ const featureImages = [
   /* ============================================================
      Mesh/floorplan wash for the 1st & 3rd content sections (What
      LUCI is, Systems) — replaces the circuit `pattern` so the page
-     owns one texture language. Mesh reads only at the left/right
-     margins; the veil is tuned to each section's tone bg so the
-     fade matches. Matches the about.astro worldview treatment.
+     owns one texture language. Both sections now share the deep
+     navy tone, so the veil + mesh opacity are unified. Mesh reads
+     only at the left/right margins. Matches the about.astro
+     worldview treatment.
      ============================================================ */
   #what-luci-is.section,
   #embedded-operation.section {
@@ -415,8 +416,8 @@ const featureImages = [
     mix-blend-mode: screen;
     opacity: 0.7;
   }
-  /* Veil tuned to each section's tone bg so the fade matches. */
-  #what-luci-is.section::after {
+  #what-luci-is.section::after,
+  #embedded-operation.section::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -430,22 +431,6 @@ const featureImages = [
       transparent 100%
     );
   }
-  #embedded-operation.section::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(49, 73, 85, 0.86) 16%,
-      rgba(49, 73, 85, 0.86) 84%,
-      transparent 100%
-    );
-  }
-  /* Mid-tone bg screens the mesh harder — ease it back so it stays a wash. */
-  #embedded-operation.section::before { opacity: 0.5; }
   #what-luci-is.section > .container,
   #embedded-operation.section > .container {
     position: relative;
@@ -453,23 +438,15 @@ const featureImages = [
   }
   @media (max-width: 720px) {
     #what-luci-is.section::before,
-    #embedded-operation.section::before { opacity: 0.4; }
-    #what-luci-is.section::after {
+    #embedded-operation.section::before { opacity: 0.45; }
+    #what-luci-is.section::after,
+    #embedded-operation.section::after {
       background: linear-gradient(
         90deg,
         rgba(16, 35, 45, 0.55) 0%,
         rgba(16, 35, 45, 0.9) 18%,
         rgba(16, 35, 45, 0.9) 82%,
         rgba(16, 35, 45, 0.55) 100%
-      );
-    }
-    #embedded-operation.section::after {
-      background: linear-gradient(
-        90deg,
-        rgba(49, 73, 85, 0.55) 0%,
-        rgba(49, 73, 85, 0.9) 18%,
-        rgba(49, 73, 85, 0.9) 82%,
-        rgba(49, 73, 85, 0.55) 100%
       );
     }
   }
