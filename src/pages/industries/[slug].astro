@@ -249,18 +249,21 @@ const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
   /* ============================================================
      Industry pages — mesh line-work underlay on sections 2 + 4
      (Before/After + Capabilities) and the closing CTA (global).
-     Transparent mesh screen-blended onto each section's navy
-     background, faded behind the content and crisp in the open
-     margins. The floorplan (under the video hero) and the case
-     study callout stay plain so the mesh never competes with the
-     hero or reads busy. Scoped to every industry detail page via [data-page].
+     Before/After uses the horizontal navy veil (the circuit-
+     pattern logic) so the mesh reads only at the far left/right
+     margins; Capabilities uses the radial mask. The floorplan
+     (under the video hero) and the case study callout stay plain
+     so the mesh never competes with the hero or reads busy.
+     Scoped to every industry detail page via [data-page].
      ============================================================ */
 
   /* Case study callout (HomeProof) — plain navy, no mesh. */
   [data-page] .home-proof-band { position: relative; isolation: isolate; }
 
-  /* Sections 2 + 4 (Before/After + Capabilities) — mesh lines,
-     faded behind the content and crisp in the open margins. */
+  /* Sections 2 + 4 (Before/After + Capabilities) — mesh lines
+     screen-blended onto the navy background. Each section fades
+     the mesh out behind its own content (Before/After via the
+     horizontal navy veil, Capabilities via the radial mask). */
   [data-page] #industry-before-after.section,
   [data-page] #industry-automation.section {
     position: relative;
@@ -276,7 +279,42 @@ const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
     pointer-events: none;
     background: url('/images/mesh/luci-bg-hero-1920x1080.png') center / cover no-repeat;
     mix-blend-mode: screen;
-    opacity: 1;
+    opacity: 0.5;
+  }
+
+  /* Section 2 (Before/After) — horizontal navy veil, same logic as
+     the circuit-pattern treatment: fades the mesh out behind the
+     centered content column and lets it read only at the far
+     left/right margins. */
+  [data-page] #industry-before-after.section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(10, 22, 28, 0.86) 16%,
+      rgba(10, 22, 28, 0.86) 84%,
+      transparent 100%
+    );
+  }
+  @media (max-width: 720px) {
+    [data-page] #industry-before-after.section::after {
+      background: linear-gradient(
+        90deg,
+        rgba(10, 22, 28, 0.55) 0%,
+        rgba(10, 22, 28, 0.9) 18%,
+        rgba(10, 22, 28, 0.9) 82%,
+        rgba(10, 22, 28, 0.55) 100%
+      );
+    }
+  }
+
+  /* Section 4 (Capabilities) — radial mask + veil, hidden behind the
+     card grid and crisp in the open margins. */
+  [data-page] #industry-automation.section::before {
     -webkit-mask-image: radial-gradient(
       ellipse 76% 94% at 50% 48%,
       transparent 0%,
@@ -292,7 +330,6 @@ const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
       #000 62%
     );
   }
-  [data-page] #industry-before-after.section::after,
   [data-page] #industry-automation.section::after {
     content: '';
     position: absolute;
@@ -307,6 +344,7 @@ const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
       transparent 72%
     );
   }
+
   [data-page] #industry-before-after > .container,
   [data-page] #industry-automation > .container {
     position: relative;
