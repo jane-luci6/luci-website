@@ -21,7 +21,8 @@
   --ink-strong: #1c2b33;
 
   --font-display: 'Syncopate', sans-serif;
-  --font-body: 'Space Grotesk', system-ui, sans-serif;
+  --font-head: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
 
   --space-1: 8px;
   --space-2: 16px;

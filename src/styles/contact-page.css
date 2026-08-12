@@ -64,7 +64,7 @@
 }
 .contact-hero__headline {
   margin: 0 0 22px;
-  font-family: var(--font-body);
+  font-family: var(--font-head);
   font-weight: 700;
   font-size: clamp(34px, 5vw, 54px);
   line-height: 1.04;
@@ -89,7 +89,7 @@
   align-items: center;
   gap: 10px;
   padding: 12px 22px;
-  font-family: var(--font-body);
+  font-family: var(--font-head);
   font-size: 15px;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -146,7 +146,7 @@
 .contact-point__head {
   grid-column: 2 / 3;
   margin: 0 0 6px;
-  font-family: var(--font-body);
+  font-family: var(--font-head);
   font-weight: 700;
   font-size: clamp(16px, 1.7vw, 19px);
   line-height: 1.25;
@@ -178,7 +178,7 @@
 .contact-form-card__head { margin-bottom: 20px; }
 .contact-form-card__title {
   margin: 0 0 10px;
-  font-family: var(--font-body);
+  font-family: var(--font-head);
   font-weight: 700;
   font-size: clamp(22px, 2.4vw, 28px);
   line-height: 1.1;
@@ -235,7 +235,7 @@
 #contact-thesis .luci-acform ._form-label {
   display: block;
   margin-bottom: 8px;
-  font-family: var(--font-body);
+  font-family: var(--font-head);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -295,7 +295,7 @@
   width: 100%;
   min-height: 48px;
   padding: 12px 28px;
-  font-family: var(--font-body);
+  font-family: var(--font-head);
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.01em;
@@ -353,7 +353,7 @@
 .contact-path__icon svg { width: 26px; height: 26px; }
 .contact-path__head {
   margin: 0;
-  font-family: var(--font-body);
+  font-family: var(--font-head);
   font-weight: 700;
   font-size: clamp(20px, 2.2vw, 24px);
   line-height: 1.15;
@@ -373,7 +373,7 @@
   align-items: center;
   gap: 8px;
   margin-top: auto;
-  font-family: var(--font-body);
+  font-family: var(--font-head);
   font-size: 15px;
   font-weight: 600;
   color: var(--mint);
@@ -413,7 +413,7 @@
 }
 .contact-office__name {
   margin: 0;
-  font-family: var(--font-body);
+  font-family: var(--font-head);
   font-weight: 700;
   font-size: clamp(20px, 2.2vw, 24px);
   line-height: 1.15;
@@ -431,7 +431,7 @@
 .contact-office__phone {
   display: inline-block;
   margin: 0;
-  font-family: var(--font-body);
+  font-family: var(--font-head);
   font-weight: 700;
   font-size: clamp(20px, 2.2vw, 24px);
   letter-spacing: -0.01em;
@@ -502,7 +502,7 @@
 .overview-modal__head { padding-right: 40px; }
 .overview-modal__title {
   margin: 0 0 8px;
-  font-family: var(--font-body);
+  font-family: var(--font-head);
   font-weight: 700;
   font-size: clamp(22px, 2.6vw, 30px);
   line-height: 1.1;
@@ -591,7 +591,7 @@
 .demo-success__check svg { width: 30px; height: 30px; }
 .demo-success__title {
   margin: 0;
-  font-family: var(--font-body);
+  font-family: var(--font-head);
   font-weight: 700;
   font-size: clamp(24px, 3vw, 30px);
   line-height: 1.12;
@@ -618,7 +618,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  font-family: var(--font-body);
+  font-family: var(--font-head);
   font-size: 15px;
   font-weight: 600;
   color: rgba(245, 248, 250, 0.66);
