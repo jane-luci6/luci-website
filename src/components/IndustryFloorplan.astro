@@ -65,16 +65,16 @@ const delaysMs = zones.map((z) => z.delay * 1000);
             <g>
               <path
                 class="fp-lead"
-                d={`M ${ln.x2} ${ln.y2} L ${ln.x2} 100`}
+                d={`M ${ln.x1} ${ln.y1} L ${ln.x2} ${ln.y2}`}
                 vector-effect="non-scaling-stroke"
                 pathLength="1"
               />
               <circle
                 class="fp-pulse"
                 r="0.9"
-                cx={ln.x2}
-                cy={ln.y2}
-                style={`offset-path: path('M ${ln.x2} ${ln.y2} L ${ln.x2} 100')`}
+                cx={ln.x1}
+                cy={ln.y1}
+                style={`offset-path: path('M ${ln.x1} ${ln.y1} L ${ln.x2} ${ln.y2}')`}
               />
               <circle class="fp-ring" cx={ln.x2} cy={ln.y2} r="1" />
               <circle class="fp-ring fp-ring--b" cx={ln.x2} cy={ln.y2} r="1" />
@@ -84,20 +84,19 @@ const delaysMs = zones.map((z) => z.delay * 1000);
         </g>
       ))}
     </svg>
-  </div>
 
-  <div class="fp-plates">
-    {zones.map((z, i) => (
-      <div
-        class="fp-plate"
-        data-zone={i}
-        style={`--d:${z.delay}s;`}
-      >
-        <span class="fp-plate__marker" aria-hidden="true"></span>
-        <span class="fp-plate__label">{z.label}</span>
-        <span class="fp-plate__desc">{z.desc}</span>
-      </div>
-    ))}
+    <div class="fp-plates">
+      {zones.map((z, i) => (
+        <div
+          class={`fp-plate fp-plate--${z.plate.side}`}
+          data-zone={i}
+          style={`--d:${z.delay}s; --left:${z.plate.left ?? 'auto'}; --right:${z.plate.right ?? 'auto'}; --top:${z.plate.top};`}
+        >
+          <span class="fp-plate__label">{z.label}</span>
+          <span class="fp-plate__desc">{z.desc}</span>
+        </div>
+      ))}
+    </div>
   </div>
 </div>
 <script>
@@ -184,12 +183,13 @@ const delaysMs = zones.map((z) => z.delay * 1000);
     position: relative;
     display: block;
     margin-inline: auto;
-    width: var(--img-w, 65.83%);
-    height: auto;
+    /* Height-constrained so all floorplans take up the same vertical space
+       regardless of aspect ratio. Width auto-adjusts to keep proportions. */
+    height: clamp(380px, 52vh, 560px);
+    width: auto;
+    max-width: 100%;
     filter: invert(1);
     mix-blend-mode: screen;
-    /* No hard rectangle edge + soft feather so the floorplan melts into the
-       aurora stage instead of reading as a pasted-on slab. */
     -webkit-mask-image:
       linear-gradient(to right, transparent, #000 7%, #000 93%, transparent),
       linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent);
@@ -203,8 +203,8 @@ const delaysMs = zones.map((z) => z.delay * 1000);
   /* One-shot light sweep down the floorplan on reveal */
   .fp-scan {
     position: absolute;
-    left: calc((100% - var(--img-w, 65.83%)) / 2);
-    right: calc((100% - var(--img-w, 65.83%)) / 2);
+    left: 10%;
+    right: 10%;
     top: 0;
     height: 40%;
     background: linear-gradient(180deg, rgba(104, 227, 190, 0.5), transparent);
@@ -305,16 +305,20 @@ const delaysMs = zones.map((z) => z.delay * 1000);
     40% { transform: scale(1.8); }
     100% { transform: scale(1); }
   }
-  /* ---------- Callout plates: frosted glass cards in a row below the floorplan ---------- */
+  /* ---------- Callout plates: frosted glass cards around the floorplan ---------- */
   .fp-plates {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: clamp(16px, 2vw, 28px);
-    margin-top: clamp(28px, 3.5vw, 44px);
+    position: absolute;
+    inset: 0;
     pointer-events: none;
   }
   .fp-plate {
-    position: relative;
+    position: absolute;
+    left: var(--left, auto);
+    right: var(--right, auto);
+    top: var(--top);
+    transform: translateY(-50%) scale(0.97);
+    width: 19%;
+    min-width: 210px;
     padding: 22px 24px 20px;
     background: rgba(16, 35, 45, 0.55);
     backdrop-filter: blur(14px);
@@ -329,6 +333,7 @@ const delaysMs = zones.map((z) => z.delay * 1000);
     cursor: pointer;
     transition:
       opacity 0.5s ease,
+      transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
       filter 0.4s ease,
       box-shadow 0.4s ease,
       border-color 0.4s ease;
@@ -345,16 +350,6 @@ const delaysMs = zones.map((z) => z.delay * 1000);
     right: 16px;
     height: 2px;
     background: linear-gradient(90deg, var(--gold), var(--mint));
-  }
-  /* Small marker dot at top of each card — visual echo of the floorplan target dot */
-  .fp-plate__marker {
-    display: block;
-    width: 10px;
-    height: 10px;
-    margin-bottom: 14px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #eafff6, var(--mint));
-    box-shadow: 0 0 12px rgba(var(--mint-rgb), 0.5);
   }
   .fp-plate__label {
     position: relative;
@@ -376,16 +371,15 @@ const delaysMs = zones.map((z) => z.delay * 1000);
     line-height: 1.45;
     color: rgba(245, 248, 250, 0.78);
   }
-  /* Reveal flips each card from greyed placeholder to full, one-by-one on its
-     delay (JS adds .is-shown). After the sequence they all stay full. */
   .fp-plate.is-shown {
     opacity: 1;
+    transform: translateY(-50%) scale(1);
     filter: none;
   }
-  /* Before a card is revealed, hover/focus previews it at full strength. */
   .fp-plate:not(.is-shown):hover,
   .fp-plate:not(.is-shown):focus {
     opacity: 1;
+    transform: translateY(-50%) scale(1);
     filter: none;
     border-color: rgba(var(--mint-rgb), 0.5);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 30px rgba(var(--mint-rgb), 0.38);
@@ -395,22 +389,32 @@ const delaysMs = zones.map((z) => z.delay * 1000);
   }
   @keyframes fp-plate-flash {
     0% { box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 20px rgba(var(--mint-rgb), 0.12); }
-    40% { box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 36px rgba(var(--mint-rgb), 0.55); }
-    100% { box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 20px rgba(var(--mint-rgb), 0.12); }
+    40% { box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 36px rgba(var(--mint-rgb), 0.55); transform: translateY(-50%) scale(1.03); }
+    100% { box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 20px rgba(var(--mint-rgb), 0.12); transform: translateY(-50%) scale(1); }
   }
 
-  /* ---------- Narrow screens: stack cards vertically ---------- */
+  /* ---------- Narrow screens: stack, drop absolute overlay ---------- */
   @media (max-width: 900px) {
     .fp-stage { padding: clamp(20px, 4vw, 32px); }
-    .fp-mount__img { width: 100%; }
+    .fp-mount { display: flex; flex-direction: column; }
+    .fp-mount__img { width: 100%; height: auto; }
     .fp-scan { left: 0; right: 0; }
     .fp-overlay { display: none; }
     .fp-plates {
+      position: static;
+      display: grid;
       grid-template-columns: 1fr;
       gap: 14px;
       margin-top: 20px;
     }
     .fp-plate {
+      position: static;
+      left: auto;
+      right: auto;
+      top: auto;
+      transform: none;
+      width: auto;
+      min-width: 0;
       opacity: 1;
       filter: none;
       animation: none !important;
@@ -425,7 +429,7 @@ const delaysMs = zones.map((z) => z.delay * 1000);
     .fp-pulse { display: none; }
     .fp-dot { transition: none; transform: scale(1); opacity: 1; }
     .fp-ring { animation: none !important; opacity: 0; }
-    .fp-plate { transition: none !important; opacity: 1; filter: none; }
+    .fp-plate { transition: none !important; opacity: 1; transform: translateY(-50%); }
     .fp-plate.is-pulsing { animation: none; }
   }
 </style>
