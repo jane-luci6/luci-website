@@ -1,28 +1,306 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHero from '../../components/PageHero.astro';
 import SectionBlock from '../../components/SectionBlock.astro';
-import { ameristarCaseStudy, portfolioLine } from '../../data/site';
+import { ameristarCaseStudy, tachiCaseStudy, site } from '../../data/site';
+
+const FAG_PDF = '/resources/field-activation-guide-prospect.pdf';
+
+const caseStudies = [ameristarCaseStudy, tachiCaseStudy];
+
+const guides = [
+  {
+    href: FAG_PDF,
+    logo: '/images/logos/luci-full-mintmark-white.png',
+    logoAlt: 'LUCI logo',
+    kicker: 'Field Guide',
+    title: 'The Field Activation Guide',
+    meta: 'How LUCI rolls out on your floor',
+    desc: 'How LUCI deploys onto your existing environment — in phases, on your budget and timeline. Every step from assessment to handoff, documented.',
+    cta: 'Download the guide',
+    download: true,
+  },
+];
 ---
 
-<BaseLayout title="Resources" description="Case studies, articles, and support for enterprise property teams.">
-  <PageHero title="Resources" lead="Case studies, articles, and support for enterprise property teams." deep />
+<BaseLayout title="Resources" description="Case studies, guides, and field documentation from LUCI Systems." darkHeader>
+  <h1 class="res-sr-only">Resources</h1>
 
-  <SectionBlock lockupName="Featured">
-    <div class="callout">
-      <p class="rows__title">{ameristarCaseStudy.title}</p>
-      <p>{ameristarCaseStudy.dek}</p>
-      <p style="margin-top: 0.75rem">
-        <a href={`/resources/case-studies/${ameristarCaseStudy.slug}`}>Read the case study →</a>
+  <section id="res-hero" class="res-hero" aria-label="LUCI resources">
+    <div class="res-hero__mesh" aria-hidden="true"></div>
+    <div class="res-hero__inner container container--wide">
+      <p class="display-label res-hero__kicker">Resources</p>
+      <h2 class="res-hero__title">See LUCI <em>on real floors</em>.</h2>
+      <p class="res-hero__deck">
+        Case studies, guides, and field documentation — everything you need to understand
+        what LUCI looks like on a property like yours, and how it gets there.
       </p>
     </div>
-  </SectionBlock>
+  </section>
 
-  <SectionBlock lockupName="Browse" tone="sand">
-    <ul class="rows">
-      <li><a href="/resources/case-studies">Case studies</a> — {portfolioLine.slice(0, 80)}…</li>
-      <li><a href="/blog">Blog</a> — Variable reduction, engagement cycle, deep dives</li>
-      <li><a href="https://support.lucisystems.com" target="_blank" rel="noopener noreferrer">Support portal</a></li>
+  <nav class="res-tabs" aria-label="Resource categories">
+    <div class="res-tabs__inner container container--wide">
+      <button class="res-tab is-active" data-tab="all" type="button">All</button>
+      <button class="res-tab" data-tab="case-studies" type="button">Case Studies</button>
+      <button class="res-tab" data-tab="guides" type="button">Guides</button>
+    </div>
+  </nav>
+
+  <SectionBlock
+    id="res-case-studies"
+    lockupName="Case <em>studies</em>"
+    lockupRole="LUCI on real properties"
+    deck="Real deployments, real timelines, real outcomes — what LUCI changed and what went away."
+    tone="deep"
+    wide
+  >
+    <ul class="res-grid" role="list" data-section="case-studies">
+      {caseStudies.map((cs) => {
+        const href = `/resources/case-studies/${cs.slug}`;
+        return (
+          <li class="res-card" data-type="case-studies">
+            <a class="res-card__link" href={href}>
+              <span class="res-card__media">
+                {cs.poster ? (
+                  <img src={cs.poster} alt="" loading="lazy" decoding="async" />
+                ) : cs.cardMedia ? (
+                  <span class="res-card__logo-panel">
+                    <img src={cs.cardMedia} alt={`${cs.property} logo`} loading="lazy" decoding="async" />
+                  </span>
+                ) : (
+                  <span class="res-card__logo-panel"></span>
+                )}
+              </span>
+              <span class="res-card__body">
+                <span class="res-card__kicker"><span>Case Study</span></span>
+                <span class="res-card__title">{cs.title}</span>
+                <span class="res-card__meta">{cs.property} <span>· {cs.location}</span></span>
+                <span class="res-card__desc">{cs.dek}</span>
+                <span class="res-card__cta">Read the story <span aria-hidden="true">&#8594;</span></span>
+              </span>
+            </a>
+          </li>
+        );
+      })}
     </ul>
   </SectionBlock>
+
+  <SectionBlock
+    id="res-guides"
+    lockupName="Field <em>guides</em>"
+    lockupRole="How LUCI rolls out"
+    deck="Documentation that walks through how LUCI deploys, operates, and scales on a real property."
+    tone="deep"
+    wide
+  >
+    <ul class="res-grid res-grid--guides" role="list" data-section="guides">
+      {guides.map((g) => (
+        <li class="res-card" data-type="guides">
+          <a
+            class="res-card__link"
+            href={g.href}
+            target={g.download ? '_blank' : undefined}
+            rel={g.download ? 'noopener' : undefined}
+            download={g.download ? '' : undefined}
+          >
+            <span class="res-card__media">
+              <span class="res-card__logo-panel">
+                <img src={g.logo} alt={g.logoAlt} loading="lazy" decoding="async" />
+              </span>
+            </span>
+            <span class="res-card__body">
+              <span class="res-card__kicker"><span>{g.kicker}</span></span>
+              <span class="res-card__title">{g.title}</span>
+              <span class="res-card__meta">{g.meta}</span>
+              <span class="res-card__desc">{g.desc}</span>
+              <span class="res-card__cta">{g.cta} <span aria-hidden="true">&#8594;</span></span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </SectionBlock>
+
+  <SectionBlock id="res-cta" tone="deep">
+    <div class="res-cta">
+      <p class="display-label res-cta__kicker">Next step</p>
+      <h2 class="res-cta__title">See LUCI on <em>your floor</em>.</h2>
+      <p class="res-cta__deck">Tell us what you're running — and what you'd like to stop managing.</p>
+      <a class="btn btn--mint-outline res-cta__btn" href="/contact">{site.ctaPrimary}</a>
+    </div>
+  </SectionBlock>
 </BaseLayout>
+
+<style>
+  .res-sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
+
+  /* ---------- HERO ---------- */
+  .res-hero {
+    position: relative; background: var(--navy-deep);
+    overflow: hidden; isolation: isolate;
+  }
+  .res-hero__mesh {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: url('/images/mesh/luci-bg-hero-1920x1080.svg?v=1') center / cover no-repeat;
+    mix-blend-mode: screen; opacity: 0.7;
+  }
+  .res-hero__mesh::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(10, 22, 28, 0.82) 18%, rgba(10, 22, 28, 0.82) 82%, transparent 100%);
+  }
+  .res-hero__inner {
+    position: relative; z-index: 1;
+    padding-block: clamp(64px, 9vw, 112px) clamp(40px, 5vw, 64px);
+  }
+  .res-hero__kicker { color: var(--mint); margin-bottom: var(--space-3); }
+  .res-hero__title {
+    margin: 0 0 var(--space-3); max-width: 18ch;
+    font-family: var(--font-head); font-size: clamp(38px, 6vw, 64px);
+    font-weight: 700; line-height: 1.04; letter-spacing: -0.03em; color: var(--off-white);
+  }
+  .res-hero__title em { font-style: normal; color: var(--gold); }
+  .res-hero__deck {
+    max-width: 56ch; font-family: var(--font-body);
+    font-size: clamp(17px, 2vw, 20px); line-height: 1.6; color: rgba(245, 248, 250, 0.82);
+  }
+
+  /* ---------- TAB RAIL ---------- */
+  .res-tabs {
+    position: sticky; top: 64px; z-index: 50;
+    background: rgba(10, 22, 28, 0.88);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(var(--mint-rgb), 0.16);
+  }
+  .res-tabs__inner {
+    display: flex; gap: 8px; padding-block: 14px; overflow-x: auto; scrollbar-width: none;
+  }
+  .res-tabs__inner::-webkit-scrollbar { display: none; }
+  .res-tab {
+    flex-shrink: 0; padding: 8px 18px;
+    font-family: var(--font-head); font-size: 13px; font-weight: 700;
+    letter-spacing: 0.04em; color: rgba(245, 248, 250, 0.6);
+    background: transparent; border: 1px solid rgba(var(--mint-rgb), 0.2);
+    border-radius: 999px; cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  }
+  .res-tab:hover { color: var(--off-white); border-color: rgba(var(--mint-rgb), 0.4); }
+  .res-tab.is-active { color: var(--navy-deep); background: var(--mint); border-color: var(--mint); }
+
+  /* ---------- CARD GRID ---------- */
+  .res-grid {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: clamp(24px, 3vw, 36px);
+  }
+  .res-grid--guides { grid-template-columns: repeat(3, 1fr); }
+
+  .res-card {
+    background: rgba(16, 35, 45, 0.55);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(var(--mint-rgb), 0.22);
+    border-radius: 16px; overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  .res-card:hover {
+    border-color: rgba(var(--mint-rgb), 0.45);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4), 0 0 24px rgba(var(--mint-rgb), 0.12);
+    transform: translateY(-3px);
+  }
+  .res-card__link { display: flex; flex-direction: column; height: 100%; text-decoration: none; color: inherit; }
+  .res-card__media { display: block; aspect-ratio: 16 / 9; overflow: hidden; background: var(--navy-deep); position: relative; }
+  .res-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.45s ease; }
+  .res-card:hover .res-card__media img { transform: scale(1.04); }
+  .res-card__logo-panel {
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; height: 100%; background-color: var(--navy-deep);
+    background-image: url('/images/textures/texture-circuit-navy-steel-print-dark.jpg');
+    background-size: cover; background-position: center;
+  }
+  .res-card__logo-panel img { width: 56%; max-width: 260px; height: auto; object-fit: contain; }
+  .res-card__body { display: flex; flex-direction: column; gap: 10px; padding: clamp(24px, 2.8vw, 32px); flex: 1; }
+  .res-card__kicker { display: flex; align-items: center; gap: 10px; margin: 0 0 2px; }
+  .res-card__kicker::before { content: ''; width: 24px; height: 2px; background: var(--mint); }
+  .res-card__kicker span {
+    font-family: var(--font-head); font-size: 10px; font-weight: 700;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--mint);
+  }
+  .res-card__title {
+    font-family: var(--font-head); font-size: clamp(20px, 2.2vw, 24px);
+    font-weight: 700; line-height: 1.18; letter-spacing: -0.015em; color: var(--off-white);
+  }
+  .res-card__meta { font-family: var(--font-head); font-size: 13px; font-weight: 600; letter-spacing: 0.02em; color: rgba(245, 248, 250, 0.72); }
+  .res-card__meta span { font-weight: 400; color: rgba(245, 248, 250, 0.5); }
+  .res-card__desc {
+    font-family: var(--font-body); font-size: 15px; font-weight: 400;
+    line-height: 1.55; color: rgba(245, 248, 250, 0.72); flex: 1;
+  }
+  .res-card__cta {
+    margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(var(--mint-rgb), 0.14);
+    font-family: var(--font-head); font-size: 14px; font-weight: 700; color: var(--mint);
+  }
+  .res-card__cta span { display: inline-block; transition: transform 0.2s ease; }
+  .res-card__link:hover .res-card__cta span { transform: translateX(4px); }
+
+  /* ---------- CTA ---------- */
+  :global(#res-cta.section) { border-top: 2px solid var(--mint); }
+  .res-cta { max-width: 64ch; padding-block: clamp(28px, 4vw, 44px); }
+  .res-cta__kicker { color: var(--mint); margin-bottom: var(--space-3); }
+  .res-cta__title {
+    margin: 0 0 var(--space-3); font-family: var(--font-head);
+    font-size: clamp(26px, 3.6vw, 36px); font-weight: 700;
+    line-height: 1.15; letter-spacing: -0.02em; color: var(--off-white);
+  }
+  .res-cta__title em { font-style: normal; color: var(--gold); }
+  .res-cta__deck {
+    max-width: 52ch; margin: 0 0 var(--space-4); font-family: var(--font-body);
+    font-size: 17px; line-height: 1.6; color: rgba(245, 248, 250, 0.78);
+  }
+  .res-cta__btn { margin-top: 0; }
+
+  @media (max-width: 900px) {
+    .res-grid { grid-template-columns: 1fr; max-width: 560px; margin-inline: auto; }
+    .res-grid--guides { grid-template-columns: 1fr; }
+  }
+</style>
+
+<style is:global>
+  /* CTA mesh band — matches the global site CTA treatment */
+  #res-cta.section {
+    position: relative; isolation: isolate; overflow: hidden;
+  }
+  #res-cta.section::before {
+    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: url('/images/mesh/luci-bg-wide-2560x800.svg') center / cover no-repeat;
+    mix-blend-mode: screen; opacity: 0.6;
+  }
+  #res-cta.section::after {
+    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: linear-gradient(90deg, transparent 0%, rgba(10, 22, 28, 0.82) 18%, rgba(10, 22, 28, 0.82) 82%, transparent 100%);
+  }
+  #res-cta > .container { position: relative; z-index: 1; }
+</style>
+
+<script>
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.res-tab'));
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('.res-card'));
+  const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-section]'));
+
+  function setActive(tab: string) {
+    tabs.forEach((t) => t.classList.toggle('is-active', t.dataset.tab === tab));
+    if (tab === 'all') {
+      cards.forEach((c) => c.style.display = '');
+      sections.forEach((s) => s.style.display = '');
+    } else {
+      cards.forEach((c) => {
+        c.style.display = c.dataset.type === tab ? '' : 'none';
+      });
+      sections.forEach((s) => {
+        s.style.display = s.dataset.section === tab ? '' : 'none';
+      });
+    }
+  }
+
+  tabs.forEach((t) => t.addEventListener('click', () => setActive(t.dataset.tab)));
+</script>
