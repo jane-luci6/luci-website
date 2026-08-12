@@ -52,7 +52,6 @@ if (!detail) return Astro.redirect('/who-we-serve');
     deck={detail.graphLockup.deck}
     tone="deep"
     wide
-    pattern="mintgold"
   >
     <PersonaNarrativeTimeline narrative={detail.narrative} />
   </SectionBlock>
@@ -71,7 +70,6 @@ if (!detail) return Astro.redirect('/who-we-serve');
     lockupName={detail.capabilitiesLockup.lockupName}
     tone="deep"
     wide
-    pattern="mintgold"
   >
     <PersonaCapabilitiesFlow
       capabilities={detail.capabilities}
@@ -172,5 +170,93 @@ if (!detail) return Astro.redirect('/who-we-serve');
   }
   .persona-cta__btn {
     margin-top: 0;
+  }
+</style>
+
+<style is:global>
+  /* ============================================================
+     Persona pages — mesh (with horizontal navy veil) on the
+     narrative + capabilities sections, replacing the
+     circuit `pattern`. The narrative (second) section gets
+     a darker brand bg (--navy-deep) so it reads as a
+     deeper band than the standard --navy; the capabilities
+     section keeps --navy. Each section's veil matches its
+     own bg so the mesh reads only at the far left/right margins.
+     ============================================================ */
+  #persona-narrative.section,
+  #persona-capabilities.section {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  /* Second section — darker brand bg. */
+  #persona-narrative.section {
+    background: var(--navy-deep);
+  }
+  #persona-narrative.section::before,
+  #persona-capabilities.section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: url('/images/mesh/luci-bg-hero-1920x1080.png') center / cover no-repeat;
+    mix-blend-mode: screen;
+    opacity: 0.5;
+  }
+  /* Veil matches each section's own bg so the center reads solid
+     and the mesh reads only at the left/right margins. */
+  #persona-narrative.section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(10, 22, 28, 0.86) 16%,
+      rgba(10, 22, 28, 0.86) 84%,
+      transparent 100%
+    );
+  }
+  #persona-capabilities.section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(16, 35, 45, 0.86) 16%,
+      rgba(16, 35, 45, 0.86) 84%,
+      transparent 100%
+    );
+  }
+  @media (max-width: 720px) {
+    #persona-narrative.section::after {
+      background: linear-gradient(
+        90deg,
+        rgba(10, 22, 28, 0.55) 0%,
+        rgba(10, 22, 28, 0.9) 18%,
+        rgba(10, 22, 28, 0.9) 82%,
+        rgba(10, 22, 28, 0.55) 100%
+      );
+    }
+    #persona-capabilities.section::after {
+      background: linear-gradient(
+        90deg,
+        rgba(16, 35, 45, 0.55) 0%,
+        rgba(16, 35, 45, 0.9) 18%,
+        rgba(16, 35, 45, 0.9) 82%,
+        rgba(16, 35, 45, 0.55) 100%
+      );
+    }
+  }
+  #persona-narrative > .container,
+  #persona-capabilities > .container {
+    position: relative;
+    z-index: 1;
   }
 </style>
