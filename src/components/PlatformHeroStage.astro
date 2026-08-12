@@ -3,32 +3,30 @@ interface Props {
   lockupName: string;
   lockupRole: string;
   deck: string;
-  imageSrc: string;
-  imageAlt?: string;
   sectionId?: string;
+  imageSrc?: string;
+  imageAlt?: string;
 }
 
 const {
   lockupName,
   lockupRole,
   deck,
-  imageSrc,
-  imageAlt = '',
   sectionId = 'platform-thesis',
+  imageSrc = '/images/hero-platform-employee.png?v=1',
+  imageAlt =
+    'A LUCI technician at a laptop in a back-of-house operations office, running the LUCI orchestration platform — the property floorplan and live device nodes visible on screen.',
 } = Astro.props;
 ---
 
 <section id={sectionId} class="plat-hero">
   <img
-    class="plat-hero__img"
+    class="plat-hero__photo"
     src={imageSrc}
     alt={imageAlt}
-    width="2400"
-    height="1725"
     loading="eager"
     decoding="async"
-    fetchpriority="high"
-    aria-hidden="true"
+    draggable="false"
   />
   <span class="plat-hero__scrim" aria-hidden="true"></span>
 
@@ -46,47 +44,47 @@ const {
   .plat-hero {
     position: relative;
     width: 100%;
-    min-height: clamp(340px, 44vw, 560px);
-    aspect-ratio: 21 / 9;
-    max-height: 60vh;
+    min-height: clamp(440px, 76vh, 720px);
     display: flex;
     align-items: flex-end;
     overflow: hidden;
     color: var(--off-white);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--navy-deep);
+    isolation: isolate;
   }
 
-  .plat-hero__img {
+  /* ── Full-bleed photo ───────────────────────────────────── */
+  .plat-hero__photo {
     position: absolute;
     inset: 0;
+    z-index: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center center;
-    display: block;
+    object-position: 62% center;
+    pointer-events: none;
+    user-select: none;
   }
 
+  /* ── Legibility veil — strong on the left/bottom where copy sits ── */
   .plat-hero__scrim {
     position: absolute;
     inset: 0;
+    z-index: 1;
     pointer-events: none;
     background:
-      linear-gradient(105deg, rgba(8, 17, 22, 0.92) 0%, rgba(8, 17, 22, 0.5) 44%, rgba(8, 17, 22, 0.22) 100%),
-      linear-gradient(to top, rgba(8, 17, 22, 0.94) 0%, rgba(8, 17, 22, 0.38) 50%, transparent 74%);
+      linear-gradient(100deg, rgba(8, 17, 22, 0.92) 0%, rgba(8, 17, 22, 0.62) 40%, rgba(8, 17, 22, 0.18) 72%, rgba(8, 17, 22, 0.05) 100%),
+      linear-gradient(to top, rgba(8, 17, 22, 0.9) 0%, rgba(8, 17, 22, 0.28) 46%, transparent 74%);
   }
 
+  /* ── Copy ───────────────────────────────────────────────── */
   .plat-hero__inner {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     width: 100%;
-    padding-block: clamp(80px, 10vw, 120px) clamp(36px, 5vw, 60px);
+    padding-block: clamp(80px, 10vw, 120px) clamp(40px, 5vw, 64px);
   }
-
-  .plat-hero .header-lockup {
-    display: block;
-    margin-bottom: var(--space-3);
-  }
-
+  .plat-hero .header-lockup { display: block; margin-bottom: var(--space-3); }
   .plat-hero .header-lockup__name {
     font-family: var(--font-display);
     font-size: clamp(34px, 5vw, 52px);
@@ -97,7 +95,6 @@ const {
     margin: 0;
     text-transform: uppercase;
   }
-
   .plat-hero .header-lockup__rule {
     display: block;
     width: 40px;
@@ -106,7 +103,6 @@ const {
     background: var(--mint);
     border-radius: 2px;
   }
-
   .plat-hero .header-lockup__role {
     font-family: var(--font-head);
     font-size: 12px;
@@ -117,23 +113,20 @@ const {
     color: var(--mint);
     margin: 0;
   }
-
   .plat-hero__deck {
-    max-width: var(--measure);
+    max-width: 46ch;
     margin: 0;
     font-family: var(--font-body);
     font-size: 17px;
     font-weight: 400;
-    line-height: 1.55;
-    color: rgba(245, 248, 250, 0.88);
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.9);
     text-align: left;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   }
 
-  @media (max-width: 720px) {
-    .plat-hero {
-      aspect-ratio: auto;
-      min-height: clamp(380px, 74vw, 480px);
-      max-height: none;
-    }
+  @media (max-width: 760px) {
+    .plat-hero__photo { object-position: 70% center; }
+    .plat-hero__deck { max-width: 90%; }
   }
 </style>
