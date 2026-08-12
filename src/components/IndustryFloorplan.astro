@@ -18,6 +18,8 @@ interface Props {
   imageWidth?: number;
   imageHeight?: number;
   imageWidthPct?: number;
+  /** Optional per-industry height scale multiplier (e.g. 1.1 = 10% taller) */
+  imageHeightScale?: number;
   zones: FloorplanZone[];
   ariaLabel?: string;
 }
@@ -27,12 +29,13 @@ const {
   imageWidth = 790,
   imageHeight = 1024,
   imageWidthPct = 65.83,
+  imageHeightScale = 1,
   zones,
   ariaLabel = 'Zones LUCI orchestrates',
 } = Astro.props;
 const delaysMs = zones.map((z) => z.delay * 1000);
 ---
-<div class="fp-stage" data-fp-animate data-delays={JSON.stringify(delaysMs)} style={`--img-w:${imageWidthPct}%`}>
+<div class="fp-stage" data-fp-animate data-delays={JSON.stringify(delaysMs)} style={`--img-w:${imageWidthPct}%; --fp-scale:${imageHeightScale};`}>
   <div class="fp-mount">
     <div class="fp-mount__clip">
       <img
@@ -184,8 +187,9 @@ const delaysMs = zones.map((z) => z.delay * 1000);
     display: block;
     margin-inline: auto;
     /* Height-constrained so all floorplans take up the same vertical space
-       regardless of aspect ratio. Width auto-adjusts to keep proportions. */
-    height: clamp(456px, 62vh, 672px);
+       regardless of aspect ratio. Width auto-adjusts to keep proportions.
+       --fp-scale lets a specific industry bump up (e.g. airport: 1.1). */
+    height: calc(clamp(456px, 62vh, 672px) * var(--fp-scale, 1));
     width: auto;
     max-width: 100%;
     filter: invert(1);

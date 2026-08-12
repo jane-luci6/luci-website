@@ -64,6 +64,7 @@ export interface IndustryDetail {
     imageWidth?: number;
     imageHeight?: number;
     imageWidthPct?: number;
+    imageHeightScale?: number;
     ariaLabel?: string;
     zones: {
       label: string;
@@ -885,12 +886,13 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         'In a terminal, information is everything — and your screens, speakers, and signage are how passengers get it. That makes multimedia the layer that guides the journey, drives revenue, and carries the messages that matter most.',
     },
     floorplan: {
-      image: '/images/industries/airports-transportation/floorplan.png?v=3',
+      image: '/images/industries/airports-transportation/floorplan.png?v=4',
       imageAlt:
         'Architectural floorplan of an airport terminal: departures hall, arrivals hall, concourses A/B/C, airline lounges, administration, parking, hotel and conference center, departure curbside, and ground transportation.',
       imageWidth: 1024,
       imageHeight: 682,
       imageWidthPct: 88,
+      imageHeightScale: 1.1,
       ariaLabel: 'Airport terminal zones LUCI orchestrates',
       zones: [
         {
