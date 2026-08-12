@@ -53,8 +53,6 @@ const featureImages = [
     lockupName="Platform"
     lockupRole="The Orchestration Engine"
     deck={site.subTagline}
-    imageSrc="/images/hero-platform.png"
-    imageAlt="LUCI control interface: a live map of every display, audio zone, and system endpoint across the property, operated from one screen."
   />
 
   <SectionBlock
@@ -64,7 +62,6 @@ const featureImages = [
     deck={oneOffering.summary}
     tone="deep"
     wide
-    pattern
   >
     <figure class="diagram-block diagram-block--parent diagram-reveal">
       <img
@@ -110,7 +107,6 @@ const featureImages = [
     deck="One accountable team gets you live, then stays — operating and refining LUCI for the life of the relationship."
     tone="mid"
     wide
-    pattern
   >
     <PlatformOrbit />
   </SectionBlock>
@@ -391,6 +387,91 @@ const featureImages = [
       transform: none;
     }
     #features::before { animation: none; }
+  }
+</style>
+
+<style is:global>
+  /* ============================================================
+     Mesh/floorplan wash for the 1st & 3rd content sections (What
+     LUCI is, Systems) — replaces the circuit `pattern` so the page
+     owns one texture language. Mesh reads only at the left/right
+     margins; the veil is tuned to each section's tone bg so the
+     fade matches. Matches the about.astro worldview treatment.
+     ============================================================ */
+  #what-luci-is.section,
+  #embedded-operation.section {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  #what-luci-is.section::before,
+  #embedded-operation.section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: url('/images/mesh/luci-bg-hero-1920x1080.svg?v=1') center / cover no-repeat;
+    mix-blend-mode: screen;
+    opacity: 0.7;
+  }
+  /* Veil tuned to each section's tone bg so the fade matches. */
+  #what-luci-is.section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(16, 35, 45, 0.86) 16%,
+      rgba(16, 35, 45, 0.86) 84%,
+      transparent 100%
+    );
+  }
+  #embedded-operation.section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(49, 73, 85, 0.86) 16%,
+      rgba(49, 73, 85, 0.86) 84%,
+      transparent 100%
+    );
+  }
+  /* Mid-tone bg screens the mesh harder — ease it back so it stays a wash. */
+  #embedded-operation.section::before { opacity: 0.5; }
+  #what-luci-is.section > .container,
+  #embedded-operation.section > .container {
+    position: relative;
+    z-index: 1;
+  }
+  @media (max-width: 720px) {
+    #what-luci-is.section::before,
+    #embedded-operation.section::before { opacity: 0.4; }
+    #what-luci-is.section::after {
+      background: linear-gradient(
+        90deg,
+        rgba(16, 35, 45, 0.55) 0%,
+        rgba(16, 35, 45, 0.9) 18%,
+        rgba(16, 35, 45, 0.9) 82%,
+        rgba(16, 35, 45, 0.55) 100%
+      );
+    }
+    #embedded-operation.section::after {
+      background: linear-gradient(
+        90deg,
+        rgba(49, 73, 85, 0.55) 0%,
+        rgba(49, 73, 85, 0.9) 18%,
+        rgba(49, 73, 85, 0.9) 82%,
+        rgba(49, 73, 85, 0.55) 100%
+      );
+    }
   }
 </style>
 
