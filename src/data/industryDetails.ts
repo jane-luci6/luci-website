@@ -258,7 +258,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         'Architectural floorplan of a resort and casino: casino floor, ballroom, pool, restaurants and bars, theater, hotel lobby and parking.',
       imageWidth: 664,
       imageHeight: 749,
-      imageWidthPct: 65.83,
+      imageWidthPct: 88,
       ariaLabel: 'Casino zones LUCI orchestrates',
       zones: [
         {
@@ -473,7 +473,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         'Architectural floorplan of a hotel and resort podium: arrival court, lobby, retail, restaurants and bars, pool deck, spa and fitness, guest tower core, ballroom, meeting rooms, service and back of house, loading, and parking.',
       imageWidth: 1024,
       imageHeight: 768,
-      imageWidthPct: 65.83,
+      imageWidthPct: 88,
       ariaLabel: 'Hotel and resort zones LUCI orchestrates',
       zones: [
         {
@@ -683,7 +683,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         'Architectural floorplan of a multi-purpose sports arena configured for basketball: court and bowl, main concourse, suites and club, locker rooms, media area, VIP lobby, back of house, and loading dock.',
       imageWidth: 1024,
       imageHeight: 768,
-      imageWidthPct: 65.83,
+      imageWidthPct: 88,
       ariaLabel: 'Sports venue zones LUCI orchestrates',
       zones: [
         {
@@ -890,7 +890,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
         'Architectural floorplan of an airport terminal: departures hall, arrivals hall, concourses A/B/C, airline lounges, administration, parking, hotel and conference center, departure curbside, and ground transportation.',
       imageWidth: 1024,
       imageHeight: 682,
-      imageWidthPct: 65.83,
+      imageWidthPct: 88,
       ariaLabel: 'Airport terminal zones LUCI orchestrates',
       zones: [
         {
@@ -970,7 +970,7 @@ export const industryDetails: Partial<Record<IndustrySlug, IndustryDetail>> = {
       imageAlt: 'Architectural floorplan of a conference and convention center: arrival court, registration, prefunction lobby, grand ballroom, exhibition hall, meeting rooms, breakout rooms, boardrooms, administration, food service and cafe, outdoor terrace, and parking garage.',
       imageWidth: 1024,
       imageHeight: 768,
-      imageWidthPct: 65.83,
+      imageWidthPct: 88,
       ariaLabel: 'Convention center zones LUCI orchestrates',
       zones: [
         {
