@@ -2,10 +2,10 @@
 
 export const homeIntroCopy = {
   headline:
-    'One interface for property-wide A/V.',
+    'With LUCI, you can run it all.',
   // Brochure-style headline: bold line with a key phrase in a gold accent span
-  headlineLead: 'One interface for ',
-  headlineAccent: 'property-wide A/V',
+  headlineLead: 'With LUCI, you can ',
+  headlineAccent: 'run it all',
   headlineTail: '',
   photoSrc: '/images/venue-guest-experience-casual-v2.jpg?v=1',
   photoAlt:
