@@ -78,7 +78,7 @@ const headlineHtml = variableReduction.headline.replace(
   </div>
 
   <!-- Worldview: reducing variables — dark manifesto band + consolidation ledger -->
-  <SectionBlock id="about-worldview" lockupName="Our worldview" lockupRole="Reducing variables" tone="deep" pattern wide>
+  <SectionBlock id="about-worldview" lockupName="Our worldview" lockupRole="Reducing variables" tone="deep" wide>
     <div class="about-worldview">
       {accumulationParas.map((p) => (
         <p class="measure about-worldview__p">{p}</p>
@@ -612,5 +612,61 @@ const headlineHtml = variableReduction.headline.replace(
   }
   .about-cta__btn {
     margin-top: 0;
+  }
+</style>
+
+<style is:global>
+  /* ============================================================
+     Worldview section — mesh/floorplan wash (replaces the circuit
+     `pattern`), so the page owns one texture language. The
+     section bg is overridden to --navy-deep below, so the veil
+     matches that. Mesh reads only at the left/right margins.
+     ============================================================ */
+  #about-worldview.section {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  #about-worldview.section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: url('/images/mesh/luci-bg-hero-1920x1080.svg?v=1') center / cover no-repeat;
+    mix-blend-mode: screen;
+    opacity: 0.7;
+  }
+  #about-worldview.section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(10, 22, 28, 0.86) 16%,
+      rgba(10, 22, 28, 0.86) 84%,
+      transparent 100%
+    );
+  }
+  @media (max-width: 720px) {
+    #about-worldview.section::before {
+      opacity: 0.45;
+    }
+    #about-worldview.section::after {
+      background: linear-gradient(
+        90deg,
+        rgba(10, 22, 28, 0.55) 0%,
+        rgba(10, 22, 28, 0.9) 18%,
+        rgba(10, 22, 28, 0.9) 82%,
+        rgba(10, 22, 28, 0.55) 100%
+      );
+    }
+  }
+  #about-worldview > .container {
+    position: relative;
+    z-index: 1;
   }
 </style>
