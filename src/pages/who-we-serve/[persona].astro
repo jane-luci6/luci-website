@@ -59,7 +59,7 @@ if (!detail) return Astro.redirect('/who-we-serve');
   <SectionBlock
     id="persona-challenges"
     lockupName={detail.challengesLockup.lockupName}
-    tone="mid"
+    tone="deep"
     wide
   >
     <PersonaChallenges challenges={detail.challenges} />
@@ -177,21 +177,19 @@ if (!detail) return Astro.redirect('/who-we-serve');
   /* ============================================================
      Persona pages — mesh (with horizontal navy veil) on the
      narrative + capabilities sections, replacing the
-     circuit `pattern`. The narrative (second) section gets
-     a darker brand bg (--navy-deep) so it reads as a
-     deeper band than the standard --navy; the capabilities
-     section keeps --navy. Each section's veil matches its
-     own bg so the mesh reads only at the far left/right margins.
+     circuit `pattern`. The mesh reads only at the far
+     left/right margins; opacity bumped to 0.7 so the
+     line-work reads stronger around the outside of the content.
+     The challenges section ("What gets in your way")
+     drops the blue/slate `mid` tone for the darker
+     `deep` navy, so it no longer reads
+     blue/slate. Each section's veil matches its own bg.
      ============================================================ */
   #persona-narrative.section,
   #persona-capabilities.section {
     position: relative;
     isolation: isolate;
     overflow: hidden;
-  }
-  /* Second section — darker brand bg. */
-  #persona-narrative.section {
-    background: var(--navy-deep);
   }
   #persona-narrative.section::before,
   #persona-capabilities.section::before {
@@ -202,7 +200,7 @@ if (!detail) return Astro.redirect('/who-we-serve');
     pointer-events: none;
     background: url('/images/mesh/luci-bg-hero-1920x1080.png') center / cover no-repeat;
     mix-blend-mode: screen;
-    opacity: 0.5;
+    opacity: 0.7;
   }
   /* Veil matches each section's own bg so the center reads solid
      and the mesh reads only at the left/right margins. */
