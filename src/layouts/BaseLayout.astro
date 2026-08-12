@@ -42,6 +42,26 @@ const pageTitle = title ? `${title} · ${site.name}` : `${site.tagline} · ${sit
       rel="stylesheet"
     />
     <title>{pageTitle}</title>
+
+    <!-- Google Analytics 4 — only loads on the production hostname and only when a
+         Measurement ID is configured, so the review VM (10.10.1.37) and localhost
+         never load gtag.js or pollute the data. -->
+    <script is:inline define:vars={{ gaId: site.gaMeasurementId }}>
+      (function () {
+        var GA_ID = gaId;
+        if (!GA_ID) return;
+        var host = location.hostname;
+        if (host !== 'lucisystems.com' && host !== 'www.lucisystems.com') return;
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', GA_ID, { anonymize_ip: true });
+        var el = document.createElement('script');
+        el.async = true;
+        el.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+        document.head.appendChild(el);
+      })();
+    </script>
   </head>
   <body>
     <Header dark={darkHeader} />

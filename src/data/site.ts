@@ -15,6 +15,10 @@ export const site = {
   heroVisualDescriptor: 'Map-based control for every display, source, and zone — with a team that stays.',
   ctaPrimary: 'Book a live demo',
   ctaSecondary: 'See LUCI in action',
+  /** Google Analytics 4 Measurement ID (G-XXXXXXXXXX). Leave empty to disable GA
+   *  entirely (the gtag snippet is a no-op until this is set, and it only fires on
+   * the production hostname so review/localhost traffic stays clean). */
+  gaMeasurementId: '',
 } as const;
 
 export const valueProp =
