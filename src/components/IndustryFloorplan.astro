@@ -141,9 +141,9 @@ const delaysMs = zones.map((z) => z.delay * 1000);
   .fp-stage {
     position: relative;
     border-radius: 20px;
-    /* Extra inset so the floorplan + cards breathe inside the aurora box;
-       cards can overhang the edges without crowding the plan. */
-    padding: clamp(28px, 3.6vw, 48px) clamp(20px, 3vw, 40px);
+    /* Generous inset so the floorplan and cards both breathe inside the
+       aurora box; cards overhang the edges without crowding the plan. */
+    padding: clamp(40px, 5vw, 64px) clamp(28px, 4vw, 48px);
     background: radial-gradient(120% 90% at 50% 0%, #123040 0%, var(--navy) 42%, var(--navy-deep) 100%);
     border: 1px solid rgba(var(--mint-rgb), 0.16);
     box-shadow: 0 32px 64px rgba(0, 0, 0, 0.55);
@@ -316,9 +316,9 @@ const delaysMs = zones.map((z) => z.delay * 1000);
     right: var(--right, auto);
     top: var(--top);
     transform: translateY(-50%) scale(0.97);
-    width: 21%;
-    min-width: 216px;
-    padding: 20px 22px 18px;
+    width: 19%;
+    min-width: 210px;
+    padding: 22px 24px 20px;
     background: rgba(16, 35, 45, 0.55);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
