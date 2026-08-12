@@ -24,7 +24,6 @@ import SectionBlock from './SectionBlock.astro';
     <div class="home-run__frame">
       <video
         class="home-run__video"
-        autoplay
         muted
         loop
         playsinline
@@ -155,6 +154,29 @@ import SectionBlock from './SectionBlock.astro';
         { threshold: 0.2, rootMargin: '0px 0px -8% 0px' }
       );
       targets.forEach((el) => io.observe(el));
+    }
+
+    // Scroll-triggered playback: play when the band is in/near view, pause when it
+    // leaves. The video has no autoplay attribute and preload="metadata", so the
+    // 31MB file only loads when play() is first called — i.e. only for people who
+    // actually reach the band. Reduced-motion: leave it paused on the poster.
+    if (!prefersReduce && 'IntersectionObserver' in window) {
+      const playObs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const v = entry.target.querySelector('video');
+            if (!v) return;
+            if (entry.isIntersecting) {
+              const p = v.play();
+              if (p && typeof p.catch === 'function') p.catch(() => {});
+            } else {
+              v.pause();
+            }
+          });
+        },
+        { threshold: 0, rootMargin: '250px 0px 250px 0px' }
+      );
+      targets.forEach((el) => playObs.observe(el));
     }
   }
 </script>
