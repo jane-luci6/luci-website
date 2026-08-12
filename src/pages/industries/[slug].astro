@@ -85,6 +85,7 @@ const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
           lockupRole="Each problem, paired with its fix"
           tone="deep"
           wide
+          pattern
         >
           <IndustryBeforeAfter challenges={detail.challenges} solutions={detail.solutions} />
         </SectionBlock>
@@ -247,65 +248,21 @@ const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
 
 <style is:global>
   /* ============================================================
-     Industry pages — mesh line-work underlay on the Before/After
-     section (What LUCI changes) and the closing CTA (global).
-     Before/After uses the horizontal navy veil (the circuit-
-     pattern logic) so the mesh reads only at the far left/right
-     margins and drops out behind the centered content column.
-     The floorplan, case study callout, and Capabilities sections
-     stay plain so the mesh never competes with the hero or reads
-     busy. Scoped to every industry detail page via [data-page].
+     Industry pages — the Before/After section (What LUCI
+     changes) uses the SectionBlock `pattern` prop (circuit-
+     texture + horizontal navy veil), matching the first
+     dark section on other pages. The closing CTA keeps
+     the global mesh band. The floorplan, case study callout,
+     and Capabilities sections stay plain. Scoped to every
+     industry detail page via [data-page].
      ============================================================ */
 
   /* Case study callout (HomeProof) — plain navy, no mesh. */
   [data-page] .home-proof-band { position: relative; isolation: isolate; }
 
-  /* Section 2 (Before/After) — mesh lines with the horizontal
-     navy veil (the circuit-pattern logic), so the mesh reads
-     only at the far left/right margins and drops out behind the
-     centered content column. */
-  [data-page] #industry-before-after.section {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-  }
-  [data-page] #industry-before-after.section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background: url('/images/mesh/luci-bg-hero-1920x1080.png') center / cover no-repeat;
-    mix-blend-mode: screen;
-    opacity: 0.5;
-  }
-  [data-page] #industry-before-after.section::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(10, 22, 28, 0.86) 16%,
-      rgba(10, 22, 28, 0.86) 84%,
-      transparent 100%
-    );
-  }
-  @media (max-width: 720px) {
-    [data-page] #industry-before-after.section::after {
-      background: linear-gradient(
-        90deg,
-        rgba(10, 22, 28, 0.55) 0%,
-        rgba(10, 22, 28, 0.9) 18%,
-        rgba(10, 22, 28, 0.9) 82%,
-        rgba(10, 22, 28, 0.55) 100%
-      );
-    }
-  }
-  [data-page] #industry-before-after > .container {
-    position: relative;
-    z-index: 1;
-  }
+  /* Section 2 (Before/After, "What LUCI changes") uses the
+     SectionBlock `pattern` prop — the circuit-texture
+     background with its built-in horizontal navy veil, same
+     as the first dark section on other pages. No custom mesh
+     here. The closing CTA keeps the global mesh band. */
 </style>
