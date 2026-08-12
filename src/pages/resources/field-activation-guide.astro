@@ -1,0 +1,202 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionBlock from '../../components/SectionBlock.astro';
+import { site } from '../../data/site';
+
+const FAG_PDF = '/resources/field-activation-guide-prospect.pdf';
+
+const sections = [
+  { icon: 'display', name: 'Marketing & Guest Experience', desc: 'Make the floor work for your campaigns — on your timeline, from your own interface.' },
+  { icon: 'grid', name: 'Gaming & Operations', desc: 'Your floor environment should be doing work. Here\u2019s how to set it up that way.' },
+  { icon: 'shield', name: 'A/V & Facilities', desc: 'Every screen, speaker, and zone on one interface — manage the whole property from wherever you are.' },
+  { icon: 'network', name: 'IT & Technology', desc: 'One view. Standard infrastructure. No more black boxes.' },
+  { icon: 'chart', name: 'Finance', desc: 'Turn A/V into a measurable platform investment — replan the capital, recover the spend, see the return.' },
+  { icon: 'building', name: 'General Management', desc: 'Run your property with more intention. What\u2019s possible across every team.' },
+];
+---
+
+<BaseLayout title="The Field Activation Guide — LUCI" description="How LUCI deploys onto your existing environment — in phases, on your budget and timeline." darkHeader>
+  <h1 class="fag-sr-only">The Field Activation Guide</h1>
+
+  <section id="fag-hero" class="fag-hero" aria-label="The Field Activation Guide">
+    <div class="fag-hero__mesh" aria-hidden="true"></div>
+    <div class="fag-hero__inner container container--wide">
+      <p class="display-label fag-hero__kicker">Field Guide</p>
+      <h2 class="fag-hero__title">The Field <em>Activation Guide</em></h2>
+      <p class="fag-hero__deck">
+        Every screen, every zone, every channel on your property — activated through LUCI.
+        This guide walks through how LUCI deploys onto your existing environment, in phases, on
+        your budget and timeline.
+      </p>
+      <a class="btn btn--mint fag-hero__btn" href={FAG_PDF} target="_blank" rel="noopener" download>
+        Download the guide
+        <span aria-hidden="true">&#8595;</span>
+      </a>
+    </div>
+  </section>
+
+  <SectionBlock
+    id="fag-inside"
+    lockupName="What&rsquo;s <em>inside</em>"
+    lockupRole="Six teams, six perspectives"
+    deck="The guide is organized by the team you sit on. Each section covers four ways LUCI changes your work — from your seat at the table."
+    tone="deep"
+    wide
+  >
+    <ul class="fag-grid" role="list">
+      {sections.map((s) => (
+        <li class="fag-card">
+          <span class="fag-card__icon" aria-hidden="true"></span>
+          <span class="fag-card__name">{s.name}</span>
+          <span class="fag-card__desc">{s.desc}</span>
+        </li>
+      ))}
+    </ul>
+  </SectionBlock>
+
+  <SectionBlock
+    id="fag-who"
+    lockupName="Who it&rsquo;s <em>for</em>"
+    lockupRole="If you run the property, this is for you"
+    deck="Whether you set the strategy, run the floor, manage the infrastructure, or sign the check — the guide meets you where you sit and shows you what LUCI changes for your team specifically."
+    tone="deep"
+    wide
+  >
+    <div class="fag-who">
+      <p class="fag-who__p">
+        The Field Activation Guide isn&rsquo;t a product manual. It&rsquo;s a walkthrough of how LUCI
+        becomes the operational backbone of your property — phased so you control the timeline,
+        scoped so you see what matters to your role, and documented so everyone on your team
+        can see the same picture.
+      </p>
+      <p class="fag-who__p">
+        Read the section that matches your seat, then share it with the teams you work alongside.
+        Every section is self-contained — you don&rsquo;t need to read the whole guide
+        to understand your piece.
+      </p>
+    </div>
+  </SectionBlock>
+
+  <SectionBlock id="fag-cta" tone="deep">
+    <div class="fag-cta">
+      <p class="display-label fag-cta__kicker">Download</p>
+      <h2 class="fag-cta__title">Read it, then <em>download it</em>.</h2>
+      <p class="fag-cta__deck">
+        The full guide is a PDF you can save, share with your team, and reference offline.
+      </p>
+      <a class="btn btn--mint fag-cta__btn" href={FAG_PDF} target="_blank" rel="noopener" download>
+        Download the Field Activation Guide
+        <span aria-hidden="true">&#8595;</span>
+      </a>
+    </div>
+  </SectionBlock>
+</BaseLayout>
+
+<style>
+  .fag-sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
+
+  .fag-hero {
+    position: relative; background: var(--navy-deep);
+    overflow: hidden; isolation: isolate;
+  }
+  .fag-hero__mesh {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: url('/images/mesh/luci-bg-hero-1920x1080.svg?v=1') center / cover no-repeat;
+    mix-blend-mode: screen; opacity: 0.7;
+  }
+  .fag-hero__mesh::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(10, 22, 28, 0.82) 18%, rgba(10, 22, 28, 0.82) 82%, transparent 100%);
+  }
+  .fag-hero__inner {
+    position: relative; z-index: 1;
+    padding-block: clamp(64px, 9vw, 112px) clamp(40px, 5vw, 64px);
+  }
+  .fag-hero__kicker { color: var(--mint); margin-bottom: var(--space-3); }
+  .fag-hero__title {
+    margin: 0 0 var(--space-3); max-width: 20ch;
+    font-family: var(--font-head); font-size: clamp(38px, 6vw, 64px);
+    font-weight: 700; line-height: 1.04; letter-spacing: -0.03em; color: var(--off-white);
+  }
+  .fag-hero__title em { font-style: normal; color: var(--gold); }
+  .fag-hero__deck {
+    max-width: 58ch; margin-bottom: var(--space-5); font-family: var(--font-body);
+    font-size: clamp(17px, 2vw, 20px); line-height: 1.6; color: rgba(245, 248, 250, 0.82);
+  }
+  .fag-hero__btn { margin-top: var(--space-2); }
+
+  .fag-grid {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 2.4vw, 28px);
+  }
+  .fag-card {
+    background: rgba(16, 35, 45, 0.55);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(var(--mint-rgb), 0.22);
+    border-radius: 14px; padding: clamp(24px, 2.8vw, 32px);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .fag-card:hover {
+    border-color: rgba(var(--mint-rgb), 0.45);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(var(--mint-rgb), 0.12);
+  }
+  .fag-card__icon {
+    display: block; width: 40px; height: 40px; margin-bottom: 16px;
+    border-radius: 10px;
+    background: linear-gradient(155deg, rgba(var(--mint-rgb), 0.14), rgba(var(--mint-rgb), 0.06));
+    box-shadow: inset 0 0 0 1px rgba(var(--mint-rgb), 0.18);
+  }
+  .fag-card__name {
+    display: block; font-family: var(--font-head);
+    font-size: clamp(17px, 1.8vw, 20px); font-weight: 700;
+    letter-spacing: -0.01em; color: var(--off-white); margin-bottom: 8px;
+  }
+  .fag-card__desc {
+    display: block; font-family: var(--font-body);
+    font-size: 14px; font-weight: 400; line-height: 1.5; color: rgba(245, 248, 250, 0.72);
+  }
+
+  .fag-who { max-width: 64ch; }
+  .fag-who__p {
+    margin: 0 0 var(--space-3); font-family: var(--font-body);
+    font-size: 17px; line-height: 1.65; color: rgba(245, 248, 250, 0.82);
+  }
+
+  .fag-cta { max-width: 64ch; padding-block: clamp(28px, 4vw, 44px); }
+  .fag-cta__kicker { color: var(--mint); margin-bottom: var(--space-3); }
+  .fag-cta__title {
+    margin: 0 0 var(--space-3); font-family: var(--font-head);
+    font-size: clamp(26px, 3.6vw, 36px); font-weight: 700;
+    line-height: 1.15; letter-spacing: -0.02em; color: var(--off-white);
+  }
+  .fag-cta__title em { font-style: normal; color: var(--gold); }
+  .fag-cta__deck {
+    max-width: 52ch; margin: 0 0 var(--space-4); font-family: var(--font-body);
+    font-size: 17px; line-height: 1.6; color: rgba(245, 248, 250, 0.78);
+  }
+  .fag-cta__btn { margin-top: 0; }
+
+  @media (max-width: 900px) {
+    .fag-grid { grid-template-columns: 1fr; max-width: 560px; margin-inline: auto; }
+  }
+</style>
+
+<style is:global>
+  #fag-cta.section {
+    position: relative; isolation: isolate; overflow: hidden;
+  }
+  #fag-cta.section::before {
+    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: url('/images/mesh/luci-bg-wide-2560x800.svg') center / cover no-repeat;
+    mix-blend-mode: screen; opacity: 0.6;
+  }
+  #fag-cta.section::after {
+    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: linear-gradient(90deg, transparent 0%, rgba(10, 22, 28, 0.82) 18%, rgba(10, 22, 28, 0.82) 82%, transparent 100%);
+  }
+  #fag-cta > .container { position: relative; z-index: 1; }
+</style>

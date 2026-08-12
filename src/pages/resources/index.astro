@@ -9,15 +9,15 @@ const caseStudies = [ameristarCaseStudy, tachiCaseStudy];
 
 const guides = [
   {
-    href: FAG_PDF,
+    href: '/resources/field-activation-guide',
     logo: '/images/logos/luci-full-mintmark-white.png',
     logoAlt: 'LUCI logo',
     kicker: 'Field Guide',
     title: 'The Field Activation Guide',
     meta: 'How LUCI rolls out on your floor',
     desc: 'How LUCI deploys onto your existing environment — in phases, on your budget and timeline. Every step from assessment to handoff, documented.',
-    cta: 'Download the guide',
-    download: true,
+    cta: 'Read the guide',
+    download: false,
   },
 ];
 ---
@@ -42,6 +42,7 @@ const guides = [
       <button class="res-tab is-active" data-tab="all" type="button">All</button>
       <button class="res-tab" data-tab="case-studies" type="button">Case Studies</button>
       <button class="res-tab" data-tab="guides" type="button">Guides</button>
+      <button class="res-tab" data-tab="blog" type="button">Blog</button>
     </div>
   </nav>
 
@@ -117,6 +118,43 @@ const guides = [
           </a>
         </li>
       ))}
+    </ul>
+  </SectionBlock>
+
+  <!-- VIDEO -->
+  <SectionBlock
+    id="res-video"
+    lockupName="See it <em>run</em>"
+    lockupRole="LUCI in motion"
+    deck="Watch LUCI orchestrate real properties — screens, audio, signage, and A/V under one interface."
+    tone="deep"
+    wide
+  >
+    <div class="res-video">
+      <video class="res-video__player" controls preload="none" poster="/videos/luci-platform-run-poster.jpg">
+        <source src="/videos/luci-platform-run.mp4?v=3" type="video/mp4" />
+      </video>
+    </div>
+  </SectionBlock>
+
+  <!-- BLOG -->
+  <SectionBlock
+    id="res-blog"
+    lockupName="From the <em>field</em>"
+    lockupRole="Notes from the LUCI team"
+    deck="Operational perspectives, deployment stories, and what we're learning from real properties."
+    tone="deep"
+    wide
+  >
+    <ul class="res-grid res-grid--blog" role="list" data-section="blog">
+      <li class="res-card res-card--placeholder" data-type="blog">
+        <span class="res-card__media res-card__soon">Coming soon</span>
+        <span class="res-card__body">
+          <span class="res-card__kicker"><span>Blog</span></span>
+          <span class="res-card__title">Articles from the LUCI team</span>
+          <span class="res-card__desc">Operational perspectives, deployment stories, and what we're learning from running real properties on LUCI.</span>
+        </span>
+      </li>
     </ul>
   </SectionBlock>
 
@@ -242,6 +280,33 @@ const guides = [
   }
   .res-card__cta span { display: inline-block; transition: transform 0.2s ease; }
   .res-card__link:hover .res-card__cta span { transform: translateX(4px); }
+
+  /* ---------- VIDEO ---------- */
+  .res-video {
+    max-width: 900px; margin-inline: auto;
+  }
+  .res-video__player {
+    width: 100%; aspect-ratio: 16 / 9; border-radius: 16px;
+    border: 1px solid rgba(var(--mint-rgb), 0.22);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+    background: var(--navy-deep);
+  }
+
+  /* ---------- BLOG PLACEHOLDER ---------- */
+  .res-grid--blog { grid-template-columns: 1fr; max-width: 560px; margin-inline: auto; }
+  .res-card--placeholder {
+    border-style: dashed; border-color: rgba(var(--mint-rgb), 0.35);
+    background: rgba(255, 255, 255, 0.03);
+  }
+  .res-card__soon {
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; height: 100%;
+    background-color: var(--navy-deep);
+    background-image: url('/images/textures/texture-circuit-navy-steel-print-dark.jpg');
+    background-size: cover; background-position: center;
+    font-family: var(--font-head); font-size: 13px; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase; color: rgba(104, 227, 190, 0.7);
+  }
 
   /* ---------- CTA ---------- */
   :global(#res-cta.section) { border-top: 2px solid var(--mint); }
