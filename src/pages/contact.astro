@@ -184,7 +184,14 @@ const OVERVIEW_POSTER = '/videos/luci-platform-run-poster.jpg?v=3';
     };
     function onKeydown(e) { if (e.key === 'Escape') closeSuccess(); }
     document.querySelectorAll('[data-close-success]').forEach((el) => el.addEventListener('click', closeSuccess));
-    const detect = () => acForm.querySelector('._form-thank-you');
+    // ActiveCampaign renders <div class="_form-thank-you" style="display:none;"></div>
+    // EMPTY on load, and only fills it with the thank-you message after a
+    // successful submit. Detect on CONTENT, not existence — checking existence
+    // alone made the modal fire the instant the form loaded.
+    const detect = () => {
+      const ty = acForm.querySelector('._form-thank-you');
+      return !!(ty && ty.textContent.trim().length > 0);
+    };
     if (typeof MutationObserver !== 'undefined') {
       const obs = new MutationObserver(() => { if (detect()) openSuccess(); });
       obs.observe(acForm, { childList: true, subtree: true });
