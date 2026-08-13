@@ -13,9 +13,10 @@ import HomePlatformRun from '../components/HomePlatformRun.astro';
 import SectionBlock from '../components/SectionBlock.astro';
 import HomeMesh from '../components/HomeMesh.astro';
 import { site } from '../data/site';
+import { seoPages } from '../data/seo';
 ---
 
-<BaseLayout title="Home" description={site.subTagline} darkHeader>
+<BaseLayout description={seoPages['/'].description} canonicalPath="/" darkHeader>
   <HomeMesh />
   <HomeHero variant="none" zones askInput />
   <HomeDifferentiator />

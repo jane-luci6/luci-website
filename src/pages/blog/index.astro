@@ -3,13 +3,22 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import SectionBlock from '../../components/SectionBlock.astro';
 import { getCollection } from 'astro:content';
+import { seoPages, breadcrumb } from '../../data/seo';
 
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
 
-<BaseLayout title="Blog" description="Insights on enterprise multimedia orchestration.">
+<BaseLayout
+  title={seoPages['/blog'].title}
+  description={seoPages['/blog'].description}
+  canonicalPath="/blog"
+  jsonLd={breadcrumb([
+    { name: 'Home', path: '/' },
+    { name: 'Blog', path: '/blog' },
+  ])}
+>
   <PageHero title="Blog" lead="Variable reduction, platform depth, and field learnings." deep />
 
   <SectionBlock>

@@ -6,11 +6,22 @@ import TeamsFilmstrip from '../components/teams-redesign/TeamsFilmstrip.astro';
 import IndustriesAdaptFlip from '../components/IndustriesAdaptFlip.astro';
 import { whoWeServe } from '../data/whoWeServe';
 import { site } from '../data/site';
+import { seoPages, breadcrumb } from '../data/seo';
 
 const h = whoWeServe.hero;
+const crumbs = breadcrumb([
+  { name: 'Home', path: '/' },
+  { name: 'Who we serve', path: '/who-we-serve' },
+]);
 ---
 
-<BaseLayout title="Who We Serve" description={h.lockupRole} darkHeader>
+<BaseLayout
+  title={seoPages['/who-we-serve'].title}
+  description={seoPages['/who-we-serve'].description}
+  canonicalPath="/who-we-serve"
+  jsonLd={crumbs}
+  darkHeader
+>
   <h1 class="wss-sr-only">Who we serve — {h.lockupName}</h1>
 
   <PersonaHeroStage

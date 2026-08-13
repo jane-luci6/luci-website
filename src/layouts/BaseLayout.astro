@@ -4,15 +4,84 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import AskLuciChat from '../components/AskLuciChat.astro';
 import { site } from '../data/site';
+import { defaultOgImage } from '../data/seo';
 
 interface Props {
+  /** Page-specific title phrase. BaseLayout appends " · LUCI Systems".
+   *  Omit on the homepage so it renders the tagline as the title. */
   title?: string;
   description?: string;
+  /** Canonical path, e.g. "/platform". Defaults to the current pathname. */
+  canonicalPath?: string;
+  /** OG image path (1200×630). Defaults to /images/og-default.png. */
+  ogImage?: string;
+  /** Add <meta name="robots" content="noindex"> — thank-you / utility pages. */
+  noindex?: boolean;
+  /** Page-level JSON-LD object(s) in addition to the site-wide Organization. */
+  jsonLd?: object | object[];
   darkHeader?: boolean;
 }
 
-const { title, description = site.subTagline, darkHeader = false } = Astro.props;
+const {
+  title,
+  description = site.subTagline,
+  canonicalPath,
+  ogImage,
+  noindex = false,
+  jsonLd,
+  darkHeader = false,
+} = Astro.props;
+
 const pageTitle = title ? `${title} · ${site.name}` : `${site.tagline} · ${site.name}`;
+
+// Canonical URL — prefer the explicit path, fall back to the current pathname.
+// Normalize to a single trailing slash so the canonical matches the
+// directory-style URLs the sitemap generates (Astro builds /platform/index.html).
+// Root stays "/"; inner pages become "/platform/".
+const rawPath = canonicalPath ?? Astro.url.pathname;
+const normPath = rawPath === '/' ? '/' : rawPath.replace(/\/+$/, '') + '/';
+const canonicalUrl = site.url + normPath;
+
+const ogImageUrl = site.url + (ogImage ?? defaultOgImage);
+
+const isHome = rawPath === '/';
+
+// Site-wide Organization schema (on every page).
+const organizationLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.name,
+  url: site.url,
+  logo: `${site.url}/favicon.svg`,
+  description: site.subTagline,
+  slogan: site.tagline,
+  areaServed: 'US',
+  knowsAbout: [
+    'Multimedia orchestration',
+    'A/V control systems',
+    'Digital signage',
+    'Building systems integration',
+    'Enterprise multimedia',
+  ],
+};
+
+// WebSite schema on the homepage (with the site name + URL).
+const websiteLd = isHome
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: site.name,
+      url: site.url,
+    }
+  : null;
+
+const pageLd = jsonLd
+  ? Array.isArray(jsonLd)
+    ? jsonLd
+    : [jsonLd]
+  : [];
+
+const allLd = [organizationLd, websiteLd, ...pageLd].filter(Boolean);
 ---
 
 <!doctype html>
@@ -34,7 +103,28 @@ const pageTitle = title ? `${title} · ${site.name}` : `${site.tagline} · ${sit
       })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="theme-color" content="#0A161C" />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={isHome ? 'website' : 'article'} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -42,7 +132,10 @@ const pageTitle = title ? `${title} · ${site.name}` : `${site.tagline} · ${sit
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Syncopate:wght@700&display=swap"
       rel="stylesheet"
     />
-    <title>{pageTitle}</title>
+
+    {allLd.map((obj) => (
+      <script type="application/ld+json" set:html={JSON.stringify(obj)} />
+    ))}
 
     <!-- Google Analytics 4 — only loads on the production hostname and only when a
          Measurement ID is configured, so the review VM (10.10.1.37) and localhost

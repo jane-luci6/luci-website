@@ -17,6 +17,7 @@ import { industries } from '../../data/industries';
 import { getIndustryDetail } from '../../data/industryDetails';
 import { pillars } from '../../data/pillars';
 import { ameristarCaseStudy, site } from '../../data/site';
+import { getIndustrySeo, breadcrumb } from '../../data/seo';
 
 export function getStaticPaths() {
   return industries.map((industry) => ({
@@ -30,11 +31,19 @@ if (!industry) return Astro.redirect('/404');
 
 const detail = getIndustryDetail(industry.slug);
 const hasFloorplan = !!(detail && detail.floorplan && detail.floorplanLockup);
+const industrySeo = getIndustrySeo(industry.slug);
+const canonicalPath = `/industries/${industry.slug}`;
 ---
 
 <BaseLayout
-  title={industry.name}
-  description={detail?.thesis.deck ?? industry.teaser}
+  title={industrySeo.title}
+  description={industrySeo.description}
+  canonicalPath={canonicalPath}
+  jsonLd={breadcrumb([
+    { name: 'Home', path: '/' },
+    { name: 'Industries', path: '/industries' },
+    { name: industry.name, path: canonicalPath },
+  ])}
   darkHeader={!!detail}
 >
   {detail ? (

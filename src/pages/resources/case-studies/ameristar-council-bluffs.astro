@@ -1,12 +1,38 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import CaseStudyAmeristar from '../../../components/CaseStudyAmeristar.astro';
-import { ameristarCaseStudy } from '../../../data/site';
+import { ameristarCaseStudy, site } from '../../../data/site';
+import { getCaseStudySeo, breadcrumb } from '../../../data/seo';
+
+const slug = 'ameristar-council-bluffs';
+const csSeo = getCaseStudySeo(slug);
+const canonicalPath = `/resources/case-studies/${slug}`;
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: `${ameristarCaseStudy.title} — Ameristar Council Bluffs`,
+  description: csSeo.description,
+  author: { '@type': 'Organization', name: site.name },
+  publisher: {
+    '@type': 'Organization',
+    name: site.name,
+    logo: { '@type': 'ImageObject', url: `${site.url}/favicon.svg` },
+  },
+  mainEntityOfPage: site.url + canonicalPath,
+  about: { '@type': 'Place', name: 'Ameristar Council Bluffs' },
+};
 ---
 
 <BaseLayout
-  title="Ameristar Council Bluffs"
-  description={ameristarCaseStudy.dek}
+  title={csSeo.title}
+  description={csSeo.description}
+  canonicalPath={canonicalPath}
+  jsonLd={[articleLd, breadcrumb([
+    { name: 'Home', path: '/' },
+    { name: 'Resources', path: '/resources' },
+    { name: 'Case studies', path: '/resources/case-studies' },
+    { name: 'Ameristar Council Bluffs', path: canonicalPath },
+  ])]}
   darkHeader
 >
   <CaseStudyAmeristar />

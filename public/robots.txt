@@ -1,0 +1,9 @@
+# https://lucisystems.com/robots.txt
+User-agent: *
+Allow: /
+
+# Utility / noindex pages kept out of the index.
+Disallow: /contact/thanks
+
+# Sitemap
+Sitemap: https://lucisystems.com/sitemap-index.xml

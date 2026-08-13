@@ -7,6 +7,7 @@ import PlatformArchitectureStage from '../components/PlatformArchitectureStage.a
 import PlatformOrbit from '../components/PlatformOrbit.astro';
 import { site, oneOffering } from '../data/site';
 import { features } from '../data/features';
+import { seoPages } from '../data/seo';
 
 const chapters = [
   { id: 'platform-thesis', label: 'Overview' },
@@ -43,9 +44,25 @@ const featureImages = [
   '/images/features/feature-presets.svg',
   '/images/features/feature-automation.svg?v=2',
 ];
+
+const serviceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'LUCI Orchestration Engine',
+  serviceType: 'Enterprise multimedia orchestration',
+  provider: { '@type': 'Organization', name: site.name, url: site.url },
+  description: seoPages['/platform'].description,
+  areaServed: 'US',
+};
 ---
 
-<BaseLayout title="Platform" description={oneOffering.platform} darkHeader>
+<BaseLayout
+  title={seoPages['/platform'].title}
+  description={seoPages['/platform'].description}
+  canonicalPath="/platform"
+  jsonLd={serviceLd}
+  darkHeader
+>
   <h1 class="platform-sr-only">Platform — {site.tagline}</h1>
   <PlatformChapterNav chapters={chapters} />
 

@@ -10,6 +10,7 @@ import PersonaCapabilitiesFlow from '../../components/PersonaCapabilitiesFlow.as
 import { personas } from '../../data/personas';
 import { getPersonaDetail, hasPersonaDetail } from '../../data/personaDetails';
 import { site } from '../../data/site';
+import { getPersonaSeo, breadcrumb } from '../../data/seo';
 
 export function getStaticPaths() {
   return personas
@@ -25,11 +26,20 @@ if (!persona) return Astro.redirect('/who-we-serve');
 
 const detail = getPersonaDetail(persona.id);
 if (!detail) return Astro.redirect('/who-we-serve');
+
+const personaSeo = getPersonaSeo(persona.id);
+const canonicalPath = `/who-we-serve/${persona.id}`;
 ---
 
 <BaseLayout
-  title={`${persona.label} — ${persona.role}`}
-  description={detail.heroDeck}
+  title={personaSeo.title}
+  description={personaSeo.description}
+  canonicalPath={canonicalPath}
+  jsonLd={breadcrumb([
+    { name: 'Home', path: '/' },
+    { name: 'Who we serve', path: '/who-we-serve' },
+    { name: persona.label, path: canonicalPath },
+  ])}
   darkHeader
 >
   <h1 class="persona-sr-only">{persona.label} — {persona.role}</h1>

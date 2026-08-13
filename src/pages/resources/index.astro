@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionBlock from '../../components/SectionBlock.astro';
 import { ameristarCaseStudy, tachiCaseStudy, site } from '../../data/site';
+import { seoPages, breadcrumb } from '../../data/seo';
 
 const FAG_PDF = '/resources/field-activation-guide-prospect.pdf';
 
@@ -36,7 +37,16 @@ const newsletter = [
 ];
 ---
 
-<BaseLayout title="Resources" description="Case studies, guides, and field documentation from LUCI Systems." darkHeader>
+<BaseLayout
+  title={seoPages['/resources'].title}
+  description={seoPages['/resources'].description}
+  canonicalPath="/resources"
+  jsonLd={breadcrumb([
+    { name: 'Home', path: '/' },
+    { name: 'Resources', path: '/resources' },
+  ])}
+  darkHeader
+>
   <h1 class="res-sr-only">Resources</h1>
 
   <section id="res-hero" class="res-hero" aria-label="LUCI resources">

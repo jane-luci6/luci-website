@@ -2,9 +2,15 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import SectionBlock from '../../components/SectionBlock.astro';
+import { seoPages } from '../../data/seo';
 ---
 
-<BaseLayout title="Message received" description="Thanks for reaching out to LUCI Systems.">
+<BaseLayout
+  title={seoPages['/contact/thanks'].title}
+  description={seoPages['/contact/thanks'].description}
+  canonicalPath="/contact/thanks"
+  noindex
+>
   <PageHero
     kicker="Contact"
     title="Message received."

@@ -6,9 +6,21 @@ import IndustriesAdaptFlip from '../../components/IndustriesAdaptFlip.astro';
 import IndustriesBento from '../../components/IndustriesBento.astro';
 import { industriesHub } from '../../data/industriesHub';
 import { site } from '../../data/site';
+import { seoPages, breadcrumb } from '../../data/seo';
+
+const crumbs = breadcrumb([
+  { name: 'Home', path: '/' },
+  { name: 'Industries', path: '/industries' },
+]);
 ---
 
-<BaseLayout title="Industries" description={industriesHub.deck} darkHeader>
+<BaseLayout
+  title={seoPages['/industries'].title}
+  description={seoPages['/industries'].description}
+  canonicalPath="/industries"
+  jsonLd={crumbs}
+  darkHeader
+>
   <h1 class="ind-hub-sr-only">Industries — {industriesHub.lockupName}</h1>
 
   <PersonaHeroStage

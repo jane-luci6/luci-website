@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionBlock from '../../components/SectionBlock.astro';
 import { site } from '../../data/site';
+import { seoPages, breadcrumb } from '../../data/seo';
 
 const FAG_PDF = '/resources/field-activation-guide-prospect.pdf';
 
@@ -15,7 +16,17 @@ const sections = [
 ];
 ---
 
-<BaseLayout title="The Field Activation Guide — LUCI" description="How LUCI deploys onto your existing environment — in phases, on your budget and timeline." darkHeader>
+<BaseLayout
+  title={seoPages['/resources/field-activation-guide'].title}
+  description={seoPages['/resources/field-activation-guide'].description}
+  canonicalPath="/resources/field-activation-guide"
+  jsonLd={breadcrumb([
+    { name: 'Home', path: '/' },
+    { name: 'Resources', path: '/resources' },
+    { name: 'Field Activation Guide', path: '/resources/field-activation-guide' },
+  ])}
+  darkHeader
+>
   <h1 class="fag-sr-only">The Field Activation Guide</h1>
 
   <section id="fag-hero" class="fag-hero" aria-label="The Field Activation Guide">

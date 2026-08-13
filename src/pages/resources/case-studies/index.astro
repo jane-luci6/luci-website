@@ -3,11 +3,21 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PageHero from '../../../components/PageHero.astro';
 import SectionBlock from '../../../components/SectionBlock.astro';
 import { ameristarCaseStudy, tachiCaseStudy, portfolioLine } from '../../../data/site';
+import { seoPages, breadcrumb } from '../../../data/seo';
 
 const caseStudies = [ameristarCaseStudy, tachiCaseStudy];
 ---
 
-<BaseLayout title="Case Studies" description={portfolioLine}>
+<BaseLayout
+  title={seoPages['/resources/case-studies'].title}
+  description={seoPages['/resources/case-studies'].description}
+  canonicalPath="/resources/case-studies"
+  jsonLd={breadcrumb([
+    { name: 'Home', path: '/' },
+    { name: 'Resources', path: '/resources' },
+    { name: 'Case studies', path: '/resources/case-studies' },
+  ])}
+>
   <PageHero title="Case studies" lead={portfolioLine} deep />
 
   <SectionBlock lockupName="Featured" tone="light" wide>

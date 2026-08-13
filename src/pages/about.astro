@@ -10,15 +10,30 @@ import {
   site,
 } from '../data/site';
 import { industries } from '../data/industries';
+import { seoPages } from '../data/seo';
 
 const accumulationParas = variableReduction.accumulation.split('\n\n');
 const headlineHtml = variableReduction.headline.replace(
   'and a shorter list of things to worry about.',
   '<span class="about-worldview__hl">and a shorter list of things to worry about.</span>'
 );
+
+const personLd = leadership.map((p) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: p.name,
+  jobTitle: p.title,
+  worksFor: { '@type': 'Organization', name: site.name },
+  image: site.url + p.photo.split('?')[0],
+}));
 ---
 
-<BaseLayout title="About LUCI" description={oneOffering.offering}>
+<BaseLayout
+  title={seoPages['/about'].title}
+  description={seoPages['/about'].description}
+  canonicalPath="/about"
+  jsonLd={personLd}
+>
 
   <!-- Hero: Las Vegas origin, full-bleed with navy scrim -->
   <section class="about-hero">
