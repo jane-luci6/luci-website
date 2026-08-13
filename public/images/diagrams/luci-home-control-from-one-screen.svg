@@ -2,7 +2,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 920 420" font-family="'Space Grotesk', sans-serif" role="img" aria-label="LUCI orchestration platform on one screen, controlling LED walls, lighting, signage, audio, video, IPTV, building systems and more across the property">
   <defs>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;display=swap');
+      
       .kick { font-weight:700; font-size:10px; letter-spacing:.18em; fill:#2b9e80; }
       .sys { font-weight:600; font-size:12px; fill:#F5F8FA; }
       .lap-cap { font-weight:600; font-size:12px; fill:#10232D; text-anchor:middle; }

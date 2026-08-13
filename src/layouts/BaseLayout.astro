@@ -126,12 +126,11 @@ const allLd = [organizationLd, websiteLd, ...pageLd].filter(Boolean);
     <meta name="twitter:image" content={ogImageUrl} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Syncopate:wght@700&display=swap"
-      rel="stylesheet"
-    />
+
+    <!-- Self-hosted brand fonts (subset woff2, font-display: swap). Preload the two
+         critical above-the-fold faces — Inter for body, Space Grotesk for headings. -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-400-500.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/space-grotesk-700.woff2" crossorigin />
 
     {allLd.map((obj) => (
       <script type="application/ld+json" set:html={JSON.stringify(obj)} />
