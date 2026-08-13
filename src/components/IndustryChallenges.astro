@@ -22,7 +22,7 @@ const flipGlyph = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" st
           <img
             class="ind-challenges__img"
             src={item.image}
-            alt=""
+            alt={item.imageAlt ?? item.head}
             loading={i < 2 ? 'eager' : 'lazy'}
             decoding="async"
             width="1280"

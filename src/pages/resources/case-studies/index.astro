@@ -28,7 +28,7 @@ const caseStudies = [ameristarCaseStudy, tachiCaseStudy];
           <li class="cs-card">
             <a class="cs-card__media" href={href} aria-label={cs.title}>
               {cs.poster ? (
-                <img src={cs.poster} alt="" loading="lazy" />
+                <img src={cs.poster} alt={`${cs.property} case study`} loading="lazy" />
               ) : cs.cardMedia ? (
                 <span class="cs-card__logo-panel">
                   <img src={cs.cardMedia} alt={`${cs.property} logo`} />

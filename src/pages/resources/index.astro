@@ -87,7 +87,7 @@ const newsletter = [
             <a class="res-card__link" href={href}>
               <span class="res-card__media">
                 {cs.poster ? (
-                  <img src={cs.poster} alt="" loading="lazy" decoding="async" />
+                  <img src={cs.poster} alt={`${cs.property} case study`} loading="lazy" decoding="async" />
                 ) : cs.cardMedia ? (
                   <span class="res-card__logo-panel">
                     <img src={cs.cardMedia} alt={`${cs.property} logo`} loading="lazy" decoding="async" />
