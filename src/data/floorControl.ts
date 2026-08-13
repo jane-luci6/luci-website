@@ -1,7 +1,7 @@
 /** "LUCI controls the whole floor" floorplan visual — shared by the hero + elsewhere */
 
 export const floorControl = {
-  src: '/images/floorplan-casino.png?v=2',
+  src: '/images/floorplan-casino.png?v=3',
   alt:
     'Casino and resort floorplan — casino floor, ballroom, theater, pool, restaurants and bars, and hotel lobby — with LUCI controlling every system across the property',
 } as const;
