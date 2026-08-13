@@ -15,6 +15,7 @@ const chapters = [
   { id: 'features', label: 'Capabilities' },
   { id: 'embedded-operation', label: 'Systems' },
   { id: 'platform', label: 'Architecture' },
+  { id: 'platform-faq', label: 'FAQ' },
   { id: 'platform-cta', label: 'Next step' },
 ];
 
@@ -54,13 +55,54 @@ const serviceLd = {
   description: seoPages['/platform'].description,
   areaServed: 'US',
 };
+
+const faqs = [
+  {
+    q: 'What is LUCI?',
+    a: 'LUCI is the orchestration engine for enterprise multimedia — one interface to control, automate, and execute A/V, signage, and building systems across a property. It runs every display, source, audio zone, and connected system from one platform on standard network infrastructure.',
+  },
+  {
+    q: 'Who does LUCI serve?',
+    a: 'LUCI serves leadership, operations, technology, finance, marketing, and facilities teams at casinos, hotels, sports venues, airports, convention centers, and corporate campuses — one platform and one accountable team across every endpoint.',
+  },
+  {
+    q: 'What does LUCI replace?',
+    a: 'LUCI replaces standalone control platforms, signage CMSes, external media players, and redundant head-ends — consolidating them onto one interface and one standardized rack. Properties decommission named systems, lapse licenses, and remove vendors from the building.',
+  },
+  {
+    q: 'Does LUCI replace our A/V team?',
+    a: 'No. LUCI gives your team one interface to run the property, and an embedded LUCI team operates and refines the platform alongside them. Your staff keeps control; LUCI removes the systems and workflows that made the work hard.',
+  },
+  {
+    q: 'How is LUCI different from a control system?',
+    a: 'A control system programs one room. LUCI orchestrates the whole property — every endpoint, zone, and system — over the network you already run, with a team that stays. The unit of work is the property, not the room.',
+  },
+  {
+    q: 'What infrastructure does LUCI need?',
+    a: 'Standard network infrastructure you already run. No parallel cabling, no proprietary hardware, and no specialist programming per room. One standardized rack replaces racks of single-purpose boxes.',
+  },
+  {
+    q: 'How do we get started with LUCI?',
+    a: 'Book a live demo. LUCI deploys onto your existing environment in phases, on your timeline and budget — the floor stays running through the transition. Tell us about your property and we will show you what one interface across every endpoint looks like on your floor.',
+  },
+];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 
 <BaseLayout
   title={seoPages['/platform'].title}
   description={seoPages['/platform'].description}
   canonicalPath="/platform"
-  jsonLd={serviceLd}
+  jsonLd={[serviceLd, faqLd]}
   darkHeader
 >
   <h1 class="platform-sr-only">Platform — {site.tagline}</h1>
@@ -150,6 +192,24 @@ const serviceLd = {
     </ul>
   </SectionBlock>
 
+  <SectionBlock
+    id="platform-faq"
+    lockupName="Questions"
+    lockupRole="Straight answers"
+    deck="What leadership, operations, and technology teams ask before they bring LUCI onto a property."
+    tone="white"
+    wide
+  >
+    <div class="faq">
+      {faqs.map((f) => (
+        <details class="faq__item">
+          <summary class="faq__q">{f.q}</summary>
+          <p class="faq__a">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </SectionBlock>
+
   <SectionBlock id="platform-cta" tone="deep">
     <div class="platform-cta">
       <p class="display-label platform-cta__kicker">Next step</p>
@@ -178,6 +238,7 @@ const serviceLd = {
   #features,
   #embedded-operation,
   #platform,
+  #platform-faq,
   #platform-cta {
     scroll-margin-top: 156px;
   }
@@ -188,6 +249,7 @@ const serviceLd = {
     #features,
     #embedded-operation,
     #platform,
+    #platform-faq,
     #platform-cta {
       scroll-margin-top: 132px;
     }
@@ -249,6 +311,51 @@ const serviceLd = {
     color: var(--navy-muted);
     font-size: 14px;
     line-height: 1.5;
+  }
+
+  /* ---------- FAQ (white) — de-boxed stacked Q&A ---------- */
+  .faq {
+    max-width: 760px;
+  }
+  .faq__item {
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .faq__item:first-child {
+    border-top: 1px solid var(--rule-light);
+  }
+  .faq__q {
+    list-style: none;
+    cursor: pointer;
+    padding: clamp(18px, 2.4vw, 26px) 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(17px, 2vw, 20px);
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    color: var(--ink-strong);
+  }
+  .faq__q::-webkit-details-marker { display: none; }
+  .faq__q::after {
+    content: '+';
+    flex: none;
+    font-family: var(--font-head);
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--accent-light);
+  }
+  .faq__item[open] .faq__q::after { content: '\2212'; }
+  .faq__a {
+    margin: 0 0 clamp(18px, 2.4vw, 26px);
+    max-width: 64ch;
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--navy-muted);
   }
 
   /* ---------- Diagram reveal (deep) ---------- */
