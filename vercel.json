@@ -1,0 +1,35 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/enterprise-case-studies",
+      "destination": "/resources/case-studies",
+      "statusCode": 301
+    },
+    {
+      "source": "/case-studies/ameristar-council-bluffs",
+      "destination": "/resources/case-studies/ameristar-council-bluffs",
+      "statusCode": 301
+    },
+    {
+      "source": "/case-study-yaamava",
+      "destination": "/resources/case-studies",
+      "statusCode": 301
+    },
+    {
+      "source": "/guides/customer-ag-content",
+      "destination": "/resources/field-activation-guide",
+      "statusCode": 301
+    },
+    {
+      "source": "/support",
+      "destination": "https://support.lucisystems.com",
+      "statusCode": 301
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy-policy",
+      "statusCode": 301
+    }
+  ]
+}

@@ -83,6 +83,11 @@ export const seoPages: Record<string, PageSeo> = {
     description:
       'Book a live LUCI demo. Tell us about your property and we’ll show you what one interface across every endpoint looks like on your floor.',
   },
+  '/privacy-policy': {
+    title: 'Privacy Policy',
+    description:
+      'LUCI Systems, LLC privacy policy — how we collect, use, and protect personally identifiable information on lucisystems.com.',
+  },
   '/contact/thanks': {
     title: 'Thanks',
     description: 'Thanks for requesting a LUCI demo — we’ll be in touch.',
