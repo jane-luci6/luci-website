@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://lucisystems.com',
+  site: 'https://www.lucisystems.com',
   integrations: [
     sitemap({
       // Exclude utility/noindex pages from the sitemap.

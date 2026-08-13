@@ -12,13 +12,13 @@ LUCI Systems orchestrates every layer of technology running enterprise propertie
 
 ## Primary pages
 
-- Home: https://lucisystems.com/
-- Platform: https://lucisystems.com/platform
-- Who we serve: https://lucisystems.com/who-we-serve
-- Industries: https://lucisystems.com/industries/casinos-gaming
-- Resources: https://lucisystems.com/resources
-- Case studies: https://lucisystems.com/resources/case-studies
-- Contact: https://lucisystems.com/contact
+- Home: https://www.lucisystems.com/
+- Platform: https://www.lucisystems.com/platform
+- Who we serve: https://www.lucisystems.com/who-we-serve
+- Industries: https://www.lucisystems.com/industries/casinos-gaming
+- Resources: https://www.lucisystems.com/resources
+- Case studies: https://www.lucisystems.com/resources/case-studies
+- Contact: https://www.lucisystems.com/contact
 
 ## Audiences
 
@@ -26,4 +26,4 @@ LUCI serves leadership, operations, technology, finance, marketing/guest experie
 
 ## Contact
 
-https://lucisystems.com/contact
+https://www.lucisystems.com/contact

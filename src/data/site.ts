@@ -2,7 +2,7 @@
 
 export const site = {
   name: 'LUCI Systems',
-  url: 'https://lucisystems.com',
+  url: 'https://www.lucisystems.com',
   tagline: 'The Orchestration Engine for Enterprise Multimedia',
   subTagline: 'One interface to control, automate, and execute the entire guest experience.',
   /** Homepage entry section — Syncopate headline + tagline left, map right (full viewport) */

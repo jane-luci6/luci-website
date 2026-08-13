@@ -6,4 +6,4 @@ Allow: /
 Disallow: /contact/thanks
 
 # Sitemap
-Sitemap: https://lucisystems.com/sitemap-index.xml
+Sitemap: https://www.lucisystems.com/sitemap-index.xml
