@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionBlock from '../components/SectionBlock.astro';
+import PageHero from '../components/PageHero.astro';
+import { seoPages, breadcrumb } from '../data/seo';
+
+const canonicalPath = '/terms';
+---
+
+<BaseLayout
+  title={seoPages['/terms'].title}
+  description={seoPages['/terms'].description}
+  canonicalPath={canonicalPath}
+  jsonLd={breadcrumb([
+    { name: 'Home', path: '/' },
+    { name: 'Terms of Service', path: canonicalPath },
+  ])}
+>
+  <PageHero kicker="Legal" title="Terms of Service" lead="The terms that govern your use of lucisystems.com and LUCI Systems’ online services." deep />
+
+  <SectionBlock>
+    <div class="prose measure">
+      <p>These Terms of Service (“Terms”) govern your access to and use of the website operated by LUCI Systems, LLC (“LUCI,” “we,” or “us”) at lucisystems.com (the “Site”). By accessing or using the Site, you agree to these Terms. If you do not agree, do not use the Site.</p>
+
+      <h2>1. Use of the site</h2>
+      <p>You may use the Site for lawful purposes only. You agree not to use the Site in any way that could damage, disable, overburden, or impair it, or interfere with any other party’s use. You may not attempt to gain unauthorized access to any part of the Site, its systems, or data.</p>
+
+      <h2>2. Accounts and contact forms</h2>
+      <p>Certain features of the Site — such as requesting a demo or subscribing to The Signal newsletter — ask you to provide contact information. You agree to provide accurate, current information and are responsible for keeping it current.</p>
+
+      <h2>3. Intellectual property</h2>
+      <p>The Site’s content — including text, graphics, logos, diagrams, photography, and software — is owned by or licensed to LUCI and is protected by copyright, trademark, and other laws. You may view and download a single copy of the content for your personal, non-commercial use. You may not copy, reproduce, republish, or distribute Site content without our prior written consent.</p>
+
+      <h2>4. Customer and partner materials</h2>
+      <p>Some content on the Site references work performed for LUCI customers. Property names appear only where a customer has approved their use. Nothing on the Site should be read as an endorsement of LUCI by a named property, and no percentage or revenue claims are made.</p>
+
+      <h2>5. Third-party links and services</h2>
+      <p>The Site may link to third-party websites and services we do not control. We are not responsible for the content, accuracy, or practices of any third-party site. Accessing them is at your own risk. Our customer login directs to a separately hosted support portal with its own terms.</p>
+
+      <h2>6. Disclaimers</h2>
+      <p>The Site is provided “as is” and “as available.” To the fullest extent permitted by law, LUCI disclaims all warranties, express or implied, including implied warranties of merchantability, fitness for a particular purpose, and non-infringement. We do not warrant that the Site will be uninterrupted, error-free, or free of harmful components.</p>
+
+      <h2>7. Limitation of liability</h2>
+      <p>To the fullest extent permitted by law, in no event will LUCI, its officers, directors, employees, or affiliates be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or data, arising out of your use of the Site — whether based on warranty, contract, tort (including negligence), or any other legal theory, and whether or not we have been advised of the possibility of such damages.</p>
+
+      <h2>8. Indemnification</h2>
+      <p>You agree to indemnify and hold harmless LUCI and its affiliates from any claim, damages, or expense (including reasonable attorneys’ fees) arising out of your breach of these Terms or your misuse of the Site.</p>
+
+      <h2>9. Changes to these terms</h2>
+      <p>We may update these Terms from time to time. When we do, we will revise the date at the bottom of this page. Your continued use of the Site after changes are posted constitutes acceptance of the updated Terms.</p>
+
+      <h2>10. Governing law</h2>
+      <p>These Terms are governed by the laws of the State of Nevada, without regard to its conflict-of-laws principles. You and LUCI agree to the exclusive jurisdiction of the state and federal courts located in Nevada for any dispute arising out of or relating to these Terms or the Site.</p>
+
+      <h2>11. Contact</h2>
+      <p>If you have questions about these Terms, contact us through the form on our contact page or write to LUCI Systems, LLC.</p>
+
+      <p class="legal-updated">Last updated: August 2026</p>
+    </div>
+  </SectionBlock>
+</BaseLayout>
+
+<style>
+  .legal-updated { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--rule-light); font-size: 13px; color: var(--navy-muted); }
+</style>

@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionBlock from '../components/SectionBlock.astro';
+import PageHero from '../components/PageHero.astro';
+import { seoPages, breadcrumb } from '../data/seo';
+
+const canonicalPath = '/accessibility';
+---
+
+<BaseLayout
+  title={seoPages['/accessibility'].title}
+  description={seoPages['/accessibility'].description}
+  canonicalPath={canonicalPath}
+  jsonLd={breadcrumb([
+    { name: 'Home', path: '/' },
+    { name: 'Accessibility', path: canonicalPath },
+  ])}
+>
+  <PageHero kicker="Legal" title="Accessibility" lead="LUCI Systems’ commitment to an inclusive web experience and how to report barriers." deep />
+
+  <SectionBlock>
+    <div class="prose measure">
+      <p>LUCI Systems, LLC is committed to making lucisystems.com usable by as many people as possible. We believe the orchestration of enterprise multimedia should serve everyone — and that the website describing it should meet the same standard.</p>
+
+      <h2>Our approach</h2>
+      <p>We design and build the Site with the Web Content Accessibility Guidelines (WCAG) 2.1 in mind, aiming for Level AA conformance. That work is ongoing: we test against keyboard navigation, screen-reader compatibility, color contrast, and reduced-motion preferences, and we correct issues as we find them.</p>
+
+      <h2>What we do</h2>
+      <p>• Maintain a clear heading structure with one top-level heading per page.<br />
+      • Provide descriptive alternative text for content images and mark decorative images as hidden from assistive technology.<br />
+      • Keep interactive targets large enough for touch and preserve visible focus indicators.<br />
+      • Respect <code>prefers-reduced-motion</code> for animations and reveal effects.<br />
+      • Hold text contrast at or above WCAG AA thresholds on light and dark surfaces.</p>
+
+      <h2>Known limitations</h2>
+      <p>Some embedded third-party content — such as video players, the customer support portal, and marketing form widgets — is provided by outside vendors and may not yet match the same standard. We monitor these and work with vendors toward conformance, but we cannot always control their markup.</p>
+
+      <h2>Reporting a barrier</h2>
+      <p>If you encounter a part of the Site that is hard to use, please tell us. Describe the page and what you were trying to do, and we will work to fix it. Reach us through the contact page or write to LUCI Systems, LLC with “Accessibility” in the subject line.</p>
+
+      <h2>Compatibility with assistive technology</h2>
+      <p>The Site is intended to work with current versions of major browsers and common screen readers. We test on recent Chrome, Safari, and Firefox, with VoiceOver and NVDA. If a combination does not work for you, please report it and we will prioritize it.</p>
+
+      <p class="legal-updated">Last updated: August 2026</p>
+    </div>
+  </SectionBlock>
+</BaseLayout>
+
+<style>
+  .legal-updated { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--rule-light); font-size: 13px; color: var(--navy-muted); }
+</style>

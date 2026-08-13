@@ -88,6 +88,16 @@ export const seoPages: Record<string, PageSeo> = {
     description:
       'LUCI Systems, LLC privacy policy — how we collect, use, and protect personally identifiable information on lucisystems.com.',
   },
+  '/terms': {
+    title: 'Terms of Service',
+    description:
+      'LUCI Systems, LLC terms of service — the terms that govern use of lucisystems.com and LUCI’s online services.',
+  },
+  '/accessibility': {
+    title: 'Accessibility',
+    description:
+      'LUCI Systems’ accessibility statement — our commitment to an inclusive, WCAG-aligned experience on lucisystems.com and how to report barriers.',
+  },
   '/contact/thanks': {
     title: 'Thanks',
     description: 'Thanks for requesting a LUCI demo — we’ll be in touch.',
