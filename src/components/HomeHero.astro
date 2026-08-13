@@ -12,6 +12,8 @@ interface Props {
   zones?: boolean;
   /** Which map stage to use. Default keeps the live casino-floor animation. */
   map?: 'floor' | 'property';
+  /** Show the "Ask LUCI anything" search bar under the copy (homepage). */
+  askInput?: boolean;
 }
 
 const {
@@ -21,6 +23,7 @@ const {
   variant = 'b',
   zones = false,
   map = 'floor',
+  askInput = false,
 } = Astro.props;
 
 const heroId = `home-hero-title-${variant}`;
@@ -203,13 +206,33 @@ const cats = [
           </div>
         </div>
       )}
+
+      {askInput && (
+        <form class="home-ask" data-home-ask>
+          <span class="home-ask__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5z"/></svg>
+          </span>
+          <input
+            class="home-ask__input"
+            type="text"
+            placeholder="Ask LUCI anything…"
+            aria-label="Ask LUCI anything"
+            autocomplete="off"
+          />
+          <button class="home-ask__btn" type="submit" aria-label="Ask">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            <span>Ask</span>
+          </button>
+        </form>
+        <p class="home-ask__hint">Instant answers from the LUCI site — no waiting, no forms.</p>
+      )}
     </div>
     <div class="home-entry__visual">
-      <div class="home-entry__stage">
+      <div class:list={['home-entry__stage', { 'home-entry__stage--contain': map !== 'property' }]}>
         {map === 'property' ? (
           <PropertyMapStage fill eager zones={zones} />
         ) : (
-          <FloorControlStage fill eager zones={zones} />
+          <FloorControlStage eager zones={zones} contain />
         )}
       </div>
       {zones && <p class="home-entry__stage-note">For illustrative purposes only.</p>}
@@ -679,6 +702,18 @@ const cats = [
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
   }
 
+  /* Contain mode: the inner stage owns the frame, so strip the parent's frame
+     and turn it into a centerer. The aspect-locked stage floats centered, and
+     the whole plan is always visible. */
+  .home-entry__stage--contain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
+  }
+
   .home-entry__stage-note {
     flex: none;
     margin: 8px 2px 0;
@@ -773,4 +808,95 @@ const cats = [
       max-height: min(78vh, 660px);
     }
   }
+
+  /* ── "Ask LUCI anything" hero search bar ────────────────────── */
+  .home-ask {
+    margin-top: var(--space-5);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: min(100%, 460px);
+    padding: 6px 6px 6px 14px;
+    border: 1px solid rgba(var(--mint-rgb), 0.32);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  }
+  .home-ask:focus-within {
+    border-color: rgba(var(--mint-rgb), 0.6);
+    background: rgba(var(--mint-rgb), 0.06);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4), 0 0 0 3px rgba(var(--mint-rgb), 0.12);
+  }
+  .home-ask__mark {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    color: var(--mint);
+  }
+  .home-ask__mark svg { width: 20px; height: 20px; }
+  .home-ask__input {
+    flex: 1 1 auto;
+    min-width: 0;
+    border: none;
+    background: transparent;
+    color: var(--off-white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.5;
+    padding: 8px 4px;
+    outline: none;
+  }
+  .home-ask__input::placeholder { color: rgba(245, 248, 250, 0.42); }
+  .home-ask__btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 16px;
+    border: none;
+    border-radius: 999px;
+    background: var(--mint);
+    color: var(--navy-deep);
+    font-family: var(--font-head);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .home-ask__btn:hover { transform: translateX(1px); }
+  .home-ask__btn svg { width: 15px; height: 15px; }
+  .home-ask__btn:focus-visible { outline: 2px solid var(--mint); outline-offset: 2px; }
+
+  .home-ask__hint {
+    margin: 10px 2px 0;
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: rgba(245, 248, 250, 0.5);
+    max-width: 460px;
+  }
+
+  @media (max-width: 767px) {
+    .home-ask { width: 100%; }
+    .home-ask__btn span { display: none; }
+    .home-ask__btn { padding: 9px 12px; }
+  }
 </style>
+
+<script>
+  document.querySelectorAll('[data-home-ask]').forEach((form) => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = form.querySelector('.home-ask__input');
+      const q = (input && input.value || '').trim();
+      if (!q) return;
+      document.dispatchEvent(new CustomEvent('luci-ask-open', { detail: { question: q } }));
+      input.value = '';
+    });
+  });
+</script>

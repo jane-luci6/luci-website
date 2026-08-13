@@ -6,13 +6,16 @@ interface Props {
   header?: boolean;
   /** Fill the parent box (absolute inset:0) instead of using an intrinsic aspect ratio. */
   fill?: boolean;
+  /** Lock the stage to the plan's aspect ratio and center it, so the whole plan is always
+   *  visible (no crop) regardless of viewport. Animations stay aligned (they're % of the stage). */
+  contain?: boolean;
   /** Eager-load the floorplan image (use in the hero). */
   eager?: boolean;
   /** Show the static property-zone caption bar at the foot of the plan. */
   zones?: boolean;
 }
 
-const { header = false, fill = false, eager = false, zones = false } = Astro.props;
+const { header = false, fill = false, contain = false, eager = false, zones = false } = Astro.props;
 
 // Group-based timeline: pairs share a slot, but the second item waits until the
 // halfway point. If a pair gets 3.4s total, item two appears at 1.7s.
@@ -45,7 +48,7 @@ const cascades = floorCascades.map((c, j) => ({
 }));
 ---
 
-<div class:list={['fp-stage', { 'fp-stage--fill': fill }]} style={`--cycle:${CYCLE}s`}>
+<div class:list={['fp-stage', { 'fp-stage--fill': fill, 'fp-stage--contain': contain }]} style={`--cycle:${CYCLE}s`}>
   <img class="fp-stage__img" src={floorControl.src} alt={floorControl.alt} loading={eager ? 'eager' : 'lazy'} decoding="async" width="1024" height="890" />
 
   {header && (
@@ -229,6 +232,19 @@ const cascades = floorCascades.map((c, j) => ({
     aspect-ratio: auto;
     border-radius: 0;
     box-shadow: none;
+  }
+
+  /* Contain: lock to the plan's aspect ratio and center it so the whole plan is always
+     visible (no crop) at any viewport size. The image fills the stage edge-to-edge
+     (aspects match), so the % -positioned animations stay aligned. The parent
+     (home-entry__stage--contain) strips its own frame and centers this stage. */
+  .fp-stage--contain {
+    position: relative;
+    inset: auto;
+    aspect-ratio: 1024 / 890;
+    width: 100%;
+    max-height: 100%;
+    margin: 0 auto;
   }
 
   .fp-icons {
