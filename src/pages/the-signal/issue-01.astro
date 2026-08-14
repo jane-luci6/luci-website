@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { seoPages, breadcrumb } from '../../data/seo';
+import './../../assets/the-signal/issue-01.css';
+import nlBody from '../../assets/the-signal/issue-01-body.html?raw';
+const canonicalPath = '/the-signal/issue-01';
+---
+<BaseLayout
+  title="Issue 01 June 2026"
+  description="The Signal — LUCI Systems' customer newsletter."
+  canonicalPath={canonicalPath}
+  jsonLd={breadcrumb([
+    { name: 'Home', path: '/' },
+    { name: 'The Signal', path: '/the-signal/home' },
+  ])}
+  darkHeader
+>
+  <Fragment set:html={nlBody} />
+</BaseLayout>
+<style is:global>body{background:var(--navy-deep);}</style>
+

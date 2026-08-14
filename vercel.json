@@ -30,6 +30,16 @@
       "source": "/privacy",
       "destination": "/privacy-policy",
       "statusCode": 301
+    },
+    {
+      "source": "/the-signal",
+      "destination": "/the-signal/home",
+      "statusCode": 301
+    },
+    {
+      "source": "/newsletter",
+      "destination": "/the-signal/home",
+      "statusCode": 301
     }
   ]
 }
