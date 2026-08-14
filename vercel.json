@@ -18,7 +18,7 @@
     },
     {
       "source": "/guides/customer-ag-content",
-      "destination": "/resources/field-activation-guide",
+      "destination": "/resources/field-activation-guide/customer",
       "statusCode": 301
     },
     {

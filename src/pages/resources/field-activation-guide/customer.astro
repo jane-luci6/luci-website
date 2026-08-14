@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { seoPages, breadcrumb } from '../../../data/seo';
+// FAG styles are global (scoped to .luci-fag / .fag-* selectors in the source CSS)
+import './../../../assets/fag-customer/fag-customer.css';
+import fagBody from '../../../assets/fag-customer/fag-customer-body.html?raw';
+import fagScript from '../../../assets/fag-customer/fag-customer.js?raw';
+
+const canonicalPath = '/resources/field-activation-guide/customer';
+---
+
+<BaseLayout
+  title="Field Activation Guide"
+  description={seoPages['/resources/field-activation-guide'].description}
+  canonicalPath={canonicalPath}
+  noindex
+  jsonLd={breadcrumb([
+    { name: 'Home', path: '/' },
+    { name: 'Resources', path: '/resources' },
+    { name: 'Field Activation Guide', path: '/resources/field-activation-guide' },
+    { name: 'Customer', path: canonicalPath },
+  ])}
+  darkHeader
+>
+  <Fragment set:html={fagBody} />
+</BaseLayout>
+
+<script is:inline set:html={fagScript} />
