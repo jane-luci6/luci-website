@@ -8,7 +8,9 @@ export default defineConfig({
   integrations: [
     sitemap({
       // Exclude utility/noindex pages from the sitemap.
-      filter: (page) => !page.includes('/contact/thanks'),
+      filter: (page) =>
+        !page.includes('/contact/thanks') &&
+        !page.endsWith('/resources/field-activation-guide/customer/'),
     }),
   ],
 });
