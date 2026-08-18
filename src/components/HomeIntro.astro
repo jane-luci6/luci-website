@@ -325,14 +325,13 @@ const cardStyle = (s: (typeof steps)[number]) =>
   }
 
   /* ---------- CIO pull-quote ----------
-     Standard page content width (--content-max), not the wide photo column.
-     House 4px mint callout bar; gold accent on the capability phrase. */
+     Standard page content width (--content-max). Gold accent on the
+     capability phrase. */
   .home-quote {
     margin: clamp(28px, 3.6vw, 44px) auto 0;
-    padding: clamp(22px, 2.8vw, 32px) 0 clamp(4px, 0.6vw, 8px) clamp(22px, 2.8vw, 32px);
+    padding: clamp(22px, 2.8vw, 32px) 0 clamp(4px, 0.6vw, 8px);
     width: 100%;
     max-width: var(--content-max);
-    border-left: 4px solid var(--mint);
   }
 
   .home-quote__text {
