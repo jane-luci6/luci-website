@@ -98,18 +98,14 @@ const cardStyle = (s: (typeof steps)[number]) =>
     )}
 
     <figure class="home-quote">
-      <span class="home-quote__mark" aria-hidden="true">“</span>
-      <div class="home-quote__body">
-        <blockquote class="home-quote__text">
-          LUCI provides us with a comprehensive IP A/V solution that has limitless capabilities of distributing A/V content to any portion of our facility — from our casino floor to our state-of-the-art concert venue.<span
-            class="home-quote__mark home-quote__mark--close"
-            aria-hidden="true">”</span>
-        </blockquote>
-        <figcaption class="home-quote__attr">
-          <span class="home-quote__role">Chief Information Officer</span>
-          <span class="home-quote__org">Casino Resort</span>
-        </figcaption>
-      </div>
+      <blockquote class="home-quote__text">
+        <span class="home-quote__mark" aria-hidden="true">“</span>LUCI provides us with a comprehensive IP A/V solution that has limitless capabilities of distributing A/V content to any portion of our facility — from our casino floor to our state-of-the-art concert venue.<span class="home-quote__mark" aria-hidden="true">”</span>
+      </blockquote>
+      <figcaption class="home-quote__attr">
+        <span class="home-quote__role">Chief Information Officer</span>
+        <span class="home-quote__sep" aria-hidden="true">·</span>
+        <span class="home-quote__org">Casino Resort</span>
+      </figcaption>
     </figure>
   </div>
 </section>
@@ -327,92 +323,66 @@ const cardStyle = (s: (typeof steps)[number]) =>
     .home-intro__step-verb { align-self: end; }
   }
 
-  /* ---------- CIO pull-quote (replaces the CTA button row) ----------
-     House pull-quote treatment (4px mint bar, sharp corners) rendered in the
-     same dark-glass language as the photo's annotation cards above, so the
-     two read as one system. Asymmetric editorial layout: the oversized mint
-     mark hangs in a left gutter, the quote runs wide beside it. */
+  /* ---------- CIO pull-quote ----------
+     Centered typographic band under the photo. No panel, no bar, no box —
+     just a hairline, italic quote with mint marks, and a compact attribution.
+     Wide measure (~68ch) keeps it to ~2 lines so the band stays shallow. */
   .home-quote {
-    position: relative;
-    margin: clamp(26px, 3.4vw, 40px) 0 0;
+    margin: clamp(24px, 3vw, 36px) auto 0;
     padding: clamp(20px, 2.4vw, 28px) 0 0;
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    column-gap: clamp(10px, 1.1vw, 15px);
-    align-items: start;
+    max-width: 68ch;
+    text-align: center;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  .home-quote__mark {
-    font-family: var(--font-head);
-    font-size: clamp(40px, 4.6vw, 62px);
-    font-weight: 700;
-    line-height: 1;
-    color: var(--mint);
-    /* Optically seat the glyph against the first line of the quote */
-    margin-top: -0.1em;
-    opacity: 0.9;
-  }
-
-  /* Closing mark rides inline at the end of the sentence */
-  .home-quote__mark--close {
-    font-size: 1.5em;
-    line-height: 0;
-    margin: 0 0 0 0.04em;
-    vertical-align: -0.28em;
-    opacity: 1;
-  }
-
-  /* No measure cap: the quote runs the full width of the photo column so it
-     resolves in two lines and keeps the band shallow. Long measures are only
-     a tracking problem across many lines — at two, it reads as one sweep. */
   .home-quote__text {
     margin: 0;
     font-family: var(--font-body);
-    font-size: clamp(18px, 2.05vw, 26px);
+    font-size: clamp(18px, 2.1vw, 24px);
     font-weight: 400;
     font-style: italic;
     line-height: 1.4;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.012em;
     color: var(--off-white);
     text-wrap: pretty;
   }
 
-  /* Compact single row — a short inline mint rule carries the accent instead of
-     a full hairline, so attribution costs one line of height, not three. */
+  .home-quote__mark {
+    font-family: var(--font-head);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.35em;
+    line-height: 0;
+    color: var(--mint);
+    vertical-align: -0.08em;
+  }
+  .home-quote__mark:first-child {
+    margin-right: 0.06em;
+  }
+  .home-quote__mark:last-child {
+    margin-left: 0.04em;
+  }
+
   .home-quote__attr {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
-    gap: 6px clamp(10px, 1.2vw, 14px);
-    margin: clamp(12px, 1.4vw, 16px) 0 0;
+    gap: 8px;
+    margin: 14px 0 0;
     font-family: var(--font-head);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.18em;
   }
-  .home-quote__attr::before {
-    content: '';
-    width: 28px;
-    height: 2px;
-    background: var(--mint);
-    border-radius: 2px;
-  }
   .home-quote__role {
     color: var(--mint);
   }
-  .home-quote__org {
-    color: rgba(245, 248, 250, 0.62);
+  .home-quote__sep {
+    color: rgba(104, 227, 190, 0.45);
   }
-
-  @media (max-width: 620px) {
-    .home-quote {
-      grid-template-columns: minmax(0, 1fr);
-      row-gap: 2px;
-    }
-    .home-quote__mark {
-      margin-top: 0;
-    }
+  .home-quote__org {
+    color: rgba(245, 248, 250, 0.55);
   }
 </style>
