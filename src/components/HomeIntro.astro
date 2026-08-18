@@ -98,9 +98,13 @@ const cardStyle = (s: (typeof steps)[number]) =>
     )}
 
     <figure class="home-quote">
-      <blockquote class="home-quote__text">
-        <span class="home-quote__mark" aria-hidden="true">“</span>LUCI provides us with a <em class="home-quote__accent">comprehensive IP A/V solution that has limitless capabilities</em> of distributing A/V content to any portion of our facility — from our casino floor to our state-of-the-art concert venue.<span class="home-quote__mark" aria-hidden="true">”</span>
-      </blockquote>
+      <div class="home-quote__row">
+        <span class="home-quote__mark" aria-hidden="true">“</span>
+        <blockquote class="home-quote__text">
+          LUCI provides us with a <em class="home-quote__accent">comprehensive IP A/V solution that has limitless capabilities</em> of distributing A/V content to any portion of our facility — from our casino floor to our state-of-the-art concert venue.
+        </blockquote>
+        <span class="home-quote__mark home-quote__mark--close" aria-hidden="true">”</span>
+      </div>
       <figcaption class="home-quote__attr">
         <span class="home-quote__rule" aria-hidden="true"></span>
         <span class="home-quote__role">Chief Information Officer</span>
@@ -325,7 +329,8 @@ const cardStyle = (s: (typeof steps)[number]) =>
   }
 
   /* ---------- CIO pull-quote ----------
-     Centered; content-max + 100px each side. Gold accent on the capability phrase. */
+     Centered; content-max + 100px each side. Oversized mint marks flank
+     the quote. Gold accent on the capability phrase. */
   .home-quote {
     margin: clamp(28px, 3.6vw, 44px) auto 0;
     padding: clamp(22px, 2.8vw, 32px) 0 clamp(4px, 0.6vw, 8px);
@@ -334,8 +339,16 @@ const cardStyle = (s: (typeof steps)[number]) =>
     text-align: center;
   }
 
+  .home-quote__row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    column-gap: clamp(10px, 1.2vw, 16px);
+    align-items: start;
+  }
+
   .home-quote__text {
     margin: 0;
+    padding-top: 0.35em; /* seat first line against the oversized marks */
     font-family: var(--font-body);
     font-size: clamp(19px, 2.3vw, 26px);
     font-weight: 400;
@@ -356,16 +369,34 @@ const cardStyle = (s: (typeof steps)[number]) =>
     font-family: var(--font-head);
     font-style: normal;
     font-weight: 700;
-    font-size: 1.45em;
-    line-height: 0;
+    font-size: clamp(56px, 7vw, 88px);
+    line-height: 0.7;
     color: var(--mint);
-    vertical-align: -0.1em;
+    /* Hang the opening mark against the first line of the quote */
+    margin-top: 0.08em;
+    user-select: none;
   }
-  .home-quote__mark:first-child {
-    margin-right: 0.08em;
+  .home-quote__mark--close {
+    /* Seat the closing mark against the last line */
+    align-self: end;
+    margin-top: 0;
+    margin-bottom: 0.12em;
   }
-  .home-quote__mark:last-child {
-    margin-left: 0.06em;
+
+  @media (max-width: 560px) {
+    .home-quote__row {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 4px;
+    }
+    .home-quote__mark {
+      font-size: clamp(40px, 12vw, 56px);
+      justify-self: start;
+    }
+    .home-quote__mark--close {
+      justify-self: end;
+      align-self: start;
+      margin-bottom: 0;
+    }
   }
 
   .home-quote__attr {
