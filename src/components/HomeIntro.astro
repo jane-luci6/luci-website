@@ -99,9 +99,10 @@ const cardStyle = (s: (typeof steps)[number]) =>
 
     <figure class="home-quote">
       <blockquote class="home-quote__text">
-        <span class="home-quote__mark" aria-hidden="true">“</span>LUCI provides us with a comprehensive IP A/V solution that has limitless capabilities of distributing A/V content to any portion of our facility — from our casino floor to our state-of-the-art concert venue.<span class="home-quote__mark" aria-hidden="true">”</span>
+        <span class="home-quote__mark" aria-hidden="true">“</span>LUCI provides us with a <em class="home-quote__accent">comprehensive IP A/V solution that has limitless capabilities</em> of distributing A/V content to any portion of our facility — from our casino floor to our state-of-the-art concert venue.<span class="home-quote__mark" aria-hidden="true">”</span>
       </blockquote>
       <figcaption class="home-quote__attr">
+        <span class="home-quote__rule" aria-hidden="true"></span>
         <span class="home-quote__role">Chief Information Officer</span>
         <span class="home-quote__sep" aria-hidden="true">·</span>
         <span class="home-quote__org">Casino Resort</span>
@@ -324,21 +325,20 @@ const cardStyle = (s: (typeof steps)[number]) =>
   }
 
   /* ---------- CIO pull-quote ----------
-     Centered typographic band under the photo. No panel, no bar, no box —
-     just a hairline, italic quote with mint marks, and a compact attribution.
-     Wide measure (~68ch) keeps it to ~2 lines so the band stays shallow. */
+     Full container width. House callout spine (4px mint bar) so it stands on
+     its own without a nested panel. Gold accent on the capability phrase. */
   .home-quote {
-    margin: clamp(24px, 3vw, 36px) auto 0;
-    padding: clamp(20px, 2.4vw, 28px) 0 0;
-    max-width: 68ch;
-    text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: clamp(28px, 3.6vw, 44px) 0 0;
+    padding: clamp(22px, 2.8vw, 32px) 0 clamp(4px, 0.6vw, 8px) clamp(22px, 2.8vw, 32px);
+    width: 100%;
+    max-width: none;
+    border-left: 4px solid var(--mint);
   }
 
   .home-quote__text {
     margin: 0;
     font-family: var(--font-body);
-    font-size: clamp(18px, 2.1vw, 24px);
+    font-size: clamp(19px, 2.3vw, 26px);
     font-weight: 400;
     font-style: italic;
     line-height: 1.4;
@@ -347,34 +347,45 @@ const cardStyle = (s: (typeof steps)[number]) =>
     text-wrap: pretty;
   }
 
+  .home-quote__accent {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--gold);
+  }
+
   .home-quote__mark {
     font-family: var(--font-head);
     font-style: normal;
     font-weight: 700;
-    font-size: 1.35em;
+    font-size: 1.45em;
     line-height: 0;
     color: var(--mint);
-    vertical-align: -0.08em;
+    vertical-align: -0.1em;
   }
   .home-quote__mark:first-child {
-    margin-right: 0.06em;
+    margin-right: 0.08em;
   }
   .home-quote__mark:last-child {
-    margin-left: 0.04em;
+    margin-left: 0.06em;
   }
 
   .home-quote__attr {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     align-items: center;
-    gap: 8px;
-    margin: 14px 0 0;
+    gap: 10px;
+    margin: 18px 0 0;
     font-family: var(--font-head);
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.18em;
+  }
+  .home-quote__rule {
+    width: 28px;
+    height: 2px;
+    background: var(--mint);
+    border-radius: 2px;
   }
   .home-quote__role {
     color: var(--mint);
