@@ -334,43 +334,23 @@ const cardStyle = (s: (typeof steps)[number]) =>
      mark hangs in a left gutter, the quote runs wide beside it. */
   .home-quote {
     position: relative;
-    margin: clamp(28px, 4vw, 44px) 0 0;
+    margin: clamp(26px, 3.4vw, 40px) 0 0;
+    padding: clamp(20px, 2.4vw, 28px) 0 0;
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
-    column-gap: clamp(14px, 1.8vw, 24px);
+    column-gap: clamp(10px, 1.1vw, 15px);
     align-items: start;
-    padding: clamp(26px, 3.4vw, 40px) clamp(24px, 3.4vw, 44px);
-    background: rgba(10, 22, 28, 0.7);
-    border-left: 4px solid var(--mint);
-    overflow: hidden;
-  }
-
-  /* Mint wash off the bar — gives the panel depth without a second border */
-  .home-quote::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: linear-gradient(
-      100deg,
-      rgba(var(--mint-rgb), 0.1) 0%,
-      rgba(var(--mint-rgb), 0.03) 34%,
-      transparent 62%
-    );
-  }
-
-  .home-quote > * {
-    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .home-quote__mark {
     font-family: var(--font-head);
-    font-size: clamp(60px, 8vw, 104px);
+    font-size: clamp(40px, 4.6vw, 62px);
     font-weight: 700;
     line-height: 1;
     color: var(--mint);
     /* Optically seat the glyph against the first line of the quote */
-    margin-top: -0.12em;
+    margin-top: -0.1em;
     opacity: 0.9;
   }
 
@@ -383,33 +363,41 @@ const cardStyle = (s: (typeof steps)[number]) =>
     opacity: 1;
   }
 
+  /* No measure cap: the quote runs the full width of the photo column so it
+     resolves in two lines and keeps the band shallow. Long measures are only
+     a tracking problem across many lines — at two, it reads as one sweep. */
   .home-quote__text {
     margin: 0;
-    max-width: 46ch;
     font-family: var(--font-body);
-    font-size: clamp(21px, 2.9vw, 31px);
+    font-size: clamp(18px, 2.05vw, 26px);
     font-weight: 400;
     font-style: italic;
-    line-height: 1.34;
+    line-height: 1.4;
     letter-spacing: -0.015em;
     color: var(--off-white);
     text-wrap: pretty;
   }
 
-  /* Attribution sits on a hairline that runs out to the panel edge */
+  /* Compact single row — a short inline mint rule carries the accent instead of
+     a full hairline, so attribution costs one line of height, not three. */
   .home-quote__attr {
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
+    align-items: center;
     gap: 6px clamp(10px, 1.2vw, 14px);
-    margin: clamp(20px, 2.4vw, 28px) 0 0;
-    padding-top: clamp(14px, 1.6vw, 18px);
-    border-top: 1px solid rgba(var(--mint-rgb), 0.22);
+    margin: clamp(12px, 1.4vw, 16px) 0 0;
     font-family: var(--font-head);
     font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.18em;
+  }
+  .home-quote__attr::before {
+    content: '';
+    width: 28px;
+    height: 2px;
+    background: var(--mint);
+    border-radius: 2px;
   }
   .home-quote__role {
     color: var(--mint);
@@ -422,7 +410,6 @@ const cardStyle = (s: (typeof steps)[number]) =>
     .home-quote {
       grid-template-columns: minmax(0, 1fr);
       row-gap: 2px;
-      padding: clamp(22px, 6vw, 30px) clamp(20px, 5vw, 28px);
     }
     .home-quote__mark {
       margin-top: 0;
