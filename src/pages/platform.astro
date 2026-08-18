@@ -83,7 +83,14 @@ const faqs = [
   },
   {
     q: 'How do we get started with LUCI?',
-    a: 'It starts with a demo — see LUCI running on a property like yours. Then discovery: we learn your systems, zones, and goals. Next, scope — we map exactly what to orchestrate. A proposal follows, with a clear plan, timeline, and price. You approve, and we mobilize the team. That\'s Phase 1 — the path to the right scope.',
+    a: 'It starts with a live demo and runs through five steps — Phase 1, the path to the right scope.',
+    steps: [
+      { title: 'Demo', body: 'See LUCI running on a property like yours.' },
+      { title: 'Discovery', body: 'We learn your systems, zones, and goals.' },
+      { title: 'Scope', body: 'We map exactly what to orchestrate.' },
+      { title: 'Proposal', body: 'A clear plan, timeline, and price.' },
+      { title: 'Decision', body: 'You approve; we mobilize the team.' },
+    ],
   },
 ];
 
@@ -202,10 +209,22 @@ const faqLd = {
   >
     <div class="faq">
       {faqs.map((f) => (
-        <details class="faq__item">
-          <summary class="faq__q">{f.q}</summary>
-          <p class="faq__a">{f.a}</p>
-        </details>
+    <details class="faq__item">
+      <summary class="faq__q">{f.q}</summary>
+      <p class="faq__a">{f.a}</p>
+      {f.steps && (
+        <ol class="faq__steps">
+          {f.steps.map((s) => (
+            <li class="faq__step">
+              <div class="faq__step-copy">
+                <p class="faq__step-title">{s.title}</p>
+                <p class="faq__step-body">{s.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      )}
+    </details>
       ))}
     </div>
   </SectionBlock>
@@ -356,6 +375,89 @@ const faqLd = {
     font-size: 17px;
     line-height: 1.65;
     color: rgba(245, 248, 250, 0.78);
+  }
+
+  /* ---------- Get-started step list (deep) ---------- */
+  .faq__steps {
+    list-style: none;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 4px 0 8px;
+    padding: 0;
+    counter-reset: step;
+  }
+  .faq__steps::before {
+    content: '';
+    position: absolute;
+    left: 14px;
+    top: 14px;
+    bottom: 14px;
+    width: 1px;
+    background: rgba(104, 227, 190, 0.3);
+  }
+  .faq__step {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    counter-increment: step;
+  }
+  .faq__step::before {
+    content: counter(step);
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 9999px;
+    border: 1px solid rgba(104, 227, 190, 0.55);
+    background: var(--navy);
+    color: var(--mint);
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 13px;
+    z-index: 1;
+  }
+  .faq__step-copy { padding-top: 2px; }
+  .faq__step-title {
+    margin: 0 0 2px;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    color: var(--off-white);
+  }
+  .faq__step-body {
+    margin: 0;
+    max-width: 44ch;
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.55;
+    color: rgba(245, 248, 250, 0.72);
+  }
+  @media (min-width: 760px) {
+    .faq__steps {
+      flex-direction: row;
+      gap: clamp(10px, 1.4vw, 18px);
+    }
+    .faq__steps::before {
+      left: 14px;
+      right: 14px;
+      top: 14px;
+      bottom: auto;
+      width: auto;
+      height: 1px;
+    }
+    .faq__step {
+      flex: 1 1 0;
+      min-width: 0;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .faq__step-copy { padding-top: 12px; }
+    .faq__step-body { max-width: none; }
   }
 
   /* ---------- Diagram reveal (deep) ---------- */
