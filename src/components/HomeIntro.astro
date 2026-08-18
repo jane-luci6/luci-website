@@ -97,10 +97,15 @@ const cardStyle = (s: (typeof steps)[number]) =>
       </figure>
     )}
 
-    <div class="home-intro__actions">
-      <a class="btn btn--mint home-intro__btn" href="/contact">Request a demo</a>
-      <a class="btn btn--ghost home-intro__btn" href="/platform">See LUCI in action</a>
-    </div>
+    <figure class="home-quote">
+      <blockquote class="home-quote__text">
+        <span class="home-quote__mark" aria-hidden="true">“</span>LUCI provides us with a comprehensive IP A/V solution that has limitless capabilities of distributing A/V content to any portion of our facility — from our casino floor to our state-of-the-art concert venue.<span class="home-quote__close" aria-hidden="true">”</span>
+      </blockquote>
+      <figcaption class="home-quote__attr">
+        <span class="home-quote__rule" aria-hidden="true"></span>
+        CIO · Casino Resort
+      </figcaption>
+    </figure>
   </div>
 </section>
 
@@ -317,19 +322,52 @@ const cardStyle = (s: (typeof steps)[number]) =>
     .home-intro__step-verb { align-self: end; }
   }
 
-  .home-intro__actions {
+  /* ---------- CIO pull-quote (replaces the CTA button row) ---------- */
+  .home-quote {
+    margin: var(--space-6) 0 0;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--space-3);
-    margin-top: var(--space-6);
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
-
-  .home-intro__btn {
-    min-height: 56px;
-    padding: 16px 32px;
-    font-size: clamp(15px, 1.5vw, 17px);
+  .home-quote__text {
+    margin: 0;
+    max-width: 40ch;
+    font-family: var(--font-body);
+    font-size: clamp(18px, 2.4vw, 24px);
+    font-weight: 400;
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+    color: var(--off-white);
+  }
+  .home-quote__mark {
+    font-family: var(--font-head);
+    font-size: 1.7em;
     font-weight: 700;
-    letter-spacing: 0.01em;
+    line-height: 0;
+    color: var(--mint);
+    margin-right: 0.04em;
+  }
+  .home-quote__close {
+    color: var(--mint);
+  }
+  .home-quote__attr {
+    margin: 20px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-head);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--mint);
+  }
+  .home-quote__rule {
+    width: 40px;
+    height: 3px;
+    background: var(--mint);
+    border-radius: 2px;
   }
 </style>

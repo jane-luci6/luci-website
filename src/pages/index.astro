@@ -29,18 +29,6 @@ import { seoPages } from '../data/seo';
   <HomePersonas />
   <HomeTrustBar />
 
-  <SectionBlock id="home-quote" tone="light">
-    <figure class="home-quote">
-      <blockquote class="home-quote__text">
-        LUCI provides us with a comprehensive IP A/V solution that has limitless capabilities of distributing A/V content to any portion of our facility — from our casino floor to our state-of-the-art concert venue.
-      </blockquote>
-      <figcaption class="home-quote__attr">
-        <span class="home-quote__rule" aria-hidden="true"></span>
-        CIO · Casino Resort
-      </figcaption>
-    </figure>
-  </SectionBlock>
-
   <SectionBlock id="home-cta" tone="deep">
     <div class="home-cta">
       <p class="display-label home-cta__kicker">Next step</p>
@@ -49,43 +37,4 @@ import { seoPages } from '../data/seo';
     </div>
   </SectionBlock>
 </BaseLayout>
-
-<style>
-  .home-quote {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .home-quote__text {
-    margin: 0;
-    max-width: 44ch;
-    font-family: var(--font-body);
-    font-size: clamp(22px, 3vw, 30px);
-    font-weight: 400;
-    line-height: 1.4;
-    letter-spacing: -0.01em;
-    color: var(--ink-strong);
-  }
-  .home-quote__attr {
-    margin: 28px 0 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    font-family: var(--font-head);
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--accent-light);
-  }
-  .home-quote__rule {
-    width: 40px;
-    height: 3px;
-    background: var(--accent-light);
-    border-radius: 2px;
-  }
-</style>
 
