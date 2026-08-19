@@ -36,6 +36,10 @@ export const samsTownCaseStudyDetail = {
     paragraphs: [
       "LUCI has run Sam's Town's A/V end to end for more than a year: we installed audio through the casino first, then video across the property, including the sportsbook. This year, Sam's Town decided the sportsbook screens were due for an upgrade to replace years of accumulated TVs.",
     ],
+    photo: {
+      src: '/images/case-studies/sams-town/room-before-web.jpg',
+      alt: "Sam's Town sportsbook before the remodel — tiered seating facing a wall of mismatched TVs",
+    },
   },
   approach: {
     titleBefore: 'The wall ',
@@ -56,6 +60,10 @@ export const samsTownCaseStudyDetail = {
     paragraphs: [
       'The race book took the same approach. Rather than trench new cable out to every betting carousel, LUCI sent ten channels of its own encoded video back out over the coax already buried under the property — live racing on existing cable, with no trenching and no new wire pulled through the floor.',
     ],
+    photo: {
+      src: '/images/case-studies/sams-town/racebook-work-web.jpg?v=5',
+      alt: 'Technician commissioning the head-end rack — coax and network paths for race video',
+    },
   },
   beforeAfter: {
     beforeSrc: '/images/case-studies/sams-town/slider-before-web.jpg',
