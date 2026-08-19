@@ -14,11 +14,11 @@ export const ameristarCaseStudyDetail = {
   summary: [
     {
       label: 'The challenge',
-      text: 'A decade-old AV system, aging equipment, and a major casino buildout on the way.',
+      text: 'A decade-old A/V system, aging equipment, and a major casino buildout on the way.',
     },
     {
       label: 'The approach',
-      text: "A full retrofit in under three days, with all AV processing relocated to the data center on land.",
+      text: "A full retrofit in under three days, with all A/V processing relocated to the data center on land.",
     },
     {
       label: 'The result',
@@ -55,13 +55,13 @@ export const ameristarCaseStudyDetail = {
   approach: {
     title: 'Modernize without disrupting the floor',
     paragraphs: [
-      "LUCI's goal was to modernize the property's AV foundation and position it for the transition ahead, without disrupting a floor that runs every day.",
-      "The defining move was location. As part of the upcoming transition away from the riverboat casino, LUCI relocated all new AV processing equipment into the property's IT data center on land. Since much of the previous system's processing was located on the boat, this single move eliminated the need to design additional AV rooms into the new buildout, helping reduce future construction and infrastructure costs.",
-      'The retrofit installation itself was completed in less than three days. In that window, the team:',
+      "LUCI's goal was to modernize the property's A/V foundation and position it for the transition ahead, without disrupting a floor that runs every day.",
+      "The defining move was location. As part of the upcoming transition away from the riverboat casino, LUCI relocated all new A/V processing equipment into the property's IT data center on land. Since much of the previous system's processing was located on the boat, this single move eliminated the need to design additional A/V rooms into the new buildout, helping reduce future construction and infrastructure costs.",
+      'The retrofit installation itself was completed in less than three days.',
     ],
     scope: [
-      'Replaced the AV head-end systems, amplifiers, and control infrastructure',
-      "Relocated all new AV processing into the property's IT data center",
+      'Replaced the A/V head-end systems, amplifiers, and control infrastructure',
+      "Relocated all new A/V processing into the property's IT data center",
       'Completed a full conversion and modernization of the system documentation',
     ],
     closing:
@@ -106,12 +106,12 @@ export const ameristarCaseStudyDetail = {
       },
     ],
     bottomLine:
-      'By modernizing the AV infrastructure and centralizing system control, LUCI helped Ameristar Council Bluffs prepare for its next phase of growth, preserving operational reliability, improving efficiency, and reducing long-term infrastructure costs.',
+      'By modernizing the A/V infrastructure and centralizing system control, LUCI helped Ameristar Council Bluffs prepare for its next phase of growth, preserving operational reliability, improving efficiency, and reducing long-term infrastructure costs.',
   },
   cta: {
     body: "Curious what this looks like for your property? Let's talk.",
     aboutLabel: 'About LUCI',
     aboutStatement:
-      'LUCI Systems orchestrates every layer of technology running your property — AV, signage, building, and operational infrastructure — from a single interface your team controls from anywhere. Rather than adding layers to your stack, LUCI reduces the variables, hardware, and interfaces your team has to manage. When onsite experience and operational continuity are non-negotiable, LUCI delivers coordinated, real-time execution, end to end.',
+      'LUCI Systems orchestrates every layer of technology running your property — A/V, signage, building, and operational infrastructure — from a single interface your team controls from anywhere. Rather than adding layers to your stack, LUCI reduces the variables, hardware, and interfaces your team has to manage. When onsite experience and operational continuity are non-negotiable, LUCI delivers coordinated, real-time execution, end to end.',
   },
 } as const;

@@ -22,7 +22,7 @@ export const site = {
 } as const;
 
 export const valueProp =
-  'LUCI Systems orchestrates every layer of technology running your property — AV, signage, building, and operational infrastructure — from a single interface your team controls from anywhere. Rather than adding layers to your stack, LUCI reduces the variables, hardware, and interfaces your team has to manage. When onsite experience and operational continuity are non-negotiable, LUCI delivers coordinated, real-time execution, end to end.';
+  'LUCI Systems orchestrates every layer of technology running your property — A/V, signage, building, and operational infrastructure — from a single interface your team controls from anywhere. Rather than adding layers to your stack, LUCI reduces the variables, hardware, and interfaces your team has to manage. When onsite experience and operational continuity are non-negotiable, LUCI delivers coordinated, real-time execution, end to end.';
 
 export const oneOffering = {
   summary: 'One platform, one embedded team, one outcome.',
@@ -85,7 +85,7 @@ export const portfolioLine =
 
 export const ameristarCaseStudy = {
   title: 'Three days to a future-ready platform',
-  dek: "LUCI completed a full retrofit of Ameristar Council Bluffs' AV infrastructure in under three days, modernizing a system that had run since 2012 and centralizing control on land to prepare the property for its next phase of growth.",
+  dek: "LUCI completed a full retrofit of Ameristar Council Bluffs' A/V infrastructure in under three days, modernizing a system that had run since 2012 and centralizing control on land to prepare the property for its next phase of growth.",
   slug: 'ameristar-council-bluffs',
   property: 'Ameristar Council Bluffs',
   location: 'Council Bluffs, Iowa',
