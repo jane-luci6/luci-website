@@ -118,13 +118,6 @@ const { dek, logoSrc } = yaamavaCaseStudy;
       </ul>
     </section>
 
-    <section class="cs-sec cs-sec--white">
-      <h2 class="cs-sec__title">{cs.oneInterface.titleBefore}<span class="cs-sec__title-accent">{cs.oneInterface.titleAccent}</span></h2>
-      <div class="cs-copy">
-        {cs.oneInterface.paragraphs.map((p) => <p>{p}</p>)}
-      </div>
-    </section>
-
     <section class="cs-sec cs-sec--light cs-consolidation" aria-labelledby="cs-consolidation-title">
       <header class="cs-consolidation__header">
         <h2 id="cs-consolidation-title" class="cs-consolidation__title">Consolidation you can see</h2>
@@ -152,6 +145,9 @@ const { dek, logoSrc } = yaamavaCaseStudy;
       <ul class="cs-results">
         {cs.results.bullets.map((item) => <li>{item}</li>)}
       </ul>
+      <div class="cs-copy">
+        {cs.results.body.map((p) => <p>{p}</p>)}
+      </div>
     </section>
 
     <figure class="cs-figure">
@@ -488,6 +484,7 @@ const { dek, logoSrc } = yaamavaCaseStudy;
     font-family: var(--font-display); font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
     color: var(--gold); margin-bottom: 10px;
   }
+  .cs-results + .cs-copy { margin-top: 32px; }
 
   .cs-plan { list-style: none; margin: 22px 0 26px; padding: 0; display: flex; flex-direction: column; gap: 22px; max-width: 64ch; }
   .cs-plan li { display: grid; grid-template-columns: 28px 1fr; gap: 14px; font-size: 17px; line-height: 1.65; color: var(--ink); }

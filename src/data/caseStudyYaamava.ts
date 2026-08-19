@@ -62,14 +62,6 @@ export const yaamavaCaseStudyDetail = {
       'New LED across the building',
     ],
   },
-  oneInterface: {
-    titleBefore: 'One interface. ',
-    titleAccent: 'Every endpoint.',
-    paragraphs: [
-      'A message the executive team wants on the gaming floor used to cross tools and teams before it reached a single display. Now one person opens LUCI, picks the screens, and sends it — the floor, the signage, the video walls, all at once.',
-      'Audio zones sit in the same place. So do the displays, and the network devices behind them. There is no second login for signage, no separate console for the LED, no third tool for paging.',
-    ],
-  },
   consolidation: [
     {
       title: 'Five silos, one platform',
@@ -101,6 +93,10 @@ export const yaamavaCaseStudyDetail = {
       'Content that moves across the property at once, instead of platform by platform',
       'LED across the building, running on the same platform as everything else',
       'An A/V and IT team spending its time on priorities instead of upkeep',
+    ],
+    body: [
+      'A message the executive team wants on the gaming floor used to cross tools and teams before it reached a single display. Now one person opens LUCI, picks the screens, and sends it — the floor, the signage, the video walls, all at once.',
+      'Audio zones sit in the same place. So do the displays, and the network devices behind them. There is no second login for signage, no separate console for the LED, no third tool for paging.',
     ],
   },
   ledFigure: {
