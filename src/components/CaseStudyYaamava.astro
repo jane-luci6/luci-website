@@ -161,7 +161,11 @@ const { dek, logoSrc } = yaamavaCaseStudy;
     </section>
 
     <figure class="cs-figure">
-      <img src={cs.ledFigure.src} alt={cs.ledFigure.alt} width="1600" height="900" loading="lazy" />
+      <div class="cs-figure__pair">
+        {cs.ledFigure.pair.map((img) => (
+          <img src={img.src} alt={img.alt} width="1600" height="900" loading="lazy" />
+        ))}
+      </div>
       <figcaption>{cs.ledFigure.caption}</figcaption>
     </figure>
 
@@ -424,6 +428,8 @@ const { dek, logoSrc } = yaamavaCaseStudy;
     width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block;
     border-radius: 14px; border: 1px solid rgba(104, 227, 190, 0.18);
   }
+  .cs-figure__pair { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(12px, 1.6vw, 18px); }
+  @media (max-width: 620px) { .cs-figure__pair { grid-template-columns: 1fr; } }
   .cs-figure figcaption {
     margin: 14px 0 0; font-size: 13px; letter-spacing: 0.02em;
     line-height: 1.5; color: rgba(235, 245, 248, 0.7); text-align: center;
@@ -512,7 +518,7 @@ const { dek, logoSrc } = yaamavaCaseStudy;
   .cs-ledger__title {
     margin: 0 0 clamp(22px, 3vw, 32px);
     padding: clamp(36px, 5vw, 56px) clamp(28px, 6vw, 64px) 0;
-    font-family: var(--font-head); font-size: clamp(22px, 3vw, 30px); font-weight: 700;
+    font-family: var(--font-head); font-size: clamp(26px, 3.6vw, 38px); font-weight: 700;
     line-height: 1.1; letter-spacing: -0.025em; color: var(--off-white); text-align: center;
   }
   .cs-ledger__title :global(em) { font-style: normal; color: var(--mint); }
@@ -535,11 +541,11 @@ const { dek, logoSrc } = yaamavaCaseStudy;
   .cs-ledger__ic { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; flex: none; }
   .cs-ledger__ic :global(svg) { width: 100%; height: 100%; display: block; }
   .cs-ledger__num {
-    font-family: var(--font-head); font-size: clamp(26px, 3.4vw, 38px); font-weight: 700;
+    font-family: var(--font-head); font-size: clamp(30px, 4vw, 44px); font-weight: 700;
     line-height: 1; letter-spacing: -0.03em; color: var(--mint);
   }
   .cs-ledger__label {
-    font-size: 12px; line-height: 1.3; letter-spacing: 0.02em; color: rgba(235, 245, 248, 0.72);
+    font-size: 13px; line-height: 1.3; letter-spacing: 0.02em; color: rgba(235, 245, 248, 0.72);
   }
   .cs-ledger__converge { display: block; width: 100%; height: clamp(52px, 7vw, 76px); margin: 4px 0 -2px; overflow: visible; }
   .cs-ledger__converge :global(line) { stroke-width: 1.5; vector-effect: non-scaling-stroke; }
@@ -559,7 +565,7 @@ const { dek, logoSrc } = yaamavaCaseStudy;
   .cs-ledger__dest-rule { width: 40px; height: 3px; background: var(--mint); }
   .cs-ledger__dest-head {
     margin: 0; font-family: var(--font-head); font-weight: 700; letter-spacing: -0.02em;
-    font-size: clamp(28px, 4vw, 40px); color: var(--off-white); text-align: center;
+    font-size: clamp(32px, 5vw, 54px); color: var(--off-white); text-align: center;
   }
   .cs-ledger__dest-head :global(em) { font-style: normal; color: var(--mint); }
   .cs-ledger__dest-sub {

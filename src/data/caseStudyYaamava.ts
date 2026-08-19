@@ -23,7 +23,7 @@ export const yaamavaCaseStudyDetail = {
     },
     {
       label: 'The approach',
-      text: "Consolidation instead of addition — the property's separate technologies and interfaces replaced by one LUCI platform, plus new LED across the building.",
+      text: "Consolidation instead of addition — the property's separate technologies and interfaces orchestrated from one LUCI platform, plus new LED across the building.",
     },
     {
       label: 'The result',
@@ -41,10 +41,9 @@ export const yaamavaCaseStudyDetail = {
     ],
   },
   floorFigure: {
-    src: '/images/case-studies/yaamava/gaming-floor-led-web.jpg',
-    alt: "A wall-sized LED display on the Yaamava' gaming floor, behind a bank of machines",
-    caption:
-      '290,000 square feet of gaming floor — every display on it now driven from the same platform.',
+    src: '/images/case-studies/yaamava/sportsbook-led-web.jpg',
+    alt: "The curved LED ribbon wrapping the 909 Sportsbar at Yaamava', carrying live games and odds above the bar",
+    caption: 'The 909 Sportsbar — every screen in the room on the same platform.',
   },
   approach: {
     titleBefore: 'Bring every layer ',
@@ -91,24 +90,20 @@ export const yaamavaCaseStudyDetail = {
   },
   consolidation: [
     {
-      title: 'Five separate technology silos',
-      text: 'Broadcast, signage, data, audio and paging, and displays each had their own hardware, software, and interface. They now run as one platform.',
+      title: 'Five silos, one platform',
+      text: 'Broadcast, signage, data, audio and paging, and displays each had their own hardware, software, and interface. They now run as one.',
     },
     {
-      title: 'Multiplying racks and players',
-      text: 'Consolidation removed hardware rather than adding it — fewer boxes to power, cool, license, and replace.',
+      title: 'Less hardware, not more',
+      text: 'Consolidation removed racks and players rather than adding them — fewer boxes to power, cool, license, and replace.',
     },
     {
-      title: 'Platform-by-platform content pushes',
-      text: 'Content that belonged on every screen no longer travels through several tools to get there. It goes out once.',
+      title: 'One send, every screen',
+      text: 'Content that belongs property-wide no longer travels through several tools to get there. It goes out once.',
     },
     {
-      title: 'A parallel control system for the new LED',
-      text: 'Never stood up. The LED installed across the building joined the platform already running the property.',
-    },
-    {
-      title: 'Interface-by-interface training',
-      text: 'Staff learn one interface instead of one per technology — and the A/V and IT team spends its time on priorities instead of upkeep.',
+      title: 'One interface to learn',
+      text: 'Staff train on LUCI instead of one tool per technology — and the A/V and IT team spends its time on priorities instead of upkeep.',
     },
   ],
   quote: {
@@ -127,9 +122,18 @@ export const yaamavaCaseStudyDetail = {
     ],
   },
   ledFigure: {
-    src: '/images/case-studies/yaamava/event-entry-led-web.jpg',
-    alt: "LED-clad columns and soffit at the Yaamava' event center entrance, all driven from LUCI",
-    caption: 'LED installed across the building — entry, floor, and bar — all on the same platform.',
+    pair: [
+      {
+        src: '/images/case-studies/yaamava/gaming-floor-led-web.jpg',
+        alt: "A wall-sized LED display on the Yaamava' gaming floor, behind a bank of machines",
+      },
+      {
+        src: '/images/case-studies/yaamava/event-entry-led-web.jpg',
+        alt: "LED-clad columns and soffit at the Yaamava' event center entrance",
+      },
+    ],
+    caption:
+      'LED LUCI designed and installed — the artwork on every wall changes from the same interface.',
   },
   ledger: {
     titleBefore: "Yaamava' on LUCI ",
