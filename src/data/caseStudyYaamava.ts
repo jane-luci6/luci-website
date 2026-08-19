@@ -53,24 +53,6 @@ export const yaamavaCaseStudyDetail = {
       'With those consolidated, every sign and every TV on the property could work together instead of separately. LUCI also designed and installed LED across the rest of the building, bringing it onto the platform as well.',
       "Today, every audio zone, display, and network device at Yaamava' is managed from one interface.",
     ],
-    crew: [
-      {
-        src: '/images/case-studies/yaamava/install-led-cabinets-web.jpg',
-        alt: 'A technician on a scaffold seating LED cabinets into the wall frame',
-      },
-      {
-        src: '/images/case-studies/yaamava/install-lobby-frame-web.jpg',
-        alt: 'The steel frame for a lobby LED wall, wired and waiting for panels',
-      },
-      {
-        src: '/images/case-studies/yaamava/install-head-end-web.jpg',
-        alt: "Head-end equipment racks in the property's A/V room",
-      },
-      {
-        src: '/images/case-studies/yaamava/install-column-commission-web.jpg',
-        alt: 'An LED column on the casino floor showing a test pattern during commissioning',
-      },
-    ],
     scope: [
       'Broadcast content',
       'Video and digital signage',
