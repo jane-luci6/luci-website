@@ -34,16 +34,14 @@ export const samsTownCaseStudyDetail = {
     titleBefore: 'The room ',
     titleAccent: 'they had',
     paragraphs: [
-      "LUCI has run Sam's Town's A/V end to end for more than a year: audio through the casino first, then video across the property, including the sportsbook.",
-      "This year, Sam's Town decided the sportsbook screens were due for an upgrade — years of mismatched TVs replaced one at a time, ready to become one continuous wall.",
+      "LUCI has run Sam's Town's A/V end to end for more than a year: we installed audio through the casino first, then video across the property, including the sportsbook. This year, Sam's Town decided the sportsbook screens were due for an upgrade to replace years of accumulated TVs.",
     ],
   },
   approach: {
     titleBefore: 'The wall ',
     titleAccent: 'they wanted',
     paragraphs: [
-      "Sam's Town commissioned LUCI to replace a large portion of those screens with one 39 × 12 foot LED wall — 480 square feet, 6400 × 1980 at 1.87 mm pitch, fine enough to hold up from the front row.",
-      'In less than a week, the LED wall, a new set of TVs, and the sportsbook’s three audio zones were live and running on LUCI. Because LUCI already ran the property, the wall hooked right in: no second system, nothing for staff to relearn.',
+      "Sam's Town decided to replace a large portion of their screens with one 39 × 12 foot LED wall — and commissioned LUCI's team to install it. In less than a week, the LED wall, a new set of TVs, and the sportsbook's three audio zones were all live and running on LUCI. The wall drives six presets across eight video inputs, all easily controlled from a single interface.",
     ],
     scope: [
       'Hung and commissioned one 480-sq-ft LED wall',
@@ -95,7 +93,7 @@ export const samsTownCaseStudyDetail = {
     titleBefore: 'Built for ',
     titleAccent: 'the moves ahead',
     intro:
-      'The sportsbook was not a new install on a blank slate — it was the next room on a platform already in the building.',
+      'The sportsbook was not a new install on a blank slate — it was the next room tied into LUCI on a growing property.',
     plans: [
       {
         title: 'Same login, new wall.',
