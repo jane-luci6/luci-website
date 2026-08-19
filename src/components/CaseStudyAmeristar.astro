@@ -56,16 +56,14 @@ const { dek, logoSrc } = ameristarCaseStudy;
       </div>
     </section>
 
-    <section class="cs-sec cs-sec--white">
-      <h2 class="cs-sec__title">{cs.challenge.titleBefore}<span class="cs-sec__title-accent">{cs.challenge.titleAccent}</span></h2>
-      <div class="cs-challenge-grid">
+    <section class="cs-photo-band" aria-labelledby="cs-challenge-title">
+      <img class="cs-photo-band__img" src={cs.challenge.photo.src} alt={cs.challenge.photo.alt} width="768" height="1024" loading="lazy" />
+      <div class="cs-photo-band__scrim" aria-hidden="true"></div>
+      <div class="cs-photo-band__content">
+        <h2 id="cs-challenge-title" class="cs-sec__title">{cs.challenge.titleBefore}<span class="cs-sec__title-accent">{cs.challenge.titleAccent}</span></h2>
         <div class="cs-copy">
           {cs.challenge.paragraphs.map((p) => <p>{p}</p>)}
         </div>
-        <figure class="cs-property-photo">
-          <img src={cs.challenge.photo.src} alt={cs.challenge.photo.alt} width="480" height="640" loading="lazy" />
-          <figcaption>{cs.challenge.photo.caption}</figcaption>
-        </figure>
       </div>
     </section>
 
@@ -355,24 +353,46 @@ const { dek, logoSrc } = ameristarCaseStudy;
   .cs-sec--mid .cs-copy p { color: rgba(235, 245, 248, 0.88); }
   .cs-sec--dark .cs-copy p { color: rgba(235, 245, 248, 0.92); }
 
-  /* Challenge grid — text + nested riverboat photo */
-  .cs-challenge-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(240px, 0.48fr);
-    gap: 40px;
-    align-items: start;
+  /* Full-bleed photo section — text rides a horizontal scrim */
+  .cs-photo-band {
+    position: relative;
+    overflow: hidden;
+    min-height: clamp(380px, 52vw, 520px);
+    border-bottom: none;
   }
-  .cs-property-photo { margin: 0; }
-  .cs-property-photo img {
-    display: block; width: 100%; aspect-ratio: 3 / 4;
-    object-fit: cover; object-position: center;
+  .cs-photo-band__img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center center;
+    display: block;
   }
-  .cs-property-photo figcaption {
-    margin-top: 10px; font-size: 12px; line-height: 1.5; color: var(--navy-muted);
+  .cs-photo-band__scrim {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(to right,
+      rgba(245, 248, 250, 0.96) 0%,
+      rgba(245, 248, 250, 0.92) 38%,
+      rgba(245, 248, 250, 0.62) 58%,
+      rgba(245, 248, 250, 0.18) 78%,
+      rgba(245, 248, 250, 0) 100%);
   }
-  @media (max-width: 700px) {
-    .cs-challenge-grid { grid-template-columns: 1fr; gap: 28px; }
-    .cs-property-photo { max-width: 420px; }
+  .cs-photo-band__content {
+    position: relative; z-index: 2;
+    padding: clamp(44px, 6vw, 72px) clamp(28px, 6vw, 64px);
+    max-width: 38ch;
+  }
+  .cs-photo-band .cs-sec__title { color: var(--navy); }
+  .cs-photo-band .cs-sec__title-accent { color: var(--accent-light); }
+  .cs-photo-band .cs-copy p { color: var(--ink); }
+  @media (max-width: 640px) {
+    .cs-photo-band { min-height: 420px; }
+    .cs-photo-band__scrim {
+      background: linear-gradient(to bottom,
+        rgba(245, 248, 250, 0.96) 0%,
+        rgba(245, 248, 250, 0.88) 48%,
+        rgba(245, 248, 250, 0.35) 72%,
+        rgba(245, 248, 250, 0) 100%);
+    }
+    .cs-photo-band__content { max-width: none; }
   }
 
   /* Scope list — icon-based 2-column grid */
