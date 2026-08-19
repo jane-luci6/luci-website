@@ -9,7 +9,10 @@ const { dek, logoSrc } = ameristarCaseStudy;
   <div class="cs-page__sheet">
     <header class="cs-hero">
       <div class="cs-hero__kicker"><span>Case Study</span></div>
-      <h1 class="cs-hero__title" set:html={cs.heroTitle} />
+      <h1 class="cs-hero__title">
+        <span class="cs-hero__leadin">{cs.heroLeadIn}</span>
+        <em>{cs.heroDisplay}</em>
+      </h1>
       <p class="cs-hero__dek">{dek}</p>
       <div class="cs-hero__actions">
         <a class="cs-download" href={cs.pdfHref} download={cs.pdfFilename}>
@@ -27,7 +30,6 @@ const { dek, logoSrc } = ameristarCaseStudy;
       <div class="cs-glance__logo">
         <img src={logoSrc} alt="Ameristar Council Bluffs" width="220" height="44" />
       </div>
-
       <div class="cs-facts">
         {cs.facts.map((fact) => (
           <div>
@@ -36,7 +38,14 @@ const { dek, logoSrc } = ameristarCaseStudy;
           </div>
         ))}
       </div>
-
+      <ul class="cs-inventory" aria-label="Retrofit scope">
+        {cs.inventory.map((item) => (
+          <li class="cs-inventory__item">
+            <p class="cs-inventory__num">{item.value}</p>
+            <p class="cs-inventory__label">{item.label}</p>
+          </li>
+        ))}
+      </ul>
       <div class="cs-summary">
         {cs.summary.map((cell) => (
           <div class="cs-summary__cell">
@@ -48,7 +57,7 @@ const { dek, logoSrc } = ameristarCaseStudy;
     </section>
 
     <section class="cs-sec cs-sec--white">
-      <h2 class="cs-sec__title">{cs.challenge.title}</h2>
+      <h2 class="cs-sec__title">{cs.challenge.titleBefore}<span class="cs-sec__title-accent">{cs.challenge.titleAccent}</span></h2>
       <div class="cs-challenge-grid">
         <div class="cs-copy">
           {cs.challenge.paragraphs.map((p) => <p>{p}</p>)}
@@ -61,26 +70,68 @@ const { dek, logoSrc } = ameristarCaseStudy;
     </section>
 
     <section class="cs-sec cs-sec--mid">
-      <h2 class="cs-sec__title">{cs.approach.title}</h2>
+      <h2 class="cs-sec__title">{cs.approach.titleBefore}<span class="cs-sec__title-accent">{cs.approach.titleAccent}</span></h2>
       <div class="cs-copy">
         {cs.approach.paragraphs.map((p) => <p>{p}</p>)}
-        <ul class="cs-scope">
-          {cs.approach.scope.map((item) => <li>{item}</li>)}
-        </ul>
+      </div>
+      <ul class="cs-scope" aria-label="What was done">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="14" rx="1.5" fill="#68E3BE" fill-opacity="0.16" stroke="#68E3BE" stroke-width="1.8"/>
+            <path d="M7 10l3 2.2L7 14.4" fill="none" stroke="#EDD086" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="12" y1="14.5" x2="16.5" y2="14.5" stroke="#68E3BE" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          <span>{cs.approach.scope[0]}</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="2" fill="#68E3BE" fill-opacity="0.16" stroke="#68E3BE" stroke-width="1.8"/>
+            <path d="M3 9h18M3 15h18M9 3v18M15 3v18" stroke="#68E3BE" stroke-width="1.3"/>
+            <rect x="9" y="9" width="6" height="6" fill="#EDD086" fill-opacity="0.9"/>
+          </svg>
+          <span>{cs.approach.scope[1]}</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="4" y="3" width="16" height="5" rx="1.5" fill="#68E3BE" fill-opacity="0.16" stroke="#68E3BE" stroke-width="1.8"/>
+            <rect x="4" y="10" width="16" height="5" rx="1.5" fill="#68E3BE" fill-opacity="0.16" stroke="#68E3BE" stroke-width="1.8"/>
+            <rect x="4" y="17" width="16" height="4" rx="1.5" stroke="#68E3BE" stroke-width="1.8"/>
+            <circle cx="7.5" cy="5.5" r="1" fill="#EDD086"/>
+            <circle cx="7.5" cy="12.5" r="1" fill="#EDD086"/>
+          </svg>
+          <span>{cs.approach.scope[2]}</span>
+        </li>
+      </ul>
+      <div class="cs-copy">
         <p>{cs.approach.closing}</p>
       </div>
+    </section>
+
+    <section class="cs-sec cs-sec--light cs-consolidation" aria-labelledby="cs-consolidation-title">
+      <header class="cs-consolidation__header">
+        <span class="cs-consolidation__rule" aria-hidden="true"></span>
+        <h2 id="cs-consolidation-title" class="cs-consolidation__title">Consolidation you can see</h2>
+      </header>
+      <ul class="cs-consolidation__list">
+        {cs.consolidation.map((item) => (
+          <li class="cs-consolidation__item">
+            <p class="cs-consolidation__item-title">{item.title}</p>
+            <p class="cs-consolidation__item-text">{item.text}</p>
+          </li>
+        ))}
+      </ul>
     </section>
 
     <section class="cs-quote">
       <blockquote class="cs-quote__text">&ldquo;{cs.quote.text}&rdquo;</blockquote>
       <p class="cs-quote__attrib">
         <span>{cs.quote.role}</span>
-        <span>{cs.quote.org}</span>
+        {cs.quote.org}
       </p>
     </section>
 
     <section class="cs-sec cs-sec--dark">
-      <h2 class="cs-sec__title">{cs.results.title}</h2>
+      <h2 class="cs-sec__title">{cs.results.titleBefore}<span class="cs-sec__title-accent">{cs.results.titleAccent}</span></h2>
       <ul class="cs-results">
         {cs.results.bullets.map((item) => <li>{item}</li>)}
       </ul>
@@ -91,7 +142,7 @@ const { dek, logoSrc } = ameristarCaseStudy;
 
     <section class="cs-scope-story" aria-labelledby="cs-scope-story-title">
       <h2 id="cs-scope-story-title" class="cs-scope-story__title">
-        {cs.scopeStory.titleBefore}<span>{cs.scopeStory.titleAccent}</span>
+        {cs.scopeStory.titleBefore}<em>{cs.scopeStory.titleAccent}</em>
       </h2>
       <ul class="cs-scope-stats" aria-label="Property scope managed through LUCI">
         {cs.scopeStory.stats.map((stat) => (
@@ -101,21 +152,25 @@ const { dek, logoSrc } = ameristarCaseStudy;
           </li>
         ))}
       </ul>
-      <div class="cs-scope-converge" aria-hidden="true">
-        <span class="cs-scope-converge__line"></span>
-        <span class="cs-scope-converge__line"></span>
-        <span class="cs-scope-converge__line"></span>
-        <span class="cs-scope-converge__line"></span>
-        <span class="cs-scope-converge__arrow"></span>
+      <svg class="cs-scope-converge" viewBox="0 0 100 120" preserveAspectRatio="none" aria-hidden="true">
+        <defs><linearGradient id="ameristar-funnel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#edd086" stop-opacity="0.75"/><stop offset="1" stop-color="#68e3be" stop-opacity="0.7"/></linearGradient></defs>
+        <line x1="15" y1="0" x2="50" y2="116" stroke="url(#ameristar-funnel)"/>
+        <line x1="38" y1="0" x2="50" y2="116" stroke="url(#ameristar-funnel)"/>
+        <line x1="62" y1="0" x2="50" y2="116" stroke="url(#ameristar-funnel)"/>
+        <line x1="85" y1="0" x2="50" y2="116" stroke="url(#ameristar-funnel)"/>
+      </svg>
+      <div class="cs-scope-arrow" aria-hidden="true"></div>
+      <div class="cs-scope-dest">
+        <span class="cs-scope-dest-rule" aria-hidden="true"></span>
+        <p class="cs-scope-story__outcome">
+          {cs.scopeStory.outcomeBefore}<em>{cs.scopeStory.outcomeAccent}</em>{cs.scopeStory.outcomeAfter}
+        </p>
+        <p class="cs-scope-story__dek">{cs.scopeStory.dek}</p>
       </div>
-      <p class="cs-scope-story__outcome">
-        {cs.scopeStory.outcomeBefore}<span>{cs.scopeStory.outcomeAccent}</span>{cs.scopeStory.outcomeAfter}
-      </p>
-      <p class="cs-scope-story__dek">{cs.scopeStory.dek}</p>
     </section>
 
     <section class="cs-sec cs-sec--light">
-      <h2 class="cs-sec__title">{cs.whatsNext.title}</h2>
+      <h2 class="cs-sec__title">{cs.whatsNext.titleBefore}<span class="cs-sec__title-accent">{cs.whatsNext.titleAccent}</span></h2>
       <div class="cs-copy">
         <p>{cs.whatsNext.intro}</p>
         <ul class="cs-plan">
@@ -132,7 +187,7 @@ const { dek, logoSrc } = ameristarCaseStudy;
     </section>
 
     <section class="cs-cta">
-      <p class="cs-cta__body">{cs.cta.body}</p>
+      <p class="cs-cta__body">Curious what this looks like for your property? <span class="cs-cta__accent">Let&rsquo;s talk.</span></p>
       <div class="cs-cta__actions">
         <a class="cs-cta-btn" href="/contact">
           Talk to LUCI
@@ -156,118 +211,72 @@ const { dek, logoSrc } = ameristarCaseStudy;
     background: var(--navy-deep);
     padding-bottom: clamp(48px, 8vw, 96px);
   }
-
   .cs-page__sheet {
     max-width: 880px;
     margin: 0 auto;
     background: #fff;
   }
 
-  /* Hero */
+  /* Hero — mesh stays vivid at the right edge; a scrim mutes it behind the
+     left-aligned title, dek, and property line so the type stays legible. */
   .cs-hero {
-    background: var(--navy-deep);
+    background-color: var(--navy-deep);
+    background-image:
+      linear-gradient(to right,
+        rgba(8, 18, 24, 0.86) 0%,
+        rgba(8, 18, 24, 0.80) 48%,
+        rgba(8, 18, 24, 0.42) 78%,
+        rgba(8, 18, 24, 0.10) 100%),
+      url('/images/mesh/luci-bg-hero-1920x1080.svg');
+    background-size: cover; background-position: center; background-repeat: no-repeat;
     padding: clamp(40px, 8vw, 84px) clamp(28px, 6vw, 64px) clamp(40px, 7vw, 72px);
-    border-bottom: 4px solid var(--mint);
+    overflow: hidden; position: relative;
   }
-
-  .cs-hero__kicker {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 22px;
+  .cs-hero::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 4px;
+    background: linear-gradient(to right, var(--mint) 0 62%, var(--gold) 62% 100%);
   }
-
-  .cs-hero__kicker::before {
-    content: '';
-    width: 28px;
-    height: 2px;
-    background: var(--mint);
-  }
-
+  .cs-hero__kicker { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+  .cs-hero__kicker::before { content: ''; width: 28px; height: 2px; background: var(--mint); }
   .cs-hero__kicker span {
-    font-family: var(--font-display);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--mint);
+    font-family: var(--font-display); font-size: 10px; font-weight: 700;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--mint);
   }
-
   .cs-hero__title {
-    margin: 0 0 26px;
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: clamp(34px, 6.5vw, 60px);
-    line-height: 1.04;
-    letter-spacing: -0.03em;
-    color: var(--off-white);
-    max-width: 16ch;
+    margin: 0 0 26px; font-family: var(--font-head); font-weight: 700;
+    font-size: clamp(34px, 6.5vw, 60px); line-height: 1.04; letter-spacing: -0.03em;
+    color: var(--off-white); max-width: 16ch;
   }
-
+  .cs-hero__leadin {
+    display: block; font-family: var(--font-head);
+    font-size: clamp(17px, 2.2vw, 24px); font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(235, 245, 248, 0.82); margin-bottom: 14px;
+  }
   .cs-hero__title :global(em) {
-    font-family: var(--font-display);
-    font-style: normal;
-    color: var(--mint);
-    text-transform: uppercase;
+    display: block; font-family: var(--font-display); font-style: normal;
+    font-size: clamp(24px, 4.8vw, 44px); line-height: 1.2; letter-spacing: 0;
+    color: var(--mint); text-transform: uppercase; max-width: 12ch;
   }
-
   .cs-hero__dek {
-    margin: 0 0 30px;
-    font-size: clamp(17px, 2.2vw, 20px);
-    line-height: 1.6;
-    color: rgba(235, 245, 248, 0.82);
-    max-width: 58ch;
+    margin: 0 0 30px; font-size: clamp(17px, 2.2vw, 20px); line-height: 1.6;
+    color: rgba(235, 245, 248, 0.82); max-width: 58ch;
   }
-
-  .cs-hero__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 30px;
-  }
-
+  .cs-hero__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 30px; }
   .cs-download {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-decoration: none;
-    color: var(--mint);
-    border: 1px solid rgba(104, 227, 190, 0.45);
-    padding: 12px 20px;
+    display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600;
+    letter-spacing: 0.04em; text-decoration: none; color: var(--mint);
+    border: 1px solid rgba(104, 227, 190, 0.45); padding: 12px 20px;
     transition: background 0.15s, border-color 0.15s;
   }
-
-  .cs-download:hover {
-    background: rgba(104, 227, 190, 0.08);
-    border-color: var(--mint);
-  }
-
-  .cs-download__icon {
-    font-size: 16px;
-    line-height: 1;
-  }
-
+  .cs-download:hover { background: rgba(104, 227, 190, 0.08); border-color: var(--mint); }
+  .cs-download__icon { font-size: 16px; line-height: 1; }
   .cs-hero__property {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    flex-wrap: wrap;
-    margin: 0;
-    padding-top: 24px;
-    border-top: 1px solid rgba(104, 227, 190, 0.15);
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    color: var(--mint);
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 0;
+    padding-top: 24px; border-top: 1px solid rgba(104, 227, 190, 0.15);
+    font-size: 13px; font-weight: 600; letter-spacing: 0.04em; color: var(--gold);
   }
-
-  .cs-hero__property span {
-    color: rgba(165, 179, 188, 0.7);
-    font-weight: 500;
-  }
+  .cs-hero__property span { color: rgba(165, 179, 188, 0.7); font-weight: 500; }
 
   /* Glance */
   .cs-glance {
@@ -275,570 +284,305 @@ const { dek, logoSrc } = ameristarCaseStudy;
     padding: clamp(32px, 5vw, 48px) clamp(28px, 6vw, 64px);
     border-bottom: 1px solid var(--rule-light);
   }
-
-  .cs-glance__logo {
-    margin-bottom: 28px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid var(--rule-light);
-  }
-
-  .cs-glance__logo img {
-    height: 44px;
-    width: auto;
-    display: block;
-  }
-
-  .cs-facts {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-bottom: 36px;
-  }
-
-  @media (max-width: 620px) {
-    .cs-facts {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px 24px;
-    }
-  }
-
+  .cs-glance__logo { margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--rule-light); }
+  .cs-glance__logo img { height: 44px; width: auto; display: block; }
+  .cs-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 32px; }
+  @media (max-width: 620px) { .cs-facts { grid-template-columns: repeat(2, 1fr); gap: 20px 24px; } }
   .cs-facts__label {
-    margin: 0 0 8px;
-    font-family: var(--font-display);
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--accent-light);
+    margin: 0 0 8px; font-family: var(--font-display); font-size: 9px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-light);
   }
+  .cs-facts__value { margin: 0; font-size: 17px; font-weight: 600; line-height: 1.3; color: var(--navy); }
 
-  .cs-facts__value {
-    margin: 0;
-    font-size: 17px;
-    font-weight: 600;
-    line-height: 1.3;
-    color: var(--navy);
+  /* Scope inventory (denominator) */
+  .cs-inventory {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    background: var(--rule-light); border: 1px solid var(--rule-light);
+    margin-bottom: 28px; list-style: none; padding: 0; margin-left: 0; margin-right: 0;
+  }
+  @media (max-width: 620px) { .cs-inventory { grid-template-columns: repeat(2, 1fr); } }
+  .cs-inventory__item { background: #fff; padding: 18px 16px; text-align: left; }
+  .cs-inventory__num {
+    margin: 0 0 6px; font-family: var(--font-head); font-size: clamp(28px, 4vw, 36px);
+    font-weight: 700; line-height: 1; letter-spacing: -0.03em; color: var(--accent-light);
+  }
+  .cs-inventory__label {
+    margin: 0; font-size: 13px; line-height: 1.35; color: var(--ink); font-weight: 500;
   }
 
   .cs-summary {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--rule-light);
-    border: 1px solid var(--rule-light);
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--rule-light); border: 1px solid var(--rule-light);
   }
-
-  @media (max-width: 620px) {
-    .cs-summary {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .cs-summary__cell {
-    background: #fff;
-    padding: 22px;
-  }
-
+  @media (max-width: 620px) { .cs-summary { grid-template-columns: 1fr; } }
+  .cs-summary__cell { background: #fff; padding: 22px; }
   .cs-summary__label {
-    margin: 0 0 10px;
-    font-family: var(--font-display);
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--accent-light);
+    margin: 0 0 10px; font-family: var(--font-display); font-size: 9px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-light);
   }
-
-  .cs-summary__text {
-    margin: 0;
-    font-size: 15px;
-    line-height: 1.55;
-    color: var(--ink);
-  }
-
+  .cs-summary__text { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink); }
   /* Sections */
   .cs-sec {
     padding: clamp(44px, 6vw, 72px) clamp(28px, 6vw, 64px);
     border-bottom: 1px solid var(--rule-light);
   }
-
-  .cs-sec--white {
-    background: #fff;
+  .cs-sec--white { background: #fff; }
+  .cs-sec--light { background: var(--off-white); }
+  .cs-sec--mid {
+    position: relative; isolation: isolate;
+    background-color: var(--navy-mid);
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+    overflow: hidden;
   }
+  .cs-sec--mid::before {
+    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 95% 100% at 0% 35%, rgba(104, 227, 190, 0.28) 0%, transparent 68%),
+      radial-gradient(ellipse 60% 75% at 15% 100%, rgba(104, 227, 190, 0.14) 0%, transparent 58%);
+  }
+  .cs-sec--mid > :global(*) { position: relative; z-index: 1; }
+  .cs-sec--dark { background: var(--navy); border-bottom-color: rgba(0, 0, 0, 0.3); }
+  .cs-sec__title {
+    margin: 0 0 22px; font-family: var(--font-head); font-weight: 700;
+    font-size: clamp(24px, 4vw, 34px); line-height: 1.12; letter-spacing: -0.025em; max-width: 24ch;
+  }
+  .cs-sec--white .cs-sec__title, .cs-sec--light .cs-sec__title { color: var(--navy); }
+  .cs-sec--mid .cs-sec__title, .cs-sec--dark .cs-sec__title { color: var(--off-white); }
+  .cs-sec__title-accent { color: var(--gold); }
+  .cs-sec--white .cs-sec__title-accent, .cs-sec--light .cs-sec__title-accent { color: var(--accent-light); }
+  .cs-copy p { margin: 0 0 18px; font-size: 17px; line-height: 1.72; max-width: 64ch; }
+  .cs-copy p:last-child { margin-bottom: 0; }
+  .cs-sec--white .cs-copy p, .cs-sec--light .cs-copy p { color: var(--ink); }
+  .cs-sec--mid .cs-copy p { color: rgba(235, 245, 248, 0.88); }
+  .cs-sec--dark .cs-copy p { color: rgba(235, 245, 248, 0.92); }
 
+  /* Challenge grid — text + nested riverboat photo */
   .cs-challenge-grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(240px, 0.48fr);
     gap: 40px;
     align-items: start;
   }
-
-  .cs-property-photo {
-    margin: 0;
-  }
-
+  .cs-property-photo { margin: 0; }
   .cs-property-photo img {
-    display: block;
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-    object-position: center;
+    display: block; width: 100%; aspect-ratio: 3 / 4;
+    object-fit: cover; object-position: center;
   }
-
   .cs-property-photo figcaption {
-    margin-top: 10px;
-    font-size: 12px;
-    line-height: 1.5;
-    color: var(--navy-muted);
+    margin-top: 10px; font-size: 12px; line-height: 1.5; color: var(--navy-muted);
   }
-
   @media (max-width: 700px) {
-    .cs-challenge-grid {
-      grid-template-columns: 1fr;
-      gap: 28px;
-    }
-
-    .cs-property-photo {
-      max-width: 420px;
-    }
+    .cs-challenge-grid { grid-template-columns: 1fr; gap: 28px; }
+    .cs-property-photo { max-width: 420px; }
   }
 
-  .cs-sec--light {
-    background: var(--off-white);
-  }
-
-  .cs-scope-story {
-    background: var(--navy-deep);
-    padding: clamp(48px, 7vw, 80px) clamp(28px, 6vw, 64px);
-    border-bottom: 1px solid rgba(104, 227, 190, 0.16);
-    text-align: center;
-  }
-
-  .cs-scope-story__title {
-    margin: 0 0 36px;
-    font-family: var(--font-head);
-    font-size: clamp(24px, 4vw, 36px);
-    font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: -0.025em;
-    color: var(--off-white);
-  }
-
-  .cs-scope-story__title span {
-    color: var(--mint);
-  }
-
-  .cs-scope-stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    list-style: none;
-    margin: 0;
-    padding: 0 0 32px;
-    border-bottom: 1px solid rgba(104, 227, 190, 0.18);
-  }
-
-  .cs-scope-stat {
-    padding: 0 18px;
-    border-left: 1px solid rgba(104, 227, 190, 0.2);
-  }
-
-  .cs-scope-stat:first-child {
-    border-left: 0;
-  }
-
-  .cs-scope-stat__value {
-    margin: 0 0 8px;
-    font-family: var(--font-head);
-    font-size: clamp(36px, 6vw, 52px);
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: -0.04em;
-    color: var(--mint);
-  }
-
-  .cs-scope-stat__label {
-    margin: 0;
-    font-size: 14px;
-    line-height: 1.4;
-    color: rgba(235, 245, 248, 0.76);
-  }
-
-  .cs-scope-converge {
-    position: relative;
-    height: 122px;
-    max-width: 760px;
-    margin: 0 auto 8px;
-  }
-
-  .cs-scope-converge__line {
-    position: absolute;
-    top: 28px;
-    left: 50%;
-    width: 28%;
-    height: 2px;
-    background: linear-gradient(90deg, var(--gold), var(--mint));
-    opacity: 0.8;
-    transform-origin: right center;
-  }
-
-  .cs-scope-converge__line:nth-child(1) {
-    transform: translateX(-100%) rotate(15deg);
-  }
-
-  .cs-scope-converge__line:nth-child(2) {
-    width: 18%;
-    transform: translateX(-100%) rotate(24deg);
-  }
-
-  .cs-scope-converge__line:nth-child(3) {
-    transform: rotate(-15deg);
-    background: linear-gradient(90deg, var(--mint), var(--gold));
-    transform-origin: left center;
-  }
-
-  .cs-scope-converge__line:nth-child(4) {
-    width: 18%;
-    transform: rotate(-24deg);
-    background: linear-gradient(90deg, var(--mint), var(--gold));
-    transform-origin: left center;
-  }
-
-  .cs-scope-converge__arrow {
-    position: absolute;
-    left: 50%;
-    top: 28px;
-    width: 4px;
-    height: 68px;
-    background: var(--mint);
-    transform: translateX(-50%);
-  }
-
-  .cs-scope-converge__arrow::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: -1px;
-    width: 22px;
-    height: 22px;
-    border-right: 4px solid var(--mint);
-    border-bottom: 4px solid var(--mint);
-    transform: translate(-50%, 2px) rotate(45deg);
-  }
-
-  .cs-scope-story__outcome {
-    margin: 0;
-    font-family: var(--font-head);
-    font-size: clamp(28px, 5vw, 44px);
-    font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: -0.03em;
-    color: var(--off-white);
-  }
-
-  .cs-scope-story__outcome span {
-    color: var(--mint);
-  }
-
-  .cs-scope-story__dek {
-    margin: 16px auto 0;
-    font-size: 17px;
-    line-height: 1.6;
-    color: rgba(235, 245, 248, 0.78);
-  }
-
-  @media (max-width: 620px) {
-    .cs-scope-stats {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 28px 0;
-    }
-
-    .cs-scope-stat:nth-child(3) {
-      border-left: 0;
-    }
-
-    .cs-scope-stat__value {
-      font-size: 38px;
-    }
-
-    .cs-scope-converge__line {
-      display: none;
-    }
-
-    .cs-scope-converge {
-      height: 96px;
-    }
-
-    .cs-scope-converge__arrow {
-      top: 16px;
-      height: 54px;
-    }
-  }
-
-  .cs-sec--mid {
-    background: var(--navy-mid);
-    border-bottom-color: rgba(0, 0, 0, 0.2);
-  }
-
-  .cs-sec--dark {
-    background: var(--navy);
-    border-bottom-color: rgba(0, 0, 0, 0.3);
-  }
-
-  .cs-sec__title {
-    margin: 0 0 22px;
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: clamp(24px, 4vw, 34px);
-    line-height: 1.12;
-    letter-spacing: -0.025em;
-    max-width: 24ch;
-  }
-
-  .cs-sec--white .cs-sec__title,
-  .cs-sec--light .cs-sec__title {
-    color: var(--navy);
-  }
-
-  .cs-sec--mid .cs-sec__title,
-  .cs-sec--dark .cs-sec__title {
-    color: var(--off-white);
-  }
-
-  .cs-copy p {
-    margin: 0 0 18px;
-    font-size: 17px;
-    line-height: 1.72;
-    max-width: 64ch;
-  }
-
-  .cs-copy p:last-child {
-    margin-bottom: 0;
-  }
-
-  .cs-sec--white .cs-copy p,
-  .cs-sec--light .cs-copy p {
-    color: var(--ink);
-  }
-
-  .cs-sec--mid .cs-copy p {
-    color: rgba(235, 245, 248, 0.88);
-  }
-
-  .cs-sec--dark .cs-copy p {
-    color: rgba(235, 245, 248, 0.92);
-  }
-
+  /* Scope list — icon-based 2-column grid */
   .cs-scope {
-    list-style: none;
-    margin: 4px 0 22px;
-    padding: 0;
-    max-width: 64ch;
+    list-style: none; margin: 28px 0 0; padding: 0; max-width: 64ch;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
   }
-
   .cs-scope li {
-    position: relative;
-    padding-left: 24px;
-    font-size: 17px;
-    line-height: 1.6;
-    margin-bottom: 12px;
-    color: rgba(235, 245, 248, 0.9);
+    display: flex; flex-direction: row; align-items: flex-start; gap: 14px;
+    padding: 16px 18px; font-size: 15px; line-height: 1.5; margin: 0;
+    color: rgba(235, 245, 248, 0.9); background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(104, 227, 190, 0.4); border-radius: 14px;
   }
+  .cs-scope li svg { display: block; width: 28px; height: 28px; flex-shrink: 0; }
+  @media (max-width: 620px) { .cs-scope { grid-template-columns: 1fr; } }
 
-  .cs-scope li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 12px;
-    width: 12px;
-    height: 2px;
-    background: var(--mint);
+  /* Consolidation you can see (canonical) */
+  .cs-consolidation__header { margin-bottom: 32px; }
+  .cs-consolidation__rule {
+    display: block; width: 40px; height: 3px; background: var(--accent-light); margin-bottom: 16px;
   }
-
-  .cs-results {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 1px;
-    background: rgba(104, 227, 190, 0.18);
-    list-style: none;
-    margin: 0 0 32px;
-    padding: 0;
-    counter-reset: cs-result;
+  .cs-consolidation__title {
+    margin: 0; font-family: var(--font-head); font-weight: 700;
+    font-size: clamp(24px, 4vw, 34px); line-height: 1.12; letter-spacing: -0.025em;
+    color: var(--navy); max-width: 28ch;
   }
-
-  .cs-results li {
-    background: var(--navy);
-    padding: 22px 20px;
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 1.4;
-    color: var(--off-white);
-  }
-
-  .cs-results li::before {
-    content: counter(cs-result, decimal-leading-zero);
-    counter-increment: cs-result;
-    display: block;
-    font-family: var(--font-display);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    color: var(--mint);
-    margin-bottom: 10px;
-  }
-
-  .cs-plan {
-    list-style: none;
-    margin: 22px 0 26px;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-    max-width: 64ch;
-  }
-
-  .cs-plan li {
-    display: grid;
-    grid-template-columns: 28px 1fr;
-    gap: 14px;
-    font-size: 17px;
-    line-height: 1.65;
-    color: var(--ink);
-  }
-
-  .cs-plan li::before {
-    content: '✓';
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--accent-light);
-    line-height: 1.3;
-  }
-
-  .cs-plan strong {
-    font-weight: 700;
-    color: var(--navy);
-  }
-
-  .cs-bottom-line {
-    margin-top: 4px;
-    padding-top: 26px;
+  .cs-consolidation__list {
+    list-style: none; margin: 0; padding: 0; max-width: 64ch;
     border-top: 1px solid var(--rule-light);
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--navy);
   }
-
+  .cs-consolidation__item { padding: 22px 0; border-bottom: 1px solid var(--rule-light); }
+  .cs-consolidation__item-title {
+    margin: 0 0 8px; font-weight: 700; font-size: 17px; line-height: 1.35; color: var(--ink-strong);
+  }
+  .cs-consolidation__item-text {
+    margin: 0; font-size: 17px; line-height: 1.65; color: var(--ink);
+  }
   /* Quote */
   .cs-quote {
     background: var(--navy-deep);
     padding: clamp(44px, 7vw, 76px) clamp(28px, 6vw, 64px);
     border-bottom: 1px solid rgba(104, 227, 190, 0.12);
   }
-
   .cs-quote__text {
-    margin: 0 0 20px;
-    font-size: clamp(22px, 3.4vw, 30px);
-    font-style: italic;
-    line-height: 1.4;
-    color: var(--off-white);
-    border-left: 4px solid var(--mint);
-    padding: 8px 0 8px 26px;
-    max-width: 26ch;
+    margin: 0 0 20px; font-size: clamp(22px, 3.4vw, 30px); font-style: italic;
+    line-height: 1.4; color: var(--off-white);
+    border-left: 4px solid var(--mint); padding: 8px 0 8px 26px; max-width: 26ch;
   }
-
   .cs-quote__attrib {
-    margin: 0;
-    padding-left: 30px;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    line-height: 1.6;
+    margin: 0; padding-left: 30px; font-size: 12px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.6;
+  }
+  .cs-quote__attrib span { display: block; color: var(--mint); }
+
+  /* Results */
+  .cs-results {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+    background: rgba(104, 227, 190, 0.18); list-style: none; margin: 0 0 32px; padding: 0;
+    counter-reset: cs-result;
+  }
+  @media (max-width: 620px) { .cs-results { grid-template-columns: 1fr; } }
+  .cs-results li {
+    background: var(--navy); padding: 22px 20px; font-size: 15px; font-weight: 600;
+    line-height: 1.4; color: var(--off-white);
+  }
+  .cs-results li::before {
+    content: counter(cs-result, decimal-leading-zero); counter-increment: cs-result; display: block;
+    font-family: var(--font-display); font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+    color: var(--gold); margin-bottom: 10px;
   }
 
-  .cs-quote__attrib span {
-    display: block;
-    color: var(--mint);
+  /* Plan */
+  .cs-plan {
+    list-style: none; margin: 22px 0 26px; padding: 0; display: flex; flex-direction: column;
+    gap: 22px; max-width: 64ch;
+  }
+  .cs-plan li {
+    display: grid; grid-template-columns: 28px 1fr; gap: 14px;
+    font-size: 17px; line-height: 1.65; color: var(--ink);
+  }
+  .cs-plan li::before {
+    content: '✓'; font-size: 20px; font-weight: 700; color: var(--gold-deep); line-height: 1.3;
+  }
+  .cs-plan strong { font-weight: 700; color: var(--navy); }
+  .cs-bottom-line {
+    margin-top: 4px; padding-top: 26px; border-top: 1px solid var(--rule-light);
+    font-size: 18px; line-height: 1.6; color: var(--navy);
   }
 
-  /* CTA */
+  /* Scope story — mesh at the edges, clear center for type + converge lines. */
+  .cs-scope-story {
+    position: relative; overflow: hidden;
+    background-color: var(--navy-deep);
+    padding: clamp(48px, 7vw, 80px) clamp(28px, 6vw, 64px);
+    border-bottom: 1px solid rgba(104, 227, 190, 0.16);
+    text-align: center;
+  }
+  .cs-scope-story::before {
+    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: url('/images/mesh/luci-bg-hero-split-1920x1080.svg') center / cover no-repeat;
+    mix-blend-mode: screen; opacity: 0.55;
+    -webkit-mask-image: radial-gradient(ellipse 78% 92% at 50% 50%, transparent 0%, transparent 28%, rgba(0,0,0,0.45) 58%, #000 82%);
+            mask-image: radial-gradient(ellipse 78% 92% at 50% 50%, transparent 0%, transparent 28%, rgba(0,0,0,0.45) 58%, #000 82%);
+  }
+  .cs-scope-story::after {
+    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: radial-gradient(ellipse 72% 88% at 50% 50%,
+      rgba(7, 15, 20, 0.72) 0%, rgba(7, 15, 20, 0.38) 42%, transparent 78%);
+  }
+  .cs-scope-story > :global(*) { position: relative; z-index: 1; }
+  .cs-scope-story__title {
+    margin: 0 0 36px; font-family: var(--font-head); font-size: clamp(24px, 4vw, 36px);
+    font-weight: 700; line-height: 1.15; letter-spacing: -0.025em; color: var(--mint);
+  }
+  .cs-scope-story__title :global(em) { font-style: normal; color: var(--off-white); }
+  .cs-scope-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); list-style: none;
+    margin: 0; padding: 0 0 32px; border-bottom: 1px solid rgba(104, 227, 190, 0.18);
+  }
+  @media (max-width: 620px) {
+    .cs-scope-stats { grid-template-columns: repeat(2, 1fr); gap: 24px 0; }
+    .cs-scope-stat:nth-child(odd) { border-left: 0; }
+  }
+  .cs-scope-stat { padding: 0 18px; border-left: 1px solid rgba(104, 227, 190, 0.2); }
+  .cs-scope-stat:first-child { border-left: 0; }
+  .cs-scope-stat__value {
+    margin: 0 0 8px; font-family: var(--font-head); font-size: clamp(28px, 5vw, 44px);
+    font-weight: 700; line-height: 1; letter-spacing: -0.04em; color: var(--mint);
+  }
+  .cs-scope-stat__label {
+    margin: 0; font-size: 13px; line-height: 1.35; color: rgba(235, 245, 248, 0.76);
+  }
+
+  /* Convergence diagram — four lines from the stats down to one arrow */
+  .cs-scope-converge {
+    display: block; width: 100%; height: clamp(52px, 7vw, 76px);
+    margin: 4px 0 -2px; overflow: visible;
+  }
+  .cs-scope-converge line { stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+  .cs-scope-arrow {
+    position: relative; width: clamp(28px, 3vw, 38px); margin: 2px auto 0;
+  }
+  .cs-scope-arrow::before {
+    content: ''; display: block; width: clamp(6px, 0.8vw, 9px);
+    height: clamp(28px, 4vw, 46px); margin: 0 auto;
+    background: var(--mint); border-radius: 4px;
+    box-shadow: 0 0 18px rgba(104, 227, 190, 0.55);
+  }
+  .cs-scope-arrow::after {
+    content: ''; display: block; width: 0; height: 0; margin: 0 auto;
+    border-left: clamp(13px, 1.4vw, 18px) solid transparent;
+    border-right: clamp(13px, 1.4vw, 18px) solid transparent;
+    border-top: clamp(17px, 1.9vw, 24px) solid var(--mint);
+    filter: drop-shadow(0 6px 12px rgba(104, 227, 190, 0.5));
+  }
+  .cs-scope-dest {
+    display: flex; flex-direction: column; align-items: center; gap: 12px; margin: 20px 0 0;
+  }
+  .cs-scope-dest-rule { width: 40px; height: 3px; background: var(--mint); }
+  .cs-scope-story__outcome {
+    margin: 0; font-family: var(--font-head); font-size: clamp(28px, 5vw, 44px);
+    font-weight: 700; line-height: 1.15; letter-spacing: -0.03em; color: var(--off-white);
+  }
+  .cs-scope-story__outcome :global(em) { font-style: normal; color: var(--mint); }
+  .cs-scope-story__dek {
+    margin: 0; font-size: 17px; line-height: 1.6;
+    color: rgba(235, 245, 248, 0.78); max-width: 42ch;
+  }
+  /* CTA — mesh background with scrim for legibility */
   .cs-cta {
-    background: var(--navy-deep);
+    background-color: var(--navy-deep);
+    background-image:
+      linear-gradient(to right,
+        rgba(8, 18, 24, 0.86) 0%,
+        rgba(8, 18, 24, 0.80) 52%,
+        rgba(8, 18, 24, 0.44) 80%,
+        rgba(8, 18, 24, 0.12) 100%),
+      url('/images/mesh/luci-bg-wide-2560x800.svg');
+    background-size: cover; background-position: center; background-repeat: no-repeat;
     padding: clamp(44px, 7vw, 76px) clamp(28px, 6vw, 64px);
     border-top: 4px solid var(--mint);
   }
-
   .cs-cta__body {
-    margin: 0 0 24px;
-    font-weight: 700;
-    font-size: clamp(22px, 3vw, 30px);
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    color: var(--off-white);
-    max-width: 24ch;
+    margin: 0 0 24px; font-weight: 700; font-size: clamp(22px, 3vw, 30px);
+    line-height: 1.2; letter-spacing: -0.02em; color: var(--off-white); max-width: 24ch;
   }
-
-  .cs-cta__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    align-items: center;
-  }
-
+  .cs-cta__accent { color: var(--mint); }
+  .cs-cta__actions { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
   .cs-cta-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-decoration: none;
-    color: var(--navy);
-    background: var(--mint);
-    padding: 16px 28px;
-    transition: background 0.15s;
+    display: inline-flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 700;
+    letter-spacing: 0.04em; text-decoration: none; color: var(--navy); background: var(--mint);
+    padding: 16px 28px; transition: background 0.15s;
   }
-
-  .cs-cta-btn:hover {
-    background: #7aedc8;
-  }
-
-  .cs-cta-btn__arrow {
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 1;
-  }
-
+  .cs-cta-btn:hover { background: #7aedc8; }
+  .cs-cta-btn__arrow { font-size: 18px; font-weight: 700; line-height: 1; }
   .cs-cta-btn--secondary {
-    background: transparent;
-    color: var(--mint);
+    background: transparent; color: var(--mint);
     border: 1px solid rgba(104, 227, 190, 0.45);
   }
-
-  .cs-cta-btn--secondary:hover {
-    background: rgba(104, 227, 190, 0.08);
-  }
-
+  .cs-cta-btn--secondary:hover { background: rgba(104, 227, 190, 0.08); }
   .cs-cta__about {
-    margin-top: 40px;
-    padding-top: 26px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 40px; padding-top: 26px; border-top: 1px solid rgba(255, 255, 255, 0.1);
     max-width: 62ch;
   }
-
   .cs-cta__about-label {
-    margin: 0 0 10px;
-    font-family: var(--font-display);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(104, 227, 190, 0.7);
+    margin: 0 0 10px; font-family: var(--font-display); font-size: 10px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase; color: rgba(104, 227, 190, 0.7);
   }
-
   .cs-cta__statement {
-    margin: 0;
-    font-size: 16px;
-    line-height: 1.65;
-    color: rgba(165, 179, 188, 0.88);
+    margin: 0; font-size: 16px; line-height: 1.65; color: rgba(165, 179, 188, 0.88);
   }
 </style>
