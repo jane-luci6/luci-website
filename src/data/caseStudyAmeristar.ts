@@ -28,10 +28,29 @@ export const ameristarCaseStudyDetail = {
   challenge: {
     title: 'A proven system, a bigger future',
     paragraphs: [
-      'Ameristar Council Bluffs spans a land-based casino and a riverboat. Its audio-visual system was based on an early LUCI design that had been operating successfully since 2012.',
+      'Ameristar Council Bluffs spans a land-based casino and a riverboat. Its A/V system was based on an early LUCI design that had been operating successfully since 2012.',
       'Even after more than a decade of daily use, the original system continued to support property operations and guest experience demands. But the property was preparing for a new chapter: a major casino buildout on the land side and a planned transition away from the riverboat casino.',
       'With years of ongoing upgrades, aging equipment, and that buildout approaching, Ameristar needed a more unified, scalable, and future-ready approach, one that could carry the property through its next phase of growth.',
     ],
+    photo: {
+      src: '/images/case-studies/ameristar-riverboat.jpg?v=3',
+      alt: 'Ameristar Council Bluffs riverboat beside the Missouri River at sunset',
+      caption: 'The riverboat at Ameristar Council Bluffs, with the land-side property beyond.',
+    },
+  },
+  scopeStory: {
+    titleBefore: 'Ameristar on LUCI ',
+    titleAccent: 'today',
+    stats: [
+      { value: '146', label: 'Video endpoints' },
+      { value: '50', label: 'Audio zones' },
+      { value: '78', label: 'DTV channels' },
+      { value: '26', label: 'CMS/signage channels' },
+    ],
+    outcomeBefore: 'One ',
+    outcomeAccent: 'LUCI',
+    outcomeAfter: ' platform',
+    dek: 'Every endpoint, every zone, every channel — one interface.',
   },
   approach: {
     title: 'Modernize without disrupting the floor',

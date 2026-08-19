@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CaseStudyYaamava from '../../../components/CaseStudyYaamava.astro';
+import { yaamavaCaseStudy, site } from '../../../data/site';
+import { getCaseStudySeo, breadcrumb } from '../../../data/seo';
+
+const slug = yaamavaCaseStudy.slug;
+const csSeo = getCaseStudySeo(slug);
+const canonicalPath = `/resources/case-studies/${slug}`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: `${yaamavaCaseStudy.title} — Yaamava' Resort & Casino`,
+  description: csSeo.description,
+  publisher: {
+    '@type': 'Organization',
+    name: site.name,
+    url: site.url,
+  },
+  mainEntityOfPage: `${site.url}${canonicalPath}`,
+  ...breadcrumb([
+    { name: 'Home', path: '/' },
+    { name: 'Resources', path: '/resources' },
+    { name: 'Case studies', path: '/resources/case-studies' },
+    { name: "Yaamava'", path: canonicalPath },
+  ]),
+};
+---
+
+<BaseLayout
+  title={csSeo.title}
+  description={csSeo.description}
+  canonicalPath={canonicalPath}
+  jsonLd={jsonLd}
+>
+  <CaseStudyYaamava />
+</BaseLayout>

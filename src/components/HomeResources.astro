@@ -1,9 +1,19 @@
 ---
-import { ameristarCaseStudy, tachiCaseStudy } from '../data/site';
+import { ameristarCaseStudy, tachiCaseStudy, samsTownCaseStudy, yaamavaCaseStudy } from '../data/site';
 
 const lede = 'See LUCI on real floors — and what is coming next.';
 
 const cards = [
+  {
+    href: `/resources/case-studies/${yaamavaCaseStudy.slug}`,
+    poster: yaamavaCaseStudy.poster,
+    logo: null,
+    logoAlt: '',
+    kicker: 'Case Study',
+    title: yaamavaCaseStudy.title,
+    meta: `${yaamavaCaseStudy.property} · ${yaamavaCaseStudy.location}`,
+    cta: 'Read the story',
+  },
   {
     href: `/resources/case-studies/${ameristarCaseStudy.slug}`,
     poster: null,
@@ -22,6 +32,16 @@ const cards = [
     kicker: 'Case Study',
     title: tachiCaseStudy.title,
     meta: `${tachiCaseStudy.property} · ${tachiCaseStudy.location}`,
+    cta: 'Read the story',
+  },
+  {
+    href: `/resources/case-studies/${samsTownCaseStudy.slug}`,
+    poster: samsTownCaseStudy.poster,
+    logo: null,
+    logoAlt: '',
+    kicker: 'Case Study',
+    title: samsTownCaseStudy.title,
+    meta: `${samsTownCaseStudy.property} · ${samsTownCaseStudy.location}`,
     cta: 'Read the story',
   },
   {

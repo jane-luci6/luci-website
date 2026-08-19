@@ -125,6 +125,28 @@ export const tachiCaseStudy = {
   pdfHref: '/downloads/LUCI-Case-Study-Tachi-Palace.pdf',
 } as const;
 
+// Sam's Town Hotel & Gambling Hall — sportsbook LED wall on existing LUCI (Issue 03 field story).
+export const samsTownCaseStudy = {
+  title: "An LED wall this big usually isn't this simple",
+  dek: "LUCI replaced a wall of mismatched TVs with one 480-square-foot LED display — looped into the same platform already running Sam's Town. No second system. Nothing for staff to relearn.",
+  slug: 'sams-town',
+  property: "Sam's Town Hotel & Gambling Hall",
+  location: 'Las Vegas, Nevada',
+  poster: '/images/case-studies/sams-town/slider-after-web.jpg',
+  logoSrc: '/images/logos/sams-town.png',
+} as const;
+
+// Yaamava' Resort & Casino — property-wide consolidation onto one platform.
+export const yaamavaCaseStudy = {
+  title: 'Everything on the property. One interface.',
+  dek: "LUCI brought Yaamava's broadcast content, signage, audio, data, and displays — and everything running underneath them — onto a single platform, so a 290,000-square-foot gaming floor can be run from one screen.",
+  slug: 'yaamava',
+  property: "Yaamava' Resort & Casino",
+  location: 'Highland, California',
+  poster: '/images/case-studies/yaamava/909-food-hall-web.jpg',
+  logoSrc: '/images/logos/yaamava.png',
+} as const;
+
 // Trust strip under the hero callout — real client logos, scrolling marquee.
 export const homeTrust = {
   eyebrow: 'Trusted on live properties',

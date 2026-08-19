@@ -202,6 +202,16 @@ export function getCaseStudySeo(slug: string): PageSeo {
       description:
         'LUCI brought Tachi Palace’s bingo hall alive in one week — eight LED video walls hung and tuned, every audio zone wired for control, all on one interface.',
     },
+    'sams-town': {
+      title: "Sam's Town case study",
+      description:
+        "LUCI replaced Sam's Town sportsbook TVs with one 480-square-foot LED wall — looped into the platform already running the property, with race video over existing coax.",
+    },
+    yaamava: {
+      title: "Yaamava' Resort & Casino case study",
+      description:
+        "LUCI consolidated Yaamava's broadcast content, signage, audio, data, and displays onto one platform — 420 displays and 284 audio zones across a 290,000-square-foot floor, run from a single interface.",
+    },
   };
   return (
     map[slug] ?? {

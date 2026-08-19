@@ -49,8 +49,14 @@ const { dek, logoSrc } = ameristarCaseStudy;
 
     <section class="cs-sec cs-sec--white">
       <h2 class="cs-sec__title">{cs.challenge.title}</h2>
-      <div class="cs-copy">
-        {cs.challenge.paragraphs.map((p) => <p>{p}</p>)}
+      <div class="cs-challenge-grid">
+        <div class="cs-copy">
+          {cs.challenge.paragraphs.map((p) => <p>{p}</p>)}
+        </div>
+        <figure class="cs-property-photo">
+          <img src={cs.challenge.photo.src} alt={cs.challenge.photo.alt} width="480" height="640" loading="lazy" />
+          <figcaption>{cs.challenge.photo.caption}</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -81,6 +87,31 @@ const { dek, logoSrc } = ameristarCaseStudy;
       <div class="cs-copy">
         {cs.results.paragraphs.map((p) => <p>{p}</p>)}
       </div>
+    </section>
+
+    <section class="cs-scope-story" aria-labelledby="cs-scope-story-title">
+      <h2 id="cs-scope-story-title" class="cs-scope-story__title">
+        {cs.scopeStory.titleBefore}<span>{cs.scopeStory.titleAccent}</span>
+      </h2>
+      <ul class="cs-scope-stats" aria-label="Property scope managed through LUCI">
+        {cs.scopeStory.stats.map((stat) => (
+          <li class="cs-scope-stat">
+            <p class="cs-scope-stat__value">{stat.value}</p>
+            <p class="cs-scope-stat__label">{stat.label}</p>
+          </li>
+        ))}
+      </ul>
+      <div class="cs-scope-converge" aria-hidden="true">
+        <span class="cs-scope-converge__line"></span>
+        <span class="cs-scope-converge__line"></span>
+        <span class="cs-scope-converge__line"></span>
+        <span class="cs-scope-converge__line"></span>
+        <span class="cs-scope-converge__arrow"></span>
+      </div>
+      <p class="cs-scope-story__outcome">
+        {cs.scopeStory.outcomeBefore}<span>{cs.scopeStory.outcomeAccent}</span>{cs.scopeStory.outcomeAfter}
+      </p>
+      <p class="cs-scope-story__dek">{cs.scopeStory.dek}</p>
     </section>
 
     <section class="cs-sec cs-sec--light">
@@ -333,8 +364,212 @@ const { dek, logoSrc } = ameristarCaseStudy;
     background: #fff;
   }
 
+  .cs-challenge-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 0.48fr);
+    gap: 40px;
+    align-items: start;
+  }
+
+  .cs-property-photo {
+    margin: 0;
+  }
+
+  .cs-property-photo img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .cs-property-photo figcaption {
+    margin-top: 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--navy-muted);
+  }
+
+  @media (max-width: 700px) {
+    .cs-challenge-grid {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    .cs-property-photo {
+      max-width: 420px;
+    }
+  }
+
   .cs-sec--light {
     background: var(--off-white);
+  }
+
+  .cs-scope-story {
+    background: var(--navy-deep);
+    padding: clamp(48px, 7vw, 80px) clamp(28px, 6vw, 64px);
+    border-bottom: 1px solid rgba(104, 227, 190, 0.16);
+    text-align: center;
+  }
+
+  .cs-scope-story__title {
+    margin: 0 0 36px;
+    font-family: var(--font-head);
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: var(--off-white);
+  }
+
+  .cs-scope-story__title span {
+    color: var(--mint);
+  }
+
+  .cs-scope-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    list-style: none;
+    margin: 0;
+    padding: 0 0 32px;
+    border-bottom: 1px solid rgba(104, 227, 190, 0.18);
+  }
+
+  .cs-scope-stat {
+    padding: 0 18px;
+    border-left: 1px solid rgba(104, 227, 190, 0.2);
+  }
+
+  .cs-scope-stat:first-child {
+    border-left: 0;
+  }
+
+  .cs-scope-stat__value {
+    margin: 0 0 8px;
+    font-family: var(--font-head);
+    font-size: clamp(36px, 6vw, 52px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--mint);
+  }
+
+  .cs-scope-stat__label {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+    color: rgba(235, 245, 248, 0.76);
+  }
+
+  .cs-scope-converge {
+    position: relative;
+    height: 122px;
+    max-width: 760px;
+    margin: 0 auto 8px;
+  }
+
+  .cs-scope-converge__line {
+    position: absolute;
+    top: 28px;
+    left: 50%;
+    width: 28%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--mint));
+    opacity: 0.8;
+    transform-origin: right center;
+  }
+
+  .cs-scope-converge__line:nth-child(1) {
+    transform: translateX(-100%) rotate(15deg);
+  }
+
+  .cs-scope-converge__line:nth-child(2) {
+    width: 18%;
+    transform: translateX(-100%) rotate(24deg);
+  }
+
+  .cs-scope-converge__line:nth-child(3) {
+    transform: rotate(-15deg);
+    background: linear-gradient(90deg, var(--mint), var(--gold));
+    transform-origin: left center;
+  }
+
+  .cs-scope-converge__line:nth-child(4) {
+    width: 18%;
+    transform: rotate(-24deg);
+    background: linear-gradient(90deg, var(--mint), var(--gold));
+    transform-origin: left center;
+  }
+
+  .cs-scope-converge__arrow {
+    position: absolute;
+    left: 50%;
+    top: 28px;
+    width: 4px;
+    height: 68px;
+    background: var(--mint);
+    transform: translateX(-50%);
+  }
+
+  .cs-scope-converge__arrow::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -1px;
+    width: 22px;
+    height: 22px;
+    border-right: 4px solid var(--mint);
+    border-bottom: 4px solid var(--mint);
+    transform: translate(-50%, 2px) rotate(45deg);
+  }
+
+  .cs-scope-story__outcome {
+    margin: 0;
+    font-family: var(--font-head);
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: var(--off-white);
+  }
+
+  .cs-scope-story__outcome span {
+    color: var(--mint);
+  }
+
+  .cs-scope-story__dek {
+    margin: 16px auto 0;
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(235, 245, 248, 0.78);
+  }
+
+  @media (max-width: 620px) {
+    .cs-scope-stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px 0;
+    }
+
+    .cs-scope-stat:nth-child(3) {
+      border-left: 0;
+    }
+
+    .cs-scope-stat__value {
+      font-size: 38px;
+    }
+
+    .cs-scope-converge__line {
+      display: none;
+    }
+
+    .cs-scope-converge {
+      height: 96px;
+    }
+
+    .cs-scope-converge__arrow {
+      top: 16px;
+      height: 54px;
+    }
   }
 
   .cs-sec--mid {

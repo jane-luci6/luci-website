@@ -2,10 +2,10 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PageHero from '../../../components/PageHero.astro';
 import SectionBlock from '../../../components/SectionBlock.astro';
-import { ameristarCaseStudy, tachiCaseStudy, portfolioLine } from '../../../data/site';
+import { ameristarCaseStudy, tachiCaseStudy, samsTownCaseStudy, yaamavaCaseStudy, portfolioLine } from '../../../data/site';
 import { seoPages, breadcrumb } from '../../../data/seo';
 
-const caseStudies = [ameristarCaseStudy, tachiCaseStudy];
+const caseStudies = [yaamavaCaseStudy, ameristarCaseStudy, tachiCaseStudy, samsTownCaseStudy];
 ---
 
 <BaseLayout
@@ -44,7 +44,9 @@ const caseStudies = [ameristarCaseStudy, tachiCaseStudy];
               <p class="cs-card__dek">{cs.dek}</p>
               <div class="cs-card__links">
                 <a class="cs-card__cta" href={href}>Read the full story <span aria-hidden="true">→</span></a>
-                <a class="cs-card__pdf" href={cs.pdfHref} target="_blank" rel="noopener noreferrer">Download PDF <span aria-hidden="true">↗</span></a>
+                {'pdfHref' in cs && cs.pdfHref ? (
+                  <a class="cs-card__pdf" href={cs.pdfHref} target="_blank" rel="noopener noreferrer">Download PDF <span aria-hidden="true">↗</span></a>
+                ) : null}
               </div>
             </div>
           </li>
