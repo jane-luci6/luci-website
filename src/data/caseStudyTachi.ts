@@ -1,8 +1,8 @@
 /** Full Tachi Palace case study — web page (PDF forthcoming). */
 
 export const tachiCaseStudyDetail = {
+  heroLeadin: 'One week to a',
   heroDisplay: 'foundation for growth',
-  heroTrail: 'built in one week',
   property: 'Tachi Palace Casino Resort',
   propertyMeta: 'Lemoore, California · Tachi Yokut Tribe',
   pdfHref: '/downloads/LUCI-Case-Study-Tachi-Palace.pdf',
