@@ -210,7 +210,7 @@ export function getCaseStudySeo(slug: string): PageSeo {
     yaamava: {
       title: "Yaamava' Resort & Casino case study",
       description:
-        "LUCI consolidated Yaamava's broadcast content, signage, audio, data, and displays onto one platform — 420 displays and 284 audio zones across a 290,000-square-foot floor, run from a single interface.",
+        "LUCI consolidated Yaamava's broadcast content, signage, audio, data, and displays onto one platform, then built 34 new LED walls across seven venues into it — 420 displays and 284 audio zones run from a single interface.",
     },
   };
   return (

@@ -13,21 +13,21 @@ export const yaamavaCaseStudyDetail = {
   inventory: [
     { value: '290,000', label: 'sq ft of gaming floor under management' },
     { value: '1,000+', label: 'endpoints on the platform' },
-    { value: '14', label: 'technologies orchestrated' },
+    { value: '34', label: 'LED walls across seven venues' },
     { value: '5', label: 'separate silos consolidated onto LUCI' },
   ],
   summary: [
     {
       label: 'The challenge',
-      text: 'Audio, video, and control each ran on their own hardware, their own software, and their own interfaces.',
+      text: 'Audio, video, and signage each ran on their own hardware, their own software, and their own interfaces.',
     },
     {
       label: 'The approach',
-      text: "Consolidation instead of addition — the property's separate technologies and interfaces orchestrated from one LUCI platform, plus new LED across the building.",
+      text: 'Integrate each existing system through its own API rather than rip it out, consolidate them onto one platform, then build the property\u2019s 34 new LED walls directly into it as they went up.',
     },
     {
       label: 'The result',
-      text: 'Every audio zone, display, and network device on the property managed from a single interface.',
+      text: 'Every audio zone, display, and network device on the property — including 34 LED walls across seven venues — managed from a single interface.',
     },
   ],
   challenge: {
@@ -35,8 +35,8 @@ export const yaamavaCaseStudyDetail = {
     titleAccent: 'one piece at a time',
     paragraphs: [
       "Yaamava' Resort & Casino sits in Highland, California, owned and operated by the San Manuel Band of Mission Indians. What opened in 1986 has grown into one of the premier casino resort destinations in the country.",
-      'The technology underneath it grew the same way it did — one piece at a time. Broadcast content, signage, audio and paging, data, displays, and everything sitting underneath those each arrived with their own hardware, their own software, their own interface, and their own way of being operated.',
-      "Each one worked on its own; together, they didn't. Racks and players multiplied. Content that belonged on every screen in the building had to be pushed through several platforms to get there. A message the executive team wanted on the gaming floor crossed tools and teams before it reached a single display.",
+      'The technology underneath it grew the same way it did — one piece at a time. Broadcast content, signage, audio and paging, data, displays, and everything sitting underneath those each arrived with its own hardware, software, interface, and its own way of being operated.',
+      'Every addition brought another rack, another license, and another interface for someone to learn. Putting one message on every screen in the building meant pushing it through several platforms, and crossing as many teams, before it reached a single display.',
       'For a property built to feel like one experience, the technology behind it was running in pieces.',
     ],
   },
@@ -46,11 +46,12 @@ export const yaamavaCaseStudyDetail = {
     caption: 'The 909 Sportsbar — every screen in the room on the same platform.',
   },
   approach: {
-    titleBefore: 'Bring every layer ',
+    titleBefore: 'Bringing every layer ',
     titleAccent: 'onto one platform',
     paragraphs: [
-      'Rather than adding more hardware and apps, LUCI consolidated all the layers under one roof and one interface — along with the technologies running underneath each of them.',
-      'With those consolidated, every sign and every TV on the property could work together instead of separately. LUCI also designed and installed LED across the rest of the building, bringing it onto the platform as well.',
+      'Rather than adding more hardware and apps, LUCI consolidated every layer of technology under one platform so everything could be controlled from a single interface. Each system was integrated through its own API and left in place — no rip-and-replace, no forklift upgrade.',
+      "The property was growing at the same time. LUCI designed and installed 34 LED walls across seven venues at Yaamava' — and every one of them came online inside the platform already running the building, not beside it.",
+      'That is where a project this size usually goes wrong. Thirty-four walls delivered on their own terms arrive with their own control software, their own scheduling, and their own operator to train — a second system to run alongside the first. Here they became more endpoints on a platform the team already used.',
       "Today, every audio zone, display, and network device at Yaamava' is managed from one interface.",
     ],
     scope: [
@@ -59,13 +60,17 @@ export const yaamavaCaseStudyDetail = {
       'API and data',
       'Audio and paging',
       'Displays and video walls',
-      'New LED across the building',
+      '34 new LED walls across seven venues',
     ],
   },
   consolidation: [
     {
       title: 'Five silos, one platform',
       text: 'Broadcast, signage, data, audio and paging, and displays each had their own hardware, software, and interface. They now run as one.',
+    },
+    {
+      title: 'Thirty-four walls, no second console',
+      text: 'The LED LUCI designed and installed across seven venues came online inside the platform already running the property — no parallel control system, no separate operator to staff.',
     },
     {
       title: 'Less hardware, not more',
@@ -91,12 +96,12 @@ export const yaamavaCaseStudyDetail = {
     bullets: [
       'One interface for every audio zone, display, and network device',
       'Content that moves across the property at once, instead of platform by platform',
-      'LED across the building, running on the same platform as everything else',
+      '34 LED walls across seven venues, running on the same platform as everything else',
       'An A/V and IT team spending its time on priorities instead of upkeep',
     ],
     body: [
-      'A message the executive team wants on the gaming floor used to cross tools and teams before it reached a single display. Now one person opens LUCI, picks the screens, and sends it — the floor, the signage, the video walls, all at once.',
-      'There is no second login for signage, no separate console for the LED, no third tool for paging.',
+      'A message that once crossed tools and teams now takes one person: open LUCI, pick the screens, send it — the floor, the signage, the video walls, all at once.',
+      'There is no second login for signage, no separate console for the 34 LED walls, no third tool for paging.',
     ],
   },
   ledFigure: {
@@ -118,6 +123,7 @@ export const yaamavaCaseStudyDetail = {
     titleAccent: 'to date',
     stats: [
       { value: '420', label: 'Displays', icon: 'display' },
+      { value: '34', label: 'LED walls', icon: 'led' },
       { value: '284', label: 'Audio zones', icon: 'audio' },
       { value: '92', label: 'DTV channels', icon: 'channel' },
       { value: '220', label: 'Digital signage endpoints', icon: 'signage' },
@@ -126,7 +132,7 @@ export const yaamavaCaseStudyDetail = {
     outcomeBefore: 'One ',
     outcomeAccent: 'LUCI',
     outcomeAfter: ' platform',
-    dek: 'Every endpoint, every zone, every channel — one interface.',
+    dek: 'Every endpoint, every zone, every wall, every channel — one interface.',
   },
   whatsNext: {
     titleBefore: 'Built for ',
@@ -134,7 +140,7 @@ export const yaamavaCaseStudyDetail = {
     plans: [
       {
         title: 'One platform to build on.',
-        body: 'As new spaces, screens, and zones come online, they join the system already running the resort — no second install, no parallel system to stand up.',
+        body: 'As new spaces, screens, and zones come online, they join the system already running the resort — no second install, no parallel system to stand up. Thirty-four LED walls have already arrived that way.',
       },
       {
         title: 'Less to maintain, not more.',

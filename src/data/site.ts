@@ -139,7 +139,7 @@ export const samsTownCaseStudy = {
 // Yaamava' Resort & Casino — property-wide consolidation onto one platform.
 export const yaamavaCaseStudy = {
   title: 'Everything on the property. One interface.',
-  dek: "LUCI brought Yaamava's broadcast content, signage, audio, data, and displays — and everything running underneath them — onto a single platform, so a 290,000-square-foot gaming floor can be run from a single platform.",
+  dek: "LUCI brought Yaamava's broadcast content, signage, audio, data, and displays onto one platform, then designed and installed 34 LED walls across seven venues that came online inside it — so a 290,000-square-foot resort runs from a single interface.",
   slug: 'yaamava',
   property: "Yaamava' Resort & Casino",
   location: 'Highland, California',
