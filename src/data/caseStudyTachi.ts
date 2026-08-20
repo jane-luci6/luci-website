@@ -19,9 +19,10 @@ export const tachiCaseStudyDetail = {
   ],
   inventory: [
     { value: '8', label: 'LED video walls hung and tuned' },
+    { value: '90', label: 'video endpoints on network' },
+    { value: '21', label: 'audio zones under control' },
+    { value: '14', label: 'CMS/signage channels' },
     { value: '1', label: 'week, install to handoff' },
-    { value: 'All', label: 'casino audio zones on LUCI' },
-    { value: '1', label: 'immersive bingo room' },
   ],
   summary: [
     {
@@ -129,10 +130,10 @@ export const tachiCaseStudyDetail = {
     titleAccent: 'to date',
     stats: [
       { value: '8', label: 'LED video walls' },
-      { value: 'All', label: 'casino audio zones' },
-      { value: '1', label: 'bingo preset system' },
+      { value: '90', label: 'video endpoints' },
+      { value: '21', label: 'audio zones' },
+      { value: '14', label: 'CMS/signage channels' },
       { value: '1', label: 'LUCI interface' },
-      { value: '0', label: 'separate control systems' },
     ],
     outcomeBefore: 'One ',
     outcomeAccent: 'LUCI',
