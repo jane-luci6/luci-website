@@ -23,7 +23,7 @@ export const yaamavaCaseStudyDetail = {
     },
     {
       label: 'The approach',
-      text: 'Integrate each existing system through its own API rather than rip it out, consolidate them onto one platform, then build the property\u2019s 34 new LED walls directly into it as they went up.',
+      text: 'Run audio and video over the property network, centralize control in LUCI, and bring all 34 LED walls into the same platform as they were built.',
     },
     {
       label: 'The result',
@@ -35,9 +35,9 @@ export const yaamavaCaseStudyDetail = {
     titleAccent: 'one piece at a time',
     paragraphs: [
       "Yaamava' Resort & Casino sits in Highland, California, owned and operated by the San Manuel Band of Mission Indians. What opened in 1986 has grown into one of the premier casino resort destinations in the country.",
-      'The technology underneath it grew the same way it did — one piece at a time. Broadcast content, signage, audio and paging, data, displays, and everything sitting underneath those each arrived with its own hardware, software, interface, and its own way of being operated.',
-      'Every addition brought another rack, another license, and another interface for someone to learn. Putting one message on every screen in the building meant pushing it through several platforms, and crossing as many teams, before it reached a single display.',
-      'For a property built to feel like one experience, the technology behind it was running in pieces.',
+      'The technology underneath it grew the same way — one piece at a time. Broadcast content, signage, audio and paging, data, displays, and everything beneath them each arrived with its own hardware, software, interface, and operating model.',
+      "Then Yaamava' began remodeling and scaling the property, including 34 LED walls across seven venues. Without a different architecture, that expansion would have compounded the same problem: another control environment, more hardware, and more workflows for the team to manage.",
+      'The property was becoming one larger guest experience. Its technology was at risk of becoming even more fragmented.',
     ],
   },
   floorFigure: {
@@ -49,10 +49,9 @@ export const yaamavaCaseStudyDetail = {
     titleBefore: 'Bringing every layer ',
     titleAccent: 'onto one platform',
     paragraphs: [
-      'Rather than adding more hardware and apps, LUCI consolidated every layer of technology under one platform so everything could be controlled from a single interface. Each system was integrated through its own API and left in place — no rip-and-replace, no forklift upgrade.',
-      "The property was growing at the same time. LUCI designed and installed 34 LED walls across seven venues at Yaamava' — and every one of them came online inside the platform already running the building, not beside it.",
-      'That is where a project this size usually goes wrong. Thirty-four walls delivered on their own terms arrive with their own control software, their own scheduling, and their own operator to train — a second system to run alongside the first. Here they became more endpoints on a platform the team already used.',
-      "Today, every audio zone, display, and network device at Yaamava' is managed from one interface.",
+      "LUCI designed the system around Yaamava's network, distributing audio and video over it and centralizing control in the LUCI platform. That network-based architecture reduced the dedicated processors and other hardware the property had to install and maintain.",
+      "LUCI also designed and built 34 LED walls across seven remodeled venues. Instead of creating a separate control environment for the expansion, the team brought every wall into LUCI with the property's audio, video, and signage.",
+      'The property grew while its operating model got smaller: fewer systems, less hardware, and one place to run every endpoint.',
     ],
     scope: [
       'Broadcast content',
@@ -70,7 +69,7 @@ export const yaamavaCaseStudyDetail = {
     },
     {
       title: 'Thirty-four walls, no second console',
-      text: 'The LED LUCI designed and installed across seven venues came online inside the platform already running the property — no parallel control system, no separate operator to staff.',
+      text: 'The LED LUCI designed and installed across seven venues came online inside the platform already running the property — no parallel control environment or separate workflow to manage.',
     },
     {
       title: 'Less hardware, not more',
