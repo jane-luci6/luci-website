@@ -64,19 +64,23 @@ export const ameristarCaseStudyDetail = {
   },
   consolidation: [
     {
-      title: 'Processing off the riverboat',
+      problem: 'A/V processing on the riverboat',
+      solution: 'one data center on land',
       text: 'All A/V processing moved from the boat to the IT data center on land — one location, not many.',
     },
     {
-      title: 'No A/V rooms in the buildout',
+      problem: 'A/V rooms in the buildout',
+      solution: 'zero new rooms needed',
       text: 'Centralizing processing in the data center eliminated the need to design separate A/V rooms into the new construction.',
     },
     {
-      title: 'Old head-end replaced',
+      problem: 'Decade-old head-end',
+      solution: 'one consolidated platform',
       text: 'The decade-old A/V head-end, amplifiers, and control infrastructure were replaced and consolidated onto the platform.',
     },
     {
-      title: 'One login, not one per system',
+      problem: 'One login per system',
+      solution: 'one browser-based interface',
       text: 'Staff now use one browser-based interface instead of separate tools for each A/V system.',
     },
   ],
