@@ -139,8 +139,7 @@ const { dek, logoSrc } = tachiCaseStudy;
       <div class="cs-consolidation-band__scrim" aria-hidden="true"></div>
       <div class="cs-consolidation-band__content">
         <header class="cs-consolidation__header">
-          <h2 id="cs-consolidation-title" class="cs-consolidation__title">Consolidation you can see</h2>
-          <p class="cs-consolidation__lead">{cs.consolidation.lead}</p>
+          <h2 id="cs-consolidation-title" class="cs-consolidation__title"><span class="cs-consolidation__title-accent">Consolidation</span> you can see</h2>
         </header>
         <ul class="cs-consolidation__list">
           {cs.consolidation.items.map((item) => (
@@ -387,12 +386,12 @@ const { dek, logoSrc } = tachiCaseStudy;
   .cs-consolidation-band__content { position: relative; z-index: 2; padding: clamp(48px, 7vw, 80px) clamp(28px, 6vw, 64px); max-width: 74ch; }
   .cs-consolidation__header { margin-bottom: 0; padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.08); }
   .cs-consolidation__title { margin: 0; font-family: var(--font-head); font-weight: 700; font-size: clamp(24px, 4vw, 34px); line-height: 1.12; letter-spacing: -0.025em; color: var(--off-white); max-width: 28ch; }
-  .cs-consolidation__lead { margin: 16px 0 0; max-width: 48ch; font-size: 17px; line-height: 1.65; color: rgba(235,245,248,0.86); }
+  .cs-consolidation__title-accent { color: var(--gold); }
   .cs-consolidation__list { list-style: none; margin: 0; padding: 0; }
   .cs-consolidation__item { padding: 22px 0; }
   .cs-consolidation__item:not(:last-child) { border-bottom: 1px solid rgba(255,255,255,0.08); }
   .cs-consolidation__item-title { margin: 0 0 8px; font-weight: 700; font-size: 19px; line-height: 1.35; color: var(--mint); }
-  .cs-consolidation__item-text { margin: 0; font-size: 15px; line-height: 1.6; color: rgba(235,245,248,0.62); }
+  .cs-consolidation__item-text { margin: 0; font-size: 17px; line-height: 1.65; color: rgba(235,245,248,0.82); }
   @media (max-width: 640px) { .cs-consolidation-band__scrim { background: linear-gradient(to bottom, rgba(10,22,28,0.95) 0%, rgba(10,22,28,0.88) 50%, rgba(10,22,28,0.45) 78%, rgba(10,22,28,0) 100%); } .cs-consolidation-band__content { max-width: none; } }
 
   .cs-quote { background: var(--off-white); padding: clamp(44px, 7vw, 76px) clamp(28px, 6vw, 64px); border-bottom: 1px solid var(--rule-light); }
