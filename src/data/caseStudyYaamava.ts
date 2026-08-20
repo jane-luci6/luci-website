@@ -61,19 +61,23 @@ export const yaamavaCaseStudyDetail = {
   },
   consolidation: [
     {
-      title: 'Five technology silos → one platform',
+      problem: 'Five technology silos',
+      solution: 'one platform',
       text: 'Broadcast, signage, data, audio and paging, and displays now operate through LUCI.',
     },
     {
-      title: '34 new LED walls → same interface',
+      problem: '34 new LED walls',
+      solution: 'same interface',
       text: 'Walls across seven venues joined the property’s existing A/V and signage control instead of creating another control environment.',
     },
     {
-      title: 'Dedicated hardware → network distribution',
+      problem: 'Dedicated hardware',
+      solution: 'network distribution',
       text: 'Audio and video run over the property network, reducing the processors, players, and rack equipment to power, cool, and maintain.',
     },
     {
-      title: 'Coordinated interfaces → one operating view',
+      problem: 'Coordinated interfaces',
+      solution: 'one operating view',
       text: 'Staff select content or channels, choose the destinations, and send them across the floor, signage, and video walls from LUCI.',
     },
   ],
