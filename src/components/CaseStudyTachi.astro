@@ -143,12 +143,17 @@ const { dek, logoSrc } = tachiCaseStudy;
           <p class="cs-consolidation__lead">{cs.consolidation.lead}</p>
         </header>
         <ul class="cs-consolidation__list">
-          {cs.consolidation.items.map((item) => (
-            <li class="cs-consolidation__item">
-              <p class="cs-consolidation__item-title">{item.title}</p>
-              <p class="cs-consolidation__item-text">{item.text}</p>
-            </li>
-          ))}
+          {cs.consolidation.items.map((item) => {
+            const parts = item.title.split('→');
+            const problem = (parts[0] ?? '').trim();
+            const solution = (parts[1] ?? '').trim();
+            return (
+              <li class="cs-consolidation__item">
+                <p class="cs-consolidation__item-title">{problem}<span class="cs-consolidation__item-solution">→ {solution}</span></p>
+                <p class="cs-consolidation__item-text">{item.text}</p>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>
@@ -385,14 +390,15 @@ const { dek, logoSrc } = tachiCaseStudy;
   .cs-consolidation-band__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: right center; display: block; filter: brightness(0.5); }
   .cs-consolidation-band__scrim { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(to right, rgba(10,22,28,0.98) 0%, rgba(10,22,28,0.94) 35%, rgba(10,22,28,0.60) 58%, rgba(10,22,28,0.12) 80%, rgba(10,22,28,0) 100%); }
   .cs-consolidation-band__content { position: relative; z-index: 2; padding: clamp(48px, 7vw, 80px) clamp(28px, 6vw, 64px); max-width: 62ch; }
-  .cs-consolidation__header { margin-bottom: 32px; }
+  .cs-consolidation__header { margin-bottom: 0; padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.08); }
   .cs-consolidation__title { margin: 0; font-family: var(--font-head); font-weight: 700; font-size: clamp(24px, 4vw, 34px); line-height: 1.12; letter-spacing: -0.025em; color: var(--off-white); max-width: 28ch; }
   .cs-consolidation__lead { margin: 16px 0 0; max-width: 48ch; font-size: 17px; line-height: 1.65; color: rgba(235,245,248,0.86); }
   .cs-consolidation__list { list-style: none; margin: 0; padding: 0; }
   .cs-consolidation__item { padding: 20px 0; }
-  .cs-consolidation__item:not(:last-child) { border-bottom: 1px solid rgba(104,227,190,0.15); }
-  .cs-consolidation__item-title { margin: 0 0 6px; font-weight: 700; font-size: 17px; line-height: 1.35; color: var(--mint); }
-  .cs-consolidation__item-text { margin: 0; font-size: 17px; line-height: 1.65; color: rgba(235,245,248,0.82); }
+  .cs-consolidation__item:not(:last-child) { border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .cs-consolidation__item-title { margin: 0 0 6px; font-weight: 700; font-size: 17px; line-height: 1.35; color: var(--off-white); }
+  .cs-consolidation__item-solution { color: var(--mint); }
+  .cs-consolidation__item-text { margin: 0; font-size: 15px; line-height: 1.6; color: rgba(235,245,248,0.62); }
   @media (max-width: 640px) { .cs-consolidation-band__scrim { background: linear-gradient(to bottom, rgba(10,22,28,0.95) 0%, rgba(10,22,28,0.88) 50%, rgba(10,22,28,0.45) 78%, rgba(10,22,28,0) 100%); } .cs-consolidation-band__content { max-width: none; } }
 
   .cs-quote { background: var(--off-white); padding: clamp(44px, 7vw, 76px) clamp(28px, 6vw, 64px); border-bottom: 1px solid var(--rule-light); }
