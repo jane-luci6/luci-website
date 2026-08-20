@@ -40,8 +40,8 @@ export const tachiCaseStudyDetail = {
     titleBefore: 'The hall ',
     titleAccent: 'they had',
     paragraphs: [
-      'The bingo hall already brought people together. The room itself had not caught up. Eight empty wall bays surrounded one of the property’s biggest gathering spaces, leaving winner moments without the scale or energy the crowd deserved.',
-      'Behind the room, separate players, audio controls, and legacy racks made every change harder than it needed to be. Tachi needed more than new screens. The hall needed to operate as one coordinated experience.',
+      'The bingo hall was already one of Tachi Palace’s biggest draws — an established gathering place that brought locals back again and again. Tachi saw an opportunity to build on that success with a more immersive experience.',
+      'Eight open wall bays offered room to make every game and winner moment feel larger. By adding LED, coordinated audio, and unified control, the property could give the hall new energy without changing what already made it special.',
     ],
     photo: {
       src: '/images/case-studies/tachi/slider-before-web.jpg',
