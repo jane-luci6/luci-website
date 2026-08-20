@@ -78,26 +78,26 @@ export const tachiCaseStudyDetail = {
       'Before LUCI, running the hall meant hunting for which player controlled which zone, switching walls one at a time, and guessing at audio levels. Now every wall, every zone, and every preset lives behind one login — search, select, send.',
     ],
     photo: {
-      src: '/images/case-studies/tachi/03c-config-web.jpg',
-      alt: 'LUCI team configuring the bingo hall system on site during installation',
+      src: '/images/case-studies/tachi/bingo-wall-operating.png',
+      alt: 'LUCI bingo wall interface in operation — blackout pattern, called numbers highlighted, prize display, and the current call on screen',
     },
   },
   consolidation: {
     items: [
       {
-        title: 'Legacy racks in the bingo hall',
+        title: 'Legacy racks → simplified LUCI stack',
         text: 'Pulled out and replaced with a simplified LUCI stack — less equipment to power, cool, and maintain.',
       },
       {
-        title: 'Separate wall and zone control',
+        title: 'Separate controls → one interface',
         text: 'Eight LED walls and every audio zone now run from one LUCI interface.',
       },
       {
-        title: 'Per-zone player guesswork',
+        title: 'Audio zone guesswork → one map',
         text: 'Every audio zone mapped in one place — staff no longer hunt for which player controls which zone.',
       },
       {
-        title: 'A parallel resort rollout',
+        title: 'Future rollouts → same platform',
         text: 'Bingo hall on LUCI first; other spaces plug into the same platform — no second install to stand up.',
       },
     ],
@@ -146,7 +146,7 @@ export const tachiCaseStudyDetail = {
     plans: [
       {
         title: 'Run it from anywhere.',
-        body: 'Bingo, audio, and every screen live in one LUCI interface the team can reach from any authorized device — an iPad on the floor, a laptop, a phone from home.',
+        body: 'Bingo, audio, and every screen live in one LUCI interface the team can reach from any authorized device — an iPad on the floor, a laptop, a phone, onsite or offsite.',
       },
       {
         title: 'Racks of gear, gone.',

@@ -136,7 +136,6 @@ const { dek, logoSrc } = tachiCaseStudy;
 
     <section class="cs-sec cs-sec--light cs-consolidation" aria-labelledby="cs-consolidation-title">
       <header class="cs-consolidation__header">
-        <span class="cs-consolidation__rule" aria-hidden="true"></span>
         <h2 id="cs-consolidation-title" class="cs-consolidation__title">Consolidation you can see</h2>
       </header>
       <ul class="cs-consolidation__list">
@@ -337,7 +336,7 @@ const { dek, logoSrc } = tachiCaseStudy;
   .cs-inline-photo { margin: 28px 0 0; max-width: 100%; }
   .cs-inline-photo img { display: block; width: 100%; aspect-ratio: 16/9; object-fit: cover; object-position: center; }
 
-  .cs-crew { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 24px 0 28px; max-width: 64ch; overflow: hidden; border-radius: 14px; }
+  .cs-crew { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; margin: 24px 0 28px; max-width: 64ch; overflow: hidden; border-radius: 14px; background: var(--navy-deep); }
   .cs-crew figure { margin: 0; }
   .cs-crew img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
   @media (max-width: 900px) { .cs-crew { grid-template-columns: 1fr 1fr; } }
@@ -382,7 +381,7 @@ const { dek, logoSrc } = tachiCaseStudy;
   .cs-consolidation__item-text { margin: 0; font-size: 17px; line-height: 1.65; color: var(--ink); }
 
   .cs-quote { background: var(--navy-deep); padding: clamp(44px, 7vw, 76px) clamp(28px, 6vw, 64px); border-bottom: 1px solid rgba(104,227,190,0.12); }
-  .cs-quote__text { margin: 0 0 20px; font-size: clamp(22px, 3.4vw, 30px); font-style: italic; line-height: 1.4; color: var(--off-white); border-left: 4px solid var(--mint); padding: 8px 0 8px 26px; max-width: 26ch; }
+  .cs-quote__text { margin: 0 0 20px; font-size: clamp(18px, 2.2vw, 22px); font-style: italic; line-height: 1.5; color: var(--off-white); border-left: 4px solid var(--mint); padding: 8px 0 8px 26px; max-width: none; }
   .cs-quote__attrib { margin: 0; padding-left: 30px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.6; }
   .cs-quote__attrib span { display: block; color: var(--mint); }
 
