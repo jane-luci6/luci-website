@@ -61,8 +61,8 @@ export const samsTownCaseStudyDetail = {
       'The race book took the same approach. Rather than trench new cable out to every betting carousel, LUCI sent ten channels of its own encoded video back out over the coax already buried under the property — live racing on existing cable, with no trenching and no new wire pulled through the floor.',
     ],
     photo: {
-      src: '/images/case-studies/sams-town/racebook-work-web.jpg?v=5',
-      alt: 'Technician commissioning the head-end rack — coax and network paths for race video',
+      src: '/images/case-studies/sams-town/luci-technician-server-rack-installation.jpg?v=1',
+      alt: 'LUCI technician routing blue ethernet cables in a server rack during a casino AV installation',
     },
   },
   beforeAfter: {
