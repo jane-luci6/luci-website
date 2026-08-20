@@ -19,10 +19,9 @@ export const tachiCaseStudyDetail = {
   ],
   inventory: [
     { value: '8', label: 'LED video walls hung and tuned' },
-    { value: '90', label: 'video endpoints on network' },
-    { value: '21', label: 'audio zones under control' },
-    { value: '14', label: 'CMS/signage channels' },
     { value: '1', label: 'week, install to handoff' },
+    { value: 'All', label: 'casino audio zones on LUCI' },
+    { value: '1', label: 'immersive bingo room' },
   ],
   summary: [
     {
@@ -75,8 +74,8 @@ export const tachiCaseStudyDetail = {
     titleBefore: 'One interface. ',
     titleAccent: 'Every wall.',
     paragraphs: [
-      'When someone calls bingo, one preset fires the whole room — eight LED walls switch to the winner graphic, the audio shifts, and the immersive experience plays across every surface. One action from one operator on one screen.',
       'Before LUCI, running the hall meant hunting for which player controlled which zone, switching walls one at a time, and guessing at audio levels. Now every wall, every zone, and every preset lives behind one login — search, select, send.',
+      'Tachi\u2019s team also now has the ability to establish presets for the room. They can configure LUCI so that, when someone calls bingo, one preset fires the whole room — eight LED walls switch to the winner graphic, the audio shifts, and the immersive experience plays across every surface.',
     ],
     photo: {
       src: '/images/case-studies/tachi/bingo-wall-operating.png',
@@ -84,6 +83,10 @@ export const tachiCaseStudyDetail = {
     },
   },
   consolidation: {
+    photo: {
+      src: '/images/case-studies/tachi/legacy-racks.png',
+      alt: 'Legacy server racks with tangled white cabling before LUCI consolidation — the back-end infrastructure that was pulled and replaced',
+    },
     items: [
       {
         title: 'Legacy racks → simplified LUCI stack',
@@ -133,7 +136,7 @@ export const tachiCaseStudyDetail = {
       { value: '90', label: 'video endpoints' },
       { value: '21', label: 'audio zones' },
       { value: '14', label: 'CMS/signage channels' },
-      { value: '1', label: 'LUCI interface' },
+      { value: '4', label: 'interfaces' },
     ],
     outcomeBefore: 'One ',
     outcomeAccent: 'LUCI',
@@ -147,7 +150,7 @@ export const tachiCaseStudyDetail = {
     plans: [
       {
         title: 'Run it from anywhere.',
-        body: 'Bingo, audio, and every screen live in one LUCI interface the team can reach from any authorized device — an iPad on the floor, a laptop, a phone, onsite or offsite.',
+        body: 'In addition to the bingo hall, audio, signage, and every screen will eventually live in one LUCI interface the team can reach from any authorized device — an iPad on the floor, a laptop, a phone, onsite or offsite.',
       },
       {
         title: 'Racks of gear, gone.',

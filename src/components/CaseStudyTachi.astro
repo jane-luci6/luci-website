@@ -134,18 +134,22 @@ const { dek, logoSrc } = tachiCaseStudy;
       </figure>
     </section>
 
-    <section class="cs-sec cs-sec--light cs-consolidation" aria-labelledby="cs-consolidation-title">
-      <header class="cs-consolidation__header">
-        <h2 id="cs-consolidation-title" class="cs-consolidation__title">Consolidation you can see</h2>
-      </header>
-      <ul class="cs-consolidation__list">
-        {cs.consolidation.items.map((item) => (
-          <li class="cs-consolidation__item">
-            <p class="cs-consolidation__item-title">{item.title}</p>
-            <p class="cs-consolidation__item-text">{item.text}</p>
-          </li>
-        ))}
-      </ul>
+    <section class="cs-consolidation-band" aria-labelledby="cs-consolidation-title">
+      <img class="cs-consolidation-band__img" src={cs.consolidation.photo.src} alt={cs.consolidation.photo.alt} width="1600" height="900" loading="lazy" />
+      <div class="cs-consolidation-band__scrim" aria-hidden="true"></div>
+      <div class="cs-consolidation-band__content">
+        <header class="cs-consolidation__header">
+          <h2 id="cs-consolidation-title" class="cs-consolidation__title">Consolidation you can see</h2>
+        </header>
+        <ul class="cs-consolidation__list">
+          {cs.consolidation.items.map((item) => (
+            <li class="cs-consolidation__item">
+              <p class="cs-consolidation__item-title">{item.title}</p>
+              <p class="cs-consolidation__item-text">{item.text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
 
     <section class="cs-quote">
@@ -372,18 +376,23 @@ const { dek, logoSrc } = tachiCaseStudy;
   .cs-plan strong { font-weight: 700; color: var(--navy); }
   .cs-bottom-line { margin-top: 4px; padding-top: 26px; border-top: 1px solid var(--rule-light); font-size: 18px; line-height: 1.6; color: var(--navy); }
 
+  .cs-consolidation-band { position: relative; overflow: hidden; min-height: clamp(480px, 62vw, 640px); }
+  .cs-consolidation-band__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 35%; display: block; }
+  .cs-consolidation-band__scrim { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(to right, rgba(10,22,28,0.95) 0%, rgba(10,22,28,0.90) 38%, rgba(10,22,28,0.62) 60%, rgba(10,22,28,0.20) 82%, rgba(10,22,28,0) 100%); }
+  .cs-consolidation-band__content { position: relative; z-index: 2; padding: clamp(48px, 7vw, 80px) clamp(28px, 6vw, 64px); max-width: 52ch; }
   .cs-consolidation__header { margin-bottom: 32px; }
-  .cs-consolidation__rule { display: block; width: 40px; height: 3px; background: var(--accent-light); margin-bottom: 16px; }
-  .cs-consolidation__title { margin: 0; font-family: var(--font-head); font-weight: 700; font-size: clamp(24px, 4vw, 34px); line-height: 1.12; letter-spacing: -0.025em; color: var(--navy); max-width: 28ch; }
-  .cs-consolidation__list { list-style: none; margin: 0; padding: 0; max-width: 64ch; border-top: 1px solid var(--rule-light); }
-  .cs-consolidation__item { padding: 22px 0; border-bottom: 1px solid var(--rule-light); }
-  .cs-consolidation__item-title { margin: 0 0 8px; font-weight: 700; font-size: 17px; line-height: 1.35; color: var(--ink-strong); }
-  .cs-consolidation__item-text { margin: 0; font-size: 17px; line-height: 1.65; color: var(--ink); }
+  .cs-consolidation__title { margin: 0; font-family: var(--font-head); font-weight: 700; font-size: clamp(24px, 4vw, 34px); line-height: 1.12; letter-spacing: -0.025em; color: var(--off-white); max-width: 28ch; }
+  .cs-consolidation__list { list-style: none; margin: 0; padding: 0; }
+  .cs-consolidation__item { padding: 20px 0; }
+  .cs-consolidation__item:not(:last-child) { border-bottom: 1px solid rgba(104,227,190,0.15); }
+  .cs-consolidation__item-title { margin: 0 0 6px; font-weight: 700; font-size: 17px; line-height: 1.35; color: var(--mint); }
+  .cs-consolidation__item-text { margin: 0; font-size: 17px; line-height: 1.65; color: rgba(235,245,248,0.82); }
+  @media (max-width: 640px) { .cs-consolidation-band__scrim { background: linear-gradient(to bottom, rgba(10,22,28,0.95) 0%, rgba(10,22,28,0.88) 50%, rgba(10,22,28,0.45) 78%, rgba(10,22,28,0) 100%); } .cs-consolidation-band__content { max-width: none; } }
 
-  .cs-quote { background: var(--navy-deep); padding: clamp(44px, 7vw, 76px) clamp(28px, 6vw, 64px); border-bottom: 1px solid rgba(104,227,190,0.12); }
-  .cs-quote__text { margin: 0 0 20px; font-size: clamp(18px, 2.2vw, 22px); font-style: italic; line-height: 1.5; color: var(--off-white); border-left: 4px solid var(--mint); padding: 8px 0 8px 26px; max-width: none; }
+  .cs-quote { background: var(--off-white); padding: clamp(44px, 7vw, 76px) clamp(28px, 6vw, 64px); border-bottom: 1px solid var(--rule-light); }
+  .cs-quote__text { margin: 0 0 20px; font-size: clamp(18px, 2.2vw, 22px); font-style: italic; line-height: 1.5; color: var(--navy); border-left: 4px solid var(--accent-light); padding: 8px 0 8px 26px; max-width: none; }
   .cs-quote__attrib { margin: 0; padding-left: 30px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.6; }
-  .cs-quote__attrib span { display: block; color: var(--mint); }
+  .cs-quote__attrib span { display: block; color: var(--accent-light); }
 
   .cs-scope-story { position: relative; overflow: hidden; background-color: var(--navy-deep); padding: clamp(48px, 7vw, 80px) clamp(28px, 6vw, 64px); border-bottom: 1px solid rgba(104,227,190,0.16); text-align: center; }
   .cs-scope-story::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: url('/images/mesh/luci-bg-hero-split-1920x1080.svg') center / cover no-repeat; mix-blend-mode: screen; opacity: 0.55; -webkit-mask-image: radial-gradient(ellipse 78% 92% at 50% 50%, transparent 0%, transparent 28%, rgba(0,0,0,0.45) 58%, #000 82%); mask-image: radial-gradient(ellipse 78% 92% at 50% 50%, transparent 0%, transparent 28%, rgba(0,0,0,0.45) 58%, #000 82%); }
