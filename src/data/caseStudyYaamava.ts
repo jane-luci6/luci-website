@@ -14,7 +14,6 @@ export const yaamavaCaseStudyDetail = {
     { value: '290,000', label: 'sq ft of gaming floor under management' },
     { value: '1,000+', label: 'endpoints on the platform' },
     { value: '34', label: 'LED walls across seven venues' },
-    { value: '5', label: 'separate silos consolidated onto LUCI' },
   ],
   summary: [
     {
