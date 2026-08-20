@@ -1,13 +1,12 @@
-/** Full Tachi Palace case study — web page + PDF download. */
+/** Full Tachi Palace case study — web page (PDF forthcoming). */
 
 export const tachiCaseStudyDetail = {
-  pdfHref: '/downloads/LUCI-Case-Study-Tachi-Palace.pdf',
-  pdfFilename: 'LUCI-Case-Study-Tachi-Palace.pdf',
-  heroLeadin: 'One week to a',
   heroDisplay: 'foundation for growth',
+  heroTrail: 'built in one week',
   property: 'Tachi Palace Casino Resort',
   propertyMeta: 'Lemoore, California · Tachi Yokut Tribe',
-  // Web-only highlight reel (not rendered in the PDF).
+  pdfHref: '/downloads/LUCI-Case-Study-Tachi-Palace.pdf',
+  pdfFilename: 'LUCI-Case-Study-Tachi-Palace.pdf',
   reel: {
     src: '/videos/tachi-reel.mp4',
     poster: '/images/case-studies/tachi/tachi-reel-poster.jpg',
@@ -17,6 +16,12 @@ export const tachiCaseStudyDetail = {
     { label: 'Property', value: 'Tachi Palace Casino Resort' },
     { label: 'Location', value: 'Lemoore, California' },
     { label: 'Completed', value: 'One week, install to handoff' },
+  ],
+  inventory: [
+    { value: '8', label: 'LED video walls hung and tuned' },
+    { value: '1', label: 'week, install to handoff' },
+    { value: 'All', label: 'casino audio zones on LUCI' },
+    { value: '1', label: 'immersive bingo room' },
   ],
   summary: [
     {
@@ -33,18 +38,30 @@ export const tachiCaseStudyDetail = {
     },
   ],
   challenge: {
-    title: 'Bring the bingo hall alive',
+    titleBefore: 'The hall ',
+    titleAccent: 'they had',
     paragraphs: [
-      'Tachi Palace Casino Resort in Lemoore, California, has a massive bingo hall — a huge draw for locals. The property was ready for an update: eight wall bays that had never held LED, and an immersive bingo room.',
-      'That meant bringing all eight LED walls and bingo and casino audio onto one easy-to-use LUCI interface, setting the stage for the rest of the resort to come onto the platform.',
+      'Tachi Palace Casino Resort in Lemoore, California, has a massive bingo hall — a huge draw for locals. The property was ready for an update: eight wall bays that had never held LED, and an immersive bingo room that needed to come to life.',
+      'That meant bringing all eight LED walls and bingo and casino audio onto one LUCI interface, setting the stage for the rest of the resort to come onto the platform.',
     ],
+    photo: {
+      src: '/images/case-studies/tachi/slider-before-web.jpg',
+      alt: 'Tachi Palace bingo hall before the refresh — empty wall bays, flat dull lighting, no LED installed',
+    },
   },
   approach: {
-    title: 'A week of hands-on work',
+    titleBefore: 'A week of ',
+    titleAccent: 'hands-on work',
     paragraphs: [
-      'LUCI’s approach was consolidation — done by hand, on site, in one week.',
-      'The team hung and aligned all eight LED walls, tiled and pixel-mapped each one, and fine-tuned them until every panel displayed picture-perfect. Then they wired the room through LUCI: pulling out racks of legacy gear, installing LUCI in its place, encoding and programming each box, and testing and tuning every audio zone for full control through LUCI.',
-      'Before they left, they sat down with Tachi’s team and trained them to run the room from the LUCI interface — and LUCI stays on for ongoing support as the rest of the resort comes onto the platform.',
+      'LUCI\u2019s approach was consolidation — done by hand, on site, in one week.',
+      'The team hung and aligned all eight LED walls, tiled and pixel-mapped each one, and fine-tuned them until every panel displayed picture-perfect. Then they wired the room through LUCI: pulling out racks of legacy gear, installing LUCI in its place, encoding and programming each box, and testing and tuning every audio zone for full control.',
+      'Before they left, they sat down with Tachi\u2019s team and trained them to run the room from the LUCI interface — and LUCI stays on for ongoing support as the rest of the resort comes onto the platform.',
+    ],
+    crewPhotos: [
+      { src: '/images/case-studies/tachi/03-install-genie-lift-web.jpg', alt: 'LUCI technicians on a lift mounting LED panels' },
+      { src: '/images/case-studies/tachi/03c-config-web.jpg', alt: 'LUCI team configuring the system on site' },
+      { src: '/images/case-studies/tachi/03b-install-detail-web.jpg', alt: 'Technician wiring the back of an LED wall' },
+      { src: '/images/case-studies/tachi/03d-config-backroom-web.jpg', alt: 'LUCI engineer configuring the system on site' },
     ],
     scope: [
       'Hung, tiled, and fine-tuned eight LED walls',
@@ -53,13 +70,53 @@ export const tachiCaseStudyDetail = {
       'Tuned every audio zone for full control through LUCI',
     ],
   },
+  oneInterface: {
+    titleBefore: 'One interface. ',
+    titleAccent: 'Every wall.',
+    paragraphs: [
+      'When someone calls bingo, one preset fires the whole room — eight LED walls switch to the winner graphic, the audio shifts, and the immersive experience plays across every surface. One action from one operator on one screen.',
+      'Before LUCI, running the hall meant hunting for which player controlled which zone, switching walls one at a time, and guessing at audio levels. Now every wall, every zone, and every preset lives behind one login — search, select, send.',
+    ],
+    photo: {
+      src: '/images/case-studies/tachi/03c-config-web.jpg',
+      alt: 'LUCI team configuring the bingo hall system on site during installation',
+    },
+  },
+  consolidation: {
+    items: [
+      {
+        title: 'Legacy racks in the bingo hall',
+        text: 'Pulled out and replaced with a simplified LUCI stack — less equipment to power, cool, and maintain.',
+      },
+      {
+        title: 'Separate wall and zone control',
+        text: 'Eight LED walls and every audio zone now run from one LUCI interface.',
+      },
+      {
+        title: 'Per-zone player guesswork',
+        text: 'Every audio zone mapped in one place — staff no longer hunt for which player controls which zone.',
+      },
+      {
+        title: 'A parallel resort rollout',
+        text: 'Bingo hall on LUCI first; other spaces plug into the same platform — no second install to stand up.',
+      },
+    ],
+  },
   quote: {
     text: 'Working with LUCI was smooth and easy, the team worked well together and with us completing the 8 LED Video Walls and all of the Casino Audio all in one week. Great Job Team!',
     role: 'AV Telecom Manager',
     org: 'Tachi Palace Casino Resort',
   },
+  beforeAfter: {
+    beforeSrc: '/images/case-studies/tachi/slider-before-web.jpg',
+    afterSrc: '/images/case-studies/tachi/slider-after-web.jpg',
+    beforeAlt: 'Tachi Palace bingo hall before the refresh — LED walls not yet installed, flat dull lighting',
+    afterAlt: 'Tachi Palace bingo hall after the refresh — both LED walls lit with the BINGO graphic, mint cove glow, and the room brought to life',
+    caption: 'Drag to see the room come alive.',
+  },
   results: {
-    title: 'What Tachi Palace runs now',
+    titleBefore: 'What Tachi Palace ',
+    titleAccent: 'runs now',
     bullets: [
       'Eight LED video walls, live and controlled from one interface',
       'Bingo winner presets that fire an immersive experience when someone wins',
@@ -67,8 +124,24 @@ export const tachiCaseStudyDetail = {
       'Every audio zone mapped in one place — no more guessing which player controls which zone',
     ],
   },
+  scopeStory: {
+    titleBefore: 'Tachi Palace on LUCI ',
+    titleAccent: 'to date',
+    stats: [
+      { value: '8', label: 'LED video walls' },
+      { value: 'All', label: 'casino audio zones' },
+      { value: '1', label: 'bingo preset system' },
+      { value: '1', label: 'LUCI interface' },
+      { value: '0', label: 'separate control systems' },
+    ],
+    outcomeBefore: 'One ',
+    outcomeAccent: 'LUCI',
+    outcomeAfter: ' platform',
+    dek: 'Every wall, every zone, every preset — one interface.',
+  },
   whatsNext: {
-    title: 'Built for the moves ahead',
+    titleBefore: 'Built for ',
+    titleAccent: 'the moves ahead',
     intro: 'The bingo hall is just the start.',
     plans: [
       {
@@ -77,7 +150,7 @@ export const tachiCaseStudyDetail = {
       },
       {
         title: 'Racks of gear, gone.',
-        body: 'LUCI consolidated the room’s hardware down to a simplified stack — less equipment to power, cool, and maintain.',
+        body: 'LUCI consolidated the room\u2019s hardware down to a simplified stack — less equipment to power, cool, and maintain.',
       },
       {
         title: 'Ready for the rest of the resort.',
@@ -88,9 +161,9 @@ export const tachiCaseStudyDetail = {
       'By bringing the bingo hall onto LUCI, Tachi Palace turned one room into a foundation the whole resort can grow onto.',
   },
   cta: {
-    body: 'Curious what this looks like for your property? Let’s talk.',
+    body: "Curious what this looks like for your property? Let's talk.",
     aboutLabel: 'About LUCI',
     aboutStatement:
-      'LUCI Systems orchestrates every layer of technology running your property — A/V, signage, building, and operational infrastructure — from a single interface your team controls from anywhere. Rather than adding layers to your stack, LUCI reduces the variables, hardware, and interfaces your team has to manage. When onsite experience and operational continuity are non-negotiable, LUCI delivers coordinated, real-time execution, end to end.',
+      'LUCI Systems is the orchestration engine for enterprise multimedia — A/V, signage, building, and operational infrastructure — from a single interface your team controls from anywhere. LUCI reduces the variables, hardware, and interfaces your team has to manage. When onsite experience and operational continuity are non-negotiable, LUCI delivers coordinated, real-time execution, end to end.',
   },
 } as const;

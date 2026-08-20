@@ -116,7 +116,7 @@ export const ameristarCaseStudy = {
 // Tachi Palace Casino Resort — bingo hall LED + audio refresh (Issue 02 field story).
 export const tachiCaseStudy = {
   title: 'One week to a foundation for growth',
-  dek: "LUCI brought Tachi Palace's bingo hall alive in one week — eight new LED video walls, audio under one interface, and an immersive room that sets the stage for the rest of the resort.",
+  dek: "LUCI brought Tachi Palace's bingo hall alive in one week — eight LED video walls, every audio zone, and an immersive bingo room on one interface. The foundation for the rest of the resort.",
   slug: 'tachi-palace',
   property: 'Tachi Palace Casino Resort',
   location: 'Lemoore, California',
