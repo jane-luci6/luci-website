@@ -21,28 +21,27 @@ export const tachiCaseStudyDetail = {
     { value: '8', label: 'LED video walls hung and tuned' },
     { value: '1', label: 'week, install to handoff' },
     { value: 'All', label: 'casino audio zones on LUCI' },
-    { value: '1', label: 'immersive bingo room' },
   ],
   summary: [
     {
       label: 'The challenge',
-      text: 'A massive bingo hall — a huge draw for locals — ready for an update, with eight wall bays that had never held LED and an immersive bingo room to bring to life.',
+      text: 'Tachi wanted to upgrade their massive bingo hall — a huge draw for locals — with eight LED walls to bring the room to life.',
     },
     {
       label: 'The approach',
-      text: 'Consolidation, done by hand in one week — eight LED walls hung and tuned, racks of legacy gear pulled and replaced with LUCI, and every audio zone wired for full control.',
+      text: 'Eight LED walls hung and tuned, racks of legacy gear pulled and replaced with LUCI, and every audio zone wired for full control.',
     },
     {
       label: 'The result',
-      text: 'The room came alive — eight LED walls live, immersive winner moments, and the whole room running from one LUCI interface.',
+      text: 'The LED walls are now live, with easy orchestration through LUCI that allows the team to create immersive winner moments and an improved guest experience.',
     },
   ],
   challenge: {
     titleBefore: 'The hall ',
     titleAccent: 'they had',
     paragraphs: [
-      'Tachi Palace Casino Resort in Lemoore, California, has a massive bingo hall — a huge draw for locals. The property was ready for an update: eight wall bays that had never held LED, and an immersive bingo room that needed to come to life.',
-      'That meant bringing all eight LED walls and bingo and casino audio onto one LUCI interface, setting the stage for the rest of the resort to come onto the platform.',
+      'The bingo hall already brought people together. The room itself had not caught up. Eight empty wall bays surrounded one of the property’s biggest gathering spaces, leaving winner moments without the scale or energy the crowd deserved.',
+      'Behind the room, separate players, audio controls, and legacy racks made every change harder than it needed to be. Tachi needed more than new screens. The hall needed to operate as one coordinated experience.',
     ],
     photo: {
       src: '/images/case-studies/tachi/slider-before-web.jpg',
@@ -83,6 +82,7 @@ export const tachiCaseStudyDetail = {
     },
   },
   consolidation: {
+    lead: 'The room changed because the infrastructure behind it changed first.',
     photo: {
       src: '/images/case-studies/tachi/legacy-racks.png',
       alt: 'Legacy server racks with tangled white cabling before LUCI consolidation — the back-end infrastructure that was pulled and replaced',
@@ -142,6 +142,10 @@ export const tachiCaseStudyDetail = {
     outcomeAccent: 'LUCI',
     outcomeAfter: ' platform',
     dek: 'Every wall, every zone, every preset — one interface.',
+  },
+  futurePhoto: {
+    src: '/images/case-studies/tachi/bingo-hall-wide.png',
+    alt: 'Wide view of the Tachi Palace bingo hall with eight LED walls installed across the room and LUCI displayed on multiple screens',
   },
   whatsNext: {
     titleBefore: 'Built for ',
