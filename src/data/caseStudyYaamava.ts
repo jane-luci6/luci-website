@@ -23,7 +23,7 @@ export const yaamavaCaseStudyDetail = {
     },
     {
       label: 'The approach',
-      text: 'Run audio and video over the property network, centralize control in LUCI, and bring all 34 LED walls into the same platform as they were built.',
+      text: 'Run audio and video over the property network, centralize control in LUCI, and build 34 LED walls looped into the same interface.',
     },
     {
       label: 'The result',
@@ -37,7 +37,7 @@ export const yaamavaCaseStudyDetail = {
       "Yaamava' Resort & Casino sits in Highland, California, owned and operated by the San Manuel Band of Mission Indians. What opened in 1986 has grown into one of the premier casino resort destinations in the country.",
       'The technology underneath it grew the same way — one piece at a time. Broadcast content, signage, audio and paging, data, displays, and everything beneath them each arrived with its own hardware, software, interface, and operating model.',
       "Then Yaamava' began remodeling and scaling the property, including 34 LED walls across seven venues. Without a different architecture, that expansion would have compounded the same problem: another control environment, more hardware, and more workflows for the team to manage.",
-      'The property was becoming one larger guest experience. Its technology was at risk of becoming even more fragmented.',
+      'As the property improved its guest experience, its technology was becoming more fragmented.',
     ],
   },
   floorFigure: {
@@ -49,39 +49,33 @@ export const yaamavaCaseStudyDetail = {
     titleBefore: 'Bringing every layer ',
     titleAccent: 'onto one platform',
     paragraphs: [
-      "LUCI designed the system around Yaamava's network, distributing audio and video over it and centralizing control in the LUCI platform. That network-based architecture reduced the dedicated processors and other hardware the property had to install and maintain.",
-      "LUCI also designed and built 34 LED walls across seven remodeled venues. Instead of creating a separate control environment for the expansion, the team brought every wall into LUCI with the property's audio, video, and signage.",
+      "LUCI designed and built 34 LED walls across seven remodeled venues while Yaamava' was scaling the property. Each wall was looped into LUCI as it came online, so the expansion did not create another control environment.",
+      "At the same time, LUCI distributed the property's audio and video over the network and brought its existing endpoints into the same interface. The network-based architecture reduced the dedicated processors and other hardware the property had to install and maintain.",
       'The property grew while its operating model got smaller: fewer systems, less hardware, and one place to run every endpoint.',
     ],
+    scopeLabel: 'What LUCI did',
     scope: [
-      'Broadcast content',
-      'Video and digital signage',
-      'API and data',
-      'Audio and paging',
-      'Displays and video walls',
-      '34 new LED walls across seven venues',
+      'Designed and built 34 LED walls across seven venues',
+      'Distributed property audio and video over the network',
+      'Mapped the new walls and existing endpoints into one LUCI interface',
     ],
   },
   consolidation: [
     {
-      title: 'Five silos, one platform',
-      text: 'Broadcast, signage, data, audio and paging, and displays each had their own hardware, software, and interface. They now run as one.',
+      title: 'Five technology silos → one platform',
+      text: 'Broadcast, signage, data, audio and paging, and displays now operate through LUCI.',
     },
     {
-      title: 'Thirty-four walls, no second console',
-      text: 'The LED LUCI designed and installed across seven venues came online inside the platform already running the property — no parallel control environment or separate workflow to manage.',
+      title: '34 new LED walls → same interface',
+      text: 'Walls across seven venues joined the property’s existing A/V and signage control instead of creating another control environment.',
     },
     {
-      title: 'Less hardware, not more',
-      text: 'Consolidation removed racks and players rather than adding them — fewer boxes to power, cool, license, and replace.',
+      title: 'Dedicated hardware → network distribution',
+      text: 'Audio and video run over the property network, reducing the processors, players, and rack equipment to power, cool, and maintain.',
     },
     {
-      title: 'One send, every screen',
-      text: 'Content that belongs property-wide no longer travels through several tools to get there. It goes out once.',
-    },
-    {
-      title: 'One interface to learn',
-      text: 'Staff train on LUCI instead of one tool per technology — and the A/V and IT team spends its time on priorities instead of upkeep.',
+      title: 'Coordinated interfaces → one operating view',
+      text: 'Staff select content or channels, choose the destinations, and send them across the floor, signage, and video walls from LUCI.',
     },
   ],
   quote: {
@@ -94,12 +88,12 @@ export const yaamavaCaseStudyDetail = {
     titleAccent: 'runs now',
     bullets: [
       'One interface for every audio zone, display, and network device',
-      'Content that moves across the property at once, instead of platform by platform',
+      'Content and channels coordinated across the property from one interface',
       '34 LED walls across seven venues, running on the same platform as everything else',
       'An A/V and IT team spending its time on priorities instead of upkeep',
     ],
     body: [
-      'A message that once crossed tools and teams now takes one person: open LUCI, pick the screens, send it — the floor, the signage, the video walls, all at once.',
+      'A content or channel change that once crossed tools and teams now takes one person: open LUCI, choose the source, select the screens, and send it to the gaming floor, signage, and video walls at once.',
       'There is no second login for signage, no separate console for the 34 LED walls, no third tool for paging.',
     ],
   },
