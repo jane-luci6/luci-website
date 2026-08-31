@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sam's Town — spatial section variants (880px)</title>
+  <style>
+    @font-face{font-family:'Space Grotesk';font-style:normal;font-display:swap;font-weight:400;src:url('/fonts/space-grotesk-400.woff2') format('woff2');}
+    @font-face{font-family:'Space Grotesk';font-style:normal;font-display:swap;font-weight:600;src:url('/fonts/space-grotesk-600.woff2') format('woff2');}
+    @font-face{font-family:'Space Grotesk';font-style:normal;font-display:swap;font-weight:700;src:url('/fonts/space-grotesk-700.woff2') format('woff2');}
+    @font-face{font-family:'Syncopate';font-style:normal;font-display:swap;font-weight:700;src:url('/fonts/syncopate-700.woff2') format('woff2');}
+    @font-face{font-family:'Inter';font-style:normal;font-display:swap;font-weight:400 500;src:url('/fonts/inter-400-500.woff2') format('woff2');}
+    @font-face{font-family:'Inter';font-style:normal;font-display:swap;font-weight:600 700;src:url('/fonts/inter-600-700.woff2') format('woff2');}
+
+    :root {
+      --navy-deep: #0A161C;
+      --navy: #0F1C24;
+      --navy-mid: #152430;
+      --off-white: #F5F8FA;
+      --sand: #E8DFC8;
+      --ink: #354F5C;
+      --ink-strong: #1A2B36;
+      --mint: #68E3BE;
+      --accent-light: #2b9e80;
+      --gold: #EDD086;
+      --gold-deep: #CEB06E;
+      --font-display: 'Syncopate', 'Arial Black', sans-serif;
+      --font-head: 'Space Grotesk', 'Trebuchet MS', sans-serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --sheet: 880px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      background: #1a2228;
+      color: var(--off-white);
+    }
+
+    .picker {
+      position: sticky; top: 0; z-index: 40;
+      background: var(--navy-deep);
+      border-bottom: 4px solid var(--mint);
+      padding: 16px clamp(20px, 4vw, 40px) 18px;
+    }
+    .picker__kicker {
+      font-family: var(--font-display); font-size: 9px; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--mint); margin: 0 0 8px;
+    }
+    .picker__title {
+      margin: 0 0 6px; font-family: var(--font-head); font-size: 20px; font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .picker__meta {
+      margin: 0 0 14px; font-size: 13px; color: rgba(235,245,248,0.62); max-width: 62ch; line-height: 1.5;
+    }
+    .picker__nav { display: flex; flex-wrap: wrap; gap: 8px; }
+    .picker__nav a {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 12px; border: 1px solid rgba(104,227,190,0.35);
+      color: rgba(235,245,248,0.88); text-decoration: none;
+      font-family: var(--font-head); font-size: 12px; font-weight: 600;
+    }
+    .picker__nav a:hover { border-color: var(--mint); color: var(--mint); }
+    .picker__nav a strong {
+      font-family: var(--font-display); font-size: 10px; letter-spacing: 0.08em; color: var(--mint);
+    }
+
+    /* Match the live case study sheet exactly */
+    .stage {
+      max-width: calc(var(--sheet) + 48px);
+      margin: 40px auto 24px;
+      padding: 0 24px;
+    }
+    .variant {
+      scroll-margin-top: 140px;
+      margin-bottom: 56px;
+    }
+    .variant__label {
+      display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: baseline;
+      margin: 0 0 12px;
+    }
+    .variant__letter {
+      font-family: var(--font-display); font-size: 13px; font-weight: 700;
+      letter-spacing: 0.12em; color: var(--mint);
+    }
+    .variant__name {
+      font-family: var(--font-head); font-size: 17px; font-weight: 700; letter-spacing: -0.02em;
+    }
+    .variant__desc {
+      flex: 1 1 100%; margin: 0; font-size: 13px; line-height: 1.5;
+      color: rgba(235,245,248,0.58); max-width: 68ch;
+    }
+    .sheet {
+      width: 100%;
+      max-width: var(--sheet);
+      margin: 0 auto;
+      background: #fff;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.45);
+      overflow: hidden;
+    }
+    .width-tag {
+      text-align: center; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(235,245,248,0.4); margin: 8px 0 0;
+      font-family: var(--font-head);
+    }
+
+    .body {
+      margin: 0; font-family: var(--font-body); font-size: 16px; line-height: 1.7;
+      color: var(--ink); max-width: 38ch;
+    }
+    .body--light { color: rgba(235,245,248,0.88); }
+    .body--on-dark { color: rgba(235,245,248,0.88); }
+
+    /* ========== A — Type as architecture ========== */
+    .a-sec {
+      position: relative; overflow: hidden;
+      min-height: 320px;
+      padding: 48px 40px 56px;
+      background: #fff;
+    }
+    .a-sec--dark { background: var(--navy-mid); }
+    .a-ghost {
+      position: absolute; left: -4%; right: -8%; top: 42%;
+      transform: translateY(-50%);
+      font-family: var(--font-display); font-weight: 700;
+      font-size: clamp(64px, 14vw, 118px); line-height: 0.85;
+      letter-spacing: -0.04em; text-transform: uppercase;
+      color: var(--accent-light); opacity: 0.09;
+      pointer-events: none; white-space: nowrap; user-select: none;
+    }
+    .a-sec--dark .a-ghost { color: var(--mint); opacity: 0.11; }
+    .a-content { position: relative; z-index: 1; max-width: 34ch; }
+    .a-kicker {
+      margin: 0 0 12px; font-family: var(--font-head); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-light);
+    }
+    .a-sec--dark .a-kicker { color: var(--mint); }
+    .a-title {
+      margin: 0 0 18px; font-family: var(--font-head); font-weight: 700;
+      font-size: clamp(26px, 4vw, 34px); line-height: 1.1; letter-spacing: -0.03em;
+      color: var(--ink-strong);
+    }
+    .a-sec--dark .a-title { color: var(--off-white); }
+    .a-title em { font-style: normal; color: var(--accent-light); }
+    .a-sec--dark .a-title em { color: var(--mint); }
+
+    /* ========== B — Hard color plane ========== */
+    .b-sec {
+      display: grid; grid-template-columns: 38% 1fr;
+      min-height: 340px;
+    }
+    .b-sec--flip { grid-template-columns: 1fr 38%; }
+    .b-plane {
+      background: var(--navy-deep);
+      padding: 40px 28px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .b-plane--mint {
+      background: #1a3d36;
+      /* deep mint-tinted plane — not bright mint fill */
+    }
+    .b-plane--sand { background: var(--sand); }
+    .b-plane__word {
+      font-family: var(--font-display); font-size: clamp(22px, 3.2vw, 32px);
+      font-weight: 700; line-height: 1.05; letter-spacing: -0.02em;
+      text-transform: uppercase; color: var(--mint); margin: 0;
+    }
+    .b-plane--sand .b-plane__word { color: var(--ink-strong); }
+    .b-plane__sub {
+      margin: 12px 0 0; font-family: var(--font-head); font-size: 12px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase; color: rgba(104,227,190,0.7);
+    }
+    .b-plane--sand .b-plane__sub { color: var(--accent-light); }
+    .b-copy {
+      padding: 40px 36px; background: #fff;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .b-sec--dark .b-copy { background: var(--navy-mid); }
+    .b-title {
+      margin: 0 0 16px; font-family: var(--font-head); font-weight: 700;
+      font-size: clamp(22px, 3vw, 28px); line-height: 1.15; letter-spacing: -0.025em;
+      color: var(--ink-strong);
+    }
+    .b-sec--dark .b-title { color: var(--off-white); }
+    .b-title em { font-style: normal; color: var(--accent-light); }
+    .b-sec--dark .b-title em { color: var(--mint); }
+
+    /* ========== C — Photo plane ========== */
+    .c-sec {
+      display: grid; grid-template-columns: 46% 1fr;
+      min-height: 360px;
+    }
+    .c-sec--flip { grid-template-columns: 1fr 46%; }
+    .c-photo {
+      position: relative; min-height: 360px;
+      background-size: cover; background-position: center;
+    }
+    .c-photo::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,22,28,0.55) 0%, transparent 45%);
+    }
+    .c-photo__tag {
+      position: absolute; left: 16px; bottom: 16px; z-index: 1;
+      font-family: var(--font-display); font-size: 9px; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--mint);
+    }
+    .c-copy {
+      padding: 40px 32px; background: #fff;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .c-sec--dark .c-copy { background: var(--navy-mid); }
+    .c-title {
+      margin: 0 0 16px; font-family: var(--font-head); font-weight: 700;
+      font-size: clamp(22px, 3vw, 28px); line-height: 1.15; letter-spacing: -0.025em;
+      color: var(--ink-strong);
+    }
+    .c-sec--dark .c-title { color: var(--off-white); }
+    .c-title em { font-style: normal; color: var(--accent-light); }
+    .c-sec--dark .c-title em { color: var(--mint); }
+
+    /* ========== D — Metric landscape ========== */
+    .d-sec {
+      position: relative; overflow: hidden;
+      min-height: 360px;
+      padding: 48px 40px 52px;
+      background: var(--off-white);
+    }
+    .d-sec--dark { background: var(--navy-deep); }
+    .d-metric {
+      position: absolute; right: -2%; bottom: -8%;
+      font-family: var(--font-head); font-weight: 700;
+      font-size: clamp(140px, 28vw, 220px); line-height: 0.78;
+      letter-spacing: -0.06em; color: var(--accent-light); opacity: 0.12;
+      pointer-events: none; user-select: none;
+    }
+    .d-sec--dark .d-metric { color: var(--mint); opacity: 0.14; }
+    .d-unit {
+      position: absolute; right: 28px; bottom: 28px;
+      font-family: var(--font-display); font-size: 10px; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent-light); opacity: 0.55;
+    }
+    .d-sec--dark .d-unit { color: var(--mint); }
+    .d-content { position: relative; z-index: 1; max-width: 32ch; }
+    .d-title {
+      margin: 0 0 16px; font-family: var(--font-head); font-weight: 700;
+      font-size: clamp(24px, 3.5vw, 32px); line-height: 1.12; letter-spacing: -0.03em;
+      color: var(--ink-strong);
+    }
+    .d-sec--dark .d-title { color: var(--off-white); }
+    .d-title em { font-style: normal; color: var(--accent-light); }
+    .d-sec--dark .d-title em { color: var(--mint); }
+
+    /* ========== E — Spine + diagonal field ========== */
+    .e-sec {
+      display: grid; grid-template-columns: clamp(72px, 11vw, 96px) 1fr;
+      min-height: 340px;
+      background: #fff;
+    }
+    .e-sec--dark { background: var(--navy-mid); }
+    .e-spine {
+      background: var(--navy-deep);
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      display: flex; align-items: center; justify-content: center;
+      padding: 28px 0;
+    }
+    .e-spine span {
+      font-family: var(--font-display); font-size: clamp(11px, 1.4vw, 13px); font-weight: 700;
+      letter-spacing: 0.28em; text-transform: uppercase; color: var(--mint);
+      white-space: nowrap;
+    }
+    .e-field {
+      position: relative; overflow: hidden;
+      padding: 44px 36px 48px;
+    }
+    .e-wedge {
+      position: absolute; top: 0; right: 0; bottom: 0; width: 22%;
+      background: var(--sand);
+      clip-path: polygon(55% 0, 100% 0, 100% 100%, 0% 100%);
+      pointer-events: none;
+    }
+    .e-sec--dark .e-wedge {
+      background: rgba(104,227,190,0.07);
+    }
+    .e-content { position: relative; z-index: 1; max-width: 34ch; }
+    .e-title {
+      margin: 0 0 16px; font-family: var(--font-head); font-weight: 700;
+      font-size: clamp(24px, 3.5vw, 32px); line-height: 1.12; letter-spacing: -0.03em;
+      color: var(--ink-strong);
+    }
+    .e-sec--dark .e-title { color: var(--off-white); }
+    .e-title em { font-style: normal; color: var(--accent-light); }
+    .e-sec--dark .e-title em { color: var(--mint); }
+
+    @media (max-width: 640px) {
+      .b-sec, .b-sec--flip, .c-sec, .c-sec--flip { grid-template-columns: 1fr; }
+      .c-photo { min-height: 220px; }
+      .e-sec { grid-template-columns: 1fr; }
+      .e-spine {
+        writing-mode: horizontal-tb; transform: none;
+        padding: 14px 20px; justify-content: flex-start;
+      }
+      .e-wedge { width: 28%; }
+    }
+
+    .footer-note {
+      max-width: var(--sheet); margin: 0 auto 72px; padding: 0 24px;
+      font-size: 14px; line-height: 1.55; color: rgba(235,245,248,0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="picker">
+    <p class="picker__kicker">Design preview · 880px sheet</p>
+    <h1 class="picker__title">Spatial directions for the narrative sections</h1>
+    <p class="picker__meta">
+      Same width as the live case study. No icons, no accent rules, no mesh/circuit.
+      These treat the whole section as a composition — type, color mass, photography, and geometry as the visual.
+    </p>
+    <nav class="picker__nav" aria-label="Variants">
+      <a href="#a"><strong>A</strong> Type architecture</a>
+      <a href="#b"><strong>B</strong> Color plane</a>
+      <a href="#c"><strong>C</strong> Photo plane</a>
+      <a href="#d"><strong>D</strong> Metric landscape</a>
+      <a href="#e"><strong>E</strong> Spine + wedge</a>
+    </nav>
+  </div>
+
+  <!-- A -->
+  <div class="stage">
+    <article class="variant" id="a">
+      <header class="variant__label">
+        <span class="variant__letter">A</span>
+        <span class="variant__name">Type as architecture</span>
+        <p class="variant__desc">Oversized Syncopate fills the section and clips at the edges — the words are the environment. Reading text sits in the clear band. Bleeding-edge editorial (Apple / Hermès / premium brand 2026).</p>
+      </header>
+      <div class="sheet">
+        <section class="a-sec">
+          <p class="a-ghost" aria-hidden="true">THEY HAD</p>
+          <div class="a-content">
+            <p class="a-kicker">The room</p>
+            <h2 class="a-title">The room <em>they had</em></h2>
+            <p class="body">LUCI has run Sam&rsquo;s Town&rsquo;s A/V end to end for more than a year: we installed audio through the casino first, then video across the property, including the sportsbook. This year, Sam&rsquo;s Town decided the sportsbook screens were due for an upgrade to replace years of accumulated TVs.</p>
+          </div>
+        </section>
+        <section class="a-sec a-sec--dark">
+          <p class="a-ghost" aria-hidden="true">THE WALL</p>
+          <div class="a-content">
+            <p class="a-kicker">Install</p>
+            <h2 class="a-title">The wall <em>they wanted</em></h2>
+            <p class="body body--on-dark">Sam&rsquo;s Town decided to replace a large portion of their screens with one 39 &times; 12 foot LED wall &mdash; and commissioned LUCI&rsquo;s team to install it. In less than a week, the LED wall, a new set of TVs, and the sportsbook&rsquo;s three audio zones were all live and running on LUCI. The wall drives six presets across eight video inputs, all easily controlled from a single interface.</p>
+          </div>
+        </section>
+        <section class="a-sec">
+          <p class="a-ghost" aria-hidden="true">RACE BOOK</p>
+          <div class="a-content">
+            <p class="a-kicker">Infrastructure</p>
+            <h2 class="a-title">Bringing the <em>race book on board</em></h2>
+            <p class="body">The race book took the same approach. Rather than trench new cable out to every betting carousel, LUCI sent ten channels of its own encoded video back out over the coax already buried under the property &mdash; live racing on existing cable, with no trenching and no new wire pulled through the floor.</p>
+          </div>
+        </section>
+      </div>
+      <p class="width-tag">880px · matches live case study sheet</p>
+    </article>
+  </div>
+
+  <!-- B -->
+  <div class="stage">
+    <article class="variant" id="b">
+      <header class="variant__label">
+        <span class="variant__letter">B</span>
+        <span class="variant__name">Hard color plane</span>
+        <p class="variant__desc">A solid chromatic mass owns ~40% of the section — no texture, no pattern. Pure color as architecture (Stripe / Linear restraint: monochrome base, one accent plane doing the work).</p>
+      </header>
+      <div class="sheet">
+        <section class="b-sec">
+          <div class="b-plane">
+            <p class="b-plane__word">The<br>room</p>
+            <p class="b-plane__sub">Before the wall</p>
+          </div>
+          <div class="b-copy">
+            <h2 class="b-title">The room <em>they had</em></h2>
+            <p class="body">LUCI has run Sam&rsquo;s Town&rsquo;s A/V end to end for more than a year: we installed audio through the casino first, then video across the property, including the sportsbook. This year, Sam&rsquo;s Town decided the sportsbook screens were due for an upgrade to replace years of accumulated TVs.</p>
+          </div>
+        </section>
+        <section class="b-sec b-sec--flip b-sec--dark">
+          <div class="b-copy">
+            <h2 class="b-title">The wall <em>they wanted</em></h2>
+            <p class="body body--on-dark">Sam&rsquo;s Town decided to replace a large portion of their screens with one 39 &times; 12 foot LED wall &mdash; and commissioned LUCI&rsquo;s team to install it. In less than a week, the LED wall, a new set of TVs, and the sportsbook&rsquo;s three audio zones were all live and running on LUCI. The wall drives six presets across eight video inputs, all easily controlled from a single interface.</p>
+          </div>
+          <div class="b-plane b-plane--mint">
+            <p class="b-plane__word">39 &times;<br>12 ft</p>
+            <p class="b-plane__sub">Live in a week</p>
+          </div>
+        </section>
+        <section class="b-sec">
+          <div class="b-plane b-plane--sand">
+            <p class="b-plane__word">No new<br>wire</p>
+            <p class="b-plane__sub">Existing coax</p>
+          </div>
+          <div class="b-copy">
+            <h2 class="b-title">Bringing the <em>race book on board</em></h2>
+            <p class="body">The race book took the same approach. Rather than trench new cable out to every betting carousel, LUCI sent ten channels of its own encoded video back out over the coax already buried under the property &mdash; live racing on existing cable, with no trenching and no new wire pulled through the floor.</p>
+          </div>
+        </section>
+      </div>
+      <p class="width-tag">880px · matches live case study sheet</p>
+    </article>
+  </div>
+
+  <!-- C -->
+  <div class="stage">
+    <article class="variant" id="c">
+      <header class="variant__label">
+        <span class="variant__letter">C</span>
+        <span class="variant__name">Photo plane</span>
+        <p class="variant__desc">Real project photography as half the section — the space itself is the visual. Before / after / after crops carry the story while type sits beside (product-evidence storytelling, 2026 B2B case study pattern).</p>
+      </header>
+      <div class="sheet">
+        <section class="c-sec">
+          <div class="c-photo" style="background-image:url('/images/case-studies/sams-town/slider-before-web.jpg')" role="img" aria-label="Sportsbook before">
+            <span class="c-photo__tag">Before</span>
+          </div>
+          <div class="c-copy">
+            <h2 class="c-title">The room <em>they had</em></h2>
+            <p class="body">LUCI has run Sam&rsquo;s Town&rsquo;s A/V end to end for more than a year: we installed audio through the casino first, then video across the property, including the sportsbook. This year, Sam&rsquo;s Town decided the sportsbook screens were due for an upgrade to replace years of accumulated TVs.</p>
+          </div>
+        </section>
+        <section class="c-sec c-sec--flip c-sec--dark">
+          <div class="c-copy">
+            <h2 class="c-title">The wall <em>they wanted</em></h2>
+            <p class="body body--on-dark">Sam&rsquo;s Town decided to replace a large portion of their screens with one 39 &times; 12 foot LED wall &mdash; and commissioned LUCI&rsquo;s team to install it. In less than a week, the LED wall, a new set of TVs, and the sportsbook&rsquo;s three audio zones were all live and running on LUCI. The wall drives six presets across eight video inputs, all easily controlled from a single interface.</p>
+          </div>
+          <div class="c-photo" style="background-image:url('/images/case-studies/sams-town/slider-after-web.jpg')" role="img" aria-label="Sportsbook after">
+            <span class="c-photo__tag">After</span>
+          </div>
+        </section>
+        <section class="c-sec">
+          <div class="c-photo" style="background-image:url('/images/case-studies/sams-town/02-before-sportsbook-web.jpg'); background-position: 30% center;" role="img" aria-label="Floor detail">
+            <span class="c-photo__tag">Floor plant</span>
+          </div>
+          <div class="c-copy">
+            <h2 class="c-title">Bringing the <em>race book on board</em></h2>
+            <p class="body">The race book took the same approach. Rather than trench new cable out to every betting carousel, LUCI sent ten channels of its own encoded video back out over the coax already buried under the property &mdash; live racing on existing cable, with no trenching and no new wire pulled through the floor.</p>
+          </div>
+        </section>
+      </div>
+      <p class="width-tag">880px · matches live case study sheet</p>
+    </article>
+  </div>
+
+  <!-- D -->
+  <div class="stage">
+    <article class="variant" id="d">
+      <header class="variant__label">
+        <span class="variant__letter">D</span>
+        <span class="variant__name">Metric landscape</span>
+        <p class="variant__desc">One project number becomes the entire visual field — 480 / 39×12 / 10 — so the section feels like standing next to the wall. Type nests in the negative space. Data as atmosphere, not a stat chip.</p>
+      </header>
+      <div class="sheet">
+        <section class="d-sec">
+          <span class="d-metric" aria-hidden="true">480</span>
+          <span class="d-unit">sq ft</span>
+          <div class="d-content">
+            <h2 class="d-title">The room <em>they had</em></h2>
+            <p class="body">LUCI has run Sam&rsquo;s Town&rsquo;s A/V end to end for more than a year: we installed audio through the casino first, then video across the property, including the sportsbook. This year, Sam&rsquo;s Town decided the sportsbook screens were due for an upgrade to replace years of accumulated TVs.</p>
+          </div>
+        </section>
+        <section class="d-sec d-sec--dark">
+          <span class="d-metric" aria-hidden="true">39×12</span>
+          <span class="d-unit">feet</span>
+          <div class="d-content">
+            <h2 class="d-title">The wall <em>they wanted</em></h2>
+            <p class="body body--on-dark">Sam&rsquo;s Town decided to replace a large portion of their screens with one 39 &times; 12 foot LED wall &mdash; and commissioned LUCI&rsquo;s team to install it. In less than a week, the LED wall, a new set of TVs, and the sportsbook&rsquo;s three audio zones were all live and running on LUCI. The wall drives six presets across eight video inputs, all easily controlled from a single interface.</p>
+          </div>
+        </section>
+        <section class="d-sec">
+          <span class="d-metric" aria-hidden="true">10</span>
+          <span class="d-unit">channels</span>
+          <div class="d-content">
+            <h2 class="d-title">Bringing the <em>race book on board</em></h2>
+            <p class="body">The race book took the same approach. Rather than trench new cable out to every betting carousel, LUCI sent ten channels of its own encoded video back out over the coax already buried under the property &mdash; live racing on existing cable, with no trenching and no new wire pulled through the floor.</p>
+          </div>
+        </section>
+      </div>
+      <p class="width-tag">880px · matches live case study sheet</p>
+    </article>
+  </div>
+
+  <!-- E -->
+  <div class="stage">
+    <article class="variant" id="e">
+      <header class="variant__label">
+        <span class="variant__letter">E</span>
+        <span class="variant__name">Spine + wedge</span>
+        <p class="variant__desc">A thicker vertical Syncopate spine plus a slim diagonal color wedge on the right — geometry without taking over the reading field.</p>
+      </header>
+      <div class="sheet">
+        <section class="e-sec">
+          <div class="e-spine"><span>The room</span></div>
+          <div class="e-field">
+            <div class="e-wedge" aria-hidden="true"></div>
+            <div class="e-content">
+              <h2 class="e-title">The room <em>they had</em></h2>
+              <p class="body">LUCI has run Sam&rsquo;s Town&rsquo;s A/V end to end for more than a year: we installed audio through the casino first, then video across the property, including the sportsbook. This year, Sam&rsquo;s Town decided the sportsbook screens were due for an upgrade to replace years of accumulated TVs.</p>
+            </div>
+          </div>
+        </section>
+        <section class="e-sec e-sec--dark">
+          <div class="e-spine"><span>The wall</span></div>
+          <div class="e-field">
+            <div class="e-wedge" aria-hidden="true"></div>
+            <div class="e-content">
+              <h2 class="e-title">The wall <em>they wanted</em></h2>
+              <p class="body body--on-dark">Sam&rsquo;s Town decided to replace a large portion of their screens with one 39 &times; 12 foot LED wall &mdash; and commissioned LUCI&rsquo;s team to install it. In less than a week, the LED wall, a new set of TVs, and the sportsbook&rsquo;s three audio zones were all live and running on LUCI. The wall drives six presets across eight video inputs, all easily controlled from a single interface.</p>
+            </div>
+          </div>
+        </section>
+        <section class="e-sec">
+          <div class="e-spine"><span>Race book</span></div>
+          <div class="e-field">
+            <div class="e-wedge" aria-hidden="true"></div>
+            <div class="e-content">
+              <h2 class="e-title">Bringing the <em>race book on board</em></h2>
+              <p class="body">The race book took the same approach. Rather than trench new cable out to every betting carousel, LUCI sent ten channels of its own encoded video back out over the coax already buried under the property &mdash; live racing on existing cable, with no trenching and no new wire pulled through the floor.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+      <p class="width-tag">880px · matches live case study sheet</p>
+    </article>
+  </div>
+
+  <p class="footer-note">
+    Reply with A–E (or a hybrid). All mockups are locked to the live case study sheet width (880px).
+  </p>
+</body>
+</html>

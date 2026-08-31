@@ -136,6 +136,17 @@ export const samsTownCaseStudy = {
   logoSrc: '/images/logos/sams-town.png',
 } as const;
 
+// Aliante Casino + Hotel + Spa — sportsbook LED wall + rack consolidation (Boyd Gaming).
+export const alianteCaseStudy = {
+  title: 'One curved wall. Fifteen racks gone.',
+  dek: "LUCI built a 106-foot curved LED wall for Aliante's sportsbook — one of the biggest in Las Vegas — and pulled fifteen racks of legacy gear down to two. All on the interface already running the rest of the property.",
+  slug: 'aliante',
+  property: 'Aliante Casino + Hotel + Spa',
+  location: 'Las Vegas, Nevada',
+  poster: '/images/case-studies/aliante/wall-finished-wide-web.jpg',
+  logoSrc: '/images/logos/aliante.png',
+} as const;
+
 // Yaamava' Resort & Casino — property-wide consolidation onto one platform.
 export const yaamavaCaseStudy = {
   title: 'Everything on the property. One interface.',

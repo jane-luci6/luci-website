@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CaseStudyAliante from '../../../components/CaseStudyAliante.astro';
+import { alianteCaseStudy, site } from '../../../data/site';
+import { getCaseStudySeo, breadcrumb } from '../../../data/seo';
+
+const slug = 'aliante';
+const csSeo = getCaseStudySeo(slug);
+const canonicalPath = `/resources/case-studies/${slug}`;
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: `${alianteCaseStudy.title} — Aliante`,
+  description: csSeo.description,
+  author: { '@type': 'Organization', name: site.name },
+  publisher: {
+    '@type': 'Organization',
+    name: site.name,
+    logo: { '@type': 'ImageObject', url: `${site.url}/favicon.svg` },
+  },
+  mainEntityOfPage: site.url + canonicalPath,
+  about: { '@type': 'Place', name: 'Aliante Casino + Hotel + Spa' },
+};
+---
+
+<BaseLayout
+  title={csSeo.title}
+  description={csSeo.description}
+  canonicalPath={canonicalPath}
+  jsonLd={[articleLd, breadcrumb([
+    { name: 'Home', path: '/' },
+    { name: 'Resources', path: '/resources' },
+    { name: 'Case studies', path: '/resources/case-studies' },
+    { name: 'Aliante', path: canonicalPath },
+  ])]}
+  darkHeader
+>
+  <CaseStudyAliante />
+</BaseLayout>

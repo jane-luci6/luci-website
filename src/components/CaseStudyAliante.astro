@@ -1,8 +1,8 @@
 ---
-import { tachiCaseStudy } from '../data/site';
-import { tachiCaseStudyDetail as cs } from '../data/caseStudyTachi';
+import { alianteCaseStudy } from '../data/site';
+import { alianteCaseStudyDetail as cs } from '../data/caseStudyAliante';
 
-const { dek, logoSrc } = tachiCaseStudy;
+const { dek, logoSrc } = alianteCaseStudy;
 ---
 
 <article class="cs-page">
@@ -38,7 +38,7 @@ const { dek, logoSrc } = tachiCaseStudy;
           </div>
         ))}
       </div>
-      <ul class="cs-inventory" aria-label="Bingo hall scope under management">
+      <ul class="cs-inventory" aria-label="Sportsbook scope under management">
         {cs.inventory.map((item) => (
           <li class="cs-inventory__item">
             <p class="cs-inventory__num">{item.value}</p>
@@ -171,7 +171,7 @@ const { dek, logoSrc } = tachiCaseStudy;
           <div class="cs-ba__divider" aria-hidden="true"><span class="cs-ba__handle"></span></div>
           <span class="cs-ba__tag cs-ba__tag--before">Before</span>
           <span class="cs-ba__tag cs-ba__tag--after">After</span>
-          <input class="cs-ba__range" type="range" min="0" max="100" value="50" aria-label="Drag to reveal the finished bingo hall" />
+          <input class="cs-ba__range" type="range" min="0" max="100" value="50" aria-label="Drag to reveal the finished sportsbook" />
         </div>
         <p class="cs-ba__caption">{cs.beforeAfter.caption}</p>
       </div>
@@ -207,7 +207,7 @@ const { dek, logoSrc } = tachiCaseStudy;
     </section>
 
     <figure class="cs-future-photo">
-      <img src={cs.futurePhoto.src} alt={cs.futurePhoto.alt} width="2172" height="476" loading="lazy" />
+      <img src={cs.futurePhoto.src} alt={cs.futurePhoto.alt} width="5712" height="4284" loading="lazy" />
     </figure>
 
     <section class="cs-sec cs-sec--light">
@@ -381,7 +381,7 @@ const { dek, logoSrc } = tachiCaseStudy;
   .cs-bottom-line { margin-top: 4px; padding-top: 26px; border-top: 1px solid var(--rule-light); font-size: 18px; line-height: 1.6; color: var(--navy); }
 
   .cs-consolidation-band { position: relative; overflow: hidden; min-height: clamp(480px, 62vw, 640px); background-color: var(--navy-deep); }
-  .cs-consolidation-band__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: right center; display: block; filter: brightness(0.32); }
+  .cs-consolidation-band__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; filter: brightness(0.32); }
   .cs-consolidation-band__scrim { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(to right, rgba(10,22,28,0.98) 0%, rgba(10,22,28,0.94) 35%, rgba(10,22,28,0.60) 58%, rgba(10,22,28,0.12) 80%, rgba(10,22,28,0) 100%); }
   .cs-consolidation-band__content { position: relative; z-index: 2; padding: clamp(48px, 7vw, 80px) clamp(28px, 6vw, 64px); max-width: 74ch; }
   .cs-consolidation__header { margin-bottom: 0; padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.08); }

@@ -207,6 +207,11 @@ export function getCaseStudySeo(slug: string): PageSeo {
       description:
         "LUCI replaced Sam's Town sportsbook TVs with one 480-square-foot LED wall — looped into the platform already running the property, with race video over existing coax.",
     },
+    'aliante': {
+      title: 'Aliante case study',
+      description:
+        "LUCI built a 106-foot curved LED wall for Aliante's sportsbook — one of the biggest in Las Vegas — and pulled fifteen racks of legacy gear down to two on the LUCI platform already running the property.",
+    },
     yaamava: {
       title: "Yaamava' Resort & Casino case study",
       description:
