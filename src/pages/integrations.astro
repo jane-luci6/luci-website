@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionBlock from '../components/SectionBlock.astro';
+import {
+  integrations,
+  integrationsHero,
+  integrationsGrid,
+  integrationsCta,
+} from '../data/integrations';
+import { site } from '../data/site';
+import { seoPages, breadcrumb } from '../data/seo';
+
+const crumbs = breadcrumb([
+  { name: 'Home', path: '/' },
+  { name: 'Integrations', path: '/integrations' },
+]);
+---
+
+<BaseLayout
+  title={seoPages['/integrations'].title}
+  description={seoPages['/integrations'].description}
+  canonicalPath="/integrations"
+  jsonLd={crumbs}
+  darkHeader
+>
+  <SectionBlock
+    id="integrations-hero"
+    lockupName={integrationsHero.lockupName}
+    lockupRole={integrationsHero.lockupRole}
+    deck={integrationsHero.deck}
+    tone="deep"
+    wide
+    pattern
+  />
+
+  <SectionBlock
+    id="integrations-grid"
+    lockupName={integrationsGrid.lockupName}
+    lockupRole={integrationsGrid.lockupRole}
+    deck={integrationsGrid.deck}
+    tone="sand"
+    wide
+  >
+    <ul class="int-grid" role="list">
+      {integrations.map((item) => (
+        <li class="int-grid__cell">
+          <img
+            class:list={['int-grid__logo', item.placeholder && 'int-grid__logo--wordmark']}
+            src={`/images/logos/integrations/${item.logo}`}
+            alt={item.name}
+            loading="lazy"
+            decoding="async"
+          />
+          <span class="int-grid__name">{item.name}</span>
+        </li>
+      ))}
+    </ul>
+    <p class="int-grid__note">
+      Official brand marks replace temporary wordmarks as we receive them. Don’t see a system you run? Ask — open APIs mean the list keeps growing.
+    </p>
+  </SectionBlock>
+
+  <SectionBlock id="integrations-cta" tone="deep">
+    <div class="int-cta">
+      <p class="display-label int-cta__kicker">{integrationsCta.kicker}</p>
+      <h2 class="int-cta__title" set:html={integrationsCta.title} />
+      <p class="int-cta__sub">{integrationsCta.sub}</p>
+      <div class="btn-row">
+        <a class="btn btn--mint-outline" href="/contact">{site.ctaPrimary}</a>
+        <a class="btn btn--ghost" href="/platform">Explore the platform</a>
+      </div>
+    </div>
+  </SectionBlock>
+</BaseLayout>
+
+<style>
+  #integrations-hero,
+  #integrations-grid,
+  #integrations-cta {
+    scroll-margin-top: 120px;
+  }
+
+  /* ---------- Logo grid ---------- */
+  .int-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid rgba(10, 22, 28, 0.1);
+    border-left: 1px solid rgba(10, 22, 28, 0.1);
+  }
+
+  @media (min-width: 640px) {
+    .int-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 960px) {
+    .int-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+
+  .int-grid__cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    min-height: 140px;
+    padding: clamp(24px, 3vw, 36px) 16px;
+    background: rgba(255, 255, 255, 0.55);
+    border-right: 1px solid rgba(10, 22, 28, 0.1);
+    border-bottom: 1px solid rgba(10, 22, 28, 0.1);
+  }
+
+  .int-grid__logo {
+    display: block;
+    width: auto;
+    max-width: 140px;
+    height: 36px;
+    object-fit: contain;
+  }
+
+  .int-grid__logo--wordmark {
+    height: 28px;
+    max-width: 160px;
+  }
+
+  .int-grid__name {
+    font-family: var(--font-head);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--navy-muted);
+  }
+
+  .int-grid__note {
+    margin: clamp(24px, 3vw, 32px) 0 0;
+    max-width: 58ch;
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--navy-muted);
+  }
+
+  /* ---------- CTA ---------- */
+  .int-cta {
+    max-width: 64ch;
+    padding-block: clamp(24px, 4vw, 40px);
+  }
+  .int-cta__kicker {
+    color: var(--mint);
+    margin-bottom: var(--space-3);
+  }
+  .int-cta__title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(24px, 3.4vw, 34px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+    margin: 0 0 var(--space-3);
+  }
+  .int-cta__title :global(em) {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .int-cta__sub {
+    margin: 0 0 var(--space-5);
+    max-width: 48ch;
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.55;
+    color: rgba(245, 248, 250, 0.78);
+  }
+</style>

@@ -48,6 +48,11 @@ export const seoPages: Record<string, PageSeo> = {
     description:
       'The LUCI orchestration engine runs every display, source, audio zone, and building system on a property from one interface — on standard network infrastructure, with an embedded team that stays.',
   },
+  '/integrations': {
+    title: 'Integrations',
+    description:
+      'LUCI connects to the A/V, signage, LED, and content systems you already run — Q-SYS, Samsung, Novastar, DirecTV, EverPass, and more — through open APIs. No rip-and-replace.',
+  },
   '/about': {
     title: 'About',
     description:
