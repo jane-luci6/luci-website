@@ -138,8 +138,8 @@ export const samsTownCaseStudy = {
 
 // Aliante Casino + Hotel + Spa — sportsbook LED wall + rack consolidation (Boyd Gaming).
 export const alianteCaseStudy = {
-  title: 'One curved wall. Fifteen racks gone.',
-  dek: "LUCI built a 106-foot curved LED wall for Aliante's sportsbook — one of the biggest in Las Vegas — and pulled fifteen racks of legacy gear down to two. All on the interface already running the rest of the property.",
+  title: 'More than 2,000 square feet of game-day impact.',
+  dek: "Aliante brought its established multimedia partner into a major sportsbook remodel. LUCI built the 106-foot curved LED wall, upgraded the bar ticker, and brought the room onto the platform already running the rest of the property.",
   slug: 'aliante',
   property: 'Aliante Casino + Hotel + Spa',
   location: 'Las Vegas, Nevada',

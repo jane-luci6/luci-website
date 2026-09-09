@@ -77,8 +77,8 @@ export const alianteCaseStudyDetail = {
       'Audio is controlled by section as well, so the team can make one event the focus without changing the rest of the room. The wall can move from a single marquee event to a full slate of simultaneous games without a separate workflow or control system.',
     ],
     photo: {
-      src: '/images/case-studies/aliante/wall-finished-people-web.jpg',
-      alt: 'Aliante sportsbook with the 106-foot curved LED wall live, showing multiple sports zones, betting tickers, and patrons seated in the viewing area',
+      src: '/images/case-studies/aliante/aliante-platform-videowall-web.png',
+      alt: 'LUCI Video Wall Control interface in dark mode \u2014 preset configuration selector across the top, the active wall layout preview in the center showing source assignments, and a scrollable source list of live channels on the right',
     },
   },
   consolidation: {

@@ -10,8 +10,8 @@ const { dek, logoSrc } = alianteCaseStudy;
     <header class="cs-hero">
       <div class="cs-hero__kicker"><span>Case Study</span></div>
       <h1 class="cs-hero__title">
-        <span class="cs-hero__leadin">{cs.heroLeadin}</span>
         <em>{cs.heroDisplay}</em>
+        <span class="cs-hero__trail">{cs.heroTrail}</span>
       </h1>
       <p class="cs-hero__dek">{dek}</p>
       <div class="cs-hero__actions">
@@ -28,7 +28,9 @@ const { dek, logoSrc } = alianteCaseStudy;
 
     <section class="cs-glance" aria-label="At a glance">
       <div class="cs-glance__logo">
-        <img src={logoSrc} alt={cs.property} width="220" height="64" />
+        <div class="cs-glance__logo-card">
+          <img src={logoSrc} alt={cs.property} width="220" height="64" />
+        </div>
       </div>
       <div class="cs-facts">
         {cs.facts.map((fact) => (
@@ -129,8 +131,8 @@ const { dek, logoSrc } = alianteCaseStudy;
       <div class="cs-copy">
         {cs.oneInterface.paragraphs.map((p) => <p>{p}</p>)}
       </div>
-      <figure class="cs-inline-photo">
-        <img src={cs.oneInterface.photo.src} alt={cs.oneInterface.photo.alt} width="1600" height="900" loading="lazy" />
+      <figure class="cs-inline-photo cs-inline-photo--ui">
+        <img src={cs.oneInterface.photo.src} alt={cs.oneInterface.photo.alt} width="1024" height="466" loading="lazy" />
       </figure>
     </section>
 
@@ -180,29 +182,81 @@ const { dek, logoSrc } = alianteCaseStudy;
       </ul>
     </section>
 
-    <section class="cs-scope-story" aria-labelledby="cs-scope-story-title">
-      <h2 id="cs-scope-story-title" class="cs-scope-story__title">{cs.scopeStory.titleBefore}<em>{cs.scopeStory.titleAccent}</em></h2>
-      <ul class="cs-scope-stats" aria-label="Property scope managed through LUCI">
-        {cs.scopeStory.stats.map((stat) => (
-          <li class="cs-scope-stat">
-            <p class="cs-scope-stat__value">{stat.value}</p>
-            <p class="cs-scope-stat__label">{stat.label}</p>
-          </li>
-        ))}
-      </ul>
-      <svg class="cs-scope-converge" viewBox="0 0 100 120" preserveAspectRatio="none" aria-hidden="true">
-        <defs><linearGradient id="cs-funnel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#edd086" stop-opacity="0.75"/><stop offset="1" stop-color="#68e3be" stop-opacity="0.7"/></linearGradient></defs>
-        <line x1="10" y1="0" x2="50" y2="116" stroke="url(#cs-funnel)"/>
-        <line x1="30" y1="0" x2="50" y2="116" stroke="url(#cs-funnel)"/>
-        <line x1="50" y1="0" x2="50" y2="116" stroke="#68e3be" stroke-width="2"/>
-        <line x1="70" y1="0" x2="50" y2="116" stroke="url(#cs-funnel)"/>
-        <line x1="90" y1="0" x2="50" y2="116" stroke="url(#cs-funnel)"/>
+    <section class="cs-ledger" aria-labelledby="cs-ledger-title">
+      <h2 id="cs-ledger-title" class="cs-ledger__title">{cs.scopeStory.titleBefore}<em>{cs.scopeStory.titleAccent}</em></h2>
+
+      <div class="cs-ledger__ticker">
+        <ul class="cs-ledger__stats" aria-label="Property scope managed through LUCI">
+          {cs.scopeStory.stats.map((stat) => (
+            <li>
+              <span class="cs-ledger__ic" aria-hidden="true">
+                {stat.icon === 'display' && (
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <rect x="3" y="4" width="18" height="13" rx="2" fill="#68E3BE" fill-opacity="0.20" stroke="#68E3BE" stroke-width="1.8"/>
+                    <path d="M9 21h6M12 17v4" stroke="#68E3BE" stroke-width="1.8" stroke-linecap="round"/>
+                    <circle cx="17.5" cy="8" r="1.5" fill="#EDD086"/>
+                  </svg>
+                )}
+                {stat.icon === 'led' && (
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <rect x="1.5" y="6" width="21" height="12" rx="1.2" fill="#68E3BE" fill-opacity="0.18" stroke="#68E3BE" stroke-width="1.8"/>
+                    <rect x="8.6" y="6.4" width="6.8" height="11.2" fill="#EDD086" fill-opacity="0.9"/>
+                    <path d="M8.6 6v12M15.4 6v12" stroke="#68E3BE" stroke-width="1.3"/>
+                  </svg>
+                )}
+                {stat.icon === 'audio' && (
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M4 9v6h3l5 4V5L7 9H4Z" fill="#68E3BE" fill-opacity="0.20" stroke="#68E3BE" stroke-width="1.8" stroke-linejoin="round"/>
+                    <path d="M15 8.5c1.5 2 1.5 5 0 7M17.5 6c2.5 3 2.5 9 0 12" stroke="#EDD086" stroke-width="1.8" stroke-linecap="round"/>
+                  </svg>
+                )}
+                {stat.icon === 'channel' && (
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <rect x="3" y="5" width="18" height="14" rx="2" fill="#68E3BE" fill-opacity="0.20" stroke="#68E3BE" stroke-width="1.8"/>
+                    <path d="M10 9l6 3-6 3V9Z" fill="#EDD086"/>
+                  </svg>
+                )}
+                {stat.icon === 'signage' && (
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <rect x="4" y="3" width="16" height="11" rx="1.5" fill="#68E3BE" fill-opacity="0.20" stroke="#68E3BE" stroke-width="1.8"/>
+                    <path d="M12 14v6M8 20h8" stroke="#68E3BE" stroke-width="1.8" stroke-linecap="round"/>
+                    <path d="M7 7h6" stroke="#EDD086" stroke-width="1.8" stroke-linecap="round"/>
+                  </svg>
+                )}
+                {stat.icon === 'grid' && (
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <rect x="3" y="3" width="18" height="18" rx="2" fill="#68E3BE" fill-opacity="0.18" stroke="#68E3BE" stroke-width="1.8"/>
+                    <path d="M3 9h18M3 15h18M9 3v18M15 3v18" stroke="#68E3BE" stroke-width="1.4"/>
+                    <rect x="9" y="9" width="6" height="6" fill="#EDD086" fill-opacity="0.9"/>
+                  </svg>
+                )}
+              </span>
+              <span class="cs-ledger__num">{stat.value}</span>
+              <span class="cs-ledger__label">{stat.label}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <svg class="cs-ledger__converge" viewBox="0 0 100 120" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="aliante-funnel" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#edd086" stop-opacity="0.75"/>
+            <stop offset="1" stop-color="#68e3be" stop-opacity="0.7"/>
+          </linearGradient>
+        </defs>
+        <line x1="8.33" y1="0" x2="50" y2="116" stroke="url(#aliante-funnel)"/>
+        <line x1="25" y1="0" x2="50" y2="116" stroke="url(#aliante-funnel)"/>
+        <line x1="41.67" y1="0" x2="50" y2="116" stroke="url(#aliante-funnel)"/>
+        <line x1="58.33" y1="0" x2="50" y2="116" stroke="url(#aliante-funnel)"/>
+        <line x1="75" y1="0" x2="50" y2="116" stroke="url(#aliante-funnel)"/>
+        <line x1="91.67" y1="0" x2="50" y2="116" stroke="url(#aliante-funnel)"/>
       </svg>
-      <div class="cs-scope-arrow" aria-hidden="true"></div>
-      <div class="cs-scope-dest">
-        <span class="cs-scope-dest-rule" aria-hidden="true"></span>
-        <p class="cs-scope-story__outcome">{cs.scopeStory.outcomeBefore}<em>{cs.scopeStory.outcomeAccent}</em>{cs.scopeStory.outcomeAfter}</p>
-        <p class="cs-scope-story__dek">{cs.scopeStory.dek}</p>
+      <div class="cs-ledger__arrow" aria-hidden="true"></div>
+      <div class="cs-ledger__dest">
+        <span class="cs-ledger__dest-rule" aria-hidden="true"></span>
+        <p class="cs-ledger__dest-head">{cs.scopeStory.outcomeBefore}<em>{cs.scopeStory.outcomeAccent}</em>{cs.scopeStory.outcomeAfter}</p>
+        <p class="cs-ledger__dest-sub">{cs.scopeStory.dek}</p>
       </div>
     </section>
 
@@ -269,7 +323,7 @@ const { dek, logoSrc } = alianteCaseStudy;
   .cs-hero {
     background-color: var(--navy-deep);
     background-image:
-      linear-gradient(to right, rgba(8,18,24,0.86) 0%, rgba(8,18,24,0.80) 48%, rgba(8,18,24,0.42) 78%, rgba(8,18,24,0.10) 100%),
+      linear-gradient(to right, rgba(8,18,24,0.98) 0%, rgba(8,18,24,0.96) 55%, rgba(8,18,24,0.70) 82%, rgba(8,18,24,0.20) 100%),
       url('/images/mesh/luci-bg-hero-1920x1080.svg');
     background-size: cover; background-position: center; background-repeat: no-repeat;
     padding: clamp(40px, 8vw, 84px) clamp(28px, 6vw, 64px) clamp(40px, 7vw, 72px);
@@ -280,9 +334,9 @@ const { dek, logoSrc } = alianteCaseStudy;
   .cs-hero__kicker::before { content: ''; width: 28px; height: 2px; background: var(--mint); }
   .cs-hero__kicker span { font-family: var(--font-display); font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mint); }
   .cs-hero__title { margin: 0 0 26px; font-family: var(--font-head); font-weight: 700; font-size: clamp(34px, 6.5vw, 60px); line-height: 1.04; letter-spacing: -0.03em; color: var(--off-white); max-width: 16ch; }
-  .cs-hero__title :global(em) { display: block; font-family: var(--font-display); font-style: normal; font-size: clamp(24px, 4.8vw, 44px); line-height: 1.2; color: var(--mint); text-transform: uppercase; max-width: 12ch; }
-  .cs-hero__leadin { display: block; font-family: var(--font-head); font-size: clamp(17px, 2.2vw, 24px); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(235,245,248,0.82); margin-bottom: 14px; }
-  .cs-hero__dek { margin: 0 0 30px; font-size: clamp(17px, 2.2vw, 20px); line-height: 1.6; color: rgba(235,245,248,0.82); max-width: 58ch; }
+  .cs-hero__title :global(em) { display: block; font-family: var(--font-display); font-style: normal; font-size: clamp(24px, 4.8vw, 44px); line-height: 1.2; letter-spacing: 0; color: var(--mint); text-transform: uppercase; white-space: nowrap; }
+  .cs-hero__trail { display: block; font-family: var(--font-head); font-size: clamp(17px, 2.2vw, 24px); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(235,245,248,0.82); margin-top: 16px; }
+  .cs-hero__dek { margin: 0 0 30px; font-size: clamp(15px, 1.8vw, 18px); line-height: 1.6; color: rgba(235,245,248,0.82); max-width: 58ch; }
   .cs-hero__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 30px; }
   .cs-download { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; letter-spacing: 0.04em; text-decoration: none; color: var(--mint); border: 1px solid rgba(104,227,190,0.45); padding: 12px 20px; transition: background 0.15s, border-color 0.15s; }
   .cs-download:hover { background: rgba(104,227,190,0.08); border-color: var(--mint); }
@@ -292,14 +346,15 @@ const { dek, logoSrc } = alianteCaseStudy;
 
   .cs-glance { background: var(--off-white); padding: clamp(32px, 5vw, 48px) clamp(28px, 6vw, 64px); border-bottom: 1px solid var(--rule-light); }
   .cs-glance__logo { margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--rule-light); }
-  .cs-glance__logo img { height: 72px; width: auto; display: block; }
+  .cs-glance__logo-card { display: inline-block; background: var(--navy-deep); padding: 14px 22px; border-radius: 8px; }
+  .cs-glance__logo img { height: 56px; width: auto; display: block; }
   .cs-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 32px; }
   @media (max-width: 620px) { .cs-facts { grid-template-columns: repeat(2, 1fr); gap: 20px 24px; } }
   .cs-facts__label { margin: 0 0 8px; font-family: var(--font-display); font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-light); }
   .cs-facts__value { margin: 0; font-size: 17px; font-weight: 600; line-height: 1.3; color: var(--navy); }
 
-  .cs-inventory { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule-light); border: 1px solid var(--rule-light); margin-bottom: 28px; list-style: none; padding: 0; }
-  @media (max-width: 620px) { .cs-inventory { grid-template-columns: repeat(2, 1fr); } }
+  .cs-inventory { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rule-light); border: 1px solid var(--rule-light); margin-bottom: 28px; list-style: none; padding: 0; }
+  @media (max-width: 768px) { .cs-inventory { grid-template-columns: repeat(2, 1fr); } }
   .cs-inventory__item { background: #fff; padding: 18px 16px; text-align: left; }
   .cs-inventory__num { margin: 0 0 6px; font-family: var(--font-head); font-size: clamp(28px, 4vw, 36px); font-weight: 700; line-height: 1; letter-spacing: -0.03em; color: var(--accent-light); }
   .cs-inventory__label { margin: 0; font-size: 13px; line-height: 1.35; color: var(--ink); font-weight: 500; }
@@ -343,6 +398,8 @@ const { dek, logoSrc } = alianteCaseStudy;
 
   .cs-inline-photo { margin: 28px 0 0; max-width: 100%; }
   .cs-inline-photo img { display: block; width: 100%; aspect-ratio: 16/9; object-fit: cover; object-position: center; }
+  .cs-inline-photo--ui { background: var(--navy-deep); border-radius: 12px; overflow: hidden; }
+  .cs-inline-photo--ui img { aspect-ratio: auto; height: auto; object-fit: contain; object-position: center; }
 
   .cs-crew { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; margin: 24px 0 28px; max-width: 64ch; overflow: hidden; border-radius: 14px; background: var(--navy-deep); }
   .cs-crew figure { margin: 0; }
@@ -399,30 +456,82 @@ const { dek, logoSrc } = alianteCaseStudy;
   .cs-quote__attrib { margin: 0; padding-left: 30px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.6; }
   .cs-quote__attrib span { display: block; color: var(--accent-light); }
 
-  .cs-scope-story { position: relative; overflow: hidden; background-color: var(--navy-deep); padding: clamp(48px, 7vw, 80px) clamp(28px, 6vw, 64px); border-bottom: 1px solid rgba(104,227,190,0.16); text-align: center; }
-  .cs-scope-story::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: url('/images/mesh/luci-bg-hero-split-1920x1080.svg') center / cover no-repeat; mix-blend-mode: screen; opacity: 0.55; -webkit-mask-image: radial-gradient(ellipse 78% 92% at 50% 50%, transparent 0%, transparent 28%, rgba(0,0,0,0.45) 58%, #000 82%); mask-image: radial-gradient(ellipse 78% 92% at 50% 50%, transparent 0%, transparent 28%, rgba(0,0,0,0.45) 58%, #000 82%); }
-  .cs-scope-story::after { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(ellipse 72% 88% at 50% 50%, rgba(7,15,20,0.72) 0%, rgba(7,15,20,0.38) 42%, transparent 78%); }
-  .cs-scope-story > :global(*) { position: relative; z-index: 1; }
-  .cs-scope-story__title { margin: 0 0 36px; font-family: var(--font-head); font-size: clamp(24px, 4vw, 36px); font-weight: 700; line-height: 1.15; letter-spacing: -0.025em; color: var(--mint); }
-  .cs-scope-story__title :global(em) { font-style: normal; color: var(--off-white); }
-  .cs-scope-stats { display: grid; grid-template-columns: repeat(5, 1fr); list-style: none; margin: 0; padding: 0 0 32px; border-bottom: 1px solid rgba(104,227,190,0.18); }
-  @media (max-width: 720px) { .cs-scope-stats { grid-template-columns: repeat(2, 1fr); gap: 24px 0; } .cs-scope-stat:nth-child(odd) { border-left: 0; } }
-  .cs-scope-stat { padding: 0 12px; border-left: 1px solid rgba(104,227,190,0.2); }
-  .cs-scope-stat:first-child { border-left: 0; }
-  .cs-scope-stat__value { margin: 0 0 8px; font-family: var(--font-head); font-size: clamp(28px, 5vw, 44px); font-weight: 700; line-height: 1; letter-spacing: -0.04em; color: var(--mint); }
-  .cs-scope-stat__label { margin: 0; font-size: 13px; line-height: 1.35; color: rgba(235,245,248,0.76); }
-  .cs-scope-story__outcome { margin: 28px 0 0; font-family: var(--font-head); font-size: clamp(28px, 5vw, 44px); font-weight: 700; line-height: 1.15; letter-spacing: -0.03em; color: var(--off-white); }
-  .cs-scope-story__outcome :global(em) { font-style: normal; color: var(--mint); }
-  .cs-scope-story__dek { margin: 16px auto 0; font-size: 17px; line-height: 1.6; color: rgba(235,245,248,0.78); max-width: 42ch; }
-  .cs-scope-converge { display: block; width: 100%; height: clamp(52px, 7vw, 76px); margin: 4px 0 -2px; overflow: visible; }
-  .cs-scope-converge line { stroke-width: 1.5; vector-effect: non-scaling-stroke; }
-  .cs-scope-arrow { position: relative; width: clamp(28px, 3vw, 38px); margin: 2px auto 0; }
-  .cs-scope-arrow::before { content: ''; display: block; width: clamp(6px, 0.8vw, 9px); height: clamp(28px, 4vw, 46px); margin: 0 auto; background: var(--mint); border-radius: 4px; box-shadow: 0 0 18px rgba(104,227,190,0.55); }
-  .cs-scope-arrow::after { content: ''; display: block; width: 0; height: 0; margin: 0 auto; border-left: clamp(13px, 1.4vw, 18px) solid transparent; border-right: clamp(13px, 1.4vw, 18px) solid transparent; border-top: clamp(17px, 1.9vw, 24px) solid var(--mint); filter: drop-shadow(0 6px 12px rgba(104,227,190,0.5)); }
-  .cs-scope-dest { display: flex; flex-direction: column; align-items: center; gap: 12px; margin: 20px 0 0; }
-  .cs-scope-dest-rule { width: 40px; height: 3px; background: var(--mint); }
-  .cs-scope-story__outcome { margin: 0; }
-  .cs-scope-story__dek { margin: 0; }
+  .cs-ledger {
+    position: relative; overflow: hidden;
+    background-color: var(--navy-deep);
+    border-top: 4px solid var(--mint);
+    border-bottom: 1px solid rgba(104, 227, 190, 0.16);
+    padding: 0 0 clamp(36px, 5vw, 52px);
+  }
+  .cs-ledger::before {
+    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: url('/images/mesh/luci-bg-hero-1920x1080.svg') center / cover no-repeat;
+    mix-blend-mode: screen; opacity: 0.7;
+    -webkit-mask-image: radial-gradient(ellipse 82% 98% at 50% 58%, transparent 0%, transparent 34%, rgba(0,0,0,0.5) 60%, #000 80%);
+            mask-image: radial-gradient(ellipse 82% 98% at 50% 58%, transparent 0%, transparent 34%, rgba(0,0,0,0.5) 60%, #000 80%);
+  }
+  .cs-ledger::after {
+    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: radial-gradient(ellipse 80% 94% at 50% 60%, rgba(7,15,20,0.82) 0%, rgba(7,15,20,0.5) 40%, transparent 82%);
+  }
+  .cs-ledger > :global(*) { position: relative; z-index: 1; }
+  .cs-ledger__title {
+    margin: 0 0 clamp(22px, 3vw, 32px);
+    padding: clamp(36px, 5vw, 56px) clamp(28px, 6vw, 64px) 0;
+    font-family: var(--font-head); font-size: clamp(26px, 3.6vw, 38px); font-weight: 700;
+    line-height: 1.1; letter-spacing: -0.025em; color: var(--mint); text-align: center;
+  }
+  .cs-ledger__title :global(em) { font-style: normal; color: var(--off-white); }
+  .cs-ledger__ticker {
+    margin: 0 0 clamp(18px, 2.4vw, 26px);
+    border-top: 1px solid rgba(var(--mint-rgb), 0.2);
+    border-bottom: 1px solid rgba(var(--mint-rgb), 0.2);
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+  }
+  .cs-ledger__stats {
+    list-style: none; margin: 0; padding: clamp(18px, 2.4vw, 26px) 0;
+    display: flex; align-items: stretch; justify-content: center;
+  }
+  .cs-ledger__stats li {
+    flex: 1 1 0; min-width: 132px; position: relative; text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    padding: 0 clamp(8px, 1.4vw, 18px);
+  }
+  .cs-ledger__stats li + li { border-left: 1px solid rgba(var(--mint-rgb), 0.18); }
+  .cs-ledger__ic { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; flex: none; }
+  .cs-ledger__ic :global(svg) { width: 100%; height: 100%; display: block; }
+  .cs-ledger__num {
+    font-family: var(--font-head); font-size: clamp(30px, 4vw, 44px); font-weight: 700;
+    line-height: 1; letter-spacing: -0.03em; color: var(--mint);
+  }
+  .cs-ledger__label {
+    font-size: 13px; line-height: 1.3; letter-spacing: 0.02em; color: rgba(235, 245, 248, 0.72);
+  }
+  .cs-ledger__converge { display: block; width: 100%; height: clamp(52px, 7vw, 76px); margin: 4px 0 -2px; overflow: visible; }
+  .cs-ledger__converge :global(line) { stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+  .cs-ledger__arrow { position: relative; width: clamp(28px, 3vw, 38px); margin: 2px auto 0; }
+  .cs-ledger__arrow::before {
+    content: ''; display: block; width: clamp(6px, 0.8vw, 9px); height: clamp(28px, 4vw, 46px); margin: 0 auto;
+    background: var(--mint); border-radius: 4px; box-shadow: 0 0 18px rgba(var(--mint-rgb), 0.55);
+  }
+  .cs-ledger__arrow::after {
+    content: ''; display: block; width: 0; height: 0; margin: 0 auto;
+    border-left: clamp(13px, 1.4vw, 18px) solid transparent;
+    border-right: clamp(13px, 1.4vw, 18px) solid transparent;
+    border-top: clamp(17px, 1.9vw, 24px) solid var(--mint);
+    filter: drop-shadow(0 6px 12px rgba(var(--mint-rgb), 0.5));
+  }
+  .cs-ledger__dest { display: flex; flex-direction: column; align-items: center; gap: 12px; margin: 20px 0 0; padding: 0 clamp(28px, 6vw, 64px); }
+  .cs-ledger__dest-rule { width: 40px; height: 3px; background: var(--mint); }
+  .cs-ledger__dest-head {
+    margin: 0; font-family: var(--font-head); font-weight: 700; letter-spacing: -0.02em;
+    font-size: clamp(32px, 5vw, 54px); color: var(--off-white); text-align: center;
+  }
+  .cs-ledger__dest-head :global(em) { font-style: normal; color: var(--mint); }
+  .cs-ledger__dest-sub {
+    margin: 0; font-size: clamp(14px, 1.6vw, 17px); color: rgba(235, 245, 248, 0.72);
+    text-align: center; max-width: 46ch; line-height: 1.5;
+  }
 
   .cs-future-photo { margin: 0; background: var(--navy-deep); overflow: hidden; }
   .cs-future-photo img { display: block; width: 100%; height: auto; }
