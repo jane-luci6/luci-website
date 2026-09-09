@@ -544,7 +544,8 @@ h2,
 #persona-cta.section,
 #industry-cta.section,
 #industries-cta.section,
-#wss-cta.section {
+#wss-cta.section,
+#integrations-cta.section {
   position: relative;
   isolation: isolate;
   background-color: var(--navy-deep) !important;
@@ -557,7 +558,8 @@ h2,
 #persona-cta.section::before,
 #industry-cta.section::before,
 #industries-cta.section::before,
-#wss-cta.section::before {
+#wss-cta.section::before,
+#integrations-cta.section::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -573,7 +575,8 @@ h2,
 #persona-cta.section::after,
 #industry-cta.section::after,
 #industries-cta.section::after,
-#wss-cta.section::after {
+#wss-cta.section::after,
+#integrations-cta.section::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -587,7 +590,8 @@ h2,
 #persona-cta.section > .container,
 #industry-cta.section > .container,
 #industries-cta.section > .container,
-#wss-cta.section > .container {
+#wss-cta.section > .container,
+#integrations-cta.section > .container {
   position: relative;
   z-index: 1;
 }
@@ -598,7 +602,8 @@ h2,
   #persona-cta.section::after,
   #industry-cta.section::after,
   #industries-cta.section::after,
-  #wss-cta.section::after {
+  #wss-cta.section::after,
+  #integrations-cta.section::after {
     background: linear-gradient(180deg, transparent 0%, rgba(7, 15, 20, 0.65) 34%, rgba(7, 15, 20, 0.65) 60%, transparent 100%);
   }
 }

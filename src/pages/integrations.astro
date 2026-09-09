@@ -76,15 +76,17 @@ const crumbs = breadcrumb([
     scroll-margin-top: 120px;
   }
 
-  /* ---------- Logo grid ---------- */
+  /* ---------- Logo grid ----------
+     House treatment: mint hairline separators (not dark gridlines),
+     a 3px mint accent bar above the grid, and a mint hover lift. */
   .int-grid {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    border-top: 1px solid rgba(10, 22, 28, 0.1);
-    border-left: 1px solid rgba(10, 22, 28, 0.1);
+    border-top: 3px solid var(--accent-light);
+    border-left: 1px solid rgba(43, 158, 128, 0.14);
   }
 
   @media (min-width: 640px) {
@@ -106,8 +108,13 @@ const crumbs = breadcrumb([
     min-height: 140px;
     padding: clamp(24px, 3vw, 36px) 16px;
     background: rgba(255, 255, 255, 0.55);
-    border-right: 1px solid rgba(10, 22, 28, 0.1);
-    border-bottom: 1px solid rgba(10, 22, 28, 0.1);
+    border-right: 1px solid rgba(43, 158, 128, 0.14);
+    border-bottom: 1px solid rgba(43, 158, 128, 0.14);
+    transition: background 0.2s ease;
+  }
+
+  .int-grid__cell:hover {
+    background: rgba(255, 255, 255, 0.85);
   }
 
   .int-grid__logo {
@@ -116,6 +123,11 @@ const crumbs = breadcrumb([
     max-width: 140px;
     height: 36px;
     object-fit: contain;
+    transition: transform 0.2s ease;
+  }
+
+  .int-grid__cell:hover .int-grid__logo {
+    transform: scale(1.06);
   }
 
   .int-grid__logo--wordmark {
