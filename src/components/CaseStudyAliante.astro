@@ -83,7 +83,10 @@ const { dek, logoSrc } = alianteCaseStudy;
       </div>
       <div class="cs-crew">
         {cs.approach.crewPhotos.map((photo) => (
-          <figure><img src={photo.src} alt={photo.alt} loading="lazy" /></figure>
+          <figure>
+            <img src={photo.src} alt={photo.alt} loading="lazy" />
+            {photo.caption && <figcaption>{photo.caption}</figcaption>}
+          </figure>
         ))}
       </div>
       <ul class="cs-scope">
@@ -133,6 +136,7 @@ const { dek, logoSrc } = alianteCaseStudy;
       </div>
       <figure class="cs-inline-photo cs-inline-photo--ui">
         <img src={cs.oneInterface.photo.src} alt={cs.oneInterface.photo.alt} width="1024" height="466" loading="lazy" />
+        {cs.oneInterface.caption && <figcaption class="cs-inline-photo__caption">{cs.oneInterface.caption}</figcaption>}
       </figure>
     </section>
 
@@ -389,8 +393,8 @@ const { dek, logoSrc } = alianteCaseStudy;
 
   .cs-photo-band { position: relative; overflow: hidden; min-height: clamp(380px, 52vw, 520px); border-bottom: none; }
   .cs-photo-band__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block; }
-  .cs-photo-band__scrim { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(to right, rgba(245,248,250,0.96) 0%, rgba(245,248,250,0.92) 38%, rgba(245,248,250,0.62) 58%, rgba(245,248,250,0.18) 78%, rgba(245,248,250,0) 100%); }
-  .cs-photo-band__content { position: relative; z-index: 2; padding: clamp(44px, 6vw, 72px) clamp(28px, 6vw, 64px); max-width: 38ch; }
+  .cs-photo-band__scrim { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(to right, rgba(245,248,250,0.97) 0%, rgba(245,248,250,0.95) 52%, rgba(245,248,250,0.78) 72%, rgba(245,248,250,0.30) 88%, rgba(245,248,250,0) 100%); }
+  .cs-photo-band__content { position: relative; z-index: 2; padding: clamp(44px, 6vw, 72px) clamp(28px, 6vw, 64px); max-width: 54ch; }
   .cs-photo-band .cs-sec__title { color: var(--navy); }
   .cs-photo-band .cs-sec__title-accent { color: var(--accent-light); }
   .cs-photo-band .cs-copy p { color: var(--ink); }
@@ -400,15 +404,18 @@ const { dek, logoSrc } = alianteCaseStudy;
   .cs-inline-photo img { display: block; width: 100%; aspect-ratio: 16/9; object-fit: cover; object-position: center; }
   .cs-inline-photo--ui { background: var(--navy-deep); border-radius: 12px; overflow: hidden; }
   .cs-inline-photo--ui img { aspect-ratio: auto; height: auto; object-fit: contain; object-position: center; }
+  .cs-inline-photo__caption { margin: 12px 0 0; padding: 0 4px; font-size: 13px; line-height: 1.5; letter-spacing: 0.02em; color: var(--ink); opacity: 0.78; }
 
-  .cs-crew { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; margin: 24px 0 28px; max-width: 64ch; overflow: hidden; border-radius: 14px; background: var(--navy-deep); }
-  .cs-crew figure { margin: 0; }
+  .cs-crew { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; margin: 24px 0 28px; max-width: 100%; overflow: hidden; border-radius: 14px; background: var(--navy-deep); }
+  .cs-crew figure { margin: 0; position: relative; }
   .cs-crew img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
+  .cs-crew figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 10px 12px; font-family: var(--font-head); font-size: 12px; font-weight: 700; line-height: 1.3; letter-spacing: 0.02em; color: var(--off-white); background: linear-gradient(to top, rgba(10,22,28,0.92) 0%, rgba(10,22,28,0) 100%); }
   @media (max-width: 900px) { .cs-crew { grid-template-columns: 1fr 1fr; } }
 
-  .cs-scope { list-style: none; margin: 28px 0 0; padding: 0; max-width: 64ch; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  .cs-scope li { display: flex; flex-direction: row; align-items: flex-start; gap: 14px; padding: 16px 18px; font-size: 15px; line-height: 1.5; margin: 0; color: rgba(235,245,248,0.9); background: rgba(255,255,255,0.05); border: 1px solid rgba(104,227,190,0.4); border-radius: 14px; }
-  .cs-scope li svg { display: block; width: 28px; height: 28px; flex-shrink: 0; }
+  .cs-scope { list-style: none; margin: 0 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .cs-scope li { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 16px 14px; font-size: 13px; line-height: 1.45; margin: 0; color: rgba(235,245,248,0.9); background: rgba(255,255,255,0.05); border: 1px solid rgba(104,227,190,0.4); border-radius: 14px; }
+  .cs-scope li svg { display: block; width: 26px; height: 26px; flex-shrink: 0; }
+  @media (max-width: 900px) { .cs-scope { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 620px) { .cs-scope { grid-template-columns: 1fr; } }
 
   .cs-results-block .cs-ba { background: transparent; padding: 8px 0 32px; border-bottom: 0; margin: 0; }
