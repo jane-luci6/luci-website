@@ -57,10 +57,10 @@ export const alianteCaseStudyDetail = {
       'Behind the wall, fifteen racks of legacy gear came out and were replaced by just two LUCI racks. More than twenty projectors came down. LUCI also rebuilt the continuous odds ticker around the sportsbook bar, bringing the main wall, the ticker, video sources, and audio onto the same platform already operating throughout Aliante.',
     ],
     crewPhotos: [
-      { src: '/images/case-studies/aliante/aliante-before-1-web.jpg', alt: 'Aliante sportsbook before the remodel \u2014 legacy multi-screen display wall with betting kiosks across patterned carpet', caption: 'A 106-foot curved LED wall' },
+      { src: '/images/case-studies/aliante/aliante-wall-build-web.jpg', alt: 'Construction of the 106-foot curved LED wall at Aliante \u2014 green LED tiles being installed on the curved mounting structure with scissor lifts and crew on the floor', caption: 'A 106-foot curved LED wall' },
       { src: '/images/case-studies/aliante/aliante-rack-room-2-before-web.jpg', alt: 'Legacy server racks with dense cabling in Aliante\u2019s rack room before LUCI consolidation', caption: '15 racks \u2192 2 LUCI racks' },
       { src: '/images/case-studies/aliante/aliante-projectors-before-web.jpg', alt: 'Row of dusty legacy projectors lined up on the floor before removal \u2014 the 20+ projectors replaced by the LED wall', caption: '20+ projectors removed' },
-      { src: '/images/case-studies/aliante/aliante-before-2-web.jpg', alt: 'Aliante sportsbook before the remodel \u2014 long horizontal row of small monitors forming the legacy odds ticker above the betting carrels', caption: 'Bar ticker rebuilt' },
+      { src: '/images/case-studies/aliante/aliante-bar-build-web.jpg', alt: 'Skeletal metal framework for the sportsbook bar centerpiece suspended from the ceiling at Aliante, with the bar area below covered in protective plastic during construction', caption: 'Bar ticker rebuilt' },
     ],
     scope: [
       'Built and installed a 106-foot curved LED wall',
@@ -70,8 +70,8 @@ export const alianteCaseStudyDetail = {
     ],
   },
   oneInterface: {
-    titleBefore: 'Six configurations. ',
-    titleAccent: 'One experience.',
+    titleBefore: 'One wall, ',
+    titleAccent: 'six layouts.',
     paragraphs: [
       'The operator starts by choosing from six wall configurations, each designed for a different mix of events. Tap a box in the interface, select the game, race, or channel that belongs there, and LUCI sends it to that section of the wall.',
       'Audio is controlled by section as well, so the team can make one event the focus without changing the rest of the room. The wall can move from a single marquee event to a full slate of simultaneous games without a separate workflow or control system.',
@@ -112,9 +112,9 @@ export const alianteCaseStudyDetail = {
     org: 'LUCI Systems',
   },
   beforeAfter: {
-    beforeSrc: '/images/case-studies/aliante/aliante-before-3-web.jpg',
+    beforeSrc: '/images/case-studies/aliante/aliante-before-2-web.jpg',
     afterSrc: '/images/case-studies/aliante/wall-finished-wide-web.jpg',
-    beforeAlt: 'Aliante sportsbook before the remodel \u2014 legacy projector-based display wall with seating in the foreground',
+    beforeAlt: 'Aliante sportsbook before the remodel \u2014 legacy multi-screen display wall with a long row of small monitors forming the odds ticker above the betting carrels',
     afterAlt: 'Aliante sportsbook after the remodel \u2014 106-foot curved LED wall live with multiple sports zones and betting tickers',
     caption: 'Drag to see the wall come together.',
   },
