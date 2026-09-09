@@ -123,9 +123,8 @@ export const alianteCaseStudyDetail = {
     titleAccent: 'built around the guest',
     bullets: [
       'Six configurations reshape the wall around the day\u2019s event mix',
-      'Each section receives its own source without changing the rest of the wall',
-      'Section-level audio lets one event take focus while the others continue',
-      'The main wall and bar ticker operate as one coordinated sportsbook environment',
+      'Section-level audio lets one event take focus',
+      'The main wall, bar ticker, and all sportsbar screens can be coordinated from a single interface',
       'Aliante\u2019s team manages the room through the LUCI interface already used across the property',
     ],
   },
