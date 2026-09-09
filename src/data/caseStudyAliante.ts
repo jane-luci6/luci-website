@@ -26,7 +26,7 @@ export const alianteCaseStudyDetail = {
   summary: [
     {
       label: 'The challenge',
-      text: 'Aliante wanted to transform its sportsbook with a full remodel, including a 2,000 sq ft curved LED wall — one of the largest in Las Vegas.',
+      text: 'Aliante wanted to transform its sportsbook with a full remodel, including a 2,000 sq ft curved LED wall.',
     },
     {
       label: 'The approach',
@@ -53,7 +53,7 @@ export const alianteCaseStudyDetail = {
     titleBefore: 'Building the ',
     titleAccent: '106-foot centerpiece',
     paragraphs: [
-      'LUCI\u2019s team built and installed one of the largest LED walls in Las Vegas. On a wall this size, the curve had to be exact: even a small variation can keep an LED tile from seating correctly or leave a visible gap. The team adjusted each section of the mounting structure to hold the intended curve, so every tile sat flush across the full span.',
+      'LUCI\u2019s team built and installed the 106-foot curved LED wall. On a wall this size, the curve had to be exact: even a small variation can keep an LED tile from seating correctly or leave a visible gap. The team adjusted each section of the mounting structure to hold the intended curve, so every tile sat flush across the full span.',
       'Behind the wall, fifteen racks of legacy gear came out and were replaced by just two LUCI racks. More than twenty projectors came down. LUCI also rebuilt the continuous odds ticker around the sportsbook bar, bringing the main wall, the ticker, video sources, and audio onto the same platform already operating throughout Aliante.',
     ],
     crewPhotos: [
