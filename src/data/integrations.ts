@@ -26,7 +26,7 @@ export const integrationsHero = {
 export const integrationsGrid = {
   lockupName: 'Technologies we orchestrate',
   lockupRole: 'A growing list',
-  deck: 'A starter set of the platforms, processors, displays, and content sources LUCI runs alongside. More to come.',
+  deck: 'A snapshot of the technologies LUCI orchestrates — platforms, processors, displays, and content sources running alongside the property. The list keeps growing.',
 } as const;
 
 export const integrations: Integration[] = [
