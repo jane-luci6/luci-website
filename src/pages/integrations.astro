@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionBlock from '../components/SectionBlock.astro';
+import PersonaHeroStage from '../components/PersonaHeroStage.astro';
 import {
   integrations,
   integrationsHero,
@@ -12,6 +13,7 @@ import { seoPages, breadcrumb } from '../data/seo';
 
 const crumbs = breadcrumb([
   { name: 'Home', path: '/' },
+  { name: 'Platform', path: '/platform' },
   { name: 'Integrations', path: '/integrations' },
 ]);
 ---
@@ -23,14 +25,15 @@ const crumbs = breadcrumb([
   jsonLd={crumbs}
   darkHeader
 >
-  <SectionBlock
-    id="integrations-hero"
+  <h1 class="int-sr-only">Integrations — {integrationsHero.lockupName}</h1>
+
+  <PersonaHeroStage
+    sectionId="integrations-hero"
+    heroImage="/images/hero-platform-employee.png"
+    heroAlt="A LUCI technician at a laptop running the LUCI orchestration platform — every system on the property visible on one screen"
     lockupName={integrationsHero.lockupName}
     lockupRole={integrationsHero.lockupRole}
     deck={integrationsHero.deck}
-    tone="deep"
-    wide
-    pattern
   />
 
   <SectionBlock
@@ -70,6 +73,18 @@ const crumbs = breadcrumb([
 </BaseLayout>
 
 <style>
+  .int-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   #integrations-hero,
   #integrations-grid,
   #integrations-cta {

@@ -197,6 +197,7 @@ const faqLd = {
         </li>
       ))}
     </ul>
+    <a class="platform-arch-link" href="/integrations">See all integrations <span aria-hidden="true">→</span></a>
   </SectionBlock>
 
   <SectionBlock
@@ -289,6 +290,23 @@ const faqLd = {
   }
 
   /* ---------- Architecture callouts (sand) ---------- */
+  .platform-arch-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: var(--space-5);
+    font-family: var(--font-head);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: var(--accent-light);
+    text-decoration: none;
+    transition: gap 0.2s ease, color 0.2s ease;
+  }
+  .platform-arch-link:hover {
+    gap: 10px;
+    color: var(--mint);
+  }
   .callout-grid {
     list-style: none;
     display: grid;
