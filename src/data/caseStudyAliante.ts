@@ -83,8 +83,8 @@ export const alianteCaseStudyDetail = {
   },
   consolidation: {
     photo: {
-      src: '/images/case-studies/aliante/consolidation-racks-before-web.jpg',
-      alt: 'Fifteen racks of dense legacy equipment with tangled multi-colored cabling before LUCI consolidation \u2014 the infrastructure that was pulled and replaced',
+      src: '/images/case-studies/aliante/aliante-rack-room-before-web.jpg',
+      alt: 'Row of legacy server racks with dense, color-coded cabling in Aliante\u2019s rack room before LUCI consolidation \u2014 the infrastructure pulled and replaced',
     },
     items: [
       {
