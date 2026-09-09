@@ -70,8 +70,8 @@ export const alianteCaseStudyDetail = {
     ],
   },
   oneInterface: {
-    titleBefore: 'One wall, ',
-    titleAccent: 'six layouts.',
+    titleBefore: 'Operating the wall',
+    titleAccent: '',
     paragraphs: [
       'The operator starts by choosing from six wall configurations, each designed for a different mix of events. Tap a box in the interface, select the game, race, or channel that belongs there, and LUCI sends it to that section of the wall.',
       'Audio is controlled by section as well, so the team can make one event the focus without changing the rest of the room. The wall can move from a single marquee event to a full slate of simultaneous games without a separate workflow or control system.',
