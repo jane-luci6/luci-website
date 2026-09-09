@@ -114,7 +114,7 @@ export const alianteCaseStudyDetail = {
   beforeAfter: {
     beforeSrc: '/images/case-studies/aliante/aliante-before-2-web.jpg',
     afterSrc: '/images/case-studies/aliante/wall-finished-wide-web.jpg',
-    beforeAlt: 'Aliante sportsbook before the remodel \u2014 legacy multi-screen display wall with a long row of small monitors forming the odds ticker above the betting carrels',
+    beforeAlt: 'Aliante sportsbook before the remodel \u2014 curved wall of multiple projection screens with a long row of small monitors forming the odds ticker, theater-style seating in the foreground',
     afterAlt: 'Aliante sportsbook after the remodel \u2014 106-foot curved LED wall live with multiple sports zones and betting tickers',
     caption: 'Drag to see the wall come together.',
   },
