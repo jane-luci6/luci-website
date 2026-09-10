@@ -158,14 +158,6 @@ const { dek, logoSrc } = alianteCaseStudy;
       </div>
     </section>
 
-    <section class="cs-quote">
-      <blockquote class="cs-quote__text">&ldquo;{cs.quote.text}&rdquo;</blockquote>
-      <p class="cs-quote__attrib">
-        <span>{cs.quote.role}</span>
-        <span>{cs.quote.org}</span>
-      </p>
-    </section>
-
     <section class="cs-sec cs-sec--dark cs-results-block">
       <h2 class="cs-sec__title">{cs.results.titleBefore}<span class="cs-sec__title-accent">{cs.results.titleAccent}</span></h2>
       <div class="cs-ba" aria-label="Before and after">
@@ -457,11 +449,6 @@ const { dek, logoSrc } = alianteCaseStudy;
   .cs-consolidation__item-title { margin: 0 0 8px; font-weight: 700; font-size: 19px; line-height: 1.35; color: var(--mint); }
   .cs-consolidation__item-text { margin: 0; font-size: 17px; line-height: 1.65; color: rgba(235,245,248,0.82); }
   @media (max-width: 640px) { .cs-consolidation-band__scrim { background: linear-gradient(to bottom, rgba(10,22,28,0.95) 0%, rgba(10,22,28,0.88) 50%, rgba(10,22,28,0.45) 78%, rgba(10,22,28,0) 100%); } .cs-consolidation-band__content { max-width: none; } }
-
-  .cs-quote { background: var(--off-white); padding: clamp(44px, 7vw, 76px) clamp(28px, 6vw, 64px); border-bottom: 1px solid var(--rule-light); }
-  .cs-quote__text { margin: 0 0 20px; font-size: clamp(18px, 2.2vw, 22px); font-style: italic; line-height: 1.5; color: var(--navy); border-left: 4px solid var(--accent-light); padding: 8px 0 8px 26px; max-width: none; }
-  .cs-quote__attrib { margin: 0; padding-left: 30px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.6; }
-  .cs-quote__attrib span { display: block; color: var(--accent-light); }
 
   .cs-ledger {
     position: relative; overflow: hidden;

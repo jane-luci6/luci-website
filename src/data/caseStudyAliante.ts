@@ -106,11 +106,6 @@ export const alianteCaseStudyDetail = {
       },
     ],
   },
-  quote: {
-    text: 'Who put this wall up? LUCI did.',
-    role: 'LUCI Project Lead',
-    org: 'LUCI Systems',
-  },
   beforeAfter: {
     beforeSrc: '/images/case-studies/aliante/aliante-before-2-web.jpg',
     afterSrc: '/images/case-studies/aliante/wall-finished-wide-web.jpg',
