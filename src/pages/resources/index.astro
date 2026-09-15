@@ -154,9 +154,18 @@ const newsletter = [
     wide
   >
     <div class="res-video" data-section="video">
-      <video class="res-video__player" controls preload="none" poster="/videos/luci-platform-run-poster.jpg?v=3">
-        <source src="/videos/luci-platform-run.mp4?v=4" type="video/mp4" />
-      </video>
+      <div class="res-video__item">
+        <p class="res-video__label">LUCI Platform Run</p>
+        <video class="res-video__player" controls preload="none" poster="/videos/luci-platform-run-poster.jpg?v=3">
+          <source src="/videos/luci-platform-run.mp4?v=4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="res-video__item">
+        <p class="res-video__label">Aliante Sportsbook Case Study</p>
+        <video class="res-video__player" controls preload="none" poster="/images/case-studies/aliante/wall-finished-wide-web.jpg?v=1">
+          <source src="/videos/aliante-reel.mp4?v=1" type="video/mp4" />
+        </video>
+      </div>
     </div>
   </SectionBlock>
 
@@ -341,6 +350,12 @@ const newsletter = [
   /* ---------- VIDEO ---------- */
   .res-video {
     max-width: 900px; margin-inline: auto;
+    display: flex; flex-direction: column; gap: clamp(28px, 4vw, 48px);
+  }
+  .res-video__item { display: flex; flex-direction: column; gap: 12px; }
+  .res-video__label {
+    margin: 0; font-family: var(--font-head); font-size: 13px; font-weight: 700;
+    letter-spacing: 0.04em; color: rgba(245, 248, 250, 0.82);
   }
   .res-video__player {
     width: 100%; aspect-ratio: 16 / 9; border-radius: 16px;
