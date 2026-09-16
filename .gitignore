@@ -46,3 +46,8 @@ pnpm-debug.log*
 /crop-ledger.png
 /crop-nav.png
 /fullpage-small.png
+
+# Web video reels are deploy-only — originals live in OneDrive (Project Media).
+# Intentionally untracked so re-encodes don't bloat git history.
+# To restore a missing reel, re-encode from the OneDrive original and drop it here.
+public/videos/*.mp4
