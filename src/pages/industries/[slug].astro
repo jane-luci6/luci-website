@@ -16,7 +16,7 @@ import IndustryFagCallout from '../../components/IndustryFagCallout.astro';
 import { industries } from '../../data/industries';
 import { getIndustryDetail } from '../../data/industryDetails';
 import { pillars } from '../../data/pillars';
-import { ameristarCaseStudy, site } from '../../data/site';
+import { ameristarCaseStudy, alianteCaseStudy, site } from '../../data/site';
 import { getIndustrySeo, breadcrumb } from '../../data/seo';
 
 export function getStaticPaths() {
@@ -122,7 +122,9 @@ const canonicalPath = `/industries/${industry.slug}`;
         </>
       )}
 
-      {(industry.slug === 'casinos-gaming' || industry.slug === 'hotels-resorts') && <HomeProof />}
+      {industry.slug === 'casinos-gaming' && <HomeProof study={alianteCaseStudy} />}
+
+      {industry.slug === 'hotels-resorts' && <HomeProof />}
 
       {!(industry.slug === 'casinos-gaming' || industry.slug === 'hotels-resorts') && hasFloorplan && <IndustryFagCallout />}
 

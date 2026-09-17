@@ -12,7 +12,7 @@ import HomeWhyItMatters from '../components/HomeWhyItMatters.astro';
 import HomePlatformRun from '../components/HomePlatformRun.astro';
 import SectionBlock from '../components/SectionBlock.astro';
 import HomeMesh from '../components/HomeMesh.astro';
-import { site } from '../data/site';
+import { site, yaamavaCaseStudy } from '../data/site';
 import { seoPages } from '../data/seo';
 ---
 
@@ -23,7 +23,7 @@ import { seoPages } from '../data/seo';
   <HomeIntro photoSrc="/images/venue-guest-experience-casual-v2.jpg?v=1" />
   <HomeLedger />
   <HomeWhyItMatters />
-  <HomeProof />
+  <HomeProof study={yaamavaCaseStudy} />
   <HomePlatformRun />
   <HomeIndustries />
   <HomePersonas />

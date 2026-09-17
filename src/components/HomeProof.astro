@@ -1,16 +1,43 @@
 ---
 import { ameristarCaseStudy } from '../data/site';
 
+type CaseStudy = typeof ameristarCaseStudy;
+
+interface Props {
+  study?: CaseStudy;
+}
+
+const { study = ameristarCaseStudy } = Astro.props;
 const {
   homeHeadline,
+  homeHeadlineAccent,
   homeStat,
   homeCta,
   homeBandKicker,
   slug,
   logoSrcDark,
-} = ameristarCaseStudy;
+  property,
+} = study;
 
-const headlineRest = homeHeadline.replace(/^Three days\s*/, '');
+// Split the headline into gold-accent + off-white parts. The accent is a
+// substring of the locked headline (e.g. Ameristar's "Three days",
+// Yaamava's "One interface.", Aliante's "game-day impact"). If no accent is
+// supplied, render the full headline in off-white.
+type Part = { text: string; accent: boolean };
+const parts: Part[] = [];
+if (homeHeadlineAccent && homeHeadline.includes(homeHeadlineAccent)) {
+  const idx = homeHeadline.indexOf(homeHeadlineAccent);
+  const before = homeHeadline.slice(0, idx);
+  const after = homeHeadline.slice(idx + homeHeadlineAccent.length);
+  if (before) parts.push({ text: before, accent: false });
+  parts.push({ text: homeHeadlineAccent, accent: true });
+  if (after) parts.push({ text: after, accent: false });
+} else {
+  parts.push({ text: homeHeadline, accent: false });
+}
+// Ameristar's headline has no trailing period; the band adds one. For
+// headlines that already end with punctuation, don't double it.
+const trailingPeriod = homeHeadline.endsWith('.') ? '' : '.';
 ---
 
 <section class="home-proof-band" aria-labelledby="home-proof-band-title">
@@ -19,7 +46,7 @@ const headlineRest = homeHeadline.replace(/^Three days\s*/, '');
       <img
         class="home-proof-band__logo"
         src={logoSrcDark}
-        alt="Ameristar Council Bluffs"
+        alt={property}
         width="180"
         height="36"
         loading="lazy"
@@ -30,10 +57,10 @@ const headlineRest = homeHeadline.replace(/^Three days\s*/, '');
     <div class="home-proof-band__copy">
       <p class="home-proof-band__kicker">{homeBandKicker}</p>
       <h2 id="home-proof-band-title" class="home-proof-band__headline">
-        <span>Three days</span> {headlineRest}.
+        {parts.map((p) => (p.accent ? <span>{p.text}</span> : p.text))}{trailingPeriod}
       </h2>
       <p class="home-proof-band__dek">
-        {homeStat.label} — {homeStat.value} at Ameristar Council Bluffs.
+        {homeStat.label} — {homeStat.value} at {property}.
       </p>
     </div>
 

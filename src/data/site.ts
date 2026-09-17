@@ -106,6 +106,7 @@ export const ameristarCaseStudy = {
   homeEyebrow: 'LUCI in Action',
   homeBandKicker: 'LUCI in Action',
   homeCta: 'Read the full case study',
+  homeHeadlineAccent: 'Three days',
   logoSrc: '/images/logos/ameristar-council-bluffs.svg',
   logoSrcDark: '/images/logos/ameristar-logo-white.png',
   cardMedia: '/images/logos/ameristar-council-bluffs-white.svg',
@@ -145,6 +146,13 @@ export const alianteCaseStudy = {
   location: 'Las Vegas, Nevada',
   poster: '/images/case-studies/aliante/wall-finished-wide-web.jpg',
   logoSrc: '/images/logos/aliante.png',
+  // Homepage proof band — derived only from locked title/dek above.
+  homeHeadline: 'More than 2,000 square feet of game-day impact.',
+  homeHeadlineAccent: 'game-day impact',
+  homeBandKicker: 'LUCI in Action',
+  homeStat: { value: '2,000 sq ft', label: '106-foot curved LED wall' },
+  homeCta: 'Read the full case study',
+  logoSrcDark: '/images/logos/aliante.png',
 } as const;
 
 // Yaamava' Resort & Casino — property-wide consolidation onto one platform.
@@ -156,6 +164,13 @@ export const yaamavaCaseStudy = {
   location: 'Highland, California',
   poster: '/images/case-studies/yaamava/909-food-hall-web.jpg',
   logoSrc: '/images/logos/yaamava.png',
+  // Homepage proof band — derived only from locked title/dek above.
+  homeHeadline: 'Everything on the property. One interface.',
+  homeHeadlineAccent: 'One interface.',
+  homeBandKicker: 'LUCI in Action',
+  homeStat: { value: '34 LED walls', label: '290,000 sq ft, seven venues, one interface' },
+  homeCta: 'Read the full case study',
+  logoSrcDark: '/images/logos/yaamava.png',
 } as const;
 
 // Trust strip under the hero callout — real client logos, scrolling marquee.
