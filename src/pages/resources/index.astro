@@ -7,6 +7,8 @@ import { seoPages, breadcrumb } from '../../data/seo';
 const FAG_PDF = '/resources/field-activation-guide-prospect.pdf';
 
 const caseStudies = [yaamavaCaseStudy, alianteCaseStudy, ameristarCaseStudy, tachiCaseStudy, samsTownCaseStudy];
+// Main /resources caps each section at 3. Full case-study inventory lives on /resources/case-studies.
+const caseStudiesFeatured = caseStudies.slice(0, 3);
 
 const guides = [
   {
@@ -80,7 +82,7 @@ const newsletter = [
     wide
   >
     <ul class="res-grid" role="list" data-section="case-studies">
-      {caseStudies.map((cs) => {
+      {caseStudiesFeatured.map((cs) => {
         const href = `/resources/case-studies/${cs.slug}`;
         return (
           <li class="res-card" data-type="case-studies">
@@ -108,6 +110,9 @@ const newsletter = [
         );
       })}
     </ul>
+    <p class="res-see-all">
+      <a href="/resources/case-studies">See all case studies <span aria-hidden="true">&#8594;</span></a>
+    </p>
   </SectionBlock>
 
   <SectionBlock
@@ -302,7 +307,7 @@ const newsletter = [
   .res-grid {
     list-style: none; margin: 0; padding: 0;
     display: grid; grid-template-columns: repeat(2, 1fr);
-    gap: clamp(24px, 3vw, 36px);
+    gap: clamp(18px, 2.2vw, 26px);
   }
   .res-grid--guides { grid-template-columns: repeat(3, 1fr); }
 
@@ -319,7 +324,7 @@ const newsletter = [
     transform: translateY(-3px);
   }
   .res-card__link { display: flex; flex-direction: column; height: 100%; text-decoration: none; color: inherit; }
-  .res-card__media { display: block; aspect-ratio: 16 / 9; overflow: hidden; background: var(--navy-deep); position: relative; }
+  .res-card__media { display: block; aspect-ratio: 2 / 1; overflow: hidden; background: var(--navy-deep); position: relative; }
   .res-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.45s ease; }
   .res-card:hover .res-card__media img { transform: scale(1.04); }
   .res-card__logo-panel {
@@ -328,39 +333,48 @@ const newsletter = [
     background-image: url('/images/textures/texture-circuit-navy-steel-print-dark.jpg');
     background-size: cover; background-position: center;
   }
-  .res-card__logo-panel img { width: 56%; max-width: 260px; height: auto; object-fit: contain; }
-  .res-card__body { display: flex; flex-direction: column; gap: 10px; padding: clamp(24px, 2.8vw, 32px); flex: 1; }
-  .res-card__kicker { display: flex; align-items: center; gap: 10px; margin: 0 0 2px; }
+  .res-card__logo-panel img { width: 56%; max-width: 240px; height: auto; object-fit: contain; }
+  .res-card__body { display: flex; flex-direction: column; gap: 8px; padding: clamp(18px, 2vw, 24px); flex: 1; }
+  .res-card__kicker { display: flex; align-items: center; gap: 10px; margin: 0 0 0; }
   .res-card__kicker::before { content: ''; width: 24px; height: 2px; background: var(--mint); }
   .res-card__kicker span {
     font-family: var(--font-head); font-size: 10px; font-weight: 700;
     letter-spacing: 0.22em; text-transform: uppercase; color: var(--mint);
   }
   .res-card__title {
-    font-family: var(--font-head); font-size: clamp(20px, 2.2vw, 24px);
-    font-weight: 700; line-height: 1.18; letter-spacing: -0.015em; color: var(--off-white);
+    font-family: var(--font-head); font-size: clamp(17px, 1.9vw, 20px);
+    font-weight: 700; line-height: 1.15; letter-spacing: -0.015em; color: var(--off-white);
   }
-  .res-card__meta { font-family: var(--font-head); font-size: 13px; font-weight: 600; letter-spacing: 0.02em; color: rgba(245, 248, 250, 0.72); }
+  .res-card__meta { font-family: var(--font-head); font-size: 12px; font-weight: 600; letter-spacing: 0.02em; color: rgba(245, 248, 250, 0.72); }
   .res-card__meta span { font-weight: 400; color: rgba(245, 248, 250, 0.5); }
   .res-card__desc {
-    font-family: var(--font-body); font-size: 15px; font-weight: 400;
-    line-height: 1.55; color: rgba(245, 248, 250, 0.72); flex: 1;
+    font-family: var(--font-body); font-size: 14px; font-weight: 400;
+    line-height: 1.5; color: rgba(245, 248, 250, 0.72); flex: 1;
   }
   .res-card__cta {
-    margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(var(--mint-rgb), 0.14);
-    font-family: var(--font-head); font-size: 14px; font-weight: 700; color: var(--mint);
+    margin-top: auto; padding-top: 12px; border-top: 1px solid rgba(var(--mint-rgb), 0.14);
+    font-family: var(--font-head); font-size: 13px; font-weight: 700; color: var(--mint);
   }
   .res-card__cta span { display: inline-block; transition: transform 0.2s ease; }
   .res-card__link:hover .res-card__cta span { transform: translateX(4px); }
 
+  /* ---------- SEE-ALL CTA (section → typed landing) ---------- */
+  .res-see-all { margin: clamp(20px, 2.4vw, 28px) 0 0; }
+  .res-see-all a {
+    font-family: var(--font-head); font-size: 14px; font-weight: 700;
+    color: var(--mint); text-decoration: none;
+  }
+  .res-see-all a span { display: inline-block; transition: transform 0.2s ease; }
+  .res-see-all a:hover span { transform: translateX(4px); }
+
   /* ---------- VIDEO ---------- */
   .res-video {
-    max-width: 900px; margin-inline: auto;
-    display: flex; flex-direction: column; gap: clamp(28px, 4vw, 48px);
+    max-width: 760px; margin-inline: auto;
+    display: flex; flex-direction: column; gap: clamp(20px, 3vw, 32px);
   }
-  .res-video__item { display: flex; flex-direction: column; gap: 12px; }
+  .res-video__item { display: flex; flex-direction: column; gap: 8px; }
   .res-video__label {
-    margin: 0; font-family: var(--font-head); font-size: 13px; font-weight: 700;
+    margin: 0; font-family: var(--font-head); font-size: 12px; font-weight: 700;
     letter-spacing: 0.04em; color: rgba(245, 248, 250, 0.82);
   }
   .res-video__player {
