@@ -1,0 +1,742 @@
+// FLAG: Live screen view is included from the tuned two-pager but is not present in the feature-list JSON.
+
+export const RELEASE_DATE = 'January 19' as const;
+
+type MediaPlaceholder = {
+  kind: 'placeholder';
+  label: string;
+};
+
+type FeatureDraft = {
+  id: string;
+  pillarId: 'room-control' | 'view-control' | 'security-control' | 'cross-cutting';
+  name: string;
+  oneLiner: string;
+  paragraph: string;
+  benefits: readonly string[];
+  media: MediaPlaceholder;
+};
+
+type UpgradeGuideDraft = {
+  meta: {
+    path: string;
+    title: string;
+    description: string;
+    releaseDate: typeof RELEASE_DATE;
+    theme: 'Putting the power of programming in your hands';
+  };
+  hero: {
+    eyebrow: string;
+    headline: {
+      text: 'Putting the power of programming in your hands';
+      leading: string;
+      mintAccent: 'power of programming';
+      trailing: string;
+    };
+    date: typeof RELEASE_DATE;
+    ctas: readonly {
+      label: string;
+      href: string;
+      audience: 'prospects' | 'existing-customers';
+    }[];
+  };
+  thesis: {
+    heading: string;
+    paragraph: string;
+  };
+  pillars: readonly {
+    id: 'room-control' | 'view-control' | 'security-control';
+    number: '01' | '02' | '03';
+    name: string;
+    summary: string;
+    featurePills: readonly {
+      id: string;
+      name: string;
+      oneLiner: string;
+    }[];
+  }[];
+  features: readonly FeatureDraft[];
+  inProductSupport: FeatureDraft & {
+    heading: string;
+    eyebrow: string;
+  };
+  technical: {
+    heading: string;
+    intro: string;
+    formatNote: string;
+    groups: readonly {
+      id: string;
+      heading: string;
+      intro: string;
+      items: readonly {
+        id: string;
+        name: string;
+        summary?: string;
+        details: readonly string[];
+      }[];
+    }[];
+  };
+  upgradePath: {
+    heading: string;
+    intro: string;
+    readiness: {
+      heading: string;
+      paragraph: string;
+      checklist: readonly string[];
+    };
+    whatIsInvolved: {
+      heading: string;
+      paragraph: string;
+      steps: readonly {
+        number: '01' | '02' | '03' | '04';
+        title: string;
+        body: string;
+      }[];
+    };
+    rollout: {
+      heading: string;
+      paragraph: string;
+    };
+    contact: {
+      heading: string;
+      paragraph: string;
+      name: string;
+      role: string;
+      email: string;
+      phone: string;
+    };
+  };
+  faq: readonly {
+    question: string;
+    answer: string;
+  }[];
+  cta: {
+    eyebrow: string;
+    heading: string;
+    body: string;
+    contact: {
+      name: string;
+      role: string;
+      email: string;
+      phone: string;
+    };
+    actions: readonly {
+      label: string;
+      href: string;
+      audience: 'prospects' | 'existing-customers';
+    }[];
+  };
+  openFlags: readonly string[];
+};
+
+export const upgradeGuide = {
+  meta: {
+    path: '/luci-upgrade-guide',
+    title: 'New LUCI Upgrade Guide | LUCI Systems',
+    description:
+      'Explore what is new in LUCI, review the technical detail, and understand the path to an upgrade.',
+    releaseDate: RELEASE_DATE,
+    theme: 'Putting the power of programming in your hands',
+  },
+
+  hero: {
+    eyebrow: 'A new version of LUCI is coming',
+    headline: {
+      text: 'Putting the power of programming in your hands',
+      leading: 'Putting the ',
+      mintAccent: 'power of programming',
+      trailing: ' in your hands',
+    },
+    date: RELEASE_DATE,
+    ctas: [
+      {
+        label: 'Book a demo',
+        href: '/contact',
+        audience: 'prospects',
+      },
+      {
+        label: 'Talk to your account team',
+        href: 'mailto:mepstein@lucisystems.com',
+        audience: 'existing-customers',
+      },
+    ],
+  },
+
+  thesis: {
+    heading: 'The only A/V that scales and improves just got better',
+    paragraph:
+      'LUCI is built to become more capable over time, extending the same A/V investment with new ways to control rooms, shape the interface, see live status, govern access, and reach support with better context. This release puts more day-to-day decisions in the hands of the people running the property, shortening the path from decision to execution while keeping the LUCI team alongside them when support is needed.',
+  },
+
+  pillars: [
+    {
+      id: 'room-control',
+      number: '01',
+      name: 'Greater control of the room',
+      summary: 'Tune in-room panels, stage events, and group audio zones.',
+      featurePills: [
+        {
+          id: 'venue-panels',
+          name: 'Venue panels',
+          oneLiner:
+            'In-venue tablets show only the approved controls for that space. Operators adjust what they need without full access.',
+        },
+        {
+          id: 'staging',
+          name: 'Staging',
+          oneLiner:
+            'Prepare screens, sources, and audio levels behind the scenes. Apply the change on cue, or save it as a preset for next time.',
+        },
+        {
+          id: 'audio-group-control',
+          name: 'Audio group control',
+          oneLiner:
+            'Move several audio zones together: apply the same incremental change to keep their balance, or set them all to one volume.',
+        },
+      ],
+    },
+    {
+      id: 'view-control',
+      number: '02',
+      name: 'Flexible control of your view',
+      summary: 'Adjust the interface to reflect your brand and customize your view.',
+      featurePills: [
+        {
+          id: 'customizable-interface',
+          name: 'Customizable interface',
+          oneLiner:
+            'Make LUCI your own with brand colors, light and dark modes, backsplashes, and more.',
+        },
+        {
+          id: 'live-map-flexibility',
+          name: 'Live map flexibility',
+          oneLiner:
+            'Upload your own floor plan maps, rotate them to match your view, and see every device’s status update live.',
+        },
+        {
+          id: 'live-screen-view',
+          name: 'Live screen view',
+          oneLiner:
+            'See what’s playing on any TV or LED wall from your iPad, shown exactly as it appears live.',
+        },
+      ],
+    },
+    {
+      id: 'security-control',
+      number: '03',
+      name: 'Deeper control over security',
+      summary: 'See activity, govern access, and bring support closer.',
+      featurePills: [
+        {
+          id: 'audit-trails',
+          name: 'Audit trails',
+          oneLiner:
+            'Trace each action to a person, preset, or schedule and export the record when needed.',
+        },
+        {
+          id: 'live-monitoring',
+          name: 'Live monitoring',
+          oneLiner:
+            'See device, display, and audio status live, including when a device stops responding.',
+        },
+        {
+          id: 'sign-in-session-control',
+          name: 'Sign-in & session control',
+          oneLiner:
+            'Use email, PIN, or Microsoft for sign-in, end sessions on command, or message everyone in the platform.',
+        },
+      ],
+    },
+  ],
+
+  features: [
+    {
+      id: 'venue-panels',
+      pillarId: 'room-control',
+      name: 'Venue panels',
+      oneLiner:
+        'In-venue tablets show only the approved controls for that space. Operators adjust what they need without full access.',
+      paragraph:
+        'Venue panels put approved controls in the space where the work happens. A panel inherits the endpoints assigned to its venue, then shows only the power, source, volume, mute, and preset controls an administrator makes available, without opening the main LUCI application.',
+      benefits: [
+        'Adopts the endpoints already assigned to the venue',
+        'Limits each panel to the controls the room needs',
+        'Keeps the administrative application out of view',
+        'Makes approved presets available in the space',
+        'Can be scoped to one venue or several',
+      ],
+      media: {
+        kind: 'placeholder',
+        label: 'Venue panel controls — screenshot placeholder',
+      },
+    },
+    {
+      id: 'staging',
+      pillarId: 'room-control',
+      name: 'Staging',
+      oneLiner:
+        'Prepare screens, sources, and audio levels behind the scenes. Apply the change on cue, or save it as a preset for next time.',
+      paragraph:
+        'Build the next room state while the current one keeps running, with screens, sources, volumes, and content gathered into one staged set. Apply it when the event is ready, save it as a preset for reuse, or give the preset a time and review what has run and what is coming.',
+      benefits: [
+        'Prepares the next look without changing the live room',
+        'Applies the staged set on cue',
+        'Saves staged sets as reusable presets',
+        'Turns a timed preset into a scheduled preset',
+        'Shows past and upcoming activity across chart views',
+      ],
+      media: {
+        kind: 'placeholder',
+        label: 'Staging roster and apply action — screenshot placeholder',
+      },
+    },
+    {
+      id: 'audio-group-control',
+      pillarId: 'room-control',
+      name: 'Audio group control',
+      oneLiner:
+        'Move several audio zones together: apply the same incremental change to keep their balance, or set them all to one volume.',
+      paragraph:
+        'Adjust several audio zones as a group without giving up the way the room has been tuned. Move every selected zone by the same increment to preserve its relative balance, set all selected zones to one level, or adjust one zone on its own.',
+      benefits: [
+        'Moves selected zones by the same increment',
+        'Preserves the tuned balance between zones',
+        'Sets a group to one shared level',
+        'Allows an individual zone to move alone',
+      ],
+      media: {
+        kind: 'placeholder',
+        label: 'Audio group controls — screenshot placeholder',
+      },
+    },
+    {
+      id: 'customizable-interface',
+      pillarId: 'view-control',
+      name: 'Customizable interface',
+      oneLiner:
+        'Make LUCI your own with brand colors, light and dark modes, backsplashes, and more.',
+      paragraph:
+        'Shape LUCI around the property’s own identity and operating cues. Sign-in and splash screens can carry property photography and marks, while curated themes, light and dark modes, background treatments, typography, and endpoint status colors give the interface a familiar look.',
+      benefits: [
+        'Uses property photography and marks on sign-in and splash screens',
+        'Offers light and dark modes with curated themes',
+        'Adjusts background blur, opacity, and position',
+        'Applies recognizable endpoint status colors across the install',
+        'Can be designed by LUCI or adjusted by the property',
+      ],
+      media: {
+        kind: 'placeholder',
+        label: 'Customized LUCI interface — screenshot placeholder',
+      },
+    },
+    {
+      id: 'live-map-flexibility',
+      pillarId: 'view-control',
+      name: 'Live map flexibility',
+      oneLiner:
+        'Upload your own floor plan maps, rotate them to match your view, and see every device’s status update live.',
+      paragraph:
+        'Use the property’s own floor plans instead of a generic layout, then rotate and orient each map to match the physical space. The map remains connected to device state, so the view operators recognize is also the surface they use to see what is happening.',
+      benefits: [
+        'Loads the property’s own floor plans',
+        'Rotates and orients maps to match the physical space',
+        'Updates device state through a live connection',
+        'Shows every device’s state from the map',
+      ],
+      media: {
+        kind: 'placeholder',
+        label: 'Live property map — screenshot placeholder',
+      },
+    },
+    {
+      id: 'live-screen-view',
+      pillarId: 'view-control',
+      name: 'Live screen view',
+      oneLiner:
+        'See what’s playing on any TV or LED wall from your iPad, shown exactly as it appears live.',
+      paragraph:
+        'Live screen view shows what is playing on a selected TV or LED wall from an iPad, exactly as it appears live. It gives the operator a direct visual check of the current screen from the device in hand.',
+      benefits: [
+        'Checks what is playing on a TV',
+        'Checks what is playing on an LED wall',
+        'Shows the screen as it appears live',
+        'Makes the view available from an iPad',
+      ],
+      media: {
+        kind: 'placeholder',
+        label: 'Live screen view on iPad — screenshot placeholder',
+      },
+    },
+    {
+      id: 'audit-trails',
+      pillarId: 'security-control',
+      name: 'Audit trails',
+      oneLiner:
+        'Trace each action to a person, preset, or schedule and export the record when needed.',
+      paragraph:
+        'Follow the record behind each action: who or what triggered it, when it happened, and which device it affected. Search by device or user, filter by action type, export the results, and review incident duration when a device stops responding and later returns.',
+      benefits: [
+        'Records actions against a person and a time',
+        'Identifies a person, preset, or schedule as the trigger',
+        'Searches by device or user and filters by action type',
+        'Exports the record as a CSV',
+        'Opens and closes incidents as devices stop responding and recover',
+      ],
+      media: {
+        kind: 'placeholder',
+        label: 'Searchable audit trail — screenshot placeholder',
+      },
+    },
+    {
+      id: 'live-monitoring',
+      pillarId: 'security-control',
+      name: 'Live monitoring',
+      oneLiner:
+        'See device, display, and audio status live, including when a device stops responding.',
+      paragraph:
+        'See the current state of devices, displays, and audio zones from one view, including what is on, what is off, and what has a fault. Filter the view to find what needs attention, follow incidents as they open and close, and raise a support request with the relevant incident context attached.',
+      benefits: [
+        'Shows live device, display, and audio-zone state',
+        'Surfaces incidents when a device stops responding',
+        'Closes an incident when the device recovers',
+        'Filters by venue, device type, or status',
+        'Carries incident context into a support request',
+      ],
+      media: {
+        kind: 'placeholder',
+        label: 'Live monitoring view — screenshot placeholder',
+      },
+    },
+    {
+      id: 'sign-in-session-control',
+      pillarId: 'security-control',
+      name: 'Sign-in & session control',
+      oneLiner:
+        'Use email, PIN, or Microsoft for sign-in, end sessions on command, or message everyone in the platform.',
+      paragraph:
+        'Give users the sign-in method that fits their work, from email and PIN access to Microsoft credentials through Entra ID. Administrators can see who is active, end a session, and post a message banner to everyone currently using LUCI.',
+      benefits: [
+        'Supports email, PIN, and Microsoft Entra ID sign-in',
+        'Shows who is active in the platform',
+        'Lets administrators terminate active sessions',
+        'Posts a site-wide message to signed-in users',
+        'Consolidates outbound connections through a private tunnel',
+      ],
+      media: {
+        kind: 'placeholder',
+        label: 'Identity and active-session controls — screenshot placeholder',
+      },
+    },
+    {
+      id: 'in-product-support',
+      pillarId: 'cross-cutting',
+      name: 'In-product support',
+      oneLiner:
+        'Raise a request from a device, incident, or error with the relevant context and logs already attached.',
+      paragraph:
+        'Start a support request from the device, incident, or error where the issue appears. The request carries what happened, what changed, and the relevant logs, while the property decides what to escalate and the LUCI team remains available to act on the fuller context.',
+      benefits: [
+        'Starts the request from the device, incident, or error',
+        'Attaches relevant context and logs',
+        'Keeps the decision to escalate with the property',
+        'Gives the LUCI team better context when support is needed',
+      ],
+      media: {
+        kind: 'placeholder',
+        label: 'In-product support request flow — screenshot placeholder',
+      },
+    },
+  ],
+
+  inProductSupport: {
+    id: 'in-product-support',
+    pillarId: 'cross-cutting',
+    eyebrow: 'Support, in context',
+    heading: 'Bring the LUCI team in from the work itself',
+    name: 'In-product support',
+    oneLiner:
+      'Raise a request from a device, incident, or error with the relevant context and logs already attached.',
+    paragraph:
+      'Start a support request from the device, incident, or error where the issue appears. The request carries what happened, what changed, and the relevant logs, while the property decides what to escalate and the LUCI team remains available to act on the fuller context.',
+    benefits: [
+      'Starts the request from the device, incident, or error',
+      'Attaches relevant context and logs',
+      'Keeps the decision to escalate with the property',
+      'Gives the LUCI team better context when support is needed',
+    ],
+    media: {
+      kind: 'placeholder',
+      label: 'In-product support request flow — screenshot placeholder',
+    },
+  },
+
+  technical: {
+    heading: 'Technical detail',
+    intro:
+      'A deeper view for the IT or A/V lead: how LUCI manages endpoints, layouts, identity, diagnostics, and property connections behind the release features.',
+    formatNote:
+      'Proposed format: accessible accordions, not tabs. Accordions keep every topic available in the document flow, support direct links to individual technical subjects, and remain consistent with the page’s other progressive-disclosure patterns. CoS to flag for Jane.',
+    groups: [
+      {
+        id: 'platform-capabilities',
+        heading: 'Platform capabilities',
+        intro:
+          'Technical capabilities that support the platform without carrying one of the three release-pillar arguments.',
+        items: [
+          {
+            id: 'technical-audio-group-control',
+            name: 'Audio group control',
+            summary:
+              'Move several zones proportionally, set every zone to the same level, or move one alone.',
+            details: [
+              'Move several zones proportionally so their tuned balance survives.',
+              'Set every selected zone to the same level.',
+              'Move one zone independently.',
+            ],
+          },
+          {
+            id: 'add-any-endpoint',
+            name: 'Add any endpoint from LUCI',
+            summary:
+              'Every device type added through the interface — one at a time or twenty at once.',
+            details: [
+              'Add every device type through the LUCI interface.',
+              'Add one endpoint from the map or create a batch with incrementing addresses.',
+              'Receive a warning when an endpoint record already exists.',
+            ],
+          },
+          {
+            id: 'video-wall-layout-sync',
+            name: 'Video wall layout sync',
+            summary:
+              'Wall layouts pulled from the processor with per-pixel geometry, not rebuilt by hand.',
+            details: [
+              'Pull wall layouts and window assignments from the video wall processor.',
+              'Preserve per-pixel geometry instead of rebuilding layouts by hand.',
+              'Assign multi-window templates to a player and change them live.',
+            ],
+          },
+          {
+            id: 'central-display-model-catalog',
+            name: 'Central display model catalog',
+            summary:
+              'New display models added centrally and pushed to the property — no on-site configuration edits.',
+            details: [
+              'Add new hospitality display models centrally.',
+              'Push model support to the property.',
+              'Avoid editing configuration files on site when a new model is purchased.',
+            ],
+          },
+        ],
+      },
+      {
+        id: 'it-av-detail',
+        heading: 'IT and A/V detail',
+        intro:
+          'The implementation detail behind the pillar features, identity controls, property connection, and diagnostics.',
+        items: [
+          {
+            id: 'technical-venue-panels',
+            name: 'Venue panels',
+            details: [
+              'Tie a panel to a point in the site hierarchy: site, building, floor, or venue.',
+              'Inherit the endpoints assigned to that venue, then narrow access by control surface rather than by device.',
+              'Load a pared-down interface with no route into the administrative application.',
+              'Return the panel to its paired configuration on every boot.',
+            ],
+          },
+          {
+            id: 'technical-staging-presets-schedules',
+            name: 'Staging, presets, and schedules',
+            details: [
+              'Treat a staged set, preset, and scheduled preset as the same command set at different stages: optionally named and optionally timed.',
+              'Review, clear, or edit the staged roster item by item before commands are sent.',
+              'Seed a staged set from the room’s current state.',
+              'Review differences against saved values before committing a preset edit.',
+              'Apply a control-engine lockout window to a scheduled preset, with a visible device indicator and administrator override.',
+            ],
+          },
+          {
+            id: 'technical-audit-incidents-support',
+            name: 'Audit trails, incidents, and support',
+            details: [
+              'Group device commands by the event that triggered them: a user, preset, or schedule.',
+              'Record administrative actions alongside device commands.',
+              'Surface out-of-band changes when the device driver reports them.',
+              'Open an incident when a device stops responding and close it when the device recovers.',
+              'Keep incidents distinct from support tickets; a person chooses what to escalate, and the ticket carries the relevant context and logs.',
+            ],
+          },
+          {
+            id: 'endpoint-management',
+            name: 'Endpoint management',
+            details: [
+              'Create all device types through the interface, including LUCI-supplied hardware.',
+              'Use bulk creation, incrementing addresses, and duplicate detection.',
+            ],
+          },
+          {
+            id: 'identity-sessions',
+            name: 'Identity and sessions',
+            details: [
+              'Use a standard Microsoft Entra ID app registration with a callback to the property’s LUCI server.',
+              'Create a profile on first sign-in and assign a PIN for floor use when needed.',
+              'Terminate active sessions and communicate through a site-wide banner.',
+            ],
+          },
+          {
+            id: 'private-tunnel',
+            name: 'Private tunnel',
+            details: [
+              'Consolidate outbound destinations into one encrypted connection between the on-property system and LUCI.',
+              'Rotate keys on a schedule instead of leaving credentials unrotated on the local machine.',
+              'Give IT one paired outbound connection to review, with no standing inbound access to the property network.',
+            ],
+          },
+          {
+            id: 'scoped-diagnostic-capture',
+            name: 'Scoped diagnostic capture',
+            details: [
+              'Aim debug-level logging at one endpoint, driver, or module for a defined window.',
+              'Capture a short reproduction window instead of increasing logging across the system.',
+              'Review the output on site or send it to LUCI with a support request.',
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  upgradePath: {
+    heading: 'Your path to the new LUCI',
+    intro:
+      'Existing LUCI clients can receive the upgrade at no charge. Because each property has its own systems and operating calendar, the LUCI team will review readiness and schedule an ordered rollout rather than updating every property at once.',
+    readiness: {
+      heading: 'Start with a property readiness review',
+      paragraph:
+        'Your account team will work with the property’s operations, IT, and A/V leads to confirm the current environment, compatibility, permissions, and the right place in the rollout. The review determines the property-specific scope before work is scheduled.',
+      checklist: [
+        'Confirm the property and systems included in the upgrade',
+        'Review compatibility and any prerequisites',
+        'Identify the access and permissions needed for the work',
+        'Align the work with the property’s operating calendar',
+      ],
+    },
+    whatIsInvolved: {
+      heading: 'What is involved',
+      paragraph:
+        'The exact work depends on the property. The readiness review will establish whether any local hardware work is needed, how existing presets and configurations will be handled, and what the property team should expect before a date is confirmed.',
+      steps: [
+        {
+          number: '01',
+          title: 'Review',
+          body: 'LUCI and the property review the current environment, prerequisites, compatibility, and permissions.',
+        },
+        {
+          number: '02',
+          title: 'Plan',
+          body: 'The account team confirms the property-specific scope, responsibilities, and proposed rollout window.',
+        },
+        {
+          number: '03',
+          title: 'Prepare',
+          body: 'LUCI and the property complete the agreed readiness work before the scheduled upgrade.',
+        },
+        {
+          number: '04',
+          title: 'Upgrade',
+          body: 'The property moves through its scheduled upgrade with the LUCI team involved in execution and continuing support.',
+        },
+      ],
+    },
+    rollout: {
+      heading: 'Ordered, property by property',
+      paragraph:
+        'The rollout will be sequenced rather than simultaneous. Your account team will confirm where each property sits in that order after readiness and scheduling are reviewed; this draft does not promise a universal duration or service-level timeline.',
+    },
+    contact: {
+      heading: 'Talk to your account team',
+      paragraph:
+        'Start with your LUCI contact to review readiness, scope, and rollout order for your property. For general upgrade questions, contact Michael Epstein.',
+      name: 'Michael Epstein',
+      role: 'CEO',
+      email: 'mepstein@lucisystems.com',
+      phone: '833.333.5868',
+    },
+  },
+
+  faq: [
+    {
+      question: 'Is this a software update or a hardware upgrade?',
+      answer:
+        'The scope depends on the systems at each property. LUCI will review the current environment and confirm whether the upgrade is software-only or includes any local hardware work before scheduling it.',
+    },
+    {
+      question: 'How long does the upgrade take?',
+      answer:
+        'There is not one duration that applies to every property. Timing will be confirmed after LUCI reviews readiness, compatibility, permissions, and the property’s operating calendar; this page does not promise an upgrade SLA.',
+    },
+    {
+      question: 'What happens to our current presets and configurations?',
+      answer:
+        'Existing presets and configurations will be reviewed as part of the property-specific plan. The LUCI team will explain how they will be handled before the upgrade is scheduled rather than assume every configuration follows the same path.',
+    },
+    {
+      question: 'Is there a cost for existing LUCI clients?',
+      answer:
+        'The upgrade is free for existing LUCI clients. Your account team will confirm the scope for your property during the readiness review.',
+    },
+    {
+      question: 'Can we see the new LUCI before our upgrade?',
+      answer:
+        'Talk to your account team or book a demo. The LUCI team can confirm the appropriate preview path and availability for your property.',
+    },
+    {
+      question: 'What if we installed LUCI recently?',
+      answer:
+        'Recent installations are still handled through the property-by-property readiness and rollout process. Your account team will review the installed environment and confirm the appropriate path.',
+    },
+    {
+      question: 'How does rollout work across multiple properties?',
+      answer:
+        'Rollout is ordered rather than simultaneous. LUCI will review each property’s readiness and work with the account team to sequence the properties; no universal timing is promised in this draft.',
+    },
+    {
+      question: 'What does our IT team need to prepare?',
+      answer:
+        'IT should be ready to review the current environment, compatibility, access, permissions, and scheduling with LUCI. Any property-specific prerequisites will be identified during readiness review before the work is scheduled.',
+    },
+  ],
+
+  cta: {
+    eyebrow: 'The new version of LUCI',
+    heading: 'More control in your hands, with the LUCI team still there when you need us.',
+    body:
+      'See the release in a live demo, or talk with your account team about readiness and the upgrade path for your property.',
+    contact: {
+      name: 'Michael Epstein',
+      role: 'CEO',
+      email: 'mepstein@lucisystems.com',
+      phone: '833.333.5868',
+    },
+    actions: [
+      {
+        label: 'Book a demo',
+        href: '/contact',
+        audience: 'prospects',
+      },
+      {
+        label: 'Talk to your account team',
+        href: 'mailto:mepstein@lucisystems.com',
+        audience: 'existing-customers',
+      },
+    ],
+  },
+
+  openFlags: [
+    'Past-improvements timeline: Jane is leaning toward skipping it; this draft uses one thesis paragraph and no timeline.',
+    'Live screen view: included from the tuned two-pager, but it is still missing from the feature-list JSON.',
+    'Technical detail format: accessible accordions are proposed instead of tabs; CoS should flag the recommendation for Jane.',
+    'Access model: still open. Per the September 17 lock, do not create a public stumble-upon self-serve upgrade page; the eventual page may remain unlisted until Jane decides.',
+  ],
+} as const satisfies UpgradeGuideDraft;
