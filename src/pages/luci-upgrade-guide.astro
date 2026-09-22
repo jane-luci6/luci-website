@@ -1,0 +1,1285 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionBlock from '../components/SectionBlock.astro';
+import PlatformChapterNav from '../components/PlatformChapterNav.astro';
+import { upgradeGuide } from '../data/upgradeGuide';
+import { breadcrumb } from '../data/seo';
+
+const { meta, hero, thesis, pillars, features, inProductSupport, technical, upgradePath, faq, cta, openFlags } =
+  upgradeGuide;
+
+const chapters = [
+  { id: 'ug-hero', label: 'Release' },
+  { id: 'ug-thesis', label: 'Thesis' },
+  { id: 'ug-pillars', label: 'Pillars' },
+  { id: 'ug-features', label: 'Features' },
+  { id: 'ug-support', label: 'Support' },
+  { id: 'ug-technical', label: 'Technical' },
+  { id: 'ug-upgrade', label: 'Upgrade' },
+  { id: 'ug-faq', label: 'FAQ' },
+  { id: 'ug-cta', label: 'Contact' },
+];
+
+const featuresByPillar = (pillarId: string) => features.filter((f) => f.pillarId === pillarId);
+
+const breadcrumbLd = breadcrumb([
+  { name: 'Home', path: '/' },
+  { name: 'New LUCI Upgrade Guide', path: meta.path },
+]);
+---
+
+<BaseLayout
+  title={meta.title.replace(' | LUCI Systems', '')}
+  description={meta.description}
+  canonicalPath={meta.path}
+  noindex
+  jsonLd={breadcrumbLd}
+  darkHeader
+>
+  <h1 class="ug-sr-only">{meta.title}</h1>
+  <PlatformChapterNav chapters={chapters} contextLabel="Upgrade Guide" />
+
+  {/* ───────── 1. HERO — dark masthead + mesh ───────── */}
+  <section id="ug-hero" class="ug-hero">
+    <span class="ug-hero__mesh" aria-hidden="true"></span>
+    <span class="ug-hero__scrim" aria-hidden="true"></span>
+    <div class="ug-hero__inner container container--wide">
+      <p class="ug-hero__eyebrow">{hero.eyebrow}</p>
+      <h2 class="ug-hero__headline">
+        {hero.headline.leading}<span class="ug-hero__accent">{hero.headline.mintAccent}</span>{hero.headline.trailing}
+      </h2>
+      <div class="ug-hero__release">
+        <span class="ug-hero__rlabel">Release date</span>
+        <span class="ug-hero__date">{hero.date}</span>
+      </div>
+      <div class="ug-hero__ctas">
+        {hero.ctas.map((c) => (
+          <a
+            class:list={['btn', c.audience === 'prospects' ? 'btn--mint' : 'btn--mint-outline']}
+            href={c.href}
+          >
+            {c.label}
+          </a>
+        ))}
+      </div>
+    </div>
+    <span class="ug-hero__bar" aria-hidden="true"></span>
+  </section>
+
+  {/* ───────── 2. THESIS ───────── */}
+  <SectionBlock
+    id="ug-thesis"
+    lockupName="The thesis"
+    lockupRole={thesis.heading}
+    tone="light"
+    wide
+  >
+    <p class="ug-thesis">{thesis.paragraph}</p>
+  </SectionBlock>
+
+  {/* ───────── 3. PILLARS OVERVIEW ───────── */}
+  <SectionBlock
+    id="ug-pillars"
+    lockupName="Three pillars"
+    lockupRole="What the release puts in your hands"
+    tone="light"
+    wide
+  >
+    <div class="ug-pillars">
+      {pillars.map((p) => (
+        <article class="ug-pillar">
+          <div class="ug-pillar__head">
+            <span class="ug-pillar__num" aria-hidden="true">{p.number}</span>
+            <h3 class="ug-pillar__name" set:html={p.name.replace('control', '<span class="ug-pillar__ctrl">control</span>')} />
+          </div>
+          <p class="ug-pillar__summary">{p.summary}</p>
+          <ul class="ug-pillar__pills" role="list">
+            {p.featurePills.map((pill) => (
+              <li>
+                <a class="ug-pill" href={`#ug-feature-${pill.id}`} data-feature={pill.id}>
+                  <span class="ug-pill__name">{pill.name}</span>
+                  <span class="ug-pill__liner">{pill.oneLiner}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </SectionBlock>
+
+  {/* ───────── 4. FEATURE DEEP-DIVE ───────── */}
+  <SectionBlock
+    id="ug-features"
+    lockupName="Feature deep-dive"
+    lockupRole="Click a feature to open its detail"
+    tone="light"
+    wide
+  >
+    <div class="ug-deepdive">
+      {pillars.map((pillar) => (
+        <div class="ug-pillar-group" id={`ug-pillar-${pillar.id}`}>
+          <div class="ug-pillar-group__head">
+            <h3 class="ug-pillar-group__title">
+              <span class="ug-pillar-group__num">{pillar.number}</span>
+              {pillar.name}
+            </h3>
+            <button
+              class="ug-expand-toggle"
+              type="button"
+              aria-expanded="false"
+              data-pillar={pillar.id}
+            >
+              <span class="ug-expand-toggle__label">Expand all</span>
+            </button>
+          </div>
+          <div class="ug-features">
+            {featuresByPillar(pillar.id).map((f) => (
+              <details class="ug-feature" id={`ug-feature-${f.id}`} data-pillar={pillar.id}>
+                <summary class="ug-feature__summary">
+                  <span class="ug-feature__name">{f.name}</span>
+                  <span class="ug-feature__liner">{f.oneLiner}</span>
+                  <span class="ug-feature__chev" aria-hidden="true"></span>
+                </summary>
+                <div class="ug-feature__body">
+                  <figure class="ug-media ug-media--placeholder">
+                    <span class="ug-media__tint" aria-hidden="true"></span>
+                    <span class="ug-media__label">{f.media.label}</span>
+                  </figure>
+                  <p class="ug-feature__paragraph">{f.paragraph}</p>
+                  <ul class="ug-feature__benefits" role="list">
+                    {f.benefits.map((b) => (
+                      <li>{b}</li>
+                    ))}
+                  </ul>
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </SectionBlock>
+
+  {/* ───────── 5. IN-PRODUCT SUPPORT SPOTLIGHT ───────── */}
+  <SectionBlock
+    id="ug-support"
+    lockupName={inProductSupport.heading}
+    lockupRole={inProductSupport.eyebrow}
+    tone="light"
+    wide
+  >
+    <div class="ug-spotlight">
+      <div class="ug-spotlight__box">
+        <div class="ug-spotlight__head">
+          <span class="ug-spotlight__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linejoin="round">
+              <path d="M4 5h16v11H9l-4 4V5z" stroke="#2b9e80" fill="rgba(43,158,128,0.12)"/>
+              <path d="M8 10h8M8 13h5" stroke="#2b9e80" stroke-opacity="0.45" stroke-linecap="round"/>
+              <circle cx="17" cy="13" r="1.5" fill="#CEB06E"/>
+            </svg>
+          </span>
+          <h3 class="ug-spotlight__name">
+            {inProductSupport.name}
+            <svg class="ug-spotlight__star" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8 5.8 21.3l2.4-7.4L2 9.4h7.6z" fill="#CEB06E"/>
+            </svg>
+          </h3>
+        </div>
+        <p class="ug-spotlight__liner">{inProductSupport.oneLiner}</p>
+        <figure class="ug-media ug-media--placeholder ug-spotlight__media">
+          <span class="ug-media__tint" aria-hidden="true"></span>
+          <span class="ug-media__label">{inProductSupport.media.label}</span>
+        </figure>
+        <p class="ug-spotlight__paragraph">{inProductSupport.paragraph}</p>
+        <ul class="ug-feature__benefits ug-spotlight__benefits" role="list">
+          {inProductSupport.benefits.map((b) => (
+            <li>{b}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </SectionBlock>
+
+  {/* ───────── 6. TECHNICAL DETAIL ───────── */}
+  <SectionBlock
+    id="ug-technical"
+    lockupName={technical.heading}
+    lockupRole="For the IT or A/V lead"
+    tone="light"
+    wide
+  >
+    <p class="ug-thesis">{technical.intro}</p>
+    <p class="ug-format-note">
+      <span class="ug-format-note__label">Format note</span>
+      {technical.formatNote}
+    </p>
+    <div class="ug-technical">
+      {technical.groups.map((group) => (
+        <div class="ug-tech-group" id={`ug-tech-${group.id}`}>
+          <h3 class="ug-tech-group__title">{group.heading}</h3>
+          <p class="ug-tech-group__intro">{group.intro}</p>
+          <div class="ug-tech-items">
+            {group.items.map((item) => (
+              <details class="ug-tech-item" id={`ug-tech-item-${item.id}`}>
+                <summary class="ug-tech-item__summary">
+                  <span class="ug-tech-item__name">{item.name}</span>
+                  {item.summary && <span class="ug-tech-item__summary-text">{item.summary}</span>}
+                  <span class="ug-feature__chev" aria-hidden="true"></span>
+                </summary>
+                <ul class="ug-tech-item__details" role="list">
+                  {item.details.map((d) => (
+                    <li>{d}</li>
+                  ))}
+                </ul>
+              </details>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </SectionBlock>
+
+  {/* ───────── 7. UPGRADE PATH ───────── */}
+  <SectionBlock
+    id="ug-upgrade"
+    lockupName={upgradePath.heading}
+    lockupRole="For existing LUCI clients"
+    tone="light"
+    wide
+  >
+    <p class="ug-thesis">{upgradePath.intro}</p>
+
+    <div class="ug-upgrade">
+      <div class="ug-upgrade__block">
+        <h3 class="ug-upgrade__subhead">{upgradePath.readiness.heading}</h3>
+        <p>{upgradePath.readiness.paragraph}</p>
+        <ul class="ug-upgrade__checklist" role="list">
+          {upgradePath.readiness.checklist.map((c) => (
+            <li>{c}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="ug-upgrade__block">
+        <h3 class="ug-upgrade__subhead">{upgradePath.whatIsInvolved.heading}</h3>
+        <p>{upgradePath.whatIsInvolved.paragraph}</p>
+        <ol class="ug-upgrade__steps" role="list">
+          {upgradePath.whatIsInvolved.steps.map((s) => (
+            <li class="ug-upgrade__step">
+              <span class="ug-upgrade__step-num">{s.number}</span>
+              <div class="ug-upgrade__step-copy">
+                <p class="ug-upgrade__step-title">{s.title}</p>
+                <p class="ug-upgrade__step-body">{s.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <div class="ug-upgrade__block">
+        <h3 class="ug-upgrade__subhead">{upgradePath.rollout.heading}</h3>
+        <p>{upgradePath.rollout.paragraph}</p>
+      </div>
+
+      <div class="ug-upgrade__block ug-upgrade__contact">
+        <h3 class="ug-upgrade__subhead">{upgradePath.contact.heading}</h3>
+        <p>{upgradePath.contact.paragraph}</p>
+        <p class="ug-upgrade__contact-line">
+          <strong>{upgradePath.contact.name}</strong> · {upgradePath.contact.role}<br />
+          <a href={`mailto:${upgradePath.contact.email}`}>{upgradePath.contact.email}</a> · {upgradePath.contact.phone}
+        </p>
+      </div>
+    </div>
+  </SectionBlock>
+
+  {/* ───────── 8. FAQ ───────── */}
+  <SectionBlock
+    id="ug-faq"
+    lockupName="Questions"
+    lockupRole="Straight answers"
+    tone="light"
+    wide
+  >
+    <div class="ug-faq">
+      {faq.map((f) => (
+        <details class="ug-faq__item">
+          <summary class="ug-faq__q">{f.question}</summary>
+          <p class="ug-faq__a">{f.answer}</p>
+        </details>
+      ))}
+    </div>
+  </SectionBlock>
+
+  {/* ───────── 9. CTA ───────── */}
+  <SectionBlock id="ug-cta" lockupName={cta.eyebrow} lockupRole={cta.heading} tone="deep" wide>
+    <p class="ug-cta__body">{cta.body}</p>
+    <p class="ug-cta__contact">
+      <strong>{cta.contact.name}</strong> · {cta.contact.role}<br />
+      <a href={`mailto:${cta.contact.email}`}>{cta.contact.email}</a> · {cta.contact.phone}
+    </p>
+    <div class="ug-cta__actions">
+      {cta.actions.map((a) => (
+        <a
+          class:list={['btn', a.audience === 'prospects' ? 'btn--mint' : 'btn--mint-outline']}
+          href={a.href}
+        >
+          {a.label}
+        </a>
+      ))}
+    </div>
+  </SectionBlock>
+
+  {/* ───────── Back-to-top ───────── */}
+  <button class="ug-back-to-top" type="button" aria-label="Back to top" data-ug-back-to-top>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="18 15 12 9 6 15" />
+    </svg>
+  </button>
+
+  {/* ───────── Open flags for Jane review (collapsed by default) ───────── */}
+  <aside class="ug-flags" aria-label="Open flags for Jane review">
+    <details>
+      <summary>Open flags for Jane review ({openFlags.length})</summary>
+      <ul>
+        {openFlags.map((flag) => (
+          <li>{flag}</li>
+        ))}
+      </ul>
+    </details>
+  </aside>
+</BaseLayout>
+
+<style>
+  .ug-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Section scroll offset for sticky nav + header */
+  #ug-hero, #ug-thesis, #ug-pillars, #ug-features, #ug-support,
+  #ug-technical, #ug-upgrade, #ug-faq, #ug-cta {
+    scroll-margin-top: 156px;
+  }
+  @media (max-width: 640px) {
+    #ug-hero, #ug-thesis, #ug-pillars, #ug-features, #ug-support,
+    #ug-technical, #ug-upgrade, #ug-faq, #ug-cta {
+      scroll-margin-top: 132px;
+    }
+  }
+
+  /* ---------- 1. HERO — dark masthead + mesh ---------- */
+  .ug-hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: #081318;
+    color: var(--off-white);
+    padding-block: clamp(56px, 9vw, 112px) clamp(40px, 6vw, 72px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .ug-hero__mesh {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: url('/images/mesh/luci-bg-hero-mesh-lines-1920x1080.svg') center / cover no-repeat;
+    mix-blend-mode: screen;
+    opacity: 0.4;
+  }
+  .ug-hero__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse 72% 70% at 38% 42%,
+      rgba(7, 15, 20, 0.72) 0%,
+      rgba(7, 15, 20, 0.45) 36%,
+      rgba(7, 15, 20, 0.16) 60%,
+      transparent 85%
+    );
+  }
+  .ug-hero__inner {
+    position: relative;
+    z-index: 1;
+    max-width: var(--content-wide);
+  }
+  .ug-hero__eyebrow {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin: 0 0 14px;
+  }
+  .ug-hero__headline {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(30px, 6vw, 56px);
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--off-white);
+    margin: 0 0 28px;
+    max-width: 18ch;
+  }
+  .ug-hero__accent { color: var(--mint); }
+  .ug-hero__release {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .ug-hero__rlabel {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(235, 245, 248, 0.5);
+  }
+  .ug-hero__date {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--gold);
+  }
+  .ug-hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .ug-hero__bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 4px;
+    background: var(--mint);
+    z-index: 1;
+  }
+
+  /* ---------- 2. THESIS ---------- */
+  .ug-thesis {
+    max-width: 64ch;
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  /* ---------- 3. PILLARS OVERVIEW ---------- */
+  .ug-pillars {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(20px, 2.4vw, 32px);
+    max-width: var(--content-wide);
+  }
+  @media (min-width: 820px) {
+    .ug-pillars { grid-template-columns: repeat(3, 1fr); }
+  }
+  .ug-pillar {
+    display: flex;
+    flex-direction: column;
+  }
+  .ug-pillar__head {
+    background: #0f1e27;
+    border-radius: 10px;
+    padding: 24px 26px 22px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 14px 26px -16px rgba(10, 20, 26, 0.4);
+  }
+  .ug-pillar__num {
+    position: absolute;
+    top: -4px;
+    left: 10px;
+    font-family: var(--font-head);
+    font-size: 92px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.14);
+    line-height: 1;
+    letter-spacing: -3px;
+  }
+  .ug-pillar__name {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-head);
+    font-size: 21px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.22;
+    margin: 0;
+  }
+  .ug-pillar__name :global(.ug-pillar__ctrl) { color: var(--gold); }
+  .ug-pillar__summary {
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    color: var(--navy-muted);
+    line-height: 1.6;
+    margin: 0 0 20px;
+  }
+  .ug-pillar__pills {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .ug-pill {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: linear-gradient(155deg, #EBF9F4 0%, #F4FCF9 100%);
+    border-left: 3px solid var(--accent-light);
+    border-radius: 8px;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .ug-pill:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(43, 158, 128, 0.18);
+  }
+  .ug-pill__name {
+    font-family: var(--font-head);
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--ink-strong);
+  }
+  .ug-pill__liner {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--navy-muted);
+  }
+
+  /* ---------- 4. FEATURE DEEP-DIVE ---------- */
+  .ug-deepdive {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(32px, 4vw, 56px);
+    max-width: var(--content-wide);
+  }
+  .ug-pillar-group__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .ug-pillar-group__title {
+    font-family: var(--font-head);
+    font-size: clamp(20px, 2.4vw, 24px);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--ink-strong);
+    margin: 0;
+  }
+  .ug-pillar-group__num {
+    color: var(--gold-deep, #CEB06E);
+    margin-right: 10px;
+    font-weight: 400;
+  }
+  .ug-expand-toggle {
+    background: transparent;
+    border: 1px solid rgba(43, 158, 128, 0.4);
+    color: var(--accent-light);
+    border-radius: 9999px;
+    padding: 6px 14px;
+    font-family: var(--font-head);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.18s ease, color 0.18s ease;
+    white-space: nowrap;
+  }
+  .ug-expand-toggle:hover {
+    background: rgba(43, 158, 128, 0.1);
+    color: var(--ink-strong);
+  }
+  .ug-expand-toggle[aria-expanded="true"] {
+    background: var(--accent-light);
+    color: #fff;
+    border-color: var(--accent-light);
+  }
+  .ug-features {
+    display: flex;
+    flex-direction: column;
+  }
+  .ug-feature {
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .ug-feature:first-child {
+    border-top: 1px solid var(--rule-light);
+  }
+  .ug-feature__summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 20px 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    position: relative;
+  }
+  .ug-feature__summary::-webkit-details-marker { display: none; }
+  .ug-feature__summary:focus-visible {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 4px;
+  }
+  @media (min-width: 720px) {
+    .ug-feature__summary {
+      grid-template-columns: minmax(160px, 220px) 1fr 24px;
+      gap: 24px;
+      align-items: baseline;
+    }
+  }
+  .ug-feature__name {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(16px, 1.8vw, 18px);
+    letter-spacing: -0.01em;
+    color: var(--ink-strong);
+  }
+  .ug-feature__liner {
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--navy-muted);
+  }
+  .ug-feature__chev {
+    align-self: center;
+    width: 14px;
+    height: 14px;
+    flex: none;
+    transition: transform 0.2s ease;
+    background: linear-gradient(135deg, transparent 47%, var(--accent-light) 47%, var(--accent-light) 53%, transparent 53%),
+                linear-gradient(45deg, transparent 47%, var(--accent-light) 47%, var(--accent-light) 53%, transparent 53%);
+  }
+  .ug-feature[open] .ug-feature__chev { transform: rotate(90deg); }
+  .ug-feature__body {
+    padding: 0 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  @media (min-width: 720px) {
+    .ug-feature__body {
+      padding-left: minmax(160px, 220px);
+    }
+  }
+  .ug-feature__paragraph {
+    font-family: var(--font-body);
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink);
+    max-width: 64ch;
+  }
+  .ug-feature__benefits {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+  }
+  .ug-feature__benefits li {
+    position: relative;
+    padding-left: 22px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 60ch;
+  }
+  .ug-feature__benefits li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.3em;
+    width: 13px;
+    height: 13px;
+    background: var(--gold-deep, #CEB06E);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
+  }
+
+  /* ---------- Media placeholder (screenshot/video slot) ---------- */
+  .ug-media {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    background: linear-gradient(155deg, #10232D 0%, #0A161C 100%);
+    border-left: 3px solid var(--accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+  }
+  .ug-media__tint {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 30% 40%, rgba(104, 227, 190, 0.08), transparent 70%),
+      radial-gradient(ellipse 50% 40% at 70% 70%, rgba(237, 208, 134, 0.05), transparent 70%);
+    pointer-events: none;
+  }
+  .ug-media__label {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-head);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(104, 227, 190, 0.72);
+    text-align: center;
+    padding: 0 24px;
+    max-width: 80%;
+  }
+  .ug-media--placeholder::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(104, 227, 190, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(104, 227, 190, 0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+    background-position: center;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+</style>
+
+<style>
+  /* ---------- 5. IN-PRODUCT SUPPORT SPOTLIGHT ---------- */
+  .ug-spotlight__box {
+    background: linear-gradient(155deg, #EBF9F4 0%, #F4FCF9 100%);
+    border-radius: 10px;
+    border-left: 3px solid var(--accent-light);
+    padding: 28px 32px;
+    max-width: var(--content-wide);
+  }
+  .ug-spotlight__head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .ug-spotlight__icon {
+    flex: none;
+    width: 28px;
+    height: 28px;
+    display: flex;
+  }
+  .ug-spotlight__icon svg { width: 26px; height: 26px; display: block; }
+  .ug-spotlight__name {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(18px, 2.2vw, 22px);
+    letter-spacing: -0.015em;
+    color: var(--ink-strong);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ug-spotlight__star { width: 16px; height: 16px; display: inline-block; }
+  .ug-spotlight__liner {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--navy-muted);
+    margin: 0 0 20px;
+    max-width: 64ch;
+  }
+  .ug-spotlight__media { margin-bottom: 20px; }
+  .ug-spotlight__paragraph {
+    font-family: var(--font-body);
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink);
+    max-width: 64ch;
+    margin: 0 0 16px;
+  }
+  .ug-spotlight__benefits { margin-top: 8px; }
+
+  /* ---------- 6. TECHNICAL DETAIL ---------- */
+  .ug-format-note {
+    margin: 0 0 32px;
+    padding: 14px 18px;
+    background: rgba(43, 158, 128, 0.05);
+    border-left: 3px solid var(--accent-light);
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--navy-muted);
+    max-width: 70ch;
+  }
+  .ug-format-note__label {
+    display: inline-block;
+    margin-right: 10px;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+  }
+  .ug-technical {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(32px, 4vw, 48px);
+    max-width: var(--content-wide);
+  }
+  .ug-tech-group__title {
+    font-family: var(--font-head);
+    font-size: clamp(18px, 2.2vw, 22px);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--ink-strong);
+    margin: 0 0 8px;
+  }
+  .ug-tech-group__intro {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--navy-muted);
+    margin: 0 0 20px;
+    max-width: 64ch;
+  }
+  .ug-tech-items {
+    display: flex;
+    flex-direction: column;
+  }
+  .ug-tech-item {
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .ug-tech-item:first-child { border-top: 1px solid var(--rule-light); }
+  .ug-tech-item__summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 18px 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    position: relative;
+  }
+  .ug-tech-item__summary::-webkit-details-marker { display: none; }
+  .ug-tech-item__summary:focus-visible {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 4px;
+  }
+  @media (min-width: 720px) {
+    .ug-tech-item__summary {
+      grid-template-columns: minmax(180px, 240px) 1fr 24px;
+      gap: 24px;
+      align-items: baseline;
+    }
+  }
+  .ug-tech-item__name {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 15.5px;
+    letter-spacing: -0.01em;
+    color: var(--ink-strong);
+  }
+  .ug-tech-item__summary-text {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--navy-muted);
+  }
+  .ug-tech-item__details {
+    list-style: none;
+    margin: 0 0 24px;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+  }
+  @media (min-width: 720px) {
+    .ug-tech-item__details {
+      padding-left: minmax(180px, 240px);
+    }
+  }
+  .ug-tech-item__details li {
+    position: relative;
+    padding-left: 18px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 60ch;
+  }
+  .ug-tech-item__details li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.45em;
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: var(--accent-light);
+    opacity: 0.7;
+  }
+
+  /* ---------- 7. UPGRADE PATH ---------- */
+  .ug-upgrade {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(28px, 4vw, 40px);
+    max-width: var(--content-wide);
+  }
+  @media (min-width: 820px) {
+    .ug-upgrade { grid-template-columns: 1fr 1fr; }
+    .ug-upgrade__contact { grid-column: 1 / -1; }
+  }
+  .ug-upgrade__block {
+    background: linear-gradient(155deg, #EBF9F4 0%, #F4FCF9 100%);
+    border-left: 3px solid var(--accent-light);
+    border-radius: 10px;
+    padding: 24px 26px;
+  }
+  .ug-upgrade__subhead {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    color: var(--ink-strong);
+    margin: 0 0 10px;
+  }
+  .ug-upgrade__block p {
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink);
+    margin: 0 0 14px;
+    max-width: 56ch;
+  }
+  .ug-upgrade__checklist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+  }
+  .ug-upgrade__checklist li {
+    position: relative;
+    padding-left: 22px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .ug-upgrade__checklist li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.3em;
+    width: 13px;
+    height: 13px;
+    background: var(--accent-light);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
+  }
+  .ug-upgrade__steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+  }
+  .ug-upgrade__step {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .ug-upgrade__step-num {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 9999px;
+    border: 1px solid var(--accent-light);
+    background: #fff;
+    color: var(--accent-light);
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 12px;
+  }
+  .ug-upgrade__step-title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--ink-strong);
+    margin: 0 0 2px;
+  }
+  .ug-upgrade__step-body {
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0;
+    max-width: 48ch;
+  }
+  .ug-upgrade__contact-line {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink);
+    margin: 0;
+  }
+  .ug-upgrade__contact-line strong { color: var(--ink-strong); }
+  .ug-upgrade__contact-line a { color: var(--accent-light); }
+
+  /* ---------- 8. FAQ ---------- */
+  .ug-faq { max-width: 760px; }
+  .ug-faq__item { border-bottom: 1px solid var(--rule-light); }
+  .ug-faq__item:first-child { border-top: 1px solid var(--rule-light); }
+  .ug-faq__q {
+    list-style: none;
+    cursor: pointer;
+    padding: clamp(18px, 2.4vw, 24px) 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(16px, 1.9vw, 18px);
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    color: var(--ink-strong);
+  }
+  .ug-faq__q::-webkit-details-marker { display: none; }
+  .ug-faq__q::after {
+    content: '+';
+    flex: none;
+    font-family: var(--font-head);
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--accent-light);
+  }
+  .ug-faq__item[open] .ug-faq__q::after { content: '\2212'; }
+  .ug-faq__a {
+    margin: 0 0 clamp(18px, 2.4vw, 24px);
+    max-width: 64ch;
+    font-family: var(--font-body);
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  /* ---------- 9. CTA (deep) ---------- */
+  .ug-cta__body {
+    max-width: 56ch;
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.82);
+    margin: 0 0 16px;
+  }
+  .ug-cta__contact {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.78);
+    margin: 0 0 24px;
+  }
+  .ug-cta__contact strong { color: var(--off-white); }
+  .ug-cta__contact a { color: var(--mint); }
+  .ug-cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* ---------- Back-to-top ---------- */
+  .ug-back-to-top {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 80;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 9999px;
+    background: rgba(16, 35, 45, 0.92);
+    color: var(--mint);
+    border: 1px solid rgba(104, 227, 190, 0.4);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+    transition: opacity 0.25s ease, transform 0.25s ease, background 0.18s, color 0.18s;
+  }
+  .ug-back-to-top.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
+  .ug-back-to-top:hover {
+    background: var(--mint);
+    color: var(--navy-deep);
+    border-color: var(--mint);
+  }
+  .ug-back-to-top:focus-visible {
+    outline: 2px solid var(--mint);
+    outline-offset: 3px;
+  }
+  .ug-back-to-top svg { width: 18px; height: 18px; }
+  @media (max-width: 640px) {
+    .ug-back-to-top { right: 14px; bottom: 14px; }
+
+    /* Stack feature summary rows on small screens */
+    .ug-feature__body, .ug-tech-item__details { padding-left: 0 !important; }
+  }
+
+  /* ---------- Open flags (Jane review only — collapsed, low-key) ---------- */
+  .ug-flags {
+    max-width: var(--content-wide);
+    margin: 0 auto;
+    padding: 16px var(--page-pad) 40px;
+  }
+  .ug-flags details {
+    background: rgba(43, 158, 128, 0.04);
+    border: 1px dashed rgba(43, 158, 128, 0.3);
+    border-radius: 8px;
+    padding: 12px 16px;
+  }
+  .ug-flags summary {
+    cursor: pointer;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    list-style: none;
+  }
+  .ug-flags summary::-webkit-details-marker { display: none; }
+  .ug-flags summary::before { content: '\25B6 '; font-size: 9px; margin-right: 6px; }
+  .ug-flags details[open] summary::before { content: '\25BC '; }
+  .ug-flags ul {
+    margin: 12px 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 8px;
+  }
+  .ug-flags li {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--navy-muted);
+    padding-left: 16px;
+    position: relative;
+  }
+  .ug-flags li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: var(--gold-deep, #CEB06E);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ug-feature__chev, .ug-back-to-top { transition: none; }
+  }
+</style>
+
+<script>
+  (function () {
+    var reduceMo = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---- Expand / Collapse all per pillar ---- */
+    var toggles = Array.prototype.slice.call(document.querySelectorAll('.ug-expand-toggle'));
+    toggles.forEach(function (toggle) {
+      var pillarId = toggle.getAttribute('data-pillar');
+      var group = document.getElementById('ug-pillar-' + pillarId);
+      if (!group) return;
+      var items = Array.prototype.slice.call(group.querySelectorAll('details.ug-feature'));
+      var label = toggle.querySelector('.ug-expand-toggle__label');
+
+      function sync() {
+        var allOpen = items.length > 0 && items.every(function (d) { return d.hasAttribute('open'); });
+        toggle.setAttribute('aria-expanded', allOpen ? 'true' : 'false');
+        if (label) label.textContent = allOpen ? 'Collapse all' : 'Expand all';
+      }
+
+      toggle.addEventListener('click', function () {
+        var allOpen = items.every(function (d) { return d.hasAttribute('open'); });
+        items.forEach(function (d) {
+          if (allOpen) d.removeAttribute('open');
+          else d.setAttribute('open', '');
+        });
+        sync();
+      });
+
+      items.forEach(function (d) {
+        d.addEventListener('toggle', sync);
+      });
+      sync();
+    });
+
+    /* ---- Pillar pill → scroll to feature and open it ---- */
+    var pills = Array.prototype.slice.call(document.querySelectorAll('.ug-pill[data-feature]'));
+    pills.forEach(function (pill) {
+      pill.addEventListener('click', function (e) {
+        var fid = pill.getAttribute('data-feature');
+        var target = document.getElementById('ug-feature-' + fid);
+        if (!target) return;
+        e.preventDefault();
+        if (!target.hasAttribute('open')) target.setAttribute('open', '');
+        var top = target.getBoundingClientRect().top + window.scrollY - 156;
+        window.scrollTo({ top: top, behavior: reduceMo ? 'auto' : 'smooth' });
+        history.replaceState(null, '', '#ug-feature-' + fid);
+      });
+    });
+
+    /* ---- Back-to-top ---- */
+    var btt = document.querySelector('[data-ug-back-to-top]');
+    if (btt) {
+      var onScroll = function () {
+        if (window.scrollY > window.innerHeight * 0.6) btt.classList.add('is-visible');
+        else btt.classList.remove('is-visible');
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      btt.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: reduceMo ? 'auto' : 'smooth' });
+      });
+      onScroll();
+    }
+  })();
+</script>
+
+
