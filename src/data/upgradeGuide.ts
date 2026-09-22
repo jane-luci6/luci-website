@@ -59,7 +59,6 @@ type UpgradeGuideDraft = {
   technical: {
     heading: string;
     intro: string;
-    formatNote: string;
     groups: readonly {
       id: string;
       heading: string;
@@ -443,8 +442,6 @@ export const upgradeGuide = {
     heading: 'Technical detail',
     intro:
       'A deeper view for the IT or A/V lead: how LUCI manages endpoints, layouts, identity, diagnostics, and property connections behind the release features.',
-    formatNote:
-      'Proposed format: accessible accordions, not tabs. Accordions keep every topic available in the document flow, support direct links to individual technical subjects, and remain consistent with the page’s other progressive-disclosure patterns. CoS to flag for Jane.',
     groups: [
       {
         id: 'platform-capabilities',
@@ -631,17 +628,17 @@ export const upgradeGuide = {
     {
       question: 'What happens to our current presets and configurations?',
       answer:
-        'Existing presets and configurations will be reviewed as part of the property-specific plan. The LUCI team will explain how they will be handled before the upgrade is scheduled rather than assume every configuration follows the same path.',
+        'Existing presets and configurations are reviewed as part of your upgrade plan. The LUCI team will explain how they will be handled before the upgrade is scheduled, rather than assume every configuration follows the same path.',
     },
     {
       question: 'Is there a cost for existing LUCI clients?',
       answer:
-        'The upgrade is free for existing LUCI clients. Your account team will confirm the scope for your property during the readiness review.',
+        'The upgrade is free for existing LUCI clients. Your account team will confirm the scope for your site during the readiness review.',
     },
     {
       question: 'Can we see the new LUCI before our upgrade?',
       answer:
-        'Talk to your account team or book a demo. The LUCI team can confirm the appropriate preview path and availability for your property.',
+        'Talk to your account team or book a demo. The LUCI team can confirm the appropriate preview path and availability for your site.',
     },
     {
       question: 'What if we installed LUCI recently?',
@@ -649,14 +646,14 @@ export const upgradeGuide = {
         'Recent installations follow the same scheduled fulfillment path. Your account team will confirm when your preconfigured laptop ships and coordinate verification and switch timing with you.',
     },
     {
-      question: 'How does rollout work across multiple properties?',
+      question: 'How does rollout work across multiple sites?',
       answer:
-        'Rollout is ordered rather than simultaneous. LUCI will review each property’s readiness and work with the account team to sequence the properties; no universal timing is promised in this draft.',
+        'Rollout is ordered rather than simultaneous. LUCI works with your account team to sequence sites on a schedule confirmed with you; this page does not promise a universal timeline.',
     },
     {
       question: 'What does our IT team need to prepare?',
       answer:
-        'IT should be ready to review the current environment, compatibility, access, permissions, and scheduling with LUCI. Any property-specific prerequisites will be identified during readiness review before the work is scheduled.',
+        'IT should be ready to review the current environment, compatibility, access, permissions, and scheduling with LUCI. Any site prerequisites will be identified during readiness review before the work is scheduled.',
     },
   ],
 
@@ -664,7 +661,7 @@ export const upgradeGuide = {
     eyebrow: 'The new version of LUCI',
     heading: 'More control in your hands, with the LUCI team still there when you need us.',
     body:
-      'See the release in a live demo, or talk with your account team about readiness and the upgrade path for your property.',
+      'See the release in a live demo, or talk with your account team about readiness and the upgrade path for your site.',
     contact: {
       name: 'Michael Epstein',
       role: 'CEO',

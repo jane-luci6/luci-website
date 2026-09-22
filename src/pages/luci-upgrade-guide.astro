@@ -164,10 +164,6 @@ const breadcrumbLd = breadcrumb([
     wide
   >
     <p class="ug-thesis">{technical.intro}</p>
-    <p class="ug-format-note">
-      <span class="ug-format-note__label">Format note</span>
-      {technical.formatNote}
-    </p>
     <div class="ug-technical">
       {technical.groups.map((group) => (
         <div class="ug-tech-group" id={`ug-tech-${group.id}`}>
@@ -674,28 +670,6 @@ const breadcrumbLd = breadcrumb([
   /* ---------- 5. IN-PRODUCT SUPPORT SPOTLIGHT ---------- */
 
   /* ---------- 6. TECHNICAL DETAIL ---------- */
-  .ug-format-note {
-    margin: 0 0 32px;
-    padding: 14px 18px;
-    background: rgba(43, 158, 128, 0.05);
-    border-left: 3px solid var(--accent-light);
-    border-radius: 8px;
-    font-family: var(--font-body);
-    font-size: 14px;
-    line-height: 1.55;
-    color: var(--navy-muted);
-    max-width: 70ch;
-  }
-  .ug-format-note__label {
-    display: inline-block;
-    margin-right: 10px;
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 10.5px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--accent-light);
-  }
   .ug-technical {
     display: flex;
     flex-direction: column;
