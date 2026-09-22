@@ -10,7 +10,8 @@ export default defineConfig({
       // Exclude utility/noindex pages from the sitemap.
       filter: (page) =>
         !page.includes('/contact/thanks') &&
-        !page.endsWith('/resources/field-activation-guide/customer/'),
+        !page.endsWith('/resources/field-activation-guide/customer/') &&
+        !page.endsWith('/luci-upgrade-guide/'),
     }),
   ],
 });
