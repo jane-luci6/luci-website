@@ -610,54 +610,56 @@ export const upgradeGuide = {
   upgradePath: {
     heading: 'Your path to the new LUCI',
     intro:
-      'Existing LUCI clients can receive the upgrade at no charge. Because each property has its own systems and operating calendar, the LUCI team will review readiness and schedule an ordered rollout rather than updating every property at once.',
+      'Your upgrade is fulfilled one-to-one with LUCI under your current contract through a new, preconfigured laptop shipped directly to you—not a download installed on your live machine. Your current system keeps running until your team has verified the new one and is ready to switch. Plan on about an hour or two for the cutover itself, with the LUCI team alongside you from scheduling through the switch.',
     readiness: {
-      heading: 'Start with a property readiness review',
+      heading: 'Proposed timeline — draft for Jane review',
       paragraph:
-        'Your account team will work with the property’s operations, IT, and A/V leads to confirm the current environment, compatibility, permissions, and the right place in the rollout. The review determines the property-specific scope before work is scheduled.',
+        'These planning milestones are proposed for Jane’s review; they are not a locked customer schedule. Your laptop shipment and switch window will be scheduled directly with LUCI.',
       checklist: [
-        'Confirm the property and systems included in the upgrade',
-        'Review compatibility and any prerequisites',
-        'Identify the access and permissions needed for the work',
-        'Align the work with the property’s operating calendar',
+        'Proposed — December 10: live demonstration webinar',
+        'Proposed — January 6: first pre-availability preparation update',
+        'Proposed — January 14: second pre-availability preparation update',
+        'Proposed — January 19: general availability window',
+        'Proposed — Your scheduled date: LUCI ships your preconfigured laptop',
+        'Proposed — Your switch window: verify the new laptop, then switch when your team is ready',
       ],
     },
     whatIsInvolved: {
-      heading: 'What is involved',
+      heading: 'How your upgrade works',
       paragraph:
-        'The exact work depends on the property. The readiness review will establish whether any local hardware work is needed, how existing presets and configurations will be handled, and what the property team should expect before a date is confirmed.',
+        'A separate, preconfigured laptop lets your team verify the new LUCI without changing the system running today. LUCI coordinates the fulfillment and stays with you through the switch.',
       steps: [
         {
           number: '01',
-          title: 'Review',
-          body: 'LUCI and the property review the current environment, prerequisites, compatibility, and permissions.',
+          title: 'Schedule with LUCI',
+          body: 'Your account team confirms your upgrade schedule and coordinates what your team should expect.',
         },
         {
           number: '02',
-          title: 'Plan',
-          body: 'The account team confirms the property-specific scope, responsibilities, and proposed rollout window.',
+          title: 'Your laptop ships preloaded',
+          body: 'LUCI builds and tests your new laptop, loads the new LUCI and security tunnel stack, and ships it preconfigured for internet and VPN connection.',
         },
         {
           number: '03',
-          title: 'Prepare',
-          body: 'LUCI and the property complete the agreed readiness work before the scheduled upgrade.',
+          title: 'Plug in and verify',
+          body: 'Connect the new laptop and verify it while your current system keeps running untouched. Nothing is downloaded onto the live machine.',
         },
         {
           number: '04',
-          title: 'Upgrade',
-          body: 'The property moves through its scheduled upgrade with the LUCI team involved in execution and continuing support.',
+          title: 'Switch when you are ready',
+          body: 'Once your team is satisfied, LUCI helps complete the switch. Plan on about an hour or two for the upgrade itself, with timing confirmed for your site.',
         },
       ],
     },
     rollout: {
-      heading: 'Ordered, property by property',
+      heading: 'Scheduled directly with your team',
       paragraph:
-        'The rollout will be sequenced rather than simultaneous. Your account team will confirm where each property sits in that order after readiness and scheduling are reviewed; this draft does not promise a universal duration or service-level timeline.',
+        'LUCI will fulfill upgrades in a coordinated sequence rather than sending every laptop at once. Your account team will confirm your shipment and switch window directly with you, with the LUCI team involved throughout.',
     },
     contact: {
       heading: 'Talk to your account team',
       paragraph:
-        'Start with your LUCI contact to review readiness, scope, and rollout order for your property. For general upgrade questions, contact Michael Epstein.',
+        'Start with your LUCI contact to review timing, shipment, and the switch for your site. For general upgrade questions, contact Michael Epstein.',
       name: 'Michael Epstein',
       role: 'CEO',
       email: 'mepstein@lucisystems.com',
@@ -669,12 +671,12 @@ export const upgradeGuide = {
     {
       question: 'Is this a software update or a hardware upgrade?',
       answer:
-        'The scope depends on the systems at each property. LUCI will review the current environment and confirm whether the upgrade is software-only or includes any local hardware work before scheduling it.',
+        'The upgrade is fulfilled with a new laptop shipped by LUCI, with the new LUCI and security tunnel stack already loaded. It is not a download applied to your live machine; your current system keeps running until you have verified the new laptop and are ready to switch.',
     },
     {
       question: 'How long does the upgrade take?',
       answer:
-        'There is not one duration that applies to every property. Timing will be confirmed after LUCI reviews readiness, compatibility, permissions, and the property’s operating calendar; this page does not promise an upgrade SLA.',
+        'Plan on about an hour or two for the upgrade itself. Your account team will confirm the timing for your site when your shipment and switch are scheduled.',
     },
     {
       question: 'What happens to our current presets and configurations?',
@@ -694,7 +696,7 @@ export const upgradeGuide = {
     {
       question: 'What if we installed LUCI recently?',
       answer:
-        'Recent installations are still handled through the property-by-property readiness and rollout process. Your account team will review the installed environment and confirm the appropriate path.',
+        'Recent installations follow the same scheduled fulfillment path. Your account team will confirm when your preconfigured laptop ships and coordinate verification and switch timing with you.',
     },
     {
       question: 'How does rollout work across multiple properties?',
