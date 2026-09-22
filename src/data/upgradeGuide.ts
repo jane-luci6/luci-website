@@ -79,10 +79,11 @@ type UpgradeGuideDraft = {
   upgradePath: {
     heading: string;
     intro: string;
-    readiness: {
-      heading: string;
-      paragraph: string;
-      checklist: readonly string[];
+    timing: {
+      releaseLabel: string;
+      releaseDate: typeof RELEASE_DATE;
+      paceLine: string;
+      rolloutNote: string;
     };
     whatIsInvolved: {
       heading: string;
@@ -92,18 +93,6 @@ type UpgradeGuideDraft = {
         title: string;
         body: string;
       }[];
-    };
-    rollout: {
-      heading: string;
-      paragraph: string;
-    };
-    contact: {
-      heading: string;
-      paragraph: string;
-      name: string;
-      role: string;
-      email: string;
-      phone: string;
     };
   };
   faq: readonly {
@@ -611,18 +600,13 @@ export const upgradeGuide = {
     heading: 'Your path to the new LUCI',
     intro:
       'Your upgrade is fulfilled one-to-one with LUCI under your current contract through a new, preconfigured laptop shipped directly to you—not a download installed on your live machine. Your current system keeps running until your team has verified the new one and is ready to switch. Plan on about an hour or two for the cutover itself, with the LUCI team alongside you from scheduling through the switch.',
-    readiness: {
-      heading: 'Proposed timeline — draft for Jane review',
-      paragraph:
-        'These planning milestones are proposed for Jane’s review; they are not a locked customer schedule. Your laptop shipment and switch window will be scheduled directly with LUCI.',
-      checklist: [
-        'Proposed — December 10: live demonstration webinar',
-        'Proposed — January 6: first pre-availability preparation update',
-        'Proposed — January 14: second pre-availability preparation update',
-        'Proposed — January 19: general availability window',
-        'Proposed — Your scheduled date: LUCI ships your preconfigured laptop',
-        'Proposed — Your switch window: verify the new laptop, then switch when your team is ready',
-      ],
+    timing: {
+      releaseLabel: 'Release date',
+      releaseDate: RELEASE_DATE,
+      paceLine:
+        'About 10 customers a week once upgrades are underway (approximate; Jane will dial in).',
+      rolloutNote:
+        'Upgrades are scheduled directly with your team in a coordinated sequence — not all at once.',
     },
     whatIsInvolved: {
       heading: 'How your upgrade works',
@@ -650,20 +634,6 @@ export const upgradeGuide = {
           body: 'Once your team is satisfied, LUCI helps complete the switch. Plan on about an hour or two for the upgrade itself, with timing confirmed for your site.',
         },
       ],
-    },
-    rollout: {
-      heading: 'Scheduled directly with your team',
-      paragraph:
-        'LUCI will fulfill upgrades in a coordinated sequence rather than sending every laptop at once. Your account team will confirm your shipment and switch window directly with you, with the LUCI team involved throughout.',
-    },
-    contact: {
-      heading: 'Talk to your account team',
-      paragraph:
-        'Start with your LUCI contact to review timing, shipment, and the switch for your site. For general upgrade questions, contact Michael Epstein.',
-      name: 'Michael Epstein',
-      role: 'CEO',
-      email: 'mepstein@lucisystems.com',
-      phone: '833.333.5868',
     },
   },
 

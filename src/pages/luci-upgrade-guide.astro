@@ -49,7 +49,7 @@ const breadcrumbLd = breadcrumb([
         {hero.headline.leading}<span class="ug-hero__accent">{hero.headline.mintAccent}</span>{hero.headline.trailing}
       </h2>
       <div class="ug-hero__release">
-        <span class="ug-hero__rlabel">Proposed release date</span>
+        <span class="ug-hero__rlabel">Release date</span>
         <span class="ug-hero__date">{hero.date}</span>
       </div>
       <div class="ug-hero__ctas">
@@ -241,19 +241,21 @@ const breadcrumbLd = breadcrumb([
     <p class="ug-thesis">{upgradePath.intro}</p>
 
     <div class="ug-upgrade">
-      <div class="ug-upgrade__block">
-        <h3 class="ug-upgrade__subhead">{upgradePath.readiness.heading}</h3>
-        <p>{upgradePath.readiness.paragraph}</p>
-        <ul class="ug-upgrade__checklist" role="list">
-          {upgradePath.readiness.checklist.map((c) => (
-            <li>{c}</li>
-          ))}
-        </ul>
+      <div class="ug-upgrade__timing" role="group" aria-label="Upgrade timing">
+        <div class="ug-upgrade__timing-cell">
+          <span class="ug-upgrade__timing-label">{upgradePath.timing.releaseLabel}</span>
+          <span class="ug-upgrade__timing-value ug-upgrade__timing-value--date">{upgradePath.timing.releaseDate}</span>
+        </div>
+        <div class="ug-upgrade__timing-cell">
+          <span class="ug-upgrade__timing-label">Pace</span>
+          <span class="ug-upgrade__timing-value">{upgradePath.timing.paceLine}</span>
+        </div>
       </div>
+      <p class="ug-upgrade__rollout-note">{upgradePath.timing.rolloutNote}</p>
 
-      <div class="ug-upgrade__block">
+      <div class="ug-upgrade__how">
         <h3 class="ug-upgrade__subhead">{upgradePath.whatIsInvolved.heading}</h3>
-        <p>{upgradePath.whatIsInvolved.paragraph}</p>
+        <p class="ug-upgrade__how-intro">{upgradePath.whatIsInvolved.paragraph}</p>
         <ol class="ug-upgrade__steps" role="list">
           {upgradePath.whatIsInvolved.steps.map((s) => (
             <li class="ug-upgrade__step">
@@ -267,19 +269,10 @@ const breadcrumbLd = breadcrumb([
         </ol>
       </div>
 
-      <div class="ug-upgrade__block">
-        <h3 class="ug-upgrade__subhead">{upgradePath.rollout.heading}</h3>
-        <p>{upgradePath.rollout.paragraph}</p>
-      </div>
-
-      <div class="ug-upgrade__block ug-upgrade__contact">
-        <h3 class="ug-upgrade__subhead">{upgradePath.contact.heading}</h3>
-        <p>{upgradePath.contact.paragraph}</p>
-        <p class="ug-upgrade__contact-line">
-          <strong>{upgradePath.contact.name}</strong> · {upgradePath.contact.role}<br />
-          <a href={`mailto:${upgradePath.contact.email}`}>{upgradePath.contact.email}</a> · {upgradePath.contact.phone}
-        </p>
-      </div>
+      <a class="ug-upgrade__path-cta" href="#ug-cta">
+        Talk to your account team about timing
+        <span class="ug-upgrade__path-cta-arrow" aria-hidden="true">&rarr;</span>
+      </a>
     </div>
   </SectionBlock>
 
@@ -887,62 +880,95 @@ const breadcrumbLd = breadcrumb([
 
   /* ---------- 7. UPGRADE PATH ---------- */
   .ug-upgrade {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: clamp(28px, 4vw, 40px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(24px, 3.6vw, 36px);
     max-width: var(--content-wide);
   }
-  @media (min-width: 820px) {
-    .ug-upgrade { grid-template-columns: 1fr 1fr; }
-    .ug-upgrade__contact { grid-column: 1 / -1; }
-  }
-  .ug-upgrade__block {
+
+  /* Timing strip: two-cell band (Release · Pace) */
+  .ug-upgrade__timing {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
     background: linear-gradient(155deg, #EBF9F4 0%, #F4FCF9 100%);
     border-left: 3px solid var(--accent-light);
     border-radius: 10px;
-    padding: 24px 26px;
+    overflow: hidden;
+  }
+  @media (min-width: 720px) {
+    .ug-upgrade__timing { grid-template-columns: minmax(220px, 260px) 1fr; }
+  }
+  .ug-upgrade__timing-cell {
+    padding: 18px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .ug-upgrade__timing-cell + .ug-upgrade__timing-cell {
+    border-top: 1px solid rgba(43, 158, 128, 0.18);
+  }
+  @media (min-width: 720px) {
+    .ug-upgrade__timing-cell + .ug-upgrade__timing-cell {
+      border-top: 0;
+      border-left: 1px solid rgba(43, 158, 128, 0.18);
+    }
+  }
+  .ug-upgrade__timing-label {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+  }
+  .ug-upgrade__timing-value {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 52ch;
+  }
+  .ug-upgrade__timing-value--date {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    color: var(--ink-strong);
+  }
+
+  /* Single short rollout line under the timing strip */
+  .ug-upgrade__rollout-note {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--navy-muted);
+    margin: 0;
+    max-width: 70ch;
+  }
+
+  /* How it works — 4 steps */
+  .ug-upgrade__how {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
   .ug-upgrade__subhead {
     font-family: var(--font-head);
     font-weight: 700;
-    font-size: 16px;
-    letter-spacing: -0.01em;
+    font-size: clamp(18px, 2.2vw, 22px);
+    letter-spacing: -0.015em;
     color: var(--ink-strong);
-    margin: 0 0 10px;
-  }
-  .ug-upgrade__block p {
-    font-family: var(--font-body);
-    font-size: 14.5px;
-    line-height: 1.6;
-    color: var(--ink);
-    margin: 0 0 14px;
-    max-width: 56ch;
-  }
-  .ug-upgrade__checklist {
-    list-style: none;
     margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 6px;
   }
-  .ug-upgrade__checklist li {
-    position: relative;
-    padding-left: 22px;
+  .ug-upgrade__how-intro {
     font-family: var(--font-body);
-    font-size: 14px;
-    line-height: 1.5;
-    color: var(--ink);
-  }
-  .ug-upgrade__checklist li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.3em;
-    width: 13px;
-    height: 13px;
-    background: var(--accent-light);
-    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
-    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--navy-muted);
+    margin: 0;
+    max-width: 60ch;
   }
   .ug-upgrade__steps {
     list-style: none;
@@ -985,15 +1011,43 @@ const breadcrumbLd = breadcrumb([
     margin: 0;
     max-width: 48ch;
   }
-  .ug-upgrade__contact-line {
-    font-family: var(--font-body);
+
+  /* Compact end-of-path CTA link to #ug-cta (not a duplicate contact card) */
+  .ug-upgrade__path-cta {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 22px 12px 18px;
+    border-radius: 9999px;
+    background: var(--accent-light);
+    color: #fff;
+    font-family: var(--font-head);
+    font-weight: 700;
     font-size: 14px;
-    line-height: 1.6;
-    color: var(--ink);
-    margin: 0;
+    letter-spacing: -0.005em;
+    text-decoration: none;
+    transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
   }
-  .ug-upgrade__contact-line strong { color: var(--ink-strong); }
-  .ug-upgrade__contact-line a { color: var(--accent-light); }
+  .ug-upgrade__path-cta:hover {
+    background: #248f72;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(43, 158, 128, 0.28);
+  }
+  .ug-upgrade__path-cta:focus-visible {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 3px;
+  }
+  .ug-upgrade__path-cta-arrow {
+    font-family: var(--font-head);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1;
+    transition: transform 0.18s ease;
+  }
+  .ug-upgrade__path-cta:hover .ug-upgrade__path-cta-arrow {
+    transform: translateX(3px);
+  }
 
   /* ---------- 8. FAQ ---------- */
   .ug-faq { max-width: 760px; }
