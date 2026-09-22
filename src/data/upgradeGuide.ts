@@ -9,7 +9,7 @@ type MediaPlaceholder = {
 
 type FeatureDraft = {
   id: string;
-  pillarId: 'room-control' | 'view-control' | 'security-control' | 'cross-cutting';
+  pillarId: 'room-control' | 'view-control' | 'security-control';
   name: string;
   oneLiner: string;
   paragraph: string;
@@ -56,10 +56,6 @@ type UpgradeGuideDraft = {
     }[];
   }[];
   features: readonly FeatureDraft[];
-  inProductSupport: FeatureDraft & {
-    heading: string;
-    eyebrow: string;
-  };
   technical: {
     heading: string;
     intro: string;
@@ -233,6 +229,12 @@ export const upgradeGuide = {
           name: 'Sign-in & session control',
           oneLiner:
             'Use email, PIN, or Microsoft for sign-in, end sessions on command, or message everyone in the platform.',
+        },
+        {
+          id: 'in-product-support',
+          name: 'In-product support',
+          oneLiner:
+            'Raise a request from a device, incident, or error with the relevant context and logs already attached.',
         },
       ],
     },
@@ -418,7 +420,7 @@ export const upgradeGuide = {
     },
     {
       id: 'in-product-support',
-      pillarId: 'cross-cutting',
+      pillarId: 'security-control',
       name: 'In-product support',
       oneLiner:
         'Raise a request from a device, incident, or error with the relevant context and logs already attached.',
@@ -436,28 +438,6 @@ export const upgradeGuide = {
       },
     },
   ],
-
-  inProductSupport: {
-    id: 'in-product-support',
-    pillarId: 'cross-cutting',
-    eyebrow: 'Support, in context',
-    heading: 'Bring the LUCI team in from the work itself',
-    name: 'In-product support',
-    oneLiner:
-      'Raise a request from a device, incident, or error with the relevant context and logs already attached.',
-    paragraph:
-      'Start a support request from the device, incident, or error where the issue appears. The request carries what happened, what changed, and the relevant logs, while the property decides what to escalate and the LUCI team remains available to act on the fuller context.',
-    benefits: [
-      'Starts the request from the device, incident, or error',
-      'Attaches relevant context and logs',
-      'Keeps the decision to escalate with the property',
-      'Gives the LUCI team better context when support is needed',
-    ],
-    media: {
-      kind: 'placeholder',
-      label: 'In-product support request flow — screenshot placeholder',
-    },
-  },
 
   technical: {
     heading: 'Technical detail',

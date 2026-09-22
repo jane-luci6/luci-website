@@ -5,7 +5,7 @@ import PlatformChapterNav from '../components/PlatformChapterNav.astro';
 import { upgradeGuide } from '../data/upgradeGuide';
 import { breadcrumb } from '../data/seo';
 
-const { meta, hero, thesis, pillars, features, inProductSupport, technical, upgradePath, faq, cta, openFlags } =
+const { meta, hero, thesis, pillars, features, technical, upgradePath, faq, cta, openFlags } =
   upgradeGuide;
 
 const chapters = [
@@ -13,7 +13,6 @@ const chapters = [
   { id: 'ug-thesis', label: 'Thesis' },
   { id: 'ug-pillars', label: 'Pillars' },
   { id: 'ug-features', label: 'Features' },
-  { id: 'ug-support', label: 'Support' },
   { id: 'ug-technical', label: 'Technical' },
   { id: 'ug-upgrade', label: 'Upgrade' },
   { id: 'ug-faq', label: 'FAQ' },
@@ -155,41 +154,6 @@ const breadcrumbLd = breadcrumb([
     </div>
   </SectionBlock>
 
-  {/* ───────── 5. IN-PRODUCT SUPPORT SPOTLIGHT ───────── */}
-  <SectionBlock
-    id="ug-support"
-    lockupName={inProductSupport.heading}
-    lockupRole={inProductSupport.eyebrow}
-    tone="light"
-    wide
-  >
-    <div class="ug-spotlight">
-      <div class="ug-spotlight__box">
-        <div class="ug-spotlight__head">
-          <span class="ug-spotlight__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linejoin="round">
-              <path d="M4 5h16v11H9l-4 4V5z" stroke="#2b9e80" fill="rgba(43,158,128,0.12)"/>
-              <path d="M8 10h8M8 13h5" stroke="#2b9e80" stroke-opacity="0.45" stroke-linecap="round"/>
-              <circle cx="17" cy="13" r="1.5" fill="#CEB06E"/>
-            </svg>
-          </span>
-          <h3 class="ug-spotlight__name">
-            {inProductSupport.name}
-            <svg class="ug-spotlight__star" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8 5.8 21.3l2.4-7.4L2 9.4h7.6z" fill="#CEB06E"/>
-            </svg>
-          </h3>
-        </div>
-        <p class="ug-spotlight__liner">{inProductSupport.oneLiner}</p>
-        <p class="ug-spotlight__paragraph">{inProductSupport.paragraph}</p>
-        <ul class="ug-feature__benefits ug-spotlight__benefits" role="list">
-          {inProductSupport.benefits.map((b) => (
-            <li>{b}</li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  </SectionBlock>
 
   {/* ───────── 6. TECHNICAL DETAIL ───────── */}
   <SectionBlock
@@ -347,12 +311,12 @@ const breadcrumbLd = breadcrumb([
   }
 
   /* Section scroll offset for sticky nav + header */
-  #ug-hero, #ug-thesis, #ug-pillars, #ug-features, #ug-support,
+  #ug-hero, #ug-thesis, #ug-pillars, #ug-features,
   #ug-technical, #ug-upgrade, #ug-faq, #ug-cta {
     scroll-margin-top: 156px;
   }
   @media (max-width: 640px) {
-    #ug-hero, #ug-thesis, #ug-pillars, #ug-features, #ug-support,
+    #ug-hero, #ug-thesis, #ug-pillars, #ug-features,
     #ug-technical, #ug-upgrade, #ug-faq, #ug-cta {
       scroll-margin-top: 132px;
     }
@@ -708,55 +672,6 @@ const breadcrumbLd = breadcrumb([
 
 <style>
   /* ---------- 5. IN-PRODUCT SUPPORT SPOTLIGHT ---------- */
-  .ug-spotlight__box {
-    background: linear-gradient(155deg, #EBF9F4 0%, #F4FCF9 100%);
-    border-radius: 10px;
-    border-left: 3px solid var(--accent-light);
-    padding: 28px 32px;
-    max-width: var(--content-wide);
-  }
-  .ug-spotlight__head {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 10px;
-  }
-  .ug-spotlight__icon {
-    flex: none;
-    width: 28px;
-    height: 28px;
-    display: flex;
-  }
-  .ug-spotlight__icon svg { width: 26px; height: 26px; display: block; }
-  .ug-spotlight__name {
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: clamp(18px, 2.2vw, 22px);
-    letter-spacing: -0.015em;
-    color: var(--ink-strong);
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .ug-spotlight__star { width: 16px; height: 16px; display: inline-block; }
-  .ug-spotlight__liner {
-    font-family: var(--font-body);
-    font-size: 15px;
-    line-height: 1.55;
-    color: var(--navy-muted);
-    margin: 0 0 20px;
-    max-width: 64ch;
-  }
-  .ug-spotlight__paragraph {
-    font-family: var(--font-body);
-    font-size: 15.5px;
-    line-height: 1.65;
-    color: var(--ink);
-    max-width: 64ch;
-    margin: 0 0 16px;
-  }
-  .ug-spotlight__benefits { margin-top: 8px; }
 
   /* ---------- 6. TECHNICAL DETAIL ---------- */
   .ug-format-note {
