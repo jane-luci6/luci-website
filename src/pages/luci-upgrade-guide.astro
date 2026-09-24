@@ -345,10 +345,10 @@ const breadcrumbLd = breadcrumb([
     pointer-events: none;
     /* Flow C family — mesh + floorplan (with-plan), self-transparent over navy.
        No mix-blend-mode: the asset carries its own transparency; screen would
-       blow out the floorplan raster. Scrim handles type legibility. */
-    /* Floorplan dial-back: Jane approved ~125% size; ease Y up (~66%)
-       between earlier 60% and too-far 72%. Asset unchanged (with-plan). */
-    background: url('/images/mesh/luci-bg-hero-with-plan-transparent-1920x1080.svg') center 66% / 125% auto no-repeat;
+       blow out the floorplan raster. Scrim handles type legibility.
+       Crop restored to pre-zoom/Y-shift (b61bc19): center / cover. Dual-color
+       mint date + gold underline kept. */
+    background: url('/images/mesh/luci-bg-hero-with-plan-transparent-1920x1080.svg') center / cover no-repeat;
     opacity: 0.82;
   }
   .ug-hero__scrim {
