@@ -55,6 +55,11 @@ type UpgradeGuideDraft = {
       oneLiner: string;
     }[];
   }[];
+  supportSpotlight: {
+    title: string;
+    oneLiner: string;
+    featureId: string;
+  };
   features: readonly FeatureDraft[];
   technical: {
     heading: string;
@@ -229,15 +234,16 @@ export const upgradeGuide = {
           oneLiner:
             'Use email, PIN, or Microsoft for sign-in, end sessions on command, or message everyone in the platform.',
         },
-        {
-          id: 'in-product-support',
-          name: 'In-product support',
-          oneLiner:
-            'Raise a request from a device, incident, or error with the relevant context and logs already attached.',
-        },
       ],
     },
   ],
+
+  supportSpotlight: {
+    title: 'In-product support',
+    oneLiner:
+      'Raise a request from a device, incident, or error with the relevant context and logs already attached.',
+    featureId: 'in-product-support',
+  },
 
   features: [
     {

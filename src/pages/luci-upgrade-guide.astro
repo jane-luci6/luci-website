@@ -5,7 +5,7 @@ import PlatformChapterNav from '../components/PlatformChapterNav.astro';
 import { upgradeGuide } from '../data/upgradeGuide';
 import { breadcrumb } from '../data/seo';
 
-const { meta, hero, thesis, pillars, features, technical, upgradePath, faq, cta, openFlags } =
+const { meta, hero, thesis, pillars, supportSpotlight, features, technical, upgradePath, faq, cta, openFlags } =
   upgradeGuide;
 
 const chapters = [
@@ -103,6 +103,15 @@ const breadcrumbLd = breadcrumb([
         </article>
       ))}
     </div>
+
+    {/* In-product support spotlight — full-width row under the 3-col grid
+        (two-pager .p2-spotlight pattern). Pulled out of the security pillar
+        (undo fold-in); links to the deep-dive feature if it remains. */}
+    <a class="ug-support-spotlight" href={`#ug-feature-${supportSpotlight.featureId}`}>
+      <span class="ug-support-spotlight__name">{supportSpotlight.title}</span>
+      <span class="ug-support-spotlight__liner">{supportSpotlight.oneLiner}</span>
+      <span class="ug-support-spotlight__arrow" aria-hidden="true">&rarr;</span>
+    </a>
   </SectionBlock>
 
   {/* ───────── 4. FEATURE DEEP-DIVE ───────── */}
@@ -456,6 +465,19 @@ const breadcrumbLd = breadcrumb([
   .ug-pillar {
     display: flex;
     flex-direction: column;
+    border-radius: 12px;
+    padding: clamp(20px, 2.4vw, 28px);
+    /* Two-pager .p1-pill / .p2-card fills, applied to the whole pillar box
+       per .ug-pillar nth-child (not paraphrases). */
+  }
+  .ug-pillars .ug-pillar:nth-child(1) {
+    background: linear-gradient(155deg, #E8EEF2 0%, #F3F6F8 100%);
+  }
+  .ug-pillars .ug-pillar:nth-child(2) {
+    background: linear-gradient(155deg, #EBF9F4 0%, #F4FCF9 100%);
+  }
+  .ug-pillars .ug-pillar:nth-child(3) {
+    background: linear-gradient(155deg, #D4EFE4 0%, #E8F6EF 100%);
   }
   .ug-pillar__head {
     background: #0f1e27;
@@ -507,16 +529,20 @@ const breadcrumbLd = breadcrumb([
     display: flex;
     flex-direction: column;
     gap: 4px;
-    background: linear-gradient(155deg, #EBF9F4 0%, #F4FCF9 100%);
+    /* Nested pill on a light pillar-fill: translucent white reads on all
+       three pillar gradients (cool gray, light mint, deeper mint) without
+       inventing new pill copy. Keeps the mint left accent. */
+    background: rgba(255, 255, 255, 0.72);
     border-left: 3px solid var(--accent-light);
     border-radius: 8px;
     padding: 14px 16px;
     text-decoration: none;
-    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
   }
   .ug-pill:hover {
     transform: translateY(-1px);
     box-shadow: 0 8px 18px rgba(43, 158, 128, 0.18);
+    background: rgba(255, 255, 255, 0.86);
   }
   .ug-pill__name {
     font-family: var(--font-head);
@@ -689,6 +715,69 @@ const breadcrumbLd = breadcrumb([
 
 <style>
   /* ---------- 5. IN-PRODUCT SUPPORT SPOTLIGHT ---------- */
+  /* Full-width row under the 3-col pillar grid (two-pager .p2-spotlight
+     pattern). Same content width as the grid; darker gray fill per
+     .p2-spotlight__box. Undo the fold-in (commit 8ca170c): support lives
+     in its own row, not as a 4th security pill. */
+  .ug-support-spotlight {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 18px;
+    max-width: var(--content-wide);
+    margin-top: clamp(20px, 2.4vw, 32px);
+    padding: 20px 24px;
+    border-radius: 10px;
+    border-left: 3px solid var(--accent-light);
+    background: linear-gradient(155deg, #D8DEE3 0%, #E8EDF0 100%);
+    text-decoration: none;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .ug-support-spotlight:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px -16px rgba(10, 20, 26, 0.32);
+  }
+  .ug-support-spotlight:focus-visible {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 3px;
+  }
+  .ug-support-spotlight__name {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 15.5px;
+    letter-spacing: -0.01em;
+    color: var(--ink-strong);
+    white-space: nowrap;
+  }
+  .ug-support-spotlight__liner {
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--navy-muted);
+  }
+  .ug-support-spotlight__arrow {
+    font-family: var(--font-head);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1;
+    color: var(--accent-light);
+    transition: transform 0.18s ease;
+  }
+  .ug-support-spotlight:hover .ug-support-spotlight__arrow {
+    transform: translateX(3px);
+  }
+  @media (max-width: 720px) {
+    .ug-support-spotlight {
+      grid-template-columns: 1fr auto;
+      grid-template-areas:
+        'name arrow'
+        'liner liner';
+      row-gap: 6px;
+    }
+    .ug-support-spotlight__name { grid-area: name; }
+    .ug-support-spotlight__liner { grid-area: liner; }
+    .ug-support-spotlight__arrow { grid-area: arrow; }
+  }
 
   /* ---------- 6. TECHNICAL DETAIL ---------- */
   .ug-technical {
