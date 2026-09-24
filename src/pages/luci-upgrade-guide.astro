@@ -336,7 +336,9 @@ const breadcrumbLd = breadcrumb([
     /* Flow C family — mesh + floorplan (with-plan), self-transparent over navy.
        No mix-blend-mode: the asset carries its own transparency; screen would
        blow out the floorplan raster. Scrim handles type legibility. */
-    background: url('/images/mesh/luci-bg-hero-with-plan-transparent-1920x1080.svg') center / cover no-repeat;
+    /* Floorplan crop: shift DOWN + zoom IN so the plan grounds in the header
+       band (less floating/orphaned plate). Asset unchanged (with-plan). */
+    background: url('/images/mesh/luci-bg-hero-with-plan-transparent-1920x1080.svg') center 68% / 138% auto no-repeat;
     opacity: 0.82;
   }
   .ug-hero__scrim {
