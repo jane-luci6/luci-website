@@ -104,7 +104,7 @@ const breadcrumbLd = breadcrumb([
         <article class="ug-pillar">
           <div class="ug-pillar__head">
             <span class="ug-pillar__num" aria-hidden="true">{p.number}</span>
-            <h3 class="ug-pillar__name" set:html={p.name.replace('control', '<span class="ug-pillar__ctrl">control</span>')} />
+            <h3 class="ug-pillar__name" set:html={p.name.replace('control', '<span class="ug-pillar__ctrl">control</span><br>')} />
           </div>
           <p class="ug-pillar__summary">{p.summary}</p>
           <ul class="ug-pillar__pills" role="list">
@@ -551,7 +551,8 @@ const breadcrumbLd = breadcrumb([
   .ug-pillar__num {
     position: absolute;
     top: -6px;
-    left: -4px;
+    right: -4px;
+    left: auto;
     font-family: var(--font-head);
     font-size: 100px;
     font-weight: 700;
@@ -560,12 +561,13 @@ const breadcrumbLd = breadcrumb([
     letter-spacing: -3px;
     pointer-events: none;
     user-select: none;
+    text-align: right;
   }
   .ug-pillar__name {
     position: relative;
     z-index: 1;
     font-family: var(--font-head);
-    font-size: 24px;
+    font-size: 27px;
     font-weight: 700;
     color: var(--ink-strong);
     line-height: 1.22;
