@@ -154,7 +154,7 @@ export const upgradeGuide = {
   thesis: {
     heading: 'The only A/V that scales and improves just got better',
     paragraph:
-      'LUCI is built to become more capable over time, extending the same A/V investment with new ways to control rooms, shape the interface, see live status, govern access, and reach support with better context. This release puts more day-to-day decisions in the hands of the people running the property, shortening the path from decision to execution while keeping the LUCI team alongside them when support is needed.',
+      'LUCI is built to become more capable over time, extending your A/V investment with new ways to control rooms, shape the interface, see live status, govern access, and reach support with better context. This release puts more day-to-day decisions in the hands of the people running the property, shortening the path from decision to execution while keeping the LUCI team alongside them when support is needed.',
   },
 
   pillars: [
