@@ -170,7 +170,7 @@ export const upgradeGuide = {
           id: 'venue-panels',
           name: 'Venue panels',
           oneLiner:
-            'In-venue tablets show only the approved controls for that space. Operators adjust what they need without full access.',
+            'Venue panels give operators a simple view of only the room—or rooms—they need, with only the controls approved for that space.',
         },
         {
           id: 'staging',
@@ -253,15 +253,17 @@ export const upgradeGuide = {
       pillarId: 'room-control',
       name: 'Venue panels',
       oneLiner:
-        'In-venue tablets show only the approved controls for that space. Operators adjust what they need without full access.',
+        'Venue panels give operators a simple view of only the room—or rooms—they need, with only the controls approved for that space.',
       paragraph:
-        'Venue panels put approved controls in the space where the work happens. A panel inherits the endpoints assigned to its venue, then shows only the power, source, volume, mute, and preset controls an administrator makes available, without opening the main LUCI application.',
+        'Put focused room control where the work happens: on a wall touchscreen in a ballroom, a tablet at a bar, or an iPad by a cabana. Each panel starts with the endpoints assigned to its venue, then an administrator chooses which devices, actions, and sources appear. Staff panels can require a PIN, while guest-facing panels can stay open. Operators get a basic panel or list interface without access to the main LUCI application.',
       benefits: [
-        'Adopts the endpoints already assigned to the venue',
-        'Limits each panel to the controls the room needs',
-        'Keeps the administrative application out of view',
-        'Makes approved presets available in the space',
-        'Can be scoped to one venue or several',
+        'Shows operators only the room or rooms that panel is for',
+        'Starts with the endpoints already assigned to the venue',
+        'Allows source or volume control while keeping actions such as power out of reach',
+        'Limits source choices to an approved list',
+        'Supports a PIN for staff or open, tap-to-wake access for guests',
+        'Works on dedicated wall touchscreens and paired browsers or iPads',
+        'Fits the typical one-panel-per-room setup, or a couple of rooms when needed',
       ],
       media: {
         kind: 'placeholder',
@@ -512,11 +514,22 @@ export const upgradeGuide = {
           {
             id: 'technical-venue-panels',
             name: 'Venue panels',
+            summary:
+              'Pair each in-venue panel to a hierarchy location so it boots into a locked-down control surface for that space’s endpoints.',
             details: [
               'Tie a panel to a point in the site hierarchy: site, building, floor, or venue.',
               'Inherit the endpoints assigned to that venue, then narrow access by control surface rather than by device.',
               'Load a pared-down interface with no route into the administrative application.',
               'Return the panel to its paired configuration on every boot.',
+              'Load `/panels` from the property’s LUCI host as the panel boot URL.',
+              'Issue a pairing code for the device or browser; a cookie binds that client to its panel configuration until an administrator revokes the pairing.',
+              'Revoke a pairing and issue a new code when a panel is moved or replaced.',
+              'Make the PIN optional, with idle lock and timeout settings for PIN-protected panels and tap-to-wake behavior for open panels.',
+              'Configure control-surface visibility per endpoint and restrict sources with allow-lists or favorites.',
+              'Use dedicated wall panels, including Rock Panel–class devices, or pair a browser or iPad.',
+              'Review paired-device telemetry including last seen, last command, lock state, and platform.',
+              'Edit the endpoint set after creation, including adding or changing endpoints beyond the automatically inherited set.',
+              'Deploy panels primarily for one room, or sometimes a couple of rooms, rather than using one panel for the whole site.',
             ],
           },
           {
