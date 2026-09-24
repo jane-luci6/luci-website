@@ -402,6 +402,20 @@ const breadcrumbLd = breadcrumb([
     line-height: 1;
     letter-spacing: -0.02em;
     color: var(--gold);
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+  }
+  /* Flow C house dual-color: gold underline/plate under release date
+     (mint already carries eyebrow + headline accent + bottom structural bar). */
+  .ug-hero__date::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 56px;
+    height: 2px;
+    background: var(--gold);
   }
   .ug-hero__ctas {
     display: flex;
