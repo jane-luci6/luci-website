@@ -41,6 +41,7 @@ const breadcrumbLd = breadcrumb([
   {/* ───────── 1. HERO — dark masthead + mesh ───────── */}
   <section id="ug-hero" class="ug-hero">
     <span class="ug-hero__mesh" aria-hidden="true"></span>
+    <span class="ug-hero__plan" aria-hidden="true"></span>
     <span class="ug-hero__scrim" aria-hidden="true"></span>
     <div class="ug-hero__inner container container--wide">
       <p class="ug-hero__eyebrow">{hero.eyebrow}</p>
@@ -350,6 +351,37 @@ const breadcrumbLd = breadcrumb([
        mint date + gold underline kept. */
     background: url('/images/mesh/luci-bg-hero-with-plan-transparent-1920x1080.svg') center / cover no-repeat;
     opacity: 0.82;
+  }
+  /* Right-column floorplan extension: short heroes match asset width under
+     cover, so X-position alone cannot shift plan into the post-text gutter.
+     Keep mesh framing locked; pin a plan layer to the right after the copy. */
+  .ug-hero__plan {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(64%, 880px);
+    z-index: 0;
+    pointer-events: none;
+    /* Dedicated right-panel crop of the plan texture (dense upper band,
+       empty far-edge trimmed). Mesh stays center/cover; this layer only
+       extends floorplan into the post-headline column. */
+    background: url('/images/mesh/luci-plan-right-panel.png') center top / cover no-repeat;
+    opacity: 0.88;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.15) 8%,
+      rgba(0, 0, 0, 0.65) 22%,
+      #000 38%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.15) 8%,
+      rgba(0, 0, 0, 0.65) 22%,
+      #000 38%
+    );
   }
   .ug-hero__scrim {
     position: absolute;
