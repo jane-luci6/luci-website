@@ -404,15 +404,24 @@ const breadcrumbLd = breadcrumb([
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    /* Radial cloud behind the headline/CTAs — small readability nudge
-       (stronger under words only). Mesh + right-column plan still read through. */
-    background: radial-gradient(
-      ellipse 74% 72% at 36% 44%,
-      rgba(7, 15, 20, 0.88) 0%,
-      rgba(7, 15, 20, 0.60) 34%,
-      rgba(7, 15, 20, 0.26) 60%,
-      transparent 86%
-    );
+    /* Hero fade v2 — clearly stronger under headline/CTAs (left / under-copy).
+       Linear left wash + denser radial; right-column floorplan stays vivid. */
+    background:
+      linear-gradient(
+        to right,
+        rgba(7, 15, 20, 0.78) 0%,
+        rgba(7, 15, 20, 0.55) 28%,
+        rgba(7, 15, 20, 0.18) 52%,
+        transparent 68%
+      ),
+      radial-gradient(
+        ellipse 70% 78% at 26% 40%,
+        rgba(7, 15, 20, 0.95) 0%,
+        rgba(7, 15, 20, 0.82) 32%,
+        rgba(7, 15, 20, 0.45) 55%,
+        rgba(7, 15, 20, 0.12) 74%,
+        transparent 88%
+      );
   }
   .ug-hero__inner {
     position: relative;
