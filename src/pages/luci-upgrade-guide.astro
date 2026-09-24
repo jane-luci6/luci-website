@@ -87,7 +87,9 @@ const breadcrumbLd = breadcrumb([
     tone="light"
     wide
   >
-    <p class="ug-thesis">{thesis.paragraph}</p>
+    {thesis.paragraphs.map((para) => (
+      <p class="ug-thesis">{para}</p>
+    ))}
   </SectionBlock>
 
   {/* ───────── 3. PILLARS OVERVIEW ───────── */}
@@ -510,6 +512,9 @@ const breadcrumbLd = breadcrumb([
     font-size: 17px;
     line-height: 1.65;
     color: var(--ink);
+  }
+  .ug-thesis + .ug-thesis {
+    margin-top: 1em;
   }
 
   /* ---------- 3. PILLARS OVERVIEW ---------- */

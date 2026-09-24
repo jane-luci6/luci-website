@@ -42,7 +42,7 @@ type UpgradeGuideDraft = {
   };
   thesis: {
     heading: string;
-    paragraph: string;
+    paragraphs: readonly [string, string];
   };
   pillars: readonly {
     id: 'room-control' | 'view-control' | 'security-control';
@@ -153,8 +153,10 @@ export const upgradeGuide = {
 
   thesis: {
     heading: 'The only A/V that scales and improves just got better',
-    paragraph:
-      'LUCI is built to become more capable over time, extending your A/V investment with new ways to control rooms, shape the interface, see live status, govern access, and reach support with better context. This release puts more day-to-day decisions in the hands of the people running the property, shortening the path from decision to execution while keeping the LUCI team alongside them when support is needed.',
+    paragraphs: [
+      'LUCI is built to become more capable over time, extending your A/V investment with new ways to control rooms, shape the interface, see live status, govern access, and reach support with better context.',
+      'This release puts more day-to-day decisions in the hands of your property, offering you greater autonomy and control while keeping the LUCI team in the loop when support is needed.',
+    ],
   },
 
   pillars: [
@@ -689,7 +691,7 @@ export const upgradeGuide = {
   },
 
   openFlags: [
-    'Past-improvements timeline: Jane is leaning toward skipping it; this draft uses one thesis paragraph and no timeline.',
+    'Past-improvements timeline: Jane is leaning toward skipping it; this draft uses two thesis paragraphs and no timeline.',
     'Live screen view: included from the tuned two-pager, but it is still missing from the feature-list JSON.',
     'Technical detail format: accessible accordions are proposed instead of tabs; CoS should flag the recommendation for Jane.',
     'Access model: still open. Per the September 17 lock, do not create a public stumble-upon self-serve upgrade page; the eventual page may remain unlisted until Jane decides.',
