@@ -58,25 +58,23 @@ const breadcrumbLd = breadcrumb([
     <span class="ug-hero__plan" aria-hidden="true"></span>
     <span class="ug-hero__scrim" aria-hidden="true"></span>
     <div class="ug-hero__inner container container--wide">
-      <div class="ug-hero__copy">
-        <p class="ug-hero__eyebrow">{hero.eyebrow}</p>
-        <h2 class="ug-hero__headline">
-          {hero.headline.leading}<span class="ug-hero__accent">{hero.headline.mintAccent}</span>{hero.headline.trailing}
-        </h2>
-        <div class="ug-hero__release">
-          <span class="ug-hero__rlabel">Release date</span>
-          <span class="ug-hero__date">{hero.date}</span>
-        </div>
-        <div class="ug-hero__ctas">
-          {hero.ctas.map((c) => (
-            <a
-              class:list={['btn', c.audience === 'prospects' ? 'btn--mint' : 'btn--mint-outline']}
-              href={c.href}
-            >
-              {c.label}
-            </a>
-          ))}
-        </div>
+      <p class="ug-hero__eyebrow">{hero.eyebrow}</p>
+      <h2 class="ug-hero__headline">
+        {hero.headline.leading}<span class="ug-hero__accent">{hero.headline.mintAccent}</span>{hero.headline.trailing}
+      </h2>
+      <div class="ug-hero__release">
+        <span class="ug-hero__rlabel">Release date</span>
+        <span class="ug-hero__date">{hero.date}</span>
+      </div>
+      <div class="ug-hero__ctas">
+        {hero.ctas.map((c) => (
+          <a
+            class:list={['btn', c.audience === 'prospects' ? 'btn--mint' : 'btn--mint-outline']}
+            href={c.href}
+          >
+            {c.label}
+          </a>
+        ))}
       </div>
     </div>
     <span class="ug-hero__bar" aria-hidden="true"></span>
@@ -385,8 +383,7 @@ const breadcrumbLd = breadcrumb([
     pointer-events: none;
     /* Dedicated right-panel crop of the plan texture (dense upper band,
        empty far-edge trimmed). Mesh stays center/cover; this layer only
-       extends floorplan into the post-headline column.
-       Fade v4: restore pre-v3 vivid plan (undo 0.52 + soft full-right mask). */
+       extends floorplan into the post-headline column. */
     background: url('/images/mesh/luci-plan-right-panel.png') center top / cover no-repeat;
     opacity: 0.88;
     -webkit-mask-image: linear-gradient(
@@ -405,35 +402,25 @@ const breadcrumbLd = breadcrumb([
     );
   }
   .ug-hero__scrim {
-    /* Fade v4: no full-bleed wash. Jane: only fade behind header text —
-       local scrim lives on .ug-hero__copy::before. Layer kept for structure. */
-    display: none;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    /* Radial cloud behind the headline/CTAs — denser than the lines-only pass
+       (with-plan is denser), but still a cloud, not an opaque left panel, so
+       mesh + floorplan read through on the right. */
+    background: radial-gradient(
+      ellipse 74% 72% at 36% 44%,
+      rgba(7, 15, 20, 0.82) 0%,
+      rgba(7, 15, 20, 0.52) 34%,
+      rgba(7, 15, 20, 0.20) 60%,
+      transparent 86%
+    );
   }
   .ug-hero__inner {
     position: relative;
     z-index: 1;
     max-width: var(--content-wide);
-  }
-  /* Text-column only: scrim sized to copy measure, clears before right plan. */
-  .ug-hero__copy {
-    position: relative;
-    width: fit-content;
-    max-width: min(36rem, 100%);
-  }
-  .ug-hero__copy::before {
-    content: '';
-    position: absolute;
-    inset: -20px -36px -24px -28px;
-    z-index: -1;
-    pointer-events: none;
-    background: radial-gradient(
-      ellipse 92% 88% at 38% 40%,
-      rgba(7, 15, 20, 0.94) 0%,
-      rgba(7, 15, 20, 0.78) 36%,
-      rgba(7, 15, 20, 0.40) 62%,
-      rgba(7, 15, 20, 0.12) 78%,
-      transparent 92%
-    );
   }
   .ug-hero__eyebrow {
     font-family: var(--font-head);
