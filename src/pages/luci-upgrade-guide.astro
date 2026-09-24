@@ -348,9 +348,9 @@ const breadcrumbLd = breadcrumb([
     /* Flow C family — mesh + floorplan (with-plan), self-transparent over navy.
        No mix-blend-mode: the asset carries its own transparency; screen would
        blow out the floorplan raster. Scrim handles type legibility. */
-    /* Floorplan dial-back: Jane approved ~125% size; shift Y lower (~72%)
-       so more floorplan is viewable. Asset unchanged (with-plan). */
-    background: url('/images/mesh/luci-bg-hero-with-plan-transparent-1920x1080.svg') center 72% / 125% auto no-repeat;
+    /* Floorplan dial-back: Jane approved ~125% size; ease Y up (~66%)
+       between earlier 60% and too-far 72%. Asset unchanged (with-plan). */
+    background: url('/images/mesh/luci-bg-hero-with-plan-transparent-1920x1080.svg') center 66% / 125% auto no-repeat;
     opacity: 0.82;
   }
   .ug-hero__scrim {
