@@ -119,7 +119,7 @@ const breadcrumbLd = breadcrumb([
     id="ug-features"
     lockupName="Feature deep-dive"
     lockupRole="Click a feature to open its detail"
-    tone="light"
+    tone="deep"
     wide
   >
     <div class="ug-deepdive">
@@ -559,18 +559,26 @@ const breadcrumbLd = breadcrumb([
   }
 
   /* ---------- 4. FEATURE DEEP-DIVE ---------- */
+  /* Section uses tone="deep" (navy lockup). Accordion stays on a light
+     panel so existing ink/rule treatment still reads — sales-style navy
+     header + light body. Brand tokens only. */
   .ug-deepdive {
     display: flex;
     flex-direction: column;
-    gap: clamp(32px, 4vw, 56px);
+    gap: clamp(28px, 3.6vw, 48px);
     max-width: var(--content-wide);
+    margin-top: var(--space-2);
+    padding: clamp(20px, 2.4vw, 32px);
+    border-radius: 12px;
+    background: var(--off-white);
+    color: var(--ink);
   }
   .ug-pillar-group__head {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
     gap: 16px;
-    margin-bottom: 16px;
+    margin-bottom: 0;
     padding-bottom: 12px;
     border-bottom: 1px solid var(--rule-light);
   }
@@ -583,7 +591,7 @@ const breadcrumbLd = breadcrumb([
     margin: 0;
   }
   .ug-pillar-group__num {
-    color: var(--gold-deep, #CEB06E);
+    color: var(--accent-light);
     margin-right: 10px;
     font-weight: 400;
   }
@@ -615,11 +623,10 @@ const breadcrumbLd = breadcrumb([
     display: flex;
     flex-direction: column;
   }
+  /* Single rule under pillar head (01): head border-bottom only —
+     do not also put border-top on the first feature (was a double hairline). */
   .ug-feature {
     border-bottom: 1px solid var(--rule-light);
-  }
-  .ug-feature:first-child {
-    border-top: 1px solid var(--rule-light);
   }
   .ug-feature__summary {
     list-style: none;
@@ -641,6 +648,9 @@ const breadcrumbLd = breadcrumb([
       gap: 24px;
       align-items: baseline;
     }
+  }
+  .ug-feature[open] .ug-feature__summary {
+    padding-bottom: 12px;
   }
   .ug-feature__name {
     font-family: var(--font-head);
@@ -665,15 +675,28 @@ const breadcrumbLd = breadcrumb([
                 linear-gradient(45deg, transparent 47%, var(--accent-light) 47%, var(--accent-light) 53%, transparent 53%);
   }
   .ug-feature[open] .ug-feature__chev { transform: rotate(90deg); }
+  /* Open body: align to summary liner column; inset + top rule so the
+     panel feels placed under the feature header (not floating left). */
   .ug-feature__body {
     padding: 0 0 24px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
+    border-top: 1px solid var(--rule-light);
+    padding-top: 16px;
   }
   @media (min-width: 720px) {
     .ug-feature__body {
-      padding-left: minmax(160px, 220px);
+      display: grid;
+      grid-template-columns: minmax(160px, 220px) 1fr 24px;
+      column-gap: 24px;
+      row-gap: 14px;
+      padding: 16px 0 28px;
+      align-items: start;
+    }
+    .ug-feature__paragraph,
+    .ug-feature__benefits {
+      grid-column: 2;
     }
   }
   .ug-feature__paragraph {
@@ -682,6 +705,7 @@ const breadcrumbLd = breadcrumb([
     line-height: 1.65;
     color: var(--ink);
     max-width: 64ch;
+    margin: 0;
   }
   .ug-feature__benefits {
     list-style: none;
@@ -706,7 +730,7 @@ const breadcrumbLd = breadcrumb([
     top: 0.3em;
     width: 13px;
     height: 13px;
-    background: var(--gold-deep, #CEB06E);
+    background: var(--accent-light);
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
   }
