@@ -108,10 +108,8 @@ const breadcrumbLd = breadcrumb([
         (two-pager .p2-spotlight pattern). Pulled out of the security pillar
         (undo fold-in); links to the deep-dive feature if it remains. */}
     <a class="ug-support-spotlight" href={`#ug-feature-${supportSpotlight.featureId}`}>
-      <span class="ug-support-spotlight__title">
-        <span class="ug-support-spotlight__name">{supportSpotlight.title}</span>
-        <span class="ug-support-spotlight__plus">Plus</span>
-      </span>
+      <span class="ug-support-spotlight__plus">Plus</span>
+      <span class="ug-support-spotlight__name">{supportSpotlight.title}</span>
       <span class="ug-support-spotlight__liner">{supportSpotlight.oneLiner}</span>
       <span class="ug-support-spotlight__arrow" aria-hidden="true">&rarr;</span>
     </a>
@@ -747,6 +745,7 @@ const breadcrumbLd = breadcrumb([
      .p2-spotlight__box. Undo the fold-in (commit 8ca170c): support lives
      in its own row, not as a 4th security pill. */
   .ug-support-spotlight {
+    position: relative;
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
@@ -768,20 +767,23 @@ const breadcrumbLd = breadcrumb([
     outline: 2px solid var(--accent-light);
     outline-offset: 3px;
   }
-  .ug-support-spotlight__title {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    white-space: nowrap;
-  }
   .ug-support-spotlight__name {
     font-family: var(--font-head);
     font-weight: 700;
     font-size: 15.5px;
     letter-spacing: -0.01em;
     color: var(--ink-strong);
+    white-space: nowrap;
   }
+  /* Top-left overlapping pill on the box edge — announces an extra
+     feature (not an account tier). Brand gold; sits half above the
+     top edge so it reads as a badge/overlay, not inline with the title. */
   .ug-support-spotlight__plus {
+    position: absolute;
+    top: 0;
+    left: 16px;
+    z-index: 1;
+    transform: translateY(-50%);
     display: inline-flex;
     align-items: center;
     font-family: var(--font-head);
@@ -790,10 +792,12 @@ const breadcrumbLd = breadcrumb([
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--ink-strong);
-    background: rgba(var(--gold-rgb), 0.22);
+    background: var(--gold);
     border-radius: 9999px;
-    padding: 3px 9px 2px;
+    padding: 4px 10px 3px;
     line-height: 1.2;
+    box-shadow: 0 2px 8px -2px rgba(10, 20, 26, 0.22);
+    pointer-events: none;
   }
   .ug-support-spotlight__liner {
     font-family: var(--font-body);
@@ -820,7 +824,7 @@ const breadcrumbLd = breadcrumb([
         'liner liner';
       row-gap: 6px;
     }
-    .ug-support-spotlight__title { grid-area: name; }
+    .ug-support-spotlight__name { grid-area: name; }
     .ug-support-spotlight__liner { grid-area: liner; }
     .ug-support-spotlight__arrow { grid-area: arrow; }
   }
