@@ -1320,8 +1320,11 @@ const breadcrumbLd = breadcrumb([
 
   /* ============================================================
      HEADER DUO TREATMENTS (review) — brochure dual-accent family
-     Refs: luci-design/.../brochure.css .cap-page-band;
-           luci-dual-accent-system.mdc (mint structural, gold expressive)
+     PRIMARY: LUCI-Brochure.pdf pp.2–4 (.cap-page-band navy bar, mint kicker,
+       white+gold headline, mint rule, mint/gold circuit texture)
+     SOURCE: ui_kits/sales/brochure.html + brochure.css
+       (.cap-page-band, .cap-page-band__accent--gold, texture-circuit-header-mintgold)
+     Handoff: luci-design/BROCHURE-PDF-HANDOFF.md · luci-dual-accent-system.mdc
      Scope: section lockups only (#ug-thesis … #ug-cta). Hero untouched.
      Switch: ?headers=white|blackbar|alt  (default white)
      ============================================================ */
@@ -1440,11 +1443,32 @@ const breadcrumbLd = breadcrumb([
     margin-bottom: var(--space-5);
     padding: 28px var(--page-pad) 32px;
     box-sizing: border-box;
+    /* Match brochure .cap-page-band: navy gradient + mint glow */
     background:
       radial-gradient(135% 120% at 90% -28%, rgba(var(--mint-rgb), 0.16), transparent 56%),
       linear-gradient(162deg, var(--navy-deep) 0%, var(--navy) 58%, #0C1F28 100%);
     overflow: hidden;
   }
+  /* Brochure circuit texture (mint/gold), fade from right — .cap-page-band::before */
+  .ug-headers--blackbar :global(.section--light) :global(.header-lockup)::before,
+  .ug-headers--blackbar :global(.section--white) :global(.header-lockup)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 4px;
+    left: 0;
+    background-image: url('/images/textures/texture-circuit-header-mintgold.png');
+    background-repeat: repeat;
+    background-position: right top;
+    background-size: 600px auto;
+    -webkit-mask-image: linear-gradient(90deg, transparent 30%, rgba(0, 0, 0, 0.55) 62%, #000 100%);
+    mask-image: linear-gradient(90deg, transparent 30%, rgba(0, 0, 0, 0.55) 62%, #000 100%);
+    opacity: 0.62;
+    pointer-events: none;
+    z-index: 0;
+  }
+  /* Mint 4px bottom rule — .cap-page-band::after */
   .ug-headers--blackbar :global(.section--light) :global(.header-lockup)::after,
   .ug-headers--blackbar :global(.section--white) :global(.header-lockup)::after {
     content: '';
@@ -1454,6 +1478,12 @@ const breadcrumbLd = breadcrumb([
     bottom: 0;
     height: 4px;
     background: var(--mint);
+    z-index: 1;
+  }
+  .ug-headers--blackbar :global(.section--light) :global(.header-lockup > *),
+  .ug-headers--blackbar :global(.section--white) :global(.header-lockup > *) {
+    position: relative;
+    z-index: 1;
   }
   .ug-headers--blackbar :global(.section--light) :global(.header-lockup__name),
   .ug-headers--blackbar :global(.section--white) :global(.header-lockup__name) {
