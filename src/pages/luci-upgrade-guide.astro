@@ -50,7 +50,7 @@ const breadcrumbLd = breadcrumb([
   <h1 class="ug-sr-only">{meta.title}</h1>
   <PlatformChapterNav chapters={chapters} contextLabel="Upgrade Guide" />
 
-  <div class="ug-headers ug-headers--blackbar">
+  <div class="ug-headers ug-headers--alt">
 
   {/* ───────── 1. HERO — dark masthead + mesh ───────── */}
   <section id="ug-hero" class="ug-hero">
@@ -305,7 +305,7 @@ const breadcrumbLd = breadcrumb([
     </svg>
   </button>
 
-  </div>{/* /ug-headers blackbar */}
+  </div>{/* /ug-headers mint wash */}
 
   {/* ───────── Open flags for Jane review (collapsed by default) ───────── */}
   <aside class="ug-flags" aria-label="Open flags for Jane review">
@@ -404,14 +404,13 @@ const breadcrumbLd = breadcrumb([
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    /* Radial cloud behind the headline/CTAs — denser than the lines-only pass
-       (with-plan is denser), but still a cloud, not an opaque left panel, so
-       mesh + floorplan read through on the right. */
+    /* Radial cloud behind the headline/CTAs — small readability nudge
+       (stronger under words only). Mesh + right-column plan still read through. */
     background: radial-gradient(
       ellipse 74% 72% at 36% 44%,
-      rgba(7, 15, 20, 0.82) 0%,
-      rgba(7, 15, 20, 0.52) 34%,
-      rgba(7, 15, 20, 0.20) 60%,
+      rgba(7, 15, 20, 0.88) 0%,
+      rgba(7, 15, 20, 0.60) 34%,
+      rgba(7, 15, 20, 0.26) 60%,
       transparent 86%
     );
   }
@@ -1308,9 +1307,10 @@ const breadcrumbLd = breadcrumb([
 
 
   /* ============================================================
-     SECTION LOCKUP HEADERS — blackbar (locked)
-     Brochure .cap-page-band: navy band, off-white + gold span,
-     mint 4px rule, texture-circuit-header-mintgold.
+     SECTION LOCKUP HEADERS — mint wash (locked)
+     Soft mint wash band + ink/accent-light duo + split mint|gold-deep rule.
+     Full-bleed wash band; lockup type shares .container--wide inset
+     (same horizontal margins as body copy). White/blackbar paths removed.
      Scope: section lockups only (#ug-thesis … #ug-cta). Hero untouched.
      ============================================================ */
 
@@ -1319,91 +1319,86 @@ const breadcrumbLd = breadcrumb([
     font-style: normal;
   }
 
-  /* BLACKBAR — brochure .cap-page-band
-     Full-bleed navy band behind lockup; off-white + gold accent;
-     mint 4px bottom rule on the band. Deep sections already navy —
-     duo gold accent only (no double band). */
-  .ug-headers--blackbar :global(.section--light) :global(.header-lockup),
-  .ug-headers--blackbar :global(.section--white) :global(.header-lockup) {
+  /* MINT WASH — soft mint band; ink + accent-light; split rule under name.
+     Band is full-bleed; content padded to match container--wide column. */
+  .ug-headers--alt :global(.section--light) :global(.header-lockup),
+  .ug-headers--alt :global(.section--white) :global(.header-lockup) {
     position: relative;
     width: 100vw;
     max-width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
     margin-bottom: var(--space-5);
-    padding: 28px var(--page-pad) 32px;
+    /* Horizontal inset matches .container--wide: page-pad, plus extra when
+       viewport exceeds content-wide so lockup type lines up with body copy. */
+    padding-top: 26px;
+    padding-bottom: 28px;
+    padding-left: max(var(--page-pad), calc(50vw - var(--content-wide) / 2 + var(--page-pad)));
+    padding-right: max(var(--page-pad), calc(50vw - var(--content-wide) / 2 + var(--page-pad)));
     box-sizing: border-box;
-    /* Match brochure .cap-page-band: navy gradient + mint glow */
     background:
-      radial-gradient(135% 120% at 90% -28%, rgba(var(--mint-rgb), 0.16), transparent 56%),
-      linear-gradient(162deg, var(--navy-deep) 0%, var(--navy) 58%, #0C1F28 100%);
-    overflow: hidden;
+      linear-gradient(180deg, rgba(var(--mint-rgb), 0.14) 0%, rgba(var(--mint-rgb), 0.06) 100%),
+      var(--off-white);
+    border-bottom: 1px solid rgba(var(--mint-rgb), 0.28);
   }
-  /* Brochure circuit texture (mint/gold), fade from right — .cap-page-band::before */
-  .ug-headers--blackbar :global(.section--light) :global(.header-lockup)::before,
-  .ug-headers--blackbar :global(.section--white) :global(.header-lockup)::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 4px;
-    left: 0;
-    background-image: url('/images/textures/texture-circuit-header-mintgold.png');
-    background-repeat: repeat;
-    background-position: right top;
-    background-size: 600px auto;
-    -webkit-mask-image: linear-gradient(90deg, transparent 30%, rgba(0, 0, 0, 0.55) 62%, #000 100%);
-    mask-image: linear-gradient(90deg, transparent 30%, rgba(0, 0, 0, 0.55) 62%, #000 100%);
-    opacity: 0.62;
-    pointer-events: none;
-    z-index: 0;
+  .ug-headers--alt :global(.section--light) :global(.header-lockup__name),
+  .ug-headers--alt :global(.section--white) :global(.header-lockup__name) {
+    color: var(--ink-strong);
   }
-  /* Mint 4px bottom rule — .cap-page-band::after */
-  .ug-headers--blackbar :global(.section--light) :global(.header-lockup)::after,
-  .ug-headers--blackbar :global(.section--white) :global(.header-lockup)::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 4px;
-    background: var(--mint);
-    z-index: 1;
-  }
-  .ug-headers--blackbar :global(.section--light) :global(.header-lockup > *),
-  .ug-headers--blackbar :global(.section--white) :global(.header-lockup > *) {
-    position: relative;
-    z-index: 1;
-  }
-  .ug-headers--blackbar :global(.section--light) :global(.header-lockup__name),
-  .ug-headers--blackbar :global(.section--white) :global(.header-lockup__name) {
-    color: rgba(245, 248, 250, 0.96);
-    max-width: min(28ch, 100%);
-  }
-  .ug-headers--blackbar :global(.section--light) :global(.header-lockup__name em),
-  .ug-headers--blackbar :global(.section--white) :global(.header-lockup__name em) {
-    color: var(--gold);
+  .ug-headers--alt :global(.section--light) :global(.header-lockup__name em),
+  .ug-headers--alt :global(.section--white) :global(.header-lockup__name em) {
+    color: var(--accent-light);
     border-bottom: none;
   }
-  .ug-headers--blackbar :global(.section--light) :global(.header-lockup__rule),
-  .ug-headers--blackbar :global(.section--white) :global(.header-lockup__rule) {
-    background: var(--mint);
+  /* Hide default mint rule; replace with split mint|gold rule */
+  .ug-headers--alt :global(.section--light) :global(.header-lockup__rule),
+  .ug-headers--alt :global(.section--white) :global(.header-lockup__rule) {
+    width: 72px;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      var(--accent-light) 0 40px,
+      transparent 40px 44px,
+      var(--gold-deep, #CEB06E) 44px 72px
+    );
+    border-radius: 0;
   }
-  .ug-headers--blackbar :global(.section--light) :global(.header-lockup__role),
-  .ug-headers--blackbar :global(.section--white) :global(.header-lockup__role) {
-    color: var(--mint);
-  }
-  .ug-headers--blackbar :global(.section--deep) :global(.header-lockup__name em),
-  .ug-headers--blackbar :global(.section--mid) :global(.header-lockup__name em) {
+  .ug-headers--alt :global(.section--deep) :global(.header-lockup__name em),
+  .ug-headers--alt :global(.section--mid) :global(.header-lockup__name em) {
     color: var(--gold);
   }
-  .ug-headers--blackbar :global(.header-lockup__name:not(:has(em)))::after {
+  .ug-headers--alt :global(.section--deep) :global(.header-lockup__rule),
+  .ug-headers--alt :global(.section--mid) :global(.header-lockup__rule) {
+    width: 72px;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      var(--mint) 0 40px,
+      transparent 40px 44px,
+      var(--gold) 44px 72px
+    );
+  }
+  .ug-headers--alt :global(.header-lockup__name:not(:has(em)))::after {
     content: '';
     display: block;
-    width: 56px;
-    height: 2px;
-    margin-top: 10px;
-    background: var(--gold);
+    width: 72px;
+    height: 3px;
+    margin-top: 12px;
+    background: linear-gradient(
+      90deg,
+      var(--accent-light) 0 40px,
+      transparent 40px 44px,
+      var(--gold-deep, #CEB06E) 44px 72px
+    );
+  }
+  .ug-headers--alt :global(.section--deep) :global(.header-lockup__name:not(:has(em)))::after,
+  .ug-headers--alt :global(.section--mid) :global(.header-lockup__name:not(:has(em)))::after {
+    background: linear-gradient(
+      90deg,
+      var(--mint) 0 40px,
+      transparent 40px 44px,
+      var(--gold) 44px 72px
+    );
   }
 
 
