@@ -50,19 +50,7 @@ const breadcrumbLd = breadcrumb([
   <h1 class="ug-sr-only">{meta.title}</h1>
   <PlatformChapterNav chapters={chapters} contextLabel="Upgrade Guide" />
 
-  {/* Temporary review strip — pillar table header treatments (remove after Jane locks) */}
-  <aside class="ug-th-picker" data-ug-th-picker aria-label="Pillar table header treatment review">
-    <span class="ug-th-picker__label">Pillar headers (review)</span>
-    <nav class="ug-th-picker__nav" aria-label="Compare pillar header treatments">
-      <a class="ug-th-picker__btn" data-th="current" href="?tableHeaders=current">0 · Current black</a>
-      <a class="ug-th-picker__btn" data-th="subtle" href="?tableHeaders=subtle">A · Subtle mint</a>
-      <a class="ug-th-picker__btn" data-th="none" href="?tableHeaders=none">B · None</a>
-      <a class="ug-th-picker__btn" data-th="alt" href="?tableHeaders=alt">C · Soft rule</a>
-    </nav>
-    <span class="ug-th-picker__hint">Query: <code>?tableHeaders=subtle|none|alt</code> · bare URL = current black</span>
-  </aside>
-
-  <div class="ug-headers ug-headers--alt ug-th--current" data-ug-table-headers>
+  <div class="ug-headers ug-headers--alt">
 
   {/* ───────── 1. HERO — dark masthead + mesh ───────── */}
   <section id="ug-hero" class="ug-hero">
@@ -319,7 +307,7 @@ const breadcrumbLd = breadcrumb([
     </svg>
   </button>
 
-  </div>{/* /ug-headers mint wash */}
+  </div>{/* /ug-headers mint wash + pillar none */}
 
   {/* ───────── Open flags for Jane review (collapsed by default) ───────── */}
   <aside class="ug-flags" aria-label="Open flags for Jane review">
@@ -545,25 +533,33 @@ const breadcrumbLd = breadcrumb([
   .ug-pillars .ug-pillar:nth-child(3) {
     background: linear-gradient(155deg, #D4EFE4 0%, #E8F6EF 100%);
   }
+  /* ============================================================
+     PILLAR TABLE HEADERS — none (locked)
+     #ug-pillars: no filled boxes; type + mint hairline;
+     large ghost .ug-pillar__num watermarks behind titles for presence.
+     ============================================================ */
   .ug-pillar__head {
-    background: #0f1e27;
-    border-radius: 10px;
-    padding: 24px 26px 22px;
-    margin-bottom: 20px;
+    background: transparent;
+    border-radius: 0;
+    padding: 18px 0 14px;
+    margin-bottom: 16px;
     position: relative;
-    overflow: hidden;
-    box-shadow: 0 14px 26px -16px rgba(10, 20, 26, 0.4);
+    overflow: visible;
+    box-shadow: none;
+    border-bottom: 1px solid rgba(var(--mint-rgb), 0.28);
   }
   .ug-pillar__num {
     position: absolute;
-    top: -4px;
-    left: 10px;
+    top: -6px;
+    left: -4px;
     font-family: var(--font-head);
-    font-size: 92px;
+    font-size: 100px;
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.14);
+    color: rgba(16, 35, 45, 0.12);
     line-height: 1;
     letter-spacing: -3px;
+    pointer-events: none;
+    user-select: none;
   }
   .ug-pillar__name {
     position: relative;
@@ -571,89 +567,11 @@ const breadcrumbLd = breadcrumb([
     font-family: var(--font-head);
     font-size: 21px;
     font-weight: 700;
-    color: #fff;
+    color: var(--ink-strong);
     line-height: 1.22;
     margin: 0;
   }
-  .ug-pillar__name :global(.ug-pillar__ctrl) { color: var(--gold); }
-
-  /* ============================================================
-     PILLAR TABLE HEADERS — review variants (?tableHeaders=)
-     Target: .ug-pillar__head black boxes in #ug-pillars
-     ("What the release puts in your hands").
-     Default / bare URL / current = existing black boxes.
-     A subtle · B none · C alt (soft rule). Body copy untouched.
-     ============================================================ */
-
-  /* A) SUBTLE — soft mint wash; ink type; accent-light on "control" */
-  .ug-th--subtle .ug-pillar__head {
-    background:
-      linear-gradient(180deg, rgba(var(--mint-rgb), 0.16) 0%, rgba(var(--mint-rgb), 0.06) 100%),
-      rgba(255, 255, 255, 0.72);
-    border: 1px solid rgba(var(--mint-rgb), 0.28);
-    box-shadow: none;
-  }
-  .ug-th--subtle .ug-pillar__num {
-    color: rgba(16, 35, 45, 0.08);
-  }
-  .ug-th--subtle .ug-pillar__name {
-    color: var(--ink-strong);
-  }
-  .ug-th--subtle .ug-pillar__name :global(.ug-pillar__ctrl) {
-    color: var(--accent-light);
-  }
-
-  /* B) NONE — remove boxes; type + light hairline only */
-  .ug-th--none .ug-pillar__head {
-    background: transparent;
-    border-radius: 0;
-    padding: 4px 0 14px;
-    margin-bottom: 16px;
-    box-shadow: none;
-    border-bottom: 1px solid rgba(var(--mint-rgb), 0.28);
-    overflow: visible;
-  }
-  .ug-th--none .ug-pillar__num {
-    display: none;
-  }
-  .ug-th--none .ug-pillar__name {
-    color: var(--ink-strong);
-  }
-  .ug-th--none .ug-pillar__name :global(.ug-pillar__ctrl) {
-    color: var(--accent-light);
-  }
-
-  /* C) ALT — soft white fill + ink; split mint|gold-deep rule under head */
-  .ug-th--alt .ug-pillar__head {
-    background: rgba(255, 255, 255, 0.78);
-    border: 1px solid rgba(16, 35, 45, 0.08);
-    box-shadow: none;
-    padding-bottom: 18px;
-  }
-  .ug-th--alt .ug-pillar__head::after {
-    content: '';
-    display: block;
-    position: relative;
-    z-index: 1;
-    width: 56px;
-    height: 3px;
-    margin-top: 12px;
-    background: linear-gradient(
-      90deg,
-      var(--accent-light) 0 32px,
-      transparent 32px 36px,
-      var(--gold-deep, #CEB06E) 36px 56px
-    );
-  }
-  .ug-th--alt .ug-pillar__num {
-    color: rgba(16, 35, 45, 0.07);
-  }
-  .ug-th--alt .ug-pillar__name {
-    color: var(--ink-strong);
-  }
-  .ug-th--alt .ug-pillar__name :global(.ug-pillar__ctrl) {
-    color: var(--accent-light);
-  }
+  .ug-pillar__name :global(.ug-pillar__ctrl) { color: var(--accent-light); }
 
   .ug-pillar__summary {
     font-family: var(--font-body);
@@ -1500,68 +1418,6 @@ const breadcrumbLd = breadcrumb([
 
 
 
-  /* Temporary review strip — pillar table header treatments */
-  .ug-th-picker {
-    position: sticky;
-    top: 0;
-    z-index: 90;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px 16px;
-    padding: 10px var(--page-pad);
-    background: rgba(10, 22, 28, 0.96);
-    border-bottom: 1px solid rgba(var(--mint-rgb), 0.35);
-    color: rgba(245, 248, 250, 0.88);
-    font-family: var(--font-body);
-    font-size: 13px;
-  }
-  .ug-th-picker__label {
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--mint);
-  }
-  .ug-th-picker__nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .ug-th-picker__btn {
-    display: inline-flex;
-    align-items: center;
-    padding: 6px 12px;
-    border-radius: 9999px;
-    border: 1px solid rgba(245, 248, 250, 0.22);
-    color: rgba(245, 248, 250, 0.88) !important;
-    text-decoration: none !important;
-    font-family: var(--font-head);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    background: transparent;
-  }
-  .ug-th-picker__btn:hover {
-    border-color: var(--mint);
-    color: var(--mint) !important;
-  }
-  .ug-th-picker__btn.is-active {
-    background: var(--mint);
-    border-color: var(--mint);
-    color: var(--navy-deep) !important;
-  }
-  .ug-th-picker__hint {
-    margin-left: auto;
-    font-size: 11px;
-    color: rgba(245, 248, 250, 0.45);
-  }
-  .ug-th-picker__hint code {
-    font-size: 11px;
-    color: var(--gold);
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .ug-feature__chev, .ug-back-to-top { transition: none; }
   }
@@ -1613,46 +1469,6 @@ const breadcrumbLd = breadcrumb([
         var top = target.getBoundingClientRect().top + window.scrollY - 156;
         window.scrollTo({ top: top, behavior: reduceMo ? 'auto' : 'smooth' });
         history.replaceState(null, '', '#ug-feature-' + fid);
-      });
-    });
-
-    /* ---- Pillar table header switch (?tableHeaders=current|subtle|none|alt) ----
-       Bare URL / missing / unknown → current (black boxes preserved). */
-    var TH_ALLOWED = { current: 1, subtle: 1, none: 1, alt: 1 };
-    var thRoot = document.querySelector('[data-ug-table-headers]');
-    var thParams = new URLSearchParams(window.location.search);
-    var thMode = thParams.get('tableHeaders') || 'current';
-    if (!TH_ALLOWED[thMode]) thMode = 'current';
-    function applyTh(mode) {
-      if (!thRoot) return;
-      thRoot.classList.remove('ug-th--current', 'ug-th--subtle', 'ug-th--none', 'ug-th--alt');
-      thRoot.classList.add('ug-th--' + mode);
-    }
-    applyTh(thMode);
-    var thBtns = Array.prototype.slice.call(document.querySelectorAll('[data-ug-th-picker] [data-th]'));
-    thBtns.forEach(function (btn) {
-      var h = btn.getAttribute('data-th');
-      if (h === thMode) btn.classList.add('is-active');
-      else btn.classList.remove('is-active');
-      btn.addEventListener('click', function (e) {
-        e.preventDefault();
-        var next = btn.getAttribute('data-th') || 'current';
-        if (!TH_ALLOWED[next]) next = 'current';
-        var url = new URL(window.location.href);
-        if (next === 'current') url.searchParams.delete('tableHeaders');
-        else url.searchParams.set('tableHeaders', next);
-        history.replaceState(null, '', url.pathname + url.search + url.hash);
-        applyTh(next);
-        thBtns.forEach(function (b) {
-          if (b.getAttribute('data-th') === next) b.classList.add('is-active');
-          else b.classList.remove('is-active');
-        });
-        /* Scroll pillars into view so Jane sees the change immediately */
-        var pillars = document.getElementById('ug-pillars');
-        if (pillars) {
-          var top = pillars.getBoundingClientRect().top + window.scrollY - 180;
-          window.scrollTo({ top: top, behavior: reduceMo ? 'auto' : 'smooth' });
-        }
       });
     });
 
