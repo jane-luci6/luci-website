@@ -333,21 +333,26 @@ const breadcrumbLd = breadcrumb([
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background: url('/images/mesh/luci-bg-hero-mesh-lines-1920x1080.svg') center / cover no-repeat;
-    mix-blend-mode: screen;
-    opacity: 0.4;
+    /* Flow C family — mesh + floorplan (with-plan), self-transparent over navy.
+       No mix-blend-mode: the asset carries its own transparency; screen would
+       blow out the floorplan raster. Scrim handles type legibility. */
+    background: url('/images/mesh/luci-bg-hero-with-plan-transparent-1920x1080.svg') center / cover no-repeat;
+    opacity: 0.82;
   }
   .ug-hero__scrim {
     position: absolute;
     inset: 0;
     z-index: 0;
     pointer-events: none;
+    /* Radial cloud behind the headline/CTAs — denser than the lines-only pass
+       (with-plan is denser), but still a cloud, not an opaque left panel, so
+       mesh + floorplan read through on the right. */
     background: radial-gradient(
-      ellipse 72% 70% at 38% 42%,
-      rgba(7, 15, 20, 0.72) 0%,
-      rgba(7, 15, 20, 0.45) 36%,
-      rgba(7, 15, 20, 0.16) 60%,
-      transparent 85%
+      ellipse 74% 72% at 36% 44%,
+      rgba(7, 15, 20, 0.82) 0%,
+      rgba(7, 15, 20, 0.52) 34%,
+      rgba(7, 15, 20, 0.20) 60%,
+      transparent 86%
     );
   }
   .ug-hero__inner {
