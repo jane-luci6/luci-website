@@ -11,8 +11,10 @@ type FeatureScenario = {
   id: string;
   label: string;
   line: string;
-  /** Optional card-header icon (public path); Thesis 1 Venue panels pilot */
-  icon?: string;
+  /** Optional full-bleed photo (public path); Thesis 1 Venue panels AI photo cards */
+  image?: string;
+  /** object-position for keeping hand/panel above the text scrim */
+  imagePosition?: string;
 };
 
 type FeatureDraft = {
@@ -281,25 +283,29 @@ export const upgradeGuide = {
           id: 'ballroom',
           label: 'Ballroom',
           line: 'Mount a wall panel so event staff control only that event space\u2019s endpoints. Require a PIN, then expose approved controls such as source, volume, mute, or power as the room needs.',
-          icon: '/images/upgrade-guide/venue-panels/use-case-ballroom.svg',
+          image: '/images/upgrade-guide/venue-panels/use-case-ballroom.jpg',
+          imagePosition: '50% 22%',
         },
         {
           id: 'cabana-pool',
           label: 'Cabana / pool',
           line: 'Mount a touch panel or place an iPad in each cabana so guests pick the channel for that cabana\u2019s screen only. Leave it open with tap-to-wake\u2014no PIN.',
-          icon: '/images/upgrade-guide/venue-panels/use-case-cabana-pool.svg',
+          image: '/images/upgrade-guide/venue-panels/use-case-cabana-pool.jpg',
+          imagePosition: '58% 18%',
         },
         {
           id: 'bar',
           label: 'Bar',
           line: 'Keep a tablet at the bar so bartenders adjust source and volume for that space\u2019s TVs. Hide power so the TVs stay on.',
-          icon: '/images/upgrade-guide/venue-panels/use-case-bar.svg',
+          image: '/images/upgrade-guide/venue-panels/use-case-bar.jpg',
+          imagePosition: '50% 24%',
         },
         {
           id: 'conference-media',
           label: 'Conference / media room',
           line: 'Place an iPad or mount a panel so staff switch that room\u2019s channel or device from a panel that starts with the room\u2019s endpoints\u2014nothing else on the property.',
-          icon: '/images/upgrade-guide/venue-panels/use-case-conference-media.svg',
+          image: '/images/upgrade-guide/venue-panels/use-case-conference-media.jpg',
+          imagePosition: '28% 18%',
         },
       ],
       limits: [
