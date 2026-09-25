@@ -166,12 +166,57 @@ const breadcrumbLd = breadcrumb([
                   <span class="ug-feature__chev" aria-hidden="true"></span>
                 </summary>
                 <div class="ug-feature__body">
-                  <p class="ug-feature__paragraph">{f.paragraph}</p>
-                  <ul class="ug-feature__benefits" role="list">
-                    {f.benefits.map((b) => (
-                      <li>{b}</li>
-                    ))}
-                  </ul>
+                  {f.scenarios && f.scenarios.length > 0 ? (
+                    <div class="ug-feature-deep">
+                      <section class="ug-feature-deep__section">
+                        <p class="ug-feature-deep__label">What it is</p>
+                        <p class="ug-feature__paragraph">{f.paragraph}</p>
+                      </section>
+                      <section class="ug-feature-deep__section">
+                        <p class="ug-feature-deep__label">{f.scenariosSubsectionLabel ?? 'Use cases on your property'}</p>
+                        <div class="ug-feature-scenarios">
+                          {f.scenarios.map((s) => (
+                            <div class="ug-feature-scenario">
+                              <p class="ug-feature-scenario__title">{s.label}</p>
+                              <p class="ug-feature-scenario__line">{s.line}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </section>
+                      {f.limits && f.limits.length > 0 && (
+                        <section class="ug-feature-deep__section">
+                          <p class="ug-feature-deep__label">Limits &amp; controls</p>
+                          <ul class="ug-feature-limits" role="list">
+                            {f.limits.map((l) => (
+                              <li>{l}</li>
+                            ))}
+                          </ul>
+                        </section>
+                      )}
+                      {/* Media slot — reserved at bottom of open detail (after limits, adjacent to IT jump).
+                          Hidden while media.kind === 'placeholder'. A future real media kind renders
+                          here in .ug-feature-media. NOT a Thesis 3 sticky side rail. */}
+                      {f.media && f.media.kind !== 'placeholder' && (
+                        <div class="ug-feature-media" data-feature-media-kind={f.media.kind}>
+                          {/* future real media kind renders here at bottom */}
+                        </div>
+                      )}
+                      {f.technicalJumpId && (
+                        <a class="ug-feature-itlink" href={`#ug-tech-item-${f.technicalJumpId}`}>
+                          Technical detail &rarr;
+                        </a>
+                      )}
+                    </div>
+                  ) : (
+                    <>
+                      <p class="ug-feature__paragraph">{f.paragraph}</p>
+                      <ul class="ug-feature__benefits" role="list">
+                        {f.benefits.map((b) => (
+                          <li>{b}</li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
                 </div>
               </details>
             ))}
@@ -798,6 +843,120 @@ const breadcrumbLd = breadcrumb([
     background: var(--accent-light);
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
+  }
+
+  /* ---------- 4b. FEATURE DEEP BODY — Thesis 1 (Venue panels pilot) ----------
+     Ported from mock .ug-mock--t1 chrome into production selectors. Tokens only
+     from locked system (mint accent, mint hairline, mint tint, fonts). No new
+     hues/shadows/icons. Fuller card body text allowed (line-height 1.5, no clamp). */
+  .ug-feature-deep {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    grid-column: 2;
+    max-width: 60ch;
+  }
+  @media (max-width: 719px) {
+    .ug-feature-deep { grid-column: 1; }
+  }
+  .ug-feature-deep__section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .ug-feature-deep__label {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin: 0;
+  }
+  /* Scenario card grid: 2-col at >=720px, 1-col mobile, gap 12px. */
+  .ug-feature-scenarios {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    align-items: stretch;
+  }
+  @media (min-width: 720px) {
+    .ug-feature-scenarios { grid-template-columns: 1fr 1fr; }
+  }
+  /* Mint tint fill + mint hairline border; no shadow. Cards taller OK (fuller beats). */
+  .ug-feature-scenario {
+    background: rgba(var(--mint-rgb), 0.06);
+    border: 1px solid rgba(var(--mint-rgb), 0.28);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .ug-feature-scenario__title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--ink-strong);
+    margin: 0;
+  }
+  .ug-feature-scenario__line {
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--navy-muted);
+    margin: 0;
+  }
+  /* Limits checklist — same mint check mask as benefits. */
+  .ug-feature-limits {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+  }
+  .ug-feature-limits li {
+    position: relative;
+    padding-left: 22px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 60ch;
+  }
+  .ug-feature-limits li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.3em;
+    width: 13px;
+    height: 13px;
+    background: var(--accent-light);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
+  }
+  /* IT jump — text link only, no button chrome. Underline on hover. */
+  .ug-feature-itlink {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--accent-light);
+    text-decoration: none;
+    align-self: flex-start;
+  }
+  .ug-feature-itlink:hover { text-decoration: underline; }
+  .ug-feature-itlink:focus-visible {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 3px;
+  }
+  /* Reserved media zone at bottom of open detail (after limits, adjacent to IT jump).
+     Hidden by default; a future real media kind renders here. NOT a Thesis 3 sticky rail. */
+  .ug-feature-media {
+    display: none;
   }
 
 </style>

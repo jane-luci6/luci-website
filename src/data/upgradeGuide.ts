@@ -7,6 +7,12 @@ type MediaPlaceholder = {
   label: string;
 };
 
+type FeatureScenario = {
+  id: string;
+  label: string;
+  line: string;
+};
+
 type FeatureDraft = {
   id: string;
   pillarId: 'room-control' | 'view-control' | 'security-control';
@@ -15,6 +21,12 @@ type FeatureDraft = {
   paragraph: string;
   benefits: readonly string[];
   media: MediaPlaceholder;
+  /** Thesis 1 pilot — when present, open body uses scenarios + limits instead of benefits list */
+  scenariosSubsectionLabel?: string;
+  scenarios?: readonly FeatureScenario[];
+  limits?: readonly string[];
+  /** When set, customer open body shows Technical detail jump to this tech item id */
+  technicalJumpId?: string;
 };
 
 type UpgradeGuideDraft = {
@@ -255,20 +267,44 @@ export const upgradeGuide = {
       oneLiner:
         'Venue panels give operators a simple view of only the room—or rooms—they need, with only the controls approved for that space.',
       paragraph:
-        'Put focused room control where the work happens: on a wall touchscreen in a ballroom, a tablet at a bar, or an iPad by a cabana. Each panel starts with the endpoints assigned to its venue, then an administrator chooses which devices, actions, and sources appear. Staff panels can require a PIN, while guest-facing panels can stay open. Operators get a basic panel or list interface without access to the main LUCI application.',
-      benefits: [
-        'Shows operators only the room or rooms that panel is for',
-        'Starts with the endpoints already assigned to the venue',
-        'Allows source or volume control while keeping actions such as power out of reach',
-        'Limits source choices to an approved list',
-        'Supports a PIN for staff or open, tap-to-wake access for guests',
-        'Works on dedicated wall touchscreens and paired browsers or iPads',
-        'Fits the typical one-panel-per-room setup, or a couple of rooms when needed',
-      ],
+        'Venue panels provide a basic panel or list interface without opening the full LUCI application. Each panel starts with the endpoints assigned to its venue, and an administrator chooses which devices, actions, and sources appear.',
+      benefits: [],
       media: {
         kind: 'placeholder',
         label: 'Venue panel controls — screenshot placeholder',
       },
+      scenariosSubsectionLabel: 'Use cases on your property',
+      scenarios: [
+        {
+          id: 'ballroom',
+          label: 'Ballroom',
+          line: 'Mount a wall panel in the ballroom so event staff can control only the endpoints assigned to that event space. Require a PIN for staff access, then make approved controls such as source, volume, mute, or power available as the room requires.',
+        },
+        {
+          id: 'cabana-pool',
+          label: 'Cabana / pool',
+          line: "Mount a touch panel or place an iPad in each cabana so guests can choose the channel for that cabana's screen without seeing or changing another space. Leave it open with tap-to-wake—no PIN required—for guest-facing use.",
+        },
+        {
+          id: 'bar',
+          label: 'Bar',
+          line: 'Keep a tablet at the bar so bartenders can adjust the source and volume for the TVs in that space. Scope the panel to the bar and hide power, so the TVs stay on while staff get only the controls they need.',
+        },
+        {
+          id: 'conference-media',
+          label: 'Conference / media room',
+          line: "Place an iPad in a conference room or mount a panel in a media room for localized control by staff. They can switch the room's channel or device from a simple panel that starts with the endpoints assigned to that room, without seeing controls for the rest of the property.",
+        },
+      ],
+      limits: [
+        'Show operators only the room or rooms assigned to that panel.',
+        'Hide individual actions, such as power, while leaving source and volume available.',
+        'Limit source choices to an approved list.',
+        'Require a PIN for staff or leave a guest-facing panel open with tap-to-wake.',
+        'Use a dedicated wall touchscreen or a paired tablet, iPad, or browser.',
+        'Plan for one panel per room in most cases, or a couple of rooms when needed.',
+      ],
+      technicalJumpId: 'technical-venue-panels',
     },
     {
       id: 'staging',
