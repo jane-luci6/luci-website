@@ -1,16 +1,15 @@
 ---
 /**
  * PREVIEW MOCK — Upgrade Guide as FAG-style standalone asset.
- * One in-asset sticky nav (back + nested chapter dropdowns). No site Header/Footer.
+ * One in-asset sticky nav (nested chapter dropdowns). No site Header/Footer.
  * Features = always-open sections. Technical + FAQ = accordion only.
- * Jane lock 2026-09-25 (GLM design pass: nested dropdowns replace the awkward
- * wrapping feature-pill row). Do NOT replace live /luci-upgrade-guide/ accordion yet.
+ * Jane 2026-09-25: keep nested Features/Technical/FAQ IA; restore lighter pre-GLM
+ * chrome/spacing; no back-to-landing CTAs. Do NOT replace live /luci-upgrade-guide/ yet.
  */
 import AssetLayout from '../../layouts/AssetLayout.astro';
 import { upgradeGuide } from '../../data/upgradeGuide';
 
 const { features, pillars, technical, faq, hero, meta } = upgradeGuide;
-const landingHref = '/luci-upgrade-guide-asset-mock/';
 const liveHref = '/luci-upgrade-guide/';
 
 const featuresByPillar = (pillarId: string) => features.filter((f) => f.pillarId === pillarId);
@@ -40,24 +39,15 @@ const techGroupLinks = technical.groups.map((g) => ({
         <span class="ug-asset-banner__tag">PREVIEW MOCK</span>
         <span>
           Standalone asset — one sticky nav, no site chrome. Waiting on Jane before live cutover.
-          <a href={landingHref}>Landing</a>
           <span aria-hidden="true"> · </span>
           <a href={liveHref}>Live accordion</a>
         </span>
       </div>
     </div>
 
-    {/* ─── ONE in-asset sticky nav — single row, nested dropdowns (FAG-quality chrome) ─── */}
+    {/* ─── ONE in-asset sticky nav — nested dropdowns, lighter pre-GLM chrome ─── */}
     <nav class="ug-asset-nav" aria-label="Upgrade Guide sections" data-ug-asset-nav>
       <div class="ug-asset-nav__inner">
-        <a class="ug-asset-nav__back" href={landingHref}>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
-            <path d="M15 18l-6-6 6-6"></path>
-          </svg>
-          Landing
-        </a>
-        <span class="ug-asset-nav__divider" aria-hidden="true"></span>
-
         <div class="ug-asset-nav__chapters">
           {/* Features — disclosure listing all 10 features */}
           <div class="ug-asset-nav__menu" data-ug-menu="ug-features">
@@ -318,7 +308,7 @@ const techGroupLinks = technical.groups.map((g) => ({
 
     <footer class="ug-asset-foot">
       <div class="ug-asset-wrap">
-        <a href={landingHref}>&larr; Back to landing mock</a>
+        Preview mock only — live accordion unchanged.
         <span aria-hidden="true"> · </span>
         <a href={liveHref}>Live site guide</a>
       </div>
@@ -512,7 +502,7 @@ const techGroupLinks = technical.groups.map((g) => ({
     font-weight: 700;
   }
 
-  /* ===== ONE sticky nav — top:0 (no site header) — single row + nested dropdowns ===== */
+  /* ===== ONE sticky nav — top:0; pre-GLM light chrome + nested dropdowns ===== */
   .ug-asset-nav {
     position: sticky;
     top: 0;
@@ -526,58 +516,26 @@ const techGroupLinks = technical.groups.map((g) => ({
   .ug-asset-nav__inner {
     max-width: 1080px;
     margin: 0 auto;
-    padding: 12px 24px;
+    padding: 14px 24px;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 12px 14px;
     flex-wrap: nowrap;
-  }
-  .ug-asset-nav__back {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    min-height: 40px;
-    padding: 8px 14px;
-    border-radius: 4px;
-    border: 1px solid rgba(235, 245, 248, 0.16);
-    background: rgba(235, 245, 248, 0.05);
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--mint);
-    text-decoration: none;
-    white-space: nowrap;
-    transition: color 0.18s, background 0.18s, border-color 0.18s;
-  }
-  .ug-asset-nav__back svg { width: 14px; height: 14px; }
-  .ug-asset-nav__back:hover {
-    color: var(--navy-deep, #0a161c);
-    background: var(--mint);
-    border-color: var(--mint);
-  }
-  .ug-asset-nav__divider {
-    width: 1px;
-    align-self: stretch;
-    min-height: 26px;
-    background: rgba(235, 245, 248, 0.14);
-    flex: 0 0 auto;
   }
   .ug-asset-nav__chapters {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     flex: 1 1 auto;
     min-width: 0;
   }
-  /* Top-level chapter controls — solid FAG-style chips, one chrome language */
+  /* Top-level chapter controls — pre-GLM chip chrome + nested triggers */
   .ug-asset-nav__chapter {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    min-height: 40px;
-    padding: 8px 14px;
+    min-height: 36px;
+    padding: 8px 12px;
     border-radius: 4px;
     border: 1px solid rgba(235, 245, 248, 0.12);
     background: rgba(235, 245, 248, 0.05);
@@ -595,7 +553,6 @@ const techGroupLinks = technical.groups.map((g) => ({
   .ug-asset-nav__chapter:hover {
     color: var(--off-white);
     border-color: rgba(235, 245, 248, 0.28);
-    background: rgba(235, 245, 248, 0.1);
   }
   .ug-asset-nav__chapter.is-active {
     color: var(--navy-deep, #0a161c);
@@ -623,15 +580,15 @@ const techGroupLinks = technical.groups.map((g) => ({
   }
   .ug-asset-nav__panel {
     position: absolute;
-    top: calc(100% + 8px);
+    top: calc(100% + 6px);
     left: 0;
     z-index: 60;
-    min-width: 260px;
-    max-width: min(360px, 90vw);
-    background: rgba(12, 28, 36, 0.98);
-    border: 1px solid rgba(43, 158, 128, 0.28);
-    border-radius: 10px;
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+    min-width: 240px;
+    max-width: min(340px, 90vw);
+    background: rgba(10, 22, 28, 0.96);
+    border: 1px solid rgba(235, 245, 248, 0.12);
+    border-radius: 4px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
     backdrop-filter: blur(14px) saturate(140%);
     -webkit-backdrop-filter: blur(14px) saturate(140%);
     padding: 6px;
@@ -674,10 +631,7 @@ const techGroupLinks = technical.groups.map((g) => ({
   .ug-asset-nav__item-name { flex: 1 1 auto; min-width: 0; }
 
   @media (max-width: 760px) {
-    .ug-asset-nav__inner { padding: 10px 16px; gap: 8px; }
-    .ug-asset-nav__divider { display: none; }
-    .ug-asset-nav__back { min-height: 36px; padding: 7px 10px; font-size: 11px; letter-spacing: 0.1em; }
-    .ug-asset-nav__back svg { width: 12px; height: 12px; }
+    .ug-asset-nav__inner { padding: 12px 16px; gap: 10px; }
     .ug-asset-nav__chapters { gap: 6px; }
     .ug-asset-nav__chapter { min-height: 36px; padding: 7px 10px; font-size: 11px; letter-spacing: 0.04em; }
     .ug-asset-nav__chev { width: 11px; height: 11px; }
@@ -688,10 +642,10 @@ const techGroupLinks = technical.groups.map((g) => ({
       min-width: 0;
       max-width: none;
       width: auto;
-      border-radius: 0 0 10px 10px;
+      border-radius: 0 0 4px 4px;
       border-left: 0;
       border-right: 0;
-      border-top: 1px solid rgba(43, 158, 128, 0.28);
+      border-top: 1px solid rgba(235, 245, 248, 0.12);
     }
   }
 
@@ -713,7 +667,7 @@ const techGroupLinks = technical.groups.map((g) => ({
 
   /* ===== Intro / sections ===== */
   .ug-asset-intro {
-    padding: clamp(28px, 4vw, 44px) 0 24px;
+    padding: clamp(36px, 5vw, 56px) 0 28px;
     border-bottom: 1px solid var(--ug-rule);
   }
   .ug-asset-kicker {
@@ -760,7 +714,7 @@ const techGroupLinks = technical.groups.map((g) => ({
     margin: 10px 0 20px;
   }
   .ug-asset-sec {
-    padding: clamp(28px, 4vw, 44px) 0;
+    padding: clamp(36px, 5vw, 56px) 0;
     border-bottom: 1px solid var(--ug-rule);
   }
   .ug-asset-sec--tech,
