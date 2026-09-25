@@ -1,0 +1,10 @@
+Wrote the lock to `.tmp-weatherby/feature-ux-mock-claude-lock.md`. No production files touched.
+
+What it pins down:
+
+- **Shared layer** — reuses only existing tokens (mint accent, the two hairlines, ink/navy-muted, the two font vars), anchors every mock block to grid-column 2 of `.ug-feature__body` so it lines up with the current paragraph and benefits, and sets one type scale plus a label→content→section spacing rhythm for all three theses.
+- **Thesis 1** — `.ug-mock-cards` 2-up grid at ≥720px, mint-tint cards with a mint hairline, 10px radius, 14/16px padding, four cards max, no icons, limits checklist reusing the existing mint check mask.
+- **Thesis 2** — `.ug-mock-beats` chips at 30px height borrowing the `.ug-expand-toggle` pill language (transparent fill, mint border), with a compact `Label — line` fallback if labels wrap. Deliberately lighter than Thesis 1, limits capped at 3–4.
+- **Thesis 3** — `.ug-mock-split` two-column at ≥900px with a sticky rail (`top: 96px`) holding a 16:9 empty "Panel UI" frame; below 900px it goes static and the frame drops in after the limits checklist.
+
+Breakpoints are 720px (grid alignment, cards go 2-up) and 900px (Thesis 3 split/sticky only), with nothing above that. The "do not change" list covers closed-state chrome, all production `.ug-feature*` CSS, mint-wash lockups, Expand all, deep links, and the live page and data file. Every copy string is marked MOCK COPY for GPT's later pass.

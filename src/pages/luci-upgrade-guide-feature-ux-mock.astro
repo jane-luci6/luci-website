@@ -1,0 +1,831 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionBlock from '../components/SectionBlock.astro';
+import { breadcrumb } from '../data/seo';
+import {
+  closedChrome,
+  itLink,
+  whatItIs,
+  scenarios,
+  limits,
+  beats,
+  mediaCaption,
+} from '../data/upgradeGuideFeatureUxMock';
+
+const meta = {
+  path: '/luci-upgrade-guide-feature-ux-mock',
+  title: 'Feature deep-dive UX mock (preview) | LUCI Systems',
+  description:
+    'Preview-only mock of three UX theses for the Venue panels feature deep-dive. Not a live page.',
+};
+
+const breadcrumbLd = breadcrumb([
+  { name: 'Home', path: '/' },
+  { name: 'New LUCI Upgrade Guide', path: '/luci-upgrade-guide' },
+  { name: 'Feature UX mock (preview)', path: meta.path },
+]);
+
+const theses = [
+  { id: 1, label: 'Thesis 1', sublabel: 'Scenario cards' },
+  { id: 2, label: 'Thesis 2', sublabel: 'Story beats' },
+  { id: 3, label: 'Thesis 3', sublabel: 'Split + media rail' },
+] as const;
+---
+
+<BaseLayout
+  title={meta.title.replace(' | LUCI Systems', '')}
+  description={meta.description}
+  canonicalPath={meta.path}
+  noindex
+  jsonLd={breadcrumbLd}
+  darkHeader
+>
+  <h1 class="ug-sr-only">{meta.title}</h1>
+
+  {/* ───────── PREVIEW BANNER ───────── */}
+  <div class="ug-mock-banner" role="status" aria-live="polite">
+    <div class="ug-mock-banner__inner container container--wide">
+      <span class="ug-mock-banner__tag" aria-hidden="true">PREVIEW MOCK</span>
+      <span class="ug-mock-banner__copy">
+        <strong>PREVIEW MOCK &mdash; not live.</strong> Pick a thesis in chat with Weatherby.
+        <a class="ug-mock-banner__link" href="/luci-upgrade-guide/">Back to live guide &rarr;</a>
+      </span>
+    </div>
+  </div>
+
+  {/* ───────── STICKY THESIS SWITCHER ───────── */}
+  <nav class="ug-mock-switcher" aria-label="Thesis switcher" data-thesis-switcher>
+    <div class="ug-mock-switcher__inner container container--wide">
+      <span class="ug-mock-switcher__title">Venue panels &mdash; open-body thesis</span>
+      <div class="ug-mock-switcher__btns" role="tablist" aria-label="Pick a thesis">
+        {theses.map((t) => (
+          <button
+            type="button"
+            class="ug-mock-switcher__btn"
+            data-thesis-btn={t.id}
+            role="tab"
+            aria-selected={t.id === 1 ? 'true' : 'false'}
+            aria-controls={`ug-mock-thesis-${t.id}`}
+          >
+            <span class="ug-mock-switcher__num">{t.id}</span>
+            <span class="ug-mock-switcher__lbl">
+              <span class="ug-mock-switcher__name">{t.label}</span>
+              <span class="ug-mock-switcher__sub">{t.sublabel}</span>
+            </span>
+          </button>
+        ))}
+      </div>
+    </div>
+  </nav>
+
+  {/* ───────── FEATURE BODY — three theses, one visible at a time ───────── */}
+  <SectionBlock
+    id="ug-mock-features"
+    lockupName="Feature <em>deep-dive</em> mock"
+    lockupRole="Preview only — pick a thesis above"
+    tone="deep"
+    wide
+  >
+    <div class="ug-deepdive ug-mock-deepdive">
+      {theses.map((t, idx) => (
+        <div
+          class:list={['ug-mock-thesis', { 'is-active': idx === 0 }]}
+          id={`ug-mock-thesis-${t.id}`}
+          data-thesis={t.id}
+          role="tabpanel"
+          aria-label={`${t.label} — ${t.sublabel}`}
+          hidden={idx !== 0}
+        >
+          <details class="ug-feature" open data-mock-feature>
+            <summary class="ug-feature__summary">
+              <span class="ug-feature__name">{closedChrome.name}</span>
+              <span class="ug-feature__liner">{closedChrome.oneLiner}</span>
+              <span class="ug-feature__chev" aria-hidden="true"></span>
+            </summary>
+            <div class="ug-feature__body">
+              {t.id === 1 && (
+                <div class="ug-mock-body ug-mock--t1">
+                  <section class="ug-mock-section">
+                    <p class="ug-mock-label">What it is</p>
+                    <p class="ug-mock-lede">{whatItIs} <span class="ug-mock-flag">MOCK COPY</span></p>
+                  </section>
+                  <section class="ug-mock-section">
+                    <p class="ug-mock-label">On your property</p>
+                    <div class="ug-mock-cards">
+                      {scenarios.map((s) => (
+                        <div class="ug-mock-card">
+                          <p class="ug-mock-card__title">{s.title}</p>
+                          <p class="ug-mock-card__line">{s.line}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                  <section class="ug-mock-section">
+                    <p class="ug-mock-label">Limits &amp; controls</p>
+                    <ul class="ug-mock-limits" role="list">
+                      {limits.map((l) => (
+                        <li>{l}</li>
+                      ))}
+                    </ul>
+                  </section>
+                  <a class="ug-mock-itlink" href={itLink.href}>
+                    {itLink.label}
+                    <span class="ug-mock-flag ug-mock-flag--inline">MOCK COPY</span>
+                  </a>
+                </div>
+              )}
+
+              {t.id === 2 && (
+                <div class="ug-mock-body ug-mock--t2">
+                  <section class="ug-mock-section">
+                    <p class="ug-mock-label">What it is</p>
+                    <p class="ug-mock-lede">{whatItIs} <span class="ug-mock-flag">MOCK COPY</span></p>
+                  </section>
+                  <section class="ug-mock-section">
+                    <p class="ug-mock-label">Where it shows up</p>
+                    <ul class="ug-mock-beatlines" role="list">
+                      {beats.map((b) => (
+                        <li class="ug-mock-beatline">
+                          <span class="ug-mock-beatline__label">{b.label}</span>
+                          <span class="ug-mock-beatline__line">{b.line}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                  <section class="ug-mock-section">
+                    <p class="ug-mock-label">What you can limit</p>
+                    <ul class="ug-mock-limits" role="list">
+                      {limits.slice(0, 4).map((l) => (
+                        <li>{l}</li>
+                      ))}
+                    </ul>
+                  </section>
+                  <a class="ug-mock-itlink" href={itLink.href}>
+                    {itLink.label}
+                    <span class="ug-mock-flag ug-mock-flag--inline">MOCK COPY</span>
+                  </a>
+                </div>
+              )}
+
+              {t.id === 3 && (
+                <div class="ug-mock-body ug-mock--t3">
+                  <div class="ug-mock-split">
+                    <div class="ug-mock-split__main">
+                      <section class="ug-mock-section">
+                        <p class="ug-mock-label">What it is</p>
+                        <p class="ug-mock-lede">{whatItIs} <span class="ug-mock-flag">MOCK COPY</span></p>
+                      </section>
+                      <section class="ug-mock-section">
+                        <p class="ug-mock-label">On your property</p>
+                        <div class="ug-mock-cards">
+                          {scenarios.map((s) => (
+                            <div class="ug-mock-card">
+                              <p class="ug-mock-card__title">{s.title}</p>
+                              <p class="ug-mock-card__line">{s.line}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </section>
+                      <section class="ug-mock-section">
+                        <p class="ug-mock-label">Limits &amp; controls</p>
+                        <ul class="ug-mock-limits" role="list">
+                          {limits.map((l) => (
+                            <li>{l}</li>
+                          ))}
+                        </ul>
+                      </section>
+                    </div>
+                    <aside class="ug-mock-split__rail" aria-label="Panel UI placeholder">
+                      <div class="ug-mock-media">
+                        <div class="ug-mock-media__frame" aria-hidden="true">
+                          <span class="ug-mock-media__label">Panel UI</span>
+                        </div>
+                        <p class="ug-mock-media__caption">{mediaCaption} <span class="ug-mock-flag">MOCK COPY</span></p>
+                      </div>
+                    </aside>
+                  </div>
+                  <a class="ug-mock-itlink" href={itLink.href}>
+                    {itLink.label}
+                    <span class="ug-mock-flag ug-mock-flag--inline">MOCK COPY</span>
+                  </a>
+                </div>
+              )}
+            </div>
+          </details>
+        </div>
+      ))}
+    </div>
+
+    {/* ───────── Stacked compare-all fallback (collapsed by default) ───────── */}
+    <details class="ug-mock-compareall">
+      <summary>Compare all three theses (stacked)</summary>
+      <p class="ug-mock-compareall__note">
+        Same closed chrome and same MOCK COPY stubs as the switcher above, shown stacked for print/scan.
+        Switcher is the primary view. <span class="ug-mock-flag">MOCK COPY</span>
+      </p>
+      {theses.map((t) => (
+        <div class="ug-mock-compareall__row">
+          <h3 class="ug-mock-compareall__h">{t.label} &mdash; {t.sublabel}</h3>
+          <p class="ug-mock-compareall__desc">
+            {t.id === 1 && 'What it is → On your property 2×2 card grid → Limits & controls checklist → Technical detail link.'}
+            {t.id === 2 && 'What it is (2 short sentences) → Where it shows up as labeled beat lines → 3–4 limit bullets → Technical detail text link.'}
+            {t.id === 3 && 'Desktop: main (cards + limits) + sticky right media frame. Mobile: stack content → frame → IT link.'}
+          </p>
+        </div>
+      ))}
+    </details>
+
+    <p class="ug-mock-foot">
+      <a class="ug-mock-foot__link" href="/luci-upgrade-guide/">&larr; Back to live Upgrade Guide</a>
+      <span class="ug-mock-foot__sep" aria-hidden="true">&middot;</span>
+      <a class="ug-mock-foot__link" href="/luci-upgrade-guide/#ug-feature-venue-panels">Live Venue panels accordion</a>
+      <span class="ug-mock-foot__sep" aria-hidden="true">&middot;</span>
+      <a class="ug-mock-foot__link" href={itLink.href}>{itLink.label}</a>
+    </p>
+  </SectionBlock>
+</BaseLayout>
+
+<style>
+  /* ───────── sr-only ───────── */
+  .ug-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ───────── PREVIEW BANNER ───────── */
+  .ug-mock-banner {
+    background: #2a1a06;
+    color: var(--off-white);
+    border-bottom: 1px solid rgba(237, 208, 134, 0.4);
+  }
+  .ug-mock-banner__inner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px var(--page-pad);
+    flex-wrap: wrap;
+  }
+  .ug-mock-banner__tag {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #1c2b33;
+    background: var(--gold);
+    border-radius: 9999px;
+    padding: 3px 10px 2px;
+    line-height: 1.2;
+    flex: none;
+  }
+  .ug-mock-banner__copy {
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: rgba(245, 248, 250, 0.86);
+  }
+  .ug-mock-banner__copy strong { color: var(--gold); }
+  .ug-mock-banner__link {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(237, 208, 134, 0.4);
+    margin-left: 4px;
+  }
+  .ug-mock-banner__link:hover { border-bottom-color: var(--gold); }
+
+  /* ───────── STICKY THESIS SWITCHER ───────── */
+  .ug-mock-switcher {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background: rgba(8, 19, 24, 0.96);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(var(--mint-rgb), 0.28);
+  }
+  .ug-mock-switcher__inner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px var(--page-pad);
+    flex-wrap: wrap;
+  }
+  .ug-mock-switcher__title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mint);
+    flex: none;
+  }
+  .ug-mock-switcher__btns {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-left: auto;
+  }
+  .ug-mock-switcher__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px 8px 10px;
+    border-radius: 9999px;
+    border: 1px solid rgba(var(--mint-rgb), 0.32);
+    background: transparent;
+    color: rgba(245, 248, 250, 0.78);
+    cursor: pointer;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    font-family: var(--font-head);
+  }
+  .ug-mock-switcher__btn:hover {
+    background: rgba(var(--mint-rgb), 0.12);
+    color: var(--off-white);
+  }
+  .ug-mock-switcher__btn[aria-selected='true'] {
+    background: var(--mint);
+    border-color: var(--mint);
+    color: #081318;
+  }
+  .ug-mock-switcher__num {
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 9999px;
+    border: 1px solid rgba(var(--mint-rgb), 0.5);
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 1;
+    flex: none;
+  }
+  .ug-mock-switcher__btn[aria-selected='true'] .ug-mock-switcher__num {
+    border-color: #081318;
+    background: #081318;
+    color: var(--mint);
+  }
+  .ug-mock-switcher__lbl {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    text-align: left;
+  }
+  .ug-mock-switcher__name {
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+  }
+  .ug-mock-switcher__sub {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    opacity: 0.78;
+  }
+
+  /* ───────── DEEPDIVE WRAPPER (mirrors live .ug-deepdive) ───────── */
+  .ug-mock-deepdive {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 2.4vw, 32px);
+    max-width: var(--content-wide);
+    margin-top: var(--space-2);
+    padding: clamp(20px, 2.4vw, 32px);
+    border-radius: 12px;
+    background: var(--off-white);
+    color: var(--ink);
+  }
+  .ug-mock-thesis { display: block; }
+  .ug-mock-thesis[hidden] { display: none; }
+
+  /* ───────── CLOSED CHROME — replicate .ug-feature (scoped, not overriding prod) ───────── */
+  .ug-feature {
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .ug-feature:last-child { border-bottom: 0; }
+  .ug-feature__summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 20px 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    position: relative;
+  }
+  .ug-feature__summary::-webkit-details-marker { display: none; }
+  .ug-feature__summary:focus-visible {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 4px;
+  }
+  @media (min-width: 720px) {
+    .ug-feature__summary {
+      grid-template-columns: minmax(160px, 220px) 1fr 24px;
+      gap: 24px;
+      align-items: baseline;
+    }
+  }
+  .ug-feature[open] .ug-feature__summary { padding-bottom: 12px; }
+  .ug-feature__name {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(16px, 1.8vw, 18px);
+    letter-spacing: -0.01em;
+    color: var(--ink-strong);
+  }
+  .ug-feature__liner {
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--navy-muted);
+  }
+  .ug-feature__chev {
+    align-self: center;
+    width: 14px;
+    height: 14px;
+    flex: none;
+    transition: transform 0.2s ease;
+    background: linear-gradient(135deg, transparent 47%, var(--accent-light) 47%, var(--accent-light) 53%, transparent 53%),
+                linear-gradient(45deg, transparent 47%, var(--accent-light) 47%, var(--accent-light) 53%, transparent 53%);
+  }
+  .ug-feature[open] .ug-feature__chev { transform: rotate(90deg); }
+  .ug-feature__body {
+    padding: 0 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    border-top: 1px solid var(--rule-light);
+    padding-top: 16px;
+  }
+  @media (min-width: 720px) {
+    .ug-feature__body {
+      display: grid;
+      grid-template-columns: minmax(160px, 220px) 1fr 24px;
+      column-gap: 24px;
+      row-gap: 14px;
+      padding: 16px 0 28px;
+      align-items: start;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ug-feature__chev { transition: none; }
+  }
+</style>
+
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     MOCK OPEN-BODY STYLES — .ug-mock-* (per Claude visual lock)
+     No new tokens, no shadows, no new accent hues. Mint + two hairlines only.
+     All copy is MOCK COPY stub from audit facts.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* Shared: mock body wrapper lives in grid-column 2 of .ug-feature__body
+     at ≥720px (same column the paragraph/benefits use). Below that, flex col. */
+  .ug-mock-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    grid-column: 2;
+    max-width: 60ch;
+  }
+  @media (max-width: 719px) {
+    .ug-mock-body { grid-column: 1; }
+  }
+
+  .ug-mock-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* Subsection label: 11px/700/0.08em uppercase, mint, --font-head */
+  .ug-mock-label {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin: 0;
+  }
+
+  /* Lede: 14px/1.5 --font-body --ink */
+  .ug-mock-lede {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink);
+    margin: 0;
+    max-width: 60ch;
+  }
+
+  /* MOCK COPY flag — small mint hairline pill, low-key */
+  .ug-mock-flag {
+    display: inline-block;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    border: 1px solid rgba(var(--mint-rgb), 0.4);
+    border-radius: 9999px;
+    padding: 1px 6px 0;
+    line-height: 1.4;
+    vertical-align: middle;
+    margin-left: 6px;
+    background: rgba(var(--mint-rgb), 0.06);
+  }
+  .ug-mock-flag--inline { margin-left: 10px; }
+
+  /* Limits checklist — reuses .ug-feature__benefits mint check mask verbatim */
+  .ug-mock-limits {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+  }
+  .ug-mock-limits li {
+    position: relative;
+    padding-left: 22px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 60ch;
+  }
+  .ug-mock-limits li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.3em;
+    width: 13px;
+    height: 13px;
+    background: var(--accent-light);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
+  }
+
+  /* IT footer link: 13px --font-head, 600, --accent-light, no button chrome,
+     16px top margin, underline on hover only. */
+  .ug-mock-itlink {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--accent-light);
+    text-decoration: none;
+    align-self: flex-start;
+  }
+  .ug-mock-itlink:hover { text-decoration: underline; }
+
+  /* ───────── Thesis 1 — Scenario cards ───────── */
+  .ug-mock-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    align-items: stretch;
+  }
+  @media (min-width: 720px) {
+    .ug-mock-cards { grid-template-columns: 1fr 1fr; }
+  }
+  .ug-mock-card {
+    fill: rgba(var(--mint-rgb), 0.06);
+    background: rgba(var(--mint-rgb), 0.06);
+    border: 1px solid rgba(var(--mint-rgb), 0.28);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .ug-mock-card__title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--ink-strong);
+    margin: 0;
+  }
+  .ug-mock-card__line {
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--navy-muted);
+    margin: 0;
+  }
+
+  /* ───────── Thesis 2 — Story-beat lines (alternate chip form not used) ───────── */
+  .ug-mock-beatlines {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+  }
+  .ug-mock-beatline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .ug-mock-beatline__label {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--accent-light);
+    flex: none;
+  }
+  .ug-mock-beatline__line {
+    color: var(--ink);
+    max-width: 56ch;
+  }
+
+  /* ───────── Thesis 3 — Split with sticky media frame ───────── */
+  .ug-mock-split {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  @media (min-width: 900px) {
+    .ug-mock-split {
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+      column-gap: 28px;
+      align-items: start;
+    }
+    .ug-mock-split__rail {
+      position: sticky;
+      top: 96px;
+      align-self: start;
+    }
+  }
+  .ug-mock-split__main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .ug-mock-media {
+    display: flex;
+    flex-direction: column;
+  }
+  .ug-mock-media__frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border: 1px solid var(--rule-light);
+    border-radius: 10px;
+    background: rgba(var(--mint-rgb), 0.06);
+    display: grid;
+    place-items: center;
+  }
+  .ug-mock-media__label {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--navy-muted);
+  }
+  .ug-mock-media__caption {
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--navy-muted);
+    margin: 8px 0 0;
+  }
+  @media (max-width: 899px) {
+    .ug-mock-media { max-width: 420px; }
+  }
+
+  /* ───────── Compare-all stacked fallback ───────── */
+  .ug-mock-compareall {
+    margin-top: clamp(20px, 2.4vw, 32px);
+    max-width: var(--content-wide);
+    background: rgba(var(--mint-rgb), 0.04);
+    border: 1px dashed rgba(var(--mint-rgb), 0.3);
+    border-radius: 8px;
+    padding: 14px 18px;
+  }
+  .ug-mock-compareall summary {
+    cursor: pointer;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    list-style: none;
+  }
+  .ug-mock-compareall summary::-webkit-details-marker { display: none; }
+  .ug-mock-compareall summary::before { content: '\25B6 '; font-size: 9px; margin-right: 6px; }
+  .ug-mock-compareall[open] summary::before { content: '\25BC '; }
+  .ug-mock-compareall__note {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--navy-muted);
+    margin: 12px 0 8px;
+  }
+  .ug-mock-compareall__row {
+    border-top: 1px solid rgba(var(--mint-rgb), 0.18);
+    padding: 12px 0;
+  }
+  .ug-mock-compareall__row:first-of-type { border-top: 0; }
+  .ug-mock-compareall__h {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--ink-strong);
+    margin: 0 0 4px;
+  }
+  .ug-mock-compareall__desc {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0;
+    max-width: 64ch;
+  }
+
+  /* ───────── Footer links ───────── */
+  .ug-mock-foot {
+    max-width: var(--content-wide);
+    margin-top: clamp(20px, 2.4vw, 32px);
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--navy-muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+  .ug-mock-foot__link {
+    color: var(--accent-light);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(var(--mint-rgb), 0.3);
+  }
+  .ug-mock-foot__link:hover { border-bottom-color: var(--accent-light); }
+  .ug-mock-foot__sep { color: rgba(var(--mint-rgb), 0.5); }
+</style>
+
+<script>
+  (function () {
+    var switcher = document.querySelector('[data-thesis-switcher]');
+    if (!switcher) return;
+    var btns = Array.prototype.slice.call(switcher.querySelectorAll('[data-thesis-btn]'));
+    var panels = Array.prototype.slice.call(document.querySelectorAll('.ug-mock-thesis'));
+
+    function activate(id, opts) {
+      var opts = opts || {};
+      btns.forEach(function (b) {
+        var match = String(b.getAttribute('data-thesis-btn')) === String(id);
+        b.setAttribute('aria-selected', match ? 'true' : 'false');
+      });
+      panels.forEach(function (p) {
+        var match = String(p.getAttribute('data-thesis')) === String(id);
+        if (match) {
+          p.removeAttribute('hidden');
+          p.classList.add('is-active');
+        } else {
+          p.setAttribute('hidden', '');
+          p.classList.remove('is-active');
+        }
+      });
+      if (!opts.skipHistory) {
+        var url = new URL(window.location.href);
+        url.searchParams.set('thesis', String(id));
+        window.history.replaceState(null, '', url.toString());
+      }
+    }
+
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        activate(b.getAttribute('data-thesis-btn'));
+      });
+    });
+
+    // Deep-link: ?thesis=1|2|3 wins; else #thesis-N hash; else default 1.
+    var params = new URLSearchParams(window.location.search);
+    var requested = params.get('thesis');
+    if (!requested) {
+      var hash = window.location.hash.replace(/^#thesis-/, '');
+      if (/^[1-3]$/.test(hash)) requested = hash;
+    }
+    if (requested && /^[1-3]$/.test(requested)) {
+      activate(requested, { skipHistory: true });
+    } else {
+      activate(1, { skipHistory: true });
+    }
+  })();
+</script>
