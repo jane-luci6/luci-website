@@ -11,6 +11,8 @@ type FeatureScenario = {
   id: string;
   label: string;
   line: string;
+  /** Optional card-header icon (public path); Thesis 1 Venue panels pilot */
+  icon?: string;
 };
 
 type FeatureDraft = {
@@ -267,7 +269,7 @@ export const upgradeGuide = {
       oneLiner:
         'Venue panels give operators a simple view of only the room—or rooms—they need, with only the controls approved for that space.',
       paragraph:
-        'Put focused room control where the work happens: on a wall touchscreen in a ballroom, a tablet at a bar, or an iPad by a cabana. Each panel starts with the endpoints assigned to its venue, then an administrator chooses which devices, actions, and sources appear. Staff panels can require a PIN, while guest-facing panels can stay open. Operators get a basic panel or list interface without access to the main LUCI application.',
+        'Put focused room control where the work happens. Each panel starts with the endpoints assigned to its venue, then an administrator chooses which devices, actions, and sources appear.\n\nStaff panels can require a PIN, while guest-facing panels can stay open. Operators get a basic panel or list interface without access to the main LUCI application—scoped to the room or rooms that panel is for.',
       benefits: [],
       media: {
         kind: 'placeholder',
@@ -278,22 +280,26 @@ export const upgradeGuide = {
         {
           id: 'ballroom',
           label: 'Ballroom',
-          line: 'Mount a wall panel in the ballroom so event staff can control only the endpoints assigned to that event space. Require a PIN for staff access, then make approved controls such as source, volume, mute, or power available as the room requires.',
+          line: 'Mount a wall panel so event staff control only that event space\u2019s endpoints. Require a PIN, then expose approved controls such as source, volume, mute, or power as the room needs.',
+          icon: '/images/upgrade-guide/venue-panels/use-case-ballroom.svg',
         },
         {
           id: 'cabana-pool',
           label: 'Cabana / pool',
-          line: "Mount a touch panel or place an iPad in each cabana so guests can choose the channel for that cabana's screen without seeing or changing another space. Leave it open with tap-to-wake—no PIN required—for guest-facing use.",
+          line: 'Mount a touch panel or place an iPad in each cabana so guests pick the channel for that cabana\u2019s screen only. Leave it open with tap-to-wake\u2014no PIN.',
+          icon: '/images/upgrade-guide/venue-panels/use-case-cabana-pool.svg',
         },
         {
           id: 'bar',
           label: 'Bar',
-          line: 'Keep a tablet at the bar so bartenders can adjust the source and volume for the TVs in that space. Scope the panel to the bar and hide power, so the TVs stay on while staff get only the controls they need.',
+          line: 'Keep a tablet at the bar so bartenders adjust source and volume for that space\u2019s TVs. Hide power so the TVs stay on.',
+          icon: '/images/upgrade-guide/venue-panels/use-case-bar.svg',
         },
         {
           id: 'conference-media',
           label: 'Conference / media room',
-          line: "Place an iPad in a conference room or mount a panel in a media room for localized control by staff. They can switch the room's channel or device from a simple panel that starts with the endpoints assigned to that room, without seeing controls for the rest of the property.",
+          line: 'Place an iPad or mount a panel so staff switch that room\u2019s channel or device from a panel that starts with the room\u2019s endpoints\u2014nothing else on the property.',
+          icon: '/images/upgrade-guide/venue-panels/use-case-conference-media.svg',
         },
       ],
       limits: [

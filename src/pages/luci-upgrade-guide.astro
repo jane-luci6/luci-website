@@ -170,13 +170,26 @@ const breadcrumbLd = breadcrumb([
                     <div class="ug-feature-deep">
                       <section class="ug-feature-deep__section">
                         <p class="ug-feature-deep__label">What it is</p>
-                        <p class="ug-feature__paragraph">{f.paragraph}</p>
+                        {f.paragraph.split(/\n\n+/).map((para) => (
+                          <p class="ug-feature__paragraph">{para}</p>
+                        ))}
                       </section>
                       <section class="ug-feature-deep__section">
                         <p class="ug-feature-deep__label">{f.scenariosSubsectionLabel ?? 'Use cases on your property'}</p>
                         <div class="ug-feature-scenarios">
                           {f.scenarios.map((s) => (
                             <div class="ug-feature-scenario">
+                              {s.icon && (
+                                <img
+                                  class="ug-feature-scenario__icon"
+                                  src={s.icon}
+                                  alt=""
+                                  width="72"
+                                  height="72"
+                                  loading="lazy"
+                                  decoding="async"
+                                />
+                              )}
                               <p class="ug-feature-scenario__title">{s.label}</p>
                               <p class="ug-feature-scenario__line">{s.line}</p>
                             </div>
@@ -809,6 +822,9 @@ const breadcrumbLd = breadcrumb([
       grid-column: 2;
     }
   }
+  .ug-feature-deep__section .ug-feature__paragraph + .ug-feature__paragraph {
+    margin-top: 0.75em;
+  }
   .ug-feature__paragraph {
     font-family: var(--font-body);
     font-size: 15.5px;
@@ -892,6 +908,15 @@ const breadcrumbLd = breadcrumb([
     display: flex;
     flex-direction: column;
     gap: 6px;
+  }
+  .ug-feature-scenario__icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 10px;
+    object-fit: cover;
+    display: block;
+    margin: 0 0 4px;
+    flex: 0 0 auto;
   }
   .ug-feature-scenario__title {
     font-family: var(--font-head);
