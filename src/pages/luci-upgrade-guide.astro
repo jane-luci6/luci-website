@@ -894,17 +894,15 @@ const breadcrumbLd = breadcrumb([
     margin: 0;
   }
   /* Scenario photo cards — industry-card style (tall full-bleed photo + bottom scrim). */
+  /* Scenario card grid: restore icon-era 2×2 (cbc67aa) — not 4-up single row. */
   .ug-feature-scenarios {
     display: grid;
     grid-template-columns: 1fr;
-    gap: clamp(16px, 2vw, 24px);
+    gap: 12px;
     align-items: stretch;
   }
-  @media (min-width: 640px) {
+  @media (min-width: 720px) {
     .ug-feature-scenarios { grid-template-columns: 1fr 1fr; }
-  }
-  @media (min-width: 1100px) {
-    .ug-feature-scenarios { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   }
   .ug-feature-scenario {
     position: relative;
