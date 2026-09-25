@@ -1,0 +1,308 @@
+---
+/**
+ * PREVIEW MOCK — Upgrade Guide landing (context → guide).
+ * Pairs with ./guide.astro standalone asset. Not live. noindex.
+ * Jane lock 2026-09-25: landing gives context; deep guide is FAG-style standalone.
+ */
+import AssetLayout from '../../layouts/AssetLayout.astro';
+import { upgradeGuide, RELEASE_DATE } from '../../data/upgradeGuide';
+
+const { hero, thesis, pillars, meta } = upgradeGuide;
+const guideHref = '/luci-upgrade-guide-asset-mock/guide/';
+const liveHref = '/luci-upgrade-guide/';
+---
+
+<AssetLayout
+  title="New LUCI Upgrade Guide — landing mock (preview)"
+  description="Preview landing that routes into the standalone Upgrade Guide asset mock. Not live."
+  canonicalPath="/luci-upgrade-guide-asset-mock"
+  theme="dark"
+>
+  <div class="ug-land-banner" role="status">
+    <div class="ug-land-banner__inner">
+      <span class="ug-land-banner__tag">PREVIEW MOCK</span>
+      <span>
+        Landing + standalone guide pair — not live. IA/nav meant to port to Webflow.
+        <a href={liveHref}>Live accordion guide &rarr;</a>
+      </span>
+    </div>
+  </div>
+
+  <header class="ug-land-hero">
+    <div class="ug-land-hero__inner">
+      <p class="ug-land-kicker">{hero.eyebrow}</p>
+      <h1 class="ug-land-title">
+        {hero.headline.leading}<em>{hero.headline.mintAccent}</em>{hero.headline.trailing}
+      </h1>
+      <p class="ug-land-date">Release — {RELEASE_DATE}</p>
+      <p class="ug-land-deck">{meta.description}</p>
+      <div class="ug-land-actions">
+        <a class="ug-land-btn ug-land-btn--primary" href={guideHref}>
+          Open the Upgrade Guide
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+        <a class="ug-land-btn ug-land-btn--ghost" href={`${guideHref}#ug-features`}>
+          Jump to Features
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <section class="ug-land-section" aria-labelledby="ug-land-why">
+    <div class="ug-land-section__inner">
+      <h2 id="ug-land-why" class="ug-land-h2">{thesis.heading}</h2>
+      {thesis.paragraphs.map((p) => (
+        <p class="ug-land-p">{p}</p>
+      ))}
+    </div>
+  </section>
+
+  <section class="ug-land-section ug-land-section--alt" aria-labelledby="ug-land-inside">
+    <div class="ug-land-section__inner">
+      <p class="ug-land-kicker" id="ug-land-inside">What&rsquo;s inside the guide</p>
+      <ul class="ug-land-pillars" role="list">
+        {pillars.map((p) => (
+          <li class="ug-land-pillar">
+            <span class="ug-land-pillar__num" aria-hidden="true">{p.number}</span>
+            <span class="ug-land-pillar__name">{p.name}</span>
+            <span class="ug-land-pillar__sum">{p.summary}</span>
+            <span class="ug-land-pillar__count">{p.featurePills.length} features</span>
+          </li>
+        ))}
+      </ul>
+      <p class="ug-land-note">
+        Inside the guide: open feature sections with a sticky feature jump (FAG pattern).
+        Technical detail and FAQ stay accordion. One in-asset sticky nav — no site header.
+      </p>
+      <a class="ug-land-btn ug-land-btn--primary" href={guideHref}>
+        Enter the guide
+        <span aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="ug-land-foot">
+    <div class="ug-land-section__inner">
+      <a href={liveHref}>Compare live site guide (accordion under site chrome)</a>
+      <span class="ug-land-foot__sep" aria-hidden="true">·</span>
+      <span>Mock only — do not treat as shipped</span>
+    </div>
+  </footer>
+</AssetLayout>
+
+<style>
+  .ug-land-banner {
+    background: #c47a12;
+    color: #0a161c;
+    font-family: var(--font-head);
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .ug-land-banner__inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 10px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    align-items: center;
+  }
+  .ug-land-banner__tag {
+    display: inline-flex;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba(10, 22, 28, 0.18);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 11px;
+  }
+  .ug-land-banner a {
+    color: #0a161c;
+    font-weight: 700;
+    margin-left: 6px;
+  }
+
+  .ug-land-hero {
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 20%, rgba(var(--mint-rgb), 0.18), transparent 60%),
+      #0a161c;
+    border-bottom: 1px solid rgba(235, 245, 248, 0.1);
+  }
+  .ug-land-hero__inner,
+  .ug-land-section__inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: clamp(40px, 6vw, 72px) 24px;
+  }
+  .ug-land-kicker {
+    font-family: var(--font-head);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin: 0 0 14px;
+  }
+  .ug-land-title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(32px, 5vw, 48px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+    margin: 0 0 16px;
+    max-width: 18ch;
+  }
+  .ug-land-title em {
+    font-style: normal;
+    color: var(--mint);
+  }
+  .ug-land-date {
+    font-family: var(--font-head);
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(235, 245, 248, 0.72);
+    margin: 0 0 18px;
+  }
+  .ug-land-deck {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.55;
+    color: rgba(235, 245, 248, 0.82);
+    max-width: 52ch;
+    margin: 0 0 28px;
+  }
+  .ug-land-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .ug-land-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .ug-land-btn--primary {
+    background: var(--mint);
+    color: #0a161c;
+    border: 1px solid var(--mint);
+  }
+  .ug-land-btn--primary:hover {
+    filter: brightness(1.05);
+  }
+  .ug-land-btn--ghost {
+    background: transparent;
+    color: var(--off-white);
+    border: 1px solid rgba(235, 245, 248, 0.28);
+  }
+  .ug-land-btn--ghost:hover {
+    border-color: var(--mint);
+    color: var(--mint);
+  }
+
+  .ug-land-section {
+    background: #0a161c;
+    border-bottom: 1px solid rgba(235, 245, 248, 0.08);
+  }
+  .ug-land-section--alt {
+    background: #0c1c24;
+  }
+  .ug-land-h2 {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(22px, 3vw, 28px);
+    color: var(--off-white);
+    margin: 0 0 16px;
+    max-width: 28ch;
+  }
+  .ug-land-p {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(235, 245, 248, 0.8);
+    max-width: 62ch;
+    margin: 0 0 14px;
+  }
+  .ug-land-pillars {
+    list-style: none;
+    display: grid;
+    gap: 14px;
+    margin: 0 0 24px;
+    padding: 0;
+  }
+  @media (min-width: 800px) {
+    .ug-land-pillars {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .ug-land-pillar {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 18px 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(235, 245, 248, 0.12);
+    background: rgba(235, 245, 248, 0.04);
+  }
+  .ug-land-pillar__num {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    color: var(--mint);
+  }
+  .ug-land-pillar__name {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--off-white);
+  }
+  .ug-land-pillar__sum {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.45;
+    color: rgba(235, 245, 248, 0.7);
+  }
+  .ug-land-pillar__count {
+    font-family: var(--font-head);
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(235, 245, 248, 0.5);
+    margin-top: 4px;
+  }
+  .ug-land-note {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(235, 245, 248, 0.68);
+    max-width: 60ch;
+    margin: 0 0 22px;
+  }
+  .ug-land-foot {
+    background: #071016;
+    color: rgba(235, 245, 248, 0.55);
+    font-family: var(--font-body);
+    font-size: 13px;
+  }
+  .ug-land-foot .ug-land-section__inner {
+    padding-block: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    align-items: center;
+  }
+  .ug-land-foot a {
+    color: var(--mint);
+  }
+  .ug-land-foot__sep {
+    opacity: 0.4;
+  }
+</style>

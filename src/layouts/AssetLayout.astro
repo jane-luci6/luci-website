@@ -1,0 +1,74 @@
+---
+/**
+ * Minimal asset chrome — fonts/tokens/meta only.
+ * No site Header, Footer, or AskLuciChat. Used for FAG-style standalone
+ * guide mocks that must not compete with website nav (Jane lock 2026-09-25).
+ * Pattern is intentionally portable to Webflow: one document, one sticky nav.
+ */
+import '../styles/global.css';
+import { site } from '../data/site';
+import { defaultOgImage } from '../data/seo';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  ogImage?: string;
+  noindex?: boolean;
+  /** Force light or dark document theme. Default dark (matches FAG asset). */
+  theme?: 'dark' | 'light';
+}
+
+const {
+  title,
+  description = site.subTagline,
+  canonicalPath,
+  ogImage,
+  noindex = true,
+  theme = 'dark',
+} = Astro.props;
+
+const pageTitle = title ? `${title} · ${site.name}` : `${site.tagline} · ${site.name}`;
+const rawPath = canonicalPath ?? Astro.url.pathname;
+const normPath = rawPath === '/' ? '/' : rawPath.replace(/\/+$/, '') + '/';
+const canonicalUrl = site.url + normPath;
+const ogImageUrl = site.url + (ogImage ?? defaultOgImage);
+---
+
+<!doctype html>
+<html lang="en" data-theme={theme} data-asset-chrome="1">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="theme-color" content="#0A161C" />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-400-500.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/space-grotesk-700.woff2" crossorigin />
+  </head>
+  <body class="asset-body">
+    <main id="main" class="asset-main">
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  .asset-body {
+    min-height: 100vh;
+    background: var(--surface-page, #0a161c);
+  }
+  .asset-main {
+    min-height: 100vh;
+  }
+</style>

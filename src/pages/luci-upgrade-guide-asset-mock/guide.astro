@@ -1,0 +1,969 @@
+---
+/**
+ * PREVIEW MOCK — Upgrade Guide as FAG-style standalone asset.
+ * One in-asset sticky nav (back + chapter + feature jump). No site Header/Footer.
+ * Features = always-open sections. Technical + FAQ = accordion only.
+ * Jane lock 2026-09-25. Do NOT replace live /luci-upgrade-guide/ accordion yet.
+ */
+import AssetLayout from '../../layouts/AssetLayout.astro';
+import { upgradeGuide } from '../../data/upgradeGuide';
+
+const { features, pillars, technical, faq, hero, meta } = upgradeGuide;
+const landingHref = '/luci-upgrade-guide-asset-mock/';
+const liveHref = '/luci-upgrade-guide/';
+
+const featuresByPillar = (pillarId: string) => features.filter((f) => f.pillarId === pillarId);
+
+const chapterLinks = [
+  { id: 'ug-features', label: 'Features' },
+  { id: 'ug-technical', label: 'Technical' },
+  { id: 'ug-faq', label: 'FAQ' },
+] as const;
+
+const featureLinks = features.map((f) => ({
+  id: `ug-feature-${f.id}`,
+  label: f.name,
+  short:
+    f.id === 'audio-group-control'
+      ? 'Audio groups'
+      : f.id === 'customizable-interface'
+        ? 'Interface'
+        : f.id === 'live-map-flexibility'
+          ? 'Live map'
+          : f.id === 'live-screen-view'
+            ? 'Screen view'
+            : f.id === 'sign-in-session-control'
+              ? 'Sign-in'
+              : f.id === 'in-product-support'
+                ? 'Support'
+                : f.name,
+}));
+---
+
+<AssetLayout
+  title="New LUCI Upgrade Guide — standalone asset mock"
+  description="Preview FAG-style standalone Upgrade Guide with sticky feature jump and open sections. Not live."
+  canonicalPath="/luci-upgrade-guide-asset-mock/guide"
+  theme="dark"
+>
+  <div class="ug-asset" data-ug-asset>
+    <div class="ug-asset-banner" role="status">
+      <div class="ug-asset-banner__inner">
+        <span class="ug-asset-banner__tag">PREVIEW MOCK</span>
+        <span>
+          Standalone asset — one sticky nav, no site chrome. Waiting on Jane before live cutover.
+          <a href={landingHref}>Landing</a>
+          <span aria-hidden="true"> · </span>
+          <a href={liveHref}>Live accordion</a>
+        </span>
+      </div>
+    </div>
+
+    {/* ─── ONE in-asset sticky nav (FAG mechanics, UG mint/navy) ─── */}
+    <nav class="ug-asset-nav" aria-label="Upgrade Guide sections" data-ug-asset-nav>
+      <div class="ug-asset-nav__inner">
+        <a class="ug-asset-nav__back" href={landingHref}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+            <path d="M15 18l-6-6 6-6"></path>
+          </svg>
+          Landing
+        </a>
+        <span class="ug-asset-nav__divider" aria-hidden="true"></span>
+        <div class="ug-asset-nav__chapters" role="list">
+          {chapterLinks.map((c) => (
+            <a
+              class="ug-asset-nav__chapter"
+              href={`#${c.id}`}
+              data-ug-chapter={c.id}
+              role="listitem"
+            >
+              {c.label}
+            </a>
+          ))}
+        </div>
+        <div class="ug-asset-nav__features" role="list" aria-label="Features">
+          {featureLinks.map((f) => (
+            <a
+              class="ug-asset-nav__feat"
+              href={`#${f.id}`}
+              data-ug-feat={f.id}
+              title={f.label}
+              role="listitem"
+            >
+              {f.short}
+            </a>
+          ))}
+        </div>
+      </div>
+    </nav>
+
+    {/* ─── Compact asset intro ─── */}
+    <header class="ug-asset-intro" id="ug-top">
+      <div class="ug-asset-wrap">
+        <p class="ug-asset-kicker">{hero.eyebrow}</p>
+        <h1 class="ug-asset-title">
+          {hero.headline.leading}<em>{hero.headline.mintAccent}</em>{hero.headline.trailing}
+        </h1>
+        <p class="ug-asset-deck">{meta.description}</p>
+      </div>
+    </header>
+
+    {/* ─── FEATURES — always open ─── */}
+    <section class="ug-asset-sec ug-asset-sec--features" id="ug-features" data-ug-chapter-sec>
+      <div class="ug-asset-wrap">
+        <p class="ug-asset-kicker">Features</p>
+        <h2 class="ug-asset-h2">What this release puts in your hands</h2>
+        <p class="ug-asset-lede">
+          Open sections with a sticky feature jump — not accordion. Pillar labels group the scan.
+          Venue panels shows the full deep treatment; other features use their current short copy.
+        </p>
+
+        {pillars.map((pillar) => (
+          <div class="ug-pillar-group" id={`ug-pillar-${pillar.id}`}>
+            <div class="ug-pillar-group__head">
+              <h3 class="ug-pillar-group__title">
+                <span class="ug-pillar-group__num">{pillar.number}</span>
+                {pillar.name}
+              </h3>
+            </div>
+
+            <div class="ug-features">
+              {featuresByPillar(pillar.id).map((f) => (
+                <article
+                  class="ug-feature ug-feature--open"
+                  id={`ug-feature-${f.id}`}
+                  data-ug-feature-sec
+                  data-pillar={pillar.id}
+                >
+                  <header class="ug-feature__summary">
+                    <h4 class="ug-feature__name">{f.name}</h4>
+                    <p class="ug-feature__liner">{f.oneLiner}</p>
+                  </header>
+                  <div class="ug-feature__body">
+                    {f.scenarios && f.scenarios.length > 0 ? (
+                      <div class="ug-feature-deep">
+                        <section class="ug-feature-deep__section">
+                          <p class="ug-feature-deep__label">What it is</p>
+                          {f.paragraph.split(/\n\n+/).map((para) => (
+                            <p class="ug-feature__paragraph">{para}</p>
+                          ))}
+                        </section>
+                        <section class="ug-feature-deep__section">
+                          <p class="ug-feature-deep__label">
+                            {f.scenariosSubsectionLabel ?? 'Use cases on your property'}
+                          </p>
+                          <div class="ug-feature-scenarios">
+                            {f.scenarios.map((s) => (
+                              <div class="ug-feature-scenario">
+                                {s.image && (
+                                  <img
+                                    class="ug-feature-scenario__img"
+                                    src={s.image}
+                                    alt=""
+                                    width="640"
+                                    height="853"
+                                    loading="lazy"
+                                    decoding="async"
+                                    style={s.imagePosition ? `object-position: ${s.imagePosition}` : undefined}
+                                  />
+                                )}
+                                <span class="ug-feature-scenario__scrim" aria-hidden="true"></span>
+                                <div class="ug-feature-scenario__copy">
+                                  <p class="ug-feature-scenario__title">{s.label}</p>
+                                  <p class="ug-feature-scenario__line">{s.line}</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </section>
+                        {f.limits && f.limits.length > 0 && (
+                          <section class="ug-feature-deep__section">
+                            <p class="ug-feature-deep__label">Limits &amp; controls</p>
+                            <ul class="ug-feature-limits" role="list">
+                              {f.limits.map((l) => (
+                                <li>{l}</li>
+                              ))}
+                            </ul>
+                          </section>
+                        )}
+                        {f.media && f.media.kind !== 'placeholder' && (
+                          <div class="ug-feature-media" data-feature-media-kind={f.media.kind}></div>
+                        )}
+                        {/* Media slot reserved (hidden while placeholder) — matches live Thesis 1 */}
+                        {f.media && f.media.kind === 'placeholder' && (
+                          <div
+                            class="ug-feature-media ug-feature-media--slot"
+                            data-feature-media-kind="placeholder"
+                            hidden
+                          >
+                            <span>{f.media.label}</span>
+                          </div>
+                        )}
+                        {f.technicalJumpId && (
+                          <a class="ug-feature-itlink" href={`#ug-tech-item-${f.technicalJumpId}`}>
+                            Technical detail &rarr;
+                          </a>
+                        )}
+                      </div>
+                    ) : (
+                      <>
+                        <p class="ug-feature__paragraph">{f.paragraph}</p>
+                        <ul class="ug-feature__benefits" role="list">
+                          {f.benefits.map((b) => (
+                            <li>{b}</li>
+                          ))}
+                        </ul>
+                      </>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    {/* ─── TECHNICAL — accordion ─── */}
+    <section class="ug-asset-sec ug-asset-sec--tech" id="ug-technical" data-ug-chapter-sec>
+      <div class="ug-asset-wrap">
+        <p class="ug-asset-kicker">Technical</p>
+        <h2 class="ug-asset-h2">{technical.heading}</h2>
+        <p class="ug-asset-lede">{technical.intro}</p>
+        <p class="ug-asset-note">Accordion only here (and FAQ) — per Jane lock.</p>
+        <div class="ug-technical">
+          {technical.groups.map((group) => (
+            <div class="ug-tech-group" id={`ug-tech-${group.id}`}>
+              <h3 class="ug-tech-group__title">{group.heading}</h3>
+              <p class="ug-tech-group__intro">{group.intro}</p>
+              <div class="ug-tech-items">
+                {group.items.map((item) => (
+                  <details class="ug-tech-item" id={`ug-tech-item-${item.id}`}>
+                    <summary class="ug-tech-item__summary">
+                      <span class="ug-tech-item__name">{item.name}</span>
+                      {item.summary && <span class="ug-tech-item__summary-text">{item.summary}</span>}
+                      <span class="ug-feature__chev" aria-hidden="true"></span>
+                    </summary>
+                    <ul class="ug-tech-item__details" role="list">
+                      {item.details.map((d) => (
+                        <li>{d}</li>
+                      ))}
+                    </ul>
+                  </details>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ─── FAQ — accordion ─── */}
+    <section class="ug-asset-sec ug-asset-sec--faq" id="ug-faq" data-ug-chapter-sec>
+      <div class="ug-asset-wrap">
+        <p class="ug-asset-kicker">FAQ</p>
+        <h2 class="ug-asset-h2">Common questions</h2>
+        <div class="ug-faq">
+          {faq.map((item, i) => (
+            <details class="ug-faq__item" id={`ug-faq-${i + 1}`}>
+              <summary class="ug-faq__q">
+                <span>{item.question}</span>
+                <span class="ug-feature__chev" aria-hidden="true"></span>
+              </summary>
+              <p class="ug-faq__a">{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <footer class="ug-asset-foot">
+      <div class="ug-asset-wrap">
+        <a href={landingHref}>&larr; Back to landing mock</a>
+        <span aria-hidden="true"> · </span>
+        <a href={liveHref}>Live site guide</a>
+      </div>
+    </footer>
+  </div>
+</AssetLayout>
+
+<script is:inline>
+  (function () {
+    var nav = document.querySelector('[data-ug-asset-nav]');
+    if (!nav) return;
+    var chapterLinks = Array.prototype.slice.call(nav.querySelectorAll('[data-ug-chapter]'));
+    var featLinks = Array.prototype.slice.call(nav.querySelectorAll('[data-ug-feat]'));
+    var chapterSecs = Array.prototype.slice.call(document.querySelectorAll('[data-ug-chapter-sec]'));
+    var featSecs = Array.prototype.slice.call(document.querySelectorAll('[data-ug-feature-sec]'));
+    var reduceMo = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function navH() {
+      var h = nav.offsetHeight || 0;
+      return h < 56 ? 96 : h;
+    }
+    function jumpTo(id, smooth) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var top = el.getBoundingClientRect().top + window.pageYOffset - navH() - 16;
+      window.scrollTo({ top: top, behavior: smooth && !reduceMo ? 'smooth' : 'auto' });
+    }
+    function bind(links) {
+      links.forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          var href = a.getAttribute('href') || '';
+          if (href.charAt(0) !== '#') return;
+          var id = href.slice(1);
+          if (!document.getElementById(id)) return;
+          e.preventDefault();
+          jumpTo(id, false);
+          if (history.pushState) history.pushState(null, '', '#' + id);
+          setTimeout(function () {
+            var el = document.getElementById(id);
+            if (el && el.getBoundingClientRect().top < navH() + 8) jumpTo(id, false);
+          }, 280);
+        });
+      });
+    }
+    bind(chapterLinks);
+    bind(featLinks);
+
+    function setChapter(id) {
+      chapterLinks.forEach(function (l) {
+        var on = l.getAttribute('data-ug-chapter') === id;
+        l.classList.toggle('is-active', on);
+      });
+    }
+    function setFeat(id) {
+      featLinks.forEach(function (l) {
+        var on = l.getAttribute('data-ug-feat') === id;
+        l.classList.toggle('is-active', on);
+      });
+    }
+
+    if ('IntersectionObserver' in window) {
+      if (chapterSecs.length) {
+        var chIo = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) setChapter(e.target.id);
+            });
+          },
+          { rootMargin: '-40% 0px -50% 0px', threshold: 0 }
+        );
+        chapterSecs.forEach(function (s) { chIo.observe(s); });
+      }
+      if (featSecs.length) {
+        var fIo = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) setFeat(e.target.id);
+            });
+          },
+          { rootMargin: '-42% 0px -48% 0px', threshold: 0 }
+        );
+        featSecs.forEach(function (s) { fIo.observe(s); });
+      }
+    }
+
+    function adjustHash() {
+      if (!location.hash) return;
+      var id = location.hash.slice(1);
+      if (document.getElementById(id)) jumpTo(id, false);
+    }
+    if (document.readyState === 'complete') adjustHash();
+    else window.addEventListener('load', adjustHash);
+    setTimeout(adjustHash, 300);
+  })();
+</script>
+
+<style>
+  /* ===== Asset shell ===== */
+  .ug-asset {
+    --ug-ink: #e8f0f4;
+    --ug-muted: rgba(235, 245, 248, 0.72);
+    --ug-rule: rgba(235, 245, 248, 0.12);
+    --ug-panel: #0c1c24;
+    --ug-deep: #0a161c;
+    background: var(--ug-deep);
+    color: var(--ug-ink);
+    font-family: var(--font-body);
+  }
+  .ug-asset-wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .ug-asset-banner {
+    background: #c47a12;
+    color: #0a161c;
+    font-family: var(--font-head);
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .ug-asset-banner__inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 10px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    align-items: center;
+  }
+  .ug-asset-banner__tag {
+    display: inline-flex;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba(10, 22, 28, 0.18);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 11px;
+  }
+  .ug-asset-banner a {
+    color: #0a161c;
+    font-weight: 700;
+  }
+
+  /* ===== ONE sticky nav — top:0 (no site header) ===== */
+  .ug-asset-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(10, 22, 28, 0.94);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border-bottom: 1px solid rgba(235, 245, 248, 0.1);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+  }
+  .ug-asset-nav__inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px 14px;
+    flex-wrap: wrap;
+  }
+  .ug-asset-nav__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 8px 14px;
+    border-radius: 4px;
+    border: 1px solid rgba(235, 245, 248, 0.16);
+    background: rgba(235, 245, 248, 0.05);
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mint);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .ug-asset-nav__back svg {
+    width: 14px;
+    height: 14px;
+  }
+  .ug-asset-nav__back:hover {
+    color: var(--navy-deep, #0a161c);
+    background: var(--mint);
+    border-color: var(--mint);
+  }
+  .ug-asset-nav__divider {
+    width: 1px;
+    align-self: stretch;
+    min-height: 28px;
+    background: rgba(235, 245, 248, 0.14);
+  }
+  .ug-asset-nav__chapters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .ug-asset-nav__chapter {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid rgba(235, 245, 248, 0.12);
+    background: rgba(235, 245, 248, 0.05);
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(235, 245, 248, 0.8);
+    text-decoration: none;
+  }
+  .ug-asset-nav__chapter:hover {
+    color: var(--off-white);
+    border-color: rgba(235, 245, 248, 0.28);
+  }
+  .ug-asset-nav__chapter.is-active {
+    color: var(--navy-deep, #0a161c);
+    background: var(--mint);
+    border-color: var(--mint);
+  }
+  .ug-asset-nav__features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    width: 100%;
+    padding-top: 4px;
+    border-top: 1px solid rgba(235, 245, 248, 0.08);
+  }
+  .ug-asset-nav__feat {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    padding: 6px 12px;
+    border-radius: 9999px;
+    border: 1px solid rgba(43, 158, 128, 0.35);
+    background: transparent;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--mint);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .ug-asset-nav__feat:hover {
+    border-color: var(--mint);
+    background: rgba(var(--mint-rgb), 0.1);
+  }
+  .ug-asset-nav__feat.is-active {
+    color: var(--navy-deep, #0a161c);
+    background: var(--mint);
+    border-color: var(--mint);
+  }
+  @media (max-width: 760px) {
+    .ug-asset-nav__inner { padding: 12px 16px; gap: 10px; }
+    .ug-asset-nav__divider { display: none; }
+    .ug-asset-nav__feat { flex: 1 1 auto; justify-content: center; }
+  }
+
+  /* Scroll offset for single sticky */
+  #ug-features,
+  #ug-technical,
+  #ug-faq,
+  [data-ug-feature-sec] {
+    scroll-margin-top: 120px;
+  }
+  @media (max-width: 760px) {
+    #ug-features,
+    #ug-technical,
+    #ug-faq,
+    [data-ug-feature-sec] {
+      scroll-margin-top: 160px;
+    }
+  }
+
+  /* ===== Intro / sections ===== */
+  .ug-asset-intro {
+    padding: clamp(36px, 5vw, 56px) 0 28px;
+    border-bottom: 1px solid var(--ug-rule);
+  }
+  .ug-asset-kicker {
+    font-family: var(--font-head);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin: 0 0 12px;
+  }
+  .ug-asset-title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+    margin: 0 0 14px;
+    max-width: 18ch;
+  }
+  .ug-asset-title em {
+    font-style: normal;
+    color: var(--mint);
+  }
+  .ug-asset-deck,
+  .ug-asset-lede {
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ug-muted);
+    max-width: 58ch;
+    margin: 0;
+  }
+  .ug-asset-h2 {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(22px, 3vw, 28px);
+    color: var(--off-white);
+    margin: 0 0 12px;
+  }
+  .ug-asset-note {
+    font-size: 13px;
+    color: rgba(235, 245, 248, 0.55);
+    margin: 10px 0 20px;
+  }
+  .ug-asset-sec {
+    padding: clamp(36px, 5vw, 56px) 0;
+    border-bottom: 1px solid var(--ug-rule);
+  }
+  .ug-asset-sec--tech,
+  .ug-asset-sec--faq {
+    background: var(--ug-panel);
+  }
+  .ug-asset-foot {
+    padding: 24px 0 40px;
+    font-size: 14px;
+    color: rgba(235, 245, 248, 0.55);
+  }
+  .ug-asset-foot a {
+    color: var(--mint);
+  }
+
+  /* ===== Pillar groups + open features ===== */
+  .ug-pillar-group {
+    margin-top: clamp(28px, 4vw, 40px);
+  }
+  .ug-pillar-group__head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(43, 158, 128, 0.28);
+  }
+  .ug-pillar-group__title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(235, 245, 248, 0.78);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .ug-pillar-group__num {
+    color: var(--mint);
+  }
+  .ug-features {
+    display: flex;
+    flex-direction: column;
+  }
+  .ug-feature--open {
+    border-bottom: 1px solid var(--ug-rule);
+    padding: 18px 0 22px;
+  }
+  .ug-feature__summary {
+    display: grid;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  @media (min-width: 720px) {
+    .ug-feature__summary {
+      grid-template-columns: minmax(160px, 220px) 1fr;
+      gap: 16px 24px;
+      align-items: start;
+    }
+  }
+  .ug-feature__name {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--off-white);
+    margin: 0;
+  }
+  .ug-feature__liner {
+    font-size: 14.5px;
+    line-height: 1.45;
+    color: var(--ug-muted);
+    margin: 0;
+    max-width: 60ch;
+  }
+  .ug-feature__body {
+    display: grid;
+    gap: 14px;
+  }
+  @media (min-width: 720px) {
+    .ug-feature__body {
+      grid-template-columns: minmax(160px, 220px) 1fr 24px;
+    }
+    .ug-feature__paragraph,
+    .ug-feature__benefits,
+    .ug-feature-deep {
+      grid-column: 2;
+    }
+  }
+  .ug-feature__paragraph {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: rgba(235, 245, 248, 0.86);
+    margin: 0;
+    max-width: 60ch;
+  }
+  .ug-feature__benefits {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+  }
+  .ug-feature__benefits li {
+    position: relative;
+    padding-left: 22px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(235, 245, 248, 0.86);
+    max-width: 60ch;
+  }
+  .ug-feature__benefits li::before,
+  .ug-feature-limits li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.3em;
+    width: 13px;
+    height: 13px;
+    background: var(--mint);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
+  }
+
+  /* Thesis 1 Venue deep body */
+  .ug-feature-deep {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 60ch;
+  }
+  .ug-feature-deep__section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .ug-feature-deep__label {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin: 0;
+  }
+  .ug-feature-scenarios {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    align-items: stretch;
+  }
+  @media (min-width: 720px) {
+    .ug-feature-scenarios {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .ug-feature-scenario {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    min-height: 280px;
+    border-radius: 14px;
+    overflow: hidden;
+    isolation: isolate;
+    background: linear-gradient(160deg, #0c1a22 0%, #08131a 100%);
+    box-shadow: 0 14px 28px rgba(10, 22, 28, 0.28);
+  }
+  .ug-feature-scenario__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    z-index: 0;
+    transform: scale(1.02);
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .ug-feature-scenario__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(10, 22, 28, 0) 0%,
+        rgba(10, 22, 28, 0) 28%,
+        rgba(10, 22, 28, 0.55) 52%,
+        rgba(8, 24, 28, 0.88) 78%,
+        rgba(6, 20, 24, 0.96) 100%
+      ),
+      linear-gradient(180deg, transparent 45%, rgba(var(--mint-rgb), 0.08) 100%);
+  }
+  .ug-feature-scenario__copy {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    padding: clamp(16px, 2vw, 22px);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .ug-feature-scenario__title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(16px, 1.6vw, 20px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+    margin: 0;
+  }
+  .ug-feature-scenario__line {
+    font-size: clamp(12.5px, 1.15vw, 14px);
+    line-height: 1.45;
+    color: rgba(245, 248, 250, 0.88);
+    margin: 0;
+  }
+  @media (hover: hover) {
+    .ug-feature-scenario:hover .ug-feature-scenario__img {
+      transform: scale(1.06);
+    }
+  }
+  .ug-feature-limits {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+  }
+  .ug-feature-limits li {
+    position: relative;
+    padding-left: 22px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(235, 245, 248, 0.86);
+    max-width: 60ch;
+  }
+  .ug-feature-itlink {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--mint);
+    text-decoration: none;
+    align-self: flex-start;
+  }
+  .ug-feature-itlink:hover {
+    text-decoration: underline;
+  }
+  .ug-feature-media {
+    display: none;
+  }
+
+  /* ===== Accordion Technical / FAQ ===== */
+  .ug-tech-group {
+    margin-top: 28px;
+  }
+  .ug-tech-group__title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--off-white);
+    margin: 0 0 8px;
+  }
+  .ug-tech-group__intro {
+    font-size: 14px;
+    color: var(--ug-muted);
+    margin: 0 0 12px;
+    max-width: 60ch;
+  }
+  .ug-tech-item,
+  .ug-faq__item {
+    border-bottom: 1px solid var(--ug-rule);
+  }
+  .ug-tech-item:first-child,
+  .ug-faq__item:first-of-type {
+    border-top: 1px solid var(--ug-rule);
+  }
+  .ug-tech-item__summary,
+  .ug-faq__q {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px 16px;
+    align-items: center;
+    padding: 14px 4px;
+    cursor: pointer;
+    list-style: none;
+  }
+  .ug-tech-item__summary::-webkit-details-marker,
+  .ug-faq__q::-webkit-details-marker {
+    display: none;
+  }
+  .ug-tech-item__name,
+  .ug-faq__q span:first-child {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--off-white);
+  }
+  .ug-tech-item__summary-text {
+    grid-column: 1;
+    font-size: 13.5px;
+    color: var(--ug-muted);
+  }
+  .ug-feature__chev {
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid var(--mint);
+    border-bottom: 2px solid var(--mint);
+    transform: rotate(-45deg);
+    transition: transform 0.18s ease;
+    justify-self: end;
+  }
+  details[open] > summary .ug-feature__chev {
+    transform: rotate(45deg);
+  }
+  .ug-tech-item__details {
+    list-style: none;
+    margin: 0 0 16px;
+    padding: 0 4px 4px;
+    display: grid;
+    gap: 8px;
+  }
+  .ug-tech-item__details li {
+    position: relative;
+    padding-left: 16px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(235, 245, 248, 0.82);
+    max-width: 62ch;
+  }
+  .ug-tech-item__details li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--mint);
+  }
+  .ug-faq__a {
+    margin: 0 0 16px;
+    padding: 0 4px;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: rgba(235, 245, 248, 0.82);
+    max-width: 62ch;
+  }
+</style>
