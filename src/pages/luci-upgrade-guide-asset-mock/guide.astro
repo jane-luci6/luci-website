@@ -3,8 +3,9 @@
  * PREVIEW MOCK — Upgrade Guide as FAG-style standalone asset.
  * One in-asset sticky nav (nested chapter dropdowns). No site Header/Footer.
  * Features = always-open sections. Technical + FAQ = accordion only.
- * Jane 2026-09-25: keep nested Features/Technical/FAQ IA; restore lighter pre-GLM
- * chrome/spacing; no back-to-landing CTAs. Do NOT replace live /luci-upgrade-guide/ yet.
+ * Jane 2026-09-25: keep nested Features/Technical/FAQ IA; no back-to-landing CTAs.
+ * True light theme (off-white + navy type + mint/accent-light) — not soft-dark.
+ * Do NOT replace live /luci-upgrade-guide/ yet.
  */
 import AssetLayout from '../../layouts/AssetLayout.astro';
 import { upgradeGuide } from '../../data/upgradeGuide';
@@ -31,7 +32,7 @@ const techGroupLinks = technical.groups.map((g) => ({
   title="New LUCI Upgrade Guide — standalone asset mock"
   description="Preview FAG-style standalone Upgrade Guide with nested section dropdowns and open feature sections. Not live."
   canonicalPath="/luci-upgrade-guide-asset-mock/guide"
-  theme="dark"
+  theme="light"
 >
   <div class="ug-asset" data-ug-asset>
     <div class="ug-asset-banner" role="status">
@@ -456,13 +457,14 @@ const techGroupLinks = technical.groups.map((g) => ({
 </script>
 
 <style>
-  /* ===== Asset shell ===== */
+  /* ===== Asset shell — TRUE light theme (off-white + navy type) ===== */
   .ug-asset {
-    --ug-ink: #e8f0f4;
-    --ug-muted: rgba(235, 245, 248, 0.72);
-    --ug-rule: rgba(235, 245, 248, 0.12);
-    --ug-panel: #0c1c24;
-    --ug-deep: #0a161c;
+    --ug-ink: var(--ink-strong);
+    --ug-muted: var(--navy-muted);
+    --ug-rule: var(--rule-light);
+    --ug-panel: #fff;
+    --ug-deep: var(--off-white);
+    --ug-accent: var(--accent-light);
     background: var(--ug-deep);
     color: var(--ug-ink);
     font-family: var(--font-body);
@@ -502,16 +504,16 @@ const techGroupLinks = technical.groups.map((g) => ({
     font-weight: 700;
   }
 
-  /* ===== ONE sticky nav — top:0; pre-GLM light chrome + nested dropdowns ===== */
+  /* ===== Sticky nav — light frosted chrome ===== */
   .ug-asset-nav {
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(10, 22, 28, 0.94);
+    background: rgba(245, 248, 250, 0.94);
     backdrop-filter: blur(14px) saturate(140%);
     -webkit-backdrop-filter: blur(14px) saturate(140%);
-    border-bottom: 1px solid rgba(235, 245, 248, 0.1);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+    border-bottom: 1px solid var(--rule-light);
+    box-shadow: 0 8px 24px rgba(10, 22, 28, 0.08);
   }
   .ug-asset-nav__inner {
     max-width: 1080px;
@@ -529,7 +531,6 @@ const techGroupLinks = technical.groups.map((g) => ({
     flex: 1 1 auto;
     min-width: 0;
   }
-  /* Top-level chapter controls — pre-GLM chip chrome + nested triggers */
   .ug-asset-nav__chapter {
     display: inline-flex;
     align-items: center;
@@ -537,30 +538,32 @@ const techGroupLinks = technical.groups.map((g) => ({
     min-height: 36px;
     padding: 8px 12px;
     border-radius: 4px;
-    border: 1px solid rgba(235, 245, 248, 0.12);
-    background: rgba(235, 245, 248, 0.05);
+    border: 1px solid var(--rule-light);
+    background: #fff;
     font-family: var(--font-head);
     font-weight: 700;
     font-size: 12px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: rgba(235, 245, 248, 0.8);
+    color: var(--navy);
     text-decoration: none;
     white-space: nowrap;
     cursor: pointer;
-    transition: color 0.18s, background 0.18s, border-color 0.18s;
+    transition: color 0.18s, background 0.18s, border-color 0.18s, box-shadow 0.18s;
   }
   .ug-asset-nav__chapter:hover {
-    color: var(--off-white);
-    border-color: rgba(235, 245, 248, 0.28);
+    color: var(--ink-strong);
+    border-color: rgba(43, 158, 128, 0.45);
+    box-shadow: 0 2px 8px rgba(10, 22, 28, 0.06);
   }
   .ug-asset-nav__chapter.is-active {
-    color: var(--navy-deep, #0a161c);
+    color: var(--navy-deep);
     background: var(--mint);
     border-color: var(--mint);
+    box-shadow: none;
   }
   .ug-asset-nav__chapter:focus-visible {
-    outline: 2px solid var(--mint);
+    outline: 2px solid var(--accent-light);
     outline-offset: 2px;
   }
   .ug-asset-nav__chev {
@@ -573,7 +576,6 @@ const techGroupLinks = technical.groups.map((g) => ({
     transform: rotate(180deg);
   }
 
-  /* Dropdown container */
   .ug-asset-nav__menu {
     position: relative;
     flex: 0 0 auto;
@@ -585,10 +587,10 @@ const techGroupLinks = technical.groups.map((g) => ({
     z-index: 60;
     min-width: 240px;
     max-width: min(340px, 90vw);
-    background: rgba(10, 22, 28, 0.96);
-    border: 1px solid rgba(235, 245, 248, 0.12);
+    background: #fff;
+    border: 1px solid var(--rule-light);
     border-radius: 4px;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+    box-shadow: 0 16px 36px rgba(10, 22, 28, 0.12);
     backdrop-filter: blur(14px) saturate(140%);
     -webkit-backdrop-filter: blur(14px) saturate(140%);
     padding: 6px;
@@ -613,20 +615,20 @@ const techGroupLinks = technical.groups.map((g) => ({
     font-weight: 500;
     font-size: 14px;
     line-height: 1.35;
-    color: rgba(235, 245, 248, 0.88);
+    color: var(--ink);
     text-decoration: none;
     transition: background 0.14s ease, color 0.14s ease;
   }
   .ug-asset-nav__item:hover,
   .ug-asset-nav__item:focus-visible {
-    background: rgba(var(--mint-rgb), 0.12);
-    color: var(--off-white);
+    background: rgba(43, 158, 128, 0.1);
+    color: var(--ink-strong);
     outline: none;
   }
   .ug-asset-nav__item.is-active {
-    background: rgba(var(--mint-rgb), 0.16);
-    color: var(--off-white);
-    box-shadow: inset 2px 0 0 var(--mint);
+    background: rgba(43, 158, 128, 0.14);
+    color: var(--ink-strong);
+    box-shadow: inset 2px 0 0 var(--accent-light);
   }
   .ug-asset-nav__item-name { flex: 1 1 auto; min-width: 0; }
 
@@ -635,7 +637,6 @@ const techGroupLinks = technical.groups.map((g) => ({
     .ug-asset-nav__chapters { gap: 6px; }
     .ug-asset-nav__chapter { min-height: 36px; padding: 7px 10px; font-size: 11px; letter-spacing: 0.04em; }
     .ug-asset-nav__chev { width: 11px; height: 11px; }
-    /* Full-bleed dropdown panel under the bar on narrow screens */
     .ug-asset-nav__panel {
       left: -16px;
       right: -16px;
@@ -645,11 +646,10 @@ const techGroupLinks = technical.groups.map((g) => ({
       border-radius: 0 0 4px 4px;
       border-left: 0;
       border-right: 0;
-      border-top: 1px solid rgba(235, 245, 248, 0.12);
+      border-top: 1px solid var(--rule-light);
     }
   }
 
-  /* Scroll offset for single sticky (single row, ~64px desktop / ~56px mobile) */
   #ug-features,
   #ug-technical,
   #ug-faq,
@@ -676,7 +676,7 @@ const techGroupLinks = technical.groups.map((g) => ({
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--mint);
+    color: var(--ug-accent);
     margin: 0 0 12px;
   }
   .ug-asset-title {
@@ -685,13 +685,13 @@ const techGroupLinks = technical.groups.map((g) => ({
     font-size: clamp(28px, 4vw, 40px);
     line-height: 1.12;
     letter-spacing: -0.02em;
-    color: var(--off-white);
+    color: var(--ink-strong);
     margin: 0 0 14px;
     max-width: 18ch;
   }
   .ug-asset-title em {
     font-style: normal;
-    color: var(--mint);
+    color: var(--ug-accent);
   }
   .ug-asset-deck,
   .ug-asset-lede {
@@ -705,12 +705,12 @@ const techGroupLinks = technical.groups.map((g) => ({
     font-family: var(--font-head);
     font-weight: 700;
     font-size: clamp(22px, 3vw, 28px);
-    color: var(--off-white);
+    color: var(--ink-strong);
     margin: 0 0 12px;
   }
   .ug-asset-note {
     font-size: 13px;
-    color: rgba(235, 245, 248, 0.55);
+    color: var(--navy-muted);
     margin: 10px 0 20px;
   }
   .ug-asset-sec {
@@ -724,10 +724,10 @@ const techGroupLinks = technical.groups.map((g) => ({
   .ug-asset-foot {
     padding: 24px 0 40px;
     font-size: 14px;
-    color: rgba(235, 245, 248, 0.55);
+    color: var(--navy-muted);
   }
   .ug-asset-foot a {
-    color: var(--mint);
+    color: var(--ug-accent);
   }
 
   /* ===== Pillar groups + open features ===== */
@@ -748,14 +748,14 @@ const techGroupLinks = technical.groups.map((g) => ({
     font-size: 15px;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: rgba(235, 245, 248, 0.78);
+    color: var(--navy);
     margin: 0;
     display: flex;
     align-items: center;
     gap: 10px;
   }
   .ug-pillar-group__num {
-    color: var(--mint);
+    color: var(--ug-accent);
   }
   .ug-features {
     display: flex;
@@ -781,7 +781,7 @@ const techGroupLinks = technical.groups.map((g) => ({
     font-family: var(--font-head);
     font-weight: 700;
     font-size: 18px;
-    color: var(--off-white);
+    color: var(--ink-strong);
     margin: 0;
   }
   .ug-feature__liner {
@@ -808,7 +808,7 @@ const techGroupLinks = technical.groups.map((g) => ({
   .ug-feature__paragraph {
     font-size: 14.5px;
     line-height: 1.55;
-    color: rgba(235, 245, 248, 0.86);
+    color: var(--ink);
     margin: 0;
     max-width: 60ch;
   }
@@ -824,7 +824,7 @@ const techGroupLinks = technical.groups.map((g) => ({
     padding-left: 22px;
     font-size: 14px;
     line-height: 1.5;
-    color: rgba(235, 245, 248, 0.86);
+    color: var(--ink);
     max-width: 60ch;
   }
   .ug-feature__benefits li::before,
@@ -835,7 +835,7 @@ const techGroupLinks = technical.groups.map((g) => ({
     top: 0.3em;
     width: 13px;
     height: 13px;
-    background: var(--mint);
+    background: var(--ug-accent);
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
   }
@@ -858,7 +858,7 @@ const techGroupLinks = technical.groups.map((g) => ({
     font-size: 11px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--mint);
+    color: var(--ug-accent);
     margin: 0;
   }
   .ug-feature-scenarios {
@@ -872,6 +872,7 @@ const techGroupLinks = technical.groups.map((g) => ({
       grid-template-columns: 1fr 1fr;
     }
   }
+  /* Photo cards keep dark image scrims for text-on-photo */
   .ug-feature-scenario {
     position: relative;
     aspect-ratio: 3 / 4;
@@ -880,7 +881,8 @@ const techGroupLinks = technical.groups.map((g) => ({
     overflow: hidden;
     isolation: isolate;
     background: linear-gradient(160deg, #0c1a22 0%, #08131a 100%);
-    box-shadow: 0 14px 28px rgba(10, 22, 28, 0.28);
+    box-shadow: 0 14px 28px rgba(10, 22, 28, 0.16);
+    border: 1px solid rgba(10, 22, 28, 0.08);
   }
   .ug-feature-scenario__img {
     position: absolute;
@@ -953,7 +955,7 @@ const techGroupLinks = technical.groups.map((g) => ({
     padding-left: 22px;
     font-size: 14px;
     line-height: 1.5;
-    color: rgba(235, 245, 248, 0.86);
+    color: var(--ink);
     max-width: 60ch;
   }
   .ug-feature-itlink {
@@ -964,7 +966,7 @@ const techGroupLinks = technical.groups.map((g) => ({
     font-family: var(--font-head);
     font-weight: 600;
     font-size: 13px;
-    color: var(--mint);
+    color: var(--ug-accent);
     text-decoration: none;
     align-self: flex-start;
   }
@@ -975,7 +977,7 @@ const techGroupLinks = technical.groups.map((g) => ({
     display: none;
   }
 
-  /* ===== Accordion Technical / FAQ ===== */
+  /* ===== Accordion Technical / FAQ — light borders ===== */
   .ug-tech-group {
     margin-top: 28px;
   }
@@ -983,7 +985,7 @@ const techGroupLinks = technical.groups.map((g) => ({
     font-family: var(--font-head);
     font-weight: 700;
     font-size: 16px;
-    color: var(--off-white);
+    color: var(--ink-strong);
     margin: 0 0 8px;
   }
   .ug-tech-group__intro {
@@ -1019,7 +1021,7 @@ const techGroupLinks = technical.groups.map((g) => ({
     font-family: var(--font-head);
     font-weight: 700;
     font-size: 15px;
-    color: var(--off-white);
+    color: var(--ink-strong);
   }
   .ug-tech-item__summary-text {
     grid-column: 1;
@@ -1029,8 +1031,8 @@ const techGroupLinks = technical.groups.map((g) => ({
   .ug-feature__chev {
     width: 10px;
     height: 10px;
-    border-right: 2px solid var(--mint);
-    border-bottom: 2px solid var(--mint);
+    border-right: 2px solid var(--ug-accent);
+    border-bottom: 2px solid var(--ug-accent);
     transform: rotate(-45deg);
     transition: transform 0.18s ease;
     justify-self: end;
@@ -1050,7 +1052,7 @@ const techGroupLinks = technical.groups.map((g) => ({
     padding-left: 16px;
     font-size: 14px;
     line-height: 1.5;
-    color: rgba(235, 245, 248, 0.82);
+    color: var(--ink);
     max-width: 62ch;
   }
   .ug-tech-item__details li::before {
@@ -1061,14 +1063,14 @@ const techGroupLinks = technical.groups.map((g) => ({
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--mint);
+    background: var(--ug-accent);
   }
   .ug-faq__a {
     margin: 0 0 16px;
     padding: 0 4px;
     font-size: 14.5px;
     line-height: 1.55;
-    color: rgba(235, 245, 248, 0.82);
+    color: var(--ink);
     max-width: 62ch;
   }
 </style>

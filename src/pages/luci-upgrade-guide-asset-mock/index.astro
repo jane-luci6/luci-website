@@ -3,6 +3,7 @@
  * PREVIEW MOCK — Upgrade Guide landing (context → guide).
  * Pairs with ./guide.astro standalone asset. Not live. noindex.
  * Jane lock 2026-09-25: landing gives context; deep guide is FAG-style standalone.
+ * True light theme to match /guide/ (off-white + navy type) — not soft-dark.
  */
 import AssetLayout from '../../layouts/AssetLayout.astro';
 import { upgradeGuide, RELEASE_DATE } from '../../data/upgradeGuide';
@@ -16,7 +17,7 @@ const liveHref = '/luci-upgrade-guide/';
   title="New LUCI Upgrade Guide — landing mock (preview)"
   description="Preview landing that routes into the standalone Upgrade Guide asset mock. Not live."
   canonicalPath="/luci-upgrade-guide-asset-mock"
-  theme="dark"
+  theme="light"
 >
   <div class="ug-land-banner" role="status">
     <div class="ug-land-banner__inner">
@@ -125,9 +126,9 @@ const liveHref = '/luci-upgrade-guide/';
 
   .ug-land-hero {
     background:
-      radial-gradient(ellipse 80% 60% at 70% 20%, rgba(var(--mint-rgb), 0.18), transparent 60%),
-      #0a161c;
-    border-bottom: 1px solid rgba(235, 245, 248, 0.1);
+      radial-gradient(ellipse 80% 60% at 70% 20%, rgba(43, 158, 128, 0.12), transparent 60%),
+      var(--off-white);
+    border-bottom: 1px solid var(--rule-light);
   }
   .ug-land-hero__inner,
   .ug-land-section__inner {
@@ -141,7 +142,7 @@ const liveHref = '/luci-upgrade-guide/';
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--mint);
+    color: var(--accent-light);
     margin: 0 0 14px;
   }
   .ug-land-title {
@@ -150,26 +151,26 @@ const liveHref = '/luci-upgrade-guide/';
     font-size: clamp(32px, 5vw, 48px);
     line-height: 1.1;
     letter-spacing: -0.02em;
-    color: var(--off-white);
+    color: var(--ink-strong);
     margin: 0 0 16px;
     max-width: 18ch;
   }
   .ug-land-title em {
     font-style: normal;
-    color: var(--mint);
+    color: var(--accent-light);
   }
   .ug-land-date {
     font-family: var(--font-head);
     font-size: 14px;
     font-weight: 600;
-    color: rgba(235, 245, 248, 0.72);
+    color: var(--navy-muted);
     margin: 0 0 18px;
   }
   .ug-land-deck {
     font-family: var(--font-body);
     font-size: 17px;
     line-height: 1.55;
-    color: rgba(235, 245, 248, 0.82);
+    color: var(--ink);
     max-width: 52ch;
     margin: 0 0 28px;
   }
@@ -197,30 +198,30 @@ const liveHref = '/luci-upgrade-guide/';
     border: 1px solid var(--mint);
   }
   .ug-land-btn--primary:hover {
-    filter: brightness(1.05);
+    filter: brightness(1.03);
   }
   .ug-land-btn--ghost {
-    background: transparent;
-    color: var(--off-white);
-    border: 1px solid rgba(235, 245, 248, 0.28);
+    background: #fff;
+    color: var(--navy);
+    border: 1px solid var(--rule-light);
   }
   .ug-land-btn--ghost:hover {
-    border-color: var(--mint);
-    color: var(--mint);
+    border-color: var(--accent-light);
+    color: var(--accent-light);
   }
 
   .ug-land-section {
-    background: #0a161c;
-    border-bottom: 1px solid rgba(235, 245, 248, 0.08);
+    background: var(--off-white);
+    border-bottom: 1px solid var(--rule-light);
   }
   .ug-land-section--alt {
-    background: #0c1c24;
+    background: #fff;
   }
   .ug-land-h2 {
     font-family: var(--font-head);
     font-weight: 700;
     font-size: clamp(22px, 3vw, 28px);
-    color: var(--off-white);
+    color: var(--ink-strong);
     margin: 0 0 16px;
     max-width: 28ch;
   }
@@ -228,7 +229,7 @@ const liveHref = '/luci-upgrade-guide/';
     font-family: var(--font-body);
     font-size: 16px;
     line-height: 1.6;
-    color: rgba(235, 245, 248, 0.8);
+    color: var(--ink);
     max-width: 62ch;
     margin: 0 0 14px;
   }
@@ -250,48 +251,50 @@ const liveHref = '/luci-upgrade-guide/';
     gap: 8px;
     padding: 18px 16px;
     border-radius: 10px;
-    border: 1px solid rgba(235, 245, 248, 0.12);
-    background: rgba(235, 245, 248, 0.04);
+    border: 1px solid var(--rule-light);
+    background: var(--off-white);
+    box-shadow: 0 4px 14px rgba(10, 22, 28, 0.04);
   }
   .ug-land-pillar__num {
     font-family: var(--font-head);
     font-weight: 700;
     font-size: 12px;
     letter-spacing: 0.12em;
-    color: var(--mint);
+    color: var(--accent-light);
   }
   .ug-land-pillar__name {
     font-family: var(--font-head);
     font-weight: 700;
     font-size: 16px;
-    color: var(--off-white);
+    color: var(--ink-strong);
   }
   .ug-land-pillar__sum {
     font-family: var(--font-body);
     font-size: 14px;
     line-height: 1.45;
-    color: rgba(235, 245, 248, 0.7);
+    color: var(--navy-muted);
   }
   .ug-land-pillar__count {
     font-family: var(--font-head);
     font-size: 12px;
     font-weight: 600;
-    color: rgba(235, 245, 248, 0.5);
+    color: var(--navy-muted);
     margin-top: 4px;
   }
   .ug-land-note {
     font-family: var(--font-body);
     font-size: 14px;
     line-height: 1.5;
-    color: rgba(235, 245, 248, 0.68);
+    color: var(--navy-muted);
     max-width: 60ch;
     margin: 0 0 22px;
   }
   .ug-land-foot {
-    background: #071016;
-    color: rgba(235, 245, 248, 0.55);
+    background: #fff;
+    color: var(--navy-muted);
     font-family: var(--font-body);
     font-size: 13px;
+    border-top: 1px solid var(--rule-light);
   }
   .ug-land-foot .ug-land-section__inner {
     padding-block: 20px;
@@ -301,7 +304,7 @@ const liveHref = '/luci-upgrade-guide/';
     align-items: center;
   }
   .ug-land-foot a {
-    color: var(--mint);
+    color: var(--accent-light);
   }
   .ug-land-foot__sep {
     opacity: 0.4;

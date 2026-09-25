@@ -15,7 +15,7 @@ interface Props {
   canonicalPath?: string;
   ogImage?: string;
   noindex?: boolean;
-  /** Force light or dark document theme. Default dark (matches FAG asset). */
+  /** Force light or dark document theme. Asset mocks use light (Jane 2026-09-25). */
   theme?: 'dark' | 'light';
 }
 
@@ -25,7 +25,7 @@ const {
   canonicalPath,
   ogImage,
   noindex = true,
-  theme = 'dark',
+  theme = 'light',
 } = Astro.props;
 
 const pageTitle = title ? `${title} · ${site.name}` : `${site.tagline} · ${site.name}`;
@@ -43,7 +43,7 @@ const ogImageUrl = site.url + (ogImage ?? defaultOgImage);
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
-    <meta name="theme-color" content="#0A161C" />
+    <meta name="theme-color" content={theme === 'light' ? '#f5f8fa' : '#0A161C'} />
     {noindex && <meta name="robots" content="noindex, follow" />}
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content={site.name} />
@@ -66,7 +66,7 @@ const ogImageUrl = site.url + (ogImage ?? defaultOgImage);
 <style is:global>
   .asset-body {
     min-height: 100vh;
-    background: var(--surface-page, #0a161c);
+    background: var(--surface-page, #f5f8fa);
   }
   .asset-main {
     min-height: 100vh;
