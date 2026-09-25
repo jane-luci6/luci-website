@@ -1,23 +1,16 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+/**
+ * Live Upgrade Guide — standalone customer asset (FAG pattern).
+ * Jane 2026-09-25: AssetLayout (no site Header/Footer), sticky nested dropdown
+ * nav (Features ×10 / Technical / FAQ), Features always-open (Venue Thesis 1
+ * depth kept), Technical + FAQ stay accordion. Hero/thesis/pillars/copy unchanged.
+ */
+import AssetLayout from '../layouts/AssetLayout.astro';
 import SectionBlock from '../components/SectionBlock.astro';
-import PlatformChapterNav from '../components/PlatformChapterNav.astro';
 import { upgradeGuide } from '../data/upgradeGuide';
-import { breadcrumb } from '../data/seo';
 
 const { meta, hero, thesis, pillars, supportSpotlight, features, technical, upgradePath, faq, cta, openFlags } =
   upgradeGuide;
-
-const chapters = [
-  { id: 'ug-hero', label: 'Release' },
-  { id: 'ug-thesis', label: 'Thesis' },
-  { id: 'ug-pillars', label: 'Pillars' },
-  { id: 'ug-features', label: 'Features' },
-  { id: 'ug-technical', label: 'Technical' },
-  { id: 'ug-upgrade', label: 'Upgrade' },
-  { id: 'ug-faq', label: 'FAQ' },
-  { id: 'ug-cta', label: 'Contact' },
-];
 
 const featuresByPillar = (pillarId: string) => features.filter((f) => f.pillarId === pillarId);
 
@@ -32,23 +25,82 @@ const duoLockups = {
   faq: 'Questions',
   cta: 'The <em>new version</em> of LUCI',
 } as const;
-
-const breadcrumbLd = breadcrumb([
-  { name: 'Home', path: '/' },
-  { name: 'New LUCI Upgrade Guide', path: meta.path },
-]);
 ---
 
-<BaseLayout
+<AssetLayout
   title={meta.title.replace(' | LUCI Systems', '')}
   description={meta.description}
   canonicalPath={meta.path}
   noindex
-  jsonLd={breadcrumbLd}
-  darkHeader
+  theme="light"
 >
   <h1 class="ug-sr-only">{meta.title}</h1>
-  <PlatformChapterNav chapters={chapters} contextLabel="Upgrade Guide" />
+
+  <nav class="ug-asset-nav" aria-label="Upgrade Guide sections" data-ug-asset-nav>
+    <div class="ug-asset-nav__inner container container--wide">
+      <div class="ug-asset-nav__chapters">
+        <div class="ug-asset-nav__menu" data-ug-menu="ug-features">
+          <button
+            class="ug-asset-nav__chapter ug-asset-nav__chapter--trigger"
+            type="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="ug-asset-menu-features"
+            data-ug-chapter="ug-features"
+            data-ug-menu-trigger
+          >
+            <span>Features</span>
+            <svg class="ug-asset-nav__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="ug-asset-nav__panel" id="ug-asset-menu-features" role="menu" data-ug-menu-panel hidden>
+            <ul class="ug-asset-nav__list" role="none">
+              {features.map((f) => (
+                <li role="none">
+                  <a class="ug-asset-nav__item" href={`#ug-feature-${f.id}`} data-ug-feat={`ug-feature-${f.id}`} role="menuitem">
+                    <span class="ug-asset-nav__item-name">{f.name}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div class="ug-asset-nav__menu" data-ug-menu="ug-technical">
+          <button
+            class="ug-asset-nav__chapter ug-asset-nav__chapter--trigger"
+            type="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="ug-asset-menu-technical"
+            data-ug-chapter="ug-technical"
+            data-ug-menu-trigger
+          >
+            <span>Technical</span>
+            <svg class="ug-asset-nav__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="ug-asset-nav__panel" id="ug-asset-menu-technical" role="menu" data-ug-menu-panel hidden>
+            <ul class="ug-asset-nav__list" role="none">
+              <li role="none">
+                <a class="ug-asset-nav__item" href="#ug-technical" role="menuitem" data-ug-tech-jump="ug-technical">
+                  <span class="ug-asset-nav__item-name">Technical overview</span>
+                </a>
+              </li>
+              {technical.groups.map((g) => (
+                <li role="none">
+                  <a class="ug-asset-nav__item" href={`#ug-tech-${g.id}`} role="menuitem" data-ug-tech-jump={`ug-tech-${g.id}`}>
+                    <span class="ug-asset-nav__item-name">{g.heading}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <a class="ug-asset-nav__chapter" href="#ug-faq" data-ug-chapter="ug-faq">FAQ</a>
+      </div>
+    </div>
+  </nav>
+
 
   <div class="ug-headers ug-headers--alt">
 
@@ -136,7 +188,7 @@ const breadcrumbLd = breadcrumb([
   <SectionBlock
     id="ug-features"
     lockupName={duoLockups.features}
-    lockupRole="Click a feature to open its detail"
+    lockupRole="Jump from the Features menu"
     tone="deep"
     wide
   >
@@ -148,24 +200,17 @@ const breadcrumbLd = breadcrumb([
               <span class="ug-pillar-group__num">{pillar.number}</span>
               {pillar.name}
             </h3>
-            <button
-              class="ug-expand-toggle"
-              type="button"
-              aria-expanded="false"
-              data-pillar={pillar.id}
-            >
-              <span class="ug-expand-toggle__label">Expand all</span>
-            </button>
           </div>
           <div class="ug-features">
             {featuresByPillar(pillar.id).map((f) => (
-              <details class="ug-feature" id={`ug-feature-${f.id}`} data-pillar={pillar.id}>
-                <summary class="ug-feature__summary">
+              <article class="ug-feature ug-feature--open" id={`ug-feature-${f.id}`} data-pillar={pillar.id}>
+                <header class="ug-feature__summary">
+
                   <span class="ug-feature__name">{f.name}</span>
                   <span class="ug-feature__liner">{f.oneLiner}</span>
-                  <span class="ug-feature__chev" aria-hidden="true"></span>
-                </summary>
+                </header>
                 <div class="ug-feature__body">
+
                   {f.scenarios && f.scenarios.length > 0 ? (
                     <div class="ug-feature-deep">
                       <section class="ug-feature-deep__section">
@@ -234,8 +279,8 @@ const breadcrumbLd = breadcrumb([
                       </ul>
                     </>
                   )}
-                </div>
-              </details>
+                                </div>
+              </article>
             ))}
           </div>
         </div>
@@ -334,8 +379,8 @@ const breadcrumbLd = breadcrumb([
     wide
   >
     <div class="ug-faq">
-      {faq.map((f) => (
-        <details class="ug-faq__item">
+      {faq.map((f, i) => (
+        <details class="ug-faq__item" id={`ug-faq-${i + 1}`}>
           <summary class="ug-faq__q">{f.question}</summary>
           <p class="ug-faq__a">{f.answer}</p>
         </details>
@@ -382,7 +427,7 @@ const breadcrumbLd = breadcrumb([
       </ul>
     </details>
   </aside>
-</BaseLayout>
+</AssetLayout>
 
 <style>
   .ug-sr-only {
@@ -400,12 +445,12 @@ const breadcrumbLd = breadcrumb([
   /* Section scroll offset for sticky nav + header */
   #ug-hero, #ug-thesis, #ug-pillars, #ug-features,
   #ug-technical, #ug-upgrade, #ug-faq, #ug-cta {
-    scroll-margin-top: 156px;
+    scroll-margin-top: 72px;
   }
   @media (max-width: 640px) {
     #ug-hero, #ug-thesis, #ug-pillars, #ug-features,
     #ug-technical, #ug-upgrade, #ug-faq, #ug-cta {
-      scroll-margin-top: 132px;
+      scroll-margin-top: 64px;
     }
   }
 
@@ -749,6 +794,7 @@ const breadcrumbLd = breadcrumb([
   .ug-features {
     display: flex;
     flex-direction: column;
+    gap: 14px;
   }
   /* Single rule under pillar head (01): head border-bottom only —
      do not also put border-top on the first feature (was a double hairline). */
@@ -776,7 +822,7 @@ const breadcrumbLd = breadcrumb([
       align-items: baseline;
     }
   }
-  .ug-feature[open] .ug-feature__summary {
+  .ug-feature[open] .ug-feature__summary, .ug-feature--open .ug-feature__summary {
     padding-bottom: 12px;
   }
   .ug-feature__name {
@@ -801,7 +847,7 @@ const breadcrumbLd = breadcrumb([
     background: linear-gradient(135deg, transparent 47%, var(--accent-light) 47%, var(--accent-light) 53%, transparent 53%),
                 linear-gradient(45deg, transparent 47%, var(--accent-light) 47%, var(--accent-light) 53%, transparent 53%);
   }
-  .ug-feature[open] .ug-feature__chev { transform: rotate(90deg); }
+  .ug-feature[open] .ug-feature__chev, .ug-feature--open .ug-feature__chev { transform: rotate(90deg); }
   /* Open body: align to summary liner column; inset + top rule so the
      panel feels placed under the feature header (not floating left). */
   .ug-feature__body {
@@ -1664,56 +1710,235 @@ const breadcrumbLd = breadcrumb([
   }
 </style>
 
-<script>
+
+<style>
+  /* ===== Asset mock chrome only (live UG styles preserved above) ===== */
+  .ug-asset-nav {
+    position: sticky;
+    top: 0;
+    z-index: 120;
+    background: rgba(245, 248, 250, 0.94);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(10, 26, 36, 0.1);
+  }
+  .ug-asset-nav__inner {
+    display: flex;
+    align-items: center;
+    min-height: 52px;
+    padding-block: 8px;
+  }
+  .ug-asset-nav__chapters { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .ug-asset-nav__menu { position: relative; }
+  .ug-asset-nav__chapter {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 36px;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--ink-strong, #0a1a24);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .ug-asset-nav__chapter:hover,
+  .ug-asset-nav__chapter:focus-visible { background: rgba(10, 26, 36, 0.05); }
+  .ug-asset-nav__chapter.is-active {
+    background: rgba(10, 26, 36, 0.08);
+    border-color: rgba(10, 26, 36, 0.12);
+  }
+  .ug-asset-nav__chapter--trigger[aria-expanded="true"] { background: rgba(10, 26, 36, 0.08); }
+  .ug-asset-nav__chev { width: 14px; height: 14px; opacity: 0.7; transition: transform 0.15s ease; }
+  .ug-asset-nav__chapter--trigger[aria-expanded="true"] .ug-asset-nav__chev { transform: rotate(180deg); }
+  .ug-asset-nav__panel {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    min-width: min(320px, 92vw);
+    max-height: min(70vh, 480px);
+    overflow: auto;
+    padding: 8px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid rgba(10, 26, 36, 0.12);
+    box-shadow: 0 16px 40px rgba(10, 26, 36, 0.14);
+    z-index: 130;
+  }
+  .ug-asset-nav__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+  .ug-asset-nav__item {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: var(--ink-strong, #0a1a24);
+    text-decoration: none;
+    font-size: 13.5px;
+    line-height: 1.35;
+  }
+  .ug-asset-nav__item:hover,
+  .ug-asset-nav__item:focus-visible { background: rgba(10, 26, 36, 0.05); }
+  .ug-asset-nav__item.is-active { background: rgba(127, 227, 187, 0.22); }
+  .ug-asset-nav__item-name { font-weight: 600; }
+
+  /* Open feature sections (asset mock): mirror live [open] without accordion */
+  .ug-feature--open {
+    border: 1px solid rgba(10, 26, 36, 0.1);
+    border-radius: 12px;
+    background: #fff;
+    overflow: hidden;
+  }
+  .ug-feature--open > .ug-feature__summary {
+    cursor: default;
+    list-style: none;
+  }
+  .ug-feature--open > .ug-feature__summary::-webkit-details-marker { display: none; }
+  .ug-feature--open .ug-feature__chev { display: none; }
+  .ug-feature--open .ug-feature__body {
+    display: block;
+    padding-top: 0;
+  }
+
+
+  .ug-feature--open { display: block; }
+  .ug-feature--open > .ug-feature__summary { cursor: default; }
+  .ug-feature--open .ug-feature__body { display: block; padding-top: 0; }
+  .ug-feature--open .ug-feature__chev { display: none; }
+
+  #ug-hero, #ug-thesis, #ug-pillars, #ug-features,
+  #ug-technical, #ug-upgrade, #ug-faq, #ug-cta,
+  [id^="ug-feature-"], [id^="ug-tech-"], [id^="ug-faq-"], [id^="ug-pillar-"] {
+    scroll-margin-top: 72px;
+  }
+  @media (max-width: 640px) {
+    #ug-hero, #ug-thesis, #ug-pillars, #ug-features,
+    #ug-technical, #ug-upgrade, #ug-faq, #ug-cta,
+    [id^="ug-feature-"], [id^="ug-tech-"], [id^="ug-faq-"], [id^="ug-pillar-"] {
+      scroll-margin-top: 64px;
+    }
+    .ug-asset-nav__panel {
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      width: auto;
+      min-width: 0;
+    }
+  }
+</style>
+
+
+<script is:inline>
   (function () {
     var reduceMo = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var nav = document.querySelector('[data-ug-asset-nav]');
+    if (!nav) return;
 
-    /* ---- Expand / Collapse all per pillar ---- */
-    var toggles = Array.prototype.slice.call(document.querySelectorAll('.ug-expand-toggle'));
-    toggles.forEach(function (toggle) {
-      var pillarId = toggle.getAttribute('data-pillar');
-      var group = document.getElementById('ug-pillar-' + pillarId);
-      if (!group) return;
-      var items = Array.prototype.slice.call(group.querySelectorAll('details.ug-feature'));
-      var label = toggle.querySelector('.ug-expand-toggle__label');
+    var triggers = Array.prototype.slice.call(nav.querySelectorAll('[data-ug-menu-trigger]'));
+    var menus = Array.prototype.slice.call(nav.querySelectorAll('[data-ug-menu]'));
+    var chapterLinks = Array.prototype.slice.call(nav.querySelectorAll('[data-ug-chapter]'));
+    var featLinks = Array.prototype.slice.call(nav.querySelectorAll('[data-ug-feat]'));
+    var techJumpLinks = Array.prototype.slice.call(nav.querySelectorAll('[data-ug-tech-jump]'));
 
-      function sync() {
-        var allOpen = items.length > 0 && items.every(function (d) { return d.hasAttribute('open'); });
-        toggle.setAttribute('aria-expanded', allOpen ? 'true' : 'false');
-        if (label) label.textContent = allOpen ? 'Collapse all' : 'Expand all';
-      }
+    function navH() { return Math.ceil(nav.getBoundingClientRect().height) || 52; }
 
-      toggle.addEventListener('click', function () {
-        var allOpen = items.every(function (d) { return d.hasAttribute('open'); });
-        items.forEach(function (d) {
-          if (allOpen) d.removeAttribute('open');
-          else d.setAttribute('open', '');
-        });
-        sync();
+    function closeAll(except) {
+      menus.forEach(function (menu) {
+        if (except && menu === except) return;
+        var btn = menu.querySelector('[data-ug-menu-trigger]');
+        var panel = menu.querySelector('[data-ug-menu-panel]');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+        if (panel) panel.hidden = true;
       });
+    }
+    function openMenu(menu) {
+      closeAll(menu);
+      var btn = menu.querySelector('[data-ug-menu-trigger]');
+      var panel = menu.querySelector('[data-ug-menu-panel]');
+      if (btn) btn.setAttribute('aria-expanded', 'true');
+      if (panel) panel.hidden = false;
+    }
 
-      items.forEach(function (d) {
-        d.addEventListener('toggle', sync);
-      });
-      sync();
-    });
-
-    /* ---- Pillar pill → scroll to feature and open it ---- */
-    var pills = Array.prototype.slice.call(document.querySelectorAll('.ug-pill[data-feature]'));
-    pills.forEach(function (pill) {
-      pill.addEventListener('click', function (e) {
-        var fid = pill.getAttribute('data-feature');
-        var target = document.getElementById('ug-feature-' + fid);
-        if (!target) return;
+    triggers.forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
         e.preventDefault();
-        if (!target.hasAttribute('open')) target.setAttribute('open', '');
-        var top = target.getBoundingClientRect().top + window.scrollY - 156;
-        window.scrollTo({ top: top, behavior: reduceMo ? 'auto' : 'smooth' });
-        history.replaceState(null, '', '#ug-feature-' + fid);
+        e.stopPropagation();
+        var menu = btn.closest('[data-ug-menu]');
+        if (btn.getAttribute('aria-expanded') === 'true') closeAll();
+        else openMenu(menu);
+      });
+    });
+    document.addEventListener('click', function (e) { if (!nav.contains(e.target)) closeAll(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
+
+    function jumpTo(id, updateHash) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var details = el.closest('details') || (el.tagName === 'DETAILS' ? el : null);
+      if (details && !details.open) details.open = true;
+      var top = el.getBoundingClientRect().top + window.scrollY - navH() - 8;
+      window.scrollTo({ top: top, behavior: reduceMo ? 'auto' : 'smooth' });
+      if (updateHash !== false) history.replaceState(null, '', '#' + id);
+      closeAll();
+    }
+
+    featLinks.forEach(function (a) {
+      a.addEventListener('click', function (e) { e.preventDefault(); jumpTo(a.getAttribute('data-ug-feat'), true); });
+    });
+    techJumpLinks.forEach(function (a) {
+      a.addEventListener('click', function (e) { e.preventDefault(); jumpTo(a.getAttribute('data-ug-tech-jump'), true); });
+    });
+    chapterLinks.forEach(function (a) {
+      if (a.tagName !== 'A') return;
+      a.addEventListener('click', function (e) { e.preventDefault(); jumpTo(a.getAttribute('data-ug-chapter'), true); });
+    });
+
+    Array.prototype.slice.call(document.querySelectorAll('a.ug-pill[data-feature], a.ug-pill[href^="#ug-feature-"]')).forEach(function (pill) {
+      pill.addEventListener('click', function (e) {
+        var href = pill.getAttribute('href') || '';
+        var fid = pill.getAttribute('data-feature');
+        var id = fid ? ('ug-feature-' + fid) : href.replace(/^#/, '');
+        if (!id) return;
+        e.preventDefault();
+        jumpTo(id, true);
       });
     });
 
-    /* ---- Back-to-top ---- */
+    function setChapterActive(id) {
+      chapterLinks.forEach(function (el) {
+        el.classList.toggle('is-active', el.getAttribute('data-ug-chapter') === id);
+      });
+    }
+    function setFeatActive(id) {
+      featLinks.forEach(function (el) {
+        el.classList.toggle('is-active', el.getAttribute('data-ug-feat') === id);
+      });
+    }
+
+    var chapterSecs = ['ug-features', 'ug-technical', 'ug-faq']
+      .map(function (id) { return document.getElementById(id); })
+      .filter(Boolean);
+    var featSecs = Array.prototype.slice.call(document.querySelectorAll('[id^="ug-feature-"]'));
+
+    function onScrollSpy() {
+      var offset = navH() + 24;
+      var activeChapter = null;
+      chapterSecs.forEach(function (sec) {
+        if (sec.getBoundingClientRect().top <= offset) activeChapter = sec.id;
+      });
+      if (activeChapter) setChapterActive(activeChapter);
+      var activeFeat = null;
+      featSecs.forEach(function (sec) {
+        if (sec.getBoundingClientRect().top <= offset + 8) activeFeat = sec.id;
+      });
+      if (activeFeat) setFeatActive(activeFeat);
+    }
+    window.addEventListener('scroll', onScrollSpy, { passive: true });
+    onScrollSpy();
+
     var btt = document.querySelector('[data-ug-back-to-top]');
     if (btt) {
       var onScroll = function () {
@@ -1727,7 +1952,12 @@ const breadcrumbLd = breadcrumb([
       onScroll();
     }
 
+    function adjustHash() {
+      var id = location.hash.slice(1);
+      if (id && document.getElementById(id)) jumpTo(id, false);
+    }
+    if (document.readyState === 'complete') adjustHash();
+    else window.addEventListener('load', adjustHash);
+    setTimeout(adjustHash, 200);
   })();
 </script>
-
-
