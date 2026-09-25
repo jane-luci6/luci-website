@@ -267,7 +267,7 @@ export const upgradeGuide = {
       oneLiner:
         'Venue panels give operators a simple view of only the room—or rooms—they need, with only the controls approved for that space.',
       paragraph:
-        'Venue panels provide a basic panel or list interface without opening the full LUCI application. Each panel starts with the endpoints assigned to its venue, and an administrator chooses which devices, actions, and sources appear.',
+        'Put focused room control where the work happens: on a wall touchscreen in a ballroom, a tablet at a bar, or an iPad by a cabana. Each panel starts with the endpoints assigned to its venue, then an administrator chooses which devices, actions, and sources appear. Staff panels can require a PIN, while guest-facing panels can stay open. Operators get a basic panel or list interface without access to the main LUCI application.',
       benefits: [],
       media: {
         kind: 'placeholder',
@@ -298,11 +298,10 @@ export const upgradeGuide = {
       ],
       limits: [
         'Show operators only the room or rooms assigned to that panel.',
-        'Hide individual actions, such as power, while leaving source and volume available.',
+        'Hide individual actions, such as turning power on or off, while leaving source and volume available.',
         'Limit source choices to an approved list.',
         'Require a PIN for staff or leave a guest-facing panel open with tap-to-wake.',
         'Use a dedicated wall touchscreen or a paired tablet, iPad, or browser.',
-        'Plan for one panel per room in most cases, or a couple of rooms when needed.',
       ],
       technicalJumpId: 'technical-venue-panels',
     },

@@ -58,15 +58,14 @@ export const scenarios = [
     id: 'conference-media',
     title: 'Conference / media',
     line: 'Localized room control; inherits endpoints assigned to that room.',
-  },
+  }
 ] as const;
 
 /** Limits & controls checklist — MOCK COPY, from audit. 4\u20136 items per lock. */
 export const limits = [
-  'Hide individual actions (e.g. power) while allowing source/volume',
+  'Hide individual actions (e.g. turning power on or off) while allowing source/volume',
   'Limit which sources appear',
-  'PIN for staff vs open/tap-to-wake for guests',
-  'Typically one panel per room (or a couple)',
+  'PIN for staff vs open/tap-to-wake for guests'
 ] as const;
 
 /** Thesis 2 story beats — MOCK COPY. Compact `Label \u2014 line` rows
@@ -87,7 +86,7 @@ export const beats = [
   {
     label: 'Conference / media',
     line: 'Localized room control; inherits endpoints assigned to that room.',
-  },
+  }
 ] as const;
 
 /** Thesis 3 media frame caption — MOCK COPY. */
