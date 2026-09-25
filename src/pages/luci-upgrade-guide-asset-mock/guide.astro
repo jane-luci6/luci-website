@@ -1,816 +1,899 @@
 ---
 /**
- * PREVIEW MOCK — Upgrade Guide as FAG-style standalone asset.
- * One in-asset sticky nav (nested chapter dropdowns). No site Header/Footer.
- * Features = always-open sections. Technical + FAQ = accordion only.
- * Jane 2026-09-25: keep nested Features/Technical/FAQ IA; no back-to-landing CTAs.
- * True light theme (off-white + navy type + mint/accent-light) — not soft-dark.
- * Do NOT replace live /luci-upgrade-guide/ yet.
+ * PREVIEW MOCK — Upgrade Guide as standalone asset.
+ * Visual/content source of truth = live /luci-upgrade-guide/ (hero, thesis, pillars, rest).
+ * Deltas only (Jane 2026-09-25 lock):
+ *   1) AssetLayout — no site Header/Footer
+ *   2) Sticky nested dropdown nav (Features ×10 / Technical / FAQ)
+ *   3) Features = always-open sections (Venue Thesis 1 depth kept); Tech + FAQ stay accordion
+ * Do NOT cut over live /luci-upgrade-guide/ until Jane says so.
  */
 import AssetLayout from '../../layouts/AssetLayout.astro';
+import SectionBlock from '../../components/SectionBlock.astro';
 import { upgradeGuide } from '../../data/upgradeGuide';
 
-const { features, pillars, technical, faq, hero, meta } = upgradeGuide;
-const liveHref = '/luci-upgrade-guide/';
+const { meta, hero, thesis, pillars, supportSpotlight, features, technical, upgradePath, faq, cta, openFlags } =
+  upgradeGuide;
 
 const featuresByPillar = (pillarId: string) => features.filter((f) => f.pillarId === pillarId);
 
-// Full feature names in the dropdown menu (per brief: full names preferred).
-const featureLinks = features.map((f) => ({
-  id: `ug-feature-${f.id}`,
-  label: f.name,
-}));
-
-// Optional nested Technical targets — cheap because the data is already in upgradeGuide.ts.
-const techGroupLinks = technical.groups.map((g) => ({
-  id: `ug-tech-${g.id}`,
-  label: g.heading,
-}));
+/** Duo-color accent spans for section lockups — same words as live UG. */
+const duoLockups = {
+  thesis: 'The only A/V that scales and improves <em>just got better</em>',
+  pillars: 'What the release puts <em>in your hands</em>',
+  features: 'Feature <em>deep-dive</em>',
+  technical: 'Technical <em>detail</em>',
+  upgrade: 'Your path to the <em>new LUCI</em>',
+  faq: 'Questions',
+  cta: 'The <em>new version</em> of LUCI',
+} as const;
 ---
 
 <AssetLayout
   title="New LUCI Upgrade Guide — standalone asset mock"
-  description="Preview FAG-style standalone Upgrade Guide with nested section dropdowns and open feature sections. Not live."
+  description="Preview: original Upgrade Guide design with asset nav and open feature sections. Not live."
   canonicalPath="/luci-upgrade-guide-asset-mock/guide"
+  noindex
   theme="light"
 >
-  <div class="ug-asset" data-ug-asset>
-    <div class="ug-asset-banner" role="status">
-      <div class="ug-asset-banner__inner">
-        <span class="ug-asset-banner__tag">PREVIEW MOCK</span>
-        <span>
-          Standalone asset — one sticky nav, no site chrome. Waiting on Jane before live cutover.
-          <span aria-hidden="true"> · </span>
-          <a href={liveHref}>Live accordion</a>
-        </span>
-      </div>
+  <h1 class="ug-sr-only">{meta.title}</h1>
+
+  <div class="ug-asset-banner" role="status">
+    <div class="ug-asset-banner__inner container container--wide">
+      <span class="ug-asset-banner__tag">PREVIEW MOCK</span>
+      <span>
+        Original Upgrade Guide look — asset chrome only. Nested Features / Technical / FAQ nav; features open (not accordion). Waiting on Jane before live cutover.
+        <span aria-hidden="true"> · </span>
+        <a href="/luci-upgrade-guide/">Live accordion</a>
+      </span>
     </div>
+  </div>
 
-    {/* ─── ONE in-asset sticky nav — nested dropdowns, lighter pre-GLM chrome ─── */}
-    <nav class="ug-asset-nav" aria-label="Upgrade Guide sections" data-ug-asset-nav>
-      <div class="ug-asset-nav__inner">
-        <div class="ug-asset-nav__chapters">
-          {/* Features — disclosure listing all 10 features */}
-          <div class="ug-asset-nav__menu" data-ug-menu="ug-features">
-            <button
-              class="ug-asset-nav__chapter ug-asset-nav__chapter--trigger"
-              type="button"
-              aria-haspopup="true"
-              aria-expanded="false"
-              aria-controls="ug-asset-menu-features"
-              data-ug-chapter="ug-features"
-              data-ug-menu-trigger
-            >
-              <span>Features</span>
-              <svg class="ug-asset-nav__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </button>
-            <div class="ug-asset-nav__panel" id="ug-asset-menu-features" role="menu" data-ug-menu-panel hidden>
-              <ul class="ug-asset-nav__list" role="none">
-                {featureLinks.map((f) => (
-                  <li role="none">
-                    <a
-                      class="ug-asset-nav__item"
-                      href={`#${f.id}`}
-                      data-ug-feat={f.id}
-                      role="menuitem"
-                    >
-                      <span class="ug-asset-nav__item-name">{f.label}</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* Technical — jump to #ug-technical, with nested tech group targets */}
-          <div class="ug-asset-nav__menu" data-ug-menu="ug-technical">
-            <button
-              class="ug-asset-nav__chapter ug-asset-nav__chapter--trigger"
-              type="button"
-              aria-haspopup="true"
-              aria-expanded="false"
-              aria-controls="ug-asset-menu-technical"
-              data-ug-chapter="ug-technical"
-              data-ug-menu-trigger
-            >
-              <span>Technical</span>
-              <svg class="ug-asset-nav__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </button>
-            <div class="ug-asset-nav__panel" id="ug-asset-menu-technical" role="menu" data-ug-menu-panel hidden>
-              <ul class="ug-asset-nav__list" role="none">
+  <nav class="ug-asset-nav" aria-label="Upgrade Guide sections" data-ug-asset-nav>
+    <div class="ug-asset-nav__inner container container--wide">
+      <div class="ug-asset-nav__chapters">
+        <div class="ug-asset-nav__menu" data-ug-menu="ug-features">
+          <button
+            class="ug-asset-nav__chapter ug-asset-nav__chapter--trigger"
+            type="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="ug-asset-menu-features"
+            data-ug-chapter="ug-features"
+            data-ug-menu-trigger
+          >
+            <span>Features</span>
+            <svg class="ug-asset-nav__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="ug-asset-nav__panel" id="ug-asset-menu-features" role="menu" data-ug-menu-panel hidden>
+            <ul class="ug-asset-nav__list" role="none">
+              {features.map((f) => (
                 <li role="none">
-                  <a class="ug-asset-nav__item" href="#ug-technical" role="menuitem" data-ug-tech-jump="ug-technical">
-                    <span class="ug-asset-nav__item-name">Technical overview</span>
+                  <a class="ug-asset-nav__item" href={`#ug-feature-${f.id}`} data-ug-feat={`ug-feature-${f.id}`} role="menuitem">
+                    <span class="ug-asset-nav__item-name">{f.name}</span>
                   </a>
                 </li>
-                {techGroupLinks.map((g) => (
-                  <li role="none">
-                    <a class="ug-asset-nav__item" href={`#${g.id}`} role="menuitem" data-ug-tech-jump={g.id}>
-                      <span class="ug-asset-nav__item-name">{g.label}</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* FAQ — simple jump link */}
-          <a
-            class="ug-asset-nav__chapter"
-            href="#ug-faq"
-            data-ug-chapter="ug-faq"
-          >
-            FAQ
-          </a>
-        </div>
-      </div>
-    </nav>
-
-    {/* ─── Compact asset intro ─── */}
-    <header class="ug-asset-intro" id="ug-top">
-      <div class="ug-asset-wrap">
-        <p class="ug-asset-kicker">{hero.eyebrow}</p>
-        <h1 class="ug-asset-title">
-          {hero.headline.leading}<em>{hero.headline.mintAccent}</em>{hero.headline.trailing}
-        </h1>
-        <p class="ug-asset-deck">{meta.description}</p>
-      </div>
-    </header>
-
-    {/* ─── FEATURES — always open ─── */}
-    <section class="ug-asset-sec ug-asset-sec--features" id="ug-features" data-ug-chapter-sec>
-      <div class="ug-asset-wrap">
-        <p class="ug-asset-kicker">Features</p>
-        <h2 class="ug-asset-h2">What this release puts in your hands</h2>
-        <p class="ug-asset-lede">
-          Open sections with a nested Features menu in the sticky nav — not a wrapping pill row,
-          not accordion. Pillar labels still group the scan underneath. Venue panels shows the
-          full deep treatment; other features use their current short copy.
-        </p>
-
-        {pillars.map((pillar) => (
-          <div class="ug-pillar-group" id={`ug-pillar-${pillar.id}`}>
-            <div class="ug-pillar-group__head">
-              <h3 class="ug-pillar-group__title">
-                <span class="ug-pillar-group__num">{pillar.number}</span>
-                {pillar.name}
-              </h3>
-            </div>
-
-            <div class="ug-features">
-              {featuresByPillar(pillar.id).map((f) => (
-                <article
-                  class="ug-feature ug-feature--open"
-                  id={`ug-feature-${f.id}`}
-                  data-ug-feature-sec
-                  data-pillar={pillar.id}
-                >
-                  <header class="ug-feature__summary">
-                    <h4 class="ug-feature__name">{f.name}</h4>
-                    <p class="ug-feature__liner">{f.oneLiner}</p>
-                  </header>
-                  <div class="ug-feature__body">
-                    {f.scenarios && f.scenarios.length > 0 ? (
-                      <div class="ug-feature-deep">
-                        <section class="ug-feature-deep__section">
-                          <p class="ug-feature-deep__label">What it is</p>
-                          {f.paragraph.split(/\n\n+/).map((para) => (
-                            <p class="ug-feature__paragraph">{para}</p>
-                          ))}
-                        </section>
-                        <section class="ug-feature-deep__section">
-                          <p class="ug-feature-deep__label">
-                            {f.scenariosSubsectionLabel ?? 'Use cases on your property'}
-                          </p>
-                          <div class="ug-feature-scenarios">
-                            {f.scenarios.map((s) => (
-                              <div class="ug-feature-scenario">
-                                {s.image && (
-                                  <img
-                                    class="ug-feature-scenario__img"
-                                    src={s.image}
-                                    alt=""
-                                    width="640"
-                                    height="853"
-                                    loading="lazy"
-                                    decoding="async"
-                                    style={s.imagePosition ? `object-position: ${s.imagePosition}` : undefined}
-                                  />
-                                )}
-                                <span class="ug-feature-scenario__scrim" aria-hidden="true"></span>
-                                <div class="ug-feature-scenario__copy">
-                                  <p class="ug-feature-scenario__title">{s.label}</p>
-                                  <p class="ug-feature-scenario__line">{s.line}</p>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </section>
-                        {f.limits && f.limits.length > 0 && (
-                          <section class="ug-feature-deep__section">
-                            <p class="ug-feature-deep__label">Limits &amp; controls</p>
-                            <ul class="ug-feature-limits" role="list">
-                              {f.limits.map((l) => (
-                                <li>{l}</li>
-                              ))}
-                            </ul>
-                          </section>
-                        )}
-                        {f.media && f.media.kind !== 'placeholder' && (
-                          <div class="ug-feature-media" data-feature-media-kind={f.media.kind}></div>
-                        )}
-                        {/* Media slot reserved (hidden while placeholder) — matches live Thesis 1 */}
-                        {f.media && f.media.kind === 'placeholder' && (
-                          <div
-                            class="ug-feature-media ug-feature-media--slot"
-                            data-feature-media-kind="placeholder"
-                            hidden
-                          >
-                            <span>{f.media.label}</span>
-                          </div>
-                        )}
-                        {f.technicalJumpId && (
-                          <a class="ug-feature-itlink" href={`#ug-tech-item-${f.technicalJumpId}`}>
-                            Technical detail &rarr;
-                          </a>
-                        )}
-                      </div>
-                    ) : (
-                      <>
-                        <p class="ug-feature__paragraph">{f.paragraph}</p>
-                        <ul class="ug-feature__benefits" role="list">
-                          {f.benefits.map((b) => (
-                            <li>{b}</li>
-                          ))}
-                        </ul>
-                      </>
-                    )}
-                  </div>
-                </article>
               ))}
-            </div>
+            </ul>
           </div>
+        </div>
+
+        <div class="ug-asset-nav__menu" data-ug-menu="ug-technical">
+          <button
+            class="ug-asset-nav__chapter ug-asset-nav__chapter--trigger"
+            type="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="ug-asset-menu-technical"
+            data-ug-chapter="ug-technical"
+            data-ug-menu-trigger
+          >
+            <span>Technical</span>
+            <svg class="ug-asset-nav__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="ug-asset-nav__panel" id="ug-asset-menu-technical" role="menu" data-ug-menu-panel hidden>
+            <ul class="ug-asset-nav__list" role="none">
+              <li role="none">
+                <a class="ug-asset-nav__item" href="#ug-technical" role="menuitem" data-ug-tech-jump="ug-technical">
+                  <span class="ug-asset-nav__item-name">Technical overview</span>
+                </a>
+              </li>
+              {technical.groups.map((g) => (
+                <li role="none">
+                  <a class="ug-asset-nav__item" href={`#ug-tech-${g.id}`} role="menuitem" data-ug-tech-jump={`ug-tech-${g.id}`}>
+                    <span class="ug-asset-nav__item-name">{g.heading}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <a class="ug-asset-nav__chapter" href="#ug-faq" data-ug-chapter="ug-faq">FAQ</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="ug-headers ug-headers--alt">
+
+  {/* ───────── 1. HERO — dark masthead + mesh ───────── */}
+  <section id="ug-hero" class="ug-hero">
+    <span class="ug-hero__mesh" aria-hidden="true"></span>
+    <span class="ug-hero__plan" aria-hidden="true"></span>
+    <span class="ug-hero__scrim" aria-hidden="true"></span>
+    <div class="ug-hero__inner container container--wide">
+      <p class="ug-hero__eyebrow">{hero.eyebrow}</p>
+      <h2 class="ug-hero__headline">
+        {hero.headline.leading}<span class="ug-hero__accent">{hero.headline.mintAccent}</span>{hero.headline.trailing}
+      </h2>
+      <div class="ug-hero__release">
+        <span class="ug-hero__rlabel">Release date</span>
+        <span class="ug-hero__date">{hero.date}</span>
+      </div>
+      <div class="ug-hero__ctas">
+        {hero.ctas.map((c) => (
+          <a
+            class:list={['btn', c.audience === 'prospects' ? 'btn--mint' : 'btn--mint-outline']}
+            href={c.href}
+          >
+            {c.label}
+          </a>
         ))}
       </div>
-    </section>
+    </div>
+    <span class="ug-hero__bar" aria-hidden="true"></span>
+  </section>
 
-    {/* ─── TECHNICAL — accordion ─── */}
-    <section class="ug-asset-sec ug-asset-sec--tech" id="ug-technical" data-ug-chapter-sec>
-      <div class="ug-asset-wrap">
-        <p class="ug-asset-kicker">Technical</p>
-        <h2 class="ug-asset-h2">{technical.heading}</h2>
-        <p class="ug-asset-lede">{technical.intro}</p>
-        <p class="ug-asset-note">Accordion only here (and FAQ) — per Jane lock.</p>
-        <div class="ug-technical">
-          {technical.groups.map((group) => (
-            <div class="ug-tech-group" id={`ug-tech-${group.id}`}>
-              <h3 class="ug-tech-group__title">{group.heading}</h3>
-              <p class="ug-tech-group__intro">{group.intro}</p>
-              <div class="ug-tech-items">
-                {group.items.map((item) => (
-                  <details class="ug-tech-item" id={`ug-tech-item-${item.id}`}>
-                    <summary class="ug-tech-item__summary">
-                      <span class="ug-tech-item__name">{item.name}</span>
-                      {item.summary && <span class="ug-tech-item__summary-text">{item.summary}</span>}
-                      <span class="ug-feature__chev" aria-hidden="true"></span>
-                    </summary>
-                    <ul class="ug-tech-item__details" role="list">
-                      {item.details.map((d) => (
-                        <li>{d}</li>
-                      ))}
-                    </ul>
-                  </details>
-                ))}
+  {/* ───────── 2. THESIS ───────── */}
+  <SectionBlock
+    id="ug-thesis"
+    lockupName={duoLockups.thesis}
+    tone="light"
+    wide
+  >
+    {thesis.paragraphs.map((para) => (
+      <p class="ug-thesis">{para}</p>
+    ))}
+  </SectionBlock>
+
+  {/* ───────── 3. PILLARS OVERVIEW ───────── */}
+  <SectionBlock
+    id="ug-pillars"
+    lockupName={duoLockups.pillars}
+    tone="light"
+    wide
+  >
+    <div class="ug-pillars">
+      {pillars.map((p) => (
+        <article class="ug-pillar">
+          <div class="ug-pillar__head">
+            <span class="ug-pillar__num" aria-hidden="true">{p.number}</span>
+            <h3 class="ug-pillar__name" set:html={p.name.replace('control', '<span class="ug-pillar__ctrl">control</span><br>')} />
+          </div>
+          <p class="ug-pillar__summary">{p.summary}</p>
+          <ul class="ug-pillar__pills" role="list">
+            {p.featurePills.map((pill) => (
+              <li>
+                <a class="ug-pill" href={`#ug-feature-${pill.id}`} data-feature={pill.id}>
+                  <span class="ug-pill__name">{pill.name}</span>
+                  <span class="ug-pill__liner">{pill.oneLiner}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+
+    {/* In-product support spotlight — full-width row under the 3-col grid
+        (two-pager .p2-spotlight pattern). Pulled out of the security pillar
+        (undo fold-in); links to the deep-dive feature if it remains. */}
+    <a class="ug-support-spotlight" href={`#ug-feature-${supportSpotlight.featureId}`}>
+      <span class="ug-support-spotlight__plus">Plus</span>
+      <span class="ug-support-spotlight__name">{supportSpotlight.title}</span>
+      <span class="ug-support-spotlight__liner">{supportSpotlight.oneLiner}</span>
+      <span class="ug-support-spotlight__arrow" aria-hidden="true">&rarr;</span>
+    </a>
+  </SectionBlock>
+
+  {/* ───────── 4. FEATURE DEEP-DIVE ───────── */}
+  <SectionBlock
+    id="ug-features"
+    lockupName={duoLockups.features}
+    lockupRole="Open sections — jump from the Features menu"
+    tone="deep"
+    wide
+  >
+    <div class="ug-deepdive">
+      {pillars.map((pillar) => (
+        <div class="ug-pillar-group" id={`ug-pillar-${pillar.id}`}>
+          <div class="ug-pillar-group__head">
+            <h3 class="ug-pillar-group__title">
+              <span class="ug-pillar-group__num">{pillar.number}</span>
+              {pillar.name}
+            </h3>
+          </div>
+          <div class="ug-features">
+            {featuresByPillar(pillar.id).map((f) => (
+              <article class="ug-feature ug-feature--open" id={`ug-feature-${f.id}`} data-pillar={pillar.id}>
+                <header class="ug-feature__summary">
+
+                  <span class="ug-feature__name">{f.name}</span>
+                  <span class="ug-feature__liner">{f.oneLiner}</span>
+                </header>
+                <div class="ug-feature__body">
+
+                  {f.scenarios && f.scenarios.length > 0 ? (
+                    <div class="ug-feature-deep">
+                      <section class="ug-feature-deep__section">
+                        <p class="ug-feature-deep__label">What it is</p>
+                        {f.paragraph.split(/\n\n+/).map((para) => (
+                          <p class="ug-feature__paragraph">{para}</p>
+                        ))}
+                      </section>
+                      <section class="ug-feature-deep__section">
+                        <p class="ug-feature-deep__label">{f.scenariosSubsectionLabel ?? 'Use cases on your property'}</p>
+                        <div class="ug-feature-scenarios">
+                          {f.scenarios.map((s) => (
+                            <div class="ug-feature-scenario">
+                              {s.image && (
+                                <img
+                                  class="ug-feature-scenario__img"
+                                  src={s.image}
+                                  alt=""
+                                  width="640"
+                                  height="853"
+                                  loading="lazy"
+                                  decoding="async"
+                                  style={s.imagePosition ? `object-position: ${s.imagePosition}` : undefined}
+                                />
+                              )}
+                              <span class="ug-feature-scenario__scrim" aria-hidden="true"></span>
+                              <div class="ug-feature-scenario__copy">
+                                <p class="ug-feature-scenario__title">{s.label}</p>
+                                <p class="ug-feature-scenario__line">{s.line}</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </section>
+                      {f.limits && f.limits.length > 0 && (
+                        <section class="ug-feature-deep__section">
+                          <p class="ug-feature-deep__label">Limits &amp; controls</p>
+                          <ul class="ug-feature-limits" role="list">
+                            {f.limits.map((l) => (
+                              <li>{l}</li>
+                            ))}
+                          </ul>
+                        </section>
+                      )}
+                      {/* Media slot — reserved at bottom of open detail (after limits, adjacent to IT jump).
+                          Hidden while media.kind === 'placeholder'. A future real media kind renders
+                          here in .ug-feature-media. NOT a Thesis 3 sticky side rail. */}
+                      {f.media && f.media.kind !== 'placeholder' && (
+                        <div class="ug-feature-media" data-feature-media-kind={f.media.kind}>
+                          {/* future real media kind renders here at bottom */}
+                        </div>
+                      )}
+                      {f.technicalJumpId && (
+                        <a class="ug-feature-itlink" href={`#ug-tech-item-${f.technicalJumpId}`}>
+                          Technical detail &rarr;
+                        </a>
+                      )}
+                    </div>
+                  ) : (
+                    <>
+                      <p class="ug-feature__paragraph">{f.paragraph}</p>
+                      <ul class="ug-feature__benefits" role="list">
+                        {f.benefits.map((b) => (
+                          <li>{b}</li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </SectionBlock>
+
+
+  {/* ───────── 6. TECHNICAL DETAIL ───────── */}
+  <SectionBlock
+    id="ug-technical"
+    lockupName={duoLockups.technical}
+    lockupRole="For the IT or A/V lead"
+    tone="light"
+    wide
+  >
+    <p class="ug-thesis">{technical.intro}</p>
+    <div class="ug-technical">
+      {technical.groups.map((group) => (
+        <div class="ug-tech-group" id={`ug-tech-${group.id}`}>
+          <h3 class="ug-tech-group__title">{group.heading}</h3>
+          <p class="ug-tech-group__intro">{group.intro}</p>
+          <div class="ug-tech-items">
+            {group.items.map((item) => (
+              <details class="ug-tech-item" id={`ug-tech-item-${item.id}`}>
+                <summary class="ug-tech-item__summary">
+                  <span class="ug-tech-item__name">{item.name}</span>
+                  {item.summary && <span class="ug-tech-item__summary-text">{item.summary}</span>}
+                  <span class="ug-feature__chev" aria-hidden="true"></span>
+                </summary>
+                <ul class="ug-tech-item__details" role="list">
+                  {item.details.map((d) => (
+                    <li>{d}</li>
+                  ))}
+                </ul>
+              </details>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </SectionBlock>
+
+  {/* ───────── 7. UPGRADE PATH ───────── */}
+  <SectionBlock
+    id="ug-upgrade"
+    lockupName={duoLockups.upgrade}
+    lockupRole="For existing LUCI clients"
+    tone="light"
+    wide
+  >
+    <p class="ug-thesis">{upgradePath.intro}</p>
+
+    <div class="ug-upgrade">
+      <div class="ug-upgrade__timing" role="group" aria-label="Upgrade timing">
+        <div class="ug-upgrade__timing-cell">
+          <span class="ug-upgrade__timing-label">{upgradePath.timing.releaseLabel}</span>
+          <span class="ug-upgrade__timing-value ug-upgrade__timing-value--date">{upgradePath.timing.releaseDate}</span>
+        </div>
+        <div class="ug-upgrade__timing-cell">
+          <span class="ug-upgrade__timing-label">Pace</span>
+          <span class="ug-upgrade__timing-value">{upgradePath.timing.paceLine}</span>
+        </div>
+      </div>
+      <p class="ug-upgrade__rollout-note">{upgradePath.timing.rolloutNote}</p>
+
+      <div class="ug-upgrade__how">
+        <h3 class="ug-upgrade__subhead">{upgradePath.whatIsInvolved.heading}</h3>
+        <p class="ug-upgrade__how-intro">{upgradePath.whatIsInvolved.paragraph}</p>
+        <ol class="ug-upgrade__steps" role="list">
+          {upgradePath.whatIsInvolved.steps.map((s) => (
+            <li class="ug-upgrade__step">
+              <span class="ug-upgrade__step-num">{s.number}</span>
+              <div class="ug-upgrade__step-copy">
+                <p class="ug-upgrade__step-title">{s.title}</p>
+                <p class="ug-upgrade__step-body">{s.body}</p>
               </div>
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
-    </section>
 
-    {/* ─── FAQ — accordion ─── */}
-    <section class="ug-asset-sec ug-asset-sec--faq" id="ug-faq" data-ug-chapter-sec>
-      <div class="ug-asset-wrap">
-        <p class="ug-asset-kicker">FAQ</p>
-        <h2 class="ug-asset-h2">Common questions</h2>
-        <div class="ug-faq">
-          {faq.map((item, i) => (
-            <details class="ug-faq__item" id={`ug-faq-${i + 1}`}>
-              <summary class="ug-faq__q">
-                <span>{item.question}</span>
-                <span class="ug-feature__chev" aria-hidden="true"></span>
-              </summary>
-              <p class="ug-faq__a">{item.answer}</p>
-            </details>
-          ))}
-        </div>
-      </div>
-    </section>
+      <a class="ug-upgrade__path-cta" href="#ug-cta">
+        Talk to your account team about timing
+        <span class="ug-upgrade__path-cta-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+  </SectionBlock>
 
-    <footer class="ug-asset-foot">
-      <div class="ug-asset-wrap">
-        Preview mock only — live accordion unchanged.
-        <span aria-hidden="true"> · </span>
-        <a href={liveHref}>Live site guide</a>
-      </div>
-    </footer>
-  </div>
+  {/* ───────── 8. FAQ ───────── */}
+  <SectionBlock
+    id="ug-faq"
+    lockupName={duoLockups.faq}
+    lockupRole="Straight answers"
+    tone="light"
+    wide
+  >
+    <div class="ug-faq">
+      {faq.map((f) => (
+        <details class="ug-faq__item" id="ug-faq-1">
+          <summary class="ug-faq__q">{f.question}</summary>
+          <p class="ug-faq__a">{f.answer}</p>
+        </details>
+      ))}
+    </div>
+  </SectionBlock>
+
+  {/* ───────── 9. CTA ───────── */}
+  <SectionBlock id="ug-cta" lockupName={duoLockups.cta} lockupRole={cta.heading} tone="deep" wide>
+    <p class="ug-cta__body">{cta.body}</p>
+    <p class="ug-cta__contact">
+      <strong>{cta.contact.name}</strong> · {cta.contact.role}<br />
+      <a href={`mailto:${cta.contact.email}`}>{cta.contact.email}</a> · {cta.contact.phone}
+    </p>
+    <div class="ug-cta__actions">
+      {cta.actions.map((a) => (
+        <a
+          class:list={['btn', a.audience === 'prospects' ? 'btn--mint' : 'btn--mint-outline']}
+          href={a.href}
+        >
+          {a.label}
+        </a>
+      ))}
+    </div>
+  </SectionBlock>
+
+  {/* ───────── Back-to-top ───────── */}
+  <button class="ug-back-to-top" type="button" aria-label="Back to top" data-ug-back-to-top>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="18 15 12 9 6 15" />
+    </svg>
+  </button>
+
+  </div>{/* /ug-headers mint wash + pillar none */}
+
+  {/* ───────── Open flags for Jane review (collapsed by default) ───────── */}
+  <aside class="ug-flags" aria-label="Open flags for Jane review">
+    <details>
+      <summary>Open flags for Jane review ({openFlags.length})</summary>
+      <ul>
+        {openFlags.map((flag) => (
+          <li>{flag}</li>
+        ))}
+      </ul>
+    </details>
+  </aside>
 </AssetLayout>
 
-<script is:inline>
-  (function () {
-    var nav = document.querySelector('[data-ug-asset-nav]');
-    if (!nav) return;
-    var triggers = Array.prototype.slice.call(nav.querySelectorAll('[data-ug-menu-trigger]'));
-    var menus = Array.prototype.slice.call(nav.querySelectorAll('[data-ug-menu]'));
-    var chapterLinks = Array.prototype.slice.call(nav.querySelectorAll('[data-ug-chapter]'));
-    var featLinks = Array.prototype.slice.call(nav.querySelectorAll('[data-ug-feat]'));
-    var techJumpLinks = Array.prototype.slice.call(nav.querySelectorAll('[data-ug-tech-jump]'));
-    var chapterSecs = Array.prototype.slice.call(document.querySelectorAll('[data-ug-chapter-sec]'));
-    var featSecs = Array.prototype.slice.call(document.querySelectorAll('[data-ug-feature-sec]'));
-    var reduceMo = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    function navH() {
-      var h = nav.offsetHeight || 0;
-      return h < 56 ? 96 : h;
-    }
-    function jumpTo(id, smooth) {
-      var el = document.getElementById(id);
-      if (!el) return;
-      var top = el.getBoundingClientRect().top + window.pageYOffset - navH() - 16;
-      window.scrollTo({ top: top, behavior: smooth && !reduceMo ? 'smooth' : 'auto' });
-    }
-
-    /* ── Dropdown open / close (click-to-open; touch parity) ── */
-    function closeMenu(menu) {
-      if (!menu) return;
-      var trigger = menu.querySelector('[data-ug-menu-trigger]');
-      var panel = menu.querySelector('[data-ug-menu-panel]');
-      if (trigger) trigger.setAttribute('aria-expanded', 'false');
-      if (panel) panel.hidden = true;
-      menu.classList.remove('is-open');
-    }
-    function openMenu(menu) {
-      if (!menu) return;
-      var trigger = menu.querySelector('[data-ug-menu-trigger]');
-      var panel = menu.querySelector('[data-ug-menu-panel]');
-      if (trigger) trigger.setAttribute('aria-expanded', 'true');
-      if (panel) panel.hidden = false;
-      menu.classList.add('is-open');
-    }
-    function closeAllMenus() { menus.forEach(closeMenu); }
-
-    triggers.forEach(function (trigger) {
-      trigger.addEventListener('click', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        var menu = trigger.closest('[data-ug-menu]');
-        var willOpen = trigger.getAttribute('aria-expanded') !== 'true';
-        closeAllMenus();
-        if (willOpen) openMenu(menu);
-      });
-    });
-
-    /* Outside click closes */
-    document.addEventListener('click', function (e) {
-      if (!nav.contains(e.target)) closeAllMenus();
-    });
-    /* Escape closes and restores focus to the last open trigger */
-    document.addEventListener('keydown', function (e) {
-      if (e.key !== 'Escape') return;
-      var openTrigger = nav.querySelector('[data-ug-menu-trigger][aria-expanded="true"]');
-      closeAllMenus();
-      if (openTrigger) openTrigger.focus();
-    });
-
-    /* Jump links inside dropdowns + plain chapter links */
-    function bindJump(a) {
-      var href = a.getAttribute('href') || '';
-      if (href.charAt(0) !== '#') return;
-      a.addEventListener('click', function (e) {
-        var id = href.slice(1);
-        if (!document.getElementById(id)) return;
-        e.preventDefault();
-        closeAllMenus();
-        jumpTo(id, false);
-        if (history.pushState) history.pushState(null, '', '#' + id);
-        setTimeout(function () {
-          var el = document.getElementById(id);
-          if (el && el.getBoundingClientRect().top < navH() + 8) jumpTo(id, false);
-        }, 280);
-      });
-    }
-    featLinks.forEach(bindJump);
-    techJumpLinks.forEach(bindJump);
-    chapterLinks.forEach(function (a) {
-      if (a.hasAttribute('data-ug-menu-trigger')) return; // dropdown trigger, not a jump
-      bindJump(a);
-    });
-
-    function setChapter(id) {
-      chapterLinks.forEach(function (l) {
-        var on = l.getAttribute('data-ug-chapter') === id;
-        l.classList.toggle('is-active', on);
-      });
-    }
-    function setFeat(id) {
-      featLinks.forEach(function (l) {
-        var on = l.getAttribute('data-ug-feat') === id;
-        l.classList.toggle('is-active', on);
-      });
-    }
-
-    if ('IntersectionObserver' in window) {
-      if (chapterSecs.length) {
-        var chIo = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (e) {
-              if (e.isIntersecting) setChapter(e.target.id);
-            });
-          },
-          { rootMargin: '-40% 0px -50% 0px', threshold: 0 }
-        );
-        chapterSecs.forEach(function (s) { chIo.observe(s); });
-      }
-      if (featSecs.length) {
-        var fIo = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (e) {
-              if (e.isIntersecting) setFeat(e.target.id);
-            });
-          },
-          { rootMargin: '-42% 0px -48% 0px', threshold: 0 }
-        );
-        featSecs.forEach(function (s) { fIo.observe(s); });
-      }
-    }
-
-    function adjustHash() {
-      if (!location.hash) return;
-      var id = location.hash.slice(1);
-      if (document.getElementById(id)) jumpTo(id, false);
-    }
-    if (document.readyState === 'complete') adjustHash();
-    else window.addEventListener('load', adjustHash);
-    setTimeout(adjustHash, 300);
-  })();
-</script>
-
 <style>
-  /* ===== Asset shell — TRUE light theme (off-white + navy type) ===== */
-  .ug-asset {
-    --ug-ink: var(--ink-strong);
-    --ug-muted: var(--navy-muted);
-    --ug-rule: var(--rule-light);
-    --ug-panel: #fff;
-    --ug-deep: var(--off-white);
-    --ug-accent: var(--accent-light);
-    background: var(--ug-deep);
-    color: var(--ug-ink);
-    font-family: var(--font-body);
+  .ug-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
-  .ug-asset-wrap {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 0 24px;
+
+  /* Section scroll offset for sticky nav + header */
+  #ug-hero, #ug-thesis, #ug-pillars, #ug-features,
+  #ug-technical, #ug-upgrade, #ug-faq, #ug-cta {
+    scroll-margin-top: 72px;
   }
-  .ug-asset-banner {
-    background: #c47a12;
-    color: #0a161c;
+  @media (max-width: 640px) {
+    #ug-hero, #ug-thesis, #ug-pillars, #ug-features,
+    #ug-technical, #ug-upgrade, #ug-faq, #ug-cta {
+      scroll-margin-top: 64px;
+    }
+  }
+
+  /* ---------- 1. HERO — dark masthead + mesh ---------- */
+  .ug-hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: #081318;
+    color: var(--off-white);
+    padding-block: clamp(56px, 9vw, 112px) clamp(40px, 6vw, 72px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .ug-hero__mesh {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    /* Flow C family — mesh + floorplan (with-plan), self-transparent over navy.
+       No mix-blend-mode: the asset carries its own transparency; screen would
+       blow out the floorplan raster. Scrim handles type legibility.
+       Crop restored to pre-zoom/Y-shift (b61bc19): center / cover. Dual-color
+       mint date + gold underline kept. */
+    background: url('/images/mesh/luci-bg-hero-with-plan-transparent-1920x1080.svg') center / cover no-repeat;
+    opacity: 0.82;
+  }
+  /* Right-column floorplan extension: short heroes match asset width under
+     cover, so X-position alone cannot shift plan into the post-text gutter.
+     Keep mesh framing locked; pin a plan layer to the right after the copy. */
+  .ug-hero__plan {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(64%, 880px);
+    z-index: 0;
+    pointer-events: none;
+    /* Dedicated right-panel crop of the plan texture (dense upper band,
+       empty far-edge trimmed). Mesh stays center/cover; this layer only
+       extends floorplan into the post-headline column. */
+    background: url('/images/mesh/luci-plan-right-panel.png') center top / cover no-repeat;
+    opacity: 0.88;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.15) 8%,
+      rgba(0, 0, 0, 0.65) 22%,
+      #000 38%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.15) 8%,
+      rgba(0, 0, 0, 0.65) 22%,
+      #000 38%
+    );
+  }
+  .ug-hero__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    /* Radial cloud behind the headline/CTAs — denser than the lines-only pass
+       (with-plan is denser), but still a cloud, not an opaque left panel, so
+       mesh + floorplan read through on the right. */
+    background: radial-gradient(
+      ellipse 74% 72% at 36% 44%,
+      rgba(7, 15, 20, 0.82) 0%,
+      rgba(7, 15, 20, 0.52) 34%,
+      rgba(7, 15, 20, 0.20) 60%,
+      transparent 86%
+    );
+  }
+  .ug-hero__inner {
+    position: relative;
+    z-index: 1;
+    max-width: var(--content-wide);
+  }
+  .ug-hero__eyebrow {
     font-family: var(--font-head);
-    font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin: 0 0 14px;
   }
-  .ug-asset-banner__inner {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 10px 24px;
+  .ug-hero__headline {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(30px, 6vw, 56px);
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--off-white);
+    margin: 0 0 28px;
+    max-width: 18ch;
+  }
+  .ug-hero__accent { color: var(--mint); }
+  .ug-hero__release {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .ug-hero__rlabel {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(235, 245, 248, 0.5);
+  }
+  .ug-hero__date {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--mint);
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+  }
+  /* Flow C house dual-color: gold underline/plate under release date
+     (mint already carries eyebrow + headline accent + bottom structural bar). */
+  .ug-hero__date::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 56px;
+    height: 2px;
+    background: var(--gold);
+  }
+  .ug-hero__ctas {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px 16px;
-    align-items: center;
+    gap: 12px;
   }
-  .ug-asset-banner__tag {
-    display: inline-flex;
-    padding: 2px 8px;
-    border-radius: 4px;
-    background: rgba(10, 22, 28, 0.18);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-size: 11px;
-  }
-  .ug-asset-banner a {
-    color: #0a161c;
-    font-weight: 700;
-  }
-
-  /* ===== Sticky nav — light frosted chrome ===== */
-  .ug-asset-nav {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: rgba(245, 248, 250, 0.94);
-    backdrop-filter: blur(14px) saturate(140%);
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
-    border-bottom: 1px solid var(--rule-light);
-    box-shadow: 0 8px 24px rgba(10, 22, 28, 0.08);
-  }
-  .ug-asset-nav__inner {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 14px 24px;
-    display: flex;
-    align-items: center;
-    gap: 12px 14px;
-    flex-wrap: nowrap;
-  }
-  .ug-asset-nav__chapters {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex: 1 1 auto;
-    min-width: 0;
-  }
-  .ug-asset-nav__chapter {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    min-height: 36px;
-    padding: 8px 12px;
-    border-radius: 4px;
-    border: 1px solid var(--rule-light);
-    background: #fff;
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--navy);
-    text-decoration: none;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: color 0.18s, background 0.18s, border-color 0.18s, box-shadow 0.18s;
-  }
-  .ug-asset-nav__chapter:hover {
-    color: var(--ink-strong);
-    border-color: rgba(43, 158, 128, 0.45);
-    box-shadow: 0 2px 8px rgba(10, 22, 28, 0.06);
-  }
-  .ug-asset-nav__chapter.is-active {
-    color: var(--navy-deep);
-    background: var(--mint);
-    border-color: var(--mint);
-    box-shadow: none;
-  }
-  .ug-asset-nav__chapter:focus-visible {
-    outline: 2px solid var(--accent-light);
-    outline-offset: 2px;
-  }
-  .ug-asset-nav__chev {
-    width: 12px;
-    height: 12px;
-    flex: 0 0 auto;
-    transition: transform 0.18s ease;
-  }
-  .ug-asset-nav__chapter--trigger[aria-expanded="true"] .ug-asset-nav__chev {
-    transform: rotate(180deg);
-  }
-
-  .ug-asset-nav__menu {
-    position: relative;
-    flex: 0 0 auto;
-  }
-  .ug-asset-nav__panel {
+  .ug-hero__bar {
     position: absolute;
-    top: calc(100% + 6px);
     left: 0;
-    z-index: 60;
-    min-width: 240px;
-    max-width: min(340px, 90vw);
-    background: #fff;
-    border: 1px solid var(--rule-light);
-    border-radius: 4px;
-    box-shadow: 0 16px 36px rgba(10, 22, 28, 0.12);
-    backdrop-filter: blur(14px) saturate(140%);
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
-    padding: 6px;
+    right: 0;
+    bottom: 0;
+    height: 4px;
+    background: var(--mint);
+    z-index: 1;
   }
-  .ug-asset-nav__panel[hidden] { display: none; }
-  .ug-asset-nav__list {
+
+  /* ---------- 2. THESIS ---------- */
+  .ug-thesis {
+    max-width: 64ch;
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+  .ug-thesis + .ug-thesis {
+    margin-top: 1em;
+  }
+
+  /* ---------- 3. PILLARS OVERVIEW ---------- */
+  .ug-pillars {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(20px, 2.4vw, 32px);
+    max-width: var(--content-wide);
+  }
+  @media (min-width: 820px) {
+    .ug-pillars { grid-template-columns: repeat(3, 1fr); }
+  }
+  .ug-pillar {
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    padding: clamp(20px, 2.4vw, 28px);
+    /* Two-pager .p1-pill / .p2-card fills, applied to the whole pillar box
+       per .ug-pillar nth-child (not paraphrases). */
+  }
+  .ug-pillars .ug-pillar:nth-child(1) {
+    background: linear-gradient(155deg, #E8EEF2 0%, #F3F6F8 100%);
+  }
+  .ug-pillars .ug-pillar:nth-child(2) {
+    background: linear-gradient(155deg, #EBF9F4 0%, #F4FCF9 100%);
+  }
+  .ug-pillars .ug-pillar:nth-child(3) {
+    background: linear-gradient(155deg, #D4EFE4 0%, #E8F6EF 100%);
+  }
+  /* ============================================================
+     PILLAR TABLE HEADERS — none (locked)
+     #ug-pillars: no filled boxes; type + mint hairline;
+     large ghost .ug-pillar__num watermarks behind titles for presence.
+     ============================================================ */
+  .ug-pillar__head {
+    background: transparent;
+    border-radius: 0;
+    padding: 18px 0 14px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: visible;
+    box-shadow: none;
+    border-bottom: 1px solid rgba(var(--mint-rgb), 0.28);
+  }
+  .ug-pillar__num {
+    position: absolute;
+    top: -6px;
+    right: -4px;
+    left: auto;
+    font-family: var(--font-head);
+    font-size: 100px;
+    font-weight: 700;
+    color: #10232d0d;
+    line-height: 1;
+    letter-spacing: -3px;
+    pointer-events: none;
+    user-select: none;
+    text-align: right;
+  }
+  .ug-pillar__name {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-head);
+    font-size: 27px;
+    font-weight: 700;
+    color: var(--ink-strong);
+    line-height: 1.22;
+    margin: 0;
+  }
+  .ug-pillar__name :global(.ug-pillar__ctrl) { color: var(--accent-light); }
+
+  .ug-pillar__summary {
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    color: var(--navy-muted);
+    line-height: 1.6;
+    margin: 0 0 20px;
+  }
+  .ug-pillar__pills {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 1px;
+    gap: 8px;
   }
-  .ug-asset-nav__item {
+  .ug-pill {
     display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    padding: 10px 12px;
-    border-radius: 6px;
-    font-family: var(--font-body);
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 1.35;
-    color: var(--ink);
+    flex-direction: column;
+    gap: 4px;
+    /* Nested pill on a light pillar-fill: translucent white reads on all
+       three pillar gradients (cool gray, light mint, deeper mint) without
+       inventing new pill copy. Keeps the mint left accent. */
+    background: rgba(255, 255, 255, 0.72);
+    border-left: 3px solid var(--accent-light);
+    border-radius: 8px;
+    padding: 14px 16px;
     text-decoration: none;
-    transition: background 0.14s ease, color 0.14s ease;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
   }
-  .ug-asset-nav__item:hover,
-  .ug-asset-nav__item:focus-visible {
-    background: rgba(43, 158, 128, 0.1);
-    color: var(--ink-strong);
-    outline: none;
+  .ug-pill:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(43, 158, 128, 0.18);
+    background: rgba(255, 255, 255, 0.86);
   }
-  .ug-asset-nav__item.is-active {
-    background: rgba(43, 158, 128, 0.14);
-    color: var(--ink-strong);
-    box-shadow: inset 2px 0 0 var(--accent-light);
-  }
-  .ug-asset-nav__item-name { flex: 1 1 auto; min-width: 0; }
-
-  @media (max-width: 760px) {
-    .ug-asset-nav__inner { padding: 12px 16px; gap: 10px; }
-    .ug-asset-nav__chapters { gap: 6px; }
-    .ug-asset-nav__chapter { min-height: 36px; padding: 7px 10px; font-size: 11px; letter-spacing: 0.04em; }
-    .ug-asset-nav__chev { width: 11px; height: 11px; }
-    .ug-asset-nav__panel {
-      left: -16px;
-      right: -16px;
-      min-width: 0;
-      max-width: none;
-      width: auto;
-      border-radius: 0 0 4px 4px;
-      border-left: 0;
-      border-right: 0;
-      border-top: 1px solid var(--rule-light);
-    }
-  }
-
-  #ug-features,
-  #ug-technical,
-  #ug-faq,
-  [data-ug-feature-sec] {
-    scroll-margin-top: 88px;
-  }
-  @media (max-width: 760px) {
-    #ug-features,
-    #ug-technical,
-    #ug-faq,
-    [data-ug-feature-sec] {
-      scroll-margin-top: 76px;
-    }
-  }
-
-  /* ===== Intro / sections ===== */
-  .ug-asset-intro {
-    padding: clamp(36px, 5vw, 56px) 0 28px;
-    border-bottom: 1px solid var(--ug-rule);
-  }
-  .ug-asset-kicker {
+  .ug-pill__name {
     font-family: var(--font-head);
-    font-size: 12px;
+    font-size: 13.5px;
     font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ug-accent);
-    margin: 0 0 12px;
-  }
-  .ug-asset-title {
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: clamp(28px, 4vw, 40px);
-    line-height: 1.12;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
     color: var(--ink-strong);
-    margin: 0 0 14px;
-    max-width: 18ch;
   }
-  .ug-asset-title em {
-    font-style: normal;
-    color: var(--ug-accent);
-  }
-  .ug-asset-deck,
-  .ug-asset-lede {
-    font-size: 16px;
-    line-height: 1.55;
-    color: var(--ug-muted);
-    max-width: 58ch;
-    margin: 0;
-  }
-  .ug-asset-h2 {
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: clamp(22px, 3vw, 28px);
-    color: var(--ink-strong);
-    margin: 0 0 12px;
-  }
-  .ug-asset-note {
+  .ug-pill__liner {
+    font-family: var(--font-body);
     font-size: 13px;
+    line-height: 1.45;
     color: var(--navy-muted);
-    margin: 10px 0 20px;
-  }
-  .ug-asset-sec {
-    padding: clamp(36px, 5vw, 56px) 0;
-    border-bottom: 1px solid var(--ug-rule);
-  }
-  .ug-asset-sec--tech,
-  .ug-asset-sec--faq {
-    background: var(--ug-panel);
-  }
-  .ug-asset-foot {
-    padding: 24px 0 40px;
-    font-size: 14px;
-    color: var(--navy-muted);
-  }
-  .ug-asset-foot a {
-    color: var(--ug-accent);
   }
 
-  /* ===== Pillar groups + open features ===== */
-  .ug-pillar-group {
-    margin-top: clamp(28px, 4vw, 40px);
+  /* ---------- 4. FEATURE DEEP-DIVE ---------- */
+  /* Section uses tone="deep" (navy lockup). Accordion stays on a light
+     panel so existing ink/rule treatment still reads — sales-style navy
+     header + light body. Brand tokens only. */
+  .ug-deepdive {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(28px, 3.6vw, 48px);
+    max-width: var(--content-wide);
+    margin-top: var(--space-2);
+    padding: clamp(20px, 2.4vw, 32px);
+    border-radius: 12px;
+    background: var(--off-white);
+    color: var(--ink);
   }
   .ug-pillar-group__head {
     display: flex;
     align-items: baseline;
-    gap: 12px;
-    margin-bottom: 12px;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 0;
     padding-bottom: 12px;
-    border-bottom: 1px solid rgba(43, 158, 128, 0.28);
+    border-bottom: 1px solid var(--rule-light);
   }
   .ug-pillar-group__title {
     font-family: var(--font-head);
+    font-size: clamp(20px, 2.4vw, 24px);
     font-weight: 700;
-    font-size: 15px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--navy);
+    letter-spacing: -0.015em;
+    color: var(--ink-strong);
     margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
   }
   .ug-pillar-group__num {
-    color: var(--ug-accent);
+    color: var(--accent-light);
+    margin-right: 10px;
+    font-weight: 400;
+  }
+  .ug-expand-toggle {
+    background: transparent;
+    border: 1px solid rgba(43, 158, 128, 0.4);
+    color: var(--accent-light);
+    border-radius: 9999px;
+    padding: 6px 14px;
+    font-family: var(--font-head);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.18s ease, color 0.18s ease;
+    white-space: nowrap;
+  }
+  .ug-expand-toggle:hover {
+    background: rgba(43, 158, 128, 0.1);
+    color: var(--ink-strong);
+  }
+  .ug-expand-toggle[aria-expanded="true"] {
+    background: var(--accent-light);
+    color: #fff;
+    border-color: var(--accent-light);
   }
   .ug-features {
     display: flex;
     flex-direction: column;
   }
-  .ug-feature--open {
-    border-bottom: 1px solid var(--ug-rule);
-    padding: 18px 0 22px;
+  /* Single rule under pillar head (01): head border-bottom only —
+     do not also put border-top on the first feature (was a double hairline). */
+  .ug-feature {
+    border-bottom: 1px solid var(--rule-light);
   }
   .ug-feature__summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 20px 0;
     display: grid;
+    grid-template-columns: 1fr;
     gap: 6px;
-    margin-bottom: 14px;
+    position: relative;
+  }
+  .ug-feature__summary::-webkit-details-marker { display: none; }
+  .ug-feature__summary:focus-visible {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 4px;
   }
   @media (min-width: 720px) {
     .ug-feature__summary {
-      grid-template-columns: minmax(160px, 220px) 1fr;
-      gap: 16px 24px;
-      align-items: start;
+      grid-template-columns: minmax(160px, 220px) 1fr 24px;
+      gap: 24px;
+      align-items: baseline;
     }
+  }
+  .ug-feature[open] .ug-feature__summary, .ug-feature--open .ug-feature__summary {
+    padding-bottom: 12px;
   }
   .ug-feature__name {
     font-family: var(--font-head);
     font-weight: 700;
-    font-size: 18px;
+    font-size: clamp(16px, 1.8vw, 18px);
+    letter-spacing: -0.01em;
     color: var(--ink-strong);
-    margin: 0;
   }
   .ug-feature__liner {
+    font-family: var(--font-body);
     font-size: 14.5px;
-    line-height: 1.45;
-    color: var(--ug-muted);
-    margin: 0;
-    max-width: 60ch;
+    line-height: 1.55;
+    color: var(--navy-muted);
   }
+  .ug-feature__chev {
+    align-self: center;
+    width: 14px;
+    height: 14px;
+    flex: none;
+    transition: transform 0.2s ease;
+    background: linear-gradient(135deg, transparent 47%, var(--accent-light) 47%, var(--accent-light) 53%, transparent 53%),
+                linear-gradient(45deg, transparent 47%, var(--accent-light) 47%, var(--accent-light) 53%, transparent 53%);
+  }
+  .ug-feature[open] .ug-feature__chev, .ug-feature--open .ug-feature__chev { transform: rotate(90deg); }
+  /* Open body: align to summary liner column; inset + top rule so the
+     panel feels placed under the feature header (not floating left). */
   .ug-feature__body {
-    display: grid;
+    padding: 0 0 24px;
+    display: flex;
+    flex-direction: column;
     gap: 14px;
+    border-top: 1px solid var(--rule-light);
+    padding-top: 16px;
   }
   @media (min-width: 720px) {
     .ug-feature__body {
+      display: grid;
       grid-template-columns: minmax(160px, 220px) 1fr 24px;
+      column-gap: 24px;
+      row-gap: 14px;
+      padding: 16px 0 28px;
+      align-items: start;
     }
     .ug-feature__paragraph,
-    .ug-feature__benefits,
-    .ug-feature-deep {
+    .ug-feature__benefits {
       grid-column: 2;
     }
   }
+  .ug-feature-deep__section .ug-feature__paragraph + .ug-feature__paragraph {
+    margin-top: 0.75em;
+  }
   .ug-feature__paragraph {
-    font-size: 14.5px;
-    line-height: 1.55;
+    font-family: var(--font-body);
+    font-size: 15.5px;
+    line-height: 1.65;
     color: var(--ink);
+    max-width: 64ch;
     margin: 0;
-    max-width: 60ch;
   }
   .ug-feature__benefits {
     list-style: none;
@@ -822,30 +905,37 @@ const techGroupLinks = technical.groups.map((g) => ({
   .ug-feature__benefits li {
     position: relative;
     padding-left: 22px;
+    font-family: var(--font-body);
     font-size: 14px;
     line-height: 1.5;
     color: var(--ink);
     max-width: 60ch;
   }
-  .ug-feature__benefits li::before,
-  .ug-feature-limits li::before {
+  .ug-feature__benefits li::before {
     content: "";
     position: absolute;
     left: 0;
     top: 0.3em;
     width: 13px;
     height: 13px;
-    background: var(--ug-accent);
+    background: var(--accent-light);
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
   }
 
-  /* Thesis 1 Venue deep body */
+  /* ---------- 4b. FEATURE DEEP BODY — Thesis 1 (Venue panels pilot) ----------
+     Ported from mock .ug-mock--t1 chrome into production selectors. Tokens only
+     from locked system (mint accent, mint hairline, mint tint, fonts). No new
+     hues/shadows/icons. Fuller card body text allowed (line-height 1.5, no clamp). */
   .ug-feature-deep {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    grid-column: 2;
     max-width: 60ch;
+  }
+  @media (max-width: 719px) {
+    .ug-feature-deep { grid-column: 1; }
   }
   .ug-feature-deep__section {
     display: flex;
@@ -858,9 +948,11 @@ const techGroupLinks = technical.groups.map((g) => ({
     font-size: 11px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--ug-accent);
+    color: var(--accent-light);
     margin: 0;
   }
+  /* Scenario photo cards — industry-card style (tall full-bleed photo + bottom scrim). */
+  /* Scenario card grid: restore icon-era 2×2 (cbc67aa) — not 4-up single row. */
   .ug-feature-scenarios {
     display: grid;
     grid-template-columns: 1fr;
@@ -868,11 +960,8 @@ const techGroupLinks = technical.groups.map((g) => ({
     align-items: stretch;
   }
   @media (min-width: 720px) {
-    .ug-feature-scenarios {
-      grid-template-columns: 1fr 1fr;
-    }
+    .ug-feature-scenarios { grid-template-columns: 1fr 1fr; }
   }
-  /* Photo cards keep dark image scrims for text-on-photo */
   .ug-feature-scenario {
     position: relative;
     aspect-ratio: 3 / 4;
@@ -881,8 +970,9 @@ const techGroupLinks = technical.groups.map((g) => ({
     overflow: hidden;
     isolation: isolate;
     background: linear-gradient(160deg, #0c1a22 0%, #08131a 100%);
-    box-shadow: 0 14px 28px rgba(10, 22, 28, 0.16);
-    border: 1px solid rgba(10, 22, 28, 0.08);
+    box-shadow: 0 14px 28px rgba(10, 22, 28, 0.28);
+    padding: 0;
+    display: block;
   }
   .ug-feature-scenario__img {
     position: absolute;
@@ -896,6 +986,7 @@ const techGroupLinks = technical.groups.map((g) => ({
     transform: scale(1.02);
     transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   }
+  /* Transparent top → deep navy/charcoal with slight mint cool cast at bottom (UG palette). */
   .ug-feature-scenario__scrim {
     position: absolute;
     inset: 0;
@@ -910,7 +1001,12 @@ const techGroupLinks = technical.groups.map((g) => ({
         rgba(8, 24, 28, 0.88) 78%,
         rgba(6, 20, 24, 0.96) 100%
       ),
-      linear-gradient(180deg, transparent 45%, rgba(var(--mint-rgb), 0.08) 100%);
+      linear-gradient(
+        180deg,
+        transparent 45%,
+        rgba(var(--mint-rgb), 0.08) 100%
+      );
+    transition: background 0.4s ease;
   }
   .ug-feature-scenario__copy {
     position: absolute;
@@ -922,6 +1018,7 @@ const techGroupLinks = technical.groups.map((g) => ({
     display: flex;
     flex-direction: column;
     gap: 6px;
+    text-align: left;
   }
   .ug-feature-scenario__title {
     font-family: var(--font-head);
@@ -933,6 +1030,7 @@ const techGroupLinks = technical.groups.map((g) => ({
     margin: 0;
   }
   .ug-feature-scenario__line {
+    font-family: var(--font-body);
     font-size: clamp(12.5px, 1.15vw, 14px);
     line-height: 1.45;
     color: rgba(245, 248, 250, 0.88);
@@ -943,6 +1041,11 @@ const techGroupLinks = technical.groups.map((g) => ({
       transform: scale(1.06);
     }
   }
+  @media (prefers-reduced-motion: reduce) {
+    .ug-feature-scenario__img { transition: none; }
+    .ug-feature-scenario:hover .ug-feature-scenario__img { transform: none; }
+  }
+  /* Limits checklist — same mint check mask as benefits. */
   .ug-feature-limits {
     list-style: none;
     margin: 0;
@@ -953,11 +1056,24 @@ const techGroupLinks = technical.groups.map((g) => ({
   .ug-feature-limits li {
     position: relative;
     padding-left: 22px;
+    font-family: var(--font-body);
     font-size: 14px;
     line-height: 1.5;
     color: var(--ink);
     max-width: 60ch;
   }
+  .ug-feature-limits li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.3em;
+    width: 13px;
+    height: 13px;
+    background: var(--accent-light);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
+  }
+  /* IT jump — text link only, no button chrome. Underline on hover. */
   .ug-feature-itlink {
     display: inline-flex;
     align-items: center;
@@ -966,111 +1082,921 @@ const techGroupLinks = technical.groups.map((g) => ({
     font-family: var(--font-head);
     font-weight: 600;
     font-size: 13px;
-    color: var(--ug-accent);
+    color: var(--accent-light);
     text-decoration: none;
     align-self: flex-start;
   }
-  .ug-feature-itlink:hover {
-    text-decoration: underline;
+  .ug-feature-itlink:hover { text-decoration: underline; }
+  .ug-feature-itlink:focus-visible {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 3px;
   }
+  /* Reserved media zone at bottom of open detail (after limits, adjacent to IT jump).
+     Hidden by default; a future real media kind renders here. NOT a Thesis 3 sticky rail. */
   .ug-feature-media {
     display: none;
   }
 
-  /* ===== Accordion Technical / FAQ — light borders ===== */
-  .ug-tech-group {
-    margin-top: 28px;
+</style>
+
+<style>
+  /* ---------- 5. IN-PRODUCT SUPPORT SPOTLIGHT ---------- */
+  /* Full-width row under the 3-col pillar grid (two-pager .p2-spotlight
+     pattern). Same content width as the grid; darker gray fill per
+     .p2-spotlight__box. Undo the fold-in (commit 8ca170c): support lives
+     in its own row, not as a 4th security pill. */
+  .ug-support-spotlight {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 18px;
+    max-width: var(--content-wide);
+    margin-top: clamp(20px, 2.4vw, 32px);
+    padding: 20px 24px;
+    border-radius: 10px;
+    border-left: 3px solid var(--accent-light);
+    background: linear-gradient(155deg, #D8DEE3 0%, #E8EDF0 100%);
+    text-decoration: none;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .ug-support-spotlight:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px -16px rgba(10, 20, 26, 0.32);
+  }
+  .ug-support-spotlight:focus-visible {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 3px;
+  }
+  .ug-support-spotlight__name {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 15.5px;
+    letter-spacing: -0.01em;
+    color: var(--ink-strong);
+    white-space: nowrap;
+  }
+  /* Top-left overlapping pill on the box edge — announces an extra
+     feature (not an account tier). Brand gold; sits half above the
+     top edge so it reads as a badge/overlay, not inline with the title. */
+  .ug-support-spotlight__plus {
+    position: absolute;
+    top: 0;
+    left: 16px;
+    z-index: 1;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-strong);
+    background: var(--gold);
+    border-radius: 9999px;
+    padding: 4px 10px 3px;
+    line-height: 1.2;
+    box-shadow: 0 2px 8px -2px rgba(10, 20, 26, 0.22);
+    pointer-events: none;
+  }
+  .ug-support-spotlight__liner {
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--navy-muted);
+  }
+  .ug-support-spotlight__arrow {
+    font-family: var(--font-head);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1;
+    color: var(--accent-light);
+    transition: transform 0.18s ease;
+  }
+  .ug-support-spotlight:hover .ug-support-spotlight__arrow {
+    transform: translateX(3px);
+  }
+  @media (max-width: 720px) {
+    .ug-support-spotlight {
+      grid-template-columns: 1fr auto;
+      grid-template-areas:
+        'name arrow'
+        'liner liner';
+      row-gap: 6px;
+    }
+    .ug-support-spotlight__name { grid-area: name; }
+    .ug-support-spotlight__liner { grid-area: liner; }
+    .ug-support-spotlight__arrow { grid-area: arrow; }
+  }
+
+  /* ---------- 6. TECHNICAL DETAIL ---------- */
+  .ug-technical {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(32px, 4vw, 48px);
+    max-width: var(--content-wide);
   }
   .ug-tech-group__title {
     font-family: var(--font-head);
+    font-size: clamp(18px, 2.2vw, 22px);
     font-weight: 700;
-    font-size: 16px;
+    letter-spacing: -0.015em;
     color: var(--ink-strong);
     margin: 0 0 8px;
   }
   .ug-tech-group__intro {
-    font-size: 14px;
-    color: var(--ug-muted);
-    margin: 0 0 12px;
-    max-width: 60ch;
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--navy-muted);
+    margin: 0 0 20px;
+    max-width: 64ch;
   }
-  .ug-tech-item,
-  .ug-faq__item {
-    border-bottom: 1px solid var(--ug-rule);
+  .ug-tech-items {
+    display: flex;
+    flex-direction: column;
   }
-  .ug-tech-item:first-child,
-  .ug-faq__item:first-of-type {
-    border-top: 1px solid var(--ug-rule);
+  .ug-tech-item {
+    border-bottom: 1px solid var(--rule-light);
   }
-  .ug-tech-item__summary,
-  .ug-faq__q {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 8px 16px;
-    align-items: center;
-    padding: 14px 4px;
-    cursor: pointer;
+  .ug-tech-item:first-child { border-top: 1px solid var(--rule-light); }
+  .ug-tech-item__summary {
     list-style: none;
+    cursor: pointer;
+    padding: 18px 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    position: relative;
   }
-  .ug-tech-item__summary::-webkit-details-marker,
-  .ug-faq__q::-webkit-details-marker {
-    display: none;
+  .ug-tech-item__summary::-webkit-details-marker { display: none; }
+  .ug-tech-item__summary:focus-visible {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 4px;
   }
-  .ug-tech-item__name,
-  .ug-faq__q span:first-child {
+  @media (min-width: 720px) {
+    .ug-tech-item__summary {
+      grid-template-columns: minmax(180px, 240px) 1fr 24px;
+      gap: 24px;
+      align-items: baseline;
+    }
+  }
+  .ug-tech-item__name {
     font-family: var(--font-head);
     font-weight: 700;
-    font-size: 15px;
+    font-size: 15.5px;
+    letter-spacing: -0.01em;
     color: var(--ink-strong);
   }
   .ug-tech-item__summary-text {
-    grid-column: 1;
-    font-size: 13.5px;
-    color: var(--ug-muted);
-  }
-  .ug-feature__chev {
-    width: 10px;
-    height: 10px;
-    border-right: 2px solid var(--ug-accent);
-    border-bottom: 2px solid var(--ug-accent);
-    transform: rotate(-45deg);
-    transition: transform 0.18s ease;
-    justify-self: end;
-  }
-  details[open] > summary .ug-feature__chev {
-    transform: rotate(45deg);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--navy-muted);
   }
   .ug-tech-item__details {
     list-style: none;
-    margin: 0 0 16px;
-    padding: 0 4px 4px;
+    margin: 0 0 24px;
+    padding: 0;
     display: grid;
-    gap: 8px;
+    gap: 6px;
+  }
+  @media (min-width: 720px) {
+    .ug-tech-item__details {
+      padding-left: minmax(180px, 240px);
+    }
   }
   .ug-tech-item__details li {
     position: relative;
-    padding-left: 16px;
+    padding-left: 18px;
+    font-family: var(--font-body);
     font-size: 14px;
-    line-height: 1.5;
+    line-height: 1.55;
     color: var(--ink);
-    max-width: 62ch;
+    max-width: 60ch;
   }
   .ug-tech-item__details li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.45em;
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: var(--accent-light);
+    opacity: 0.7;
+  }
+
+  /* ---------- 7. UPGRADE PATH ---------- */
+  .ug-upgrade {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(24px, 3.6vw, 36px);
+    max-width: var(--content-wide);
+  }
+
+  /* Timing strip: two-cell band (Release · Pace) */
+  .ug-upgrade__timing {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    background: linear-gradient(155deg, #EBF9F4 0%, #F4FCF9 100%);
+    border-left: 3px solid var(--accent-light);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  @media (min-width: 720px) {
+    .ug-upgrade__timing { grid-template-columns: minmax(220px, 260px) 1fr; }
+  }
+  .ug-upgrade__timing-cell {
+    padding: 18px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .ug-upgrade__timing-cell + .ug-upgrade__timing-cell {
+    border-top: 1px solid rgba(43, 158, 128, 0.18);
+  }
+  @media (min-width: 720px) {
+    .ug-upgrade__timing-cell + .ug-upgrade__timing-cell {
+      border-top: 0;
+      border-left: 1px solid rgba(43, 158, 128, 0.18);
+    }
+  }
+  .ug-upgrade__timing-label {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+  }
+  .ug-upgrade__timing-value {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 52ch;
+  }
+  .ug-upgrade__timing-value--date {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    color: var(--ink-strong);
+  }
+
+  /* Single short rollout line under the timing strip */
+  .ug-upgrade__rollout-note {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--navy-muted);
+    margin: 0;
+    max-width: 70ch;
+  }
+
+  /* How it works — 4 steps */
+  .ug-upgrade__how {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .ug-upgrade__subhead {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(18px, 2.2vw, 22px);
+    letter-spacing: -0.015em;
+    color: var(--ink-strong);
+    margin: 0;
+  }
+  .ug-upgrade__how-intro {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--navy-muted);
+    margin: 0;
+    max-width: 60ch;
+  }
+  .ug-upgrade__steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+  }
+  .ug-upgrade__step {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .ug-upgrade__step-num {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 9999px;
+    border: 1px solid var(--accent-light);
+    background: #fff;
+    color: var(--accent-light);
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 12px;
+  }
+  .ug-upgrade__step-title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--ink-strong);
+    margin: 0 0 2px;
+  }
+  .ug-upgrade__step-body {
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0;
+    max-width: 48ch;
+  }
+
+  /* Compact end-of-path CTA link to #ug-cta (not a duplicate contact card) */
+  .ug-upgrade__path-cta {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 22px 12px 18px;
+    border-radius: 9999px;
+    background: var(--accent-light);
+    color: #fff;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: -0.005em;
+    text-decoration: none;
+    transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .ug-upgrade__path-cta:hover {
+    background: #248f72;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(43, 158, 128, 0.28);
+  }
+  .ug-upgrade__path-cta:focus-visible {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 3px;
+  }
+  .ug-upgrade__path-cta-arrow {
+    font-family: var(--font-head);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1;
+    transition: transform 0.18s ease;
+  }
+  .ug-upgrade__path-cta:hover .ug-upgrade__path-cta-arrow {
+    transform: translateX(3px);
+  }
+
+  /* ---------- 8. FAQ ---------- */
+  .ug-faq { max-width: 760px; }
+  .ug-faq__item { border-bottom: 1px solid var(--rule-light); }
+  .ug-faq__item:first-child { border-top: 1px solid var(--rule-light); }
+  .ug-faq__q {
+    list-style: none;
+    cursor: pointer;
+    padding: clamp(18px, 2.4vw, 24px) 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(16px, 1.9vw, 18px);
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    color: var(--ink-strong);
+  }
+  .ug-faq__q::-webkit-details-marker { display: none; }
+  .ug-faq__q::after {
+    content: '+';
+    flex: none;
+    font-family: var(--font-head);
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--accent-light);
+  }
+  .ug-faq__item[open] .ug-faq__q::after { content: '\2212'; }
+  .ug-faq__a {
+    margin: 0 0 clamp(18px, 2.4vw, 24px);
+    max-width: 64ch;
+    font-family: var(--font-body);
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  /* ---------- 9. CTA (deep) ---------- */
+  .ug-cta__body {
+    max-width: 56ch;
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.82);
+    margin: 0 0 16px;
+  }
+  .ug-cta__contact {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.78);
+    margin: 0 0 24px;
+  }
+  .ug-cta__contact strong { color: var(--off-white); }
+  .ug-cta__contact a { color: var(--mint); }
+  .ug-cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* ---------- Back-to-top ---------- */
+  .ug-back-to-top {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 80;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 9999px;
+    background: rgba(16, 35, 45, 0.92);
+    color: var(--mint);
+    border: 1px solid rgba(104, 227, 190, 0.4);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+    transition: opacity 0.25s ease, transform 0.25s ease, background 0.18s, color 0.18s;
+  }
+  .ug-back-to-top.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
+  .ug-back-to-top:hover {
+    background: var(--mint);
+    color: var(--navy-deep);
+    border-color: var(--mint);
+  }
+  .ug-back-to-top:focus-visible {
+    outline: 2px solid var(--mint);
+    outline-offset: 3px;
+  }
+  .ug-back-to-top svg { width: 18px; height: 18px; }
+  @media (max-width: 640px) {
+    .ug-back-to-top { right: 14px; bottom: 14px; }
+
+    /* Stack feature summary rows on small screens */
+    .ug-feature__body, .ug-tech-item__details { padding-left: 0 !important; }
+  }
+
+  /* ---------- Open flags (Jane review only — collapsed, low-key) ---------- */
+  .ug-flags {
+    max-width: var(--content-wide);
+    margin: 0 auto;
+    padding: 16px var(--page-pad) 40px;
+  }
+  .ug-flags details {
+    background: rgba(43, 158, 128, 0.04);
+    border: 1px dashed rgba(43, 158, 128, 0.3);
+    border-radius: 8px;
+    padding: 12px 16px;
+  }
+  .ug-flags summary {
+    cursor: pointer;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    list-style: none;
+  }
+  .ug-flags summary::-webkit-details-marker { display: none; }
+  .ug-flags summary::before { content: '\25B6 '; font-size: 9px; margin-right: 6px; }
+  .ug-flags details[open] summary::before { content: '\25BC '; }
+  .ug-flags ul {
+    margin: 12px 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 8px;
+  }
+  .ug-flags li {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--navy-muted);
+    padding-left: 16px;
+    position: relative;
+  }
+  .ug-flags li::before {
     content: "";
     position: absolute;
     left: 0;
     top: 0.55em;
     width: 6px;
     height: 6px;
-    border-radius: 50%;
-    background: var(--ug-accent);
+    border-radius: 9999px;
+    background: var(--gold-deep, #CEB06E);
   }
-  .ug-faq__a {
-    margin: 0 0 16px;
-    padding: 0 4px;
-    font-size: 14.5px;
-    line-height: 1.55;
-    color: var(--ink);
-    max-width: 62ch;
+
+
+  /* ============================================================
+     SECTION LOCKUP HEADERS — mint wash (locked)
+     Soft mint wash band + ink/accent-light duo + split mint|gold-deep rule.
+     Full-bleed wash band; lockup type shares .container--wide inset
+     (same horizontal margins as body copy). White/blackbar paths removed.
+     Scope: section lockups only (#ug-thesis … #ug-cta). Hero untouched.
+     ============================================================ */
+
+  /* Shared: lockup em reads as duo accent */
+  .ug-headers :global(.header-lockup__name em) {
+    font-style: normal;
+  }
+
+  /* MINT WASH — soft mint band; ink + accent-light; split rule under name.
+     Band is full-bleed; content padded to match container--wide column. */
+  .ug-headers--alt :global(.section--light) :global(.header-lockup),
+  .ug-headers--alt :global(.section--white) :global(.header-lockup) {
+    position: relative;
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    margin-bottom: var(--space-5);
+    /* Horizontal inset matches .container--wide: page-pad, plus extra when
+       viewport exceeds content-wide so lockup type lines up with body copy. */
+    padding-top: 26px;
+    padding-bottom: 28px;
+    padding-left: max(var(--page-pad), calc(50vw - var(--content-wide) / 2 + var(--page-pad)));
+    padding-right: max(var(--page-pad), calc(50vw - var(--content-wide) / 2 + var(--page-pad)));
+    box-sizing: border-box;
+    background:
+      linear-gradient(180deg, rgba(var(--mint-rgb), 0.14) 0%, rgba(var(--mint-rgb), 0.06) 100%),
+      var(--off-white);
+    border-bottom: 1px solid rgba(var(--mint-rgb), 0.28);
+  }
+  .ug-headers--alt :global(.section--light) :global(.header-lockup__name),
+  .ug-headers--alt :global(.section--white) :global(.header-lockup__name) {
+    color: var(--ink-strong);
+  }
+  .ug-headers--alt :global(.section--light) :global(.header-lockup__name em),
+  .ug-headers--alt :global(.section--white) :global(.header-lockup__name em) {
+    color: var(--accent-light);
+    border-bottom: none;
+  }
+  /* Hide default mint rule; replace with split mint|gold rule */
+  .ug-headers--alt :global(.section--light) :global(.header-lockup__rule),
+  .ug-headers--alt :global(.section--white) :global(.header-lockup__rule) {
+    width: 72px;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      var(--accent-light) 0 40px,
+      transparent 40px 44px,
+      var(--gold-deep, #CEB06E) 44px 72px
+    );
+    border-radius: 0;
+  }
+  .ug-headers--alt :global(.section--deep) :global(.header-lockup__name em),
+  .ug-headers--alt :global(.section--mid) :global(.header-lockup__name em) {
+    color: var(--gold);
+  }
+  .ug-headers--alt :global(.section--deep) :global(.header-lockup__rule),
+  .ug-headers--alt :global(.section--mid) :global(.header-lockup__rule) {
+    width: 72px;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      var(--mint) 0 40px,
+      transparent 40px 44px,
+      var(--gold) 44px 72px
+    );
+  }
+  .ug-headers--alt :global(.header-lockup__name:not(:has(em)))::after {
+    content: '';
+    display: block;
+    width: 72px;
+    height: 3px;
+    margin-top: 12px;
+    background: linear-gradient(
+      90deg,
+      var(--accent-light) 0 40px,
+      transparent 40px 44px,
+      var(--gold-deep, #CEB06E) 44px 72px
+    );
+  }
+  .ug-headers--alt :global(.section--deep) :global(.header-lockup__name:not(:has(em)))::after,
+  .ug-headers--alt :global(.section--mid) :global(.header-lockup__name:not(:has(em)))::after {
+    background: linear-gradient(
+      90deg,
+      var(--mint) 0 40px,
+      transparent 40px 44px,
+      var(--gold) 44px 72px
+    );
+  }
+
+
+
+  @media (prefers-reduced-motion: reduce) {
+    .ug-feature__chev, .ug-back-to-top { transition: none; }
   }
 </style>
+
+
+<style>
+  /* ===== Asset mock chrome only (live UG styles preserved above) ===== */
+  .ug-asset-banner {
+    background: #0a1a24;
+    color: rgba(245, 248, 250, 0.88);
+    font-size: 12.5px;
+    line-height: 1.45;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .ug-asset-banner__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    align-items: center;
+    padding-block: 10px;
+  }
+  .ug-asset-banner__tag {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mint);
+    border: 1px solid rgba(127, 227, 187, 0.45);
+    border-radius: 999px;
+    padding: 3px 10px;
+  }
+  .ug-asset-banner a { color: var(--mint); text-decoration: underline; text-underline-offset: 2px; }
+
+  .ug-asset-nav {
+    position: sticky;
+    top: 0;
+    z-index: 120;
+    background: rgba(245, 248, 250, 0.94);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(10, 26, 36, 0.1);
+  }
+  .ug-asset-nav__inner {
+    display: flex;
+    align-items: center;
+    min-height: 52px;
+    padding-block: 8px;
+  }
+  .ug-asset-nav__chapters { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .ug-asset-nav__menu { position: relative; }
+  .ug-asset-nav__chapter {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 36px;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--ink-strong, #0a1a24);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .ug-asset-nav__chapter:hover,
+  .ug-asset-nav__chapter:focus-visible { background: rgba(10, 26, 36, 0.05); }
+  .ug-asset-nav__chapter.is-active {
+    background: rgba(10, 26, 36, 0.08);
+    border-color: rgba(10, 26, 36, 0.12);
+  }
+  .ug-asset-nav__chapter--trigger[aria-expanded="true"] { background: rgba(10, 26, 36, 0.08); }
+  .ug-asset-nav__chev { width: 14px; height: 14px; opacity: 0.7; transition: transform 0.15s ease; }
+  .ug-asset-nav__chapter--trigger[aria-expanded="true"] .ug-asset-nav__chev { transform: rotate(180deg); }
+  .ug-asset-nav__panel {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    min-width: min(320px, 92vw);
+    max-height: min(70vh, 480px);
+    overflow: auto;
+    padding: 8px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid rgba(10, 26, 36, 0.12);
+    box-shadow: 0 16px 40px rgba(10, 26, 36, 0.14);
+    z-index: 130;
+  }
+  .ug-asset-nav__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+  .ug-asset-nav__item {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: var(--ink-strong, #0a1a24);
+    text-decoration: none;
+    font-size: 13.5px;
+    line-height: 1.35;
+  }
+  .ug-asset-nav__item:hover,
+  .ug-asset-nav__item:focus-visible { background: rgba(10, 26, 36, 0.05); }
+  .ug-asset-nav__item.is-active { background: rgba(127, 227, 187, 0.22); }
+  .ug-asset-nav__item-name { font-weight: 600; }
+
+  /* Open feature sections (asset mock): mirror live [open] without accordion */
+  .ug-feature--open {
+    border: 1px solid rgba(10, 26, 36, 0.1);
+    border-radius: 12px;
+    background: #fff;
+    overflow: hidden;
+  }
+  .ug-feature--open > .ug-feature__summary {
+    cursor: default;
+    list-style: none;
+  }
+  .ug-feature--open > .ug-feature__summary::-webkit-details-marker { display: none; }
+  .ug-feature--open .ug-feature__chev { display: none; }
+  .ug-feature--open .ug-feature__body {
+    display: block;
+    padding-top: 0;
+  }
+
+
+  .ug-feature--open { display: block; }
+  .ug-feature--open > .ug-feature__summary { cursor: default; }
+  .ug-feature--open .ug-feature__body { display: block; padding-top: 0; }
+  .ug-feature--open .ug-feature__chev { display: none; }
+
+  #ug-hero, #ug-thesis, #ug-pillars, #ug-features,
+  #ug-technical, #ug-upgrade, #ug-faq, #ug-cta,
+  [id^="ug-feature-"], [id^="ug-tech-"], [id^="ug-faq-"], [id^="ug-pillar-"] {
+    scroll-margin-top: 72px;
+  }
+  @media (max-width: 640px) {
+    #ug-hero, #ug-thesis, #ug-pillars, #ug-features,
+    #ug-technical, #ug-upgrade, #ug-faq, #ug-cta,
+    [id^="ug-feature-"], [id^="ug-tech-"], [id^="ug-faq-"], [id^="ug-pillar-"] {
+      scroll-margin-top: 64px;
+    }
+    .ug-asset-nav__panel {
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      width: auto;
+      min-width: 0;
+    }
+  }
+</style>
+
+
+<script is:inline>
+  (function () {
+    var reduceMo = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var nav = document.querySelector('[data-ug-asset-nav]');
+    if (!nav) return;
+
+    var triggers = Array.prototype.slice.call(nav.querySelectorAll('[data-ug-menu-trigger]'));
+    var menus = Array.prototype.slice.call(nav.querySelectorAll('[data-ug-menu]'));
+    var chapterLinks = Array.prototype.slice.call(nav.querySelectorAll('[data-ug-chapter]'));
+    var featLinks = Array.prototype.slice.call(nav.querySelectorAll('[data-ug-feat]'));
+    var techJumpLinks = Array.prototype.slice.call(nav.querySelectorAll('[data-ug-tech-jump]'));
+
+    function navH() { return Math.ceil(nav.getBoundingClientRect().height) || 52; }
+
+    function closeAll(except) {
+      menus.forEach(function (menu) {
+        if (except && menu === except) return;
+        var btn = menu.querySelector('[data-ug-menu-trigger]');
+        var panel = menu.querySelector('[data-ug-menu-panel]');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+        if (panel) panel.hidden = true;
+      });
+    }
+    function openMenu(menu) {
+      closeAll(menu);
+      var btn = menu.querySelector('[data-ug-menu-trigger]');
+      var panel = menu.querySelector('[data-ug-menu-panel]');
+      if (btn) btn.setAttribute('aria-expanded', 'true');
+      if (panel) panel.hidden = false;
+    }
+
+    triggers.forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var menu = btn.closest('[data-ug-menu]');
+        if (btn.getAttribute('aria-expanded') === 'true') closeAll();
+        else openMenu(menu);
+      });
+    });
+    document.addEventListener('click', function (e) { if (!nav.contains(e.target)) closeAll(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
+
+    function jumpTo(id, updateHash) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var details = el.closest('details') || (el.tagName === 'DETAILS' ? el : null);
+      if (details && !details.open) details.open = true;
+      var top = el.getBoundingClientRect().top + window.scrollY - navH() - 8;
+      window.scrollTo({ top: top, behavior: reduceMo ? 'auto' : 'smooth' });
+      if (updateHash !== false) history.replaceState(null, '', '#' + id);
+      closeAll();
+    }
+
+    featLinks.forEach(function (a) {
+      a.addEventListener('click', function (e) { e.preventDefault(); jumpTo(a.getAttribute('data-ug-feat'), true); });
+    });
+    techJumpLinks.forEach(function (a) {
+      a.addEventListener('click', function (e) { e.preventDefault(); jumpTo(a.getAttribute('data-ug-tech-jump'), true); });
+    });
+    chapterLinks.forEach(function (a) {
+      if (a.tagName !== 'A') return;
+      a.addEventListener('click', function (e) { e.preventDefault(); jumpTo(a.getAttribute('data-ug-chapter'), true); });
+    });
+
+    Array.prototype.slice.call(document.querySelectorAll('a.ug-pill[data-feature], a.ug-pill[href^="#ug-feature-"]')).forEach(function (pill) {
+      pill.addEventListener('click', function (e) {
+        var href = pill.getAttribute('href') || '';
+        var fid = pill.getAttribute('data-feature');
+        var id = fid ? ('ug-feature-' + fid) : href.replace(/^#/, '');
+        if (!id) return;
+        e.preventDefault();
+        jumpTo(id, true);
+      });
+    });
+
+    function setChapterActive(id) {
+      chapterLinks.forEach(function (el) {
+        el.classList.toggle('is-active', el.getAttribute('data-ug-chapter') === id);
+      });
+    }
+    function setFeatActive(id) {
+      featLinks.forEach(function (el) {
+        el.classList.toggle('is-active', el.getAttribute('data-ug-feat') === id);
+      });
+    }
+
+    var chapterSecs = ['ug-features', 'ug-technical', 'ug-faq']
+      .map(function (id) { return document.getElementById(id); })
+      .filter(Boolean);
+    var featSecs = Array.prototype.slice.call(document.querySelectorAll('[id^="ug-feature-"]'));
+
+    function onScrollSpy() {
+      var offset = navH() + 24;
+      var activeChapter = null;
+      chapterSecs.forEach(function (sec) {
+        if (sec.getBoundingClientRect().top <= offset) activeChapter = sec.id;
+      });
+      if (activeChapter) setChapterActive(activeChapter);
+      var activeFeat = null;
+      featSecs.forEach(function (sec) {
+        if (sec.getBoundingClientRect().top <= offset + 8) activeFeat = sec.id;
+      });
+      if (activeFeat) setFeatActive(activeFeat);
+    }
+    window.addEventListener('scroll', onScrollSpy, { passive: true });
+    onScrollSpy();
+
+    var btt = document.querySelector('[data-ug-back-to-top]');
+    if (btt) {
+      var onScroll = function () {
+        if (window.scrollY > window.innerHeight * 0.6) btt.classList.add('is-visible');
+        else btt.classList.remove('is-visible');
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      btt.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: reduceMo ? 'auto' : 'smooth' });
+      });
+      onScroll();
+    }
+
+    function adjustHash() {
+      var id = location.hash.slice(1);
+      if (id && document.getElementById(id)) jumpTo(id, false);
+    }
+    if (document.readyState === 'complete') adjustHash();
+    else window.addEventListener('load', adjustHash);
+    setTimeout(adjustHash, 200);
+  })();
+</script>
