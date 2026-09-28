@@ -249,8 +249,8 @@ const duoLockups = {
                                   class="ug-feature-scenario__img"
                                   src={s.image}
                                   alt=""
-                                  width="640"
-                                  height="853"
+                                  width="1280"
+                                  height="960"
                                   loading="lazy"
                                   decoding="async"
                                   style={s.imagePosition ? `object-position: ${s.imagePosition}` : undefined}
@@ -1086,9 +1086,11 @@ const duoLockups = {
   .ug-feature-deep {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 22px;
     grid-column: 2;
-    max-width: 60ch;
+    /* No tight max-width here: landscape scenario cards break out to the body
+       column width. Prose (.ug-feature__paragraph) and limits keep their own
+       readable measure below. */
   }
   @media (max-width: 719px) {
     .ug-feature-deep { grid-column: 1; }
@@ -1107,7 +1109,9 @@ const duoLockups = {
     color: var(--accent-light);
     margin: 0;
   }
-  /* Scenario photo cards — industry-card style (tall full-bleed photo + bottom scrim). */
+  /* Scenario photo cards — landscape 1280×960 (4:3) plates: login scaled in
+     bezel + hands in front of UI. Card ratio matches the plate so cover fills
+     cleanly with no crop; copy stays at bottom over the mint/navy scrim. */
   /* Scenario card grid: comfortable 2×2 at ≥720px (fe20cc5 direction), not 4-up
      single row. Jane locked 2×2 in 78f753e. No ≥1100px 4-column rule. */
   .ug-feature-scenarios {
@@ -1115,21 +1119,27 @@ const duoLockups = {
     grid-template-columns: 1fr;
     gap: clamp(16px, 2vw, 24px);
     align-items: stretch;
+    justify-items: center;
   }
   @media (min-width: 720px) {
-    .ug-feature-scenarios { grid-template-columns: 1fr 1fr; }
+    .ug-feature-scenarios { grid-template-columns: 1fr 1fr; justify-items: stretch; }
   }
   .ug-feature-scenario {
     position: relative;
-    aspect-ratio: 3 / 4;
-    min-height: 280px;
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    max-width: min(100%, 440px);
+    min-height: 200px;
     border-radius: 14px;
     overflow: hidden;
     isolation: isolate;
     background: linear-gradient(160deg, #0c1a22 0%, #08131a 100%);
-    box-shadow: 0 14px 28px rgba(10, 22, 28, 0.28);
+    box-shadow: 0 14px 28px rgba(10, 22, 28, 0.22);
     padding: 0;
     display: block;
+  }
+  @media (min-width: 720px) {
+    .ug-feature-scenario { max-width: none; }
   }
   .ug-feature-scenario__img {
     position: absolute;
@@ -1137,13 +1147,15 @@ const duoLockups = {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center top;
+    object-position: center center;
     display: block;
     z-index: 0;
     transform: scale(1.02);
     transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  /* Transparent top → deep navy/charcoal with slight mint cool cast at bottom (UG palette). */
+  /* Transparent top → deep navy/charcoal with slight mint cool cast at bottom (UG palette).
+     Scrim darkening pushed a touch later for landscape 4:3 plates so the upper
+     login/hands read clean; copy still sits over the dark bottom third. */
   .ug-feature-scenario__scrim {
     position: absolute;
     inset: 0;
@@ -1153,14 +1165,14 @@ const duoLockups = {
       linear-gradient(
         180deg,
         rgba(10, 22, 28, 0) 0%,
-        rgba(10, 22, 28, 0) 28%,
-        rgba(10, 22, 28, 0.55) 52%,
-        rgba(8, 24, 28, 0.88) 78%,
+        rgba(10, 22, 28, 0) 38%,
+        rgba(10, 22, 28, 0.55) 60%,
+        rgba(8, 24, 28, 0.9) 82%,
         rgba(6, 20, 24, 0.96) 100%
       ),
       linear-gradient(
         180deg,
-        transparent 45%,
+        transparent 52%,
         rgba(var(--mint-rgb), 0.08) 100%
       );
     transition: background 0.4s ease;
@@ -1171,12 +1183,11 @@ const duoLockups = {
     right: 0;
     bottom: 0;
     z-index: 2;
-    /* Aggressive inset so title + line clearly sit inside the photo/scrim
-       (Jane: margins still tight after e1bc687 clamp(18–26)). */
-    padding: clamp(22px, 2.8vw, 34px);
+    /* Inset tuned for landscape 4:3 cards: comfortable but not caption-heavy. */
+    padding: clamp(18px, 2.2vw, 26px);
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
     text-align: left;
   }
   .ug-feature-scenario__title {
