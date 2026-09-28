@@ -136,10 +136,9 @@ const duoLockups = {
     <span class="ug-hero__bar" aria-hidden="true"></span>
   </section>
 
-  {/* ───────── 2. THESIS — C grid: side ghost + copy + media ───────── */}
-  {/* Ghost date sits vertical in the left page margin, between the thesis
-      lockup wash above and the pillars wash below — NOT in the dark hero.
-      Band wrapper provides the positioning context; grid is the content zone. */}
+  {/* ───────── 2. THESIS — C grid: copy + media (January 2026 watermark
+      now lives in the interstitial band between this section and #ug-pillars,
+      not left-of-copy in this grid). ───────── */}
   <div class="ug-thesis-band ug-thesis-band--c">
   <SectionBlock
     id="ug-thesis"
@@ -148,10 +147,9 @@ const duoLockups = {
     wide
   >
     <div class="ug-thesis-grid ug-thesis-grid--c">
-      <span class="ug-thesis-side-ghostdate" aria-hidden="true">{hero.date}</span>
       <div class="ug-thesis-copy">
         {thesis.paragraphs.map((para) => (
-          <p class="ug-thesis-para">{para}</p>
+          <p class="ug-thesis-para" set:html={para} />
         ))}
       </div>
       <div class="ug-thesis-media">
@@ -167,6 +165,15 @@ const duoLockups = {
     </div>
   </SectionBlock>
   </div>{/* /ug-thesis-band--c */}
+
+  {/* ───────── Interstitial January 2026 watermark — between thesis & pillars ───────── */}
+  {/* Horizontal ghost date band filler in the gap between the two mint lockup
+      washes. Replaces the prior left-of-copy vertical .ug-thesis-side-ghostdate
+      (removed). Ink ghost for light wash; soft horizontal mask fade so it reads
+      as a band filler, not a hard plaque. Hidden <900px (mirrors prior hide). */}
+  <div class="ug-section-gap-ghostdate" aria-hidden="true">
+    <span class="ug-section-gap-ghostdate__text">{hero.date}</span>
+  </div>
 
   {/* ───────── 3. PILLARS OVERVIEW ───────── */}
   <SectionBlock
@@ -702,31 +709,42 @@ const duoLockups = {
     margin: 0;
     max-width: 48ch;
   }
-  /* Side ghost date — vertical left margin of thesis content zone.
-     Spans the grid (between the two mint wash bands); ink ghost for light wash. */
-  .ug-thesis-side-ghostdate {
-    position: absolute;
-    left: calc(-1 * clamp(28px, 3.2vw, 44px));
-    top: 0;
-    bottom: 0;
+  /* Thesis paragraph bolding — GPT RECOMMENDED set. strong = existing ink
+     weight (no new accent color, no mint flood). em = soft stress (italic). */
+  .ug-thesis-para strong { font-weight: 700; color: var(--ink); }
+  .ug-thesis-para em { font-style: italic; }
+  /* ---------- 2c. INTERSTITIAL January 2026 WATERMARK — between thesis & pillars ----------
+     Horizontal ghost date band filler in the gap between the thesis lockup
+     wash and the pillars wash. Replaces the prior left-of-copy vertical
+     .ug-thesis-side-ghostdate (removed). Ink ghost for light wash; soft
+     horizontal mask fade so it reads as a band filler, not a hard plaque.
+     Hidden <900px so it does not crowd mobile. */
+  .ug-section-gap-ghostdate {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
-    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
-    mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: clamp(10px, 2vw, 24px) 0;
+    pointer-events: none;
+    user-select: none;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  }
+  .ug-section-gap-ghostdate__text {
     font-family: var(--font-head);
     font-weight: 700;
-    font-size: clamp(72px, 11vw, 160px);
+    font-size: clamp(64px, 13vw, 180px);
     line-height: 1;
     letter-spacing: -0.04em;
     color: rgba(10, 22, 28, 0.055);
-    pointer-events: none;
-    user-select: none;
-    z-index: 0;
     white-space: nowrap;
+    text-align: center;
   }
   @media (max-width: 899px) {
-    .ug-thesis-side-ghostdate { display: none; }
+    .ug-section-gap-ghostdate { display: none; }
   }
   /* Media frame — 16:10, L/T/B mint hairline, no right border, no shadow.
      ≥1200px: right-bleed + sticky. <900px: copy→media, all four borders. */

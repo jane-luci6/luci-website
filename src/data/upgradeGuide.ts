@@ -175,8 +175,8 @@ export const upgradeGuide = {
   thesis: {
     heading: 'The only A/V that scales and improves is about to get even better',
     paragraphs: [
-      'We’ve been building toward this: a more capable LUCI with new ways to control rooms, shape the interface, see live status, govern access, and reach support with better context. It’s a major step forward for a platform designed to scale with your needs and improve over time.',
-      'This release puts more day-to-day control in your hands, giving your property greater autonomy to move faster. When support is needed, the LUCI team stays in the loop—with better context to help keep everything running smoothly.',
+      'We’ve been building toward this: <strong>a more capable LUCI</strong> with new ways to control rooms, shape the interface, see live status, govern access, and reach support with better context. It’s a major step forward for a platform designed to <strong>scale with your needs</strong> and improve over time.',
+      'This release puts <strong>more day-to-day control</strong> in your hands, giving your property greater autonomy to move faster. When support is needed, the <em>LUCI team stays in the loop</em>—with better context to help keep everything running smoothly.',
     ],
     media: {
       kind: 'placeholder',
