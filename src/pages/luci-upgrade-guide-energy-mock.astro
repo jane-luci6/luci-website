@@ -18,6 +18,12 @@
  *
  * Mock-specific classes: `.ug-energy-*` (hero/thesis variants) and
  * `.ug-mock-*` (banner/switcher chrome). Live CSS is not polluted.
+ *
+ * Jane lock (2026-09-28): prefer thesis C. Ghost oversize date watermark
+ * moved OUT of hero (too busy / unnoticed) → vertical left margin of the
+ * first content section (thesis / mint band). C beats otherwise kept:
+ * wider right-bleed media, dashed mint inset, two-cell eyebrow/date row,
+ * full-width mint hairline. Placeholder only; GPT recommended copy stays.
  */
 import AssetLayout from '../layouts/AssetLayout.astro';
 import SectionBlock from '../components/SectionBlock.astro';
@@ -95,7 +101,7 @@ const duoLockups = {
             class="ug-mock-switcher__btn"
             data-thesis-btn={t.id}
             role="tab"
-            aria-selected={idx === 0 ? 'true' : 'false'}
+            aria-selected={t.id === 'C' ? 'true' : 'false'}
             aria-controls={`ug-energy-thesis-${t.id}`}
             id={`ug-energy-tab-${t.id}`}
           >
@@ -112,12 +118,12 @@ const duoLockups = {
   {/* ───────── THREE THESES — one visible at a time (hero + thesis only) ───────── */}
   {theses.map((t, idx) => (
     <div
-      class:list={['ug-energy-thesis', `ug-energy-thesis--${t.id.toLowerCase()}`, { 'is-active': idx === 0 }]}
+      class:list={['ug-energy-thesis', `ug-energy-thesis--${t.id.toLowerCase()}`, { 'is-active': t.id === 'C' }]}
       id={`ug-energy-thesis-${t.id}`}
       data-thesis={t.id}
       role="tabpanel"
       aria-labelledby={`ug-energy-tab-${t.id}`}
-      hidden={idx !== 0}
+      hidden={t.id !== 'C'}
     >
       {/* ───────── HERO — dark masthead + mesh (unchanged layers) ───────── */}
       <section id={`ug-energy-hero-${t.id}`} class="ug-energy-hero">
@@ -185,7 +191,6 @@ const duoLockups = {
                   <a class:list={['btn', c.audience === 'prospects' ? 'btn--mint' : 'btn--mint-outline']} href={c.href}>{c.label}</a>
                 ))}
               </div>
-              <span class="ug-energy-hero__ghostdate" aria-hidden="true">{t.hero.date}</span>
             </>
           )}
         </div>
@@ -193,7 +198,13 @@ const duoLockups = {
       </section>
 
       {/* ───────── THESIS — text left, framed media right ───────── */}
-      <div class="ug-headers ug-headers--alt">
+      {/* C: ghost oversize date moved OUT of hero (Jane: header too busy;
+          watermark unnoticed there) → vertical along left margin of this
+          mint thesis band. A/B unchanged. */}
+      <div class:list={['ug-headers', 'ug-headers--alt', { 'ug-energy-thesis-band--c': t.id === 'C' }]}>
+      {t.id === 'C' && (
+        <span class="ug-energy-side-ghostdate" aria-hidden="true">{t.hero.date}</span>
+      )}
       <SectionBlock
         id={`ug-energy-thesis-section-${t.id}`}
         lockupName={duoLockups.thesis}
@@ -929,20 +940,34 @@ const duoLockups = {
   .ug-energy-hero__release--C .ug-energy-hero__date {
     font-size: 22px;
   }
-  .ug-energy-hero__ghostdate {
+  /* C — ghost date relocated: vertical left margin of thesis mint band
+     (not in hero — Jane found hero too busy / watermark unnoticed there).
+     Ink ghost for light mint wash; same Space Grotesk / weight / tracking. */
+  .ug-energy-thesis-band--c {
+    position: relative;
+    overflow: visible;
+  }
+  .ug-energy-side-ghostdate {
     position: absolute;
-    right: max(var(--page-pad), calc(50vw - var(--content-wide) / 2 + var(--page-pad)));
-    bottom: clamp(40px, 6vw, 72px);
+    /* Sit in the left page margin, outside the content column */
+    left: max(2px, calc(50vw - var(--content-wide) / 2 - clamp(28px, 3.2vw, 44px)));
+    top: clamp(40px, 6vw, 88px);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
     font-family: var(--font-head);
     font-weight: 700;
-    font-size: clamp(90px, 14vw, 190px);
+    font-size: clamp(72px, 11vw, 160px);
     line-height: 1;
     letter-spacing: -0.04em;
-    color: rgba(245, 248, 250, 0.045);
+    color: rgba(10, 22, 28, 0.055);
     pointer-events: none;
     user-select: none;
-    z-index: -1;
+    z-index: 0;
     white-space: nowrap;
+  }
+  @media (max-width: 899px) {
+    /* No left gutter on narrow — hide rather than crowd the thesis */
+    .ug-energy-side-ghostdate { display: none; }
   }
   .ug-energy-hero__bar--C {
     height: 4px;
@@ -2086,7 +2111,8 @@ const duoLockups = {
       });
     });
 
-    // Deep-link: ?thesis=A|B|C wins; else #thesis-a hash; else default A.
+    // Deep-link: ?thesis=A|B|C wins; else #thesis-a hash; else default C
+    // (Jane lock preference — Release sheet).
     var params = new URLSearchParams(window.location.search);
     var requested = params.get('thesis');
     if (!requested) {
@@ -2096,7 +2122,7 @@ const duoLockups = {
     if (requested && /^[a-c]$/i.test(requested)) {
       activate(requested.toUpperCase(), { skipHistory: true });
     } else {
-      activate('A', { skipHistory: true });
+      activate('C', { skipHistory: true });
     }
 
     // Back-to-top
