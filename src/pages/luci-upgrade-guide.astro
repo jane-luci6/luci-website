@@ -136,9 +136,7 @@ const duoLockups = {
     <span class="ug-hero__bar" aria-hidden="true"></span>
   </section>
 
-  {/* ───────── 2. THESIS — C grid: copy + media (January 2026 watermark
-      now lives in the interstitial band between this section and #ug-pillars,
-      not left-of-copy in this grid). ───────── */}
+  {/* ───────── 2. THESIS — C grid: copy + media. ───────── */}
   <div class="ug-thesis-band ug-thesis-band--c">
   <SectionBlock
     id="ug-thesis"
@@ -165,15 +163,6 @@ const duoLockups = {
     </div>
   </SectionBlock>
   </div>{/* /ug-thesis-band--c */}
-
-  {/* ───────── Interstitial January 2026 watermark — between thesis & pillars ───────── */}
-  {/* Horizontal ghost date band filler in the gap between the two mint lockup
-      washes. Replaces the prior left-of-copy vertical .ug-thesis-side-ghostdate
-      (removed). Ink ghost for light wash; soft horizontal mask fade so it reads
-      as a band filler, not a hard plaque. Hidden <900px (mirrors prior hide). */}
-  <div class="ug-section-gap-ghostdate" aria-hidden="true">
-    <span class="ug-section-gap-ghostdate__text">{hero.date}</span>
-  </div>
 
   {/* ───────── 3. PILLARS OVERVIEW ───────── */}
   <SectionBlock
@@ -674,11 +663,9 @@ const duoLockups = {
     margin-top: 1em;
   }
 
-  /* ---------- 2b. THESIS — C Release sheet grid (ghost + copy + media) ----------
-     Ported from energy mock `.ug-energy-thesis-*--c` / `.ug-energy-side-ghostdate`
-     under live-scoped names. Ghost date sits vertical in the left page margin,
-     between the thesis lockup wash above and the pillars wash below — NOT in
-     the dark hero. Media = labeled placeholder only (no real video). */
+  /* ---------- 2b. THESIS — C Release sheet grid (copy + media) ----------
+     Ported from energy mock `.ug-energy-thesis-*--c` under live-scoped names.
+     Media = labeled placeholder only (no real video). */
   .ug-thesis-band--c {
     position: relative;
     overflow: visible;
@@ -713,39 +700,6 @@ const duoLockups = {
      weight (no new accent color, no mint flood). em = soft stress (italic). */
   .ug-thesis-para strong { font-weight: 700; color: var(--ink); }
   .ug-thesis-para em { font-style: italic; }
-  /* ---------- 2c. INTERSTITIAL January 2026 WATERMARK — between thesis & pillars ----------
-     Horizontal ghost date band filler in the gap between the thesis lockup
-     wash and the pillars wash. Replaces the prior left-of-copy vertical
-     .ug-thesis-side-ghostdate (removed). Ink ghost for light wash; soft
-     horizontal mask fade so it reads as a band filler, not a hard plaque.
-     Hidden <900px so it does not crowd mobile. */
-  .ug-section-gap-ghostdate {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-    padding: clamp(10px, 2vw, 24px) 0;
-    pointer-events: none;
-    user-select: none;
-    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
-    mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
-  }
-  .ug-section-gap-ghostdate__text {
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: clamp(64px, 13vw, 180px);
-    line-height: 1;
-    letter-spacing: -0.04em;
-    color: rgba(10, 22, 28, 0.055);
-    white-space: nowrap;
-    text-align: center;
-  }
-  @media (max-width: 899px) {
-    .ug-section-gap-ghostdate { display: none; }
-  }
   /* Media frame — 16:10, L/T/B mint hairline, no right border, no shadow.
      ≥1200px: right-bleed + sticky. <900px: copy→media, all four borders. */
   .ug-thesis-media__frame {
