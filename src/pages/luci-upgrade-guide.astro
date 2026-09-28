@@ -897,9 +897,11 @@ const duoLockups = {
   }
 
   /* ---------- 4. FEATURE DEEP-DIVE ---------- */
-  /* Section uses tone="deep" (navy lockup). Accordion stays on a light
-     panel so existing ink/rule treatment still reads — sales-style navy
-     header + light body. Brand tokens only. */
+  /* Section uses tone="deep" (navy lockup). Deepdive panel uses the UG grey
+     gradient language (two-pager .p1-pill cool grey) so the navy Features
+     section no longer carries a white card chrome. Photo scenario cards keep
+     their own full-bleed photo + mint/navy scrim — no extra chrome around
+     or inside them. Brand tokens only. */
   .ug-deepdive {
     display: flex;
     flex-direction: column;
@@ -908,7 +910,7 @@ const duoLockups = {
     margin-top: var(--space-2);
     padding: clamp(20px, 2.4vw, 32px);
     border-radius: 12px;
-    background: var(--off-white);
+    background: linear-gradient(155deg, #E8EEF2 0%, #F3F6F8 100%);
     color: var(--ink);
   }
   .ug-pillar-group__head {
@@ -1106,11 +1108,12 @@ const duoLockups = {
     margin: 0;
   }
   /* Scenario photo cards — industry-card style (tall full-bleed photo + bottom scrim). */
-  /* Scenario card grid: restore icon-era 2×2 (cbc67aa) — not 4-up single row. */
+  /* Scenario card grid: comfortable 2×2 at ≥720px (fe20cc5 direction), not 4-up
+     single row. Jane locked 2×2 in 78f753e. No ≥1100px 4-column rule. */
   .ug-feature-scenarios {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: clamp(16px, 2vw, 24px);
     align-items: stretch;
   }
   @media (min-width: 720px) {
@@ -1168,7 +1171,9 @@ const duoLockups = {
     right: 0;
     bottom: 0;
     z-index: 2;
-    padding: clamp(16px, 2vw, 22px);
+    /* Inset matches industry capability cards so title + line wrap cleanly
+       inside the card; no overflow clipping against the photo/scrim edge. */
+    padding: clamp(18px, 2vw, 26px);
     display: flex;
     flex-direction: column;
     gap: 6px;
