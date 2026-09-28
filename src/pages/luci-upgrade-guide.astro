@@ -1171,12 +1171,12 @@ const duoLockups = {
     right: 0;
     bottom: 0;
     z-index: 2;
-    /* Inset matches industry capability cards so title + line wrap cleanly
-       inside the card; no overflow clipping against the photo/scrim edge. */
-    padding: clamp(18px, 2vw, 26px);
+    /* Aggressive inset so title + line clearly sit inside the photo/scrim
+       (Jane: margins still tight after e1bc687 clamp(18–26)). */
+    padding: clamp(22px, 2.8vw, 34px);
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
     text-align: left;
   }
   .ug-feature-scenario__title {
@@ -1956,12 +1956,14 @@ const duoLockups = {
   .ug-asset-nav__item.is-active { background: rgba(127, 227, 187, 0.22); }
   .ug-asset-nav__item-name { font-weight: 600; }
 
-  /* Open feature sections (asset mock): mirror live [open] without accordion */
+  /* Open feature sections: no white card chrome — sit flush on .ug-deepdive
+     grey wash. Border/radius/white bg made each feature look like a boxed
+     card on the panel (Jane: white boxes still visible after e1bc687). */
   .ug-feature--open {
-    border: 1px solid rgba(10, 26, 36, 0.1);
-    border-radius: 12px;
-    background: #fff;
-    overflow: hidden;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    overflow: visible;
   }
   .ug-feature--open > .ug-feature__summary {
     cursor: default;
@@ -1974,7 +1976,7 @@ const duoLockups = {
     padding-top: 0;
   }
 
-
+  /* Keep always-open behavior; no second white-card rule. */
   .ug-feature--open { display: block; }
   .ug-feature--open > .ug-feature__summary { cursor: default; }
   .ug-feature--open .ug-feature__body { display: block; padding-top: 0; }
