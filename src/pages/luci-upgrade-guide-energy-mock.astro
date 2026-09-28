@@ -200,11 +200,9 @@ const duoLockups = {
       {/* ───────── THESIS — text left, framed media right ───────── */}
       {/* C: ghost oversize date moved OUT of hero (Jane: header too busy;
           watermark unnoticed there) → vertical along left margin of this
-          mint thesis band. A/B unchanged. */}
+          mint thesis band, between the upper lockup wash and the lower
+          pillars wash. A/B unchanged. */}
       <div class:list={['ug-headers', 'ug-headers--alt', { 'ug-energy-thesis-band--c': t.id === 'C' }]}>
-      {t.id === 'C' && (
-        <span class="ug-energy-side-ghostdate" aria-hidden="true">{t.hero.date}</span>
-      )}
       <SectionBlock
         id={`ug-energy-thesis-section-${t.id}`}
         lockupName={duoLockups.thesis}
@@ -212,6 +210,9 @@ const duoLockups = {
         wide
       >
         <div class={`ug-energy-thesis-grid ug-energy-thesis-grid--${t.id.toLowerCase()}`}>
+          {t.id === 'C' && (
+            <span class="ug-energy-side-ghostdate" aria-hidden="true">{t.hero.date}</span>
+          )}
           <div class="ug-energy-thesis-copy">
             {t.thesis.paragraphs.map((para) => (
               <p class="ug-energy-thesis-para">{para}</p>
@@ -942,16 +943,33 @@ const duoLockups = {
   }
   /* C — ghost date relocated: vertical left margin of thesis mint band
      (not in hero — Jane found hero too busy / watermark unnoticed there).
-     Ink ghost for light mint wash; same Space Grotesk / weight / tracking. */
+     Anchored to the thesis grid (content zone), so the vertical span sits
+     BETWEEN the upper header-lockup mint wash and the lower pillars mint
+     wash — not inside the lockup band. Ink ghost for light mint wash; same
+     Space Grotesk / weight / tracking. */
   .ug-energy-thesis-band--c {
     position: relative;
     overflow: visible;
   }
+  .ug-energy-thesis-grid--c {
+    position: relative;
+  }
   .ug-energy-side-ghostdate {
     position: absolute;
-    /* Sit in the left page margin, outside the content column */
-    left: max(2px, calc(50vw - var(--content-wide) / 2 - clamp(28px, 3.2vw, 44px)));
-    top: clamp(40px, 6vw, 88px);
+    /* Sit in the left page margin, outside the content column. Grid is the
+       positioning ancestor (content column); push left into the page gutter
+       by the same clamp family as the prior band-relative offset. */
+    left: calc(-1 * clamp(28px, 3.2vw, 44px));
+    /* Span the grid's content zone: top at grid top (below the lockup wash),
+       bottom at grid bottom (above the pillars wash). */
+    top: 0;
+    bottom: 0;
+    /* Clip the oversized text to the content zone so it does not bleed past
+       the grid into the pillars band. Soft fade at both ends so the
+       watermark reads as filling the margin between the two mint bands. */
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
+    mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
     writing-mode: vertical-rl;
     transform: rotate(180deg);
     font-family: var(--font-head);
