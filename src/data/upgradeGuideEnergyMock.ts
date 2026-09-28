@@ -8,7 +8,8 @@
  * empty placeholder today. No video files are referenced.
  */
 
-export const ENERGY_MOCK_RELEASE_DATE = 'January 19' as const;
+/** Month-only release window for the energy mock (exact day TBD; may never ship). */
+export const ENERGY_MOCK_RELEASE_DATE = 'January 2026' as const;
 
 export const ENERGY_MOCK_SLOT_LABEL = 'Platform walkthrough — coming soon' as const;
 

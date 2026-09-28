@@ -17,7 +17,7 @@ const featuresByPillar = (pillarId: string) => features.filter((f) => f.pillarId
 /** Duo-color accent spans for section lockups (same words; brochure-style emphasis).
  *  Accent phrase wraps only — no body-copy rewrite. Hero left untouched. */
 const duoLockups = {
-  thesis: 'The only A/V that scales and improves <em>just got better</em>',
+  thesis: 'The only A/V that scales and improves <em>is about to get even better</em>',
   pillars: 'What the release puts <em>in your hands</em>',
   features: 'Feature <em>deep-dive</em>',
   technical: 'Technical <em>detail</em>',
@@ -104,13 +104,17 @@ const duoLockups = {
 
   <div class="ug-headers ug-headers--alt">
 
-  {/* ───────── 1. HERO — dark masthead + mesh ───────── */}
+  {/* ───────── 1. HERO — dark masthead + mesh (C Release sheet chrome) ───────── */}
   <section id="ug-hero" class="ug-hero">
     <span class="ug-hero__mesh" aria-hidden="true"></span>
     <span class="ug-hero__plan" aria-hidden="true"></span>
     <span class="ug-hero__scrim" aria-hidden="true"></span>
     <div class="ug-hero__inner container container--wide">
-      <p class="ug-hero__eyebrow">{hero.eyebrow}</p>
+      <div class="ug-hero__specrow">
+        <p class="ug-hero__eyebrow">{hero.eyebrow}</p>
+        <span class="ug-hero__specrule" aria-hidden="true"></span>
+        <p class="ug-hero__speclabel">{hero.date}</p>
+      </div>
       <h2 class="ug-hero__headline">
         {hero.headline.leading}<span class="ug-hero__accent">{hero.headline.mintAccent}</span>{hero.headline.trailing}
       </h2>
@@ -132,17 +136,37 @@ const duoLockups = {
     <span class="ug-hero__bar" aria-hidden="true"></span>
   </section>
 
-  {/* ───────── 2. THESIS ───────── */}
+  {/* ───────── 2. THESIS — C grid: side ghost + copy + media ───────── */}
+  {/* Ghost date sits vertical in the left page margin, between the thesis
+      lockup wash above and the pillars wash below — NOT in the dark hero.
+      Band wrapper provides the positioning context; grid is the content zone. */}
+  <div class="ug-thesis-band ug-thesis-band--c">
   <SectionBlock
     id="ug-thesis"
     lockupName={duoLockups.thesis}
     tone="light"
     wide
   >
-    {thesis.paragraphs.map((para) => (
-      <p class="ug-thesis">{para}</p>
-    ))}
+    <div class="ug-thesis-grid ug-thesis-grid--c">
+      <span class="ug-thesis-side-ghostdate" aria-hidden="true">{hero.date}</span>
+      <div class="ug-thesis-copy">
+        {thesis.paragraphs.map((para) => (
+          <p class="ug-thesis-para">{para}</p>
+        ))}
+      </div>
+      <div class="ug-thesis-media">
+        <div class="ug-thesis-media__frame">
+          <div class="ug-thesis-media__plate">
+            <div class="ug-thesis-media__label">
+              <span class="ug-thesis-media__label-primary">{thesis.media.label}</span>
+              <span class="ug-thesis-media__label-secondary">{thesis.media.secondaryLabel}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </SectionBlock>
+  </div>{/* /ug-thesis-band--c */}
 
   {/* ───────── 3. PILLARS OVERVIEW ───────── */}
   <SectionBlock
@@ -536,18 +560,48 @@ const duoLockups = {
     letter-spacing: 0.24em;
     text-transform: uppercase;
     color: var(--mint);
-    margin: 0 0 14px;
+    margin: 0;
+  }
+  /* C Release sheet — two-cell eyebrow/date specrow with full-width mint hairline */
+  .ug-hero__specrow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding-left: max(var(--page-pad), calc(50vw - var(--content-wide) / 2 + var(--page-pad)));
+    padding-right: max(var(--page-pad), calc(50vw - var(--content-wide) / 2 + var(--page-pad)));
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(var(--mint-rgb), 0.3);
+    margin-bottom: 18px;
+  }
+  .ug-hero__specrule {
+    width: 1px;
+    align-self: stretch;
+    background: rgba(var(--mint-rgb), 0.3);
+    flex: none;
+  }
+  .ug-hero__speclabel {
+    margin: 0;
+    margin-left: auto;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(245, 248, 250, 0.78);
+    font-variant: small-caps;
   }
   .ug-hero__headline {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(30px, 6vw, 56px);
-    line-height: 1.05;
-    letter-spacing: 0.02em;
+    font-size: clamp(36px, 7.5vw, 76px);
+    line-height: 1.0;
+    letter-spacing: 0.01em;
     text-transform: uppercase;
     color: var(--off-white);
     margin: 0 0 28px;
-    max-width: 18ch;
+    max-width: 15ch;
   }
   .ug-hero__accent { color: var(--mint); }
   .ug-hero__release {
@@ -567,7 +621,7 @@ const duoLockups = {
   .ug-hero__date {
     font-family: var(--font-head);
     font-weight: 700;
-    font-size: 20px;
+    font-size: 22px;
     line-height: 1;
     letter-spacing: -0.02em;
     color: var(--mint);
@@ -611,6 +665,146 @@ const duoLockups = {
   }
   .ug-thesis + .ug-thesis {
     margin-top: 1em;
+  }
+
+  /* ---------- 2b. THESIS — C Release sheet grid (ghost + copy + media) ----------
+     Ported from energy mock `.ug-energy-thesis-*--c` / `.ug-energy-side-ghostdate`
+     under live-scoped names. Ghost date sits vertical in the left page margin,
+     between the thesis lockup wash above and the pillars wash below — NOT in
+     the dark hero. Media = labeled placeholder only (no real video). */
+  .ug-thesis-band--c {
+    position: relative;
+    overflow: visible;
+  }
+  .ug-thesis-grid--c {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+  @media (min-width: 900px) {
+    .ug-thesis-grid--c {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+      gap: clamp(28px, 4vw, 48px);
+    }
+  }
+  .ug-thesis-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+  .ug-thesis-para {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink);
+    margin: 0;
+    max-width: 48ch;
+  }
+  /* Side ghost date — vertical left margin of thesis content zone.
+     Spans the grid (between the two mint wash bands); ink ghost for light wash. */
+  .ug-thesis-side-ghostdate {
+    position: absolute;
+    left: calc(-1 * clamp(28px, 3.2vw, 44px));
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
+    mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(72px, 11vw, 160px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: rgba(10, 22, 28, 0.055);
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    white-space: nowrap;
+  }
+  @media (max-width: 899px) {
+    .ug-thesis-side-ghostdate { display: none; }
+  }
+  /* Media frame — 16:10, L/T/B mint hairline, no right border, no shadow.
+     ≥1200px: right-bleed + sticky. <900px: copy→media, all four borders. */
+  .ug-thesis-media__frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-top: 1px solid rgba(var(--mint-rgb), 0.3);
+    border-bottom: 1px solid rgba(var(--mint-rgb), 0.3);
+    border-left: 1px solid rgba(var(--mint-rgb), 0.3);
+    border-right: 0;
+    border-radius: 12px 0 0 12px;
+    box-shadow: none;
+  }
+  .ug-thesis-media__plate {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: 12px 0 0 12px;
+    background: linear-gradient(160deg, #0c1a22 0%, #08131a 100%);
+  }
+  .ug-thesis-media__plate::before {
+    content: '';
+    position: absolute;
+    inset: 20px;
+    border: 1px dashed rgba(var(--mint-rgb), 0.35);
+    pointer-events: none;
+  }
+  .ug-thesis-media__label {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 14px 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mint);
+    line-height: 1.3;
+  }
+  .ug-thesis-media__label-primary { display: block; }
+  .ug-thesis-media__label-secondary {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 0;
+    text-transform: none;
+    color: rgba(245, 248, 250, 0.62);
+  }
+  @media (min-width: 1200px) {
+    .ug-thesis-grid--c .ug-thesis-media {
+      position: sticky;
+      top: 84px;
+      align-self: start;
+    }
+    .ug-thesis-media__frame {
+      margin-right: calc(50% - 50vw);
+    }
+  }
+  @media (max-width: 899px) {
+    .ug-thesis-grid--c { grid-template-columns: 1fr; }
+    .ug-thesis-grid--c .ug-thesis-media { order: -1; }
+    .ug-thesis-media__frame {
+      margin-right: 0;
+      border: 1px solid rgba(var(--mint-rgb), 0.3);
+      border-radius: 12px;
+    }
+    .ug-thesis-media__plate {
+      border-radius: 12px;
+    }
+  }
+  /* C lockup name bump on #ug-thesis */
+  #ug-thesis :global(.header-lockup__name) {
+    font-size: clamp(40px, 6vw, 66px);
   }
 
   /* ---------- 3. PILLARS OVERVIEW ---------- */

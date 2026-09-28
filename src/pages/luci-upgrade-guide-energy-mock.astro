@@ -24,25 +24,35 @@
  * first content section (thesis / mint band). C beats otherwise kept:
  * wider right-bleed media, dashed mint inset, two-cell eyebrow/date row,
  * full-width mint hairline. Placeholder only; GPT recommended copy stays.
+ * Release date surfaces on this mock are month-only (January 2026) — exact day TBD.
  */
 import AssetLayout from '../layouts/AssetLayout.astro';
 import SectionBlock from '../components/SectionBlock.astro';
 import { breadcrumb } from '../data/seo';
 import { upgradeGuide } from '../data/upgradeGuide';
-import { upgradeGuideEnergyMock } from '../data/upgradeGuideEnergyMock';
+import { upgradeGuideEnergyMock, ENERGY_MOCK_RELEASE_DATE } from '../data/upgradeGuideEnergyMock';
 
 const {
   pillars,
   supportSpotlight,
   features,
   technical,
-  upgradePath,
+  upgradePath: upgradePathLive,
   faq,
   cta,
   openFlags,
 } = upgradeGuide;
 
 const { theses, slotLabel } = upgradeGuideEnergyMock;
+
+/* Mock-only: month window. Do not mutate live upgradeGuide RELEASE_DATE. */
+const upgradePath = {
+  ...upgradePathLive,
+  timing: {
+    ...upgradePathLive.timing,
+    releaseDate: ENERGY_MOCK_RELEASE_DATE as typeof upgradePathLive.timing.releaseDate,
+  },
+};
 
 const featuresByPillar = (pillarId: string) =>
   features.filter((f) => f.pillarId === pillarId);

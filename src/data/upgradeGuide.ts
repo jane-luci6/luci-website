@@ -1,6 +1,6 @@
 // FLAG: Live screen view is included from the tuned two-pager but is not present in the feature-list JSON.
 
-export const RELEASE_DATE = 'January 19' as const;
+export const RELEASE_DATE = 'January 2026' as const;
 
 type MediaPlaceholder = {
   kind: 'placeholder';
@@ -59,6 +59,11 @@ type UpgradeGuideDraft = {
   thesis: {
     heading: string;
     paragraphs: readonly [string, string];
+    media: {
+      kind: 'placeholder';
+      label: string;
+      secondaryLabel?: string;
+    };
   };
   pillars: readonly {
     id: 'room-control' | 'view-control' | 'security-control';
@@ -145,7 +150,7 @@ export const upgradeGuide = {
   },
 
   hero: {
-    eyebrow: 'A new version of LUCI is coming',
+    eyebrow: 'A new version of LUCI is on the way',
     headline: {
       text: 'Putting the power of programming in your hands',
       leading: 'Putting the ',
@@ -168,11 +173,16 @@ export const upgradeGuide = {
   },
 
   thesis: {
-    heading: 'The only A/V that scales and improves just got better',
+    heading: 'The only A/V that scales and improves is about to get even better',
     paragraphs: [
-      'LUCI is built to become more capable over time, extending your A/V investment with new ways to control rooms, shape the interface, see live status, govern access, and reach support with better context.',
-      'This release puts more day-to-day decisions in the hands of your property, offering you greater autonomy and control while keeping the LUCI team in the loop when support is needed.',
+      'We’ve been building toward this: a more capable LUCI with new ways to control rooms, shape the interface, see live status, govern access, and reach support with better context. It’s a major step forward for a platform designed to scale with your needs and improve over time.',
+      'This release puts more day-to-day control in your hands, giving your property greater autonomy to move faster. When support is needed, the LUCI team stays in the loop—with better context to help keep everything running smoothly.',
     ],
+    media: {
+      kind: 'placeholder',
+      label: 'Platform walkthrough — coming soon',
+      secondaryLabel: 'Reserved media slot',
+    },
   },
 
   pillars: [
