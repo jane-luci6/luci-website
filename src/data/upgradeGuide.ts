@@ -293,8 +293,8 @@ export const upgradeGuide = {
           id: 'ballroom',
           label: 'Ballroom',
           line: 'Mount a wall panel so event staff control only that event space\u2019s endpoints. Require a PIN, then expose approved controls such as source, volume, mute, or power as the room needs.',
-          image: '/images/upgrade-guide/venue-panels/use-case-ballroom.jpg',
-          imagePosition: '50% 30%',
+          image: '/images/upgrade-guide/venue-panels/login-passcode.jpg',
+          imagePosition: '50% 42%',
         },
         {
           id: 'cabana-pool',
