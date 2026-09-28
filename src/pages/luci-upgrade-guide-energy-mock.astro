@@ -1,0 +1,2117 @@
+---
+/**
+ * UG first-section ENERGY MOCK — preview only.
+ *
+ * Jane wants to SEE three Upgrade Guide first-section energy theses (A/B/C)
+ * before picking. Dedicated preview route:
+ *   http://10.10.1.37/luci-upgrade-guide-energy-mock/
+ *
+ * Live `/luci-upgrade-guide/` is untouched and stays working. This page uses
+ * AssetLayout (matches live UG). Only hero + thesis differ across A/B/C;
+ * pillars -> CTA are reused from live `upgradeGuide` data + markup so Jane
+ * sees each thesis in full-page context.
+ *
+ * Video = PLACEHOLDER ONLY. The plate is a labeled empty frame. No real video
+ * files are created, borrowed, or referenced. Nothing under public/videos/.
+ * Play affordance (B only) is a decorative aria-hidden span, pointer-events
+ * none — not a button, not focusable, no handler.
+ *
+ * Mock-specific classes: `.ug-energy-*` (hero/thesis variants) and
+ * `.ug-mock-*` (banner/switcher chrome). Live CSS is not polluted.
+ */
+import AssetLayout from '../layouts/AssetLayout.astro';
+import SectionBlock from '../components/SectionBlock.astro';
+import { breadcrumb } from '../data/seo';
+import { upgradeGuide } from '../data/upgradeGuide';
+import { upgradeGuideEnergyMock } from '../data/upgradeGuideEnergyMock';
+
+const {
+  pillars,
+  supportSpotlight,
+  features,
+  technical,
+  upgradePath,
+  faq,
+  cta,
+  openFlags,
+} = upgradeGuide;
+
+const { theses, slotLabel } = upgradeGuideEnergyMock;
+
+const featuresByPillar = (pillarId: string) =>
+  features.filter((f) => f.pillarId === pillarId);
+
+const meta = {
+  path: '/luci-upgrade-guide-energy-mock',
+  title: 'Upgrade Guide first-section energy mock (preview) | LUCI Systems',
+  description:
+    'Preview-only mock of three energy theses for the Upgrade Guide first section. Not a live page.',
+};
+
+const breadcrumbLd = breadcrumb([
+  { name: 'Home', path: '/' },
+  { name: 'New LUCI Upgrade Guide', path: '/luci-upgrade-guide' },
+  { name: 'Energy mock (preview)', path: meta.path },
+]);
+
+const duoLockups = {
+  thesis: 'The only A/V that scales and improves <em>is about to get even better</em>',
+  pillars: 'What the release puts <em>in your hands</em>',
+  features: 'Feature <em>deep-dive</em>',
+  technical: 'Technical <em>detail</em>',
+  upgrade: 'Your path to the <em>new LUCI</em>',
+  faq: 'Questions',
+  cta: 'The <em>new version</em> of LUCI',
+} as const;
+---
+
+<AssetLayout
+  title={meta.title.replace(' | LUCI Systems', '')}
+  description={meta.description}
+  canonicalPath={meta.path}
+  noindex
+  theme="light"
+>
+  <h1 class="ug-sr-only">{meta.title}</h1>
+
+  {/* ───────── PREVIEW BANNER ───────── */}
+  <div class="ug-mock-banner" role="status" aria-live="polite">
+    <div class="ug-mock-banner__inner container container--wide">
+      <span class="ug-mock-banner__tag" aria-hidden="true">PREVIEW MOCK</span>
+      <span class="ug-mock-banner__copy">
+        <strong>PREVIEW MOCK &mdash; not live.</strong> Pick A/B/C above; live guide untouched.
+        <a class="ug-mock-banner__link" href="/luci-upgrade-guide/">Back to live guide &rarr;</a>
+      </span>
+    </div>
+  </div>
+  {/* ───────── STICKY A/B/C SWITCHER ───────── */}
+  <nav class="ug-mock-switcher" aria-label="Energy thesis switcher" data-thesis-switcher>
+    <div class="ug-mock-switcher__inner container container--wide">
+      <span class="ug-mock-switcher__title">UG first-section &mdash; energy thesis</span>
+      <div class="ug-mock-switcher__btns" role="tablist" aria-label="Pick an energy thesis">
+        {theses.map((t, idx) => (
+          <button
+            type="button"
+            class="ug-mock-switcher__btn"
+            data-thesis-btn={t.id}
+            role="tab"
+            aria-selected={idx === 0 ? 'true' : 'false'}
+            aria-controls={`ug-energy-thesis-${t.id}`}
+            id={`ug-energy-tab-${t.id}`}
+          >
+            <span class="ug-mock-switcher__num">{t.label}</span>
+            <span class="ug-mock-switcher__lbl">
+              <span class="ug-mock-switcher__name">{t.name}</span>
+              <span class="ug-mock-switcher__sub">{t.sublabel}</span>
+            </span>
+          </button>
+        ))}
+      </div>
+    </div>
+  </nav>
+  {/* ───────── THREE THESES — one visible at a time (hero + thesis only) ───────── */}
+  {theses.map((t, idx) => (
+    <div
+      class:list={['ug-energy-thesis', `ug-energy-thesis--${t.id.toLowerCase()}`, { 'is-active': idx === 0 }]}
+      id={`ug-energy-thesis-${t.id}`}
+      data-thesis={t.id}
+      role="tabpanel"
+      aria-labelledby={`ug-energy-tab-${t.id}`}
+      hidden={idx !== 0}
+    >
+      {/* ───────── HERO — dark masthead + mesh (unchanged layers) ───────── */}
+      <section id={`ug-energy-hero-${t.id}`} class="ug-energy-hero">
+        <span class="ug-energy-hero__mesh" aria-hidden="true"></span>
+        <span class="ug-energy-hero__plan" aria-hidden="true"></span>
+        <span class="ug-energy-hero__scrim" aria-hidden="true"></span>
+        <div class="ug-energy-hero__inner container container--wide">
+          {t.id === 'A' && (
+            <>
+              <span class="ug-energy-hero__rule" aria-hidden="true"></span>
+              <p class="ug-energy-hero__eyebrow ug-energy-hero__eyebrow--A">{t.hero.eyebrow}</p>
+              <h2 class="ug-energy-hero__headline ug-energy-hero__headline--A">
+                {t.hero.headline.leading}<span class="ug-energy-hero__accent">{t.hero.headline.mintAccent}</span>{t.hero.headline.trailing}
+              </h2>
+              <div class="ug-energy-hero__release ug-energy-hero__release--A">
+                <span class="ug-energy-hero__rlabel">Release date</span>
+                <span class="ug-energy-hero__date">{t.hero.date}</span>
+              </div>
+              <div class="ug-energy-hero__ctas">
+                {t.hero.ctas.map((c) => (
+                  <a class:list={['btn', c.audience === 'prospects' ? 'btn--mint' : 'btn--mint-outline']} href={c.href}>{c.label}</a>
+                ))}
+              </div>
+            </>
+          )}
+
+          {t.id === 'B' && (
+            <>
+              <p class="ug-energy-hero__eyebrow ug-energy-hero__eyebrow--B">
+                <span class="ug-energy-hero__chip">{t.hero.eyebrow}</span>
+              </p>
+              <h2 class="ug-energy-hero__headline ug-energy-hero__headline--B">
+                {t.hero.headline.leading}<span class="ug-energy-hero__accent">{t.hero.headline.mintAccent}</span>{t.hero.headline.trailing}
+              </h2>
+              <div class="ug-energy-hero__release ug-energy-hero__release--B">
+                <span class="ug-energy-hero__rlabel">Release date</span>
+                <span class="ug-energy-hero__divider" aria-hidden="true"></span>
+                <span class="ug-energy-hero__date ug-energy-hero__date--B">{t.hero.date}</span>
+              </div>
+              <span class="ug-energy-hero__hr" aria-hidden="true"></span>
+              <div class="ug-energy-hero__ctas">
+                {t.hero.ctas.map((c) => (
+                  <a class:list={['btn', c.audience === 'prospects' ? 'btn--mint' : 'btn--mint-outline']} href={c.href}>{c.label}</a>
+                ))}
+              </div>
+            </>
+          )}
+
+          {t.id === 'C' && (
+            <>
+              <div class="ug-energy-hero__specrow">
+                <p class="ug-energy-hero__eyebrow ug-energy-hero__eyebrow--C">{t.hero.eyebrow}</p>
+                <span class="ug-energy-hero__specrule" aria-hidden="true"></span>
+                <p class="ug-energy-hero__speclabel">{t.hero.date}</p>
+              </div>
+              <h2 class="ug-energy-hero__headline ug-energy-hero__headline--C">
+                {t.hero.headline.leading}<span class="ug-energy-hero__accent">{t.hero.headline.mintAccent}</span>{t.hero.headline.trailing}
+              </h2>
+              <div class="ug-energy-hero__release ug-energy-hero__release--C">
+                <span class="ug-energy-hero__rlabel">Release date</span>
+                <span class="ug-energy-hero__date">{t.hero.date}</span>
+              </div>
+              <div class="ug-energy-hero__ctas">
+                {t.hero.ctas.map((c) => (
+                  <a class:list={['btn', c.audience === 'prospects' ? 'btn--mint' : 'btn--mint-outline']} href={c.href}>{c.label}</a>
+                ))}
+              </div>
+              <span class="ug-energy-hero__ghostdate" aria-hidden="true">{t.hero.date}</span>
+            </>
+          )}
+        </div>
+        <span class={`ug-energy-hero__bar ug-energy-hero__bar--${t.id}`} aria-hidden="true"></span>
+      </section>
+
+      {/* ───────── THESIS — text left, framed media right ───────── */}
+      <div class="ug-headers ug-headers--alt">
+      <SectionBlock
+        id={`ug-energy-thesis-section-${t.id}`}
+        lockupName={duoLockups.thesis}
+        tone="light"
+        wide
+      >
+        <div class={`ug-energy-thesis-grid ug-energy-thesis-grid--${t.id.toLowerCase()}`}>
+          <div class="ug-energy-thesis-copy">
+            {t.thesis.paragraphs.map((para) => (
+              <p class="ug-energy-thesis-para">{para}</p>
+            ))}
+          </div>
+          <div class="ug-energy-media">
+            <div class={`ug-energy-media__frame ug-energy-media__frame--${t.id.toLowerCase()}`}>
+              <div class={`ug-energy-media__plate ug-energy-media__plate--${t.id.toLowerCase()}`}>
+                {t.id === 'B' && (
+                  <span class="ug-energy-media__play" aria-hidden="true">
+                    <span class="ug-energy-media__play-circle"></span>
+                    <span class="ug-energy-media__play-tri"></span>
+                  </span>
+                )}
+                <div class={`ug-energy-media__label ug-energy-media__label--${t.id.toLowerCase()}`}>
+                  {t.id === 'A' && (
+                    <>
+                      <span class="ug-energy-media__dot" aria-hidden="true"></span>
+                      <span class="ug-energy-media__label-primary">{slotLabel}</span>
+                    </>
+                  )}
+                  {t.id === 'B' && (
+                    <>
+                      <span class="ug-energy-media__label-primary">{slotLabel}</span>
+                      <span class="ug-energy-media__label-secondary">Video coming soon</span>
+                    </>
+                  )}
+                  {t.id === 'C' && (
+                    <>
+                      <span class="ug-energy-media__label-primary">{slotLabel}</span>
+                      <span class="ug-energy-media__label-secondary">Reserved media slot</span>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </SectionBlock>
+      </div>{/* /ug-headers mint wash for thesis lockup */}
+    </div>
+  ))}
+  {/* ═══════════════════════════════════════════════════════════════
+       SHARED SECTIONS — pillars → CTA (reused from live upgradeGuide data +
+       markup). Unchanged across A/B/C. Live CSS patterns copied so the mock
+       renders self-contained. In-page feature links point to the live guide
+       so anchors stay functional. Video = placeholder only (no real assets).
+       ═══════════════════════════════════════════════════════════════ */}
+  <div class="ug-headers ug-headers--alt">
+
+    {/* ───────── 3. PILLARS OVERVIEW ───────── */}
+    <SectionBlock
+      id="ug-energy-pillars"
+      lockupName={duoLockups.pillars}
+      tone="light"
+      wide
+    >
+      <div class="ug-pillars">
+        {pillars.map((p) => (
+          <article class="ug-pillar">
+            <div class="ug-pillar__head">
+              <span class="ug-pillar__num" aria-hidden="true">{p.number}</span>
+              <h3 class="ug-pillar__name" set:html={p.name.replace('control', '<span class="ug-pillar__ctrl">control</span><br>')} />
+            </div>
+            <p class="ug-pillar__summary">{p.summary}</p>
+            <ul class="ug-pillar__pills" role="list">
+              {p.featurePills.map((pill) => (
+                <li>
+                  <a class="ug-pill" href={`/luci-upgrade-guide/#ug-feature-${pill.id}`} data-feature={pill.id}>
+                    <span class="ug-pill__name">{pill.name}</span>
+                    <span class="ug-pill__liner">{pill.oneLiner}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+
+      <a class="ug-support-spotlight" href={`/luci-upgrade-guide/#ug-feature-${supportSpotlight.featureId}`}>
+        <span class="ug-support-spotlight__plus">Plus</span>
+        <span class="ug-support-spotlight__name">{supportSpotlight.title}</span>
+        <span class="ug-support-spotlight__liner">{supportSpotlight.oneLiner}</span>
+        <span class="ug-support-spotlight__arrow" aria-hidden="true">&rarr;</span>
+      </a>
+    </SectionBlock>
+
+    {/* ───────── 4. FEATURE DEEP-DIVE ───────── */}
+    <SectionBlock
+      id="ug-energy-features"
+      lockupName={duoLockups.features}
+      lockupRole="See the live guide for the full deep-dive"
+      tone="deep"
+      wide
+    >
+      <div class="ug-deepdive">
+        {pillars.map((pillar) => (
+          <div class="ug-pillar-group" id={`ug-energy-pillar-${pillar.id}`}>
+            <div class="ug-pillar-group__head">
+              <h3 class="ug-pillar-group__title">
+                <span class="ug-pillar-group__num">{pillar.number}</span>
+                {pillar.name}
+              </h3>
+            </div>
+            <div class="ug-features">
+              {featuresByPillar(pillar.id).map((f) => (
+                <article class="ug-feature ug-feature--open" id={`ug-energy-feature-${f.id}`} data-pillar={pillar.id}>
+                  <header class="ug-feature__summary">
+                    <span class="ug-feature__name">{f.name}</span>
+                    <span class="ug-feature__liner">{f.oneLiner}</span>
+                  </header>
+                  <div class="ug-feature__body">
+                    {f.scenarios && f.scenarios.length > 0 ? (
+                      <div class="ug-feature-deep">
+                        <section class="ug-feature-deep__section">
+                          <p class="ug-feature-deep__label">What it is</p>
+                          {f.paragraph.split(/\n\n+/).map((para) => (
+                            <p class="ug-feature__paragraph">{para}</p>
+                          ))}
+                        </section>
+                        <section class="ug-feature-deep__section">
+                          <p class="ug-feature-deep__label">{f.scenariosSubsectionLabel ?? 'Use cases on your property'}</p>
+                          <div class="ug-feature-scenarios">
+                            {f.scenarios.map((s) => (
+                              <div class="ug-feature-scenario">
+                                {s.image && (
+                                  <img
+                                    class="ug-feature-scenario__img"
+                                    src={s.image}
+                                    alt=""
+                                    width="640"
+                                    height="853"
+                                    loading="lazy"
+                                    decoding="async"
+                                    style={s.imagePosition ? `object-position: ${s.imagePosition}` : undefined}
+                                  />
+                                )}
+                                <span class="ug-feature-scenario__scrim" aria-hidden="true"></span>
+                                <div class="ug-feature-scenario__copy">
+                                  <p class="ug-feature-scenario__title">{s.label}</p>
+                                  <p class="ug-feature-scenario__line">{s.line}</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </section>
+                        {f.limits && f.limits.length > 0 && (
+                          <section class="ug-feature-deep__section">
+                            <p class="ug-feature-deep__label">Limits &amp; controls</p>
+                            <ul class="ug-feature-limits" role="list">
+                              {f.limits.map((l) => (<li>{l}</li>))}
+                            </ul>
+                          </section>
+                        )}
+                        {f.technicalJumpId && (
+                          <a class="ug-feature-itlink" href={`/luci-upgrade-guide/#ug-tech-item-${f.technicalJumpId}`}>
+                            Technical detail &rarr;
+                          </a>
+                        )}
+                      </div>
+                    ) : (
+                      <>
+                        <p class="ug-feature__paragraph">{f.paragraph}</p>
+                        <ul class="ug-feature__benefits" role="list">
+                          {f.benefits.map((b) => (<li>{b}</li>))}
+                        </ul>
+                      </>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </SectionBlock>
+
+    {/* ───────── 6. TECHNICAL DETAIL ───────── */}
+    <SectionBlock
+      id="ug-energy-technical"
+      lockupName={duoLockups.technical}
+      lockupRole="For the IT or A/V lead"
+      tone="light"
+      wide
+    >
+      <p class="ug-thesis">{technical.intro}</p>
+      <div class="ug-technical">
+        {technical.groups.map((group) => (
+          <div class="ug-tech-group" id={`ug-energy-tech-${group.id}`}>
+            <h3 class="ug-tech-group__title">{group.heading}</h3>
+            <p class="ug-tech-group__intro">{group.intro}</p>
+            <div class="ug-tech-items">
+              {group.items.map((item) => (
+                <details class="ug-tech-item" id={`ug-energy-tech-item-${item.id}`}>
+                  <summary class="ug-tech-item__summary">
+                    <span class="ug-tech-item__name">{item.name}</span>
+                    {item.summary && <span class="ug-tech-item__summary-text">{item.summary}</span>}
+                    <span class="ug-feature__chev" aria-hidden="true"></span>
+                  </summary>
+                  <ul class="ug-tech-item__details" role="list">
+                    {item.details.map((d) => (<li>{d}</li>))}
+                  </ul>
+                </details>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </SectionBlock>
+
+    {/* ───────── 7. UPGRADE PATH ───────── */}
+    <SectionBlock
+      id="ug-energy-upgrade"
+      lockupName={duoLockups.upgrade}
+      lockupRole="For existing LUCI clients"
+      tone="light"
+      wide
+    >
+      <p class="ug-thesis">{upgradePath.intro}</p>
+      <div class="ug-upgrade">
+        <div class="ug-upgrade__timing" role="group" aria-label="Upgrade timing">
+          <div class="ug-upgrade__timing-cell">
+            <span class="ug-upgrade__timing-label">{upgradePath.timing.releaseLabel}</span>
+            <span class="ug-upgrade__timing-value ug-upgrade__timing-value--date">{upgradePath.timing.releaseDate}</span>
+          </div>
+          <div class="ug-upgrade__timing-cell">
+            <span class="ug-upgrade__timing-label">Pace</span>
+            <span class="ug-upgrade__timing-value">{upgradePath.timing.paceLine}</span>
+          </div>
+        </div>
+        <p class="ug-upgrade__rollout-note">{upgradePath.timing.rolloutNote}</p>
+        <div class="ug-upgrade__how">
+          <h3 class="ug-upgrade__subhead">{upgradePath.whatIsInvolved.heading}</h3>
+          <p class="ug-upgrade__how-intro">{upgradePath.whatIsInvolved.paragraph}</p>
+          <ol class="ug-upgrade__steps" role="list">
+            {upgradePath.whatIsInvolved.steps.map((s) => (
+              <li class="ug-upgrade__step">
+                <span class="ug-upgrade__step-num">{s.number}</span>
+                <div class="ug-upgrade__step-copy">
+                  <p class="ug-upgrade__step-title">{s.title}</p>
+                  <p class="ug-upgrade__step-body">{s.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+        <a class="ug-upgrade__path-cta" href="/luci-upgrade-guide/#ug-cta">
+          Talk to your account team about timing
+          <span class="ug-upgrade__path-cta-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </SectionBlock>
+
+    {/* ───────── 8. FAQ ───────── */}
+    <SectionBlock
+      id="ug-energy-faq"
+      lockupName={duoLockups.faq}
+      lockupRole="Straight answers"
+      tone="light"
+      wide
+    >
+      <div class="ug-faq">
+        {faq.map((f, i) => (
+          <details class="ug-faq__item" id={`ug-energy-faq-${i + 1}`}>
+            <summary class="ug-faq__q">{f.question}</summary>
+            <p class="ug-faq__a">{f.answer}</p>
+          </details>
+        ))}
+      </div>
+    </SectionBlock>
+
+    {/* ───────── 9. CTA ───────── */}
+    <SectionBlock id="ug-energy-cta" lockupName={duoLockups.cta} lockupRole={cta.heading} tone="deep" wide>
+      <p class="ug-cta__body">{cta.body}</p>
+      <p class="ug-cta__contact">
+        <strong>{cta.contact.name}</strong> &middot; {cta.contact.role}<br />
+        <a href={`mailto:${cta.contact.email}`}>{cta.contact.email}</a> &middot; {cta.contact.phone}
+      </p>
+      <div class="ug-cta__actions">
+        {cta.actions.map((a) => (
+          <a class:list={['btn', a.audience === 'prospects' ? 'btn--mint' : 'btn--mint-outline']} href={a.href}>{a.label}</a>
+        ))}
+      </div>
+    </SectionBlock>
+
+    {/* ───────── Back-to-top ───────── */}
+    <button class="ug-back-to-top" type="button" aria-label="Back to top" data-ug-back-to-top>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="18 15 12 9 6 15" />
+      </svg>
+    </button>
+
+  </div>{/* /ug-headers mint wash */}
+
+  {/* ───────── Open flags for Jane review (collapsed by default) ───────── */}
+  <aside class="ug-flags" aria-label="Open flags for Jane review">
+    <details>
+      <summary>Open flags for Jane review ({openFlags.length})</summary>
+      <ul>
+        {openFlags.map((flag) => (<li>{flag}</li>))}
+      </ul>
+    </details>
+  </aside>
+
+</AssetLayout>
+
+<style>
+  /* ───────── sr-only ───────── */
+  .ug-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Section scroll offset for sticky switcher */
+  #ug-energy-thesis-A, #ug-energy-thesis-B, #ug-energy-thesis-C,
+  #ug-energy-pillars, #ug-energy-features, #ug-energy-technical,
+  #ug-energy-upgrade, #ug-energy-faq, #ug-energy-cta,
+  [id^="ug-energy-feature-"], [id^="ug-energy-tech-"], [id^="ug-energy-pillar-"] {
+    scroll-margin-top: 72px;
+  }
+  @media (max-width: 640px) {
+    #ug-energy-thesis-A, #ug-energy-thesis-B, #ug-energy-thesis-C,
+    #ug-energy-pillars, #ug-energy-features, #ug-energy-technical,
+    #ug-energy-upgrade, #ug-energy-faq, #ug-energy-cta,
+    [id^="ug-energy-feature-"], [id^="ug-energy-tech-"], [id^="ug-energy-pillar-"] {
+      scroll-margin-top: 64px;
+    }
+  }
+
+  /* ───────── PREVIEW BANNER ───────── */
+  .ug-mock-banner {
+    background: #2a1a06;
+    color: var(--off-white);
+    border-bottom: 1px solid rgba(237, 208, 134, 0.4);
+  }
+  .ug-mock-banner__inner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px var(--page-pad);
+    flex-wrap: wrap;
+  }
+  .ug-mock-banner__tag {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #1c2b33;
+    background: var(--gold);
+    border-radius: 9999px;
+    padding: 3px 10px 2px;
+    line-height: 1.2;
+    flex: none;
+  }
+  .ug-mock-banner__copy {
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: rgba(245, 248, 250, 0.86);
+  }
+  .ug-mock-banner__copy strong { color: var(--gold); }
+  .ug-mock-banner__link {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(237, 208, 134, 0.4);
+    margin-left: 4px;
+  }
+  .ug-mock-banner__link:hover { border-bottom-color: var(--gold); }
+
+  /* ───────── STICKY THESIS SWITCHER ───────── */
+  .ug-mock-switcher {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background: rgba(8, 19, 24, 0.96);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(var(--mint-rgb), 0.28);
+  }
+  .ug-mock-switcher__inner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px var(--page-pad);
+    flex-wrap: wrap;
+  }
+  .ug-mock-switcher__title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mint);
+    flex: none;
+  }
+  .ug-mock-switcher__btns {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-left: auto;
+  }
+  .ug-mock-switcher__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px 8px 10px;
+    border-radius: 9999px;
+    border: 1px solid rgba(var(--mint-rgb), 0.32);
+    background: transparent;
+    color: rgba(245, 248, 250, 0.78);
+    cursor: pointer;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    font-family: var(--font-head);
+  }
+  .ug-mock-switcher__btn:hover {
+    background: rgba(var(--mint-rgb), 0.12);
+    color: var(--off-white);
+  }
+  .ug-mock-switcher__btn[aria-selected='true'] {
+    background: var(--mint);
+    border-color: var(--mint);
+    color: #081318;
+  }
+  .ug-mock-switcher__num {
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 9999px;
+    border: 1px solid rgba(var(--mint-rgb), 0.5);
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 1;
+    flex: none;
+  }
+  .ug-mock-switcher__btn[aria-selected='true'] .ug-mock-switcher__num {
+    border-color: #081318;
+    background: #081318;
+    color: var(--mint);
+  }
+  .ug-mock-switcher__lbl {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    text-align: left;
+  }
+  .ug-mock-switcher__name {
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+  }
+  .ug-mock-switcher__sub {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    opacity: 0.78;
+  }
+
+  /* Tabpanel visibility */
+  .ug-energy-thesis { display: block; }
+  .ug-energy-thesis[hidden] { display: none; }
+</style>
+
+<style>
+  /* ═══ ENERGY HERO — dark masthead + mesh. Layer geometry (mesh/plan/scrim)
+     matches live UG exactly: no opacity/position/cover/mask changes. Only the
+     chrome inside .ug-energy-hero__inner differs per thesis. */
+  .ug-energy-hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: #081318;
+    color: var(--off-white);
+    padding-block: clamp(56px, 9vw, 112px) clamp(40px, 6vw, 72px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .ug-energy-hero__mesh {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: url('/images/mesh/luci-bg-hero-with-plan-transparent-1920x1080.svg') center / cover no-repeat;
+    opacity: 0.82;
+  }
+  .ug-energy-hero__plan {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(64%, 880px);
+    z-index: 0;
+    pointer-events: none;
+    background: url('/images/mesh/luci-plan-right-panel.png') center top / cover no-repeat;
+    opacity: 0.88;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.15) 8%, rgba(0,0,0,0.65) 22%, #000 38%);
+    mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.15) 8%, rgba(0,0,0,0.65) 22%, #000 38%);
+  }
+  .ug-energy-hero__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse 74% 72% at 36% 44%, rgba(7,15,20,0.82) 0%, rgba(7,15,20,0.52) 34%, rgba(7,15,20,0.20) 60%, transparent 86%);
+  }
+  .ug-energy-hero__inner {
+    position: relative;
+    z-index: 1;
+    max-width: var(--content-wide);
+  }
+  .ug-energy-hero__accent { color: var(--mint); }
+  .ug-energy-hero__ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  .ug-energy-hero__rlabel {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(235, 245, 248, 0.5);
+  }
+  .ug-energy-hero__date {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--mint);
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+  }
+  .ug-energy-hero__date::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 56px;
+    height: 2px;
+    background: var(--gold);
+  }
+  .ug-energy-hero__bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 4px;
+    background: var(--mint);
+    z-index: 1;
+  }
+  /* ───────── A — Release masthead hero ───────── */
+  .ug-energy-hero__rule {
+    display: block;
+    width: 48px;
+    height: 2px;
+    background: var(--mint);
+    margin-bottom: 14px;
+  }
+  .ug-energy-hero__eyebrow--A {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin: 0 0 16px;
+  }
+  .ug-energy-hero__headline--A {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(38px, 8vw, 84px);
+    line-height: 1.02;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: var(--off-white);
+    margin: 0 0 28px;
+    max-width: 16ch;
+  }
+  .ug-energy-hero__release--A {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 8px;
+    border: 1px solid rgba(var(--mint-rgb), 0.38);
+    border-radius: 4px;
+    padding: 12px 18px;
+    margin-bottom: 32px;
+  }
+  .ug-energy-hero__release--A .ug-energy-hero__date {
+    font-size: 28px;
+    padding-bottom: 10px;
+  }
+  .ug-energy-hero__release--A .ug-energy-hero__date::after {
+    width: 56px;
+  }
+  .ug-energy-hero__bar--A {
+    height: 6px;
+    background: linear-gradient(90deg, var(--mint) 0 62%, var(--gold) 62% 100%);
+  }
+  /* ───────── B — Product plate hero ───────── */
+  .ug-energy-hero__eyebrow--B {
+    margin: 0 0 16px;
+  }
+  .ug-energy-hero__chip {
+    display: inline-block;
+    background: rgba(var(--mint-rgb), 0.14);
+    border: 1px solid rgba(var(--mint-rgb), 0.4);
+    border-radius: 9999px;
+    padding: 6px 14px 5px;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mint);
+    line-height: 1.2;
+  }
+  .ug-energy-hero__headline--B {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(34px, 7vw, 68px);
+    line-height: 1.05;
+    letter-spacing: 0.015em;
+    text-transform: uppercase;
+    color: var(--off-white);
+    margin: 0 0 28px;
+    max-width: 17ch;
+  }
+  .ug-energy-hero__release--B {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .ug-energy-hero__release--B .ug-energy-hero__rlabel {
+    font-size: 10px;
+  }
+  .ug-energy-hero__divider {
+    width: 1px;
+    height: 28px;
+    background: var(--gold);
+    flex: none;
+  }
+  .ug-energy-hero__date--B {
+    font-size: 32px;
+    letter-spacing: -0.03em;
+    padding-bottom: 0;
+  }
+  .ug-energy-hero__date--B::after {
+    display: none;
+  }
+  .ug-energy-hero__hr {
+    display: block;
+    width: 100%;
+    max-width: var(--content-wide);
+    height: 1px;
+    background: rgba(255, 255, 255, 0.14);
+    margin: 0 0 28px;
+  }
+  .ug-energy-hero__bar--B {
+    height: 4px;
+    background: var(--mint);
+  }
+  /* ───────── C — Release sheet hero ───────── */
+  .ug-energy-hero__specrow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    /* Full-width mint hairline (edge to edge) under the spec row */
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding-left: max(var(--page-pad), calc(50vw - var(--content-wide) / 2 + var(--page-pad)));
+    padding-right: max(var(--page-pad), calc(50vw - var(--content-wide) / 2 + var(--page-pad)));
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(var(--mint-rgb), 0.3);
+    margin-bottom: 18px;
+  }
+  .ug-energy-hero__eyebrow--C {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin: 0;
+  }
+  .ug-energy-hero__specrule {
+    width: 1px;
+    align-self: stretch;
+    background: rgba(var(--mint-rgb), 0.3);
+    flex: none;
+  }
+  .ug-energy-hero__speclabel {
+    margin: 0;
+    margin-left: auto;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(245, 248, 250, 0.78);
+    font-variant: small-caps;
+  }
+  .ug-energy-hero__headline--C {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(36px, 7.5vw, 76px);
+    line-height: 1.0;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: var(--off-white);
+    margin: 0 0 28px;
+    max-width: 15ch;
+  }
+  .ug-energy-hero__release--C {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .ug-energy-hero__release--C .ug-energy-hero__date {
+    font-size: 22px;
+  }
+  .ug-energy-hero__ghostdate {
+    position: absolute;
+    right: max(var(--page-pad), calc(50vw - var(--content-wide) / 2 + var(--page-pad)));
+    bottom: clamp(40px, 6vw, 72px);
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(90px, 14vw, 190px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: rgba(245, 248, 250, 0.045);
+    pointer-events: none;
+    user-select: none;
+    z-index: -1;
+    white-space: nowrap;
+  }
+  .ug-energy-hero__bar--C {
+    height: 4px;
+    background: var(--mint);
+  }
+  /* ═══ ENERGY THESIS GRID + MEDIA FRAME (per Claude visual lock) ═══ */
+  .ug-energy-thesis-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+  @media (min-width: 900px) {
+    .ug-energy-thesis-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  }
+  .ug-energy-thesis-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+  .ug-energy-thesis-para {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  /* Lockup name bumps per thesis (scoped to each thesis section id) */
+  #ug-energy-thesis-section-A :global(.header-lockup__name) {
+    font-size: clamp(38px, 5.6vw, 60px);
+  }
+  #ug-energy-thesis-section-B :global(.header-lockup__name) {
+    font-size: clamp(36px, 5.2vw, 54px);
+  }
+  #ug-energy-thesis-section-C :global(.header-lockup__name) {
+    font-size: clamp(40px, 6vw, 66px);
+  }
+
+  /* Copy measure per thesis */
+  #ug-energy-thesis-section-A .ug-energy-thesis-para { max-width: 52ch; }
+  #ug-energy-thesis-section-B .ug-energy-thesis-para { max-width: 50ch; }
+  #ug-energy-thesis-section-C .ug-energy-thesis-para { max-width: 48ch; }
+
+  /* Shared media frame contract: frame owns ratio + chrome; plate is child */
+  .ug-energy-media__frame {
+    position: relative;
+    width: 100%;
+  }
+  .ug-energy-media__plate {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  .ug-energy-media__label {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mint);
+    line-height: 1.3;
+  }
+  .ug-energy-media__label-primary { display: block; }
+  .ug-energy-media__label-secondary {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 0;
+    text-transform: none;
+    color: rgba(245, 248, 250, 0.62);
+  }
+  .ug-energy-media__dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 9999px;
+    border: 1px solid var(--mint);
+    flex: none;
+  }
+  /* ───────── A — Release masthead media (flat 16:9 plate) ───────── */
+  @media (min-width: 900px) {
+    .ug-energy-thesis-grid--a {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);
+      gap: clamp(28px, 4vw, 56px);
+      align-items: center;
+    }
+  }
+  .ug-energy-media__frame--a {
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    border: 1px solid rgba(var(--mint-rgb), 0.32);
+    box-shadow: 0 18px 40px -24px rgba(10, 22, 28, 0.35);
+  }
+  .ug-energy-media__plate--a {
+    background: linear-gradient(160deg, #0c1a22 0%, #08131a 100%);
+  }
+  .ug-energy-media__plate--a::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('/images/mesh/luci-bg-hero-with-plan-transparent-1920x1080.svg') center / cover no-repeat;
+    opacity: 0.16;
+    pointer-events: none;
+  }
+  .ug-energy-media__plate--a::after {
+    content: '';
+    position: absolute;
+    left: 24px;
+    right: 24px;
+    bottom: 0;
+    height: 1px;
+    background: var(--gold-deep, #CEB06E);
+  }
+  .ug-energy-media__label--a {
+    left: 24px;
+    bottom: 24px;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+  /* ───────── B — Product plate media (3:4 iPad bezel) ───────── */
+  @media (min-width: 900px) {
+    .ug-energy-thesis-grid--b {
+      grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+      gap: clamp(28px, 4vw, 48px);
+      align-items: start;
+    }
+  }
+  .ug-energy-media--b-wrap { max-width: 420px; margin: 0 auto; } /* legacy hook, kept inert */
+  .ug-energy-media__frame--b {
+    aspect-ratio: 3 / 4;
+    border-radius: 22px;
+    padding: 10px;
+    background: linear-gradient(160deg, #16262f 0%, #0d1a22 100%);
+    box-shadow: 0 22px 48px -22px rgba(10, 22, 28, 0.45);
+  }
+  .ug-energy-media__plate--b {
+    border-radius: 14px;
+    border: 1px solid rgba(var(--mint-rgb), 0.22);
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 28%, rgba(var(--mint-rgb), 0.12) 0%, transparent 70%),
+      linear-gradient(160deg, #0c1a22 0%, #08131a 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .ug-energy-media__label--b {
+    position: static;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+  }
+  /* Ghost play — decorative, not a control. aria-hidden, pointer-events none. */
+  .ug-energy-media__play {
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 56px;
+    height: 56px;
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+  }
+  .ug-energy-media__play-circle {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    border: 1px solid rgba(var(--mint-rgb), 0.45);
+    background: transparent;
+  }
+  .ug-energy-media__play-tri {
+    position: relative;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 9px 0 9px 14px;
+    border-color: transparent transparent transparent var(--mint);
+    opacity: 0.55;
+    margin-left: 3px;
+  }
+  @media (max-width: 899px) {
+    .ug-energy-thesis-grid--b { grid-template-columns: 1fr; }
+    .ug-energy-thesis-grid--b .ug-energy-media { order: -1; max-width: 420px; margin: 0 auto; }
+    .ug-energy-thesis-grid--b .ug-energy-media__frame--b { max-width: 420px; }
+  }
+  /* ───────── C — Release sheet media (16:10, right bleed, sticky) ───────── */
+  @media (min-width: 900px) {
+    .ug-energy-thesis-grid--c {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+      gap: clamp(28px, 4vw, 48px);
+      align-items: start;
+    }
+  }
+  @media (min-width: 1200px) {
+    .ug-energy-thesis-grid--c .ug-energy-media {
+      position: sticky;
+      top: 84px;
+      align-self: start;
+    }
+    .ug-energy-media__frame--c {
+      margin-right: calc(50% - 50vw);
+      border-radius: 12px 0 0 12px;
+    }
+  }
+  .ug-energy-media__frame--c {
+    aspect-ratio: 16 / 10;
+    border-top: 1px solid rgba(var(--mint-rgb), 0.3);
+    border-bottom: 1px solid rgba(var(--mint-rgb), 0.3);
+    border-left: 1px solid rgba(var(--mint-rgb), 0.3);
+    border-right: 0;
+    border-radius: 12px 0 0 12px;
+    box-shadow: none;
+  }
+  .ug-energy-media__plate--c {
+    background: linear-gradient(160deg, #0c1a22 0%, #08131a 100%);
+  }
+  .ug-energy-media__plate--c::before {
+    content: '';
+    position: absolute;
+    inset: 20px;
+    border: 1px dashed rgba(var(--mint-rgb), 0.35);
+    pointer-events: none;
+  }
+  .ug-energy-media__label--c {
+    top: 20px;
+    left: 20px;
+    padding: 14px 16px 0;
+    gap: 4px;
+  }
+  @media (max-width: 899px) {
+    .ug-energy-thesis-grid--c { grid-template-columns: 1fr; }
+    .ug-energy-media__frame--c {
+      margin-right: 0;
+      border: 1px solid rgba(var(--mint-rgb), 0.3);
+      border-radius: 12px;
+    }
+  }
+</style>
+
+<style>
+  /* ═══ SHARED SECTIONS — copied from live UG so the mock renders
+     self-contained. Brand tokens only; no live-page CSS is modified. ═══ */
+
+  /* ---------- 2. THESIS (shared base) ---------- */
+  .ug-thesis {
+    max-width: 64ch;
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+  .ug-thesis + .ug-thesis { margin-top: 1em; }
+
+  /* ---------- 3. PILLARS OVERVIEW ---------- */
+  .ug-pillars {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(20px, 2.4vw, 32px);
+    max-width: var(--content-wide);
+  }
+  @media (min-width: 820px) {
+    .ug-pillars { grid-template-columns: repeat(3, 1fr); }
+  }
+  .ug-pillar {
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    padding: clamp(20px, 2.4vw, 28px);
+  }
+  .ug-pillars .ug-pillar:nth-child(1) { background: linear-gradient(155deg, #E8EEF2 0%, #F3F6F8 100%); }
+  .ug-pillars .ug-pillar:nth-child(2) { background: linear-gradient(155deg, #EBF9F4 0%, #F4FCF9 100%); }
+  .ug-pillars .ug-pillar:nth-child(3) { background: linear-gradient(155deg, #D4EFE4 0%, #E8F6EF 100%); }
+  .ug-pillar__head {
+    background: transparent;
+    border-radius: 0;
+    padding: 18px 0 14px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: visible;
+    box-shadow: none;
+    border-bottom: 1px solid rgba(var(--mint-rgb), 0.28);
+  }
+  .ug-pillar__num {
+    position: absolute;
+    top: -6px;
+    right: -4px;
+    left: auto;
+    font-family: var(--font-head);
+    font-size: 100px;
+    font-weight: 700;
+    color: #10232d0d;
+    line-height: 1;
+    letter-spacing: -3px;
+    pointer-events: none;
+    user-select: none;
+    text-align: right;
+  }
+  .ug-pillar__name {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-head);
+    font-size: 27px;
+    font-weight: 700;
+    color: var(--ink-strong);
+    line-height: 1.22;
+    margin: 0;
+  }
+  .ug-pillar__name :global(.ug-pillar__ctrl) { color: var(--accent-light); }
+  .ug-pillar__summary {
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    color: var(--navy-muted);
+    line-height: 1.6;
+    margin: 0 0 20px;
+  }
+  .ug-pillar__pills {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .ug-pill {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.72);
+    border-left: 3px solid var(--accent-light);
+    border-radius: 8px;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  }
+  .ug-pill:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(43, 158, 128, 0.18);
+    background: rgba(255, 255, 255, 0.86);
+  }
+  .ug-pill__name {
+    font-family: var(--font-head);
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--ink-strong);
+  }
+  .ug-pill__liner {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--navy-muted);
+  }
+  /* ---------- 5. IN-PRODUCT SUPPORT SPOTLIGHT ---------- */
+  .ug-support-spotlight {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 18px;
+    max-width: var(--content-wide);
+    margin-top: clamp(20px, 2.4vw, 32px);
+    padding: 20px 24px;
+    border-radius: 10px;
+    border-left: 3px solid var(--accent-light);
+    background: linear-gradient(155deg, #D8DEE3 0%, #E8EDF0 100%);
+    text-decoration: none;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .ug-support-spotlight:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px -16px rgba(10, 20, 26, 0.32);
+  }
+  .ug-support-spotlight:focus-visible {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 3px;
+  }
+  .ug-support-spotlight__name {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 15.5px;
+    letter-spacing: -0.01em;
+    color: var(--ink-strong);
+    white-space: nowrap;
+  }
+  .ug-support-spotlight__plus {
+    position: absolute;
+    top: 0;
+    left: 16px;
+    z-index: 1;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-strong);
+    background: var(--gold);
+    border-radius: 9999px;
+    padding: 4px 10px 3px;
+    line-height: 1.2;
+    box-shadow: 0 2px 8px -2px rgba(10, 20, 26, 0.22);
+    pointer-events: none;
+  }
+  .ug-support-spotlight__liner {
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--navy-muted);
+  }
+  .ug-support-spotlight__arrow {
+    font-family: var(--font-head);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1;
+    color: var(--accent-light);
+    transition: transform 0.18s ease;
+  }
+  .ug-support-spotlight:hover .ug-support-spotlight__arrow { transform: translateX(3px); }
+  @media (max-width: 720px) {
+    .ug-support-spotlight {
+      grid-template-columns: 1fr auto;
+      grid-template-areas: 'name arrow' 'liner liner';
+      row-gap: 6px;
+    }
+    .ug-support-spotlight__name { grid-area: name; }
+    .ug-support-spotlight__liner { grid-area: liner; }
+    .ug-support-spotlight__arrow { grid-area: arrow; }
+  }
+
+  /* ---------- 4. FEATURE DEEP-DIVE ---------- */
+  .ug-deepdive {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(28px, 3.6vw, 48px);
+    max-width: var(--content-wide);
+    margin-top: var(--space-2);
+    padding: clamp(20px, 2.4vw, 32px);
+    border-radius: 12px;
+    background: var(--off-white);
+    color: var(--ink);
+  }
+  .ug-pillar-group__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .ug-pillar-group__title {
+    font-family: var(--font-head);
+    font-size: clamp(20px, 2.4vw, 24px);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--ink-strong);
+    margin: 0;
+  }
+  .ug-pillar-group__num { color: var(--accent-light); margin-right: 10px; font-weight: 400; }
+  .ug-features { display: flex; flex-direction: column; gap: 14px; }
+  .ug-feature { border-bottom: 1px solid var(--rule-light); }
+  .ug-feature__summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 20px 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    position: relative;
+  }
+  .ug-feature__summary::-webkit-details-marker { display: none; }
+  .ug-feature__summary:focus-visible { outline: 2px solid var(--accent-light); outline-offset: 4px; }
+  @media (min-width: 720px) {
+    .ug-feature__summary { grid-template-columns: minmax(160px, 220px) 1fr 24px; gap: 24px; align-items: baseline; }
+  }
+  .ug-feature--open > .ug-feature__summary { cursor: default; }
+  .ug-feature--open > .ug-feature__summary::-webkit-details-marker { display: none; }
+  .ug-feature__name {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(16px, 1.8vw, 18px);
+    letter-spacing: -0.01em;
+    color: var(--ink-strong);
+  }
+  .ug-feature__liner {
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--navy-muted);
+  }
+  .ug-feature__chev {
+    align-self: center;
+    width: 14px;
+    height: 14px;
+    flex: none;
+    background: linear-gradient(135deg, transparent 47%, var(--accent-light) 47%, var(--accent-light) 53%, transparent 53%),
+                linear-gradient(45deg, transparent 47%, var(--accent-light) 47%, var(--accent-light) 53%, transparent 53%);
+  }
+  .ug-feature--open .ug-feature__chev { display: none; }
+  .ug-feature__body {
+    padding: 0 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    border-top: 1px solid var(--rule-light);
+    padding-top: 16px;
+  }
+  @media (min-width: 720px) {
+    .ug-feature__body {
+      display: grid;
+      grid-template-columns: minmax(160px, 220px) 1fr 24px;
+      column-gap: 24px;
+      row-gap: 14px;
+      padding: 16px 0 28px;
+      align-items: start;
+    }
+    .ug-feature__paragraph, .ug-feature__benefits { grid-column: 2; }
+  }
+  .ug-feature--open .ug-feature__body { display: block; padding-top: 0; }
+  .ug-feature__paragraph {
+    font-family: var(--font-body);
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink);
+    max-width: 64ch;
+    margin: 0;
+  }
+  .ug-feature__benefits { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .ug-feature__benefits li {
+    position: relative;
+    padding-left: 22px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 60ch;
+  }
+  .ug-feature__benefits li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.3em;
+    width: 13px;
+    height: 13px;
+    background: var(--accent-light);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
+  }
+  /* ---------- 4b. FEATURE DEEP BODY (Venue panels pilot pattern) ---------- */
+  .ug-feature-deep {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    grid-column: 2;
+    max-width: 60ch;
+  }
+  @media (max-width: 719px) { .ug-feature-deep { grid-column: 1; } }
+  .ug-feature-deep__section { display: flex; flex-direction: column; gap: 8px; }
+  .ug-feature-deep__label {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin: 0;
+  }
+  .ug-feature-scenarios {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    align-items: stretch;
+  }
+  @media (min-width: 720px) { .ug-feature-scenarios { grid-template-columns: 1fr 1fr; } }
+  .ug-feature-scenario {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    min-height: 280px;
+    border-radius: 14px;
+    overflow: hidden;
+    isolation: isolate;
+    background: linear-gradient(160deg, #0c1a22 0%, #08131a 100%);
+    box-shadow: 0 14px 28px rgba(10, 22, 28, 0.28);
+    display: block;
+  }
+  .ug-feature-scenario__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    z-index: 0;
+  }
+  .ug-feature-scenario__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(10,22,28,0) 0%, rgba(10,22,28,0) 28%, rgba(10,22,28,0.55) 52%, rgba(8,24,28,0.88) 78%, rgba(6,20,24,0.96) 100%),
+      linear-gradient(180deg, transparent 45%, rgba(var(--mint-rgb), 0.08) 100%);
+  }
+  .ug-feature-scenario__copy {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    padding: clamp(16px, 2vw, 22px);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: left;
+  }
+  .ug-feature-scenario__title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(16px, 1.6vw, 20px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+    margin: 0;
+  }
+  .ug-feature-scenario__line {
+    font-family: var(--font-body);
+    font-size: clamp(12.5px, 1.15vw, 14px);
+    line-height: 1.45;
+    color: rgba(245, 248, 250, 0.88);
+    margin: 0;
+  }
+  .ug-feature-limits { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .ug-feature-limits li {
+    position: relative;
+    padding-left: 22px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 60ch;
+  }
+  .ug-feature-limits li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.3em;
+    width: 13px;
+    height: 13px;
+    background: var(--accent-light);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center / contain;
+  }
+  .ug-feature-itlink {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--accent-light);
+    text-decoration: none;
+    align-self: flex-start;
+  }
+  .ug-feature-itlink:hover { text-decoration: underline; }
+  .ug-feature-itlink:focus-visible { outline: 2px solid var(--accent-light); outline-offset: 3px; }
+  .ug-feature-media { display: none; }
+  /* ---------- 6. TECHNICAL DETAIL ---------- */
+  .ug-technical {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(32px, 4vw, 48px);
+    max-width: var(--content-wide);
+  }
+  .ug-tech-group__title {
+    font-family: var(--font-head);
+    font-size: clamp(18px, 2.2vw, 22px);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--ink-strong);
+    margin: 0 0 8px;
+  }
+  .ug-tech-group__intro {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--navy-muted);
+    margin: 0 0 20px;
+    max-width: 64ch;
+  }
+  .ug-tech-items { display: flex; flex-direction: column; }
+  .ug-tech-item { border-bottom: 1px solid var(--rule-light); }
+  .ug-tech-item:first-child { border-top: 1px solid var(--rule-light); }
+  .ug-tech-item__summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 18px 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    position: relative;
+  }
+  .ug-tech-item__summary::-webkit-details-marker { display: none; }
+  .ug-tech-item__summary:focus-visible { outline: 2px solid var(--accent-light); outline-offset: 4px; }
+  @media (min-width: 720px) {
+    .ug-tech-item__summary { grid-template-columns: minmax(180px, 240px) 1fr 24px; gap: 24px; align-items: baseline; }
+  }
+  .ug-tech-item__name {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 15.5px;
+    letter-spacing: -0.01em;
+    color: var(--ink-strong);
+  }
+  .ug-tech-item__summary-text {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--navy-muted);
+  }
+  .ug-tech-item__details { list-style: none; margin: 0 0 24px; padding: 0; display: grid; gap: 6px; }
+  @media (min-width: 720px) {
+    .ug-tech-item__details { padding-left: minmax(180px, 240px); }
+  }
+  .ug-tech-item__details li {
+    position: relative;
+    padding-left: 18px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 60ch;
+  }
+  .ug-tech-item__details li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.45em;
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: var(--accent-light);
+    opacity: 0.7;
+  }
+
+  /* ---------- 7. UPGRADE PATH ---------- */
+  .ug-upgrade {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(24px, 3.6vw, 36px);
+    max-width: var(--content-wide);
+  }
+  .ug-upgrade__timing {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    background: linear-gradient(155deg, #EBF9F4 0%, #F4FCF9 100%);
+    border-left: 3px solid var(--accent-light);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  @media (min-width: 720px) {
+    .ug-upgrade__timing { grid-template-columns: minmax(220px, 260px) 1fr; }
+  }
+  .ug-upgrade__timing-cell { padding: 18px 24px; display: flex; flex-direction: column; gap: 6px; }
+  .ug-upgrade__timing-cell + .ug-upgrade__timing-cell { border-top: 1px solid rgba(43, 158, 128, 0.18); }
+  @media (min-width: 720px) {
+    .ug-upgrade__timing-cell + .ug-upgrade__timing-cell { border-top: 0; border-left: 1px solid rgba(43, 158, 128, 0.18); }
+  }
+  .ug-upgrade__timing-label {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+  }
+  .ug-upgrade__timing-value {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 52ch;
+  }
+  .ug-upgrade__timing-value--date {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    color: var(--ink-strong);
+  }
+  .ug-upgrade__rollout-note {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--navy-muted);
+    margin: 0;
+    max-width: 70ch;
+  }
+  .ug-upgrade__how { display: flex; flex-direction: column; gap: 16px; }
+  .ug-upgrade__subhead {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(18px, 2.2vw, 22px);
+    letter-spacing: -0.015em;
+    color: var(--ink-strong);
+    margin: 0;
+  }
+  .ug-upgrade__how-intro {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--navy-muted);
+    margin: 0;
+    max-width: 60ch;
+  }
+  .ug-upgrade__steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+  .ug-upgrade__step { display: flex; align-items: flex-start; gap: 14px; }
+  .ug-upgrade__step-num {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 9999px;
+    border: 1px solid var(--accent-light);
+    background: #fff;
+    color: var(--accent-light);
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 12px;
+  }
+  .ug-upgrade__step-title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--ink-strong);
+    margin: 0 0 2px;
+  }
+  .ug-upgrade__step-body {
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0;
+    max-width: 48ch;
+  }
+  .ug-upgrade__path-cta {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 22px 12px 18px;
+    border-radius: 9999px;
+    background: var(--accent-light);
+    color: #fff;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: -0.005em;
+    text-decoration: none;
+    transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .ug-upgrade__path-cta:hover {
+    background: #248f72;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(43, 158, 128, 0.28);
+  }
+  .ug-upgrade__path-cta:focus-visible { outline: 2px solid var(--accent-light); outline-offset: 3px; }
+  .ug-upgrade__path-cta-arrow {
+    font-family: var(--font-head);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1;
+    transition: transform 0.18s ease;
+  }
+  .ug-upgrade__path-cta:hover .ug-upgrade__path-cta-arrow { transform: translateX(3px); }
+  /* ---------- 8. FAQ ---------- */
+  .ug-faq { max-width: 760px; }
+  .ug-faq__item { border-bottom: 1px solid var(--rule-light); }
+  .ug-faq__item:first-child { border-top: 1px solid var(--rule-light); }
+  .ug-faq__q {
+    list-style: none;
+    cursor: pointer;
+    padding: clamp(18px, 2.4vw, 24px) 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(16px, 1.9vw, 18px);
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    color: var(--ink-strong);
+  }
+  .ug-faq__q::-webkit-details-marker { display: none; }
+  .ug-faq__q::after {
+    content: '+';
+    flex: none;
+    font-family: var(--font-head);
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--accent-light);
+  }
+  .ug-faq__item[open] .ug-faq__q::after { content: '\2212'; }
+  .ug-faq__a {
+    margin: 0 0 clamp(18px, 2.4vw, 24px);
+    max-width: 64ch;
+    font-family: var(--font-body);
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  /* ---------- 9. CTA (deep) ---------- */
+  .ug-cta__body {
+    max-width: 56ch;
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.82);
+    margin: 0 0 16px;
+  }
+  .ug-cta__contact {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.78);
+    margin: 0 0 24px;
+  }
+  .ug-cta__contact strong { color: var(--off-white); }
+  .ug-cta__contact a { color: var(--mint); }
+  .ug-cta__actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  /* ---------- Back-to-top ---------- */
+  .ug-back-to-top {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 80;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 9999px;
+    background: rgba(16, 35, 45, 0.92);
+    color: var(--mint);
+    border: 1px solid rgba(104, 227, 190, 0.4);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+    transition: opacity 0.25s ease, transform 0.25s ease, background 0.18s, color 0.18s;
+  }
+  .ug-back-to-top.is-visible { opacity: 1; pointer-events: auto; transform: none; }
+  .ug-back-to-top:hover { background: var(--mint); color: var(--navy-deep); border-color: var(--mint); }
+  .ug-back-to-top:focus-visible { outline: 2px solid var(--mint); outline-offset: 3px; }
+  .ug-back-to-top svg { width: 18px; height: 18px; }
+
+  /* ---------- Open flags (Jane review only) ---------- */
+  .ug-flags {
+    max-width: var(--content-wide);
+    margin: 0 auto;
+    padding: 16px var(--page-pad) 40px;
+  }
+  .ug-flags details {
+    background: rgba(43, 158, 128, 0.04);
+    border: 1px dashed rgba(43, 158, 128, 0.3);
+    border-radius: 8px;
+    padding: 12px 16px;
+  }
+  .ug-flags summary {
+    cursor: pointer;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    list-style: none;
+  }
+  .ug-flags summary::-webkit-details-marker { display: none; }
+  .ug-flags summary::before { content: '\25B6 '; font-size: 9px; margin-right: 6px; }
+  .ug-flags details[open] summary::before { content: '\25BC '; }
+  .ug-flags ul { margin: 12px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+  .ug-flags li {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--navy-muted);
+    padding-left: 16px;
+    position: relative;
+  }
+  .ug-flags li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: var(--gold-deep, #CEB06E);
+  }
+  /* ============================================================
+     SECTION LOCKUP HEADERS — mint wash (matches live UG)
+     Soft mint wash band + ink/accent-light duo + split mint|gold-deep
+     rule. Full-bleed wash band; lockup type shares container--wide inset.
+     ============================================================ */
+  .ug-headers :global(.header-lockup__name em) { font-style: normal; }
+
+  .ug-headers--alt :global(.section--light) :global(.header-lockup),
+  .ug-headers--alt :global(.section--white) :global(.header-lockup) {
+    position: relative;
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    margin-bottom: var(--space-5);
+    padding-top: 26px;
+    padding-bottom: 28px;
+    padding-left: max(var(--page-pad), calc(50vw - var(--content-wide) / 2 + var(--page-pad)));
+    padding-right: max(var(--page-pad), calc(50vw - var(--content-wide) / 2 + var(--page-pad)));
+    box-sizing: border-box;
+    background:
+      linear-gradient(180deg, rgba(var(--mint-rgb), 0.14) 0%, rgba(var(--mint-rgb), 0.06) 100%),
+      var(--off-white);
+    border-bottom: 1px solid rgba(var(--mint-rgb), 0.28);
+  }
+  .ug-headers--alt :global(.section--light) :global(.header-lockup__name),
+  .ug-headers--alt :global(.section--white) :global(.header-lockup__name) {
+    color: var(--ink-strong);
+  }
+  .ug-headers--alt :global(.section--light) :global(.header-lockup__name em),
+  .ug-headers--alt :global(.section--white) :global(.header-lockup__name em) {
+    color: var(--accent-light);
+    border-bottom: none;
+  }
+  .ug-headers--alt :global(.section--light) :global(.header-lockup__rule),
+  .ug-headers--alt :global(.section--white) :global(.header-lockup__rule) {
+    width: 72px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-light) 0 40px, transparent 40px 44px, var(--gold-deep, #CEB06E) 44px 72px);
+    border-radius: 0;
+  }
+  .ug-headers--alt :global(.section--deep) :global(.header-lockup__name em),
+  .ug-headers--alt :global(.section--mid) :global(.header-lockup__name em) {
+    color: var(--gold);
+  }
+  .ug-headers--alt :global(.section--deep) :global(.header-lockup__rule),
+  .ug-headers--alt :global(.section--mid) :global(.header-lockup__rule) {
+    width: 72px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--mint) 0 40px, transparent 40px 44px, var(--gold) 44px 72px);
+  }
+  .ug-headers--alt :global(.header-lockup__name:not(:has(em)))::after {
+    content: '';
+    display: block;
+    width: 72px;
+    height: 3px;
+    margin-top: 12px;
+    background: linear-gradient(90deg, var(--accent-light) 0 40px, transparent 40px 44px, var(--gold-deep, #CEB06E) 44px 72px);
+  }
+  .ug-headers--alt :global(.section--deep) :global(.header-lockup__name:not(:has(em)))::after,
+  .ug-headers--alt :global(.section--mid) :global(.header-lockup__name:not(:has(em)))::after {
+    background: linear-gradient(90deg, var(--mint) 0 40px, transparent 40px 44px, var(--gold) 44px 72px);
+  }
+
+  @media (max-width: 640px) {
+    .ug-feature__body, .ug-tech-item__details { padding-left: 0 !important; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ug-back-to-top { transition: none; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var switcher = document.querySelector('[data-thesis-switcher]');
+    if (!switcher) return;
+    var btns = Array.prototype.slice.call(switcher.querySelectorAll('[data-thesis-btn]'));
+    var panels = Array.prototype.slice.call(document.querySelectorAll('.ug-energy-thesis'));
+
+    function activate(id, opts) {
+      var o = opts || {};
+      var matched = false;
+      btns.forEach(function (b) {
+        var match = String(b.getAttribute('data-thesis-btn')).toUpperCase() === String(id).toUpperCase();
+        if (match) matched = true;
+        b.setAttribute('aria-selected', match ? 'true' : 'false');
+        b.tabIndex = match ? 0 : -1;
+      });
+      panels.forEach(function (p) {
+        var match = String(p.getAttribute('data-thesis')).toUpperCase() === String(id).toUpperCase();
+        if (match) {
+          p.removeAttribute('hidden');
+          p.classList.add('is-active');
+        } else {
+          p.setAttribute('hidden', '');
+          p.classList.remove('is-active');
+        }
+      });
+      if (!matched) return;
+      if (!o.skipHistory) {
+        var url = new URL(window.location.href);
+        url.searchParams.set('thesis', String(id).toUpperCase());
+        window.history.replaceState(null, '', url.toString());
+      }
+    }
+
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        activate(b.getAttribute('data-thesis-btn'));
+      });
+    });
+
+    // Keyboard arrow navigation between tabs
+    btns.forEach(function (b, i) {
+      b.addEventListener('keydown', function (e) {
+        var idx = i;
+        if (e.key === 'ArrowRight') { e.preventDefault(); btns[(idx + 1) % btns.length].focus(); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); btns[(idx - 1 + btns.length) % btns.length].focus(); }
+        else if (e.key === 'Home') { e.preventDefault(); btns[0].focus(); }
+        else if (e.key === 'End') { e.preventDefault(); btns[btns.length - 1].focus(); }
+      });
+    });
+
+    // Deep-link: ?thesis=A|B|C wins; else #thesis-a hash; else default A.
+    var params = new URLSearchParams(window.location.search);
+    var requested = params.get('thesis');
+    if (!requested) {
+      var hash = window.location.hash.replace(/^#thesis-/, '');
+      if (/^[a-c]$/i.test(hash)) requested = hash;
+    }
+    if (requested && /^[a-c]$/i.test(requested)) {
+      activate(requested.toUpperCase(), { skipHistory: true });
+    } else {
+      activate('A', { skipHistory: true });
+    }
+
+    // Back-to-top
+    var btt = document.querySelector('[data-ug-back-to-top]');
+    if (btt) {
+      var onScroll = function () {
+        if (window.scrollY > window.innerHeight * 0.6) btt.classList.add('is-visible');
+        else btt.classList.remove('is-visible');
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      btt.addEventListener('click', function () {
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+      });
+      onScroll();
+    }
+  })();
+</script>
