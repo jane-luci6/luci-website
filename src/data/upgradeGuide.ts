@@ -196,19 +196,19 @@ export const upgradeGuide = {
           id: 'venue-panels',
           name: 'Venue panels',
           oneLiner:
-            'Venue panels let operators and guests adjust what they need in only the room—or rooms—they should control, with only the actions approved for that space.',
+            'With venue panels, you control what operators and guests can adjust in each room. Choose the rooms, devices, actions, and sources that appear, then require a PIN or leave the panel open.',
         },
         {
           id: 'staging',
           name: 'Staging',
           oneLiner:
-            'Prepare screens, sources, and audio levels behind the scenes. Apply the change on cue, or save it as a preset for next time.',
+            'With staging, you can prepare screens, sources, volumes, and content while the current experience keeps running. Hold the changes until you Apply, then apply them on cue or save the set as a preset.',
         },
         {
           id: 'audio-group-control',
           name: 'Audio group control',
           oneLiner:
-            'Raise or lower selected zones together while you keep their balance, set them all to one volume, or move one zone on its own.',
+            'With audio group control, you have more options when moving multiple zones at once. Lock the selected zones together and move them incrementally or set them all to a single volume number.',
         },
       ],
     },
@@ -222,19 +222,19 @@ export const upgradeGuide = {
           id: 'customizable-interface',
           name: 'Customizable interface',
           oneLiner:
-            'Make LUCI your own with brand colors, light and dark modes, backsplashes, and more.',
+            'With a customizable interface, you can shape LUCI around your property’s identity and operating cues. Add property photography and marks, then choose themes, light or dark mode, background treatments, typography, and endpoint status colors.',
         },
         {
           id: 'live-map-flexibility',
           name: 'Live map flexibility',
           oneLiner:
-            'Upload your own floor plan maps, rotate them to match your view, and see every device’s status update live.',
+            'With live map flexibility, you can use your own floor plans as a live view of your devices. Rotate and orient each map to match the physical space, then see every device’s state from the map.',
         },
         {
           id: 'live-screen-view',
           name: 'Live screen view',
           oneLiner:
-            'See what’s playing on any TV or LED wall from your iPad or any browser device, shown exactly as it appears live.',
+            'With live screen view, you can check what is playing on a selected TV or LED wall. See the screen exactly as it appears live from your iPad or any browser device.',
         },
       ],
     },
@@ -248,19 +248,19 @@ export const upgradeGuide = {
           id: 'audit-trails',
           name: 'Audit trails',
           oneLiner:
-            'Trace each action to a person, preset, or schedule and export the record when needed.',
+            'With audit trails, you can follow who or what triggered each action, when it happened, and which device it affected. Search by device or user, filter by action type, and export the record when needed.',
         },
         {
           id: 'live-monitoring',
           name: 'Live monitoring',
           oneLiner:
-            'See device, display, and audio status live, including when a device stops responding.',
+            'With live monitoring, you can see the current state of devices, displays, and audio zones from one view. Filter by venue, device type, or status, follow incidents as they open and close, and carry their context into a support request.',
         },
         {
           id: 'sign-in-session-control',
           name: 'Sign-in & session control',
           oneLiner:
-            'Use email, PIN, or Microsoft for sign-in, end sessions on command, or message everyone in the platform.',
+            'With sign-in and session control, you can give users access by email, PIN, or Microsoft Entra ID. See who is active, end a session, or post a message to everyone using LUCI.',
         },
       ],
     },
@@ -269,7 +269,7 @@ export const upgradeGuide = {
   supportSpotlight: {
     title: 'In-product support',
     oneLiner:
-      'Raise a request from a device, incident, or error with context and logs attached—and when something on your property goes down, the LUCI team gets an alert so they can jump on it right away.',
+      'With in-product support, you can start a request from the device, incident, or error where the issue appears, with context and logs attached. You decide what to escalate, and when something on your property goes down, the LUCI team gets an alert so they can jump on it right away.',
     featureId: 'in-product-support',
   },
 
@@ -279,7 +279,7 @@ export const upgradeGuide = {
       pillarId: 'room-control',
       name: 'Venue panels',
       oneLiner:
-        'Venue panels let operators and guests adjust what they need in only the room—or rooms—they should control, with only the actions approved for that space.',
+        'With venue panels, you control what operators and guests can adjust in each room. Choose the rooms, devices, actions, and sources that appear, then require a PIN or leave the panel open.',
       paragraph:
         'Put focused room control where the work happens. Each panel starts with the endpoints assigned to its venue, then an administrator chooses which devices, actions, and sources appear.\n\nStaff panels can require a PIN, while guest-facing panels can stay open. Operators and guests adjust what they need from a basic panel or list interface—without access to the main LUCI application—scoped to the room or rooms that panel is for. Scheduling allows automatic shut-down for venue panels in a selected space.',
       benefits: [],
@@ -333,7 +333,7 @@ export const upgradeGuide = {
       pillarId: 'room-control',
       name: 'Staging',
       oneLiner:
-        'Prepare screens, sources, and audio levels behind the scenes, and hold that set until you are ready. Apply on cue, or save it as a preset for next time.',
+        'With staging, you can prepare screens, sources, volumes, and content while the current experience keeps running. Hold the changes until you Apply, then apply them on cue or save the set as a preset.',
       paragraph:
         'Prepare the screens, sources, volumes, and content for an upcoming event while the current experience keeps running. Nothing changes until you Apply. Save the staged set as a preset to use again, or give the preset a time to make it a scheduled preset. Chart views show what has run and what is coming up.',
       benefits: [
@@ -379,7 +379,7 @@ export const upgradeGuide = {
       pillarId: 'room-control',
       name: 'Audio group control',
       oneLiner:
-        'Raise or lower selected zones together while you keep their balance, set them all to one volume, or move one zone on its own.',
+        'With audio group control, you have more options when moving multiple zones at once. Lock the selected zones together and move them incrementally or set them all to a single volume number.',
       paragraph:
         'You’ve set the bar louder than the dining room and the patio at its own level, but all three zones are too quiet. Select them, lock in their current balance, and raise them together. Audio group control moves each zone by the same amount, so the bar stays louder than the dining room as the whole space gets louder.\n\nWhen you need one level across the space, set every selected zone to the same volume. When one area needs a quick adjustment, move that zone alone without changing the others.',
       benefits: [
@@ -417,7 +417,7 @@ export const upgradeGuide = {
       pillarId: 'view-control',
       name: 'Customizable interface',
       oneLiner:
-        'Make LUCI your own with brand colors, light and dark modes, backsplashes, and more.',
+        'With a customizable interface, you can shape LUCI around your property’s identity and operating cues. Add property photography and marks, then choose themes, light or dark mode, background treatments, typography, and endpoint status colors.',
       paragraph:
         'Shape LUCI around the property’s own identity and operating cues. Sign-in and splash screens can carry property photography and marks, while curated themes, light and dark modes, background treatments, typography, and endpoint status colors give the interface a familiar look.',
       benefits: [
@@ -437,7 +437,7 @@ export const upgradeGuide = {
       pillarId: 'view-control',
       name: 'Live map flexibility',
       oneLiner:
-        'Upload your own floor plan maps, rotate them to match your view, and see every device’s status update live.',
+        'With live map flexibility, you can use your own floor plans as a live view of your devices. Rotate and orient each map to match the physical space, then see every device’s state from the map.',
       paragraph:
         'Use the property’s own floor plans instead of a generic layout, then rotate and orient each map to match the physical space. The map remains connected to device state, so the view operators recognize is also the surface they use to see what is happening.',
       benefits: [
@@ -456,7 +456,7 @@ export const upgradeGuide = {
       pillarId: 'view-control',
       name: 'Live screen view',
       oneLiner:
-        'See what’s playing on any TV or LED wall from your iPad or any browser device, shown exactly as it appears live.',
+        'With live screen view, you can check what is playing on a selected TV or LED wall. See the screen exactly as it appears live from your iPad or any browser device.',
       paragraph:
         'Live screen view shows what is playing on a selected TV or LED wall from an iPad or any browser device, exactly as it appears live. It gives the operator a direct visual check of the current screen from the device in hand.',
       benefits: [
@@ -475,7 +475,7 @@ export const upgradeGuide = {
       pillarId: 'security-control',
       name: 'Audit trails',
       oneLiner:
-        'Trace each action to a person, preset, or schedule and export the record when needed.',
+        'With audit trails, you can follow who or what triggered each action, when it happened, and which device it affected. Search by device or user, filter by action type, and export the record when needed.',
       paragraph:
         'Follow the record behind each action: who or what triggered it, when it happened, and which device it affected. Search by device or user, filter by action type, export the results, and review incident duration when a device stops responding and later returns.',
       benefits: [
@@ -495,7 +495,7 @@ export const upgradeGuide = {
       pillarId: 'security-control',
       name: 'Live monitoring',
       oneLiner:
-        'See device, display, and audio status live, including when a device stops responding.',
+        'With live monitoring, you can see the current state of devices, displays, and audio zones from one view. Filter by venue, device type, or status, follow incidents as they open and close, and carry their context into a support request.',
       paragraph:
         'See the current state of devices, displays, and audio zones from one view, including what is on, what is off, and what has a fault. Filter the view to find what needs attention, follow incidents as they open and close, and raise a support request with the relevant incident context attached.',
       benefits: [
@@ -515,7 +515,7 @@ export const upgradeGuide = {
       pillarId: 'security-control',
       name: 'Sign-in & session control',
       oneLiner:
-        'Use email, PIN, or Microsoft for sign-in, end sessions on command, or message everyone in the platform.',
+        'With sign-in and session control, you can give users access by email, PIN, or Microsoft Entra ID. See who is active, end a session, or post a message to everyone using LUCI.',
       paragraph:
         'Give users the sign-in method that fits their work, from email and PIN access to Microsoft credentials through Entra ID. Administrators can see who is active, end a session, and post a message banner to everyone currently using LUCI.',
       benefits: [
@@ -535,7 +535,7 @@ export const upgradeGuide = {
       pillarId: 'security-control',
       name: 'In-product support',
       oneLiner:
-        'Raise a request from a device, incident, or error with context and logs attached—and when something on your property goes down, the LUCI team gets an alert so they can jump on it right away.',
+        'With in-product support, you can start a request from the device, incident, or error where the issue appears, with context and logs attached. You decide what to escalate, and when something on your property goes down, the LUCI team gets an alert so they can jump on it right away.',
       paragraph:
         'Start a support request from the device, incident, or error where the issue appears. The request carries what happened, what changed, and the relevant logs, while the property decides what to escalate and the LUCI team remains available to act on the fuller context. When something on your property goes down, the LUCI team gets an alert so they can jump on it right away.',
       benefits: [
