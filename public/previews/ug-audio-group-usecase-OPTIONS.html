@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>LUCI Upgrade Guide — Audio group control copy</title>
+  <style>
+    @font-face {
+      font-family: "Space Grotesk";
+      font-style: normal;
+      font-display: swap;
+      font-weight: 400;
+      src: url("/fonts/space-grotesk-400.woff2") format("woff2");
+    }
+
+    @font-face {
+      font-family: "Space Grotesk";
+      font-style: normal;
+      font-display: swap;
+      font-weight: 600 700;
+      src: url("/fonts/space-grotesk-600.woff2") format("woff2");
+    }
+
+    @font-face {
+      font-family: "Inter";
+      font-style: normal;
+      font-display: swap;
+      font-weight: 400 500;
+      src: url("/fonts/inter-400-500.woff2") format("woff2");
+    }
+
+    @font-face {
+      font-family: "Inter";
+      font-style: normal;
+      font-display: swap;
+      font-weight: 600 700;
+      src: url("/fonts/inter-600-700.woff2") format("woff2");
+    }
+
+    :root {
+      color-scheme: light;
+      --navy: #0a161c;
+      --navy-mid: #152430;
+      --ink: #1a2b36;
+      --body: #405864;
+      --paper: #f5f8fa;
+      --white: #ffffff;
+      --mint: #68e3be;
+      --mint-deep: #2b9e80;
+      --gold: #edd086;
+      --line: #d7e1e5;
+      --head: "Space Grotesk", "Trebuchet MS", sans-serif;
+      --body-font: "Inter", system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--body-font);
+    }
+
+    .review-header {
+      padding: 46px clamp(22px, 6vw, 72px);
+      border-bottom: 4px solid var(--mint);
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .review-header__inner,
+    main {
+      width: min(980px, 100%);
+      margin-inline: auto;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--mint);
+      font-family: var(--head);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--head);
+    }
+
+    h1 {
+      max-width: 16ch;
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+    }
+
+    .deck {
+      max-width: 66ch;
+      margin: 18px 0 0;
+      color: #d5e1e5;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    main {
+      padding: 38px 20px 64px;
+    }
+
+    .review-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 16px;
+      margin-bottom: 18px;
+    }
+
+    .recommended {
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: var(--head);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .review-meta {
+      margin: 0;
+      color: var(--body);
+      font-size: 0.82rem;
+    }
+
+    .copy-sheet {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: 0 18px 44px rgba(10, 22, 28, 0.08);
+    }
+
+    .intro {
+      padding: clamp(26px, 6vw, 54px);
+      background: var(--navy-mid);
+      color: var(--white);
+    }
+
+    .section-label {
+      margin: 0 0 10px;
+      color: var(--mint);
+      font-family: var(--head);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .intro h2 {
+      margin: 0 0 20px;
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .customer-copy {
+      max-width: 72ch;
+    }
+
+    .customer-copy p {
+      margin: 0;
+      color: #e5eef1;
+      font-size: clamp(1.02rem, 2vw, 1.15rem);
+      line-height: 1.7;
+    }
+
+    .customer-copy p + p {
+      margin-top: 12px;
+    }
+
+    .cards-section,
+    .benefits,
+    .it-only,
+    .product-note {
+      padding: clamp(26px, 5vw, 44px) clamp(22px, 6vw, 54px);
+    }
+
+    .cards-section {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .cards-section h2,
+    .benefits h2,
+    .it-only h2 {
+      margin: 0;
+      font-size: 1.35rem;
+      letter-spacing: -0.025em;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .card {
+      min-height: 210px;
+      padding: 24px;
+      border-top: 4px solid var(--mint-deep);
+      background: var(--paper);
+    }
+
+    .card__number {
+      display: block;
+      margin-bottom: 38px;
+      color: var(--mint-deep);
+      font-family: var(--head);
+      font-size: 0.73rem;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 1.25rem;
+      letter-spacing: -0.025em;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--body);
+      line-height: 1.58;
+    }
+
+    .benefits {
+      border-bottom: 1px solid var(--line);
+      background: #fbfcfd;
+    }
+
+    .benefits ul,
+    .it-only ul {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px 28px;
+      margin: 20px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .benefits li,
+    .it-only li {
+      position: relative;
+      padding-left: 22px;
+      color: var(--body);
+      line-height: 1.55;
+    }
+
+    .benefits li::before {
+      position: absolute;
+      top: 0.58em;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--mint-deep);
+      content: "";
+    }
+
+    .it-only {
+      border-bottom: 1px solid #d6c286;
+      background: #fffaf0;
+    }
+
+    .it-only .section-label {
+      color: #947a38;
+    }
+
+    .it-only__note {
+      margin: 8px 0 0;
+      color: #725f30;
+      font-size: 0.84rem;
+      line-height: 1.5;
+    }
+
+    .it-only li::before {
+      position: absolute;
+      left: 0;
+      color: #947a38;
+      font-weight: 700;
+      content: "+";
+    }
+
+    .it-only strong {
+      color: var(--ink);
+    }
+
+    .product-note {
+      background: var(--white);
+    }
+
+    .product-note p {
+      margin: 0;
+      color: var(--body);
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+
+    .product-note strong {
+      color: var(--ink);
+    }
+
+    footer {
+      width: min(980px, calc(100% - 40px));
+      margin: 0 auto 38px;
+      color: #6a7e87;
+      font-size: 0.75rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 760px) {
+      .cards,
+      .benefits ul,
+      .it-only ul {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        min-height: 0;
+      }
+
+      .card__number {
+        margin-bottom: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="review-header">
+    <div class="review-header__inner">
+      <p class="eyebrow">Upgrade Guide · customer copy review</p>
+      <h1>Audio group control</h1>
+      <p class="deck">Copy-only preview for live multi-zone volume. No live Upgrade Guide content or layout has been changed.</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="review-bar">
+      <span class="recommended">Recommended</span>
+      <p class="review-meta">One proposed customer set, plus optional benefits and IT-only detail.</p>
+    </div>
+
+    <article class="copy-sheet">
+      <section class="intro" aria-labelledby="customer-heading">
+        <p class="section-label">Proposed customer paragraph</p>
+        <h2 id="customer-heading">Keep the room’s balance as volume changes</h2>
+        <div class="customer-copy">
+          <p>Your dining room can stay quieter than the bar while the patio stays louder—even when all three need to come up or down. In the old LUCI, moving several zones together meant setting them to the same volume, flattening the balance you had tuned.</p>
+          <p>New LUCI lets you move selected zones together while keeping those differences intact. You can still set every selected zone to one volume when that’s what the room needs, or adjust a single zone without moving the rest.</p>
+        </div>
+      </section>
+
+      <section class="cards-section" aria-labelledby="cards-heading">
+        <p class="section-label">Three ways to move volume</p>
+        <h2 id="cards-heading">Choose the change the room needs</h2>
+        <div class="cards">
+          <article class="card">
+            <span class="card__number">01</span>
+            <h3>Keep the mix</h3>
+            <p>Raise or lower selected zones by the same step. Dining can stay quieter than the bar while the patio stays louder.</p>
+          </article>
+          <article class="card">
+            <span class="card__number">02</span>
+            <h3>Set them equal</h3>
+            <p>When selected zones need one shared volume, set them all to the same level at once.</p>
+          </article>
+          <article class="card">
+            <span class="card__number">03</span>
+            <h3>Move one alone</h3>
+            <p>Fine-tune one zone—such as the patio—without changing the dining room or bar.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="benefits" aria-labelledby="benefits-heading">
+        <p class="section-label">Optional refreshed benefits</p>
+        <h2 id="benefits-heading">Benefits</h2>
+        <ul>
+          <li>Moves selected zones together without flattening the mix</li>
+          <li>Keeps the volume differences set during tuning</li>
+          <li>Sets selected zones to one shared volume when needed</li>
+          <li>Lets one zone move without changing the rest</li>
+        </ul>
+      </section>
+
+      <aside class="it-only" aria-labelledby="it-heading">
+        <p class="section-label">IT-only · optional densify candidates</p>
+        <h2 id="it-heading">Interface mechanics</h2>
+        <p class="it-only__note">Candidates for technical detail, not part of the customer paragraph or cards.</p>
+        <ul>
+          <li><strong>Incremental:</strong> Up/down adds or subtracts one step across selected zones, preserving the differences between their levels.</li>
+          <li><strong>Absolute:</strong> A slider or typed number sets selected zones to the same volume.</li>
+        </ul>
+      </aside>
+
+      <div class="product-note">
+        <p><strong>Product boundary:</strong> This section stays separate from presets until product clarifies how they interact.</p>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    Draft grounded in the Audio group control gap brief and its cited transcript evidence. Customer wording avoids technical analogies and unconfirmed product behavior.
+  </footer>
+</body>
+</html>
