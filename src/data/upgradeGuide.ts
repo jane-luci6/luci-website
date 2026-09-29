@@ -222,7 +222,7 @@ export const upgradeGuide = {
           id: 'customizable-interface',
           name: 'Customizable interface',
           oneLiner:
-            'With a customizable interface, you brand LUCI for your property. Add photography and marks, then choose themes, light or dark, typography, and status colors.',
+            'LUCI\'s new customizable interface allows you to create a branded experience within the platform. Add property photography and marks, choose themes, and select from many more options.',
         },
         {
           id: 'live-map-flexibility',
@@ -402,7 +402,7 @@ export const upgradeGuide = {
       pillarId: 'view-control',
       name: 'Customizable interface',
       oneLiner:
-        'With a customizable interface, you brand LUCI for your property. Add photography and marks, then choose themes, light or dark, typography, and status colors.',
+        'LUCI\'s new customizable interface allows you to create a branded experience within the platform. Add property photography and marks, choose themes, and select from many more options.',
       paragraph:
         'A customizable interface gives you the ability to match LUCI to your property’s brand and the cues operators already use. When you set up the property, put photography and marks on the sign-in and splash screens, choose a curated theme with light or dark mode, pick typography from an approved set, and adjust the background image’s blur, opacity, and position. Endpoint status colors ship as operators already know them—green for healthy, yellow for attention, red for powered off—and can be changed once across the install so every floor reads the same. LUCI can design the theme, or your property can build and tweak it.',
       benefits: [
