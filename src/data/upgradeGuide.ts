@@ -208,7 +208,7 @@ export const upgradeGuide = {
           id: 'audio-group-control',
           name: 'Audio group control',
           oneLiner:
-            'Keep the room’s balance as volume changes: move selected zones together while keeping differences, set them all to one volume, or adjust one alone.',
+            'Raise or lower selected zones together while you keep their balance, set them all to one volume, or move one zone on its own.',
         },
       ],
     },
@@ -379,31 +379,31 @@ export const upgradeGuide = {
       pillarId: 'room-control',
       name: 'Audio group control',
       oneLiner:
-        'Keep the room’s balance as volume changes: move selected zones together while keeping differences, set them all to one volume, or adjust one alone.',
+        'Raise or lower selected zones together while you keep their balance, set them all to one volume, or move one zone on its own.',
       paragraph:
-        'Your dining room can stay quieter than the bar while the patio stays louder—even when all three need to come up or down. In the old LUCI, moving several zones together meant setting them to the same volume, flattening the balance you had tuned.\n\nNew LUCI lets you move selected zones together while keeping those differences intact. You can still set every selected zone to one volume when that’s what the room needs, or adjust a single zone without moving the rest.',
+        'You’ve set the bar louder than the dining room and the patio at its own level, but all three zones are too quiet. Select them, lock in their current balance, and raise them together. Audio group control moves each zone by the same amount, so the bar stays louder than the dining room as the whole space gets louder.\n\nWhen you need one level across the space, set every selected zone to the same volume. When one area needs a quick adjustment, move that zone alone without changing the others.',
       benefits: [
-        'Moves selected zones together without flattening the mix',
-        'Keeps the volume differences set during tuning',
-        'Sets selected zones to one shared volume when needed',
-        'Lets one zone move without changing the rest',
+        'Raise or lower selected zones together',
+        'Keep the volume differences between zones as they move',
+        'Set selected zones to one shared volume',
+        'Adjust one zone without changing the others',
       ],
       scenariosSubsectionLabel: 'Three ways to move volume',
       scenarios: [
         {
-          id: 'keep-the-mix',
-          label: 'Keep the mix',
-          line: 'Raise or lower selected zones by the same step. Dining can stay quieter than the bar while the patio stays louder.',
+          id: 'keep-the-balance',
+          label: 'Keep the balance',
+          line: 'Select the bar, dining room, and patio, then raise or lower them by the same amount. Each zone keeps its current volume difference from the others.',
         },
         {
           id: 'set-them-equal',
           label: 'Set them equal',
-          line: 'When selected zones need one shared volume, set them all to the same level at once.',
+          line: 'Set every selected zone to one volume when the whole space needs the same level.',
         },
         {
           id: 'move-one-alone',
           label: 'Move one alone',
-          line: 'Fine-tune one zone—such as the patio—without changing the dining room or bar.',
+          line: 'Adjust the patio on its own without changing the bar or dining room.',
         },
       ],
       media: {
