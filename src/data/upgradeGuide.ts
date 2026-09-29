@@ -189,14 +189,14 @@ export const upgradeGuide = {
     {
       id: 'room-control',
       number: '01',
-      name: 'Greater control of the room',
-      summary: 'Tune in-room panels, stage events, and group audio zones.',
+      name: 'Greater control of the guest experience',
+      summary: 'Operators and guests adjust what they need—panels, staging, and audio—for a sharper guest experience.',
       featurePills: [
         {
           id: 'venue-panels',
           name: 'Venue panels',
           oneLiner:
-            'Venue panels give operators a simple view of only the room—or rooms—they need, with only the controls approved for that space.',
+            'Venue panels let operators and guests adjust what they need in only the room—or rooms—they should control, with only the actions approved for that space.',
         },
         {
           id: 'staging',
@@ -234,7 +234,7 @@ export const upgradeGuide = {
           id: 'live-screen-view',
           name: 'Live screen view',
           oneLiner:
-            'See what’s playing on any TV or LED wall from your iPad, shown exactly as it appears live.',
+            'See what’s playing on any TV or LED wall from your iPad or any browser device, shown exactly as it appears live.',
         },
       ],
     },
@@ -269,7 +269,7 @@ export const upgradeGuide = {
   supportSpotlight: {
     title: 'In-product support',
     oneLiner:
-      'Raise a request from a device, incident, or error with the relevant context and logs already attached.',
+      'Raise a request from a device, incident, or error with context and logs attached—and when something is down, LUCI gets alerts so the team can start working before the client reaches out.',
     featureId: 'in-product-support',
   },
 
@@ -279,9 +279,9 @@ export const upgradeGuide = {
       pillarId: 'room-control',
       name: 'Venue panels',
       oneLiner:
-        'Venue panels give operators a simple view of only the room—or rooms—they need, with only the controls approved for that space.',
+        'Venue panels let operators and guests adjust what they need in only the room—or rooms—they should control, with only the actions approved for that space.',
       paragraph:
-        'Put focused room control where the work happens. Each panel starts with the endpoints assigned to its venue, then an administrator chooses which devices, actions, and sources appear.\n\nStaff panels can require a PIN, while guest-facing panels can stay open. Operators get a basic panel or list interface without access to the main LUCI application—scoped to the room or rooms that panel is for.',
+        'Put focused room control where the work happens. Each panel starts with the endpoints assigned to its venue, then an administrator chooses which devices, actions, and sources appear.\n\nStaff panels can require a PIN, while guest-facing panels can stay open. Operators and guests adjust what they need from a basic panel or list interface—without access to the main LUCI application—scoped to the room or rooms that panel is for. Scheduling allows automatic shut-down for venue panels in a selected space.',
       benefits: [],
       media: {
         kind: 'placeholder',
@@ -324,6 +324,7 @@ export const upgradeGuide = {
         'Limit source choices to an approved list.',
         'Require a PIN for staff or leave a guest-facing panel open with tap-to-wake.',
         'Use a dedicated wall touchscreen or a paired tablet, iPad, or browser.',
+        'Schedule automatic shut-down for venue panels in a selected space.',
       ],
       technicalJumpId: 'technical-venue-panels',
     },
@@ -410,14 +411,14 @@ export const upgradeGuide = {
       pillarId: 'view-control',
       name: 'Live screen view',
       oneLiner:
-        'See what’s playing on any TV or LED wall from your iPad, shown exactly as it appears live.',
+        'See what’s playing on any TV or LED wall from your iPad or any browser device, shown exactly as it appears live.',
       paragraph:
-        'Live screen view shows what is playing on a selected TV or LED wall from an iPad, exactly as it appears live. It gives the operator a direct visual check of the current screen from the device in hand.',
+        'Live screen view shows what is playing on a selected TV or LED wall from an iPad or any browser device, exactly as it appears live. It gives the operator a direct visual check of the current screen from the device in hand.',
       benefits: [
         'Checks what is playing on a TV',
         'Checks what is playing on an LED wall',
         'Shows the screen as it appears live',
-        'Makes the view available from an iPad',
+        'Makes the view available from an iPad or any browser device',
       ],
       media: {
         kind: 'placeholder',
@@ -489,14 +490,15 @@ export const upgradeGuide = {
       pillarId: 'security-control',
       name: 'In-product support',
       oneLiner:
-        'Raise a request from a device, incident, or error with the relevant context and logs already attached.',
+        'Raise a request from a device, incident, or error with context and logs attached—and when something is down, LUCI gets alerts so the team can start working before the client reaches out.',
       paragraph:
-        'Start a support request from the device, incident, or error where the issue appears. The request carries what happened, what changed, and the relevant logs, while the property decides what to escalate and the LUCI team remains available to act on the fuller context.',
+        'Start a support request from the device, incident, or error where the issue appears. The request carries what happened, what changed, and the relevant logs, while the property decides what to escalate and the LUCI team remains available to act on the fuller context. When something is down, LUCI gets alerts so the team can start working before the client reaches out.',
       benefits: [
         'Starts the request from the device, incident, or error',
         'Attaches relevant context and logs',
         'Keeps the decision to escalate with the property',
         'Gives the LUCI team better context when support is needed',
+        'Gets alerts when something is down so LUCI can start working before the client reaches out',
       ],
       media: {
         kind: 'placeholder',
