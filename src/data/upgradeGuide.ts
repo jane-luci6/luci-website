@@ -269,7 +269,7 @@ export const upgradeGuide = {
   supportSpotlight: {
     title: 'In-product support',
     oneLiner:
-      'Raise a request from a device, incident, or error with context and logs attached—and when sites throw errors, LUCI is notified so the team can be more proactive.',
+      'Raise a request from a device, incident, or error with context and logs attached—and when something on your property goes down, the LUCI team gets an alert so they can jump on it right away.',
     featureId: 'in-product-support',
   },
 
@@ -490,15 +490,15 @@ export const upgradeGuide = {
       pillarId: 'security-control',
       name: 'In-product support',
       oneLiner:
-        'Raise a request from a device, incident, or error with context and logs attached—and when sites throw errors, LUCI is notified so the team can be more proactive.',
+        'Raise a request from a device, incident, or error with context and logs attached—and when something on your property goes down, the LUCI team gets an alert so they can jump on it right away.',
       paragraph:
-        'Start a support request from the device, incident, or error where the issue appears. The request carries what happened, what changed, and the relevant logs, while the property decides what to escalate and the LUCI team remains available to act on the fuller context. Through the hub, LUCI gets the logs and error reports and is notified if there are issues—monitoring support that lets the team be more proactive when something isn’t right.',
+        'Start a support request from the device, incident, or error where the issue appears. The request carries what happened, what changed, and the relevant logs, while the property decides what to escalate and the LUCI team remains available to act on the fuller context. When something on your property goes down, the LUCI team gets an alert so they can jump on it right away.',
       benefits: [
         'Starts the request from the device, incident, or error',
         'Attaches relevant context and logs',
         'Keeps the decision to escalate with the property',
         'Gives the LUCI team better context when support is needed',
-        'Notifies LUCI of issues so the team can be more proactive',
+        'Alerts the LUCI team when something on your property goes down so they can jump on it right away',
       ],
       media: {
         kind: 'placeholder',
