@@ -190,7 +190,7 @@ export const upgradeGuide = {
       id: 'room-control',
       number: '01',
       name: 'Greater control of the guest experience',
-      summary: 'Operators and guests adjust what they need—panels, staging, and audio—for a sharper guest experience.',
+      summary: 'Tune in-room panels, stage events, and group audio zones.',
       featurePills: [
         {
           id: 'venue-panels',
