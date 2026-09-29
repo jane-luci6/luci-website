@@ -1142,14 +1142,14 @@ const duoLockups = {
     display: block;
   }
   @media (min-width: 720px) {
-    /* Keep the 2×2 grid, but make each photo about half its former footprint.
-       Centering each card in its grid cell keeps the reduced set balanced. */
+    /* Fill each 2×2 grid track with a wide landscape plate; the shorter ratio
+       keeps the overall photo mass modest without leaving side gutters. */
     .ug-feature-scenario {
-      width: 50%;
+      width: 100%;
       max-width: none;
-      /* Retain the readable caption floor while the photo width shrinks. */
-      min-height: 200px;
-      justify-self: center;
+      aspect-ratio: 16 / 9;
+      min-height: 0;
+      justify-self: stretch;
     }
   }
   .ug-feature-scenario__img {
