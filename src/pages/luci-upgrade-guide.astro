@@ -239,6 +239,15 @@ const duoLockups = {
                           <p class="ug-feature__paragraph">{para}</p>
                         ))}
                       </section>
+                      {f.benefits && f.benefits.length > 0 && (
+                        <section class="ug-feature-deep__section">
+                          <ul class="ug-feature__benefits" role="list">
+                            {f.benefits.map((b) => (
+                              <li>{b}</li>
+                            ))}
+                          </ul>
+                        </section>
+                      )}
                       <section class="ug-feature-deep__section">
                         <p class="ug-feature-deep__label">{f.scenariosSubsectionLabel ?? 'Use cases on your property'}</p>
                         <div class="ug-feature-scenarios">
@@ -265,15 +274,6 @@ const duoLockups = {
                           ))}
                         </div>
                       </section>
-                      {f.benefits && f.benefits.length > 0 && (
-                        <section class="ug-feature-deep__section">
-                          <ul class="ug-feature__benefits" role="list">
-                            {f.benefits.map((b) => (
-                              <li>{b}</li>
-                            ))}
-                          </ul>
-                        </section>
-                      )}
                       {f.limits && f.limits.length > 0 && (
                         <section class="ug-feature-deep__section">
                           <p class="ug-feature-deep__label">Limits &amp; controls</p>

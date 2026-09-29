@@ -281,8 +281,15 @@ export const upgradeGuide = {
       oneLiner:
         'With venue panels, you control what operators and guests can adjust in each room. Choose the rooms, devices, actions, and sources that appear, then require a PIN or leave the panel open.',
       paragraph:
-        'Venue panels give you the ability to put focused controls in the room where they’re used, without giving operators or guests access to the main LUCI application. When someone should control only a specific room, assign the panel to that venue, choose the devices, actions, and sources that appear, and show them in a basic panel or list. Require a PIN for staff or leave a guest-facing panel open with tap-to-wake; set a schedule if that space should shut down automatically.',
-      benefits: [],
+        'Venue panels give you the ability to put focused controls in the room where they’re used, without giving operators or guests access to the main LUCI application. When someone should control only a specific space, assign the panel to the room or rooms it serves. Then choose which devices appear, which actions are available, and which approved sources operators can select; for example, you can hide power controls while leaving source and volume available. Show those controls in a basic panel or list.\n\nFor staff use, require a PIN. For guest-facing use, leave the panel open with tap-to-wake. The assigned controls can appear on a dedicated wall touchscreen or a paired tablet, iPad, or browser, so the person in the room sees only what they are meant to use. If the selected space should shut down automatically, set a schedule for the venue panel.',
+      benefits: [
+        'Show operators only the room or rooms assigned to that panel',
+        'Hide individual actions, such as turning power on or off, while leaving source and volume available',
+        'Limit source choices to an approved list',
+        'Require a PIN for staff or leave a guest-facing panel open with tap-to-wake',
+        'Use a dedicated wall touchscreen or a paired tablet, iPad, or browser',
+        'Schedule automatic shut-down for venue panels in a selected space',
+      ],
       media: {
         kind: 'placeholder',
         label: 'Venue panel controls — screenshot placeholder',
@@ -310,14 +317,6 @@ export const upgradeGuide = {
           line: 'Place an iPad or mount a panel so staff switch that room\u2019s channel or device from a panel that starts with the room\u2019s endpoints\u2014nothing else on the property.',
         },
       ],
-      limits: [
-        'Show operators only the room or rooms assigned to that panel.',
-        'Hide individual actions, such as turning power on or off, while leaving source and volume available.',
-        'Limit source choices to an approved list.',
-        'Require a PIN for staff or leave a guest-facing panel open with tap-to-wake.',
-        'Use a dedicated wall touchscreen or a paired tablet, iPad, or browser.',
-        'Schedule automatic shut-down for venue panels in a selected space.',
-      ],
       technicalJumpId: 'technical-venue-panels',
     },
     {
@@ -327,7 +326,7 @@ export const upgradeGuide = {
       oneLiner:
         'With staging, you can prepare screens, sources, volumes, and content while the current experience keeps running. Hold the changes until you Apply, then apply them on cue or save the set as a preset.',
       paragraph:
-        'Staging gives you the ability to prepare screens, sources, volumes, and content while the current experience keeps running. If you’re preparing for an upcoming event, take the current setup from live, make the next changes, and hold them until you select Apply. Apply the staged set on cue, save it as a preset to use again, or give the preset a time to schedule it; use the chart views to see what has run and what is coming up.',
+        'Staging gives you the ability to prepare screens, sources, volumes, and content while the current experience keeps running. When you’re preparing for an upcoming event, take from live to seed the stage with the current setup, then make the next changes. The roster marks pending items in amber so you can review them while they are held; nothing changes live until you select Apply. When the event is ready, select Apply to send the staged changes together on cue.\n\nTo use the same set again, name the staged set and save it as a preset. You can apply that preset manually, or give it a time to create a scheduled preset. If the event timing may slip, leave someone ready to Apply on cue. For a scheduled event, add a lockout to hold selected screens during the event window; an administrator can override it when needed. Use the chart views to review what has run and what is coming up.',
       benefits: [
         'Holds the next set until you Apply without changing what is live',
         'Lets you Apply on demand when an event\u2019s timing slips',
@@ -367,7 +366,7 @@ export const upgradeGuide = {
       oneLiner:
         'With audio group control, you have more options when moving multiple zones at once. Lock the selected zones together and move them incrementally or set them all to a single volume number.',
       paragraph:
-        'Audio group control gives you the ability to adjust the volume of multiple zones at once. If you’ve already set 3 zones to 3 differing levels, this feature lets you lock that balance and move them together incrementally, set them all to a single volume number, or adjust one zone alone.',
+        'Audio group control gives you the ability to adjust the volume of multiple zones at once while choosing whether their existing differences should stay in place. If the dining room is intentionally quieter than the bar and patio, select all three zones and lock them together. Their current levels remain visible; raise or lower the selection by the same increment, and each zone keeps its relative difference from the others.\n\nWhen the whole space should match, set the selected zones to one absolute volume number using the slider or a typed value. If only the patio needs an adjustment, move that zone alone without changing the bar or dining room.',
       benefits: [
         'Raise or lower selected zones together',
         'Keep the volume differences between zones as they move',
