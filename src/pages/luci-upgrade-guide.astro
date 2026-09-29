@@ -243,7 +243,7 @@ const duoLockups = {
                         <p class="ug-feature-deep__label">{f.scenariosSubsectionLabel ?? 'Use cases on your property'}</p>
                         <div class="ug-feature-scenarios">
                           {f.scenarios.map((s) => (
-                            <div class="ug-feature-scenario">
+                            <div class:list={['ug-feature-scenario', !s.image && 'ug-feature-scenario--text']}>
                               {s.image && (
                                 <img
                                   class="ug-feature-scenario__img"
@@ -256,7 +256,7 @@ const duoLockups = {
                                   style={s.imagePosition ? `object-position: ${s.imagePosition}` : undefined}
                                 />
                               )}
-                              <span class="ug-feature-scenario__scrim" aria-hidden="true"></span>
+                              {s.image && <span class="ug-feature-scenario__scrim" aria-hidden="true"></span>}
                               <div class="ug-feature-scenario__copy">
                                 <p class="ug-feature-scenario__title">{s.label}</p>
                                 <p class="ug-feature-scenario__line">{s.line}</p>
@@ -265,6 +265,15 @@ const duoLockups = {
                           ))}
                         </div>
                       </section>
+                      {f.benefits && f.benefits.length > 0 && (
+                        <section class="ug-feature-deep__section">
+                          <ul class="ug-feature__benefits" role="list">
+                            {f.benefits.map((b) => (
+                              <li>{b}</li>
+                            ))}
+                          </ul>
+                        </section>
+                      )}
                       {f.limits && f.limits.length > 0 && (
                         <section class="ug-feature-deep__section">
                           <p class="ug-feature-deep__label">Limits &amp; controls</p>
@@ -1150,6 +1159,27 @@ const duoLockups = {
       aspect-ratio: 16 / 9;
       min-height: 0;
       justify-self: stretch;
+    }
+  }
+  /* Text-only workflow cards (Staging Thesis C) — no photo plate required. */
+  .ug-feature-scenario--text {
+    aspect-ratio: auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .ug-feature-scenario--text .ug-feature-scenario__copy {
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    padding: clamp(18px, 2.2vw, 26px);
+  }
+  @media (min-width: 720px) {
+    .ug-feature-scenario--text {
+      aspect-ratio: auto;
+      min-height: 0;
     }
   }
   .ug-feature-scenario__img {
