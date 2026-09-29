@@ -1,0 +1,247 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  dek: string;
+  kicker: string;
+  cta: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  logoSrc?: string;
+  logoAlt?: string;
+  meta?: string;
+  metaNote?: string;
+  pdfHref?: string;
+}
+
+const {
+  href,
+  title,
+  dek,
+  kicker,
+  cta,
+  imageSrc,
+  imageAlt = '',
+  logoSrc,
+  logoAlt = '',
+  meta,
+  metaNote,
+  pdfHref,
+} = Astro.props;
+---
+
+<li class="resource-card">
+  <a class="resource-card__media" href={href} aria-label={title}>
+    {imageSrc ? (
+      <img src={imageSrc} alt={imageAlt} loading="lazy" />
+    ) : logoSrc ? (
+      <span class="resource-card__logo-panel">
+        <img src={logoSrc} alt={logoAlt} />
+      </span>
+    ) : (
+      <span class="resource-card__logo-panel"></span>
+    )}
+  </a>
+  <div class="resource-card__body">
+    <p class="resource-card__kicker"><span>{kicker}</span></p>
+    <h3 class="resource-card__title"><a href={href}>{title}</a></h3>
+    {meta && (
+      <p class="resource-card__meta">
+        {meta}{metaNote && <span> · {metaNote}</span>}
+      </p>
+    )}
+    <p class="resource-card__dek">{dek}</p>
+    <div class="resource-card__links">
+      <a class="resource-card__cta" href={href}>{cta} <span aria-hidden="true">→</span></a>
+      {pdfHref && (
+        <a class="resource-card__pdf" href={pdfHref} target="_blank" rel="noopener noreferrer">Download PDF <span aria-hidden="true">↗</span></a>
+      )}
+    </div>
+  </div>
+</li>
+
+<style>
+  .resource-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: #fff;
+    border: 1px solid var(--rule-light);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+  }
+
+  .resource-card:hover {
+    border-color: rgba(43, 158, 128, 0.45);
+    box-shadow: 0 24px 48px rgba(26, 43, 51, 0.12);
+    transform: translateY(-3px);
+  }
+
+  .resource-card__media {
+    display: block;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--navy-deep);
+    position: relative;
+  }
+
+  .resource-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s ease;
+  }
+
+  .resource-card:hover .resource-card__media img {
+    transform: scale(1.04);
+  }
+
+  .resource-card__logo-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: var(--navy-deep);
+    background-image: url('/images/textures/texture-circuit-navy-steel-print-dark.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .resource-card__logo-panel img {
+    width: 52%;
+    max-width: 140px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .resource-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px 14px 16px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .resource-card__kicker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 2px;
+  }
+
+  .resource-card__kicker::before {
+    content: '';
+    width: 16px;
+    height: 2px;
+    flex-shrink: 0;
+    background: var(--accent-light);
+  }
+
+  .resource-card__kicker span {
+    font-family: var(--font-head);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+  }
+
+  .resource-card__title {
+    font-family: var(--font-head);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.22;
+    letter-spacing: -0.02em;
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .resource-card__title a {
+    color: var(--ink-strong);
+    text-decoration: none;
+  }
+
+  .resource-card__title a:hover {
+    color: var(--accent-light);
+  }
+
+  .resource-card__meta {
+    font-family: var(--font-head);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--ink-strong);
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .resource-card__meta span {
+    font-weight: 400;
+    color: var(--navy-muted);
+  }
+
+  .resource-card__dek {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.45;
+    color: var(--ink);
+    margin: 0;
+    flex: 1;
+    overflow-wrap: anywhere;
+  }
+
+  .resource-card__links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 4px;
+    padding-top: 10px;
+    border-top: 1px solid var(--rule-light);
+  }
+
+  .resource-card__cta {
+    font-family: var(--font-head);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent-light);
+    text-decoration: none;
+  }
+
+  .resource-card__cta span {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+
+  .resource-card__cta:hover span {
+    transform: translateX(4px);
+  }
+
+  .resource-card__pdf {
+    font-family: var(--font-head);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy-muted);
+    text-decoration: none;
+  }
+
+  .resource-card__pdf:hover {
+    color: var(--ink-strong);
+  }
+
+  @media (max-width: 700px) {
+    .resource-card__body {
+      padding: 16px;
+    }
+    .resource-card__links {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+  }
+</style>

@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import MeshHero from '../../components/MeshHero.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import ResourceCardGrid from '../../components/ResourceCardGrid.astro';
 import SectionBlock from '../../components/SectionBlock.astro';
 import { getCollection } from 'astro:content';
 import { seoPages, breadcrumb } from '../../data/seo';
@@ -8,6 +10,9 @@ import { seoPages, breadcrumb } from '../../data/seo';
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+const dateLabel = (date: Date) =>
+  date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
 <BaseLayout
@@ -28,19 +33,34 @@ const posts = (await getCollection('blog')).sort(
     label="Blog"
   />
 
-  <SectionBlock>
-    <ul class="rows">
-      {
-        posts.map((post) => (
-          <li>
-            <p class="rows__title">
-              <a href={`/blog/${post.id}/`}>{post.data.title}</a>
-            </p>
-            <p>{post.data.description}</p>
-          </li>
-        ))
-      }
-    </ul>
-    {posts.length === 0 && <p class="scaffold-note">No posts yet.</p>}
+  <SectionBlock id="blog-index" tone="light" wide>
+    {posts.length > 0 ? (
+      <ResourceCardGrid>
+        {posts.map((post) => {
+          const href = `/blog/${post.id}/`;
+          return (
+            <ResourceCard
+              href={href}
+              title={post.data.title}
+              dek={post.data.description}
+              kicker="Blog"
+              cta="Read the article"
+              logoSrc="/images/logos/luci-full-mintmark-white.png"
+              logoAlt="LUCI"
+              meta={dateLabel(post.data.pubDate)}
+            />
+          );
+        })}
+      </ResourceCardGrid>
+    ) : (
+      <p class="scaffold-note">No posts yet.</p>
+    )}
   </SectionBlock>
 </BaseLayout>
+
+<style>
+  :global(#blog-hero > .container.container--wide),
+  :global(#blog-index > .container.container--wide) {
+    max-width: 1360px;
+  }
+</style>
