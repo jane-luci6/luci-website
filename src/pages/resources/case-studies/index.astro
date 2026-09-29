@@ -20,7 +20,7 @@ const caseStudies = [yaamavaCaseStudy, ameristarCaseStudy, tachiCaseStudy, samsT
 >
   <PageHero title="Case studies" lead={portfolioLine} deep />
 
-  <SectionBlock lockupName="Featured" tone="light" wide>
+  <SectionBlock id="cs-index" lockupName="Featured" tone="light" wide>
     <ul class="cs-index">
       {caseStudies.map((cs) => {
         const href = `/resources/case-studies/${cs.slug}`;
@@ -62,16 +62,21 @@ const caseStudies = [yaamavaCaseStudy, ameristarCaseStudy, tachiCaseStudy, samsT
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  :global(#cs-index > .container.container--wide) {
+    max-width: 1360px;
   }
 
   .cs-card {
     display: flex;
     flex-direction: column;
+    min-width: 0;
     background: #fff;
     border: 1px solid var(--rule-light);
-    border-radius: 16px;
+    border-radius: 12px;
     overflow: hidden;
     transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
   }
@@ -115,8 +120,8 @@ const caseStudies = [yaamavaCaseStudy, ameristarCaseStudy, tachiCaseStudy, samsT
   }
 
   .cs-card__logo-panel img {
-    width: 62%;
-    max-width: 300px;
+    width: 52%;
+    max-width: 140px;
     height: auto;
     object-fit: contain;
   }
@@ -124,9 +129,10 @@ const caseStudies = [yaamavaCaseStudy, ameristarCaseStudy, tachiCaseStudy, samsT
   .cs-card__body {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 32px;
+    gap: 8px;
+    padding: 14px 14px 16px;
     flex: 1;
+    min-width: 0;
   }
 
   .cs-card__kicker {
@@ -138,8 +144,9 @@ const caseStudies = [yaamavaCaseStudy, ameristarCaseStudy, tachiCaseStudy, samsT
 
   .cs-card__kicker::before {
     content: '';
-    width: 24px;
+    width: 16px;
     height: 2px;
+    flex-shrink: 0;
     background: var(--accent-light);
   }
 
@@ -154,11 +161,12 @@ const caseStudies = [yaamavaCaseStudy, ameristarCaseStudy, tachiCaseStudy, samsT
 
   .cs-card__title {
     font-family: var(--font-head);
-    font-size: clamp(22px, 2.4vw, 26px);
+    font-size: 16px;
     font-weight: 700;
-    line-height: 1.15;
+    line-height: 1.22;
     letter-spacing: -0.02em;
     margin: 0;
+    overflow-wrap: anywhere;
   }
 
   .cs-card__title a {
@@ -172,11 +180,12 @@ const caseStudies = [yaamavaCaseStudy, ameristarCaseStudy, tachiCaseStudy, samsT
 
   .cs-card__meta {
     font-family: var(--font-head);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.02em;
     color: var(--ink-strong);
     margin: 0;
+    overflow-wrap: anywhere;
   }
 
   .cs-card__meta span {
@@ -186,27 +195,28 @@ const caseStudies = [yaamavaCaseStudy, ameristarCaseStudy, tachiCaseStudy, samsT
 
   .cs-card__dek {
     font-family: var(--font-body);
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 400;
-    line-height: 1.6;
+    line-height: 1.45;
     color: var(--ink);
     margin: 0;
     flex: 1;
+    overflow-wrap: anywhere;
   }
 
   .cs-card__links {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
     margin-top: 4px;
-    padding-top: 18px;
+    padding-top: 10px;
     border-top: 1px solid var(--rule-light);
   }
 
   .cs-card__cta {
     font-family: var(--font-head);
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     color: var(--accent-light);
     text-decoration: none;
@@ -223,7 +233,7 @@ const caseStudies = [yaamavaCaseStudy, ameristarCaseStudy, tachiCaseStudy, samsT
 
   .cs-card__pdf {
     font-family: var(--font-head);
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     color: var(--navy-muted);
     text-decoration: none;
@@ -233,13 +243,27 @@ const caseStudies = [yaamavaCaseStudy, ameristarCaseStudy, tachiCaseStudy, samsT
     color: var(--ink-strong);
   }
 
-  @media (max-width: 760px) {
+  @media (max-width: 1199px) {
     .cs-index {
-      grid-template-columns: 1fr;
-      gap: 24px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .cs-index {
+      grid-template-columns: minmax(0, 1fr);
+      max-width: 480px;
+      margin-inline: auto;
+      gap: 16px;
     }
     .cs-card__body {
-      padding: 24px;
+      padding: 16px;
+    }
+    .cs-card__links {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
     }
   }
 </style>
