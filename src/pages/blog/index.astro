@@ -13,9 +13,6 @@ const posts = (await getCollection('blog')).sort(
 
 const dateLabel = (date: Date) =>
   date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-
-/** Turf Club #3 — locked morning-reset hero (MD5 873157ad…). */
-const BLOG_HERO_IMAGE = '/images/blog/morning-reset-hero.jpg';
 ---
 
 <BaseLayout
@@ -34,8 +31,6 @@ const BLOG_HERO_IMAGE = '/images/blog/morning-reset-hero.jpg';
     title="Blog"
     deck="Variable reduction, platform depth, and field learnings."
     label="LUCI blog"
-    imageSrc={BLOG_HERO_IMAGE}
-    imageAlt="Casino sportsbook bar with a wall of TVs and an overhead LED ticker."
   />
 
   <SectionBlock id="blog-index" lockupName="Latest articles" tone="white" wide>
@@ -49,7 +44,6 @@ const BLOG_HERO_IMAGE = '/images/blog/morning-reset-hero.jpg';
               href={href}
               title={post.data.title}
               dek={post.data.description}
-              kicker="Blog"
               cta="Read the article"
               imageSrc={hasHero ? post.data.heroImage : undefined}
               imageAlt={hasHero ? (post.data.heroAlt ?? `${post.data.title} hero image`) : undefined}
@@ -70,20 +64,5 @@ const BLOG_HERO_IMAGE = '/images/blog/morning-reset-hero.jpg';
   :global(#blog-hero > .container.container--wide),
   :global(#blog-index > .container.container--wide) {
     max-width: 1360px;
-  }
-
-  /* Two blog posts: prefer a comfortable 2-up over a sparse 4-col row. */
-  :global(#blog-index .resource-index) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(20px, 2.5vw, 28px);
-    max-width: 960px;
-  }
-
-  @media (max-width: 700px) {
-    :global(#blog-index .resource-index) {
-      grid-template-columns: minmax(0, 1fr);
-      max-width: 480px;
-      margin-inline: auto;
-    }
   }
 </style>

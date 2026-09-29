@@ -1,7 +1,7 @@
 ---
 title: Start the day on a known look
 description: By morning, the floor may still reflect the night before instead of the day ahead. A morning reset returns the property to your opening look before the day begins.
-pubDate: 2026-09-29
+pubDate: 2026-07-15
 personas:
   - operations
   - facilities

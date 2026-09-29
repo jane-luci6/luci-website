@@ -3,7 +3,7 @@ interface Props {
   href: string;
   title: string;
   dek: string;
-  kicker: string;
+  kicker?: string;
   cta: string;
   imageSrc?: string;
   imageAlt?: string;
@@ -18,7 +18,7 @@ const {
   href,
   title,
   dek,
-  kicker,
+  kicker = '',
   cta,
   imageSrc,
   imageAlt = '',
@@ -43,7 +43,9 @@ const {
     )}
   </a>
   <div class="resource-card__body">
-    <p class="resource-card__kicker"><span>{kicker}</span></p>
+    {kicker && (
+      <p class="resource-card__kicker"><span>{kicker}</span></p>
+    )}
     <h3 class="resource-card__title"><a href={href}>{title}</a></h3>
     {meta && (
       <p class="resource-card__meta">
