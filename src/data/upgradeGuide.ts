@@ -222,7 +222,7 @@ export const upgradeGuide = {
           id: 'customizable-interface',
           name: 'Customizable interface',
           oneLiner:
-            'With a customizable interface, you can shape LUCI around your property’s identity and operating cues. Add property photography and marks, then choose themes, light or dark mode, background treatments, typography, and endpoint status colors.',
+            'With a customizable interface, you brand LUCI for your property. Add photography and marks, then choose themes, light or dark, typography, and status colors.',
         },
         {
           id: 'live-map-flexibility',
@@ -402,20 +402,44 @@ export const upgradeGuide = {
       pillarId: 'view-control',
       name: 'Customizable interface',
       oneLiner:
-        'With a customizable interface, you can shape LUCI around your property’s identity and operating cues. Add property photography and marks, then choose themes, light or dark mode, background treatments, typography, and endpoint status colors.',
+        'With a customizable interface, you brand LUCI for your property. Add photography and marks, then choose themes, light or dark, typography, and status colors.',
       paragraph:
-        'A customizable interface gives you the ability to match LUCI to your property’s identity and operating cues. When you’re setting up the interface for your property, add photography and marks to the sign-in and splash screens, choose a curated theme and light or dark mode, adjust the background blur, opacity, and position, and set the endpoint status colors. LUCI can design the interface, or your property can make the adjustments.',
+        'A customizable interface gives you the ability to match LUCI to your property’s brand and the cues operators already use. When you set up the property, put photography and marks on the sign-in and splash screens, choose a curated theme with light or dark mode, pick typography from an approved set, and adjust the background image’s blur, opacity, and position. Endpoint status colors ship as operators already know them—green for healthy, yellow for attention, red for powered off—and can be changed once across the install so every floor reads the same. LUCI can design the theme, or your property can build and tweak it.',
       benefits: [
-        'Uses property photography and marks on sign-in and splash screens',
-        'Offers light and dark modes with curated themes',
-        'Adjusts background blur, opacity, and position',
-        'Applies recognizable endpoint status colors across the install',
-        'Can be designed by LUCI or adjusted by the property',
+        'Puts property photography and marks on sign-in and splash screens',
+        'Offers curated themes matched to brand colors, with light and dark modes',
+        'Selects typography from an approved set of fonts',
+        'Adjusts background image blur, opacity, and position',
+        'Ships familiar endpoint status colors (green healthy, yellow attention, red powered off) and changes them across the install',
+        'Can be designed by LUCI or built and tweaked by the property',
       ],
       media: {
         kind: 'placeholder',
         label: 'Customized LUCI interface — screenshot placeholder',
       },
+      scenariosSubsectionLabel: 'Use cases on your property',
+      scenarios: [
+        {
+          id: 'sign-in-splash',
+          label: 'Sign-in that looks like the property',
+          line: 'Put property photography and marks on the sign-in and splash screens so every session opens on the property’s look.',
+        },
+        {
+          id: 'brand-theme',
+          label: 'A theme that matches the brand',
+          line: 'Choose a curated theme with the property’s colors, light or dark mode, and typography from the approved set.',
+        },
+        {
+          id: 'status-colors',
+          label: 'Status colors that mean the same everywhere',
+          line: 'Keep green, yellow, and red (or the property’s chosen set) consistent across floors and devices so healthy, attention, and powered-off read the same.',
+        },
+        {
+          id: 'luci-or-property',
+          label: 'LUCI designs it—or the property does',
+          line: 'Have LUCI design the theme for the property, or build and tweak it in the interface.',
+        },
+      ],
     },
     {
       id: 'live-map-flexibility',
