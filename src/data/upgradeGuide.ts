@@ -281,7 +281,7 @@ export const upgradeGuide = {
       oneLiner:
         'With venue panels, you control what operators and guests can adjust in each room. Choose the rooms, devices, actions, and sources that appear, then require a PIN or leave the panel open.',
       paragraph:
-        'Put focused room control where the work happens. Each panel starts with the endpoints assigned to its venue, then an administrator chooses which devices, actions, and sources appear.\n\nStaff panels can require a PIN, while guest-facing panels can stay open. Operators and guests adjust what they need from a basic panel or list interface—without access to the main LUCI application—scoped to the room or rooms that panel is for. Scheduling allows automatic shut-down for venue panels in a selected space.',
+        'Venue panels give you the ability to put focused controls in the room where they’re used, without giving operators or guests access to the main LUCI application. When someone should control only a specific room, assign the panel to that venue, choose the devices, actions, and sources that appear, and show them in a basic panel or list. Require a PIN for staff or leave a guest-facing panel open with tap-to-wake; set a schedule if that space should shut down automatically.',
       benefits: [],
       media: {
         kind: 'placeholder',
@@ -293,29 +293,21 @@ export const upgradeGuide = {
           id: 'ballroom',
           label: 'Ballroom',
           line: 'Mount a wall panel so event staff control only that event space\u2019s endpoints. Require a PIN, then expose approved controls such as source, volume, mute, or power as the room needs.',
-          image: '/images/upgrade-guide/venue-panels/use-case-ballroom.jpg',
-          imagePosition: '50% 30%',
         },
         {
           id: 'cabana-pool',
           label: 'Cabana / pool',
           line: 'Mount a touch panel or place an iPad in each cabana so guests pick the channel for that cabana\u2019s screen only. Leave it open with tap-to-wake\u2014no PIN.',
-          image: '/images/upgrade-guide/venue-panels/use-case-cabana-pool.jpg',
-          imagePosition: '50% 32%',
         },
         {
           id: 'bar',
           label: 'Bar',
           line: 'Keep a tablet at the bar so bartenders adjust source and volume for that space\u2019s TVs. Hide power so the TVs stay on.',
-          image: '/images/upgrade-guide/venue-panels/use-case-bar.jpg',
-          imagePosition: '50% 30%',
         },
         {
           id: 'conference-media',
           label: 'Conference / media room',
           line: 'Place an iPad or mount a panel so staff switch that room\u2019s channel or device from a panel that starts with the room\u2019s endpoints\u2014nothing else on the property.',
-          image: '/images/upgrade-guide/venue-panels/use-case-conference-media.jpg',
-          imagePosition: '50% 30%',
         },
       ],
       limits: [
@@ -335,7 +327,7 @@ export const upgradeGuide = {
       oneLiner:
         'With staging, you can prepare screens, sources, volumes, and content while the current experience keeps running. Hold the changes until you Apply, then apply them on cue or save the set as a preset.',
       paragraph:
-        'Prepare the screens, sources, volumes, and content for an upcoming event while the current experience keeps running. Nothing changes until you Apply. Save the staged set as a preset to use again, or give the preset a time to make it a scheduled preset. Chart views show what has run and what is coming up.',
+        'Staging gives you the ability to prepare screens, sources, volumes, and content while the current experience keeps running. If you’re preparing for an upcoming event, take the current setup from live, make the next changes, and hold them until you select Apply. Apply the staged set on cue, save it as a preset to use again, or give the preset a time to schedule it; use the chart views to see what has run and what is coming up.',
       benefits: [
         'Holds the next set until you Apply without changing what is live',
         'Lets you Apply on demand when an event\u2019s timing slips',
@@ -350,22 +342,16 @@ export const upgradeGuide = {
           id: 'late-running-casino-drawing',
           label: 'A drawing that starts late',
           line: 'Prepare the screens, content, sources, and audio ahead of time, keep the current experience live, then select Apply when the host is ready.',
-          image: '/images/upgrade-guide/staging/use-case-late-drawing.jpg',
-          imagePosition: '50% 30%',
         },
         {
           id: 'weekly-giveaway',
           label: 'The weekly giveaway',
           line: 'Save its screen, source, content, and audio setup as a preset, give it a time, and let the scheduled preset run each week.',
-          image: '/images/upgrade-guide/staging/use-case-weekly-giveaway.jpg',
-          imagePosition: '50% 30%',
         },
         {
           id: 'drawing-in-progress',
           label: 'Drawing in progress',
           line: 'Keep drawing branding and results on selected screens for the event window with a scheduled preset lockout, so floor staff cannot switch them back to the game; an administrator can override the lock.',
-          image: '/images/upgrade-guide/staging/use-case-drawing-in-progress.jpg',
-          imagePosition: '50% 30%',
         },
       ],
       media: {
@@ -381,7 +367,7 @@ export const upgradeGuide = {
       oneLiner:
         'With audio group control, you have more options when moving multiple zones at once. Lock the selected zones together and move them incrementally or set them all to a single volume number.',
       paragraph:
-        'You’ve set the bar louder than the dining room and the patio at its own level, but all three zones are too quiet. Select them, lock in their current balance, and raise them together. Audio group control moves each zone by the same amount, so the bar stays louder than the dining room as the whole space gets louder.\n\nWhen you need one level across the space, set every selected zone to the same volume. When one area needs a quick adjustment, move that zone alone without changing the others.',
+        'Audio group control gives you the ability to adjust the volume of multiple zones at once. If you’ve already set 3 zones to 3 differing levels, this feature lets you lock that balance and move them together incrementally, set them all to a single volume number, or adjust one zone alone.',
       benefits: [
         'Raise or lower selected zones together',
         'Keep the volume differences between zones as they move',
@@ -419,7 +405,7 @@ export const upgradeGuide = {
       oneLiner:
         'With a customizable interface, you can shape LUCI around your property’s identity and operating cues. Add property photography and marks, then choose themes, light or dark mode, background treatments, typography, and endpoint status colors.',
       paragraph:
-        'Shape LUCI around the property’s own identity and operating cues. Sign-in and splash screens can carry property photography and marks, while curated themes, light and dark modes, background treatments, typography, and endpoint status colors give the interface a familiar look.',
+        'A customizable interface gives you the ability to match LUCI to your property’s identity and operating cues. When you’re setting up the interface for your property, add photography and marks to the sign-in and splash screens, choose a curated theme and light or dark mode, adjust the background blur, opacity, and position, and set the endpoint status colors. LUCI can design the interface, or your property can make the adjustments.',
       benefits: [
         'Uses property photography and marks on sign-in and splash screens',
         'Offers light and dark modes with curated themes',
@@ -439,7 +425,7 @@ export const upgradeGuide = {
       oneLiner:
         'With live map flexibility, you can use your own floor plans as a live view of your devices. Rotate and orient each map to match the physical space, then see every device’s state from the map.',
       paragraph:
-        'Use the property’s own floor plans instead of a generic layout, then rotate and orient each map to match the physical space. The map remains connected to device state, so the view operators recognize is also the surface they use to see what is happening.',
+        'Live map flexibility gives you the ability to use your property’s floor plans as a live view of its devices. When the map needs to match the operator’s physical view of the space, rotate and orient it, then use it to see the live state of every device.',
       benefits: [
         'Loads the property’s own floor plans',
         'Rotates and orients maps to match the physical space',
@@ -458,7 +444,7 @@ export const upgradeGuide = {
       oneLiner:
         'With live screen view, you can check what is playing on a selected TV or LED wall. See the screen exactly as it appears live from your iPad or any browser device.',
       paragraph:
-        'Live screen view shows what is playing on a selected TV or LED wall from an iPad or any browser device, exactly as it appears live. It gives the operator a direct visual check of the current screen from the device in hand.',
+        'Live screen view gives you the ability to see what is playing on a selected TV or LED wall exactly as it appears live. When you need to check a screen from the device in your hand, select it from an iPad or any browser device and view its current content.',
       benefits: [
         'Checks what is playing on a TV',
         'Checks what is playing on an LED wall',
@@ -477,7 +463,7 @@ export const upgradeGuide = {
       oneLiner:
         'With audit trails, you can follow who or what triggered each action, when it happened, and which device it affected. Search by device or user, filter by action type, and export the record when needed.',
       paragraph:
-        'Follow the record behind each action: who or what triggered it, when it happened, and which device it affected. Search by device or user, filter by action type, export the results, and review incident duration when a device stops responding and later returns.',
+        'Audit trails give you the ability to follow who or what triggered an action, when it happened, and which device it affected. If you need to investigate an action, search by device or user, filter by action type, and export the results as a CSV. When a device stops responding and later recovers, review when the incident opened and closed to see how long it lasted.',
       benefits: [
         'Records actions against a person and a time',
         'Identifies a person, preset, or schedule as the trigger',
@@ -497,7 +483,7 @@ export const upgradeGuide = {
       oneLiner:
         'With live monitoring, you can see the current state of devices, displays, and audio zones from one view. Filter by venue, device type, or status, follow incidents as they open and close, and carry their context into a support request.',
       paragraph:
-        'See the current state of devices, displays, and audio zones from one view, including what is on, what is off, and what has a fault. Filter the view to find what needs attention, follow incidents as they open and close, and raise a support request with the relevant incident context attached.',
+        'Live monitoring gives you the ability to see the current state of devices, displays, and audio zones from one view. When you need to find what requires attention, filter by venue, device type, or status, then follow incidents as they open and close. If an incident needs support, start a request with its context attached.',
       benefits: [
         'Shows live device, display, and audio-zone state',
         'Surfaces incidents when a device stops responding',
@@ -517,7 +503,7 @@ export const upgradeGuide = {
       oneLiner:
         'With sign-in and session control, you can give users access by email, PIN, or Microsoft Entra ID. See who is active, end a session, or post a message to everyone using LUCI.',
       paragraph:
-        'Give users the sign-in method that fits their work, from email and PIN access to Microsoft credentials through Entra ID. Administrators can see who is active, end a session, and post a message banner to everyone currently using LUCI.',
+        'Sign-in and session control gives you the ability to manage how users enter LUCI and what happens during an active session. When you set up access, choose email, PIN, or Microsoft Entra ID. If you need to manage current use, see who is active, end a session, or post a message to everyone using LUCI.',
       benefits: [
         'Supports email, PIN, and Microsoft Entra ID sign-in',
         'Shows who is active in the platform',
@@ -537,7 +523,7 @@ export const upgradeGuide = {
       oneLiner:
         'With in-product support, you can start a request from the device, incident, or error where the issue appears, with context and logs attached. You decide what to escalate, and when something on your property goes down, the LUCI team gets an alert so they can jump on it right away.',
       paragraph:
-        'Start a support request from the device, incident, or error where the issue appears. The request carries what happened, what changed, and the relevant logs, while the property decides what to escalate and the LUCI team remains available to act on the fuller context. When something on your property goes down, the LUCI team gets an alert so they can jump on it right away.',
+        'In-product support gives you the ability to start a support request where an issue appears. If a device, incident, or error needs attention, open the request from that item so its context and relevant logs are attached, then decide what to escalate. When something on your property goes down, the LUCI team receives an alert so they can act on it right away.',
       benefits: [
         'Starts the request from the device, incident, or error',
         'Attaches relevant context and logs',
