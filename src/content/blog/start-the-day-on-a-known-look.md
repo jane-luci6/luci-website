@@ -9,7 +9,7 @@ topics:
   - morning-reset
   - spotlight
 heroImage: /images/blog/morning-reset-hero.jpg
-heroAlt: A casino bar with displays above the counter and along the back wall.
+heroAlt: A sportsbook bar with displays above the counter and a wide screen overhead.
 ---
 
 Casino and resort floors rely on A/V to set the opening environment across displays, sources, and audio zones. But every shift change leaves decisions behind: a source changed for an event, a volume raised for a busy room, or a display left on after the audience moved on.
