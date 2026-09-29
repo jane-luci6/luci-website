@@ -51,29 +51,49 @@ const articleLd = {
   ])]}
 >
   <SectionBlock tone="sand">
-    <p class="display-label">Blog</p>
-    <h1 class="h1">{post.data.title}</h1>
-    <p class="lead" style="margin-top: 1rem">{post.data.description}</p>
-    <p class="scaffold-note" style="margin-top: 0.5rem">
-      {published}
-    </p>
-    {post.data.heroImage && (
-      <img
-        class="post-hero"
-        src={post.data.heroImage}
-        alt={post.data.heroAlt ?? ''}
-      />
-    )}
+    <div class="article-hero">
+      <p class="display-label">Blog</p>
+      <h1 class="h1">{post.data.title}</h1>
+      <p class="lead">{post.data.description}</p>
+      <p class="scaffold-note">{published}</p>
+      {post.data.heroImage && (
+        <img
+          class="post-hero"
+          src={post.data.heroImage}
+          alt={post.data.heroAlt ?? ''}
+        />
+      )}
+    </div>
   </SectionBlock>
 
   <SectionBlock>
-    <div class="prose measure">
+    <div class="prose measure article-body">
       <Content />
     </div>
   </SectionBlock>
 </BaseLayout>
 
 <style>
+  /* Sand and white article bands stay light in the default dark theme, so
+     body copy cannot inherit the near-white page text color. */
+  .article-hero,
+  .article-body {
+    color: var(--ink);
+  }
+
+  .article-hero .display-label {
+    color: var(--accent-light);
+  }
+
+  .article-hero .lead {
+    margin-top: 1rem;
+    color: var(--ink);
+  }
+
+  .article-hero .scaffold-note {
+    margin-top: 0.5rem;
+  }
+
   .post-hero {
     width: 100%;
     height: auto;

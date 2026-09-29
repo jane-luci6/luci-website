@@ -37,3 +37,9 @@ const posts = (await getCollection('blog')).sort(
     {posts.length === 0 && <p class="scaffold-note">No posts yet.</p>}
   </SectionBlock>
 </BaseLayout>
+
+<style>
+  .rows p {
+    color: var(--ink);
+  }
+</style>
