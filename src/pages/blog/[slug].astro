@@ -186,9 +186,20 @@ const articleLd = {
     background: linear-gradient(to bottom, rgba(10, 22, 28, 0.55) 0%, rgba(10, 22, 28, 0) 32%, rgba(10, 22, 28, 0.25) 100%);
   }
 
-  /* ---------- BODY ---------- */
+  /* ---------- BODY — readable measure on light band ---------- */
   .post-body {
     margin-inline: auto;
+    max-width: 68ch;
+    color: var(--ink);
+  }
+  .post-body :global(p),
+  .post-body :global(li) {
+    color: var(--ink);
+  }
+  .post-body :global(h2),
+  .post-body :global(h3),
+  .post-body :global(h4) {
+    color: var(--ink-strong);
   }
 
   .post-footer {

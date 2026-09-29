@@ -1,0 +1,145 @@
+---
+/**
+ * Marketing mesh page header — navy-deep canvas, screen-blended hero mesh
+ * (or optional photo), horizontal scrim, mint Syncopate kicker, Space Grotesk
+ * title, Inter deck, wide measure.
+ *
+ * Pass imageSrc to replace the mesh SVG with a locked photo (e.g. Turf Club
+ * on /blog/). Scrim darkens the photo so title/deck stay readable.
+ */
+interface Props {
+  id?: string;
+  kicker?: string;
+  title?: string;
+  /** Title HTML when a phrase needs a gold <em>. Used instead of title. */
+  titleHtml?: string;
+  deck?: string;
+  label?: string;
+  /** Optional full-bleed photo instead of the mesh SVG. */
+  imageSrc?: string;
+  imageAlt?: string;
+}
+
+const { id, kicker, title = '', titleHtml, deck, label, imageSrc, imageAlt = '' } = Astro.props;
+const photoMode = Boolean(imageSrc);
+---
+
+<section id={id} class:list={['mesh-hero', photoMode && 'mesh-hero--photo']} aria-label={label}>
+  {photoMode ? (
+    <div class="mesh-hero__photo" aria-hidden={imageAlt ? undefined : 'true'}>
+      <img src={imageSrc} alt={imageAlt} decoding="async" fetchpriority="high" />
+    </div>
+  ) : (
+    <div class="mesh-hero__mesh" aria-hidden="true"></div>
+  )}
+  <div class="mesh-hero__inner container container--wide">
+    {kicker && <p class="display-label mesh-hero__kicker">{kicker}</p>}
+    {titleHtml ? (
+      <h1 class="mesh-hero__title" set:html={titleHtml} />
+    ) : (
+      <h1 class="mesh-hero__title">{title}</h1>
+    )}
+    {deck && <p class="mesh-hero__deck">{deck}</p>}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .mesh-hero {
+    position: relative;
+    background: var(--navy-deep);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .mesh-hero__mesh {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: url('/images/mesh/luci-bg-hero-1920x1080.svg?v=1') center / cover no-repeat;
+    mix-blend-mode: screen;
+    opacity: 0.7;
+  }
+
+  .mesh-hero__mesh::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(10, 22, 28, 0.82) 18%,
+      rgba(10, 22, 28, 0.82) 82%,
+      transparent 100%
+    );
+  }
+
+  .mesh-hero__photo {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .mesh-hero__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .mesh-hero__photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(10, 22, 28, 0.78) 0%, rgba(10, 22, 28, 0.55) 42%, rgba(10, 22, 28, 0.72) 100%),
+      linear-gradient(180deg, rgba(10, 22, 28, 0.45) 0%, rgba(10, 22, 28, 0.2) 40%, rgba(10, 22, 28, 0.65) 100%);
+  }
+
+  .mesh-hero__inner {
+    position: relative;
+    z-index: 1;
+    padding-block: clamp(64px, 9vw, 112px) clamp(40px, 5vw, 64px);
+  }
+
+  .mesh-hero--photo .mesh-hero__inner {
+    padding-block: clamp(72px, 10vw, 128px) clamp(48px, 6vw, 72px);
+  }
+
+  .mesh-hero__kicker {
+    color: var(--mint);
+    margin-bottom: var(--space-3);
+  }
+
+  .mesh-hero__title {
+    margin: 0 0 var(--space-3);
+    max-width: 20ch;
+    font-family: var(--font-head);
+    font-size: clamp(38px, 6vw, 64px);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    color: var(--off-white);
+  }
+
+  .mesh-hero__title :global(em) {
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  .mesh-hero__deck {
+    max-width: 56ch;
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: clamp(17px, 2vw, 20px);
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.82);
+  }
+
+  .mesh-hero__inner :global(.btn) {
+    margin-top: var(--space-5);
+  }
+</style>

@@ -83,11 +83,33 @@ h2,
 /* ---------- Article prose — long-form body copy (blog, terms, privacy) ----------
    Comfortable measure, Inter body, Space Grotesk heads, accent-light links.
    Contrast per house tokens: ink on light surfaces, mint/gold never as body
-   text on light. */
+   text on light. Explicit ink — site default data-theme=dark sets near-white
+   --text-primary, which is unreadable on white/off-white sections. */
 .prose {
-  max-width: var(--measure);
-  font-size: 17px;
-  line-height: 1.7;
+  max-width: 68ch;
+  margin-inline: auto;
+  font-family: var(--font-body);
+  font-size: clamp(17px, 1.05vw + 0.55rem, 19px);
+  line-height: 1.75;
+  letter-spacing: 0.005em;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Light section tones must keep ink even under data-theme=dark. */
+.section--white .prose,
+.section--light .prose,
+.section--sand .prose {
+  color: var(--ink);
+}
+
+.section--white .prose p,
+.section--light .prose p,
+.section--sand .prose p,
+.section--white .prose li,
+.section--light .prose li,
+.section--sand .prose li {
   color: var(--ink);
 }
 
@@ -100,7 +122,11 @@ h2,
 }
 
 .prose p + p {
-  margin-top: 1em;
+  margin-top: 1.15em;
+}
+
+.prose p {
+  margin: 0;
 }
 
 .prose h2,
@@ -156,12 +182,16 @@ h2,
 
 .prose ul,
 .prose ol {
-  margin: 1.25em 0;
-  padding-left: 1.4em;
+  margin: 1.35em 0;
+  padding-left: 1.5em;
+}
+
+.prose li {
+  line-height: 1.7;
 }
 
 .prose li + li {
-  margin-top: 0.45em;
+  margin-top: 0.55em;
 }
 
 .prose ul {
