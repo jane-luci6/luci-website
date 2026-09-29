@@ -23,6 +23,7 @@ const pubDate = post.data.pubDate.toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
+  timeZone: 'UTC',
 });
 const articleLd = {
   '@context': 'https://schema.org',
