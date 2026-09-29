@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import PageHero from '../../../components/PageHero.astro';
+import MeshHero from '../../../components/MeshHero.astro';
 import SectionBlock from '../../../components/SectionBlock.astro';
 import { ameristarCaseStudy, tachiCaseStudy, samsTownCaseStudy, yaamavaCaseStudy, alianteCaseStudy, portfolioLine } from '../../../data/site';
 import { seoPages, breadcrumb } from '../../../data/seo';
@@ -17,8 +17,15 @@ const caseStudies = [yaamavaCaseStudy, ameristarCaseStudy, tachiCaseStudy, samsT
     { name: 'Resources', path: '/resources' },
     { name: 'Case studies', path: '/resources/case-studies' },
   ])}
+  darkHeader
 >
-  <PageHero title="Case studies" lead={portfolioLine} deep />
+  <MeshHero
+    id="case-studies-hero"
+    kicker="Resources"
+    title="Case studies"
+    deck={portfolioLine}
+    label="Case studies"
+  />
 
   <SectionBlock id="cs-index" lockupName="Featured" tone="light" wide>
     <ul class="cs-index">
@@ -66,6 +73,7 @@ const caseStudies = [yaamavaCaseStudy, ameristarCaseStudy, tachiCaseStudy, samsT
     gap: 16px;
   }
 
+  :global(#case-studies-hero > .container.container--wide),
   :global(#cs-index > .container.container--wide) {
     max-width: 1360px;
   }

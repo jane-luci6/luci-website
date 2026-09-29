@@ -1,0 +1,105 @@
+---
+/**
+ * Marketing mesh page header — the same treatment as the Resources hub
+ * and the Field Activation Guide: navy-deep canvas, screen-blended hero
+ * mesh, horizontal scrim, mint Syncopate kicker, Space Grotesk title,
+ * Inter deck, wide measure.
+ */
+interface Props {
+  id?: string;
+  kicker?: string;
+  title?: string;
+  /** Title HTML when a phrase needs a gold <em>. Used instead of title. */
+  titleHtml?: string;
+  deck?: string;
+  label?: string;
+}
+
+const { id, kicker, title = '', titleHtml, deck, label } = Astro.props;
+---
+
+<section id={id} class="mesh-hero" aria-label={label}>
+  <div class="mesh-hero__mesh" aria-hidden="true"></div>
+  <div class="mesh-hero__inner container container--wide">
+    {kicker && <p class="display-label mesh-hero__kicker">{kicker}</p>}
+    {titleHtml ? (
+      <h1 class="mesh-hero__title" set:html={titleHtml} />
+    ) : (
+      <h1 class="mesh-hero__title">{title}</h1>
+    )}
+    {deck && <p class="mesh-hero__deck">{deck}</p>}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .mesh-hero {
+    position: relative;
+    background: var(--navy-deep);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .mesh-hero__mesh {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: url('/images/mesh/luci-bg-hero-1920x1080.svg?v=1') center / cover no-repeat;
+    mix-blend-mode: screen;
+    opacity: 0.7;
+  }
+
+  .mesh-hero__mesh::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(10, 22, 28, 0.82) 18%,
+      rgba(10, 22, 28, 0.82) 82%,
+      transparent 100%
+    );
+  }
+
+  .mesh-hero__inner {
+    position: relative;
+    z-index: 1;
+    padding-block: clamp(64px, 9vw, 112px) clamp(40px, 5vw, 64px);
+  }
+
+  .mesh-hero__kicker {
+    color: var(--mint);
+    margin-bottom: var(--space-3);
+  }
+
+  .mesh-hero__title {
+    margin: 0 0 var(--space-3);
+    max-width: 20ch;
+    font-family: var(--font-head);
+    font-size: clamp(38px, 6vw, 64px);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    color: var(--off-white);
+  }
+
+  .mesh-hero__title :global(em) {
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  .mesh-hero__deck {
+    max-width: 56ch;
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: clamp(17px, 2vw, 20px);
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.82);
+  }
+
+  .mesh-hero__inner :global(.btn) {
+    margin-top: var(--space-5);
+  }
+</style>
