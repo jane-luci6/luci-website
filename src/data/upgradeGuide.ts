@@ -404,16 +404,13 @@ export const upgradeGuide = {
       oneLiner:
         'LUCI\'s new customizable interface allows you to create a branded experience within the platform. Add property photography and marks, choose themes, and select from many more options.',
       paragraph:
-        'A customizable interface gives you the ability to make LUCI feel like your property from the first sign-in through daily operations. Put your property’s own photography and marks—logo, word mark, or icon—on the sign-in and splash screens. Choose a curated theme matched to your brand, with light or dark display modes (or system mode where available), and select typography from an approved set of fonts. For the splash background, adjust blur and opacity so the image supports the interface without competing with it. Set endpoint status colors across the install so green, yellow, and red—or your chosen equivalents—carry the same meaning on every floor and iPad. Apply a theme at the site level, then allow per-user preferences where permitted. LUCI can design the theme for you, or your property can build and tweak it in the interface.',
+        'A customizable interface gives you the ability to create a branded experience within the platform—from the first sign-in through daily operations. Choose from curated theme presets matched to your property’s brand colors, each with a different look and feel. Select typography from an approved set of fonts and adjust text sizes so the interface reads the way your teams need. Apply a theme at the site level so the property stays consistent, then support per-user preferences where permitted.',
       benefits: [
         'Puts property photography and marks—logo, word mark, and icon—on sign-in and splash screens',
-        'Offers curated theme presets matched to property brand colors, each with a different look and feel',
-        'Runs the interface in light, dark, or system mode where permitted',
-        'Selects typography from an approved set of fonts and adjusts theme text sizes',
         'Adjusts splash background image blur and opacity',
         'Sets endpoint status colors across the install, with familiar green, yellow, and red defaults that can be changed',
-        'Applies theme presets at site level and supports per-user preferences where permitted',
-        'Lets LUCI design the theme or lets the property build and tweak it',
+        'Runs the interface in light, dark, or system mode',
+        'Lets LUCI design the theme, or lets the property build and tweak it',
       ],
       media: {
         kind: 'placeholder',
@@ -427,9 +424,9 @@ export const upgradeGuide = {
           line: 'Put the property’s photography and marks—logo, word mark, or icon—on the sign-in and splash screens so every session opens on the property’s look.',
         },
         {
-          id: 'brand-theme',
-          label: 'A theme that matches the brand',
-          line: 'Choose a curated theme matched to the property’s colors, then use light, dark, or system mode and typography from the approved set to give the interface the right look and feel.',
+          id: 'display-mode',
+          label: 'Light, dark, or system mode',
+          line: 'Run the interface in light, dark, or system mode so operators get the look that fits the floor and time of day.',
         },
         {
           id: 'splash-treatment',
@@ -440,11 +437,6 @@ export const upgradeGuide = {
           id: 'status-colors',
           label: 'Status colors that mean the same everywhere',
           line: 'Keep green, yellow, and red (or the property’s chosen set) consistent across the install so healthy, attention, and powered-off read the same on every floor and iPad.',
-        },
-        {
-          id: 'site-and-user-preference',
-          label: 'A consistent site with room for preference',
-          line: 'Apply the theme at site level, then let users choose a permitted per-user preference when their workflow calls for it.',
         },
         {
           id: 'luci-or-property',
