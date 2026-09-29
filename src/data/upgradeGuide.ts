@@ -208,7 +208,7 @@ export const upgradeGuide = {
           id: 'audio-group-control',
           name: 'Audio group control',
           oneLiner:
-            'Move several audio zones together: apply the same incremental change to keep their balance, or set them all to one volume.',
+            'Keep the room’s balance as volume changes: move selected zones together while keeping differences, set them all to one volume, or adjust one alone.',
         },
       ],
     },
@@ -379,19 +379,38 @@ export const upgradeGuide = {
       pillarId: 'room-control',
       name: 'Audio group control',
       oneLiner:
-        'Move several audio zones together: apply the same incremental change to keep their balance, or set them all to one volume.',
+        'Keep the room’s balance as volume changes: move selected zones together while keeping differences, set them all to one volume, or adjust one alone.',
       paragraph:
-        'Adjust several audio zones as a group without giving up the way the room has been tuned. Move every selected zone by the same increment to preserve its relative balance, set all selected zones to one level, or adjust one zone on its own.',
+        'Your dining room can stay quieter than the bar while the patio stays louder—even when all three need to come up or down. In the old LUCI, moving several zones together meant setting them to the same volume, flattening the balance you had tuned.\n\nNew LUCI lets you move selected zones together while keeping those differences intact. You can still set every selected zone to one volume when that’s what the room needs, or adjust a single zone without moving the rest.',
       benefits: [
-        'Moves selected zones by the same increment',
-        'Preserves the tuned balance between zones',
-        'Sets a group to one shared level',
-        'Allows an individual zone to move alone',
+        'Moves selected zones together without flattening the mix',
+        'Keeps the volume differences set during tuning',
+        'Sets selected zones to one shared volume when needed',
+        'Lets one zone move without changing the rest',
+      ],
+      scenariosSubsectionLabel: 'Three ways to move volume',
+      scenarios: [
+        {
+          id: 'keep-the-mix',
+          label: 'Keep the mix',
+          line: 'Raise or lower selected zones by the same step. Dining can stay quieter than the bar while the patio stays louder.',
+        },
+        {
+          id: 'set-them-equal',
+          label: 'Set them equal',
+          line: 'When selected zones need one shared volume, set them all to the same level at once.',
+        },
+        {
+          id: 'move-one-alone',
+          label: 'Move one alone',
+          line: 'Fine-tune one zone—such as the patio—without changing the dining room or bar.',
+        },
       ],
       media: {
         kind: 'placeholder',
         label: 'Audio group controls — screenshot placeholder',
       },
+      technicalJumpId: 'technical-audio-group-control',
     },
     {
       id: 'customizable-interface',
@@ -548,10 +567,10 @@ export const upgradeGuide = {
             id: 'technical-audio-group-control',
             name: 'Audio group control',
             summary:
-              'Move several zones proportionally, set every zone to the same level, or move one alone.',
+              'Incremental group moves preserve level differences; absolute sets selected zones to one volume; or move one zone alone.',
             details: [
-              'Move several zones proportionally so their tuned balance survives.',
-              'Set every selected zone to the same level.',
+              'Incremental: Up/down adds or subtracts one step across selected zones, preserving the differences between their levels.',
+              'Absolute: A slider or typed number sets selected zones to the same volume.',
               'Move one zone independently.',
             ],
           },
