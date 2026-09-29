@@ -788,6 +788,9 @@ const duoLockups = {
   }
   @media (min-width: 820px) {
     .ug-pillars { grid-template-columns: repeat(3, 1fr); }
+    /* 01 title wraps to 3 lines (“of the guest experience”); reserve
+       that height so 02/03 heads + hairlines align with the taller 01. */
+    .ug-pillar__name { min-height: calc(1.22em * 3); }
   }
   .ug-pillar {
     display: flex;
