@@ -404,14 +404,16 @@ export const upgradeGuide = {
       oneLiner:
         'LUCI\'s new customizable interface allows you to create a branded experience within the platform. Add property photography and marks, choose themes, and select from many more options.',
       paragraph:
-        'A customizable interface gives you the ability to match LUCI to your property’s brand and the cues operators already use. When you set up the property, put photography and marks on the sign-in and splash screens, choose a curated theme with light or dark mode, pick typography from an approved set, and adjust the background image’s blur, opacity, and position. Endpoint status colors ship as operators already know them—green for healthy, yellow for attention, red for powered off—and can be changed once across the install so every floor reads the same. LUCI can design the theme, or your property can build and tweak it.',
+        'A customizable interface gives you the ability to make LUCI feel like your property from the first sign-in through daily operations. Put your property’s own photography and marks—logo, word mark, or icon—on the sign-in and splash screens. Choose a curated theme matched to your brand, with light or dark display modes (or system mode where available), and select typography from an approved set of fonts. For the splash background, adjust blur and opacity so the image supports the interface without competing with it. Set endpoint status colors across the install so green, yellow, and red—or your chosen equivalents—carry the same meaning on every floor and iPad. Apply a theme at the site level, then allow per-user preferences where permitted. LUCI can design the theme for you, or your property can build and tweak it in the interface.',
       benefits: [
-        'Puts property photography and marks on sign-in and splash screens',
-        'Offers curated themes matched to brand colors, with light and dark modes',
-        'Selects typography from an approved set of fonts',
-        'Adjusts background image blur, opacity, and position',
-        'Ships familiar endpoint status colors (green healthy, yellow attention, red powered off) and changes them across the install',
-        'Can be designed by LUCI or built and tweaked by the property',
+        'Puts property photography and marks—logo, word mark, and icon—on sign-in and splash screens',
+        'Offers curated theme presets matched to property brand colors, each with a different look and feel',
+        'Runs the interface in light, dark, or system mode where permitted',
+        'Selects typography from an approved set of fonts and adjusts theme text sizes',
+        'Adjusts splash background image blur and opacity',
+        'Sets endpoint status colors across the install, with familiar green, yellow, and red defaults that can be changed',
+        'Applies theme presets at site level and supports per-user preferences where permitted',
+        'Lets LUCI design the theme or lets the property build and tweak it',
       ],
       media: {
         kind: 'placeholder',
@@ -422,17 +424,27 @@ export const upgradeGuide = {
         {
           id: 'sign-in-splash',
           label: 'Sign-in that looks like the property',
-          line: 'Put property photography and marks on the sign-in and splash screens so every session opens on the property’s look.',
+          line: 'Put the property’s photography and marks—logo, word mark, or icon—on the sign-in and splash screens so every session opens on the property’s look.',
         },
         {
           id: 'brand-theme',
           label: 'A theme that matches the brand',
-          line: 'Choose a curated theme with the property’s colors, light or dark mode, and typography from the approved set.',
+          line: 'Choose a curated theme matched to the property’s colors, then use light, dark, or system mode and typography from the approved set to give the interface the right look and feel.',
+        },
+        {
+          id: 'splash-treatment',
+          label: 'A splash screen with the right emphasis',
+          line: 'Adjust the background image’s blur and opacity so the property photography supports the sign-in and splash screens at the level of emphasis you want.',
         },
         {
           id: 'status-colors',
           label: 'Status colors that mean the same everywhere',
-          line: 'Keep green, yellow, and red (or the property’s chosen set) consistent across floors and devices so healthy, attention, and powered-off read the same.',
+          line: 'Keep green, yellow, and red (or the property’s chosen set) consistent across the install so healthy, attention, and powered-off read the same on every floor and iPad.',
+        },
+        {
+          id: 'site-and-user-preference',
+          label: 'A consistent site with room for preference',
+          line: 'Apply the theme at site level, then let users choose a permitted per-user preference when their workflow calls for it.',
         },
         {
           id: 'luci-or-property',
