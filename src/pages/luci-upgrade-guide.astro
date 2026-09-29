@@ -1142,7 +1142,15 @@ const duoLockups = {
     display: block;
   }
   @media (min-width: 720px) {
-    .ug-feature-scenario { max-width: none; }
+    /* Keep the 2×2 grid, but make each photo about half its former footprint.
+       Centering each card in its grid cell keeps the reduced set balanced. */
+    .ug-feature-scenario {
+      width: 50%;
+      max-width: none;
+      /* Retain the readable caption floor while the photo width shrinks. */
+      min-height: 200px;
+      justify-self: center;
+    }
   }
   .ug-feature-scenario__img {
     position: absolute;
