@@ -17,6 +17,13 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 
 const canonicalPath = `/blog/${post.id}`;
+const heroImage = post.data.heroImage;
+const heroAlt = post.data.heroAlt;
+const pubDate = post.data.pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
 const articleLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
@@ -30,6 +37,7 @@ const articleLd = {
     logo: { '@type': 'ImageObject', url: `${site.url}/favicon.svg` },
   },
   mainEntityOfPage: site.url + canonicalPath,
+  ...(heroImage ? { image: site.url + heroImage } : {}),
 };
 ---
 
@@ -37,30 +45,172 @@ const articleLd = {
   title={post.data.title}
   description={post.data.description}
   canonicalPath={canonicalPath}
+  ogImage={heroImage}
   jsonLd={[articleLd, breadcrumb([
     { name: 'Home', path: '/' },
     { name: 'Blog', path: '/blog' },
     { name: post.data.title, path: canonicalPath },
   ])]}
+  darkHeader
 >
-  <SectionBlock tone="sand">
-    <p class="display-label">Blog</p>
-    <h1 class="h1">{post.data.title}</h1>
-    <p class="lead" style="margin-top: 1rem">{post.data.description}</p>
-    <p class="scaffold-note" style="margin-top: 0.5rem">
-      {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-    </p>
-  </SectionBlock>
+  <article class="post">
+    <header class="post-header" aria-label="Article header">
+      <div class="post-header__inner container">
+        <p class="display-label post-header__kicker">Blog</p>
+        <h1 class="post-header__title">{post.data.title}</h1>
+        <p class="post-header__dek">{post.data.description}</p>
+        <p class="post-header__meta">
+          {pubDate} <span aria-hidden="true">&middot;</span> {site.name}
+        </p>
+      </div>
+    </header>
 
-  <SectionBlock>
-    <div class="prose measure">
-      <Content />
-    </div>
-  </SectionBlock>
+    {
+      heroImage && (
+        <figure class="post-hero">
+          <span class="post-hero__scrim" aria-hidden="true" />
+          <img
+            class="post-hero__img"
+            src={heroImage}
+            alt={heroAlt ?? post.data.title}
+            width="1920"
+            height="820"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </figure>
+      )
+    }
+
+    <SectionBlock tone="white">
+      <div class="prose post-body">
+        <Content />
+      </div>
+      <footer class="post-footer">
+        <a class="post-footer__back" href="/blog/">
+          All articles <span aria-hidden="true">&#8594;</span>
+        </a>
+      </footer>
+    </SectionBlock>
+  </article>
 </BaseLayout>
 
 <style>
-  .prose :global(p + p) {
-    margin-top: 1rem;
+  /* ---------- ARTICLE HEADER — navy-deep band, strong type hierarchy ---------- */
+  .post-header {
+    position: relative;
+    background: var(--navy-deep);
+    overflow: hidden;
+    isolation: isolate;
+    border-bottom: 1px solid rgba(var(--mint-rgb), 0.14);
+  }
+  .post-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: url('/images/mesh/luci-bg-hero-1920x1080.svg?v=1') center / cover no-repeat;
+    mix-blend-mode: screen;
+    opacity: 0.55;
+  }
+  .post-header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgba(10, 22, 28, 0.86) 0%, rgba(10, 22, 28, 0.6) 45%, rgba(10, 22, 28, 0.3) 100%);
+  }
+  .post-header__inner {
+    position: relative;
+    z-index: 1;
+    padding-block: clamp(48px, 7vw, 88px) clamp(36px, 5vw, 56px);
+  }
+  .post-header__kicker {
+    color: var(--mint);
+    margin-bottom: var(--space-3);
+  }
+  .post-header__title {
+    margin: 0 0 var(--space-3);
+    max-width: 24ch;
+    font-family: var(--font-head);
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+    color: var(--off-white);
+  }
+  .post-header__dek {
+    max-width: 56ch;
+    margin: 0 0 var(--space-3);
+    font-family: var(--font-body);
+    font-size: clamp(17px, 2vw, 20px);
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.82);
+  }
+  .post-header__meta {
+    margin: 0;
+    font-family: var(--font-head);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: rgba(245, 248, 250, 0.72);
+  }
+  .post-header__meta span {
+    color: var(--mint);
+    padding-inline: 6px;
+  }
+
+  /* ---------- HERO MEDIA — full-bleed controlled crop under the header ---------- */
+  .post-hero {
+    position: relative;
+    margin: 0;
+    width: 100%;
+    overflow: hidden;
+    background: var(--navy-deep);
+  }
+  .post-hero__img {
+    display: block;
+    width: 100%;
+    max-height: clamp(320px, 58vh, 640px);
+    aspect-ratio: 21 / 9;
+    object-fit: cover;
+    object-position: center;
+  }
+  .post-hero__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(10, 22, 28, 0.55) 0%, rgba(10, 22, 28, 0) 32%, rgba(10, 22, 28, 0.25) 100%);
+  }
+
+  /* ---------- BODY ---------- */
+  .post-body {
+    margin-inline: auto;
+  }
+
+  .post-footer {
+    margin-top: var(--space-6);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--rule-light);
+  }
+  .post-footer__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-head);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent-light);
+    text-decoration: none;
+  }
+  .post-footer__back span {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+  .post-footer__back:hover span {
+    transform: translateX(4px);
   }
 </style>
