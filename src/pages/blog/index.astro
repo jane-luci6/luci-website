@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHero from '../../components/PageHero.astro';
 import SectionBlock from '../../components/SectionBlock.astro';
 import { getCollection } from 'astro:content';
 import { seoPages, breadcrumb } from '../../data/seo';
@@ -8,6 +7,9 @@ import { seoPages, breadcrumb } from '../../data/seo';
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
 <BaseLayout
@@ -18,22 +20,278 @@ const posts = (await getCollection('blog')).sort(
     { name: 'Home', path: '/' },
     { name: 'Blog', path: '/blog' },
   ])}
+  darkHeader
 >
-  <PageHero title="Blog" lead="Variable reduction, platform depth, and field learnings." deep />
+  <!-- Hero — matches the Resources mesh-header treatment: navy-deep canvas,
+       screen-blended hero mesh, horizontal scrim, Space Grotesk display title. -->
+  <section class="blog-hero" aria-label="LUCI blog">
+    <div class="blog-hero__mesh" aria-hidden="true"></div>
+    <div class="blog-hero__inner container container--wide">
+      <p class="display-label blog-hero__kicker">The LUCI blog</p>
+      <h1 class="blog-hero__title">Blog</h1>
+      <p class="blog-hero__deck">
+        Variable reduction, platform depth, and field learnings.
+      </p>
+    </div>
+  </section>
 
-  <SectionBlock>
-    <ul class="rows">
-      {
-        posts.map((post) => (
-          <li>
-            <p class="rows__title">
-              <a href={`/blog/${post.id}/`}>{post.data.title}</a>
-            </p>
-            <p>{post.data.description}</p>
-          </li>
-        ))
-      }
-    </ul>
-    {posts.length === 0 && <p class="scaffold-note">No posts yet.</p>}
+  <SectionBlock lockupName="Latest articles" tone="white" wide>
+    {
+      posts.length > 0 ? (
+        <ul class="post-grid" role="list">
+          {posts.map((post) => (
+            <li class="post-card">
+              <a class="post-card__link" href={`/blog/${post.id}/`}>
+                <span class="post-card__media">
+                  {post.data.heroImage ? (
+                    <img
+                      src={post.data.heroImage}
+                      alt={post.data.heroAlt ?? `${post.data.title} hero image`}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <span class="post-card__fallback">
+                      <img
+                        src="/images/logos/luci-full-mintmark-white.png"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </span>
+                  )}
+                </span>
+                <span class="post-card__body">
+                  <span class="post-card__kicker">
+                    <span>{formatDate(post.data.pubDate)}</span>
+                  </span>
+                  <span class="post-card__title">{post.data.title}</span>
+                  <span class="post-card__dek">{post.data.description}</span>
+                  <span class="post-card__cta">
+                    Read the article <span aria-hidden="true">&#8594;</span>
+                  </span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="scaffold-note">No posts yet.</p>
+      )
+    }
   </SectionBlock>
 </BaseLayout>
+
+<style>
+  /* ---------- HERO (Resources mesh-header pattern) ---------- */
+  .blog-hero {
+    position: relative;
+    background: var(--navy-deep);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .blog-hero__mesh {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: url('/images/mesh/luci-bg-hero-1920x1080.svg?v=1') center / cover no-repeat;
+    mix-blend-mode: screen;
+    opacity: 0.7;
+  }
+  .blog-hero__mesh::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(10, 22, 28, 0.82) 18%, rgba(10, 22, 28, 0.82) 82%, transparent 100%);
+  }
+  .blog-hero__inner {
+    position: relative;
+    z-index: 1;
+    padding-block: clamp(64px, 9vw, 112px) clamp(40px, 5vw, 64px);
+  }
+  .blog-hero__kicker {
+    color: var(--mint);
+    margin-bottom: var(--space-3);
+  }
+  .blog-hero__title {
+    margin: 0 0 var(--space-3);
+    max-width: 18ch;
+    font-family: var(--font-head);
+    font-size: clamp(38px, 6vw, 64px);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    color: var(--off-white);
+  }
+  .blog-hero__deck {
+    max-width: 56ch;
+    font-family: var(--font-body);
+    font-size: clamp(17px, 2vw, 20px);
+    line-height: 1.6;
+    color: rgba(245, 248, 250, 0.82);
+  }
+
+  /* ---------- POST CARD GRID (case-study card pattern) ---------- */
+  .post-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(24px, 3vw, 32px);
+  }
+
+  /* Lone post reads as a centered feature, not a half-empty grid. */
+  .post-grid:has(.post-card:only-child) {
+    grid-template-columns: 1fr;
+    max-width: 560px;
+    margin-inline: auto;
+  }
+
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid var(--rule-light);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+  }
+
+  .post-card:hover {
+    border-color: rgba(43, 158, 128, 0.45);
+    box-shadow: 0 24px 48px rgba(26, 43, 51, 0.12);
+    transform: translateY(-3px);
+  }
+
+  .post-card__link {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .post-card__media {
+    display: block;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--navy-deep);
+    position: relative;
+  }
+
+  .post-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s ease;
+  }
+
+  .post-card:hover .post-card__media img {
+    transform: scale(1.04);
+  }
+
+  /* Fallback panel for posts without a hero image — navy circuit texture
+     with the mintmark, mirroring the res-card logo-panel treatment. */
+  .post-card__fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: var(--navy-deep);
+    background-image: url('/images/textures/texture-circuit-navy-steel-print-dark.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .post-card__fallback img {
+    width: 56%;
+    max-width: 260px;
+    height: auto;
+    object-fit: contain;
+    transition: none;
+  }
+
+  .post-card:hover .post-card__fallback img {
+    transform: none;
+  }
+
+  .post-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: clamp(24px, 2.8vw, 32px);
+    flex: 1;
+  }
+
+  .post-card__kicker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 2px;
+  }
+
+  .post-card__kicker::before {
+    content: '';
+    width: 24px;
+    height: 2px;
+    background: var(--accent-light);
+  }
+
+  .post-card__kicker span {
+    font-family: var(--font-head);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+  }
+
+  .post-card__title {
+    font-family: var(--font-head);
+    font-size: clamp(20px, 2.2vw, 24px);
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.015em;
+    color: var(--ink-strong);
+  }
+
+  .post-card__dek {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--ink);
+    flex: 1;
+  }
+
+  .post-card__cta {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule-light);
+    font-family: var(--font-head);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent-light);
+  }
+
+  .post-card__cta span {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+
+  .post-card__link:hover .post-card__cta span {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 760px) {
+    .post-grid {
+      grid-template-columns: 1fr;
+      max-width: 560px;
+      margin-inline: auto;
+    }
+  }
+</style>
