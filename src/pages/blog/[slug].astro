@@ -17,12 +17,19 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 
 const canonicalPath = `/blog/${post.id}`;
+const published = post.data.pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'UTC',
+});
 const articleLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline: post.data.title,
   description: post.data.description,
   datePublished: post.data.pubDate.toISOString(),
+  ...(post.data.heroImage ? { image: `${site.url}${post.data.heroImage}` } : {}),
   author: { '@type': 'Organization', name: site.name },
   publisher: {
     '@type': 'Organization',
@@ -48,8 +55,15 @@ const articleLd = {
     <h1 class="h1">{post.data.title}</h1>
     <p class="lead" style="margin-top: 1rem">{post.data.description}</p>
     <p class="scaffold-note" style="margin-top: 0.5rem">
-      {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+      {published}
     </p>
+    {post.data.heroImage && (
+      <img
+        class="post-hero"
+        src={post.data.heroImage}
+        alt={post.data.heroAlt ?? ''}
+      />
+    )}
   </SectionBlock>
 
   <SectionBlock>
@@ -60,7 +74,33 @@ const articleLd = {
 </BaseLayout>
 
 <style>
-  .prose :global(p + p) {
+  .post-hero {
+    width: 100%;
+    height: auto;
+    margin-top: clamp(20px, 3vw, 32px);
+  }
+
+  .prose :global(p + p),
+  .prose :global(ul + p),
+  .prose :global(ol + p) {
     margin-top: 1rem;
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin-top: 0.75rem;
+    padding-left: 1.25rem;
+  }
+
+  .prose :global(ul) {
+    list-style: disc;
+  }
+
+  .prose :global(ol) {
+    list-style: decimal;
+  }
+
+  .prose :global(li + li) {
+    margin-top: 0.35rem;
   }
 </style>
