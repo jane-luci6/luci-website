@@ -1,6 +1,6 @@
 ---
 title: Why variable reduction matters for enterprise AV
-description: Complex environments fail because of what they accumulate — not what they lack.
+description: Complex environments fail from what they accumulate — not what they lack.
 pubDate: 2026-06-16
 personas:
   - leadership

@@ -1,6 +1,6 @@
 ---
 title: Lighting lives with the rest of the A/V
-description: Guests read a room as one environment. LUCI brings lighting into the same interface as displays, audio, and sources.
+description: Guests read a room as one environment. LUCI puts lighting with displays, audio, and sources in one interface.
 pubDate: 2026-07-22
 personas:
   - operations
