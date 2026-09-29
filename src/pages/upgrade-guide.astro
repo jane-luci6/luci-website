@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionBlock from '../components/SectionBlock.astro';
+import UpgradeGuideFeature from '../components/UpgradeGuideFeature.astro';
+import { upgradeGuidePillars, upgradeGuideTechnical } from '../data/upgradeGuide';
+
+const staging = upgradeGuidePillars.flatMap((pillar) => pillar.features).find((feature) => feature.id === 'staging');
+---
+
+<BaseLayout title="Upgrade Guide" description={staging?.oneLiner}>
+  <PageHero title="Upgrade Guide" deep />
+
+  {
+    upgradeGuidePillars.map((pillar) => (
+      <SectionBlock id={pillar.id} kicker={pillar.label} title={pillar.title} tone="deep" wide>
+        {pillar.features.map((feature) => (
+          <UpgradeGuideFeature feature={feature} />
+        ))}
+      </SectionBlock>
+    ))
+  }
+
+  {
+    upgradeGuideTechnical.map((section) => (
+      <SectionBlock id={section.id} kicker="Technical" title={section.title} tone="deep" wide>
+        <ul class="rows">
+          {section.bullets.map((bullet) => (
+            <li>{bullet}</li>
+          ))}
+        </ul>
+      </SectionBlock>
+    ))
+  }
+</BaseLayout>

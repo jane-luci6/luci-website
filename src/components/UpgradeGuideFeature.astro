@@ -1,0 +1,209 @@
+---
+import type { UpgradeGuideFeature } from '../data/upgradeGuide';
+
+interface Props {
+  feature: UpgradeGuideFeature;
+}
+
+const { feature } = Astro.props;
+const scenarios = feature.scenarios ?? [];
+const media = feature.media ?? [];
+---
+
+<details class="ug-feature" id={feature.id} open>
+  <summary class="ug-feature__summary">
+    <h3 class="ug-feature__title">{feature.title}</h3>
+    <span class="ug-feature__one-liner">{feature.oneLiner}</span>
+  </summary>
+  <div class="ug-feature__body">
+    <p class="ug-feature__paragraph">{feature.paragraph}</p>
+    <ul class="ug-benefits">
+      {feature.benefits.map((benefit) => <li>{benefit}</li>)}
+    </ul>
+
+    {
+      scenarios.length > 0 && (
+        <ul class="ug-scenario-grid">
+          {scenarios.map((scenario) => (
+            <li class="ug-scenario-card">
+              <h3 class="ug-scenario-card__title">{scenario.title}</h3>
+              {scenario.paragraphs.map((paragraph) => (
+                <p class="ug-scenario-card__body">{paragraph}</p>
+              ))}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    {
+      media.length > 0 && (
+        <div class="ug-media-grid">
+          {media.map((slot) => (
+            <figure class="ug-media-slot visual-placeholder">
+              {slot.src ? (
+                <img src={slot.src} alt={slot.alt} width="960" height="540" loading="lazy" decoding="async" />
+              ) : (
+                <p class="ug-media-slot__caption">{slot.caption}</p>
+              )}
+              {slot.src && <figcaption class="ug-media-slot__caption">{slot.caption}</figcaption>}
+            </figure>
+          ))}
+        </div>
+      )
+    }
+
+    {
+      feature.technicalId && (
+        <p class="ug-feature__technical">
+          <a href={`#${feature.technicalId}`}>Technical detail</a>
+        </p>
+      )
+    }
+  </div>
+</details>
+
+<style>
+  .ug-feature {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .ug-feature__summary {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: var(--space-3) 0;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .ug-feature__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .ug-feature__summary::after {
+    content: 'Open';
+    align-self: flex-start;
+    margin-top: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--mint);
+  }
+
+  .ug-feature[open] .ug-feature__summary::after {
+    content: 'Close';
+  }
+
+  .ug-feature__title {
+    font-size: clamp(20px, 3vw, 24px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    color: var(--off-white);
+  }
+
+  .ug-feature__one-liner {
+    max-width: 68ch;
+    color: rgba(245, 248, 250, 0.78);
+  }
+
+  .ug-feature__body {
+    padding-bottom: var(--space-4);
+  }
+
+  .ug-feature__paragraph {
+    max-width: 68ch;
+    color: rgba(245, 248, 250, 0.9);
+  }
+
+  .ug-benefits {
+    margin-top: var(--space-3);
+    max-width: 68ch;
+    padding-left: 1.15em;
+    color: rgba(245, 248, 250, 0.88);
+  }
+
+  .ug-benefits li + li {
+    margin-top: 0.4em;
+  }
+
+  .ug-scenario-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+    list-style: none;
+    padding: 0;
+  }
+
+  @media (min-width: 900px) {
+    .ug-scenario-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .ug-scenario-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    background: var(--navy-deep);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 3px solid var(--mint);
+  }
+
+  .ug-scenario-card__title {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--off-white);
+  }
+
+  .ug-scenario-card__body {
+    font-size: 15px;
+    line-height: 1.5;
+    color: rgba(245, 248, 250, 0.78);
+  }
+
+  .ug-media-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+  }
+
+  @media (min-width: 768px) {
+    .ug-media-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .ug-media-slot {
+    margin-top: 0;
+    width: 100%;
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
+
+  .ug-media-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ug-media-slot__caption {
+    max-width: 36ch;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .ug-feature__technical {
+    margin-top: var(--space-3);
+  }
+
+  .ug-feature__technical a {
+    color: var(--mint);
+    font-weight: 600;
+  }
+</style>
