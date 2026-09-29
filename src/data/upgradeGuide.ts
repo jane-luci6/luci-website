@@ -175,8 +175,8 @@ export const upgradeGuide = {
   thesis: {
     heading: 'The only A/V that scales and improves is about to get even better',
     paragraphs: [
+      'We rebuilt LUCI from the ground up around the capabilities, functionality, and performance you asked for—making monitoring, support, and future upgrades easier. You gain more control, with the LUCI team still right there when you need us.',
       'We’ve been building toward this: <strong>a more capable LUCI</strong> with new ways to control rooms, shape the interface, see live status, govern access, and reach support with better context. It’s a major step forward for a platform designed to <strong>scale with your needs</strong> and improve over time.',
-      'This release puts <strong>more day-to-day control</strong> in your hands, giving your property greater autonomy to move faster. When support is needed, the <em>LUCI team stays in the loop</em>—with better context to help keep everything running smoothly.',
     ],
     media: {
       kind: 'placeholder',
@@ -763,7 +763,7 @@ export const upgradeGuide = {
   },
 
   openFlags: [
-    'Past-improvements timeline: Jane is leaning toward skipping it; this draft uses two thesis paragraphs and no timeline.',
+    'Past-improvements timeline: Jane is leaning toward skipping it; thesis opens with Jane’s locked rebuild intro, then the capability paragraph; no timeline.',
     'Live screen view: included from the tuned two-pager, but it is still missing from the feature-list JSON.',
     'Technical detail format: accessible accordions are proposed instead of tabs; CoS should flag the recommendation for Jane.',
     'Access model: still open. Per the September 17 lock, do not create a public stumble-upon self-serve upgrade page; the eventual page may remain unlisted until Jane decides.',
