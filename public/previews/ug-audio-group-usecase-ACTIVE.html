@@ -228,26 +228,17 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 12px 28px;
       margin: 20px 0 0;
-      padding: 0;
-      list-style: none;
+      padding-left: 22px;
     }
 
     .benefits li {
-      position: relative;
-      padding-left: 22px;
+      padding-left: 2px;
       color: var(--body);
       line-height: 1.55;
     }
 
-    .benefits li::before {
-      position: absolute;
-      top: 0.58em;
-      left: 0;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--mint-deep);
-      content: "";
+    .benefits li::marker {
+      color: var(--mint-deep);
     }
 
     @media (max-width: 760px) {
