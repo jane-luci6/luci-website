@@ -42,4 +42,4 @@ LUCI orchestrates all of your A/V from a single interface your team controls fro
 
 Two outcomes matter most here: Your teams get a shared control point instead of resetting systems one by one. Guests get an optimal, branded experience no matter when they enter your property.
 
-[If you want to see a morning reset on a floor like yours, we can walk you through it in a short demo.](/contact)
+If you want to see a morning reset on a floor like yours, we can walk you through it [in a short demo](/contact).
