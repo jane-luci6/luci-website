@@ -248,7 +248,7 @@ export const upgradeGuide = {
           id: 'audit-trails',
           name: 'Audit trails',
           oneLiner:
-            'With audit trails, you can see what a user did and when—plus which device it affected—and whether a person, a preset, or a schedule triggered the change, including changes made outside LUCI when the device reports them. Search by device or user, filter by action type, and export the record when needed.',
+            'With audit trails, you can see what a user did and when—plus which device it affected—and whether a person, a preset, or a schedule triggered the change, including changes made outside LUCI.',
         },
         {
           id: 'live-monitoring',
@@ -488,9 +488,9 @@ export const upgradeGuide = {
       pillarId: 'security-control',
       name: 'Audit trails',
       oneLiner:
-        'With audit trails, you can see what a user did and when—plus which device it affected—and whether a person, a preset, or a schedule triggered the change, including changes made outside LUCI when the device reports them. Search by device or user, filter by action type, and export the record when needed.',
+        'With audit trails, you can see what a user did and when—plus which device it affected—and whether a person, a preset, or a schedule triggered the change, including changes made outside LUCI.',
       paragraph:
-        'Audit trails give you the ability to see what happened on the property, who did it, and when. Every action is recorded against a person and a timestamp, including whether a person, a preset, or a schedule triggered the change—those times are especially useful when you are diagnosing an issue. When a screen is on the wrong game or a zone has been muted, search by device or by user, filter by action type, and export the results as a CSV. Changes made outside LUCI—such as someone using a remote—are noticed and recorded for most third-party device types when the device driver reports them.\n\nThe full set of actions you can take in this feature include:',
+        'Audit trails give you the ability to see what happened on the property, who did it, and when. Every action is recorded against a person and a timestamp, including whether a person, a preset, or a schedule triggered the change—those times are especially useful when you are diagnosing an issue. When a screen is on the wrong game or a zone has been muted, search by device or by user, filter by action type, and export the results as a CSV. Changes made outside LUCI—such as someone using a remote—are noticed and recorded for most third-party device types when the device driver reports them. With this visibility, you can trace what changed and when without guessing.\n\nIn this record, you can:',
       benefits: [
         'Shows what a user did and when, with a timestamp on each action',
         'Records actions against a person and a time',
