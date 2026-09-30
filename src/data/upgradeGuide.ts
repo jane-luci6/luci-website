@@ -29,8 +29,12 @@ type FeatureDraft = {
   scenariosSubsectionLabel?: string;
   scenarios?: readonly FeatureScenario[];
   limits?: readonly string[];
-  /** When set, customer open body shows Technical detail jump to this tech item id */
-  technicalJumpId?: string;
+  /** Optional IT/A/V disclosure. Omit when there is little beyond the customer copy. */
+  howItWorks?: {
+    /** Defaults to "How it works" in the page. */
+    label?: string;
+    details: readonly string[];
+  };
 };
 
 type UpgradeGuideDraft = {
@@ -82,21 +86,6 @@ type UpgradeGuideDraft = {
     featureId: string;
   };
   features: readonly FeatureDraft[];
-  technical: {
-    heading: string;
-    intro: string;
-    groups: readonly {
-      id: string;
-      heading: string;
-      intro: string;
-      items: readonly {
-        id: string;
-        name: string;
-        summary?: string;
-        details: readonly string[];
-      }[];
-    }[];
-  };
   upgradePath: {
     heading: string;
     intro: string;
@@ -326,7 +315,23 @@ export const upgradeGuide = {
         'Use a dedicated wall touchscreen or a paired tablet, iPad, or browser.',
         'Schedule automatic shut-down for venue panels in a selected space.',
       ],
-      technicalJumpId: 'technical-venue-panels',
+      howItWorks: {
+        details: [
+          'Tie a panel to a point in the site hierarchy: site, building, floor, or venue.',
+          'Inherit the endpoints assigned to that venue, then narrow access by control surface rather than by device.',
+          'Load a pared-down interface with no route into the administrative application.',
+          'Return the panel to its paired configuration on every boot.',
+          'Load `/panels` from the property’s LUCI host as the panel boot URL.',
+          'Issue a pairing code for the device or browser; a cookie binds that client to its panel configuration until an administrator revokes the pairing.',
+          'Revoke a pairing and issue a new code when a panel is moved or replaced.',
+          'Make the PIN optional, with idle lock and timeout settings for PIN-protected panels and tap-to-wake behavior for open panels.',
+          'Configure control-surface visibility per endpoint and restrict sources with allow-lists or favorites.',
+          'Use dedicated wall panels, including Rock Panel–class devices, or pair a browser or iPad.',
+          'Review paired-device telemetry including last seen, last command, lock state, and platform.',
+          'Edit the endpoint set after creation, including adding or changing endpoints beyond the automatically inherited set.',
+          'Deploy panels primarily for one room, or sometimes a couple of rooms, rather than using one panel for the whole site.',
+        ],
+      },
     },
     {
       id: 'staging',
@@ -347,6 +352,15 @@ export const upgradeGuide = {
         kind: 'placeholder',
         label: 'Staging roster and apply action — screenshot placeholder',
       },
+      howItWorks: {
+        details: [
+          'Treat a staged set, preset, and scheduled preset as the same command set at different stages: optionally named and optionally timed.',
+          'Review, clear, or edit the staged roster item by item before commands are sent.',
+          'Seed a staged set from the room’s current state.',
+          'Review differences against saved values before committing a preset edit.',
+          'Apply a control-engine lockout window to a scheduled preset, with a visible device indicator and administrator override.',
+        ],
+      },
     },
     {
       id: 'audio-group-control',
@@ -365,6 +379,13 @@ export const upgradeGuide = {
       media: {
         kind: 'placeholder',
         label: 'Audio group controls — screenshot placeholder',
+      },
+      howItWorks: {
+        details: [
+          'Move several zones proportionally so their tuned balance survives.',
+          'Set every selected zone to the same level.',
+          'Move one zone independently.',
+        ],
       },
     },
     {
@@ -386,6 +407,14 @@ export const upgradeGuide = {
         kind: 'placeholder',
         label: 'Customized LUCI interface — screenshot placeholder',
       },
+      howItWorks: {
+        details: [
+          'Sign-in and splash screens are the surfaces that carry property photography and marks.',
+          'Curated themes set light or dark mode, background treatments, and typography.',
+          'Background treatments (backsplashes) are adjusted with blur, opacity, and position.',
+          'Endpoint status colors apply across the install so the same state reads the same way.',
+        ],
+      },
     },
     {
       id: 'live-map-flexibility',
@@ -404,6 +433,13 @@ export const upgradeGuide = {
       media: {
         kind: 'placeholder',
         label: 'Live property map — screenshot placeholder',
+      },
+      howItWorks: {
+        details: [
+          'Load the property’s own floor plans instead of a generic layout.',
+          'Rotate and orient each map so it matches the physical space and the operator’s view.',
+          'Keep the map connected to device state, so the familiar view is also the surface used to see what is happening.',
+        ],
       },
     },
     {
@@ -442,6 +478,14 @@ export const upgradeGuide = {
         kind: 'placeholder',
         label: 'Live screen view on iPad — screenshot placeholder',
       },
+      howItWorks: {
+        details: [
+          'Pull wall layouts and window assignments from the video wall processor.',
+          'Preserve per-pixel geometry instead of rebuilding layouts by hand.',
+          'Assign multi-window templates to a player and change them live.',
+          'From an iPad or any browser device, select a TV or LED wall and see the feed as it appears live.',
+        ],
+      },
     },
     {
       id: 'audit-trails',
@@ -461,6 +505,13 @@ export const upgradeGuide = {
       media: {
         kind: 'placeholder',
         label: 'Searchable audit trail — screenshot placeholder',
+      },
+      howItWorks: {
+        details: [
+          'Group device commands by the event that triggered them: a user, preset, or schedule.',
+          'Record administrative actions alongside device commands.',
+          'Surface out-of-band changes when the device driver reports them.',
+        ],
       },
     },
     {
@@ -482,6 +533,15 @@ export const upgradeGuide = {
         kind: 'placeholder',
         label: 'Live monitoring view — screenshot placeholder',
       },
+      howItWorks: {
+        details: [
+          'Open an incident when a device stops responding and close it when the device recovers.',
+          'Review incident duration from the time the device stops responding until it returns.',
+          'Filter the view by venue, device type, or status.',
+          'Keep incidents distinct from support tickets. A person chooses what to escalate, and the ticket carries the relevant context and logs.',
+          'When something on the property goes down, the LUCI team gets an alert so they can jump on it right away.',
+        ],
+      },
     },
     {
       id: 'sign-in-session-control',
@@ -501,6 +561,16 @@ export const upgradeGuide = {
       media: {
         kind: 'placeholder',
         label: 'Identity and active-session controls — screenshot placeholder',
+      },
+      howItWorks: {
+        details: [
+          'Use a standard Microsoft Entra ID app registration with a callback to the property’s LUCI server.',
+          'Create a profile on first sign-in and assign a PIN for floor use when needed.',
+          'Terminate active sessions and communicate through a site-wide banner.',
+          'Consolidate outbound destinations into one encrypted connection between the on-property system and LUCI.',
+          'Rotate keys on a schedule instead of leaving credentials unrotated on the local machine.',
+          'Give IT one paired outbound connection to review, with no standing inbound access to the property network.',
+        ],
       },
     },
     {
@@ -522,154 +592,17 @@ export const upgradeGuide = {
         kind: 'placeholder',
         label: 'In-product support request flow — screenshot placeholder',
       },
+      howItWorks: {
+        details: [
+          'Aim debug-level logging at one endpoint, driver, or module for a defined window.',
+          'Capture a short reproduction window instead of increasing logging across the system.',
+          'Review the output on site or send it to LUCI with a support request.',
+          'The property chooses what to escalate; the request carries the relevant context and logs.',
+        ],
+      },
     },
   ],
 
-  technical: {
-    heading: 'Technical detail',
-    intro:
-      'A deeper view for the IT or A/V lead: how LUCI manages endpoints, layouts, identity, diagnostics, and property connections behind the release features.',
-    groups: [
-      {
-        id: 'platform-capabilities',
-        heading: 'Platform capabilities',
-        intro:
-          'Technical capabilities that support the platform without carrying one of the three release-pillar arguments.',
-        items: [
-          {
-            id: 'technical-audio-group-control',
-            name: 'Audio group control',
-            summary:
-              'Move several zones proportionally, set every zone to the same level, or move one alone.',
-            details: [
-              'Move several zones proportionally so their tuned balance survives.',
-              'Set every selected zone to the same level.',
-              'Move one zone independently.',
-            ],
-          },
-          {
-            id: 'add-any-endpoint',
-            name: 'Add any endpoint from LUCI',
-            summary:
-              'Every device type added through the interface — one at a time or twenty at once.',
-            details: [
-              'Add every device type through the LUCI interface.',
-              'Add one endpoint from the map or create a batch with incrementing addresses.',
-              'Receive a warning when an endpoint record already exists.',
-            ],
-          },
-          {
-            id: 'video-wall-layout-sync',
-            name: 'Video wall layout sync',
-            summary:
-              'Wall layouts pulled from the processor with per-pixel geometry, not rebuilt by hand.',
-            details: [
-              'Pull wall layouts and window assignments from the video wall processor.',
-              'Preserve per-pixel geometry instead of rebuilding layouts by hand.',
-              'Assign multi-window templates to a player and change them live.',
-            ],
-          },
-          {
-            id: 'central-display-model-catalog',
-            name: 'Central display model catalog',
-            summary:
-              'New display models added centrally and pushed to the property — no on-site configuration edits.',
-            details: [
-              'Add new hospitality display models centrally.',
-              'Push model support to the property.',
-              'Avoid editing configuration files on site when a new model is purchased.',
-            ],
-          },
-        ],
-      },
-      {
-        id: 'it-av-detail',
-        heading: 'IT and A/V detail',
-        intro:
-          'The implementation detail behind the pillar features, identity controls, property connection, and diagnostics.',
-        items: [
-          {
-            id: 'technical-venue-panels',
-            name: 'Venue panels',
-            summary:
-              'Pair each in-venue panel to a hierarchy location so it boots into a locked-down control surface for that space’s endpoints.',
-            details: [
-              'Tie a panel to a point in the site hierarchy: site, building, floor, or venue.',
-              'Inherit the endpoints assigned to that venue, then narrow access by control surface rather than by device.',
-              'Load a pared-down interface with no route into the administrative application.',
-              'Return the panel to its paired configuration on every boot.',
-              'Load `/panels` from the property’s LUCI host as the panel boot URL.',
-              'Issue a pairing code for the device or browser; a cookie binds that client to its panel configuration until an administrator revokes the pairing.',
-              'Revoke a pairing and issue a new code when a panel is moved or replaced.',
-              'Make the PIN optional, with idle lock and timeout settings for PIN-protected panels and tap-to-wake behavior for open panels.',
-              'Configure control-surface visibility per endpoint and restrict sources with allow-lists or favorites.',
-              'Use dedicated wall panels, including Rock Panel–class devices, or pair a browser or iPad.',
-              'Review paired-device telemetry including last seen, last command, lock state, and platform.',
-              'Edit the endpoint set after creation, including adding or changing endpoints beyond the automatically inherited set.',
-              'Deploy panels primarily for one room, or sometimes a couple of rooms, rather than using one panel for the whole site.',
-            ],
-          },
-          {
-            id: 'technical-staging-presets-schedules',
-            name: 'Staging, presets, and schedules',
-            details: [
-              'Treat a staged set, preset, and scheduled preset as the same command set at different stages: optionally named and optionally timed.',
-              'Review, clear, or edit the staged roster item by item before commands are sent.',
-              'Seed a staged set from the room’s current state.',
-              'Review differences against saved values before committing a preset edit.',
-              'Apply a control-engine lockout window to a scheduled preset, with a visible device indicator and administrator override.',
-            ],
-          },
-          {
-            id: 'technical-audit-incidents-support',
-            name: 'Audit trails, incidents, and support',
-            details: [
-              'Group device commands by the event that triggered them: a user, preset, or schedule.',
-              'Record administrative actions alongside device commands.',
-              'Surface out-of-band changes when the device driver reports them.',
-              'Open an incident when a device stops responding and close it when the device recovers.',
-              'Keep incidents distinct from support tickets; a person chooses what to escalate, and the ticket carries the relevant context and logs.',
-            ],
-          },
-          {
-            id: 'endpoint-management',
-            name: 'Endpoint management',
-            details: [
-              'Create all device types through the interface, including LUCI-supplied hardware.',
-              'Use bulk creation, incrementing addresses, and duplicate detection.',
-            ],
-          },
-          {
-            id: 'identity-sessions',
-            name: 'Identity and sessions',
-            details: [
-              'Use a standard Microsoft Entra ID app registration with a callback to the property’s LUCI server.',
-              'Create a profile on first sign-in and assign a PIN for floor use when needed.',
-              'Terminate active sessions and communicate through a site-wide banner.',
-            ],
-          },
-          {
-            id: 'private-tunnel',
-            name: 'Private tunnel',
-            details: [
-              'Consolidate outbound destinations into one encrypted connection between the on-property system and LUCI.',
-              'Rotate keys on a schedule instead of leaving credentials unrotated on the local machine.',
-              'Give IT one paired outbound connection to review, with no standing inbound access to the property network.',
-            ],
-          },
-          {
-            id: 'scoped-diagnostic-capture',
-            name: 'Scoped diagnostic capture',
-            details: [
-              'Aim debug-level logging at one endpoint, driver, or module for a defined window.',
-              'Capture a short reproduction window instead of increasing logging across the system.',
-              'Review the output on site or send it to LUCI with a support request.',
-            ],
-          },
-        ],
-      },
-    ],
-  },
 
   upgradePath: {
     heading: 'Your path to the new LUCI',
@@ -783,7 +716,7 @@ export const upgradeGuide = {
   openFlags: [
     'Past-improvements timeline: Jane is leaning toward skipping it; thesis opens with Jane’s locked rebuild intro, then the capability paragraph; no timeline.',
     'Live screen view: included from the tuned two-pager, but it is still missing from the feature-list JSON.',
-    'Technical detail format: accessible accordions are proposed instead of tabs; CoS should flag the recommendation for Jane.',
+    'Technical detail: folded into each feature as an optional How it works accordion (2026-09-30). Standalone Technical section and nav entry removed. Platform items without a feature home (add any endpoint, endpoint management, central display model catalog) are omitted from the Guide for now.',
     'Access model: still open. Per the September 17 lock, do not create a public stumble-upon self-serve upgrade page; the eventual page may remain unlisted until Jane decides.',
   ],
 } as const satisfies UpgradeGuideDraft;

@@ -36,7 +36,6 @@ const {
   pillars,
   supportSpotlight,
   features,
-  technical,
   upgradePath: upgradePathLive,
   faq,
   cta,
@@ -74,7 +73,6 @@ const duoLockups = {
   thesis: 'The only A/V that scales and improves <em>is about to get even better</em>',
   pillars: 'What the release puts <em>in your hands</em>',
   features: 'Feature <em>deep-dive</em>',
-  technical: 'Technical <em>detail</em>',
   upgrade: 'Your path to the <em>new LUCI</em>',
   faq: 'Questions',
   cta: 'The <em>new version</em> of LUCI',
@@ -377,11 +375,6 @@ const duoLockups = {
                             </ul>
                           </section>
                         )}
-                        {f.technicalJumpId && (
-                          <a class="ug-feature-itlink" href={`/luci-upgrade-guide/#ug-tech-item-${f.technicalJumpId}`}>
-                            Technical detail &rarr;
-                          </a>
-                        )}
                       </div>
                     ) : (
                       <>
@@ -390,6 +383,16 @@ const duoLockups = {
                           {f.benefits.map((b) => (<li>{b}</li>))}
                         </ul>
                       </>
+                    )}
+                    {f.howItWorks && f.howItWorks.details.length > 0 && (
+                      <details class="ug-faq__item ug-how" id={`ug-energy-how-${f.id}`}>
+                        <summary class="ug-faq__q">{f.howItWorks.label ?? 'How it works'}</summary>
+                        <ul class="ug-how__list" role="list">
+                          {f.howItWorks.details.map((d) => (
+                            <li>{d}</li>
+                          ))}
+                        </ul>
+                      </details>
                     )}
                   </div>
                 </article>
@@ -400,40 +403,7 @@ const duoLockups = {
       </div>
     </SectionBlock>
 
-    {/* ───────── 6. TECHNICAL DETAIL ───────── */}
-    <SectionBlock
-      id="ug-energy-technical"
-      lockupName={duoLockups.technical}
-      lockupRole="For the IT or A/V lead"
-      tone="light"
-      wide
-    >
-      <p class="ug-thesis">{technical.intro}</p>
-      <div class="ug-technical">
-        {technical.groups.map((group) => (
-          <div class="ug-tech-group" id={`ug-energy-tech-${group.id}`}>
-            <h3 class="ug-tech-group__title">{group.heading}</h3>
-            <p class="ug-tech-group__intro">{group.intro}</p>
-            <div class="ug-tech-items">
-              {group.items.map((item) => (
-                <details class="ug-tech-item" id={`ug-energy-tech-item-${item.id}`}>
-                  <summary class="ug-tech-item__summary">
-                    <span class="ug-tech-item__name">{item.name}</span>
-                    {item.summary && <span class="ug-tech-item__summary-text">{item.summary}</span>}
-                    <span class="ug-feature__chev" aria-hidden="true"></span>
-                  </summary>
-                  <ul class="ug-tech-item__details" role="list">
-                    {item.details.map((d) => (<li>{d}</li>))}
-                  </ul>
-                </details>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </SectionBlock>
-
-    {/* ───────── 7. UPGRADE PATH ───────── */}
+    {/* ───────── 6. UPGRADE PATH ───────── */}
     <SectionBlock
       id="ug-energy-upgrade"
       lockupName={duoLockups.upgrade}
@@ -1673,6 +1643,40 @@ const duoLockups = {
   .ug-feature-itlink:hover { text-decoration: underline; }
   .ug-feature-itlink:focus-visible { outline: 2px solid var(--accent-light); outline-offset: 3px; }
   .ug-feature-media { display: none; }
+  .ug-how.ug-faq__item {
+    border-top: 1px solid var(--rule-light);
+    margin-top: 4px;
+    max-width: 720px;
+  }
+  @media (min-width: 720px) {
+    .ug-feature__body > .ug-how { grid-column: 2; }
+  }
+  .ug-how__list {
+    list-style: none;
+    margin: 0 0 clamp(18px, 2.4vw, 24px);
+    padding: 0;
+    display: grid;
+    gap: 8px;
+    max-width: 64ch;
+  }
+  .ug-how__list li {
+    position: relative;
+    padding-left: 18px;
+    font-family: var(--font-body);
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+  .ug-how__list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 7px;
+    height: 7px;
+    border-radius: 9999px;
+    background: var(--accent-light);
+  }
   /* ---------- 6. TECHNICAL DETAIL ---------- */
   .ug-technical {
     display: flex;
