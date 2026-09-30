@@ -243,7 +243,7 @@ export const upgradeGuide = {
           id: 'live-monitoring',
           name: 'Live monitoring',
           oneLiner:
-            'With live monitoring, issues are caught in the background as they happen—so you know right away, LUCI is looped in immediately, and a support request can open with the context attached.',
+            'With live monitoring, issues are caught in the background and show up in LUCI—on the map and in system health—so you can see what needs attention, LUCI can see it on the Hub, and you can open a support request with the context attached when you choose.',
         },
         {
           id: 'sign-in-session-control',
@@ -587,13 +587,14 @@ export const upgradeGuide = {
       pillarId: 'security-control',
       name: 'Live monitoring',
       oneLiner:
-        'With live monitoring, issues are caught in the background as they happen—so you know right away, LUCI is looped in immediately, and a support request can open with the context attached.',
+        'With live monitoring, issues are caught in the background and show up in LUCI—on the map and in system health—so you can see what needs attention, LUCI can see it on the Hub, and you can open a support request with the context attached when you choose.',
       paragraph:
-        'Live monitoring gives you the ability to catch issues as they happen—without waiting for someone to notice. It runs in the background and detects when something goes wrong on the property, then brings that problem to your attention and to LUCI\'s. When help is needed, a support request can open with the incident context already attached. With this in place, you get immediate knowledge of issues and a clear path to get them handled.\n\nLive monitoring brings you:',
+        'Live monitoring gives you the ability to catch issues as they happen—without waiting for someone to walk the floor and notice. It runs in the background and opens an incident when a device becomes uncontactable or unhealthy, then closes it when the device recovers so you can see how long the fault lasted. Those incidents show up in system health and as status on the map. The same picture is visible to LUCI on the Hub so the team can act alongside you. When you need help, you choose what to escalate—a support request can carry the incident context and relevant logs.\n\nLive monitoring brings you:',
       benefits: [
-        'Immediate knowledge when something goes wrong',
-        'LUCI looped in as soon as an issue is detected',
-        'A support request with the context already attached',
+        'Incidents that open and close in the background as devices fail and recover',
+        'Visibility in system health and on the map—not a separate email or popup alert',
+        'LUCI seeing the same issues on the Hub so they can jump in',
+        'A support request with context attached when you choose to escalate',
       ],
       media: {
         kind: 'placeholder',
