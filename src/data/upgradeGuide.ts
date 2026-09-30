@@ -634,11 +634,11 @@ export const upgradeGuide = {
       paragraph:
         'Sign-in and session control gives you the ability to manage how people enter LUCI and what happens while they are signed in. When you set up access, choose email, PIN, or Microsoft Entra ID so users sign in with the method that fits how they work—including Microsoft work credentials through Entra ID when IT wants federated sign-in. A profile can be created on first Entra sign-in, and a PIN can be assigned for floor use when that person should authenticate without leaving the floor workflow. During an active session, see who is signed in, end a session when someone should no longer be in the system, or post a site-wide message that appears as a banner to signed-in users. With this control, you decide who may enter, who is active right now, and how you reach everyone using LUCI.\n\nSign-in and session control lets you:',
       benefits: [
-        'Access by email, PIN, or Microsoft Entra ID',
-        'A view of who is active in LUCI right now',
-        'Ending an active session when an administrator needs someone signed out',
-        'A site-wide message banner to signed-in users',
-        'Outbound connections consolidated through a private tunnel',
+        'Sign in by email, PIN, or Microsoft Entra ID',
+        'See who is active in LUCI right now',
+        'End an active session when someone should be signed out',
+        'Post a site-wide message banner to signed-in users',
+        'Consolidate outbound connections through a private tunnel',
       ],
       media: {
         kind: 'placeholder',
