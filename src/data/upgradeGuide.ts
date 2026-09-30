@@ -595,19 +595,6 @@ export const upgradeGuide = {
         'LUCI looped in as soon as an issue is detected',
         'A support request with the context already attached',
       ],
-      scenariosSubsectionLabel: 'Use cases on your property',
-      scenarios: [
-        {
-          id: 'display-goes-dark',
-          label: 'A display goes dark',
-          line: 'A sportsbook screen or zone stops responding mid-shift. Live monitoring opens an incident in the background so you know right away—and LUCI is looped in—without waiting for someone to walk the floor and notice.',
-        },
-        {
-          id: 'escalate-with-context',
-          label: 'Escalate with context',
-          line: 'When the fault needs LUCI’s help, open a support request from the incident so the context and relevant logs are already attached. You decide what to escalate; the ticket is not automatic.',
-        },
-      ],
       media: {
         kind: 'placeholder',
         label: 'Live monitoring view — screenshot placeholder',
