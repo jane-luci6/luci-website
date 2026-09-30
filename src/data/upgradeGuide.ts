@@ -596,6 +596,19 @@ export const upgradeGuide = {
         'LUCI seeing the same issues on the Hub so they can jump in',
         'A support request with context attached when you choose to escalate',
       ],
+      scenariosSubsectionLabel: 'Use cases on your property',
+      scenarios: [
+        {
+          id: 'see-it-handle-it',
+          label: 'See it, handle it yourself',
+          line: 'A display drops offline and an incident opens in system health. You spot it on the map, bring the device back, and the incident closes—no ticket, because you chose to handle it on property.',
+        },
+        {
+          id: 'choose-to-escalate',
+          label: 'Choose to talk to support',
+          line: 'The same kind of incident won’t clear. From the incident, you start a support request so LUCI gets the context and logs—you decide to escalate; the ticket is not opened automatically.',
+        },
+      ],
       media: {
         kind: 'placeholder',
         label: 'Live monitoring view — screenshot placeholder',
