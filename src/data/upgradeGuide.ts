@@ -432,10 +432,12 @@ export const upgradeGuide = {
         'Load your own floor plans',
         'Rotate and orient maps to match how you look at the space',
         'Zoom so label and icon detail fits the floor’s density',
+        'Move endpoint labels so they don’t overlap what you need to see',
         'Set when endpoints, spaces, floors, and buildings appear on the map',
         'See live device state through a live connection',
         'Find a device by name and jump to it on the map',
-        'Scale, pan, and save map viewports',
+        'Scale and pan the map',
+        'Lock a viewpoint for a place so it opens oriented correctly on login (e.g. bartender at the bar)',
       ],
       media: {
         kind: 'placeholder',
