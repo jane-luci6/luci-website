@@ -14,6 +14,8 @@ const { meta, hero, thesis, pillars, supportSpotlight, features, upgradePath, fa
   upgradeGuide;
 
 const featuresByPillar = (pillarId: string) => features.filter((f) => f.pillarId === pillarId);
+const pillarShortName = (id: string) =>
+  ({ 'room-control': 'Room control', 'view-control': 'View control', 'security-control': 'Security control' })[id] ?? id;
 
 /** Duo-color accent spans for section lockups (same words; brochure-style emphasis).
  *  Accent phrase wraps only — no body-copy rewrite. Hero left untouched. */
@@ -181,14 +183,24 @@ const duoLockups = {
     tone="light"
     wide
   >
+    <div class="ug-pillar-index">
+      {pillars.map((p) => (
+        <a class="ug-pillar-index__card" href={`#ug-pillar-${p.id}`}>
+          <span class="ug-pillar-index__num">{p.number}</span>
+          <h3 class="ug-pillar-index__name">{p.name}</h3>
+          <p class="ug-pillar-index__summary">{p.summary}</p>
+        </a>
+      ))}
+    </div>
     <div class="ug-deepdive">
       {pillars.map((pillar) => (
         <div class="ug-pillar-group" id={`ug-pillar-${pillar.id}`}>
           <div class="ug-pillar-group__head">
-            <h3 class="ug-pillar-group__title">
-              <span class="ug-pillar-group__num">{pillar.number}</span>
-              {pillar.name}
-            </h3>
+            <p class="ug-pillar-group__kicker">
+              <span class="ug-pillar-group__kicker-num">{pillar.number}</span>
+              <span class="ug-pillar-group__kicker-rule" aria-hidden="true"></span>
+              <span class="ug-pillar-group__kicker-name">{pillarShortName(pillar.id)}</span>
+            </p>
           </div>
           <div class="ug-features">
             {featuresByPillar(pillar.id).map((f) => (
@@ -861,6 +873,55 @@ const duoLockups = {
      holds name + liner + benefits; right column holds prose, scenarios,
      limits, and how-it-works. Venue panels gets a full-width wide header
      above the rail. Brand tokens only. */
+  /* ── Pillar index — three-up theme overview at the top of the deep-dive. */
+  .ug-pillar-index {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(16px, 2vw, 24px);
+    max-width: var(--content-wide);
+    margin-bottom: clamp(32px, 4vw, 56px);
+  }
+  @media (min-width: 900px) {
+    .ug-pillar-index { grid-template-columns: repeat(3, 1fr); }
+  }
+  .ug-pillar-index__card {
+    display: block;
+    padding: clamp(20px, 2.5vw, 28px);
+    border-top: 2px solid var(--accent-light);
+    background: transparent;
+    text-decoration: none;
+    transition: background 0.18s ease;
+  }
+  .ug-pillar-index__card:hover { background: rgba(var(--mint-rgb), 0.05); }
+  .ug-pillar-index__card:focus-visible {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 2px;
+  }
+  .ug-pillar-index__num {
+    display: block;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(28px, 3vw, 36px);
+    line-height: 1;
+    color: var(--accent-light);
+  }
+  .ug-pillar-index__name {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(18px, 2vw, 22px);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    color: var(--ink-strong);
+    margin: 12px 0 0;
+  }
+  .ug-pillar-index__summary {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--navy-muted);
+    margin: 10px 0 0;
+  }
+
   .ug-deepdive {
     display: flex;
     flex-direction: column;
@@ -868,40 +929,32 @@ const duoLockups = {
     max-width: var(--content-wide);
     margin-top: var(--space-2);
   }
+  /* Demoted group head — quiet tracked-uppercase kicker, not a statement band. */
   .ug-pillar-group__head {
-    position: relative;
-    display: flex;
-    align-items: baseline;
-    gap: 16px;
-    margin-bottom: 0;
-    padding-bottom: 14px;
     border-bottom: 1px solid var(--rule-light);
-    overflow: visible;
+    padding-bottom: 12px;
+    margin-bottom: 0;
   }
-  .ug-pillar-group__title {
-    position: relative;
-    z-index: 1;
-    font-family: var(--font-head);
-    font-size: clamp(24px, 3vw, 32px);
-    font-weight: 700;
-    letter-spacing: -0.015em;
-    color: var(--ink-strong);
+  .ug-pillar-group__kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     margin: 0;
-  }
-  .ug-pillar-group__num {
-    position: absolute;
-    top: -8px;
-    right: -4px;
     font-family: var(--font-head);
-    font-size: 80px;
     font-weight: 700;
-    color: #10232d0d;
-    line-height: 1;
-    letter-spacing: -3px;
-    pointer-events: none;
-    user-select: none;
-    z-index: 0;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-light);
   }
+  .ug-pillar-group__kicker-num { line-height: 1; }
+  .ug-pillar-group__kicker-rule {
+    display: inline-block;
+    width: 28px;
+    height: 2px;
+    background: var(--accent-light);
+  }
+  .ug-pillar-group__kicker-name { color: var(--ink-strong); }
   .ug-expand-toggle {
     background: transparent;
     border: 1px solid rgba(43, 158, 128, 0.4);
