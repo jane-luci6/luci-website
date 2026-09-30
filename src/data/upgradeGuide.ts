@@ -249,7 +249,7 @@ export const upgradeGuide = {
           id: 'sign-in-session-control',
           name: 'Sign-in & session control',
           oneLiner:
-            'With sign-in and session control, you can give users access by email, PIN, or Microsoft Entra ID. See who is active, end a session, or post a message to everyone using LUCI.',
+            'With sign-in and session control, you can give users access by email, PIN, or Microsoft Entra ID. See who is active, end a session when you need to, or post a message to everyone using LUCI.',
         },
       ],
     },
@@ -630,28 +630,41 @@ export const upgradeGuide = {
       pillarId: 'security-control',
       name: 'Sign-in & session control',
       oneLiner:
-        'With sign-in and session control, you can give users access by email, PIN, or Microsoft Entra ID. See who is active, end a session, or post a message to everyone using LUCI.',
+        'With sign-in and session control, you can give users access by email, PIN, or Microsoft Entra ID. See who is active, end a session when you need to, or post a message to everyone using LUCI.',
       paragraph:
-        'Sign-in and session control gives you the ability to manage how users enter LUCI and what happens during an active session. When you set up access, choose email, PIN, or Microsoft Entra ID. If you need to manage current use, see who is active, end a session, or post a message to everyone using LUCI.',
+        'Sign-in and session control gives you the ability to manage how people enter LUCI and what happens while they are signed in. When you set up access, choose email, PIN, or Microsoft Entra ID so users sign in with the method that fits how they work—including Microsoft work credentials through Entra ID when IT wants federated sign-in. A profile can be created on first Entra sign-in, and a PIN can be assigned for floor use when that person should authenticate without leaving the floor workflow. During an active session, see who is signed in, end a session when someone should no longer be in the system, or post a site-wide message that appears as a banner to signed-in users. With this control, you decide who may enter, who is active right now, and how you reach everyone using LUCI.\n\nSign-in and session control lets you:',
       benefits: [
-        'Supports email, PIN, and Microsoft Entra ID sign-in',
-        'Shows who is active in the platform',
-        'Lets administrators terminate active sessions',
-        'Posts a site-wide message to signed-in users',
-        'Consolidates outbound connections through a private tunnel',
+        'Access by email, PIN, or Microsoft Entra ID',
+        'A view of who is active in LUCI right now',
+        'Ending an active session when an administrator needs someone signed out',
+        'A site-wide message banner to signed-in users',
+        'Outbound connections consolidated through a private tunnel',
       ],
       media: {
         kind: 'placeholder',
         label: 'Identity and active-session controls — screenshot placeholder',
       },
+      scenariosSubsectionLabel: 'Use cases on your property',
+      scenarios: [
+        {
+          id: 'sign-someone-out',
+          label: 'Sign someone out',
+          line: 'An administrator sees an active session that should not continue. They end that session so the person is signed out of LUCI—without waiting for them to leave on their own.',
+        },
+        {
+          id: 'message-everyone',
+          label: 'Message everyone using LUCI',
+          line: 'When everyone signed in needs the same notice, post a site-wide message. It appears as a banner so people using LUCI see it in the product.',
+        },
+      ],
       howItWorks: {
         details: [
           'Use a standard Microsoft Entra ID app registration with a callback to the property’s LUCI server.',
-          'Create a profile on first sign-in and assign a PIN for floor use when needed.',
-          'Terminate active sessions and communicate through a site-wide banner.',
-          'Consolidate outbound destinations into one encrypted connection between the on-property system and LUCI.',
-          'Rotate keys on a schedule instead of leaving credentials unrotated on the local machine.',
-          'Give IT one paired outbound connection to review, with no standing inbound access to the property network.',
+          'Create a profile on first Entra / Microsoft sign-in; assign a PIN for floor use when needed.',
+          'Email and PIN identify a user as separate sign-in methods; Entra can create the profile that a floor PIN may later use.',
+          'Review active sessions (signed in / offline) and terminate a session when required.',
+          'Communicate to signed-in users through a site-wide banner.',
+          'Consolidate outbound destinations through one encrypted private tunnel between the on-property system and LUCI—one paired connection for IT to review, with scheduled key rotation and no standing inbound access.',
         ],
       },
     },
