@@ -516,6 +516,7 @@ export const upgradeGuide = {
           line: 'Filter the actions you care about and download a CSV that shows who did what and when—useful when ops needs a report, or when you need a clear record to share with LUCI for diagnosis.',
         },
       ],
+      technicalJumpId: 'technical-audit-trails',
       media: {
         kind: 'placeholder',
         label: 'Searchable audit trail — screenshot placeholder',
@@ -535,6 +536,7 @@ export const upgradeGuide = {
         'LUCI looped in as soon as an issue is detected',
         'A support request with the context already attached',
       ],
+      technicalJumpId: 'technical-live-monitoring',
       media: {
         kind: 'placeholder',
         label: 'Live monitoring view — screenshot placeholder',
@@ -684,14 +686,32 @@ export const upgradeGuide = {
             ],
           },
           {
-            id: 'technical-audit-incidents-support',
-            name: 'Audit trails, incidents, and support',
+            id: 'technical-audit-trails',
+            name: 'Audit trails',
+            summary:
+              'Searchable record of who did what and when—including out-of-band changes when the driver reports them—filterable and exportable as CSV.',
             details: [
               'Group device commands by the event that triggered them: a user, preset, or schedule.',
               'Record administrative actions alongside device commands.',
-              'Surface out-of-band changes when the device driver reports them.',
-              'Open an incident when a device stops responding and close it when the device recovers.',
-              'Keep incidents distinct from support tickets; a person chooses what to escalate, and the ticket carries the relevant context and logs.',
+              'Attach a timestamp to each action so operators can diagnose issues by time.',
+              'Search and filter the record by device, user, or action type.',
+              'Export the filtered record as a CSV download.',
+              'Surface out-of-band changes for most third-party device types when the device driver reports them.',
+            ],
+          },
+          {
+            id: 'technical-live-monitoring',
+            name: 'Live monitoring',
+            summary:
+              'Background detection opens and closes incidents with measurable duration, surfaces what needs attention, loops LUCI in, and can attach context to a support request.',
+            details: [
+              'Run monitoring in the background so unhealthy or uncontactable devices are detected without waiting for someone to notice.',
+              'Open an incident automatically when a device stops responding; close it when the device recovers.',
+              'Record how long the fault lasted (measured duration between open and close).',
+              'Filter and sort system-health views by venue, device type, or status to surface what needs attention.',
+              'Keep incidents distinct from support tickets—an incident is not a ticket by itself.',
+              'Loop LUCI in when an issue is detected so the team can act alongside the property.',
+              'Let a person choose what to escalate; a support request can carry the incident context and relevant logs.',
             ],
           },
           {
