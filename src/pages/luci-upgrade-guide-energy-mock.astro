@@ -389,6 +389,11 @@ const duoLockups = {
                         <ul class="ug-feature__benefits" role="list">
                           {f.benefits.map((b) => (<li>{b}</li>))}
                         </ul>
+                        {f.technicalJumpId && (
+                          <a class="ug-feature-itlink" href={`/luci-upgrade-guide/#ug-tech-item-${f.technicalJumpId}`}>
+                            Technical detail &rarr;
+                          </a>
+                        )}
                       </>
                     )}
                   </div>
@@ -1521,7 +1526,7 @@ const duoLockups = {
       padding: 16px 0 28px;
       align-items: start;
     }
-    .ug-feature__paragraph, .ug-feature__benefits { grid-column: 2; }
+    .ug-feature__paragraph, .ug-feature__benefits, .ug-feature__body > .ug-feature-itlink { grid-column: 2; }
   }
   .ug-feature--open .ug-feature__body { display: block; padding-top: 0; }
   .ug-feature__paragraph {

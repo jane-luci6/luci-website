@@ -462,6 +462,7 @@ export const upgradeGuide = {
         kind: 'placeholder',
         label: 'Searchable audit trail — screenshot placeholder',
       },
+      technicalJumpId: 'technical-audit-trails',
     },
     {
       id: 'live-monitoring',
@@ -482,6 +483,7 @@ export const upgradeGuide = {
         kind: 'placeholder',
         label: 'Live monitoring view — screenshot placeholder',
       },
+      technicalJumpId: 'technical-live-monitoring',
     },
     {
       id: 'sign-in-session-control',
@@ -621,14 +623,26 @@ export const upgradeGuide = {
             ],
           },
           {
-            id: 'technical-audit-incidents-support',
-            name: 'Audit trails, incidents, and support',
+            id: 'technical-audit-trails',
+            name: 'Audit trails',
             details: [
               'Group device commands by the event that triggered them: a user, preset, or schedule.',
               'Record administrative actions alongside device commands.',
               'Surface out-of-band changes when the device driver reports them.',
-              'Open an incident when a device stops responding and close it when the device recovers.',
-              'Keep incidents distinct from support tickets; a person chooses what to escalate, and the ticket carries the relevant context and logs.',
+              'Search the record by device or user and filter by action type.',
+              'Export the results as a CSV.',
+            ],
+          },
+          {
+            id: 'technical-live-monitoring',
+            name: 'Live monitoring',
+            details: [
+              'Show the current state of devices, displays, and audio zones, including what is on, what is off, and what has a fault.',
+              'Filter the view by venue, device type, or status.',
+              'Open an incident when a device stops responding and close it when the device recovers, so the fault has a duration.',
+              'Keep incidents distinct from support tickets; a person chooses what to escalate.',
+              'Attach the incident’s context and logs to the support request.',
+              'Loop the LUCI team in on that request so they can act with the incident context.',
             ],
           },
           {

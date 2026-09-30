@@ -304,6 +304,11 @@ const duoLockups = {
                           <li>{b}</li>
                         ))}
                       </ul>
+                      {f.technicalJumpId && (
+                        <a class="ug-feature-itlink" href={`#ug-tech-item-${f.technicalJumpId}`}>
+                          Technical detail &rarr;
+                        </a>
+                      )}
                     </>
                   )}
                                 </div>
@@ -1046,7 +1051,8 @@ const duoLockups = {
       align-items: start;
     }
     .ug-feature__paragraph,
-    .ug-feature__benefits {
+    .ug-feature__benefits,
+    .ug-feature__body > .ug-feature-itlink {
       grid-column: 2;
     }
   }
