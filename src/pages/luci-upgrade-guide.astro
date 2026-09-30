@@ -183,25 +183,18 @@ const duoLockups = {
     tone="light"
     wide
   >
-    <div class="ug-pillar-index">
-      {pillars.map((p) => (
-        <a class="ug-pillar-index__card" href={`#ug-pillar-${p.id}`}>
-          <span class="ug-pillar-index__num">{p.number}</span>
-          <h3 class="ug-pillar-index__name">{p.name}</h3>
-          <p class="ug-pillar-index__summary">{p.summary}</p>
-        </a>
+    <div class="ug-pillar-tabs" role="tablist" aria-label="Feature deep-dive themes">
+      {pillars.map((p, i) => (
+        <button class="ug-pillar-tab" id={`ug-pillartab-${p.id}`} role="tab" aria-selected={i === 0 ? 'true' : 'false'} aria-controls={`ug-pillar-${p.id}`} data-pillar-tab={p.id} tabindex={i === 0 ? 0 : -1}>
+          <span class="ug-pillar-tab__num" aria-hidden="true">{p.number}</span>
+          <span class="ug-pillar-tab__name" set:html={p.name.replace('control', '<span class="ug-pillar-tab__ctrl">control</span><br>')} />
+          <span class="ug-pillar-tab__summary">{p.summary}</span>
+        </button>
       ))}
     </div>
     <div class="ug-deepdive">
-      {pillars.map((pillar) => (
-        <div class="ug-pillar-group" id={`ug-pillar-${pillar.id}`}>
-          <div class="ug-pillar-group__head">
-            <p class="ug-pillar-group__kicker">
-              <span class="ug-pillar-group__kicker-num">{pillar.number}</span>
-              <span class="ug-pillar-group__kicker-rule" aria-hidden="true"></span>
-              <span class="ug-pillar-group__kicker-name">{pillarShortName(pillar.id)}</span>
-            </p>
-          </div>
+      {pillars.map((pillar, i) => (
+        <div class="ug-pillar-group" id={`ug-pillar-${pillar.id}`} role="tabpanel" aria-labelledby={`ug-pillartab-${pillar.id}`} data-pillar-panel={pillar.id}>
           <div class="ug-features">
             {featuresByPillar(pillar.id).map((f) => (
               <article class:list={['ug-feature', 'ug-feature--open', f.id === 'venue-panels' && 'ug-feature--widehead']} id={`ug-feature-${f.id}`} data-pillar={pillar.id}>
@@ -873,54 +866,90 @@ const duoLockups = {
      holds name + liner + benefits; right column holds prose, scenarios,
      limits, and how-it-works. Venue panels gets a full-width wide header
      above the rail. Brand tokens only. */
-  /* ── Pillar index — three-up theme overview at the top of the deep-dive. */
-  .ug-pillar-index {
+  /* ── Pillar tabs — three clickable theme headers that reveal each pillar's
+     features. Mimics the #ug-pillars section headers (.ug-pillar__head):
+     transparent bg, large ghost numeral watermark, bold name with "control"
+     in mint, mint hairline beneath. Active tab gets the matching pillar-card
+     gradient fill + a thicker mint hairline. */
+  .ug-pillar-tabs {
     display: grid;
     grid-template-columns: 1fr;
-    gap: clamp(16px, 2vw, 24px);
+    gap: clamp(8px, 1.5vw, 16px);
     max-width: var(--content-wide);
-    margin-bottom: clamp(32px, 4vw, 56px);
+    margin-bottom: clamp(24px, 3vw, 32px);
   }
   @media (min-width: 900px) {
-    .ug-pillar-index { grid-template-columns: repeat(3, 1fr); }
+    .ug-pillar-tabs { grid-template-columns: repeat(3, 1fr); }
   }
-  .ug-pillar-index__card {
-    display: block;
-    padding: clamp(20px, 2.5vw, 28px);
-    border-top: 2px solid var(--accent-light);
+  .ug-pillar-tab {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 18px clamp(16px, 2vw, 24px) 14px;
+    border: 0;
+    border-bottom: 1px solid rgba(var(--mint-rgb), 0.18);
+    border-radius: 0;
     background: transparent;
-    text-decoration: none;
-    transition: background 0.18s ease;
+    cursor: pointer;
+    opacity: 0.62;
+    transition: opacity 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+    font: inherit;
   }
-  .ug-pillar-index__card:hover { background: rgba(var(--mint-rgb), 0.05); }
-  .ug-pillar-index__card:focus-visible {
+  .ug-pillar-tab:hover { opacity: 0.85; }
+  .ug-pillar-tab:focus-visible {
     outline: 2px solid var(--accent-light);
     outline-offset: 2px;
   }
-  .ug-pillar-index__num {
-    display: block;
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: clamp(28px, 3vw, 36px);
-    line-height: 1;
-    color: var(--accent-light);
+  .ug-pillar-tab[aria-selected="true"] {
+    opacity: 1;
+    border-bottom: 3px solid var(--accent-light);
   }
-  .ug-pillar-index__name {
+  .ug-pillar-tabs .ug-pillar-tab:nth-child(1)[aria-selected="true"] {
+    background: linear-gradient(155deg, #E8EEF2 0%, #F3F6F8 100%);
+  }
+  .ug-pillar-tabs .ug-pillar-tab:nth-child(2)[aria-selected="true"] {
+    background: linear-gradient(155deg, #EBF9F4 0%, #F4FCF9 100%);
+  }
+  .ug-pillar-tabs .ug-pillar-tab:nth-child(3)[aria-selected="true"] {
+    background: linear-gradient(155deg, #D4EFE4 0%, #E8F6EF 100%);
+  }
+  .ug-pillar-tab__num {
+    position: absolute;
+    top: -6px;
+    right: clamp(4px, 1vw, 8px);
     font-family: var(--font-head);
+    font-size: clamp(56px, 7vw, 100px);
     font-weight: 700;
-    font-size: clamp(18px, 2vw, 22px);
-    line-height: 1.2;
-    letter-spacing: -0.015em;
+    color: #10232d0d;
+    line-height: 1;
+    letter-spacing: -3px;
+    pointer-events: none;
+    user-select: none;
+    text-align: right;
+  }
+  .ug-pillar-tab__name {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-head);
+    font-size: clamp(20px, 2.2vw, 27px);
+    font-weight: 700;
     color: var(--ink-strong);
+    line-height: 1.22;
+    margin: 0;
+  }
+  .ug-pillar-tab__name :global(.ug-pillar-tab__ctrl) { color: var(--accent-light); }
+  .ug-pillar-tab__summary {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    color: var(--navy-muted);
+    line-height: 1.6;
     margin: 12px 0 0;
   }
-  .ug-pillar-index__summary {
-    font-family: var(--font-body);
-    font-size: 14px;
-    line-height: 1.5;
-    color: var(--navy-muted);
-    margin: 10px 0 0;
-  }
+  /* Hide inactive tab panels (set by JS; no-JS fallback shows all). */
+  .ug-pillar-group[hidden] { display: none; }
 
   .ug-deepdive {
     display: flex;
@@ -929,32 +958,7 @@ const duoLockups = {
     max-width: var(--content-wide);
     margin-top: var(--space-2);
   }
-  /* Demoted group head — quiet tracked-uppercase kicker, not a statement band. */
-  .ug-pillar-group__head {
-    border-bottom: 1px solid var(--rule-light);
-    padding-bottom: 12px;
-    margin-bottom: 0;
-  }
-  .ug-pillar-group__kicker {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    margin: 0;
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent-light);
-  }
-  .ug-pillar-group__kicker-num { line-height: 1; }
-  .ug-pillar-group__kicker-rule {
-    display: inline-block;
-    width: 28px;
-    height: 2px;
-    background: var(--accent-light);
-  }
-  .ug-pillar-group__kicker-name { color: var(--ink-strong); }
+  /* (Pillar-group inline head removed — the pillar tab now carries the theme identity.) */
   .ug-expand-toggle {
     background: transparent;
     border: 1px solid rgba(43, 158, 128, 0.4);
@@ -2162,6 +2166,8 @@ const duoLockups = {
     function jumpTo(id, updateHash) {
       var el = document.getElementById(id);
       if (!el) return;
+      var pid = pillarOfTarget(id);
+      if (pid) activateTab(pid);
       var details = el.closest('details') || (el.tagName === 'DETAILS' ? el : null);
       if (details && !details.open) details.open = true;
       var top = el.getBoundingClientRect().top + window.scrollY - navH() - 8;
@@ -2244,5 +2250,41 @@ const duoLockups = {
     if (document.readyState === 'complete') adjustHash();
     else window.addEventListener('load', adjustHash);
     setTimeout(adjustHash, 200);
+
+    /* ── Pillar tabs — click a theme header to reveal that pillar's features.
+       Nav links to a feature or pillar inside a hidden panel activate
+       that tab first (handled in jumpTo above). No-JS fallback:
+       all panels stay visible. */
+    var tabBtns = Array.prototype.slice.call(document.querySelectorAll('[data-pillar-tab]'));
+    var tabPanels = Array.prototype.slice.call(document.querySelectorAll('[data-pillar-panel]'));
+    function pillarOfTarget(id) {
+      var el = document.getElementById(id);
+      if (!el) return null;
+      var panel = el.closest('[data-pillar-panel]');
+      return panel ? panel.getAttribute('data-pillar-panel') : null;
+    }
+    function activateTab(pillarId) {
+      tabBtns.forEach(function (btn) {
+        var on = btn.getAttribute('data-pillar-tab') === pillarId;
+        btn.setAttribute('aria-selected', on ? 'true' : 'false');
+        btn.setAttribute('tabindex', on ? '0' : '-1');
+      });
+      tabPanels.forEach(function (panel) {
+        panel.hidden = panel.getAttribute('data-pillar-panel') !== pillarId;
+      });
+      onScrollSpy();
+    }
+    tabBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var pillarId = btn.getAttribute('data-pillar-tab');
+        activateTab(pillarId);
+        history.replaceState(null, '', '#ug-pillar-' + pillarId);
+      });
+    });
+    (function initTabs() {
+      var hashId = location.hash.slice(1);
+      var initPillar = pillarOfTarget(hashId) || (tabBtns[0] && tabBtns[0].getAttribute('data-pillar-tab'));
+      if (initPillar) activateTab(initPillar);
+    })();
   })();
 </script>
