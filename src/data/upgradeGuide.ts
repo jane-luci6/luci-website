@@ -460,6 +460,24 @@ export const upgradeGuide = {
         'Sync wall layouts and window assignments from the processor into LUCI',
         'Keep the layout in LUCI matched to the wall designed on the processor, with live feed visible in that layout',
       ],
+      scenariosSubsectionLabel: 'Use cases on your property',
+      scenarios: [
+        {
+          id: 'sportsbook-call',
+          label: 'Sportsbook call',
+          line: 'Someone radios that a screen looks wrong. From the desk, back of house, or an iPad, open LUCI, select that TV or LED wall, and see what is live without walking to it.',
+        },
+        {
+          id: 'pre-shift-wall',
+          label: 'Pre-shift wall check',
+          line: 'Before doors or a big game, scan each TV or LED wall from back of house or any browser. Catch a dead or wrong feed before guests do, without walking the wall.',
+        },
+        {
+          id: 'mid-event-swap',
+          label: 'Mid-event swap',
+          line: 'A promo or game changes mid-afternoon. From the office or anywhere you run LUCI, confirm that TV or LED wall is on the right feed before you switch the next one, without standing in front of it.',
+        },
+      ],
       media: {
         kind: 'placeholder',
         label: 'Live screen view on iPad — screenshot placeholder',
