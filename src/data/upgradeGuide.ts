@@ -647,14 +647,14 @@ export const upgradeGuide = {
       scenariosSubsectionLabel: 'Use cases on your property',
       scenarios: [
         {
-          id: 'sign-someone-out',
-          label: 'Sign someone out',
-          line: 'An administrator sees an active session that should not continue. They end that session so the person is signed out of LUCI—without waiting for them to leave on their own.',
+          id: 'cut-access-after-misuse',
+          label: 'Cut access after misuse',
+          line: 'A bartender’s iPad left the floor—or someone is still signed in from home who shouldn’t be. Open Active Sessions, end that session so they’re signed out now, and remove their PIN so they can’t walk back in.',
         },
         {
-          id: 'message-everyone',
-          label: 'Message everyone using LUCI',
-          line: 'When everyone signed in needs the same notice, post a site-wide message. It appears as a banner so people using LUCI see it in the product.',
+          id: 'banner-a-lockout',
+          label: 'Banner a lockout',
+          line: 'You’re about to take the building for an update window, New Year’s, or a big game. Post a site-wide banner on every page so staff see LUCI is locked on purpose for the crew that needs it—not that something is broken.',
         },
       ],
       howItWorks: {
