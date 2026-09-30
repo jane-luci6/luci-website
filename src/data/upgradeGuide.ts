@@ -228,7 +228,7 @@ export const upgradeGuide = {
           id: 'live-map-flexibility',
           name: 'Live map flexibility',
           oneLiner:
-            'With live map flexibility, you can load your own floor plans as a live view of your devices, rotate and orient each map to match how you look at the space, and see every device’s state from the map.',
+            'With live map flexibility, you can load your own floor plans and rotate and orient each map to match how you look at the space.',
         },
         {
           id: 'live-screen-view',
@@ -425,9 +425,9 @@ export const upgradeGuide = {
       pillarId: 'view-control',
       name: 'Live map flexibility',
       oneLiner:
-        'With live map flexibility, you can load your own floor plans as a live view of your devices, rotate and orient each map to match how you look at the space, and see every device’s state from the map.',
+        'With live map flexibility, you can load your own floor plans and rotate and orient each map to match how you look at the space.',
       paragraph:
-        'Live map flexibility gives you the ability to run the property on floor plans that match the real building—and to turn those plans into a live view of devices. Load the maps your team already uses, then rotate and orient each view so it lines up with how an operator looks out at the room (including from where a panel sits). Zoom changes how much label and icon detail you see, so a dense floor stays readable and a sparse floor can show more sooner. Device state updates through a live connection, so what you see on the map tracks what is happening in the space. If you’ve already placed endpoints, you can find one by name and jump straight to it on the map, or select several from the map and act on them together.\n\nWith this capability at your fingertips, you can…',
+        'Live map flexibility gives you the ability to run the property on floor plans that match the real building—and to turn those plans into a live view of what’s on the floor. Load the maps your team already uses, then rotate and orient each view so it lines up with how an operator looks out at the room (including from where a panel sits). Zoom changes how much label and icon detail you see, so a dense floor stays readable and a sparse floor can show more sooner. Device state updates through a live connection, so what you see on the map tracks what is happening in the space. If you’ve already placed endpoints, you can find one by name and jump straight to it on the map, or select several from the map and act on them together.\n\nWith this capability at your fingertips, you can…',
       benefits: [
         'Load your own floor plans',
         'Rotate and orient maps to match how you look at the space',
