@@ -26,10 +26,10 @@ export const closedChrome = {
   oneLiner: venuePanels.oneLiner,
 } as const;
 
-/** IT jump target on the LIVE guide — keeps the real customer/IT split. */
+/** How it works disclosure on the LIVE guide — venue panels. */
 export const itLink = {
-  label: 'Technical detail \u2192',
-  href: '/luci-upgrade-guide/#ug-tech-item-technical-venue-panels',
+  label: 'How it works \u2192',
+  href: '/luci-upgrade-guide/#ug-how-venue-panels',
 } as const;
 
 /** "What it is" — MOCK COPY, short trim of the idea (not the live paragraph). */

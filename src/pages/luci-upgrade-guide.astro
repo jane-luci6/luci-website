@@ -2,14 +2,15 @@
 /**
  * Live Upgrade Guide — standalone customer asset (FAG pattern).
  * Jane 2026-09-25: AssetLayout (no site Header/Footer), sticky nested dropdown
- * nav (Features ×10 / Technical / FAQ), Features always-open (Venue Thesis 1
- * depth kept), Technical + FAQ stay accordion. Hero/thesis/pillars/copy unchanged.
+ * nav, Features always-open (Venue Thesis 1 depth kept), FAQ stays accordion.
+ * Jane 2026-09-30: technical detail lives in each feature as an optional
+ * How it works disclosure. No standalone Technical section.
  */
 import AssetLayout from '../layouts/AssetLayout.astro';
 import SectionBlock from '../components/SectionBlock.astro';
 import { upgradeGuide } from '../data/upgradeGuide';
 
-const { meta, hero, thesis, pillars, supportSpotlight, features, technical, upgradePath, faq, cta, openFlags } =
+const { meta, hero, thesis, pillars, supportSpotlight, features, upgradePath, faq, cta, openFlags } =
   upgradeGuide;
 
 const featuresByPillar = (pillarId: string) => features.filter((f) => f.pillarId === pillarId);
@@ -20,7 +21,6 @@ const duoLockups = {
   thesis: 'The only A/V that scales and improves <em>is about to get even better</em>',
   pillars: 'What the release puts <em>in your hands</em>',
   features: 'Feature <em>deep-dive</em>',
-  technical: 'Technical <em>detail</em>',
   upgrade: 'Your path to the <em>new LUCI</em>',
   faq: 'Questions',
   cta: 'The <em>new version</em> of LUCI',
@@ -58,37 +58,6 @@ const duoLockups = {
                 <li role="none">
                   <a class="ug-asset-nav__item" href={`#ug-feature-${f.id}`} data-ug-feat={`ug-feature-${f.id}`} role="menuitem">
                     <span class="ug-asset-nav__item-name">{f.name}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        <div class="ug-asset-nav__menu" data-ug-menu="ug-technical">
-          <button
-            class="ug-asset-nav__chapter ug-asset-nav__chapter--trigger"
-            type="button"
-            aria-haspopup="true"
-            aria-expanded="false"
-            aria-controls="ug-asset-menu-technical"
-            data-ug-chapter="ug-technical"
-            data-ug-menu-trigger
-          >
-            <span>Technical</span>
-            <svg class="ug-asset-nav__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </button>
-          <div class="ug-asset-nav__panel" id="ug-asset-menu-technical" role="menu" data-ug-menu-panel hidden>
-            <ul class="ug-asset-nav__list" role="none">
-              <li role="none">
-                <a class="ug-asset-nav__item" href="#ug-technical" role="menuitem" data-ug-tech-jump="ug-technical">
-                  <span class="ug-asset-nav__item-name">Technical overview</span>
-                </a>
-              </li>
-              {technical.groups.map((g) => (
-                <li role="none">
-                  <a class="ug-asset-nav__item" href={`#ug-tech-${g.id}`} role="menuitem" data-ug-tech-jump={`ug-tech-${g.id}`}>
-                    <span class="ug-asset-nav__item-name">{g.heading}</span>
                   </a>
                 </li>
               ))}
@@ -292,11 +261,6 @@ const duoLockups = {
                           {/* future real media kind renders here at bottom */}
                         </div>
                       )}
-                      {f.technicalJumpId && (
-                        <a class="ug-feature-itlink" href={`#ug-tech-item-${f.technicalJumpId}`}>
-                          Technical detail &rarr;
-                        </a>
-                      )}
                     </div>
                   ) : (
                     <>
@@ -308,6 +272,16 @@ const duoLockups = {
                       </ul>
                     </>
                   )}
+                  {f.howItWorks && f.howItWorks.details.length > 0 && (
+                    <details class="ug-faq__item ug-how" id={`ug-how-${f.id}`}>
+                      <summary class="ug-faq__q">{f.howItWorks.label ?? 'How it works'}</summary>
+                      <ul class="ug-how__list" role="list">
+                        {f.howItWorks.details.map((d) => (
+                          <li>{d}</li>
+                        ))}
+                      </ul>
+                    </details>
+                  )}
                                 </div>
               </article>
             ))}
@@ -318,42 +292,7 @@ const duoLockups = {
   </SectionBlock>
 
 
-  {/* ───────── 6. TECHNICAL DETAIL ───────── */}
-  <SectionBlock
-    id="ug-technical"
-    lockupName={duoLockups.technical}
-    lockupRole="For the IT or A/V lead"
-    tone="light"
-    wide
-  >
-    <p class="ug-thesis">{technical.intro}</p>
-    <div class="ug-technical">
-      {technical.groups.map((group) => (
-        <div class="ug-tech-group" id={`ug-tech-${group.id}`}>
-          <h3 class="ug-tech-group__title">{group.heading}</h3>
-          <p class="ug-tech-group__intro">{group.intro}</p>
-          <div class="ug-tech-items">
-            {group.items.map((item) => (
-              <details class="ug-tech-item" id={`ug-tech-item-${item.id}`}>
-                <summary class="ug-tech-item__summary">
-                  <span class="ug-tech-item__name">{item.name}</span>
-                  {item.summary && <span class="ug-tech-item__summary-text">{item.summary}</span>}
-                  <span class="ug-feature__chev" aria-hidden="true"></span>
-                </summary>
-                <ul class="ug-tech-item__details" role="list">
-                  {item.details.map((d) => (
-                    <li>{d}</li>
-                  ))}
-                </ul>
-              </details>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-  </SectionBlock>
-
-  {/* ───────── 7. UPGRADE PATH ───────── */}
+  {/* ───────── 6. UPGRADE PATH ───────── */}
   <SectionBlock
     id="ug-upgrade"
     lockupName={duoLockups.upgrade}
@@ -1307,6 +1246,43 @@ const duoLockups = {
   .ug-feature-media {
     display: none;
   }
+  /* How it works — FAQ disclosure, after checkmarks/cards at the end of the feature body. */
+  .ug-how.ug-faq__item {
+    border-top: 1px solid var(--rule-light);
+    margin-top: 4px;
+    max-width: 720px;
+  }
+  @media (min-width: 720px) {
+    .ug-feature__body > .ug-how {
+      grid-column: 2;
+    }
+  }
+  .ug-how__list {
+    list-style: none;
+    margin: 0 0 clamp(18px, 2.4vw, 24px);
+    padding: 0;
+    display: grid;
+    gap: 8px;
+    max-width: 64ch;
+  }
+  .ug-how__list li {
+    position: relative;
+    padding-left: 18px;
+    font-family: var(--font-body);
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+  .ug-how__list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 7px;
+    height: 7px;
+    border-radius: 9999px;
+    background: var(--accent-light);
+  }
 
 </style>
 
@@ -2143,7 +2119,7 @@ const duoLockups = {
       });
     }
 
-    var chapterSecs = ['ug-features', 'ug-technical', 'ug-faq']
+    var chapterSecs = ['ug-features', 'ug-faq']
       .map(function (id) { return document.getElementById(id); })
       .filter(Boolean);
     var featSecs = Array.prototype.slice.call(document.querySelectorAll('[id^="ug-feature-"]'));
