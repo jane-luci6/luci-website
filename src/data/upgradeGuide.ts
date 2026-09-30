@@ -254,7 +254,7 @@ export const upgradeGuide = {
           id: 'live-monitoring',
           name: 'Live monitoring',
           oneLiner:
-            'With live monitoring, you can see the current state of devices, displays, and audio zones from one view. Filter by venue, device type, or status, follow incidents as they open and close, and carry their context into a support request.',
+            'With live monitoring, you can see the current state of devices, displays, and audio zones from one view—including when a device stops responding. Filter by venue, device type, or status, follow incidents as they open and close, and carry their context into a support request when you choose to escalate.',
         },
         {
           id: 'sign-in-session-control',
@@ -527,15 +527,29 @@ export const upgradeGuide = {
       pillarId: 'security-control',
       name: 'Live monitoring',
       oneLiner:
-        'With live monitoring, you can see the current state of devices, displays, and audio zones from one view. Filter by venue, device type, or status, follow incidents as they open and close, and carry their context into a support request.',
+        'With live monitoring, you can see the current state of devices, displays, and audio zones from one view—including when a device stops responding. Filter by venue, device type, or status, follow incidents as they open and close, and carry their context into a support request when you choose to escalate.',
       paragraph:
-        'Live monitoring gives you the ability to see the current state of devices, displays, and audio zones from one view. When you need to find what requires attention, filter by venue, device type, or status, then follow incidents as they open and close. If an incident needs support, start a request with its context attached.',
+        'Live monitoring gives you the ability to see what is happening on the property right now—across devices, displays, and audio zones—from one view. When a device becomes uncontactable or unhealthy, an incident opens; when it recovers, the incident closes, so a fault has a duration you can see rather than a guess. Filter by venue, device type, or status to find what needs attention. If an incident needs LUCI\'s help, start a support request with its context attached—you decide what to escalate. With this visibility, you can spot what is on, what is off, and what has a fault without hunting.\n\nLive monitoring can show you:',
       benefits: [
-        'Shows live device, display, and audio-zone state',
-        'Surfaces incidents when a device stops responding',
-        'Closes an incident when the device recovers',
-        'Filters by venue, device type, or status',
-        'Carries incident context into a support request',
+        'The live state of devices, displays, and audio zones',
+        'Which endpoints are on, off, or in fault',
+        'Incidents that open when a device stops responding',
+        'Incidents that close when the device recovers—and how long the fault lasted',
+        'Results filtered by venue, device type, or status',
+        'Incident context ready to carry into a support request',
+      ],
+      scenariosSubsectionLabel: 'Use cases on your property',
+      scenarios: [
+        {
+          id: 'how-long-was-it-down',
+          label: 'How long was it down',
+          line: 'A display or zone stops responding. An incident opens when it becomes uncontactable and closes when it recovers—so you can see how long the fault lasted, not just that something felt wrong.',
+        },
+        {
+          id: 'filter-to-the-fault',
+          label: 'Filter to the fault',
+          line: 'Narrow by venue, device type, or status to surface what needs attention now—without scanning every endpoint on the property.',
+        },
       ],
       media: {
         kind: 'placeholder',
