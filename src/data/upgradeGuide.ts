@@ -234,7 +234,7 @@ export const upgradeGuide = {
           id: 'live-screen-view',
           name: 'Live screen view',
           oneLiner:
-            'With live screen view, you can check what is playing on a selected TV or LED wall. See the screen exactly as it appears live from your iPad or any browser device.',
+            'With live screen view, you can check what is playing on a selected TV or LED wall and see it as it appears live—including live feed on LED walls—from your iPad or any browser device. Sync wall layouts from the processor so the layout in LUCI matches the wall.',
         },
       ],
     },
@@ -449,14 +449,16 @@ export const upgradeGuide = {
       pillarId: 'view-control',
       name: 'Live screen view',
       oneLiner:
-        'With live screen view, you can check what is playing on a selected TV or LED wall. See the screen exactly as it appears live from your iPad or any browser device.',
+        'With live screen view, you can check what is playing on a selected TV or LED wall and see it as it appears live—including live feed on LED walls—from your iPad or any browser device. Sync wall layouts from the processor so the layout in LUCI matches the wall.',
       paragraph:
-        'Live screen view gives you the ability to see what is playing on a selected TV or LED wall exactly as it appears live. When you need to check a screen from the device in your hand, select it from an iPad or any browser device and view its current content.',
+        'Live screen view gives you the ability to check what a TV or LED wall is showing without walking the floor. Select a screen in LUCI and see a live look at what’s on it from an iPad or any browser device—useful before you change a source, run a preset, or trust that the wall matches the moment. On LED walls, that live feed shows in the wall view in the app; on a sportsbook or other wall of many sets, you can see those live looks together so the whole wall is visible from the device in your hand. For processor-driven walls, sync pulls the layouts and window assignments into LUCI so the wall structure in the app matches what was designed on the processor—not rebuilt by hand—with the live feed visible in that layout.\n\nThe full set of actions you can take in this feature include:',
       benefits: [
-        'Checks what is playing on a TV',
-        'Checks what is playing on an LED wall',
-        'Shows the screen as it appears live',
-        'Makes the view available from an iPad or any browser device',
+        'Check what is playing on a TV',
+        'Check what is playing on an LED wall, including live feed in the wall view',
+        'See the screen as it appears live from an iPad or any browser device',
+        'See live looks across a multi-TV or display wall without walking it',
+        'Sync wall layouts and window assignments from the processor into LUCI',
+        'Keep the layout in LUCI matched to the wall designed on the processor, with live feed visible in that layout',
       ],
       media: {
         kind: 'placeholder',
