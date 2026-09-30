@@ -494,8 +494,8 @@ export const upgradeGuide = {
       benefits: [
         'What a user did and when, with a timestamp on each action',
         'Which person, preset, or schedule triggered a change',
-        'A searchable record by device or user, filterable by action type',
-        'An exportable CSV of the filtered record',
+        'Results filtered by device, user, or action type',
+        'The filtered record as a CSV download',
         'Changes made outside LUCI for most third-party device types (when the driver reports them)',
       ],
       scenariosSubsectionLabel: 'Use cases on your property',
