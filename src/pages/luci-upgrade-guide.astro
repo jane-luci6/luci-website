@@ -239,11 +239,18 @@ const duoLockups = {
                           <p class="ug-feature__paragraph">{para}</p>
                         ))}
                       </section>
+                      {f.benefits.length > 0 && (
+                        <ul class="ug-feature__benefits" role="list">
+                          {f.benefits.map((b) => (
+                            <li>{b}</li>
+                          ))}
+                        </ul>
+                      )}
                       <section class="ug-feature-deep__section">
                         <p class="ug-feature-deep__label">{f.scenariosSubsectionLabel ?? 'Use cases on your property'}</p>
                         <div class="ug-feature-scenarios">
                           {f.scenarios.map((s) => (
-                            <div class="ug-feature-scenario">
+                            <div class:list={['ug-feature-scenario', { 'ug-feature-scenario--text': !s.image }]}>
                               {s.image && (
                                 <img
                                   class="ug-feature-scenario__img"
@@ -1208,6 +1215,28 @@ const duoLockups = {
     line-height: 1.45;
     color: rgba(245, 248, 250, 0.88);
     margin: 0;
+  }
+  /* Text-only use cases (no photo). Ops copy in the card, not an empty plate. */
+  .ug-feature-scenario--text {
+    aspect-ratio: auto;
+    min-height: 0;
+    background: #fff;
+    box-shadow: none;
+    border: 1px solid var(--rule-light);
+  }
+  .ug-feature-scenario--text .ug-feature-scenario__scrim {
+    display: none;
+  }
+  .ug-feature-scenario--text .ug-feature-scenario__copy {
+    position: static;
+  }
+  .ug-feature-scenario--text .ug-feature-scenario__title {
+    color: var(--ink-strong);
+  }
+  .ug-feature-scenario--text .ug-feature-scenario__line {
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.5;
   }
   @media (hover: hover) {
     .ug-feature-scenario:hover .ug-feature-scenario__img {
