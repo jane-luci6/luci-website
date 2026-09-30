@@ -254,7 +254,7 @@ export const upgradeGuide = {
           id: 'live-monitoring',
           name: 'Live monitoring',
           oneLiner:
-            'With live monitoring, you can see the current state of devices, displays, and audio zones from one view—including when a device stops responding. Filter by venue, device type, or status, follow incidents as they open and close, and carry their context into a support request when you choose to escalate.',
+            'With live monitoring, issues are caught in the background as they happen—so you know right away, LUCI is looped in immediately, and a support request can open with the context attached.',
         },
         {
           id: 'sign-in-session-control',
@@ -527,29 +527,13 @@ export const upgradeGuide = {
       pillarId: 'security-control',
       name: 'Live monitoring',
       oneLiner:
-        'With live monitoring, you can see the current state of devices, displays, and audio zones from one view—including when a device stops responding. Filter by venue, device type, or status, follow incidents as they open and close, and carry their context into a support request when you choose to escalate.',
+        'With live monitoring, issues are caught in the background as they happen—so you know right away, LUCI is looped in immediately, and a support request can open with the context attached.',
       paragraph:
-        'Live monitoring gives you the ability to see what is happening on the property right now—across devices, displays, and audio zones—from one view. When a device becomes uncontactable or unhealthy, an incident opens; when it recovers, the incident closes, so a fault has a duration you can see rather than a guess. Filter by venue, device type, or status to find what needs attention. If an incident needs LUCI\'s help, start a support request with its context attached—you decide what to escalate. With this visibility, you can spot what is on, what is off, and what has a fault without hunting.\n\nLive monitoring can show you:',
+        'Live monitoring gives you the ability to catch issues as they happen—without waiting for someone to notice. It runs in the background and detects when something goes wrong on the property, then brings that problem to your attention and to LUCI\'s. When help is needed, a support request can open with the incident context already attached. With this in place, you get immediate knowledge of issues and a clear path to get them handled.\n\nLive monitoring brings you:',
       benefits: [
-        'The live state of devices, displays, and audio zones',
-        'Which endpoints are on, off, or in fault',
-        'Incidents that open when a device stops responding',
-        'Incidents that close when the device recovers—and how long the fault lasted',
-        'Results filtered by venue, device type, or status',
-        'Incident context ready to carry into a support request',
-      ],
-      scenariosSubsectionLabel: 'Use cases on your property',
-      scenarios: [
-        {
-          id: 'how-long-was-it-down',
-          label: 'How long was it down',
-          line: 'A display or zone stops responding. An incident opens when it becomes uncontactable and closes when it recovers—so you can see how long the fault lasted, not just that something felt wrong.',
-        },
-        {
-          id: 'filter-to-the-fault',
-          label: 'Filter to the fault',
-          line: 'Narrow by venue, device type, or status to surface what needs attention now—without scanning every endpoint on the property.',
-        },
+        'Immediate knowledge when something goes wrong',
+        'LUCI looped in as soon as an issue is detected',
+        'A support request with the context already attached',
       ],
       media: {
         kind: 'placeholder',
