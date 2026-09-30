@@ -133,7 +133,7 @@ export const upgradeGuide = {
     path: '/luci-upgrade-guide',
     title: 'New LUCI Upgrade Guide | LUCI Systems',
     description:
-      'Explore what is new in LUCI, review the technical detail, and understand the path to an upgrade.',
+      'Explore what is new in LUCI, dig into how each feature works, and understand the path to an upgrade.',
     releaseDate: RELEASE_DATE,
     theme: 'Putting the power of programming in your hands',
   },
