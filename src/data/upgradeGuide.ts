@@ -470,12 +470,12 @@ export const upgradeGuide = {
         {
           id: 'pre-shift-wall',
           label: 'Pre-shift wall check',
-          line: 'Before doors or a big game, scan each TV or LED wall from back of house or any browser. Catch a dead or wrong feed before guests do, without walking the wall.',
+          line: 'Before doors or a big game, scan each TV or LED wall from back of house or any browser. Catch a dead or wrong feed before guests do.',
         },
         {
           id: 'mid-event-swap',
           label: 'Mid-event swap',
-          line: 'A promo or game changes mid-afternoon. From the office or anywhere you run LUCI, confirm that TV or LED wall is on the right feed before you switch the next one, without standing in front of it.',
+          line: 'A promo or game changes mid-afternoon. From the office or anywhere you run LUCI, confirm that TV or LED wall is on the right feed before you switch the next one.',
         },
       ],
       media: {
