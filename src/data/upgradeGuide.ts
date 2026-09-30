@@ -234,7 +234,7 @@ export const upgradeGuide = {
           id: 'live-screen-view',
           name: 'Live screen view',
           oneLiner:
-            'With live screen view, you can check what is playing on a selected TV or LED wall and see it as it appears live—including live feed on LED walls—from your iPad or any browser device. Sync wall layouts from the processor so the layout in LUCI matches the wall.',
+            'With live screen view, you can check what is playing on a selected TV or LED wall and see it as it appears live—including live feed on LED walls—from your iPad or any browser device.',
         },
       ],
     },
@@ -449,7 +449,7 @@ export const upgradeGuide = {
       pillarId: 'view-control',
       name: 'Live screen view',
       oneLiner:
-        'With live screen view, you can check what is playing on a selected TV or LED wall and see it as it appears live—including live feed on LED walls—from your iPad or any browser device. Sync wall layouts from the processor so the layout in LUCI matches the wall.',
+        'With live screen view, you can check what is playing on a selected TV or LED wall and see it as it appears live—including live feed on LED walls—from your iPad or any browser device.',
       paragraph:
         'Live screen view gives you the ability to check what a TV or LED wall is showing without walking the floor. Select a screen in LUCI and see a live look at what’s on it from an iPad or any browser device—useful before you change a source, run a preset, or trust that the wall matches the moment. On LED walls, that live feed shows in the wall view in the app; on a sportsbook or other wall of many sets, you can see those live looks together so the whole wall is visible from the device in your hand. For processor-driven walls, sync pulls the layouts and window assignments into LUCI so the wall structure in the app matches what was designed on the processor—not rebuilt by hand—with the live feed visible in that layout.\n\nThe full set of actions you can take in this feature include:',
       benefits: [
