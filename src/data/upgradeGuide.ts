@@ -258,7 +258,7 @@ export const upgradeGuide = {
   supportSpotlight: {
     title: 'In-product support',
     oneLiner:
-      'With in-product support, you can start a request from the device, incident, or error where the issue appears, with context and logs attached. You decide what to escalate, and when something on your property goes down, the LUCI team gets an alert so they can jump on it right away.',
+      'With in-product support, you can start a request from the device, incident, or error where the issue appears, with context and logs attached. You decide what to escalate—and when something on your property goes down, the LUCI team can get an alert so they can jump on it.',
     featureId: 'in-product-support',
   },
 
@@ -673,15 +673,23 @@ export const upgradeGuide = {
       pillarId: 'security-control',
       name: 'In-product support',
       oneLiner:
-        'With in-product support, you can start a request from the device, incident, or error where the issue appears, with context and logs attached. You decide what to escalate, and when something on your property goes down, the LUCI team gets an alert so they can jump on it right away.',
+        'With in-product support, you can start a request from the device, incident, or error where the issue appears, with context and logs attached. You decide what to escalate—and when something on your property goes down, the LUCI team can get an alert so they can jump on it.',
       paragraph:
-        'In-product support gives you the ability to start a support request where an issue appears. If a device, incident, or error needs attention, open the request from that item so its context and relevant logs are attached, then decide what to escalate. When something on your property goes down, the LUCI team receives an alert so they can act on it right away.',
+        'In-product support gives you the ability to reach the LUCI team from inside the work, instead of starting from a blank ticket. When a device, an incident, or an error needs attention, open the support request from that item so the relevant context and logs come with it. You choose what to escalate. Separately, when something on your property goes down, LUCI can receive an alert on the Hub so the team can act alongside you—without replacing your decision to open a ticket.\n\nIn-product support lets you:',
       benefits: [
-        'Starts the request from the device, incident, or error',
-        'Attaches relevant context and logs',
-        'Keeps the decision to escalate with the property',
-        'Gives the LUCI team better context when support is needed',
-        'Alerts the LUCI team when something on your property goes down so they can jump on it right away',
+        'Start a support request from the device, incident, or error',
+        'Attach relevant context and logs to the request',
+        'Keep the decision to escalate with the property',
+        'Get an alert to the LUCI team when something on your property goes down',
+        'Capture scoped debug logs for a short window when you need deeper detail',
+      ],
+      scenariosSubsectionLabel: 'Use cases on your property',
+      scenarios: [
+        {
+          id: 'hub-alert-property-down',
+          label: 'LUCI sees it when you’re down',
+          line: 'Something on the property goes down—screens dark, system offline. Before anyone opens a blank ticket, LUCI can get an alert on the Hub so the team can jump in alongside you. You still choose what to escalate from inside LUCI, with context and logs attached.',
+        },
       ],
       media: {
         kind: 'placeholder',
@@ -689,10 +697,12 @@ export const upgradeGuide = {
       },
       howItWorks: {
         details: [
-          'Aim debug-level logging at one endpoint, driver, or module for a defined window.',
-          'Capture a short reproduction window instead of increasing logging across the system.',
-          'Review the output on site or send it to LUCI with a support request.',
-          'The property chooses what to escalate; the request carries the relevant context and logs.',
+          'Start a support request from a device, a device incident, or an error/log context in LUCI so the request is not blank.',
+          'Carry relevant context and logs with the request (including correlation context where the UI provides it).',
+          'Keep incidents distinct from tickets: a person on property chooses what to escalate.',
+          'When the system goes offline or the site throws issues toward the Hub, LUCI can receive a flag/alert so the team can respond alongside the property.',
+          'Aim debug-level logging at one endpoint, driver, or module for a defined window; capture a short reproduction; review on site or send it with the support request.',
+          'Support requests and Hub alerts ride the private tunnel connection between the on-property system and LUCI—without restating Sign-in’s full tunnel IT story.',
         ],
       },
     },
