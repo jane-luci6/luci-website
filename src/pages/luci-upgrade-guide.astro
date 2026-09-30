@@ -283,6 +283,13 @@ const duoLockups = {
                           <p class="ug-feature__paragraph">{f.paragraph}</p>
                         </section>
                       )}
+                      <section class="ug-feature-deep__section" aria-label="Reserved media slot">
+                        <h4 class="ug-feature-deep__heading">See it on your property</h4>
+                        <figure class="ug-feature-media-slot">
+                          <span class="ug-feature-media-slot__kicker" aria-hidden="true">Photo / video</span>
+                          <span class="ug-feature-media-slot__label">{f.media?.label ?? 'Photo / video — coming soon'}</span>
+                        </figure>
+                      </section>
                     </>
                   )}
                   {f.howItWorks && f.howItWorks.details.length > 0 && (
@@ -1339,6 +1346,37 @@ const duoLockups = {
      Hidden by default; a future real media kind renders here. NOT a Thesis 3 sticky rail. */
   .ug-feature-media {
     display: none;
+  }
+  /* Reserved media placeholder — shown for features without use-case
+     scenarios, where a photo or video will eventually live. Reads as
+     a quiet, clearly-empty slot (not a use-case card). */
+  .ug-feature-media-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    aspect-ratio: 16 / 9;
+    border-top: 2px solid var(--accent-light);
+    background: rgba(var(--mint-rgb), 0.05);
+    padding: clamp(24px, 3vw, 40px);
+    margin: 0;
+  }
+  .ug-feature-media-slot__kicker {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+  }
+  .ug-feature-media-slot__label {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--navy-muted);
+    text-align: center;
+    max-width: 42ch;
   }
   /* How it works — FAQ disclosure, after checkmarks/cards at the end of the feature body. */
   .ug-how.ug-faq__item {
