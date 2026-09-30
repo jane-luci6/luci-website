@@ -1,6 +1,6 @@
 // FLAG: Live screen view is included from the tuned two-pager but is not present in the feature-list JSON.
 
-export const RELEASE_DATE = 'January 2026' as const;
+export const RELEASE_DATE = 'January 19, 2027' as const;
 
 type MediaPlaceholder = {
   kind: 'placeholder';
@@ -162,10 +162,10 @@ export const upgradeGuide = {
   },
 
   thesis: {
-    heading: 'The only A/V that scales and improves is about to get even better',
+    heading: 'A more capable LUCI, built for what comes next',
     paragraphs: [
-      'We rebuilt LUCI from the ground up around the capabilities, functionality, and performance you asked for—making monitoring, support, and future upgrades easier. You gain more control, with the LUCI team still right there when you need us.',
-      'We’ve been building toward this: <strong>a more capable LUCI</strong> with new ways to control rooms, shape the interface, see live status, govern access, and reach support with better context. It’s a major step forward for a platform designed to <strong>scale with your needs</strong> and improve over time.',
+      'The new LUCI is rebuilt around the way your teams operate: more control in each space, a clearer view of the property, stronger oversight, and support tied directly to the issue. Monitoring, diagnostics, and future updates now work through the same platform.',
+      'Your team can do more on its own without being left on its own. Operators gain direct control over rooms, views, and access while the LUCI team remains alongside you to monitor, diagnose, and support the system.',
     ],
     media: {
       kind: 'placeholder',
@@ -179,25 +179,26 @@ export const upgradeGuide = {
       id: 'room-control',
       number: '01',
       name: 'Greater control of the guest experience',
-      summary: 'Tune in-room panels, stage events, and group audio zones.',
+      summary:
+        'Put focused controls in each space, prepare changes before they go live, and adjust grouped audio without losing the balance between zones.',
       featurePills: [
         {
           id: 'venue-panels',
           name: 'Venue panels',
           oneLiner:
-            'With venue panels, you control what operators and guests can adjust in each room. Choose the rooms, devices, actions, and sources that appear, then require a PIN or leave the panel open.',
+            'Put room-specific controls where the work happens. Each panel shows only its assigned spaces and approved actions, sources, and presets, with optional PIN access.',
         },
         {
           id: 'staging',
           name: 'Staging',
           oneLiner:
-            'With staging, you can prepare screens, sources, volumes, and content while the current experience keeps running. Hold the changes until you Apply, then apply them on cue or save the set as a preset.',
+            'Prepare screens, sources, volumes, and content while current programming continues. Review the staged changes, then apply them together on cue or save them as a preset.',
         },
         {
           id: 'audio-group-control',
           name: 'Audio group control',
           oneLiner:
-            'With audio group control, you have more options when moving multiple zones at once. Lock the selected zones together and move them incrementally or set them all to a single volume number.',
+            'Adjust several audio zones together while preserving their relative levels, set them to one level, or move one zone independently.',
         },
       ],
     },
@@ -205,25 +206,26 @@ export const upgradeGuide = {
       id: 'view-control',
       number: '02',
       name: 'Flexible control of your view',
-      summary: 'Adjust the interface to reflect your brand and customize your view.',
+      summary:
+        'Bring the property into the interface, orient live maps to the physical space, and confirm what screens are showing without walking the floor.',
       featurePills: [
         {
           id: 'customizable-interface',
           name: 'Customizable interface',
           oneLiner:
-            'LUCI\'s new customizable interface allows you to create a branded experience within the platform. Add property photography and marks, choose themes, and select from many more options.',
+            'Apply property photography, marks, colors, and approved type styles across sign-in screens, splash screens, and the operating interface.',
         },
         {
           id: 'live-map-flexibility',
           name: 'Live map flexibility',
           oneLiner:
-            'With live map flexibility, you can load your own floor plans and rotate and orient each map to match how you look at the space.',
+            'Load the property’s own floor plans and orient each map to match the physical space. Live device state appears on the same view.',
         },
         {
           id: 'live-screen-view',
           name: 'Live screen view',
           oneLiner:
-            'With live screen view, you can check what is playing on a selected TV or LED wall and see it as it appears live—including live feed on LED walls—from your iPad or any browser device.',
+            'Select a TV or LED wall to confirm what is playing without walking the floor. Synced wall layouts reflect processor geometry in LUCI.',
         },
       ],
     },
@@ -231,25 +233,26 @@ export const upgradeGuide = {
       id: 'security-control',
       number: '03',
       name: 'Deeper control over security',
-      summary: 'See activity, govern access, and bring support closer.',
+      summary:
+        'Trace changes, see device health in real time, and control who can access an active session.',
       featurePills: [
         {
           id: 'audit-trails',
           name: 'Audit trails',
           oneLiner:
-            'With audit trails, you can see what a user did and when—plus which device it affected—and whether a person, a preset, or a schedule triggered the change, including changes made outside LUCI.',
+            'Trace changes by time, user, device, and trigger—including presets, schedules, and supported changes made outside LUCI.',
         },
         {
           id: 'live-monitoring',
           name: 'Live monitoring',
           oneLiner:
-            'With live monitoring, issues are caught in the background and show up in LUCI—on the map and in system health—so you can see what needs attention, LUCI can see it on the Hub, and you can open a support request with the context attached when you choose.',
+            'See device state and incidents in real time across the map and system health. Escalate an issue to LUCI with its context and logs attached.',
         },
         {
           id: 'sign-in-session-control',
           name: 'Sign-in & session control',
           oneLiner:
-            'With sign-in and session control, you can give users access by email, PIN, or Microsoft Entra ID. See who is active, end a session when you need to, or post a message to everyone using LUCI.',
+            'Choose email, PIN, or Microsoft Entra ID sign-in; see active sessions, sign users out, and message everyone currently using LUCI.',
         },
       ],
     },
@@ -258,7 +261,7 @@ export const upgradeGuide = {
   supportSpotlight: {
     title: 'In-product support',
     oneLiner:
-      'With in-product support, you can start a request from the device, incident, or error where the issue appears, with context and logs attached. You decide what to escalate—and when something on your property goes down, the LUCI team can get an alert so they can jump on it.',
+      'Start a request from the device, incident, or error itself so the relevant context and logs travel with it. Your team chooses when to escalate; LUCI remains connected and ready to act.',
     featureId: 'in-product-support',
   },
 
@@ -268,16 +271,16 @@ export const upgradeGuide = {
       pillarId: 'room-control',
       name: 'Venue panels',
       oneLiner:
-        'With venue panels, you control what operators and guests can adjust in each room. Choose the rooms, devices, actions, and sources that appear, then require a PIN or leave the panel open.',
+        'Put room-specific controls where the work happens. Each panel shows only its assigned spaces and approved actions, sources, and presets, with optional PIN access.',
       paragraph:
-        'Venue panels give you the ability to put focused controls in the room where they’re used, without giving operators or guests access to the main LUCI application. When someone should control only a specific space, assign the panel to the room or rooms it serves. Then choose which devices appear, which actions are available, and which approved sources operators can select; for example, you can hide power controls while leaving source and volume available. Show those controls in a basic panel or list.\n\nFor staff use, require a PIN. For guest-facing use, leave the panel open with tap-to-wake. The assigned controls can appear on a dedicated wall touchscreen or a paired tablet, iPad, or browser, so the person in the room sees only what they are meant to use. If the selected space should shut down automatically, set a schedule for the venue panel.',
+        'Venue panels put focused controls in the room without opening the full LUCI administrative application. Assign a panel to one or more venues and it inherits the endpoints already assigned there. Then decide which controls—source, volume, mute, power, or approved presets—are available. Administrators narrow the controls instead of building another device list from scratch.\n\nRequire a PIN for staff-facing panels or leave a guest panel open. A paired wall touchscreen, tablet, iPad, or browser returns to its assigned panel configuration, keeping each user inside the spaces and actions intended for them.',
       benefits: [
-        'Show operators only the room or rooms assigned to that panel',
-        'Hide individual actions, such as turning power on or off, while leaving source and volume available',
-        'Limit source choices to an approved list',
-        'Require a PIN for staff or leave a guest-facing panel open with tap-to-wake',
-        'Use a dedicated wall touchscreen or a paired tablet, iPad, or browser',
-        'Schedule automatic shut-down for venue panels in a selected space',
+        'Inherit the endpoints already assigned to a venue',
+        'Limit the panel to one venue or several related venues',
+        'Expose only the controls, sources, and presets approved for that panel',
+        'Keep users out of the full administrative application',
+        'Require a PIN for staff or leave a guest-facing panel open',
+        'Pair a wall touchscreen, tablet, iPad, or browser',
       ],
       media: {
         kind: 'placeholder',
@@ -306,29 +309,15 @@ export const upgradeGuide = {
           line: 'Place an iPad or mount a panel so staff switch that room\u2019s channel or device from a panel that starts with the room\u2019s endpoints\u2014nothing else on the property.',
         },
       ],
-      limits: [
-        'Show operators only the room or rooms assigned to that panel.',
-        'Hide individual actions, such as turning power on or off, while leaving source and volume available.',
-        'Limit source choices to an approved list.',
-        'Require a PIN for staff or leave a guest-facing panel open with tap-to-wake.',
-        'Use a dedicated wall touchscreen or a paired tablet, iPad, or browser.',
-        'Schedule automatic shut-down for venue panels in a selected space.',
-      ],
       howItWorks: {
         details: [
           'Tie a panel to a point in the site hierarchy: site, building, floor, or venue.',
-          'Inherit the endpoints assigned to that venue, then narrow access by control surface rather than by device.',
+          'Inherit the endpoints assigned to that venue, then narrow access by control surface—power, source, volume, or mute—rather than rebuilding the device list.',
           'Load a pared-down interface with no route into the administrative application.',
-          'Return the panel to its paired configuration on every boot.',
-          'Load `/panels` from the property’s LUCI host as the panel boot URL.',
-          'Issue a pairing code for the device or browser; a cookie binds that client to its panel configuration until an administrator revokes the pairing.',
-          'Revoke a pairing and issue a new code when a panel is moved or replaced.',
-          'Make the PIN optional, with idle lock and timeout settings for PIN-protected panels and tap-to-wake behavior for open panels.',
-          'Configure control-surface visibility per endpoint and restrict sources with allow-lists or favorites.',
-          'Use dedicated wall panels, including Rock Panel–class devices, or pair a browser or iPad.',
-          'Review paired-device telemetry including last seen, last command, lock state, and platform.',
-          'Edit the endpoint set after creation, including adding or changing endpoints beyond the automatically inherited set.',
-          'Deploy panels primarily for one room, or sometimes a couple of rooms, rather than using one panel for the whole site.',
+          'Pair a device or browser with a code and return it to the same panel configuration on every boot.',
+          'Revoke the pairing and issue a new code when a panel moves or is replaced.',
+          'Make the PIN optional, with idle-lock and timeout settings for protected panels.',
+          'Review paired-device status, including when it was last seen and the last command sent.',
         ],
       },
     },
@@ -337,16 +326,16 @@ export const upgradeGuide = {
       pillarId: 'room-control',
       name: 'Staging',
       oneLiner:
-        'With staging, you can prepare screens, sources, volumes, and content while the current experience keeps running. Hold the changes until you Apply, then apply them on cue or save the set as a preset.',
+        'Prepare screens, sources, volumes, and content while current programming continues. Review the staged changes, then apply them together on cue or save them as a preset.',
       paragraph:
-        'Staging gives you the ability to prepare screens, sources, volumes, and content while the current experience keeps running. When you\'re preparing for an upcoming event, you can copy the current A/V settings into Staging, make the changes you need for the next event, and then hold them while the current live experience is running. The roster marks pending items in amber so you can review them while they are held; nothing changes live until you select Apply. When the event is ready, select Apply to send the staged changes together on cue.\n\nTo use the same set again, name the staged set and save it as a preset. You can apply that preset manually, or give it a time to create a scheduled preset. If the event timing may slip, leave someone ready to Apply on cue. For a scheduled event, add a lockout to hold selected screens during the event window; an administrator can override it when needed. Use the chart views to review what has run and what is coming up.',
+        'Build the next room configuration while the current one keeps running. Start with the live A/V settings, change the screens, sources, volumes, or content needed for the next event, and review every pending command in the staging roster. Nothing changes in the room until you select Apply.\n\nApply the set on cue, save it as a reusable preset, or assign a time to create a scheduled preset. Chart views show what has already run, what is coming next, and every preset or schedule due to affect a selected display. A scheduled preset can also hold selected screens for an event window, with administrator override when needed.',
       benefits: [
         'Holds the next set until you Apply without changing what is live',
         'Lets you Apply on demand when an event\u2019s timing slips',
         'Takes from live to start the stage, then shows the roster with pending changes marked in amber',
-        'Saves a staged set as a reusable preset, or schedules it for set-and-forget timing',
+        'Saves a staged set as a reusable preset or scheduled preset',
         'Adds a lockout so floor staff cannot change screens during a hold window',
-        'Shows past and upcoming activity across chart views',
+        'Shows past and upcoming activity across chart views and by display',
       ],
       scenariosSubsectionLabel: 'Use cases on your property',
       scenarios: [
@@ -385,9 +374,9 @@ export const upgradeGuide = {
       pillarId: 'room-control',
       name: 'Audio group control',
       oneLiner:
-        'With audio group control, you have more options when moving multiple zones at once. Lock the selected zones together and move them incrementally or set them all to a single volume number.',
+        'Adjust several audio zones together while preserving their relative levels, set them to one level, or move one zone independently.',
       paragraph:
-        'Audio group control gives you the ability to adjust the volume of multiple zones at once while choosing whether their existing differences should stay in place. If the dining room is intentionally quieter than the bar and patio, select all three zones and lock them together. Their current levels remain visible; raise or lower the selection by the same increment, and each zone keeps its relative difference from the others.\n\nWhen the whole space should match, set the selected zones to one absolute volume number using the slider or a typed value. If only the patio needs an adjustment, move that zone alone without changing the bar or dining room.',
+        'Select several audio zones and choose how they should move. To preserve the tuned balance between spaces, lock the zones together and raise or lower them by the same amount. Their individual levels remain visible, and the difference between them stays intact.\n\nWhen the whole area should match, set every selected zone to one level with the slider or a typed value. You can also release one zone and adjust it without changing the rest of the group.',
       benefits: [
         'Raise or lower selected zones together',
         'Keep the volume differences between zones as they move',
@@ -429,17 +418,15 @@ export const upgradeGuide = {
       pillarId: 'view-control',
       name: 'Customizable interface',
       oneLiner:
-        'LUCI\'s new customizable interface allows you to create a branded experience within the platform. Add property photography and marks, choose themes, and select from many more options.',
+        'Apply property photography, marks, colors, and approved type styles across sign-in screens, splash screens, and the operating interface.',
       paragraph:
-        'Your operators live in this interface—so it should feel like the property from the first sign-in through every shift on the floor. Give them a branded experience that matches how the property presents itself and how teams read the work—consistent across the site, with room for individual preference where you allow it. With this capability at your fingertips, you can…',
+        'Carry the property’s visual identity into the interface operators use every day. Add photography and brand marks to sign-in and splash screens, then choose a curated light or dark theme that reflects the property’s colors and typography. The result stays consistent across the installation while keeping device state easy to read.\n\nLUCI can design the theme with you, or an authorized property team can build and adjust it.',
       benefits: [
-        'Put property photography and marks—logo, word mark, and icon—on sign-in and splash screens',
-        'Choose curated themes matched to your brand colors',
-        'Select fonts and text sizes from an approved set',
-        'Apply a theme at the site level, with per-user preference where permitted',
+        'Put property photography and marks—logo, wordmark, and icon—on sign-in and splash screens',
+        'Choose a curated light or dark theme matched to your brand colors',
+        'Select typography from an approved set',
         'Adjust splash background image blur and opacity',
-        'Set endpoint status colors across the install, with familiar green, yellow, and red defaults that can be changed',
-        'Run the interface in light, dark, or system mode',
+        'Set endpoint status colors consistently across the installation',
         'Have LUCI design the theme, or build and tweak it at the property',
       ],
       media: {
@@ -460,19 +447,14 @@ export const upgradeGuide = {
       pillarId: 'view-control',
       name: 'Live map flexibility',
       oneLiner:
-        'With live map flexibility, you can load your own floor plans and rotate and orient each map to match how you look at the space.',
+        'Load the property’s own floor plans and orient each map to match the physical space. Live device state appears on the same view.',
       paragraph:
-        'Live map flexibility gives you the ability to run the property on floor plans that match the real building—and to turn those plans into a live view of what’s on the floor. Load the maps your team already uses, then rotate and orient each view so it lines up with how an operator looks out at the room, including from where a panel sits. This gives your team a familiar, practical view for understanding what is happening and working with the A/V on the floor.\n\nThe full set of actions you can take in this feature include:',
+        'Use the property’s own floor plans as the operating map instead of forcing the building into a generic layout. Rotate and orient each plan to match the physical space and the operator’s point of view.\n\nBecause the map stays connected to device state, the same familiar floor plan shows what is on, what is off, and what needs attention.',
       benefits: [
         'Load your own floor plans',
-        'Rotate and orient maps to match how you look at the space',
-        'Zoom so label and icon detail fits the floor’s density',
-        'Move endpoint labels so they don’t overlap what you need to see',
-        'Set when endpoints, spaces, floors, and buildings appear on the map',
-        'See live device state through a live connection',
-        'Find a device by name and jump to it on the map',
-        'Scale and pan the map',
-        'Lock a viewpoint for a place so it opens oriented correctly on login (e.g. bartender at the bar)',
+        'Rotate and orient each map to match the physical space',
+        'See live device state on the map',
+        'Use the map as the monitoring surface for the property',
       ],
       media: {
         kind: 'placeholder',
@@ -491,9 +473,9 @@ export const upgradeGuide = {
       pillarId: 'view-control',
       name: 'Live screen view',
       oneLiner:
-        'With live screen view, you can check what is playing on a selected TV or LED wall and see it as it appears live—including live feed on LED walls—from your iPad or any browser device.',
+        'Select a TV or LED wall to confirm what is playing without walking the floor. Synced wall layouts reflect processor geometry in LUCI.',
       paragraph:
-        'Live screen view gives you the ability to check what a TV or LED wall is showing without walking the floor. Select a screen in LUCI and see a live look at what’s on it from an iPad or any browser device—useful before you change a source, run a preset, or trust that the wall matches the moment. On LED walls, that live feed shows in the wall view in the app; on a sportsbook or other wall of many sets, you can see those live looks together so the whole wall is visible from the device in your hand. For processor-driven walls, sync pulls the layouts and window assignments into LUCI so the wall structure in the app matches what was designed on the processor—not rebuilt by hand—with the live feed visible in that layout.\n\nFrom a live look at the TV or LED wall, you can:',
+        'Check what a TV or LED wall is showing from an iPad or any browser running LUCI. Select the screen to see its live feed before changing a source, running a preset, or confirming that the room matches the plan.\n\nFor processor-driven video walls, LUCI pulls in the wall layout and window assignments with their per-pixel geometry. The wall view matches the processor design instead of recreating it by hand, and live feeds appear in the correct windows.',
       benefits: [
         'Check what is playing on a TV',
         'Check what is playing on an LED wall, including live feed in the wall view',
@@ -538,9 +520,9 @@ export const upgradeGuide = {
       pillarId: 'security-control',
       name: 'Audit trails',
       oneLiner:
-        'With audit trails, you can see what a user did and when—plus which device it affected—and whether a person, a preset, or a schedule triggered the change, including changes made outside LUCI.',
+        'Trace changes by time, user, device, and trigger—including presets, schedules, and supported changes made outside LUCI.',
       paragraph:
-        'Audit trails give you the ability to see what happened on the property, who did it, and when. Every action is recorded against a person and a timestamp, including whether a person, a preset, or a schedule triggered the change—those times are especially useful when you are diagnosing an issue. When a screen is on the wrong game or a zone has been muted, search by device or by user, filter by action type, and export the results as a CSV. Changes made outside LUCI—such as someone using a remote—are noticed and recorded for most third-party device types when the device driver reports them. With this visibility, you can trace what changed and when without guessing.\n\nAudit trails can show you:',
+        'Audit trails record what changed, when it changed, which device was affected, and what triggered the action—a user, preset, or schedule. Search by device or user, filter by action type, and export the filtered record as a CSV.\n\nFor most third-party devices, LUCI can also record changes made outside the platform, such as a command from a remote, when the device driver reports that state change. That gives operations and support a shared record to diagnose from instead of reconstructing the event from memory.',
       benefits: [
         'What a user did and when, with a timestamp on each action',
         'Which person, preset, or schedule triggered a change',
@@ -587,14 +569,14 @@ export const upgradeGuide = {
       pillarId: 'security-control',
       name: 'Live monitoring',
       oneLiner:
-        'With live monitoring, issues are caught in the background and show up in LUCI—on the map and in system health—so you can see what needs attention, LUCI can see it on the Hub, and you can open a support request with the context attached when you choose.',
+        'See device state and incidents in real time across the map and system health. Escalate an issue to LUCI with its context and logs attached.',
       paragraph:
-        'Live monitoring gives you the ability to catch issues as they happen—without waiting for someone to walk the floor and notice. It runs in the background and opens an incident when a device becomes uncontactable or unhealthy, then closes it when the device recovers so you can see how long the fault lasted. Those incidents show up in system health and as status on the map. The same picture is visible to LUCI on the Hub so the team can act alongside you. When you need help, you choose what to escalate—a support request can carry the incident context and relevant logs.\n\nLive monitoring brings you:',
+        'Live monitoring shows the real-time state of devices, displays, and audio zones without waiting for someone to find the problem on the floor. When a device stops responding or reports an unhealthy state, LUCI opens an incident. Recovery closes it, creating a measured record of how long the fault lasted.\n\nIncidents appear in system health and on the property map. Filter them by venue, device type, or status, then handle the issue on property or open a support request with the incident context and relevant logs attached.',
       benefits: [
         'Incidents that open and close in the background as devices fail and recover',
         'Visibility in system health and on the map—not a separate email or popup alert',
-        'LUCI seeing the same issues on the Hub so they can jump in',
-        'A support request with context attached when you choose to escalate',
+        'Filters for venue, device type, and status',
+        'A contextual support request when you choose to escalate',
       ],
       scenariosSubsectionLabel: 'Use cases on your property',
       scenarios: [
@@ -630,9 +612,9 @@ export const upgradeGuide = {
       pillarId: 'security-control',
       name: 'Sign-in & session control',
       oneLiner:
-        'With sign-in and session control, you can give users access by email, PIN, or Microsoft Entra ID. See who is active, end a session when you need to, or post a message to everyone using LUCI.',
+        'Choose email, PIN, or Microsoft Entra ID sign-in; see active sessions, sign users out, and message everyone currently using LUCI.',
       paragraph:
-        'Sign-in and session control gives you the ability to manage how people enter LUCI and what happens while they are signed in. When you set up access, choose email, PIN, or Microsoft Entra ID so users sign in with the method that fits how they work—including Microsoft work credentials through Entra ID when IT wants federated sign-in. A profile can be created on first Entra sign-in, and a PIN can be assigned for floor use when that person should authenticate without leaving the floor workflow. During an active session, see who is signed in, end a session when someone should no longer be in the system, or post a site-wide message that appears as a banner to signed-in users. With this control, you decide who may enter, who is active right now, and how you reach everyone using LUCI.\n\nSign-in and session control lets you:',
+        'Choose the sign-in method that fits each workflow: email, a floor-ready PIN, or existing Microsoft work credentials through Entra ID. On first Entra sign-in, LUCI can create the user profile; administrators can then assign a PIN when that person also needs quick access on the floor.\n\nActive-session controls show who is signed in now. Administrators can end a session immediately or post a site-wide banner to everyone currently using LUCI. A private tunnel consolidates outbound traffic into one encrypted connection for IT to review.',
       benefits: [
         'Sign in by email, PIN, or Microsoft Entra ID',
         'See who is active in LUCI right now',
@@ -648,13 +630,13 @@ export const upgradeGuide = {
       scenarios: [
         {
           id: 'cut-access-after-misuse',
-          label: 'Cut access after misuse',
-          line: 'A bartender’s iPad left the floor—or someone is still signed in from home who shouldn’t be. Open Active Sessions, end that session so they’re signed out now, and remove their PIN so they can’t walk back in.',
+          label: 'End an active session',
+          line: 'A shared tablet leaves the floor or a user should no longer be signed in. Open Active Sessions and end that session immediately.',
         },
         {
           id: 'banner-a-lockout',
-          label: 'Banner a lockout',
-          line: 'You’re about to take the building for an update window, New Year’s, or a big game. Post a site-wide banner on every page so staff see LUCI is locked on purpose for the crew that needs it.',
+          label: 'Announce a maintenance window',
+          line: 'Post a site-wide banner before planned maintenance or a major event so every signed-in user sees the same operational message.',
         },
       ],
       howItWorks: {
@@ -673,22 +655,21 @@ export const upgradeGuide = {
       pillarId: 'security-control',
       name: 'In-product support',
       oneLiner:
-        'With in-product support, you can start a request from the device, incident, or error where the issue appears, with context and logs attached. You decide what to escalate—and when something on your property goes down, the LUCI team can get an alert so they can jump on it.',
+        'Start a support request from the device, incident, or error in front of you. Context and relevant logs are attached, so the request begins with evidence.',
       paragraph:
-        'In-product support gives you the ability to reach the LUCI team from inside the work, instead of starting from a blank ticket. When a device, an incident, or an error needs attention, open the support request from that item so the relevant context and logs come with it. You choose what to escalate. Separately, when something on your property goes down, LUCI can receive an alert on the Hub so the team can act alongside you—without replacing your decision to open a ticket.\n\nIn-product support lets you:',
+        'Reach the LUCI team from the issue itself instead of starting with a blank ticket. Open a support request from a device, incident, or error and the relevant context and logs travel with it. Your team decides what to escalate, while LUCI receives the information needed to begin diagnosis.\n\nFor deeper troubleshooting, diagnostic capture can collect detailed logs from one endpoint, driver, or module for a defined window instead of increasing logging across the entire system.',
       benefits: [
         'Start a support request from the device, incident, or error',
         'Attach relevant context and logs to the request',
         'Keep the decision to escalate with the property',
-        'Get an alert to the LUCI team when something on your property goes down',
         'Capture scoped debug logs for a short window when you need deeper detail',
       ],
       scenariosSubsectionLabel: 'Use cases on your property',
       scenarios: [
         {
           id: 'hub-alert-property-down',
-          label: 'LUCI sees it when you’re down',
-          line: 'Something on the property goes down—screens dark, system offline. Before anyone opens a blank ticket, LUCI can get an alert on the Hub so the team can jump in alongside you. You still choose what to escalate from inside LUCI, with context and logs attached.',
+          label: 'Escalate from the incident',
+          line: 'An incident will not clear on its own. Open a support request from that incident so LUCI receives the device context and logs without asking your team to reconstruct what happened.',
         },
       ],
       media: {
@@ -700,9 +681,8 @@ export const upgradeGuide = {
           'Start a support request from a device, a device incident, or an error/log context in LUCI so the request is not blank.',
           'Carry relevant context and logs with the request (including correlation context where the UI provides it).',
           'Keep incidents distinct from tickets: a person on property chooses what to escalate.',
-          'When the system goes offline or the site throws issues toward the Hub, LUCI can receive a flag/alert so the team can respond alongside the property.',
           'Aim debug-level logging at one endpoint, driver, or module for a defined window; capture a short reproduction; review on site or send it with the support request.',
-          'Support requests and Hub alerts ride the private tunnel connection between the on-property system and LUCI—without restating Sign-in’s full tunnel IT story.',
+          'Send support requests and diagnostic context through the private tunnel connection between the on-property system and LUCI.',
         ],
       },
     },
@@ -712,39 +692,39 @@ export const upgradeGuide = {
   upgradePath: {
     heading: 'Your path to the new LUCI',
     intro:
-      'Your upgrade is fulfilled one-to-one with LUCI under your current contract through a new, preconfigured laptop shipped directly to you—not a download installed on your live machine. Your current system keeps running until your team has verified the new one and is ready to switch. Plan on about an hour or two for the cutover itself, with the LUCI team alongside you from scheduling through the switch.',
+      'LUCI handles each upgrade directly under your current contract. We ship a preconfigured replacement laptop rather than installing the new version on the machine running your current system. The current system stays online while your team verifies the replacement, and the LUCI team remains with you from scheduling through cutover.',
     timing: {
       releaseLabel: 'Release date',
       releaseDate: RELEASE_DATE,
       paceLine:
-        'About 10 customers a week once upgrades are underway (approximate; Jane will dial in).',
+        'Upgrades are scheduled in coordinated weekly groups after release.',
       rolloutNote:
         'Upgrades are scheduled directly with your team in a coordinated sequence — not all at once.',
     },
     whatIsInvolved: {
       heading: 'How your upgrade works',
       paragraph:
-        'A separate, preconfigured laptop lets your team verify the new LUCI without changing the system running today. LUCI coordinates the fulfillment and stays with you through the switch.',
+        'A separate, preconfigured laptop lets your team verify the new LUCI without changing the system running today. LUCI coordinates the shipment, readiness review, verification, and cutover.',
       steps: [
         {
           number: '01',
           title: 'Schedule with LUCI',
-          body: 'Your account team confirms your upgrade schedule and coordinates what your team should expect.',
+          body: 'Your account team reviews site readiness, confirms the upgrade schedule, and identifies anything your IT or A/V team needs to prepare.',
         },
         {
           number: '02',
           title: 'Your laptop ships preloaded',
-          body: 'LUCI builds and tests your new laptop, loads the new LUCI and security tunnel stack, and ships it preconfigured for internet and VPN connection.',
+          body: 'LUCI builds and tests the replacement laptop, loads the new LUCI and private-tunnel configuration, and ships it prepared for your site.',
         },
         {
           number: '03',
           title: 'Plug in and verify',
-          body: 'Connect the new laptop and verify it while your current system keeps running untouched. Nothing is downloaded onto the live machine.',
+          body: 'Connect and verify the replacement while the current system keeps running. Nothing is installed on the live machine.',
         },
         {
           number: '04',
           title: 'Switch when you are ready',
-          body: 'Once your team is satisfied, LUCI helps complete the switch. Plan on about an hour or two for the upgrade itself, with timing confirmed for your site.',
+          body: 'Once your team has verified the replacement, LUCI completes the cutover with you. Plan on about one to two hours, with the final timing confirmed for your site.',
         },
       ],
     },
@@ -754,50 +734,50 @@ export const upgradeGuide = {
     {
       question: 'Is this a software update or a hardware upgrade?',
       answer:
-        'The upgrade is fulfilled with a new laptop shipped by LUCI, with the new LUCI and security tunnel stack already loaded. It is not a download applied to your live machine; your current system keeps running until you have verified the new laptop and are ready to switch.',
+        'LUCI ships a preconfigured replacement laptop with the new platform and private-tunnel configuration already loaded. We do not install the release on the machine running your current system. That system stays online until your team verifies the replacement and is ready to switch.',
     },
     {
       question: 'How long does the upgrade take?',
       answer:
-        'Plan on about an hour or two for the upgrade itself. Your account team will confirm the timing for your site when your shipment and switch are scheduled.',
+        'Plan on about one to two hours for the cutover. Shipment, readiness review, and verification happen before that window. Your account team will confirm the schedule for your site.',
     },
     {
       question: 'What happens to our current presets and configurations?',
       answer:
-        'Existing presets and configurations are reviewed as part of your upgrade plan. The LUCI team will explain how they will be handled before the upgrade is scheduled, rather than assume every configuration follows the same path.',
+        'LUCI reviews your presets and configurations during readiness planning and confirms how they will be handled before cutover. The process is matched to the configuration of your site.',
     },
     {
       question: 'Is there a cost for existing LUCI clients?',
       answer:
-        'The upgrade is free for existing LUCI clients. Your account team will confirm the scope for your site during the readiness review.',
+        'The upgrade is included for existing LUCI clients under their current contract. Your account team will confirm the scope for your site during the readiness review.',
     },
     {
       question: 'Can we see the new LUCI before our upgrade?',
       answer:
-        'Talk to your account team or book a demo. The LUCI team can confirm the appropriate preview path and availability for your site.',
+        'Yes. Talk to your account team or book a demo to review the release before your site is scheduled.',
     },
     {
       question: 'What if we installed LUCI recently?',
       answer:
-        'Recent installations follow the same scheduled fulfillment path. Your account team will confirm when your preconfigured laptop ships and coordinate verification and switch timing with you.',
+        'Recent installations follow the same coordinated upgrade path. Your account team will confirm when the replacement ships and schedule verification and cutover with you.',
     },
     {
       question: 'How does rollout work across multiple sites?',
       answer:
-        'Rollout is ordered rather than simultaneous. LUCI works with your account team to sequence sites on a schedule confirmed with you; this page does not promise a universal timeline.',
+        'Multi-site upgrades are sequenced rather than completed simultaneously. LUCI works with your account team to schedule each site in an order confirmed with you.',
     },
     {
       question: 'What does our IT team need to prepare?',
       answer:
-        'IT should be ready to review the current environment, compatibility, access, permissions, and scheduling with LUCI. Any site prerequisites will be identified during readiness review before the work is scheduled.',
+        'During the readiness review, LUCI and your IT team confirm the current environment, compatibility, access, permissions, and cutover window. Any site-specific prerequisites are identified before the upgrade is scheduled.',
     },
   ],
 
   cta: {
     eyebrow: 'The new version of LUCI',
-    heading: 'More control in your hands, with the LUCI team still there when you need us.',
+    heading: 'More control for your team, with LUCI alongside you.',
     body:
-      'See the release in a live demo, or talk with your account team about readiness and the upgrade path for your site.',
+      'See the release in a live demo, or talk with your account team about readiness and the upgrade schedule for your site.',
     contact: {
       name: 'Michael Epstein',
       role: 'CEO',
@@ -820,7 +800,7 @@ export const upgradeGuide = {
 
   openFlags: [
     'Past-improvements timeline: Jane is leaning toward skipping it; thesis opens with Jane’s locked rebuild intro, then the capability paragraph; no timeline.',
-    'Live screen view: included from the tuned two-pager, but it is still missing from the feature-list JSON.',
+    'Live screen view: included from the tuned two-pager, but it is still missing from the feature-list JSON and should be confirmed before publication.',
     'Technical detail: folded into each feature as an optional How it works accordion (2026-09-30). Standalone Technical section and nav entry removed. Platform items without a feature home (add any endpoint, endpoint management, central display model catalog) are omitted from the Guide for now.',
     'Access model: still open. Per the September 17 lock, do not create a public stumble-upon self-serve upgrade page; the eventual page may remain unlisted until Jane decides.',
   ],
