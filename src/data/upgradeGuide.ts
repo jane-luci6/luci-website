@@ -248,7 +248,7 @@ export const upgradeGuide = {
           id: 'audit-trails',
           name: 'Audit trails',
           oneLiner:
-            'With audit trails, you can follow who or what triggered each action, when it happened, and which device it affected. Search by device or user, filter by action type, and export the record when needed.',
+            'With audit trails, you can see what a user did and when—plus which device it affected—and whether a person, a preset, or a schedule triggered the change, including changes made outside LUCI when the device reports them. Search by device or user, filter by action type, and export the record when needed.',
         },
         {
           id: 'live-monitoring',
@@ -488,21 +488,41 @@ export const upgradeGuide = {
       pillarId: 'security-control',
       name: 'Audit trails',
       oneLiner:
-        'With audit trails, you can follow who or what triggered each action, when it happened, and which device it affected. Search by device or user, filter by action type, and export the record when needed.',
+        'With audit trails, you can see what a user did and when—plus which device it affected—and whether a person, a preset, or a schedule triggered the change, including changes made outside LUCI when the device reports them. Search by device or user, filter by action type, and export the record when needed.',
       paragraph:
-        'Audit trails give you the ability to follow who or what triggered an action, when it happened, and which device it affected. If you need to investigate an action, search by device or user, filter by action type, and export the results as a CSV. When a device stops responding and later recovers, review when the incident opened and closed to see how long it lasted.',
+        'Audit trails give you the ability to see what happened on the property, who did it, and when. Every action is recorded against a person and a timestamp, including whether a person, a preset, or a schedule triggered the change—those times are especially useful when you are diagnosing an issue. When a screen is on the wrong game or a zone has been muted, search by device or by user, filter by action type, and export the results as a CSV. Changes made outside LUCI—such as someone using a remote—are noticed and recorded for most third-party device types when the device driver reports them.\n\nThe full set of actions you can take in this feature include:',
       benefits: [
+        'Shows what a user did and when, with a timestamp on each action',
         'Records actions against a person and a time',
-        'Identifies a person, preset, or schedule as the trigger',
+        'Identifies a person, a preset, or a schedule as the trigger',
         'Searches by device or user and filters by action type',
         'Exports the record as a CSV',
-        'Opens and closes incidents as devices stop responding and recover',
+        'Records changes made outside LUCI for most third-party device types (when the driver reports them)',
+      ],
+      scenariosSubsectionLabel: 'Use cases on your property',
+      scenarios: [
+        {
+          id: 'who-changed-it',
+          label: 'Who changed it',
+          line: 'A screen is on the wrong game or a zone has been muted. Search the record by device or user to confirm who did it and when—then fix with confidence.',
+        },
+        {
+          id: 'user-preset-or-schedule',
+          label: 'User, preset, or schedule',
+          line: 'A display changed and the floor needs an answer. Trace the action to a person, a preset, or a schedule—and see the timestamp—so you know what triggered it and when.',
+        },
+        {
+          id: 'export-for-review',
+          label: 'Export for review',
+          line: 'Filter the actions you care about and download a CSV that shows who did what and when—useful when ops needs a report, or when you need a clear record to share with LUCI for diagnosis.',
+        },
       ],
       media: {
         kind: 'placeholder',
         label: 'Searchable audit trail — screenshot placeholder',
       },
     },
+
     {
       id: 'live-monitoring',
       pillarId: 'security-control',
