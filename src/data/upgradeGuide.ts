@@ -654,7 +654,7 @@ export const upgradeGuide = {
         {
           id: 'banner-a-lockout',
           label: 'Banner a lockout',
-          line: 'You’re about to take the building for an update window, New Year’s, or a big game. Post a site-wide banner on every page so staff see LUCI is locked on purpose for the crew that needs it—not that something is broken.',
+          line: 'You’re about to take the building for an update window, New Year’s, or a big game. Post a site-wide banner on every page so staff see LUCI is locked on purpose for the crew that needs it.',
         },
       ],
       howItWorks: {
