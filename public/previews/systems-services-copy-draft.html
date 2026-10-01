@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>LUCI Systems / Services — Copy Draft</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #18201f;
+      --muted: #5d6866;
+      --line: #dce3e1;
+      --paper: #ffffff;
+      --wash: #f4f7f6;
+      --accent: #0b6e5b;
+      --accent-soft: #e7f3ef;
+      --flag: #fff8e8;
+      --flag-line: #d19a2a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--wash);
+      font: 17px/1.65 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    main {
+      width: min(900px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 4rem 0;
+    }
+
+    header,
+    section,
+    .open-flags,
+    footer {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+
+    header {
+      padding: clamp(1.5rem, 4vw, 3rem);
+      margin-bottom: 1rem;
+    }
+
+    section,
+    .open-flags {
+      padding: clamp(1.35rem, 3vw, 2.25rem);
+      margin: 1rem 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 18ch;
+      margin-bottom: 1rem;
+      font-size: clamp(2.25rem, 7vw, 4.5rem);
+      line-height: 1;
+      letter-spacing: -0.045em;
+    }
+
+    h2 {
+      margin-bottom: 0.75rem;
+      font-size: clamp(1.65rem, 4vw, 2.35rem);
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+    }
+
+    h3 {
+      margin-bottom: 0.45rem;
+      font-size: 0.82rem;
+      line-height: 1.2;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    p:last-child,
+    ul:last-child {
+      margin-bottom: 0;
+    }
+
+    .eyebrow {
+      margin-bottom: 0.65rem;
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .intro {
+      max-width: 68ch;
+      margin-bottom: 0;
+      font-size: 1.08rem;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 1rem;
+      margin-bottom: 1.35rem;
+    }
+
+    .depth {
+      flex: 0 0 auto;
+      border-radius: 999px;
+      padding: 0.3rem 0.65rem;
+      color: var(--accent);
+      background: var(--accent-soft);
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .outline {
+      border-left: 3px solid var(--line);
+      padding-left: 1rem;
+      margin-bottom: 1.5rem;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .outline ul,
+    .open-flags ul {
+      margin: 0;
+      padding-left: 1.2rem;
+    }
+
+    .outline li + li,
+    .open-flags li + li {
+      margin-top: 0.3rem;
+    }
+
+    .draft {
+      max-width: 72ch;
+    }
+
+    .dek {
+      color: var(--accent);
+      font-size: 1.15rem;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    .benefits {
+      list-style: none;
+      padding: 0;
+    }
+
+    .benefits li {
+      position: relative;
+      padding-left: 1.6rem;
+    }
+
+    .benefits li + li {
+      margin-top: 0.5rem;
+    }
+
+    .benefits li::before {
+      position: absolute;
+      left: 0;
+      content: "✓";
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .tease {
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .open-flags {
+      border-left: 4px solid var(--flag-line);
+      background: var(--flag);
+    }
+
+    footer {
+      padding: 1rem 1.25rem;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    @media (max-width: 600px) {
+      main {
+        padding: 1rem 0 2rem;
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .depth {
+        display: inline-block;
+        margin-top: 0.2rem;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      main {
+        width: 100%;
+        padding: 0;
+      }
+
+      header,
+      section,
+      .open-flags,
+      footer {
+        break-inside: avoid;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Systems / Embedded Operation · First-pass copy</p>
+      <h1>One platform. One embedded team.</h1>
+      <p class="intro">LUCI is The Orchestration Engine for Enterprise Multimedia. Systems is the embedded operation around the platform: six capabilities, available when needed and built into every deployment. One accountable team helps you scope, design, stand up, operate, and refine LUCI for the life of the relationship.</p>
+    </header>
+
+    <section aria-labelledby="luci-fde">
+      <div class="section-heading">
+        <h2 id="luci-fde">LUCI FDE</h2>
+        <span class="depth">Soft–medium</span>
+      </div>
+      <div class="outline">
+        <h3>Outline</h3>
+        <ul>
+          <li>Forward-deployed engineers embedded from early scoping onward</li>
+          <li>Pre-budget sounding board for multimedia planning and design</li>
+          <li>Continuity from the first conversation through the ongoing relationship</li>
+        </ul>
+      </div>
+      <div class="draft">
+        <h3>Draft</h3>
+        <p class="dek">Forward-deployed engineers stay close from early scoping through the ongoing relationship.</p>
+        <p>Reach LUCI FDE when you are weighing a multimedia system, an addition, or an expansion—before assumptions harden into a budget. The embedded team can be a sounding board for design, planning, and budget questions while working alongside the architects, vendors, and trades already involved.</p>
+        <p>That support mindset begins as the engagement begins. The same team remains involved as the work moves toward go-live and into operations, preserving context from day one through the life of the relationship.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="design-deployment">
+      <div class="section-heading">
+        <h2 id="design-deployment">Design &amp; Deployment</h2>
+        <span class="depth">Rich</span>
+      </div>
+      <div class="outline">
+        <h3>Outline</h3>
+        <ul>
+          <li>Infrastructure planning and design included in the subscription relationship</li>
+          <li>Scope from tenant improvements to larger additions</li>
+          <li>One design thread across architecture, systems, trades, commission, and training</li>
+          <li>Budget from plans before bid; refine after approval</li>
+          <li>Phased stand-up and go-live with the same team</li>
+        </ul>
+      </div>
+      <div class="draft">
+        <h3>Draft</h3>
+        <p class="dek">Design begins with how you operate, then carries one accountable thread from plans and budget through commission and training.</p>
+        <p>Planning and design for the infrastructure LUCI needs are built into the subscription relationship. The scope can range from a single restaurant tenant improvement to a larger addition, and from an LED-only package to broader low-voltage and LED design, depending on the project.</p>
+        <p>Starting with the architect’s drawings, LUCI plans landing rooms, places racks and nodes with the intent to minimize hardware, defines speaker chains and groupings, and coordinates requirements with other trades. Pathways remain responsive to field conditions. You can bid hardware installation to others while the LUCI team stays connected through design review, stand-up, commission, go-live, and owner training.</p>
+        <p>Budget planning follows the same thread. Building a budget from plans before bid gives you a package and working numbers before a deeper commitment. After approval, the team can refine the scope, guard against overbuilding, and phase the work so operational value arrives earlier.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="owners-rep">
+      <div class="section-heading">
+        <h2 id="owners-rep">Owner's-Rep Partnership</h2>
+        <span class="depth">Medium</span>
+      </div>
+      <div class="outline">
+        <h3>Outline</h3>
+        <ul>
+          <li>An embedded, owner-side extension for guest-facing technology decisions</li>
+          <li>Roadmap, vendor, capital, and technical guidance</li>
+          <li>Continuity across plans, budget, bid, and standards</li>
+        </ul>
+      </div>
+      <div class="draft">
+        <h3>Draft</h3>
+        <p class="dek">Your LUCI FDE works on your side of the table as a standing extension of the enterprise.</p>
+        <p>The embedded team brings operational context to roadmap, vendor, capital, and guest-facing technical decisions. It checks plans against your standards and helps keep the scope aligned to what the operation needs—not overbuilt around a disconnected specification.</p>
+        <p>Because the same team carries the work from plans to budget and bid, accountability does not disappear when other vendors sell or install the equipment. LUCI stays connected to the technical decisions and the operating outcome.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="training-enablement">
+      <div class="section-heading">
+        <h2 id="training-enablement">Training &amp; Enablement</h2>
+        <span class="depth">Soft</span>
+      </div>
+      <div class="outline">
+        <h3>Outline</h3>
+        <ul>
+          <li>Training at commission as part of the design-to-go-live thread</li>
+          <li>Role-aware enablement and documentation for continuity</li>
+          <li>More delivery detail to follow</li>
+        </ul>
+      </div>
+      <div class="draft">
+        <h3>Draft</h3>
+        <p class="dek">Enablement starts at commission, with training shaped around the people who will operate LUCI.</p>
+        <p>The embedded team carries training into the turn-on and go-live process, with documentation available to support the people responsible for the system. The aim is durable operating knowledge that can survive staff turnover rather than knowledge held by one person.</p>
+        <p class="tease">More detail on LUCI’s role-aware training approach will follow as the enablement program is published.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="support-operations">
+      <div class="section-heading">
+        <h2 id="support-operations">Support &amp; Operations</h2>
+        <span class="depth">Soft</span>
+      </div>
+      <div class="outline">
+        <h3>Outline</h3>
+        <ul>
+          <li>One accountable team from before deployment into operations</li>
+          <li>Continuity beyond a faceless, tiered vendor queue</li>
+          <li>More operating detail to follow</li>
+        </ul>
+      </div>
+      <div class="draft">
+        <h3>Draft</h3>
+        <p class="dek">The team that knows the design stays accountable when the system needs attention.</p>
+        <p>Support begins before deployment because the embedded team is already carrying the project context. After go-live, that continuity matters: you are working with one accountable team, not starting over in a faceless, tiered vendor queue.</p>
+        <p>Properties do not operate only during conventional business hours. LUCI’s operating relationship is built around staying with the outcome when attention is needed.</p>
+        <p class="tease">More detail on the support and operations model will follow in the next content pass.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="continuous-refinement">
+      <div class="section-heading">
+        <h2 id="continuous-refinement">Continuous Refinement</h2>
+        <span class="depth">Soft–medium</span>
+      </div>
+      <div class="outline">
+        <h3>Outline</h3>
+        <ul>
+          <li>Field learning and incidents inform future releases</li>
+          <li>Engineers carry learning forward across the client base</li>
+          <li>Direction toward more self-monitoring and less intervention</li>
+        </ul>
+      </div>
+      <div class="draft">
+        <h3>Draft</h3>
+        <p class="dek">Field experience returns to the platform, so the system becomes more capable over the course of the relationship.</p>
+        <p>The engineers working with operators see where attention is required. Those incidents and field lessons become input for future releases, allowing what the team learns in one engagement to inform the platform for others.</p>
+        <p>LUCI is moving toward more self-monitoring and less intervention, with updates becoming a notification rather than a new operational project. The embedded team continues refining the platform within the same ongoing relationship.</p>
+      </div>
+    </section>
+
+    <aside class="open-flags">
+      <h2>Open flags left for Jane</h2>
+      <ul>
+        <li>Hardware-install responsibility remains unresolved; this draft uses stand-up, commission, and go-live language and notes that installation may be bid to others.</li>
+        <li>Training and Support detail is intentionally generic and teased for a later content pass.</li>
+        <li>The Owner's-Rep Partnership title is retained while its body copy uses LUCI FDE, embedded-team, and owner-side language.</li>
+      </ul>
+    </aside>
+
+    <footer>
+      Draft for Jane review only · Not production page copy · Soft nodes are marked above: Training &amp; Enablement and Support &amp; Operations; LUCI FDE and Continuous Refinement are marked soft–medium.
+    </footer>
+  </main>
+</body>
+</html>
