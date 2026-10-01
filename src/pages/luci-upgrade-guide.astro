@@ -412,12 +412,12 @@ const duoLockups = {
   /* Section scroll offset for sticky nav + header */
   #ug-hero, #ug-thesis, #ug-pillars, #ug-features,
   #ug-technical, #ug-upgrade, #ug-faq, #ug-cta {
-    scroll-margin-top: 88px;
+    scroll-margin-top: 100px;
   }
   @media (max-width: 640px) {
     #ug-hero, #ug-thesis, #ug-pillars, #ug-features,
     #ug-technical, #ug-upgrade, #ug-faq, #ug-cta {
-      scroll-margin-top: 76px;
+      scroll-margin-top: 88px;
     }
   }
 
@@ -2068,24 +2068,26 @@ const duoLockups = {
   .ug-asset-nav__inner {
     display: flex;
     align-items: center;
-    min-height: 68px;
-    padding-block: 12px;
+    justify-content: space-between;
+    max-width: none;
+    min-height: 84px;
+    padding-block: 14px;
   }
-  .ug-asset-nav__chapters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .ug-asset-nav__chapters { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
   .ug-asset-nav__menu { position: relative; }
   .ug-asset-nav__chapter {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    min-height: 44px;
-    padding: 0 18px;
+    gap: 10px;
+    min-height: 52px;
+    padding: 0 24px;
     border-radius: 999px;
     border: 1px solid transparent;
     background: transparent;
     color: var(--ink-strong, #0a1a24);
     font-family: var(--font-head);
     font-weight: 600;
-    font-size: 16px;
+    font-size: 20px;
     letter-spacing: 0;
     text-decoration: none;
     cursor: pointer;
@@ -2097,7 +2099,7 @@ const duoLockups = {
     border-color: rgba(10, 26, 36, 0.12);
   }
   .ug-asset-nav__chapter--trigger[aria-expanded="true"] { background: rgba(10, 26, 36, 0.08); }
-  .ug-asset-nav__chev { width: 18px; height: 18px; opacity: 0.7; transition: transform 0.15s ease; }
+  .ug-asset-nav__chev { width: 22px; height: 22px; opacity: 0.7; transition: transform 0.15s ease; }
   .ug-asset-nav__chapter--trigger[aria-expanded="true"] .ug-asset-nav__chev { transform: rotate(180deg); }
   .ug-asset-nav__panel {
     position: absolute;
@@ -2116,11 +2118,11 @@ const duoLockups = {
   .ug-asset-nav__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
   .ug-asset-nav__item {
     display: block;
-    padding: 12px 14px;
+    padding: 14px 16px;
     border-radius: 8px;
     color: var(--ink-strong, #0a1a24);
     text-decoration: none;
-    font-size: 15px;
+    font-size: 17px;
     line-height: 1.35;
   }
   .ug-asset-nav__item:hover,
@@ -2151,13 +2153,13 @@ const duoLockups = {
   #ug-hero, #ug-thesis, #ug-pillars, #ug-features,
   #ug-technical, #ug-upgrade, #ug-faq, #ug-cta,
   [id^="ug-feature-"], [id^="ug-tech-"], [id^="ug-faq-"], [id^="ug-pillar-"] {
-    scroll-margin-top: 88px;
+    scroll-margin-top: 100px;
   }
   @media (max-width: 640px) {
     #ug-hero, #ug-thesis, #ug-pillars, #ug-features,
     #ug-technical, #ug-upgrade, #ug-faq, #ug-cta,
     [id^="ug-feature-"], [id^="ug-tech-"], [id^="ug-faq-"], [id^="ug-pillar-"] {
-      scroll-margin-top: 76px;
+      scroll-margin-top: 88px;
     }
     .ug-asset-nav__panel {
       position: fixed;
