@@ -36,6 +36,30 @@ const duoLockups = {
 >
   <h1 class="ug-sr-only">{meta.title}</h1>
 
+  <div class="ug-headers ug-headers--alt">
+
+  {/* ───────── 1. HERO — dark masthead + mesh (C Release sheet chrome) ───────── */}
+  <section id="ug-hero" class="ug-hero">
+    <span class="ug-hero__mesh" aria-hidden="true"></span>
+    <span class="ug-hero__plan" aria-hidden="true"></span>
+    <span class="ug-hero__scrim" aria-hidden="true"></span>
+    <div class="ug-hero__inner container container--wide">
+      <div class="ug-hero__specrow">
+        <p class="ug-hero__eyebrow">{hero.eyebrow}</p>
+        <span class="ug-hero__specrule" aria-hidden="true"></span>
+        <p class="ug-hero__speclabel">{hero.date}</p>
+      </div>
+      <h2 class="ug-hero__headline">
+        {hero.headline.leading}<span class="ug-hero__accent">{hero.headline.mintAccent}</span>{hero.headline.trailing}
+      </h2>
+      <div class="ug-hero__release">
+        <span class="ug-hero__rlabel">Release date</span>
+        <span class="ug-hero__date">{hero.date}</span>
+      </div>
+    </div>
+    <span class="ug-hero__bar" aria-hidden="true"></span>
+  </section>
+
   <nav class="ug-asset-nav" aria-label="Upgrade Guide sections" data-ug-asset-nav>
     <div class="ug-asset-nav__inner container container--wide">
       <div class="ug-asset-nav__chapters">
@@ -72,31 +96,6 @@ const duoLockups = {
       </div>
     </div>
   </nav>
-
-
-  <div class="ug-headers ug-headers--alt">
-
-  {/* ───────── 1. HERO — dark masthead + mesh (C Release sheet chrome) ───────── */}
-  <section id="ug-hero" class="ug-hero">
-    <span class="ug-hero__mesh" aria-hidden="true"></span>
-    <span class="ug-hero__plan" aria-hidden="true"></span>
-    <span class="ug-hero__scrim" aria-hidden="true"></span>
-    <div class="ug-hero__inner container container--wide">
-      <div class="ug-hero__specrow">
-        <p class="ug-hero__eyebrow">{hero.eyebrow}</p>
-        <span class="ug-hero__specrule" aria-hidden="true"></span>
-        <p class="ug-hero__speclabel">{hero.date}</p>
-      </div>
-      <h2 class="ug-hero__headline">
-        {hero.headline.leading}<span class="ug-hero__accent">{hero.headline.mintAccent}</span>{hero.headline.trailing}
-      </h2>
-      <div class="ug-hero__release">
-        <span class="ug-hero__rlabel">Release date</span>
-        <span class="ug-hero__date">{hero.date}</span>
-      </div>
-    </div>
-    <span class="ug-hero__bar" aria-hidden="true"></span>
-  </section>
 
   {/* ───────── 2. THESIS — C grid: copy + media. ───────── */}
   <div class="ug-thesis-band ug-thesis-band--c">
@@ -2084,7 +2083,7 @@ const duoLockups = {
     border: 1px solid transparent;
     background: transparent;
     color: var(--ink-strong, #0a1a24);
-    font-family: var(--font-display);
+    font-family: var(--font-head);
     font-weight: 600;
     font-size: 13px;
     letter-spacing: 0.02em;
