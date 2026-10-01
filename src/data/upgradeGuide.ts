@@ -429,6 +429,19 @@ export const upgradeGuide = {
         'Set endpoint status colors consistently across the installation',
         'Have LUCI design the theme, or build and tweak it at the property',
       ],
+      scenariosSubsectionLabel: 'Use cases on your property',
+      scenarios: [
+        {
+          id: 'open-with-the-property',
+          label: 'Open with the property',
+          line: 'Before handoff, apply the property’s photography, marks, colors, and approved type to sign-in, splash, and operating screens so the interface belongs in the building on day one.',
+        },
+        {
+          id: 'refresh-the-identity',
+          label: 'Refresh the identity',
+          line: 'When the property updates its look, replace photography, marks, colors, and approved type without rebuilding endpoints or changing the status colors operators rely on.',
+        },
+      ],
       media: {
         kind: 'placeholder',
         label: 'Customized LUCI interface — screenshot placeholder',
@@ -455,6 +468,19 @@ export const upgradeGuide = {
         'Rotate and orient each map to match the physical space',
         'See live device state on the map',
         'Use the map as the monitoring surface for the property',
+      ],
+      scenariosSubsectionLabel: 'Use cases on your property',
+      scenarios: [
+        {
+          id: 'match-the-operators-view',
+          label: 'Match the operator’s view',
+          line: 'Rotate the property floor plan to match the direction the operator is facing, then work from the same layout they see around them instead of translating a generic map.',
+        },
+        {
+          id: 'go-straight-to-the-problem',
+          label: 'Go straight to the problem',
+          line: 'A device changes state on the live map. Use the familiar floor plan to see which endpoint needs attention and where it is before someone walks the floor.',
+        },
       ],
       media: {
         kind: 'placeholder',
