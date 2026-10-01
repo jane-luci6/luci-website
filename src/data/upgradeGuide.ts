@@ -219,7 +219,7 @@ export const upgradeGuide = {
           id: 'live-map-flexibility',
           name: 'Live map flexibility',
           oneLiner:
-            'Load or replace the property’s floor plans directly in LUCI, then orient each map to match the physical space. Live device state appears on the same view.',
+            'Load or replace floor plans directly in LUCI, then set each map to open in the orientation that matches its location. Live device state appears on the same view.',
         },
         {
           id: 'live-screen-view',
@@ -460,13 +460,13 @@ export const upgradeGuide = {
       pillarId: 'view-control',
       name: 'Live map flexibility',
       oneLiner:
-        'Load or replace the property’s floor plans directly in LUCI, then orient each map to match the physical space. Live device state appears on the same view.',
+        'Load or replace floor plans directly in LUCI, then set each map to open in the orientation that matches its location. Live device state appears on the same view.',
       paragraph:
-        'Load the property’s own floor plans directly into LUCI and replace them when a room, venue, or floor changes—without waiting for the LUCI team to make the update. Rotate and orient each plan to match the physical space and the operator’s point of view.\n\nBecause the map stays connected to device state, the same familiar floor plan shows what is on, what is off, and what needs attention.',
+        'Load the property’s own floor plans directly into LUCI and replace them when a room, venue, or floor changes—without waiting for the LUCI team to make the update. Set each plan’s orientation so when an operator signs in at that location, the map opens facing the same direction they are standing.\n\nBecause the map stays connected to device state, the same familiar floor plan shows what is on, what is off, and what needs attention.',
       benefits: [
         'Load or replace floor plans directly in LUCI',
         'Keep maps current when the property changes',
-        'Rotate and orient each map to match the physical space',
+        'Open each map facing the same direction as the operator',
         'See live device state on the map',
       ],
       scenariosSubsectionLabel: 'Use cases on your property',
@@ -477,9 +477,9 @@ export const upgradeGuide = {
           line: 'A renovation changes a venue layout. Load the revised floor plan directly into LUCI and keep the operating map current without waiting for the LUCI team.',
         },
         {
-          id: 'match-the-operators-view',
-          label: 'Match the operator’s view',
-          line: 'Rotate the floor plan to match the direction the operator is facing, then work from the same layout they see around them.',
+          id: 'a-bartender-starts-a-shift',
+          label: 'A bartender starts a shift',
+          line: 'A sportsbook bartender signs in and the map opens facing the same direction they are standing—no remembering which way is north or reorienting themselves. New employees can find the right screen without already knowing the property.',
         },
       ],
       media: {
@@ -490,7 +490,7 @@ export const upgradeGuide = {
         details: [
           'Load the property’s own floor plans directly into LUCI.',
           'Replace a map when a room, venue, or floor changes.',
-          'Rotate and orient each map so it matches the physical space and the operator’s view.',
+          'Set each map’s orientation so it opens facing the same direction as the operator at that location.',
           'Keep the map connected to device state, so the familiar view is also the surface used to see what is happening.',
         ],
       },
