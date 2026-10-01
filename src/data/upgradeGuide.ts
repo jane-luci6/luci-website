@@ -429,17 +429,17 @@ export const upgradeGuide = {
         'Set endpoint status colors consistently across the installation',
         'Have LUCI design the theme, or build and tweak it at the property',
       ],
-      scenariosSubsectionLabel: 'When branding matters',
+      scenariosSubsectionLabel: 'Use cases on your property',
       scenarios: [
         {
-          id: 'the-propertys-own-tool',
-          label: 'The property’s own tool',
-          line: 'Carry the property’s photography, marks, colors, and approved type through the screens employees use every day. LUCI reads as part of the property’s operating environment—not a separate vendor platform.',
+          id: 'a-new-employees-first-shift',
+          label: 'A new employee’s first shift',
+          line: 'A new employee signs into LUCI for the first time. The property’s photography, marks, colors, and type carry through from sign-in to the operating interface, so the system reads as the property’s tool—not an unfamiliar vendor portal.',
         },
         {
-          id: 'refresh-the-identity',
-          label: 'Refresh the identity',
-          line: 'When brand standards change, update photography, marks, colors, and approved type across LUCI without rebuilding the operating structure. The interface changes; the controls employees already know stay in place.',
+          id: 'the-property-rebrands',
+          label: 'The property rebrands',
+          line: 'Marketing rolls out a new visual identity. Update the photography, marks, colors, and approved type in LUCI; when employees sign in, the interface reflects the new brand while the controls they already know stay in place.',
         },
       ],
       media: {
