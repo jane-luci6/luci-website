@@ -809,7 +809,7 @@ export const upgradeGuide = {
     eyebrow: 'The new version of LUCI',
     heading: 'More control for your team, with LUCI alongside you.',
     body:
-      'See the release in a live demo, or talk with your account team about readiness and the upgrade schedule for your site.',
+      'Your account team will confirm readiness and the upgrade schedule for your site.',
     contact: {
       name: 'Michael Epstein',
       role: 'CEO',

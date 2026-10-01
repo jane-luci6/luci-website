@@ -39,6 +39,8 @@ const duoLockups = {
   <nav class="ug-asset-nav" aria-label="Upgrade Guide sections" data-ug-asset-nav>
     <div class="ug-asset-nav__inner container container--wide">
       <div class="ug-asset-nav__chapters">
+        <a class="ug-asset-nav__chapter" href="#ug-thesis" data-ug-chapter="ug-thesis">Overview</a>
+        <a class="ug-asset-nav__chapter" href="#ug-pillars" data-ug-chapter="ug-pillars">Pillars</a>
         <div class="ug-asset-nav__menu" data-ug-menu="ug-features">
           <button
             class="ug-asset-nav__chapter ug-asset-nav__chapter--trigger"
@@ -65,6 +67,7 @@ const duoLockups = {
           </div>
         </div>
 
+        <a class="ug-asset-nav__chapter" href="#ug-upgrade" data-ug-chapter="ug-upgrade">Upgrade path</a>
         <a class="ug-asset-nav__chapter" href="#ug-faq" data-ug-chapter="ug-faq">FAQ</a>
       </div>
     </div>
@@ -90,16 +93,6 @@ const duoLockups = {
       <div class="ug-hero__release">
         <span class="ug-hero__rlabel">Release date</span>
         <span class="ug-hero__date">{hero.date}</span>
-      </div>
-      <div class="ug-hero__ctas">
-        {hero.ctas.map((c) => (
-          <a
-            class:list={['btn', c.audience === 'prospects' ? 'btn--mint' : 'btn--mint-outline']}
-            href={c.href}
-          >
-            {c.label}
-          </a>
-        ))}
       </div>
     </div>
     <span class="ug-hero__bar" aria-hidden="true"></span>
@@ -352,11 +345,6 @@ const duoLockups = {
           ))}
         </ol>
       </div>
-
-      <a class="ug-upgrade__path-cta" href="#ug-cta">
-        Talk to your account team about timing
-        <span class="ug-upgrade__path-cta-arrow" aria-hidden="true">&rarr;</span>
-      </a>
     </div>
   </SectionBlock>
 
@@ -385,16 +373,6 @@ const duoLockups = {
       <strong>{cta.contact.name}</strong> · {cta.contact.role}<br />
       <a href={`mailto:${cta.contact.email}`}>{cta.contact.email}</a> · {cta.contact.phone}
     </p>
-    <div class="ug-cta__actions">
-      {cta.actions.map((a) => (
-        <a
-          class:list={['btn', a.audience === 'prospects' ? 'btn--mint' : 'btn--mint-outline']}
-          href={a.href}
-        >
-          {a.label}
-        </a>
-      ))}
-    </div>
   </SectionBlock>
 
   {/* ───────── Back-to-top ───────── */}
@@ -2282,7 +2260,7 @@ const duoLockups = {
       });
     }
 
-    var chapterSecs = ['ug-features', 'ug-faq']
+    var chapterSecs = ['ug-thesis', 'ug-pillars', 'ug-features', 'ug-upgrade', 'ug-faq']
       .map(function (id) { return document.getElementById(id); })
       .filter(Boolean);
     var featSecs = Array.prototype.slice.call(document.querySelectorAll('[id^="ug-feature-"]'));
