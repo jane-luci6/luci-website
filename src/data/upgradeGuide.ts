@@ -701,7 +701,7 @@ export const upgradeGuide = {
         {
           id: 'hub-alert-property-down',
           label: 'Escalate from the incident',
-          line: 'An incident will not clear on its own. Open a support request from that incident so LUCI receives the device context and logs without asking your team to reconstruct what happened.',
+          line: 'A device incident is open on the map. Open a support request from that incident so LUCI gets the device context and logs—without your team rebuilding what happened from scratch.',
         },
       ],
       media: {
