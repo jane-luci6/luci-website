@@ -434,12 +434,12 @@ export const upgradeGuide = {
         {
           id: 'a-new-employees-first-shift',
           label: 'A new employee’s first shift',
-          line: 'A new employee signs into LUCI for the first time. The property’s photography, marks, colors, and type carry through from sign-in to the operating interface, so the system reads as the property’s tool—not an unfamiliar vendor portal.',
+          line: 'They sign into LUCI and recognize the property at every step—not a separate vendor portal.',
         },
         {
           id: 'the-property-rebrands',
           label: 'The property rebrands',
-          line: 'Marketing rolls out a new visual identity. Update the photography, marks, colors, and approved type in LUCI; when employees sign in, the interface reflects the new brand while the controls they already know stay in place.',
+          line: 'Update LUCI with the new identity while the controls employees know stay in place.',
         },
       ],
       media: {
