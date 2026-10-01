@@ -434,7 +434,7 @@ export const upgradeGuide = {
         {
           id: 'a-new-employees-first-shift',
           label: 'A new employee’s first shift',
-          line: 'A new employee signs in and sees the property’s photography, colors, and marks—not an unfamiliar vendor portal.',
+          line: 'A new employee signs in and sees the property’s brand photography, colors, and marks—not an unfamiliar vendor portal.',
         },
         {
           id: 'the-property-rebrands',
@@ -474,12 +474,17 @@ export const upgradeGuide = {
         {
           id: 'the-floor-plan-changes',
           label: 'The floor plan changes',
-          line: 'A renovation changes a venue. Load the revised floor plan directly into LUCI and keep the map current without waiting on the LUCI team.',
+          line: 'A renovation changes one of your venues. Load the revised floor plan directly into LUCI and keep the map current without any external support.',
         },
         {
           id: 'a-bartender-starts-a-shift',
           label: 'A bartender starts a shift',
-          line: 'A sportsbook bartender signs in and the map opens facing the same direction they are standing. New employees can find the right screen without remembering north.',
+          line: 'A sportsbook bartender signs in and the map opens facing the same direction they are standing—no remembering which way is north.',
+        },
+        {
+          id: 'a-new-employee-learns-the-property',
+          label: 'A new employee learns the property',
+          line: 'The map opens in the same orientation as the space around them, so they can find the right screen without already knowing the property.',
         },
       ],
       media: {
