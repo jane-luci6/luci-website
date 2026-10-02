@@ -5,6 +5,8 @@ interface Props {
   title?: string;
   lockupName?: string;
   lockupRole?: string;
+  /** When false, omit header-lockup__rule (UG: no mint|gold accent bars under titles). Default true. */
+  lockupRule?: boolean;
   deck?: string;
   tone?: 'white' | 'light' | 'sand' | 'deep' | 'mid';
   wide?: boolean;
@@ -12,7 +14,7 @@ interface Props {
   pattern?: boolean | 'mintgold';
 }
 
-const { id, kicker, title, lockupName, lockupRole, deck, tone = 'white', wide = false, pattern = false } = Astro.props;
+const { id, kicker, title, lockupName, lockupRole, lockupRule = true, deck, tone = 'white', wide = false, pattern = false } = Astro.props;
 const toneClass = `section--${tone}`;
 const patternClass = pattern === 'mintgold' ? 'section--pattern section--pattern-mintgold' : pattern ? 'section--pattern' : '';
 ---
@@ -27,7 +29,7 @@ const patternClass = pattern === 'mintgold' ? 'section--pattern section--pattern
         <h2 class="header-lockup__name" set:html={lockupName} />
         {lockupRole && (
           <>
-            <span class="header-lockup__rule" aria-hidden="true"></span>
+            {lockupRule && <span class="header-lockup__rule" aria-hidden="true"></span>}
             <p class="header-lockup__role">{lockupRole}</p>
           </>
         )}

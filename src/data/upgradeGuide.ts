@@ -1,6 +1,6 @@
 // FLAG: Live screen view is included from the tuned two-pager but is not present in the feature-list JSON.
 
-export const RELEASE_DATE = 'January 19, 2027' as const;
+export const RELEASE_DATE = 'December 2026' as const;
 
 type MediaPlaceholder = {
   kind: 'placeholder';

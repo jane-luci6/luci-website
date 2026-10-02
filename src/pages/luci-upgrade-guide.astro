@@ -169,7 +169,7 @@ const duoLockups = {
   <SectionBlock
     id="ug-features"
     lockupName={duoLockups.features}
-    lockupRole="Jump from the Features menu"
+    lockupRule={false}
     tone="light"
     wide
   >
@@ -310,7 +310,7 @@ const duoLockups = {
   <SectionBlock
     id="ug-upgrade"
     lockupName={duoLockups.upgrade}
-    lockupRole="For existing LUCI clients"
+    lockupRule={false}
     tone="light"
     wide
   >
@@ -351,7 +351,7 @@ const duoLockups = {
   <SectionBlock
     id="ug-faq"
     lockupName={duoLockups.faq}
-    lockupRole="Straight answers"
+    lockupRule={false}
     tone="light"
     wide
   >
@@ -366,7 +366,13 @@ const duoLockups = {
   </SectionBlock>
 
   {/* ───────── 9. CTA ───────── */}
-  <SectionBlock id="ug-cta" lockupName={duoLockups.cta} lockupRole={cta.heading} tone="deep" wide>
+  <SectionBlock
+    id="ug-cta"
+    lockupName={duoLockups.cta}
+    lockupRule={false}
+    tone="deep"
+    wide
+  >
     <p class="ug-cta__body">{cta.body}</p>
     <p class="ug-cta__contact">
       <strong>{cta.contact.name}</strong> · {cta.contact.role}<br />
@@ -1953,7 +1959,7 @@ const duoLockups = {
 
   /* ============================================================
      SECTION LOCKUP HEADERS — mint wash (locked)
-     Soft mint wash band + ink/accent-light duo + split mint|gold-deep rule.
+     Soft mint wash band + ink/accent-light duo; no mint|gold rule under name.
      Full-bleed wash band; lockup type shares .container--wide inset
      (same horizontal margins as body copy). White/blackbar paths removed.
      Scope: section lockups only (#ug-thesis … #ug-cta). Hero untouched.
@@ -1964,7 +1970,7 @@ const duoLockups = {
     font-style: normal;
   }
 
-  /* MINT WASH — soft mint band; ink + accent-light; split rule under name.
+  /* MINT WASH — soft mint band; ink + accent-light; no accent rule under name.
      Band is full-bleed; content padded to match container--wide column. */
   .ug-headers--alt :global(.section--light) :global(.header-lockup),
   .ug-headers--alt :global(.section--white) :global(.header-lockup) {
@@ -1984,7 +1990,7 @@ const duoLockups = {
     background:
       linear-gradient(180deg, rgba(var(--mint-rgb), 0.14) 0%, rgba(var(--mint-rgb), 0.06) 100%),
       var(--off-white);
-    border-bottom: 1px solid rgba(var(--mint-rgb), 0.28);
+    border-bottom: none;
   }
   .ug-headers--alt :global(.section--light) :global(.header-lockup__name),
   .ug-headers--alt :global(.section--white) :global(.header-lockup__name) {
@@ -1995,55 +2001,28 @@ const duoLockups = {
     color: var(--accent-light);
     border-bottom: none;
   }
-  /* Hide default mint rule; replace with split mint|gold rule */
+  /* Jane 2026-10-01: no accent bars under section headers (!important beats SectionBlock). */
+  .ug-headers--alt :global(.header-lockup__rule),
+  .ug-headers--alt :global(.header-lockup.is-in .header-lockup__rule),
   .ug-headers--alt :global(.section--light) :global(.header-lockup__rule),
-  .ug-headers--alt :global(.section--white) :global(.header-lockup__rule) {
-    width: 72px;
-    height: 3px;
-    background: linear-gradient(
-      90deg,
-      var(--accent-light) 0 40px,
-      transparent 40px 44px,
-      var(--gold-deep, #CEB06E) 44px 72px
-    );
-    border-radius: 0;
+  .ug-headers--alt :global(.section--white) :global(.header-lockup__rule),
+  .ug-headers--alt :global(.section--deep) :global(.header-lockup__rule),
+  .ug-headers--alt :global(.section--mid) :global(.header-lockup__rule) {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    background: none !important;
+    transform: none !important;
   }
   .ug-headers--alt :global(.section--deep) :global(.header-lockup__name em),
   .ug-headers--alt :global(.section--mid) :global(.header-lockup__name em) {
     color: var(--gold);
   }
-  .ug-headers--alt :global(.section--deep) :global(.header-lockup__rule),
-  .ug-headers--alt :global(.section--mid) :global(.header-lockup__rule) {
-    width: 72px;
-    height: 3px;
-    background: linear-gradient(
-      90deg,
-      var(--mint) 0 40px,
-      transparent 40px 44px,
-      var(--gold) 44px 72px
-    );
-  }
-  .ug-headers--alt :global(.header-lockup__name:not(:has(em)))::after {
-    content: '';
-    display: block;
-    width: 72px;
-    height: 3px;
-    margin-top: 12px;
-    background: linear-gradient(
-      90deg,
-      var(--accent-light) 0 40px,
-      transparent 40px 44px,
-      var(--gold-deep, #CEB06E) 44px 72px
-    );
-  }
-  .ug-headers--alt :global(.section--deep) :global(.header-lockup__name:not(:has(em)))::after,
-  .ug-headers--alt :global(.section--mid) :global(.header-lockup__name:not(:has(em)))::after {
-    background: linear-gradient(
-      90deg,
-      var(--mint) 0 40px,
-      transparent 40px 44px,
-      var(--gold) 44px 72px
-    );
+  .ug-headers--alt :global(.header-lockup__name:not(:has(em)))::after,
+  .ug-headers--alt :global(.header-lockup__name)::after {
+    content: none !important;
+    display: none !important;
   }
 
 
@@ -2066,10 +2045,11 @@ const duoLockups = {
     border-bottom: 1px solid rgba(10, 26, 36, 0.1);
   }
   .ug-asset-nav__inner {
+    /* Match hero/thesis .container--wide column (do not override to full page width). */
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: none;
+    max-width: var(--content-wide);
     min-height: 84px;
     padding-block: 14px;
   }
