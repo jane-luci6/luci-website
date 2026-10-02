@@ -445,8 +445,7 @@ const duoLockups = {
     /* Flow C family — mesh + floorplan (with-plan), self-transparent over navy.
        No mix-blend-mode: the asset carries its own transparency; screen would
        blow out the floorplan raster. Scrim handles type legibility.
-       Crop restored to pre-zoom/Y-shift (b61bc19): center / cover. Dual-color
-       mint date + gold underline kept. */
+       Crop restored to pre-zoom/Y-shift (b61bc19): center / cover. */
     background: url('/images/mesh/luci-bg-hero-with-plan-transparent-1920x1080.svg') center / cover no-repeat;
     opacity: 0.82;
   }
@@ -511,7 +510,7 @@ const duoLockups = {
     color: var(--mint);
     margin: 0;
   }
-  /* C Release sheet — two-cell eyebrow/date specrow with full-width mint hairline */
+  /* C Release sheet — two-cell eyebrow/date specrow. No mint hairline under the row. */
   .ug-hero__specrow {
     display: flex;
     align-items: center;
@@ -521,7 +520,7 @@ const duoLockups = {
     padding-left: max(var(--page-pad), calc(50vw - var(--content-wide) / 2 + var(--page-pad)));
     padding-right: max(var(--page-pad), calc(50vw - var(--content-wide) / 2 + var(--page-pad)));
     padding-bottom: 14px;
-    border-bottom: 1px solid rgba(var(--mint-rgb), 0.3);
+    border-bottom: none;
     margin-bottom: 18px;
   }
   .ug-hero__specrule {
@@ -574,20 +573,6 @@ const duoLockups = {
     line-height: 1;
     letter-spacing: -0.02em;
     color: var(--mint);
-    position: relative;
-    display: inline-block;
-    padding-bottom: 10px;
-  }
-  /* Flow C house dual-color: gold underline/plate under release date
-     (mint already carries eyebrow + headline accent + bottom structural bar). */
-  .ug-hero__date::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 56px;
-    height: 2px;
-    background: var(--gold);
   }
   .ug-hero__ctas {
     display: flex;
@@ -742,7 +727,7 @@ const duoLockups = {
   @media (min-width: 820px) {
     .ug-pillars { grid-template-columns: repeat(3, 1fr); }
     /* 01 title wraps to 3 lines (“of the guest experience”); reserve
-       that height so 02/03 heads + hairlines align with the taller 01. */
+       that height so 02/03 heads align with the taller 01. */
     .ug-pillar__name { min-height: calc(1.22em * 3); }
   }
   .ug-pillar {
@@ -764,7 +749,7 @@ const duoLockups = {
   }
   /* ============================================================
      PILLAR TABLE HEADERS — none (locked)
-     #ug-pillars: no filled boxes; type + mint hairline;
+     #ug-pillars: no filled boxes and no mint hairline under the title;
      large ghost .ug-pillar__num watermarks behind titles for presence.
      ============================================================ */
   .ug-pillar__head {
@@ -775,7 +760,7 @@ const duoLockups = {
     position: relative;
     overflow: visible;
     box-shadow: none;
-    border-bottom: 1px solid rgba(var(--mint-rgb), 0.28);
+    border-bottom: none;
   }
   .ug-pillar__num {
     position: absolute;
@@ -1079,12 +1064,12 @@ const duoLockups = {
     color: var(--navy-muted);
     margin: 0 0 18px;
   }
-  /* Benefits live in the rail as a checkmark list under a mint hairline. */
+  /* Benefits live in the rail as a checkmark list. Spacing kept; no mint hairline under the feature header. */
   .ug-feature__rail .ug-feature__benefits {
     list-style: none;
     margin: 16px 0 0;
     padding: 16px 0 0;
-    border-top: 1px solid rgba(var(--mint-rgb), 0.28);
+    border-top: none;
     display: grid;
     gap: 10px;
   }
