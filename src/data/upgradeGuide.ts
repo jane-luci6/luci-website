@@ -29,12 +29,6 @@ type FeatureDraft = {
   scenariosSubsectionLabel?: string;
   scenarios?: readonly FeatureScenario[];
   limits?: readonly string[];
-  /** Optional IT/A/V disclosure. Omit when there is little beyond the customer copy. */
-  howItWorks?: {
-    /** Defaults to "How it works" in the page. */
-    label?: string;
-    details: readonly string[];
-  };
 };
 
 type UpgradeGuideDraft = {
@@ -309,17 +303,6 @@ export const upgradeGuide = {
           line: 'Place an iPad or mount a panel so staff switch that room\u2019s channel or device from a panel that starts with the room\u2019s endpoints\u2014nothing else on the property.',
         },
       ],
-      howItWorks: {
-        details: [
-          'Tie a panel to a point in the site hierarchy: site, building, floor, or venue.',
-          'Inherit the endpoints assigned to that venue, then narrow access by control surface—power, source, volume, or mute—rather than rebuilding the device list.',
-          'Load a pared-down interface with no route into the administrative application.',
-          'Pair a device or browser with a code and return it to the same panel configuration on every boot.',
-          'Revoke the pairing and issue a new code when a panel moves or is replaced.',
-          'Make the PIN optional, with idle-lock and timeout settings for protected panels.',
-          'Review paired-device status, including when it was last seen and the last command sent.',
-        ],
-      },
     },
     {
       id: 'staging',
@@ -359,15 +342,6 @@ export const upgradeGuide = {
         kind: 'placeholder',
         label: 'Staging roster and apply action — screenshot placeholder',
       },
-      howItWorks: {
-        details: [
-          'Treat a staged set, preset, and scheduled preset as the same command set at different stages: optionally named and optionally timed.',
-          'Review, clear, or edit the staged roster item by item before commands are sent.',
-          'Seed a staged set from the room’s current state.',
-          'Review differences against saved values before committing a preset edit.',
-          'Apply a control-engine lockout window to a scheduled preset, with a visible device indicator and administrator override.',
-        ],
-      },
     },
     {
       id: 'audio-group-control',
@@ -405,13 +379,6 @@ export const upgradeGuide = {
         kind: 'placeholder',
         label: 'Audio group controls — screenshot placeholder',
       },
-      howItWorks: {
-        details: [
-          'Move several zones proportionally so their tuned balance survives.',
-          'Set every selected zone to the same level.',
-          'Move one zone independently.',
-        ],
-      },
     },
     {
       id: 'customizable-interface',
@@ -445,14 +412,6 @@ export const upgradeGuide = {
       media: {
         kind: 'placeholder',
         label: 'Customized LUCI interface — screenshot placeholder',
-      },
-      howItWorks: {
-        details: [
-          'Sign-in and splash screens are the surfaces that carry property photography and marks.',
-          'Curated themes set light or dark mode, background treatments, and typography.',
-          'Background treatments (backsplashes) are adjusted with blur, opacity, and position.',
-          'Endpoint status colors apply across the install so the same state reads the same way.',
-        ],
       },
     },
     {
@@ -490,14 +449,6 @@ export const upgradeGuide = {
       media: {
         kind: 'placeholder',
         label: 'Live property map — screenshot placeholder',
-      },
-      howItWorks: {
-        details: [
-          'Load the property’s own floor plans directly into LUCI.',
-          'Replace a map when a room, venue, or floor changes.',
-          'Set each map’s orientation so it opens facing the same direction as the operator at that location.',
-          'Keep the map connected to device state, so the familiar view is also the surface used to see what is happening.',
-        ],
       },
     },
     {
@@ -538,14 +489,6 @@ export const upgradeGuide = {
         kind: 'placeholder',
         label: 'Live screen view on iPad — screenshot placeholder',
       },
-      howItWorks: {
-        details: [
-          'Pull wall layouts and window assignments from the video wall processor.',
-          'Preserve per-pixel geometry instead of rebuilding layouts by hand.',
-          'Assign multi-window templates to a player and change them live.',
-          'From an iPad or any browser device, select a TV or LED wall and see the feed as it appears live.',
-        ],
-      },
     },
     {
       id: 'audit-trails',
@@ -584,16 +527,6 @@ export const upgradeGuide = {
         kind: 'placeholder',
         label: 'Searchable audit trail — screenshot placeholder',
       },
-      howItWorks: {
-        details: [
-          'Group device commands by the event that triggered them: a user, preset, or schedule.',
-          'Record administrative actions alongside device commands.',
-          'Attach a timestamp to each action so operators can diagnose issues by time.',
-          'Search and filter the record by device, user, or action type.',
-          'Export the filtered record as a CSV download.',
-          'Surface out-of-band changes for most third-party device types when the device driver reports them.',
-        ],
-      },
     },
 
     {
@@ -626,17 +559,6 @@ export const upgradeGuide = {
       media: {
         kind: 'placeholder',
         label: 'Live monitoring view — screenshot placeholder',
-      },
-      howItWorks: {
-        details: [
-          'Run monitoring in the background so unhealthy or uncontactable devices are detected without waiting for someone to notice.',
-          'Open an incident automatically when a device stops responding; close it when the device recovers.',
-          'Record how long the fault lasted (measured duration between open and close).',
-          'Filter and sort system-health views by venue, device type, or status to surface what needs attention.',
-          'Keep incidents distinct from support tickets—an incident is not a ticket by itself.',
-          'Loop LUCI in when an issue is detected so the team can act alongside the property.',
-          'Let a person choose what to escalate; a support request can carry the incident context and relevant logs.',
-        ],
       },
     },
     {
@@ -671,16 +593,6 @@ export const upgradeGuide = {
           line: 'Post a site-wide banner before planned maintenance or a major event so every signed-in user sees the same operational message.',
         },
       ],
-      howItWorks: {
-        details: [
-          'Use a standard Microsoft Entra ID app registration with a callback to the property’s LUCI server.',
-          'Create a profile on first Entra / Microsoft sign-in; assign a PIN for floor use when needed.',
-          'Email and PIN identify a user as separate sign-in methods; Entra can create the profile that a floor PIN may later use.',
-          'Review active sessions (signed in / offline) and terminate a session when required.',
-          'Communicate to signed-in users through a site-wide banner.',
-          'Consolidate outbound destinations through one encrypted private tunnel between the on-property system and LUCI—one paired connection for IT to review, with scheduled key rotation and no standing inbound access.',
-        ],
-      },
     },
     {
       id: 'in-product-support',
@@ -707,15 +619,6 @@ export const upgradeGuide = {
       media: {
         kind: 'placeholder',
         label: 'In-product support request flow — screenshot placeholder',
-      },
-      howItWorks: {
-        details: [
-          'Start a support request from a device, a device incident, or an error/log context in LUCI so the request is not blank.',
-          'Carry relevant context and logs with the request (including correlation context where the UI provides it).',
-          'Keep incidents distinct from tickets: a person on property chooses what to escalate.',
-          'Aim debug-level logging at one endpoint, driver, or module for a defined window; capture a short reproduction; review on site or send it with the support request.',
-          'Send support requests and diagnostic context through the private tunnel connection between the on-property system and LUCI.',
-        ],
       },
     },
   ],
@@ -833,7 +736,7 @@ export const upgradeGuide = {
   openFlags: [
     'Past-improvements timeline: Jane is leaning toward skipping it; thesis opens with Jane’s locked rebuild intro, then the capability paragraph; no timeline.',
     'Live screen view: included from the tuned two-pager, but it is still missing from the feature-list JSON and should be confirmed before publication.',
-    'Technical detail: folded into each feature as an optional How it works accordion (2026-09-30). Standalone Technical section and nav entry removed. Platform items without a feature home (add any endpoint, endpoint management, central display model catalog) are omitted from the Guide for now.',
+    'Technical detail: per-feature technical disclosures removed from the Guide (Jane UG-01, 2026-10-05); earlier standalone Technical section and nav entry also removed. Platform items without a feature home (add any endpoint, endpoint management, central display model catalog) are omitted from the Guide for now.',
     'Access model: still open. Per the September 17 lock, do not create a public stumble-upon self-serve upgrade page; the eventual page may remain unlisted until Jane decides.',
   ],
 } as const satisfies UpgradeGuideDraft;

@@ -256,16 +256,6 @@ const duoLockups = {
                       </ul>
                     </>
                   )}
-                  {f.howItWorks && f.howItWorks.details.length > 0 && (
-                    <details class="ug-faq__item ug-how" id={`ug-how-${f.id}`}>
-                      <summary class="ug-faq__q">{f.howItWorks.label ?? 'How it works'}</summary>
-                      <ul class="ug-how__list" role="list">
-                        {f.howItWorks.details.map((d) => (
-                          <li>{d}</li>
-                        ))}
-                      </ul>
-                    </details>
-                  )}
                                 </div>
               </article>
             ))}
