@@ -1,7 +1,9 @@
 # Casino “hundreds of screens” AEO/GEO draft notes
 
-Reviewers: Jane Haynie and Thaddeus  
-Buyer question: “How do casinos control content on hundreds of screens from one place?”  
+Reviewers: Jane Haynie and Thaddeus
+
+Buyer question: “How do casinos control content on hundreds of screens from one place?”
+
 Lane: discovery / early shopping for casino and resort operations and IT
 
 ## Draft status
